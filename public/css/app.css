@@ -3,3 +3,60 @@
     font-size: 30px;
 }
 
+.job-search-filter{
+    background-color: #2f6cd3;
+    height: 20%;
+}
+
+.search-filter-box{
+    background-color: #D9D9D9 !important;
+}
+
+.btn-explore{
+    background-color: #2f6cd3;
+    color: white;
+    font-weight: bold;
+}
+.btn-explore:hover{
+    background-color: #254ea1;
+    color: white;
+}
+
+.banner{
+    height: 80vh;
+}
+
+.banner-left-content{
+    right: -15%;
+    top: 8%;
+}
+
+.banner-right-content{
+    left: -15%;
+    top: 30%;
+}
+
+.hr-bold {
+  border: 0;           
+  height: 1px;             
+  background-color: black;           
+}
+
+.registration-card{
+    width: "260px";
+    border-radius: "12px";
+    overflow: "hidden";
+    border: "1px solid #ddd"
+}
+
+
+@media (max-width: 768px) {
+  .banner-left-content {
+    position: static;
+  }
+
+  .banner-left-content{
+        right: 10%;
+        top: 10%;
+    }
+}
