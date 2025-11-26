@@ -35,7 +35,7 @@ export default function EmployerRegistrationModal(
   };
 
   return (
-    <Modal {...props} backdrop="static" keyboard={false} size="md" scrollable>
+    <Modal {...props} backdrop="static" keyboard={false} size="md">
       <Modal.Header
         className={`d-flex align-items-center border-0 ${
           currentStep !== 1 ? "justify-content-between" : "justify-content-end"
