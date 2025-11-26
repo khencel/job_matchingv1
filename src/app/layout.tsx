@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import BootstrapClient from "./components/BootstrapClient";
 import Navbar from "./components/Navbar";
+import StoreProvider from "./StoreProvider";
 import "../../public/css/app.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -23,12 +24,13 @@ export default function RootLayout({
       </head>
 
       <body>
-        <Providers>
+        <StoreProvider>
           <BootstrapClient />
           <Navbar />
           {children}
-        </Providers>
+        </StoreProvider>
       </body>
     </html>
   );
 }
+ 
