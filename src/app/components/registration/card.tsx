@@ -1,35 +1,85 @@
-export default function SampleCard() {
-  return (
-    <div
-      className="card registration-card shadow-sm"
-      style={{
-        width: "260px",
-        borderRadius: "12px",
-        overflow: "hidden",
-        border: "1px solid #ddd"
-      }}
-    >
-      <img
-        src="/registration/job_seeker.jpg"
-        alt="Job seeker"
-        style={{ width: "100%", height: "250px", objectFit: "cover" }}
-      />
+"use client";
+import { useAppDispatch } from "@/redux/hooks";
+import { useState } from "react";
+import { clearRegisterEmployerData } from "@/redux/slices/registerEmployerSlice";
 
-      <div className="card-body d-flex justify-content-center">
-        <div
-          className="text-white fw-bold d-flex justify-content-center align-items-center"
+import { Button, Card } from "react-bootstrap";
+import EmployerRegistrationModal from "./employer/EmployerRegistrationModal";
+
+interface RegistrationCardProps {
+  id: "employer" | "jobSeeker" | "superVisory"; // Registration type identifier
+  imageUrl: string; // Card image source
+  buttonText: string; // CTA button label
+}
+
+/**
+ * Reusable registration card component for different user types
+ * Displays an image, button, and corresponding registration modal
+ */
+export default function RegistrationCard({
+  imageUrl,
+  buttonText,
+  id,
+}: RegistrationCardProps) {
+  const dispatch = useAppDispatch();
+  const [showModal, setShowModal] = useState(false);
+
+  // Open registration modal
+  const handleOpenForm = () => {
+    setShowModal(true);
+  };
+
+  // Close modal and reset form data
+  const handleCloseForm = () => {
+    dispatch(clearRegisterEmployerData());
+    setShowModal(false);
+  };
+
+  // Render appropriate modal based on user type
+  const handleModalRender = () => {
+    switch (id) {
+      case "employer":
+        return (
+          <EmployerRegistrationModal
+            show={showModal}
+            onHide={handleCloseForm}
+          />
+        );
+      case "jobSeeker":
+        return; // TODO: Implement job seeker modal
+      case "superVisory":
+        return; // TODO: Implement supervisory modal
+    }
+  };
+
+  return (
+    <Card className="shadow-sm border-0">
+      {/* Fixed height image container - maintains aspect ratio with object-fit: cover */}
+      <div
+        style={{
+          height: "250px",
+          overflow: "hidden",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Card.Img
+          variant="top"
+          src={imageUrl}
           style={{
-            backgroundColor: "#2F79D0",
-            width: "80%",
-            height: "55px",
-            borderRadius: "12px",
-            fontSize: "15px",
-            textAlign: "center"
+            width: "100%",
+            height: "100%",
+            objectFit: "cover", // Ensures image fills container without distortion
           }}
-        >
-          Job seeker registration
-        </div>
+        />
       </div>
-    </div>
+      <Card.Body className="px-5">
+        <Button className="w-100 py-4" onClick={handleOpenForm} id={id}>
+          {buttonText}
+        </Button>
+      </Card.Body>
+      {handleModalRender()}
+    </Card>
   );
 }
