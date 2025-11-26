@@ -50,10 +50,9 @@ export default function RegisterEmployerStep3() {
 
   return (
     <Form onSubmit={handleSubmit}>
+      <h4 className="mb-5 text-center">Contact Person</h4>
       {/* Contact Information */}
       <div className="mb-4">
-        <h5 className="mb-3">Contact Information</h5>
-
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control

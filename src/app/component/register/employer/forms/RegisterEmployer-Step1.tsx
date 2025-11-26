@@ -77,6 +77,7 @@ export default function RegisterEmployerStep1() {
 
   return (
     <Form onSubmit={handleSubmit}>
+      <h4 className="mb-4 text-center">Account Details</h4>
       {/* Email Address */}
       <Form.Group className="mb-3" controlId="formEmail">
         <Form.Label>Email Address</Form.Label>

@@ -48,7 +48,6 @@ interface RegisterEmployerData {
 export interface RegisterEmployerState {
   currentStep: 1 | 2 | 3 | 4; // Current registration step (1-4)
   registerEmployerData: RegisterEmployerData;
-  isModalOpen: boolean;
   isLoading: boolean;
   isError: boolean;
 }
@@ -83,7 +82,6 @@ const initialState: RegisterEmployerState = {
       acceptReceiveEmails: false,
     },
   },
-  isModalOpen: false,
   isLoading: false,
   isError: false,
 };
@@ -141,9 +139,6 @@ export const registerEmployerSlice = createSlice({
   initialState,
   reducers: {
     // Reducers for navigating Registration Step State
-    openRegisterEmployerModal: (state) => {
-      state.isModalOpen = true;
-    },
     openRegEmployerStep1: (state) => {
       state.currentStep = 1;
     },
@@ -229,7 +224,6 @@ export const registerEmployerSlice = createSlice({
 });
 
 export const {
-  openRegisterEmployerModal,
   goBack,
   saveRegEmployerStep1,
   saveRegEmployerStep2,

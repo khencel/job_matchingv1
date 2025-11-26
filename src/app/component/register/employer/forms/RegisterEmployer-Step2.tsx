@@ -117,9 +117,10 @@ export default function RegisterEmployerStep2() {
 
   return (
     <Form onSubmit={handleSubmit}>
+      <h4 className="mb-5 text-center">Management Organization Information</h4>
       {/* Basic Information */}
       <div className="mb-4">
-        <h5 className="mb-3">Basic Information</h5>
+        <h6 className="mb-3 fw-bold">Basic Information</h6>
         <Form.Group className="mb-3" controlId="companyName">
           <Form.Label>Company Name</Form.Label>
           <Form.Control
@@ -160,7 +161,7 @@ export default function RegisterEmployerStep2() {
 
       {/* Company Industry */}
       <div className="mb-4">
-        <h5 className="mb-3">Company Industry</h5>
+        <h6 className="mb-3 fw-bold">Company Industry</h6>
         <Form.Group controlId="industry">
           <Form.Label>Industry</Form.Label>
           <Form.Select
@@ -181,7 +182,7 @@ export default function RegisterEmployerStep2() {
 
       {/* Regions */}
       <div className="mb-4">
-        <h5 className="mb-3">Regions</h5>
+        <h6 className="mb-3 fw-bold">Regions</h6>
         <Form.Group controlId="regions">
           <Form.Label>Region</Form.Label>
           <Form.Select
@@ -202,7 +203,7 @@ export default function RegisterEmployerStep2() {
 
       {/* Organizational Information */}
       <div className="mb-4">
-        <h5 className="mb-3">Organizational Information</h5>
+        <h6 className="mb-3 fw-bold">Organizational Information</h6>
         <Form.Group className="mb-3" controlId="numberOfEmployees">
           <Form.Label>Number of Employees</Form.Label>
           <Form.Control
@@ -271,7 +272,7 @@ export default function RegisterEmployerStep2() {
 
       {/* PR Information */}
       <div className="mb-4">
-        <h5 className="mb-3">PR Information</h5>
+        <h6 className="mb-3 fw-bold">PR Information</h6>
         <Form.Group className="mb-3" controlId="appealPoints">
           <Form.Label>Appeal Points</Form.Label>
           <Form.Control
