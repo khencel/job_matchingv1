@@ -104,7 +104,7 @@ export default function RegisterEmployerStep3() {
 
       {/* Submit Button */}
       <div className="d-grid">
-        <p className="fs-6 fw-light fst-italic text-center text-muted mb-5">
+        <p className="fs-6 fw-light fst-italic text-center text-muted">
           This information will be used by the platform administrators to
           contact your company if needed. It will not be displayed on job
           listings.
