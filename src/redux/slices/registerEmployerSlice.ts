@@ -3,26 +3,26 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
 // Step 1: Account credentials
-interface RegisterEmployerStep1Data {
+export interface RegisterEmployerStep1Data {
   email: string;
   password: string;
 }
 
 // Step 2: Company information
-interface RegisterEmployerStep2Data {
+export interface RegisterEmployerStep2Data {
   companyName: string;
-  address: string;
+  companyAddress: string;
   phoneNumber: string;
   industry: string;
   regions: string;
   numberOfEmployees: string;
-  branchOffices: string;
+  branchOffices: string[];
   appealPoints: string;
   fee: string;
 }
 
 // Step 3: Contact person details
-interface RegisterEmployerStep3Data {
+export interface RegisterEmployerStep3Data {
   name: string;
   departmentName: string;
   phoneNumber: string;
@@ -30,7 +30,7 @@ interface RegisterEmployerStep3Data {
 }
 
 // Step 4: Agreement checkboxes
-interface RegisterEmployerStep4Data {
+export interface RegisterEmployerStep4Data {
   acceptTerms: boolean;
   acceptPrivacyPolicy: boolean;
   acceptReceiveEmails: boolean;
@@ -46,14 +46,15 @@ interface RegisterEmployerData {
 
 // Main state interface for employer registration
 export interface RegisterEmployerState {
-  currentStep: "close" | 1 | 2 | 3 | 4; // Current registration step (1-4)
+  currentStep: 1 | 2 | 3 | 4; // Current registration step (1-4)
   registerEmployerData: RegisterEmployerData;
+  isModalOpen: boolean;
   isLoading: boolean;
   isError: boolean;
 }
 
 const initialState: RegisterEmployerState = {
-  currentStep: "close",
+  currentStep: 1,
   registerEmployerData: {
     step1: {
       email: "",
@@ -61,12 +62,12 @@ const initialState: RegisterEmployerState = {
     },
     step2: {
       companyName: "",
-      address: "",
+      companyAddress: "",
       phoneNumber: "",
       industry: "",
       regions: "",
       numberOfEmployees: "",
-      branchOffices: "",
+      branchOffices: [],
       appealPoints: "",
       fee: "",
     },
@@ -82,6 +83,7 @@ const initialState: RegisterEmployerState = {
       acceptReceiveEmails: false,
     },
   },
+  isModalOpen: false,
   isLoading: false,
   isError: false,
 };
@@ -139,8 +141,8 @@ export const registerEmployerSlice = createSlice({
   initialState,
   reducers: {
     // Reducers for navigating Registration Step State
-    closeRegEmployer: (state) => {
-      state.currentStep = "close";
+    openRegisterEmployerModal: (state) => {
+      state.isModalOpen = true;
     },
     openRegEmployerStep1: (state) => {
       state.currentStep = 1;
@@ -154,7 +156,21 @@ export const registerEmployerSlice = createSlice({
     openRegEmployerStep4: (state) => {
       state.currentStep = 4;
     },
-
+    goBack: (state) => {
+      switch (state.currentStep) {
+        case 4:
+          state.currentStep = 3;
+          break;
+        case 3:
+          state.currentStep = 2;
+          break;
+        case 2:
+          state.currentStep = 1;
+          break;
+        default:
+          break;
+      }
+    },
     // Save data to state
     saveRegEmployerStep1: (
       state,
@@ -183,7 +199,7 @@ export const registerEmployerSlice = createSlice({
 
     // Clear State
     clearRegisterEmployerData: (state) => {
-      state.currentStep = "close";
+      state.currentStep = 1;
       state.registerEmployerData = initialState.registerEmployerData;
       state.isLoading = false;
       state.isError = false;
@@ -200,9 +216,9 @@ export const registerEmployerSlice = createSlice({
       .addCase(registerEmployerFinalSubmit.fulfilled, (state) => {
         state.isLoading = false;
         state.isError = false;
-        // Reset data after successful submission
+        // Reset data and close modal after successful submission
         state.registerEmployerData = initialState.registerEmployerData;
-        state.currentStep = "close";
+        state.currentStep = 1;
       })
       // Handle failed submission
       .addCase(registerEmployerFinalSubmit.rejected, (state) => {
@@ -213,11 +229,13 @@ export const registerEmployerSlice = createSlice({
 });
 
 export const {
+  openRegisterEmployerModal,
+  goBack,
   saveRegEmployerStep1,
   saveRegEmployerStep2,
   saveRegEmployerStep3,
+  saveRegEmployerStep4,
   clearRegisterEmployerData,
-  closeRegEmployer,
   openRegEmployerStep1,
   openRegEmployerStep2,
   openRegEmployerStep3,

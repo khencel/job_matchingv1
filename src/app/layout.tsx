@@ -1,18 +1,18 @@
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import BootstrapClient from "./component/BootstrapClient";
 import Navbar from "./component/Navbar";
+import StoreProvider from "./StoreProvider";
 import "../../public/css/app.css";
 
 export const metadata = {
-  title: 'Next.js',
-  description: 'A job matching application built with Next.js',
-}
+  title: "Next.js",
+  description: "A job matching application built with Next.js",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -20,10 +20,13 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-        <BootstrapClient />
-        <Navbar />
-        {children}
+        <StoreProvider>
+          <BootstrapClient />
+          <Navbar />
+          {children}
+        </StoreProvider>
       </body>
     </html>
-  )
+  );
 }
+ 
