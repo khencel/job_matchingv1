@@ -2,7 +2,7 @@
 import { useAppDispatch } from "@/redux/hooks";
 import { useState } from "react";
 
-import EmployerRegistrationModal from "./component/register/employer/EmployerRegistrationModal";
+import EmployerRegistrationModal from "./components/registration/employer/EmployerRegistrationModal";
 import { clearRegisterEmployerData } from "@/redux/slices/registerEmployerSlice";
 import { Button } from "react-bootstrap";
 

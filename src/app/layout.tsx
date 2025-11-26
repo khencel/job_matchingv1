@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import BootstrapClient from "./component/BootstrapClient";
-import Navbar from "./component/Navbar";
+import BootstrapClient from "./components/BootstrapClient";
+import Navbar from "./components/Navbar";
 import StoreProvider from "./StoreProvider";
 import "../../public/css/app.css";
 
