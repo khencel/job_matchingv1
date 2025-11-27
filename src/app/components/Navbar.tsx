@@ -1,6 +1,6 @@
 "use client";
 import { useLocale, useTranslations } from "next-intl";
-import { Button, ButtonGroup } from "react-bootstrap";
+import Image from "next/image";
 import React, { useCallback } from "react";
 
 export default function Navbar() {
@@ -12,26 +12,14 @@ export default function Navbar() {
     document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; expires=${expiry.toUTCString()}`;
     window.location.reload();
   }, []);
+
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setLocale(e.target.value as "en" | "ja");
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid d-flex align-items-center">
-        {/* Locale switcher - left side of the logo */}
-        <div className="me-3">
-          <ButtonGroup size="sm" aria-label="Locale switcher">
-            <Button
-              variant={locale === "en" ? "primary" : "outline-primary"}
-              onClick={() => setLocale("en")}
-            >
-              EN
-            </Button>
-            <Button
-              variant={locale === "ja" ? "primary" : "outline-primary"}
-              onClick={() => setLocale("ja")}
-            >
-              日本語
-            </Button>
-          </ButtonGroup>
-        </div>
         <button
           className="navbar-toggler"
           type="button"
@@ -44,28 +32,51 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" href="#">{t("home")}</a>
+              <a className="nav-link active" href="#">
+                {t("home")}
+              </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="#">{t("features")}</a>
+              <a className="nav-link active" href="#">
+                {t("features")}
+              </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="#">{t("findJobs")}</a>
+              <a className="nav-link active" href="#">
+                {t("findJobs")}
+              </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="#">{t("qa")}</a>
+              <a className="nav-link active" href="#">
+                {t("qa")}
+              </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="#">{t("contact")}</a>
+              <a className="nav-link active" href="#">
+                {t("contact")}
+              </a>
             </li>
           </ul>
         </div>
 
+        <div className="me-3 d-flex align-items-center gap-2">
+          <select
+            id="language-selector"
+            className="form-select form-select-sm"
+            value={locale}
+            onChange={handleLanguageChange}
+            aria-label="Language selector"
+            style={{ width: "auto", minWidth: "140px" }}
+          >
+            <option value="en">🇺🇸 English</option>
+            <option value="ja">🇯🇵 日本語</option>
+          </select>
+        </div>
         <a className="navbar-brand d-flex align-items-center ms-auto" href="#">
-          <img 
-            src="/logo.png" 
-            alt={t("logoAlt")} 
-            style={{ height: "80px", width: "auto", marginRight: "8px" }} 
+          <img
+            src="/logo.png"
+            alt={t("logoAlt")}
+            style={{ height: "80px", width: "auto", marginRight: "8px" }}
           />
         </a>
       </div>
