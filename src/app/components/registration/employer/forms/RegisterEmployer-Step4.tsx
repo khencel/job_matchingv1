@@ -5,9 +5,9 @@ import { Form, Button, Spinner } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   saveRegEmployerStep4,
-  registerEmployerFinalSubmit,
+  registerEmployerSubmit,
   RegisterEmployerStep4Data,
-} from "@/redux/slices/registerEmployerSlice";
+} from "@/redux/slices/register/employerSlice";
 import { useTranslations } from "next-intl";
 
 interface RegisterEmployerStep4Props {
@@ -30,6 +30,7 @@ export default function RegisterEmployerStep4({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
     setData((prev) => ({ ...prev, [name]: checked }));
+    dispatch(saveRegEmployerStep4({ ...data, [name]: checked }));
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -42,7 +43,7 @@ export default function RegisterEmployerStep4({
     dispatch(saveRegEmployerStep4(data));
     try {
       // Final submit thunk (simulated API)
-      await dispatch(registerEmployerFinalSubmit());
+      await dispatch(registerEmployerSubmit());
       closeModal();
     } catch (error) {
       console.log("Error Submitting the Register Employer:", error);
@@ -52,9 +53,7 @@ export default function RegisterEmployerStep4({
   return (
     <Form onSubmit={handleSubmit}>
       <div className="mb-4">
-        <h5 className="mb-5 fs-5 text-center">
-          {t("steps.confirm")}
-        </h5>
+        <h4 className="mb-5 text-center">{t("title")}</h4>
 
         <Form.Group className="mb-4" controlId="acceptTerms">
           <Form.Check

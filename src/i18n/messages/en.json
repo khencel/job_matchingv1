@@ -19,7 +19,7 @@
     "placeholders": {
       "jobType": "Job Type"
     },
-    "labels":  {
+    "labels": {
       "region": "Region"
     },
     "regions": {
@@ -53,8 +53,8 @@
     }
   },
   "registerEmployerStep1": {
+    "title": "Account Details",
     "labels": {
-      "accountDetails": "Account Details",
       "email": "Email Address",
       "password": "Password",
       "confirmPassword": "Confirm Password",
@@ -80,8 +80,8 @@
     }
   },
   "registerEmployerStep2": {
+    "title": "Management Organization Information",
     "labels": {
-      "mgmtOrgInfo": "Management Organization Information",
       "basicInfo": "Basic Information",
       "companyName": "Company Name",
       "companyAddress": "Company Address",
@@ -120,8 +120,8 @@
     }
   },
   "registerEmployerStep3": {
+    "title": "Contact Person",
     "labels": {
-      "contactPerson": "Contact Person",
       "name": "Name",
       "departmentName": "Department Name",
       "phoneNumber": "Phone Number",
@@ -144,6 +144,7 @@
     }
   },
   "registerEmployerStep4": {
+    "title": "Terms and Conditions",
     "labels": {
       "acceptTerms": "Accept the terms of use.",
       "acceptPrivacyPolicy": "Accept privacy policy.",

@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   saveRegEmployerStep1,
-  openRegEmployerStep2,
   RegisterEmployerStep1Data,
-} from "@/redux/slices/registerEmployerSlice";
+  goNextStep,
+} from "@/redux/slices/register/employerSlice";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
@@ -12,8 +12,8 @@ import { useTranslations } from "next-intl";
 export default function RegisterEmployerStep1() {
   const dispatch = useAppDispatch();
   const t = useTranslations("registerEmployerStep1");
-  const step1Data = useAppSelector(
-    (s) => s.registerEmployer.registerEmployerData.step1
+  const accountInfo = useAppSelector(
+    (s) => s.registerEmployer.registerEmployerData.accountInfo
   );
 
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -27,8 +27,8 @@ export default function RegisterEmployerStep1() {
   });
 
   useEffect(() => {
-    setData(step1Data);
-  }, [step1Data]);
+    setData(accountInfo);
+  }, [accountInfo]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked } = e.target;
@@ -44,6 +44,8 @@ export default function RegisterEmployerStep1() {
         [name]: value,
       });
     }
+
+    dispatch(saveRegEmployerStep1({ ...data, [name]: value }));
   };
 
   const handleSubmit = (e: FormEvent) => {
@@ -74,12 +76,12 @@ export default function RegisterEmployerStep1() {
       //Handle jwt token storage in cookies/local storage
     }
     dispatch(saveRegEmployerStep1(data));
-    dispatch(openRegEmployerStep2());
+    dispatch(goNextStep(2));
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h4 className="mb-4 text-center">{t("labels.accountDetails")}</h4>
+      <h4 className="mb-4 text-center">{t("title")}</h4>
       {/* Email Address */}
       <Form.Group className="mb-3" controlId="formEmail">
         <Form.Label>{t("labels.email")}</Form.Label>

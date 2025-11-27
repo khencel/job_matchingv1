@@ -1,7 +1,7 @@
 "use client";
 import { useAppDispatch } from "@/redux/hooks";
 import { useState } from "react";
-import { clearRegisterEmployerData } from "@/redux/slices/registerEmployerSlice";
+import { clearRegisterEmployerData } from "@/redux/slices/register/employerSlice";
 import { useTranslations } from "next-intl";
 
 import { Button, Card } from "react-bootstrap";

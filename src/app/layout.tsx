@@ -7,8 +7,6 @@ import NextIntlProvider from "@/i18n/NextIntlProvider";
 import { cookies } from "next/headers";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-import Providers from "../app/redux/Providers"; // <-- ADD THIS
-
 export const metadata = {
   title: "Next.js",
   description: "A job matching application built with Next.js",
@@ -21,7 +19,10 @@ export default async function RootLayout({
 }) {
   // Determine locale from cookie (NEXT_LOCALE) with fallback to 'en'
   const cookieStore = await cookies();
-  const cookieLocale = cookieStore.get("NEXT_LOCALE")?.value as "en" | "ja" | undefined;
+  const cookieLocale = cookieStore.get("NEXT_LOCALE")?.value as
+    | "en"
+    | "ja"
+    | undefined;
   const locale: "en" | "ja" = cookieLocale === "ja" ? "ja" : "en";
   return (
     <html lang={locale}>
@@ -42,4 +43,3 @@ export default async function RootLayout({
     </html>
   );
 }
- 

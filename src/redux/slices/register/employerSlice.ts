@@ -38,28 +38,28 @@ export interface RegisterEmployerStep4Data {
 
 // All employer data
 interface RegisterEmployerData {
-  step1: RegisterEmployerStep1Data;
-  step2: RegisterEmployerStep2Data;
-  step3: RegisterEmployerStep3Data;
-  step4: RegisterEmployerStep4Data;
+  accountInfo: RegisterEmployerStep1Data;
+  employerInfo: RegisterEmployerStep2Data;
+  contactPerson: RegisterEmployerStep3Data;
+  termsAndConditions: RegisterEmployerStep4Data;
 }
 
 // Main state interface for employer registration
-export interface RegisterEmployerState {
+export interface RegisterEmployer {
   currentStep: 1 | 2 | 3 | 4; // Current registration step (1-4)
   registerEmployerData: RegisterEmployerData;
   isLoading: boolean;
   isError: boolean;
 }
 
-const initialState: RegisterEmployerState = {
+const initialState: RegisterEmployer = {
   currentStep: 1,
   registerEmployerData: {
-    step1: {
+    accountInfo: {
       email: "",
       password: "",
     },
-    step2: {
+    employerInfo: {
       companyName: "",
       companyAddress: "",
       phoneNumber: "",
@@ -70,13 +70,13 @@ const initialState: RegisterEmployerState = {
       appealPoints: "",
       fee: "",
     },
-    step3: {
+    contactPerson: {
       name: "",
       departmentName: "",
       phoneNumber: "",
       emailAddress: "",
     },
-    step4: {
+    termsAndConditions: {
       acceptTerms: false,
       acceptPrivacyPolicy: false,
       acceptReceiveEmails: false,
@@ -86,19 +86,19 @@ const initialState: RegisterEmployerState = {
   isError: false,
 };
 
-export const registerEmployerFinalSubmit = createAsyncThunk<
+export const registerEmployerSubmit = createAsyncThunk<
   void,
   void,
-  { state: { registerEmployer: RegisterEmployerState } }
->("registerEmployer/finalSubmit", async (_, { getState, rejectWithValue }) => {
+  { state: { registerEmployer: RegisterEmployer } }
+>("registerEmployer/Submit", async (_, { getState, rejectWithValue }) => {
   const state = getState().registerEmployer;
   const data = state.registerEmployerData;
 
   const submissionData = {
-    step1: data.step1,
-    step2: data.step2,
-    step3: data.step3,
-    step4: data.step4,
+    accountInfo: data.accountInfo,
+    employerInfo: data.employerInfo,
+    contactPerson: data.contactPerson,
+    termsAndConditions: data.termsAndConditions,
   };
 
   try {
@@ -139,17 +139,8 @@ export const registerEmployerSlice = createSlice({
   initialState,
   reducers: {
     // Reducers for navigating Registration Step State
-    openRegEmployerStep1: (state) => {
-      state.currentStep = 1;
-    },
-    openRegEmployerStep2: (state) => {
-      state.currentStep = 2;
-    },
-    openRegEmployerStep3: (state) => {
-      state.currentStep = 3;
-    },
-    openRegEmployerStep4: (state) => {
-      state.currentStep = 4;
+    goNextStep: (state, action: PayloadAction<1 | 2 | 3 | 4>) => {
+      state.currentStep = action.payload;
     },
     goBack: (state) => {
       switch (state.currentStep) {
@@ -162,8 +153,6 @@ export const registerEmployerSlice = createSlice({
         case 2:
           state.currentStep = 1;
           break;
-        default:
-          break;
       }
     },
     // Save data to state
@@ -171,25 +160,25 @@ export const registerEmployerSlice = createSlice({
       state,
       action: PayloadAction<RegisterEmployerStep1Data>
     ) => {
-      state.registerEmployerData.step1 = action.payload;
+      state.registerEmployerData.accountInfo = action.payload;
     },
     saveRegEmployerStep2: (
       state,
       action: PayloadAction<RegisterEmployerStep2Data>
     ) => {
-      state.registerEmployerData.step2 = action.payload;
+      state.registerEmployerData.employerInfo = action.payload;
     },
     saveRegEmployerStep3: (
       state,
       action: PayloadAction<RegisterEmployerStep3Data>
     ) => {
-      state.registerEmployerData.step3 = action.payload;
+      state.registerEmployerData.contactPerson = action.payload;
     },
     saveRegEmployerStep4: (
       state,
       action: PayloadAction<RegisterEmployerStep4Data>
     ) => {
-      state.registerEmployerData.step4 = action.payload;
+      state.registerEmployerData.termsAndConditions = action.payload;
     },
 
     // Clear State
@@ -203,12 +192,12 @@ export const registerEmployerSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // Handle pending state
-      .addCase(registerEmployerFinalSubmit.pending, (state) => {
+      .addCase(registerEmployerSubmit.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
       })
       // Handle successful submission
-      .addCase(registerEmployerFinalSubmit.fulfilled, (state) => {
+      .addCase(registerEmployerSubmit.fulfilled, (state) => {
         state.isLoading = false;
         state.isError = false;
         // Reset data and close modal after successful submission
@@ -216,7 +205,7 @@ export const registerEmployerSlice = createSlice({
         state.currentStep = 1;
       })
       // Handle failed submission
-      .addCase(registerEmployerFinalSubmit.rejected, (state) => {
+      .addCase(registerEmployerSubmit.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
       });
@@ -224,15 +213,12 @@ export const registerEmployerSlice = createSlice({
 });
 
 export const {
+  goNextStep,
   goBack,
   saveRegEmployerStep1,
   saveRegEmployerStep2,
   saveRegEmployerStep3,
   saveRegEmployerStep4,
   clearRegisterEmployerData,
-  openRegEmployerStep1,
-  openRegEmployerStep2,
-  openRegEmployerStep3,
-  openRegEmployerStep4,
 } = registerEmployerSlice.actions;
 export default registerEmployerSlice.reducer;

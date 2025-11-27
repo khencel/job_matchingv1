@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   saveRegEmployerStep2,
   RegisterEmployerStep2Data,
-  openRegEmployerStep3,
-} from "@/redux/slices/registerEmployerSlice";
+  goNextStep,
+} from "@/redux/slices/register/employerSlice";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { useTranslations } from "next-intl";
@@ -14,8 +14,8 @@ export default function RegisterEmployerStep2() {
   const dispatch = useAppDispatch();
   // i18n for labels/placeholders in Step 2
   const t = useTranslations("registerEmployerStep2");
-  const step2data = useAppSelector(
-    (s) => s.registerEmployer.registerEmployerData.step2
+  const employerInfo = useAppSelector(
+    (s) => s.registerEmployer.registerEmployerData.employerInfo
   );
 
   const [currentBranch, setCurrentBranch] = useState<string>("");
@@ -32,8 +32,8 @@ export default function RegisterEmployerStep2() {
   });
 
   useEffect(() => {
-    setData(step2data);
-  }, [step2data]);
+    setData(employerInfo);
+  }, [employerInfo]);
 
   // Industry options
   const industries = [
@@ -70,10 +70,12 @@ export default function RegisterEmployerStep2() {
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
+    const { name, value } = e.target;
     setData({
       ...data,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+    dispatch(saveRegEmployerStep2({ ...data, [name]: value }));
   };
 
   const handleAddBranch = () => {
@@ -115,12 +117,12 @@ export default function RegisterEmployerStep2() {
     }
     // Save branches as comma-separated string
     dispatch(saveRegEmployerStep2(data));
-    dispatch(openRegEmployerStep3());
+    dispatch(goNextStep(3));
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h4 className="mb-5 text-center">{t("labels.mgmtOrgInfo")}</h4>
+      <h4 className="mb-5 text-center">{t("title")}</h4>
       {/* Basic Information */}
       <div className="mb-4">
         <h6 className="mb-3 fw-bold">{t("labels.basicInfo")}</h6>
@@ -251,7 +253,9 @@ export default function RegisterEmployerStep2() {
           {/* Collection of Branch Offices */}
           {data.branchOffices.length > 0 && (
             <div className="mt-3">
-              <p className="text-muted small mb-2">{t("labels.branchOfficesList")}</p>
+              <p className="text-muted small mb-2">
+                {t("labels.branchOfficesList")}
+              </p>
               {data.branchOffices.map((branch, index) => (
                 <div
                   key={index}

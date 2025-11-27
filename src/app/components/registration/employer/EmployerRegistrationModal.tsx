@@ -7,7 +7,7 @@ import RegisterEmployerStep3 from "./forms/RegisterEmployer-Step3";
 import RegisterEmployerStep4 from "./forms/RegisterEmployer-Step4";
 import { ArrowLeft, XIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { goBack } from "@/redux/slices/registerEmployerSlice";
+import { goBack } from "@/redux/slices/register/employerSlice";
 import ProgressStepCount from "../../ProgressStepCount";
 
 interface EmployerRegistrationModalProps {
@@ -26,7 +26,7 @@ export default function EmployerRegistrationModal({
     (state) => state.registerEmployer.currentStep
   );
 
-  const renderStepContent = () => {
+  const renderRegisterForms = () => {
     switch (currentStep) {
       case 1:
         return <RegisterEmployerStep1 />;
@@ -68,7 +68,7 @@ export default function EmployerRegistrationModal({
         <ProgressStepCount currentStep={currentStep} stepCount={[1, 2, 3, 4]} />
       </Modal.Title>
 
-      <Modal.Body className="border-0 px-5">{renderStepContent()}</Modal.Body>
+      <Modal.Body className="border-0 px-5">{renderRegisterForms()}</Modal.Body>
     </Modal>
   );
 }

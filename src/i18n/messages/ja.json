@@ -6,7 +6,8 @@
     "qa": "Q&A",
     "contact": "お問い合わせ",
     "logoAlt": "ロゴ",
-    "japanese": "日本語"
+    "japanese": "日本語",
+    "languageLabel": "言語"
   },
   "banner": {
     "title": "理想の仕事を見つけよう",
@@ -53,6 +54,7 @@
     }
   },
   "registerEmployerStep1": {
+    "title": "アカウント情報",
     "labels": {
       "accountDetails": "アカウント情報",
       "email": "メールアドレス",
@@ -80,6 +82,7 @@
     }
   },
   "registerEmployerStep2": {
+    "title": "管理組織情報",
     "labels": {
       "mgmtOrgInfo": "管理組織情報",
       "basicInfo": "基本情報",
@@ -120,6 +123,7 @@
     }
   },
   "registerEmployerStep3": {
+    "title": "担当者",
     "labels": {
       "contactPerson": "担当者",
       "name": "氏名",
@@ -144,6 +148,7 @@
     }
   },
   "registerEmployerStep4": {
+    "title": "利用規約",
     "labels": {
       "acceptTerms": "利用規約に同意する",
       "acceptPrivacyPolicy": "プライバシーポリシーに同意する",
