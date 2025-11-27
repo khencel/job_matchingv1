@@ -1,0 +1,165 @@
+{
+  "navbar": {
+    "home": "ホーム",
+    "features": "就職支援の機能",
+    "findJobs": "仕事を探す",
+    "qa": "Q&A",
+    "contact": "お問い合わせ",
+    "logoAlt": "ロゴ",
+    "japanese": "日本語"
+  },
+  "banner": {
+    "title": "理想の仕事を見つけよう",
+    "subtitle": "あなたの未来は、運任せではなく、最高の機会を受けるに値します。",
+    "buttons": {
+      "findJob": "仕事を探す"
+    }
+  },
+  "jobSearchFilter": {
+    "placeholders": {
+      "jobType": "職種"
+    },
+    "labels": {
+      "region": "地域"
+    },
+    "regions": {
+      "test1": "テスト1",
+      "test2": "テスト2",
+      "test3": "テスト3",
+      "test4": "テスト4"
+    },
+    "buttons": {
+      "explore": "検索"
+    }
+  },
+  "registrationCard": {
+    "buttons": {
+      "registerJobSeeker": "求職者として登録",
+      "registerEmployer": "雇用主として登録",
+      "registerSupervisory": "監督者として登録"
+    }
+  },
+  "employerRegistrationModal": {
+    "title": "雇用主の登録",
+    "steps": {
+      "account": "アカウント",
+      "company": "会社",
+      "contact": "連絡先",
+      "confirm": "確認"
+    },
+    "buttons": {
+      "close": "閉じる",
+      "back": "戻る"
+    }
+  },
+  "registerEmployerStep1": {
+    "labels": {
+      "accountDetails": "アカウント情報",
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "confirmPassword": "パスワード（確認）",
+      "rememberMe": "ログイン情報を保存"
+    },
+    "placeholders": {
+      "enterEmail": "メールアドレスを入力",
+      "enterPassword": "パスワードを入力",
+      "confirmYourPassword": "パスワードを確認"
+    },
+    "helpers": {
+      "passwordMinLength": "8文字以上で入力してください。",
+      "accountConfirmNote": "確認リンクがメールで送信されます。アカウントを認証してください。"
+    },
+    "errors": {
+      "fillRequired": "必須項目を入力してください。",
+      "invalidEmail": "有効なメールアドレスを入力してください。",
+      "passwordTooShort": "パスワードは8文字以上で入力してください。",
+      "passwordMismatch": "パスワードが一致しません。"
+    },
+    "buttons": {
+      "next": "次へ"
+    }
+  },
+  "registerEmployerStep2": {
+    "labels": {
+      "mgmtOrgInfo": "管理組織情報",
+      "basicInfo": "基本情報",
+      "companyName": "会社名",
+      "companyAddress": "会社住所",
+      "phoneNumber": "電話番号",
+      "companyIndustry": "業種",
+      "industry": "業界",
+      "regions": "地域",
+      "region": "地域",
+      "orgInfo": "組織情報",
+      "numEmployees": "従業員数",
+      "branchOffices": "支店",
+      "branchOfficePlaceholder": "支店所在地を入力",
+      "branchOfficesList": "支店一覧:",
+      "prInfo": "PR情報",
+      "appealPoints": "アピールポイント",
+      "fee": "料金"
+    },
+    "placeholders": {
+      "enterCompanyName": "会社名を入力",
+      "enterCompanyAddress": "会社住所を入力",
+      "enterPhoneNumber": "電話番号を入力",
+      "selectIndustry": "業界を選択",
+      "selectRegion": "地域を選択",
+      "enterNumEmployees": "従業員数を入力",
+      "enterAppealPoints": "アピールポイントを入力",
+      "enterFee": "料金を入力"
+    },
+    "errors": {
+      "fillRequired": "必須項目を入力してください。",
+      "addAtLeastOneBranch": "少なくとも1つの支店を追加してください。"
+    },
+    "buttons": {
+      "next": "次へ",
+      "add": "追加",
+      "remove": "削除"
+    }
+  },
+  "registerEmployerStep3": {
+    "labels": {
+      "contactPerson": "担当者",
+      "name": "氏名",
+      "departmentName": "部署名",
+      "phoneNumber": "電話番号",
+      "emailAddress": "メールアドレス"
+    },
+    "placeholders": {
+      "enterFullName": "氏名を入力",
+      "enterDeptName": "部署名を入力",
+      "enterPhoneNumber": "電話番号を入力",
+      "enterEmailAddress": "メールアドレスを入力"
+    },
+    "helpers": {
+      "contactInfoNote": "この情報は必要に応じて管理者が会社へ連絡するために使用されます。求人には表示されません。"
+    },
+    "errors": {
+      "fillRequired": "必須項目を入力してください。"
+    },
+    "buttons": {
+      "next": "次へ"
+    }
+  },
+  "registerEmployerStep4": {
+    "labels": {
+      "acceptTerms": "利用規約に同意する",
+      "acceptPrivacyPolicy": "プライバシーポリシーに同意する",
+      "acceptReceiveEmails": "メールで通知を受け取る"
+    },
+    "helpers": {
+      "submitting": "送信中..."
+    },
+    "errors": {
+      "acceptTermsPrivacy": "続行するには、利用規約とプライバシーポリシーに同意してください。"
+    },
+    "buttons": {
+      "submit": "登録を送信"
+    }
+  },
+  "forgotPasswordPage": {
+    "title": "パスワードをお忘れですか"
+  }
+}

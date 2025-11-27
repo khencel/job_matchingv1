@@ -8,6 +8,7 @@ import {
   registerEmployerFinalSubmit,
   RegisterEmployerStep4Data,
 } from "@/redux/slices/registerEmployerSlice";
+import { useTranslations } from "next-intl";
 
 interface RegisterEmployerStep4Props {
   closeModal: () => void;
@@ -18,6 +19,7 @@ export default function RegisterEmployerStep4({
 }: RegisterEmployerStep4Props) {
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((s) => s.registerEmployer);
+  const t = useTranslations("registerEmployerStep4");
 
   const [data, setData] = useState<RegisterEmployerStep4Data>({
     acceptTerms: false,
@@ -34,7 +36,7 @@ export default function RegisterEmployerStep4({
     e.preventDefault();
     // Basic required validation for mandatory consents
     if (!data.acceptTerms || !data.acceptPrivacyPolicy) {
-      alert("You must accept Terms of Use and Privacy Policy to continue.");
+      alert(t("errors.acceptTermsPrivacy"));
       return;
     }
     dispatch(saveRegEmployerStep4(data));
@@ -51,7 +53,7 @@ export default function RegisterEmployerStep4({
     <Form onSubmit={handleSubmit}>
       <div className="mb-4">
         <h5 className="mb-5 fs-5 text-center">
-          Confirmation of Terms, Use & Consent
+          {t("steps.confirm")}
         </h5>
 
         <Form.Group className="mb-4" controlId="acceptTerms">
@@ -59,7 +61,7 @@ export default function RegisterEmployerStep4({
             className="px-5"
             type="checkbox"
             name="acceptTerms"
-            label="Accept the terms of use."
+            label={t("labels.acceptTerms")}
             checked={data.acceptTerms}
             onChange={handleChange}
             required
@@ -71,7 +73,7 @@ export default function RegisterEmployerStep4({
             className="px-5"
             type="checkbox"
             name="acceptPrivacyPolicy"
-            label="Accept privacy policy."
+            label={t("labels.acceptPrivacyPolicy")}
             checked={data.acceptPrivacyPolicy}
             onChange={handleChange}
             required
@@ -83,7 +85,7 @@ export default function RegisterEmployerStep4({
             className="px-5"
             type="checkbox"
             name="acceptReceiveEmails"
-            label="Receive notification via email."
+            label={t("labels.acceptReceiveEmails")}
             checked={data.acceptReceiveEmails}
             onChange={handleChange}
           />
@@ -100,10 +102,10 @@ export default function RegisterEmployerStep4({
           {isLoading ? (
             <>
               <Spinner animation="border" size="sm" className="me-2" />
-              Submitting...
+              {t("helpers.submitting")}
             </>
           ) : (
-            "Submit Registration"
+            t("buttons.submit")
           )}
         </Button>
       </div>

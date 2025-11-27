@@ -15,7 +15,7 @@ export default function Registration() {
               <RegistrationCard
                 id="jobSeeker"
                 imageUrl="/registration/job_seeker.jpg"
-                buttonText="Register as Job Seeker"
+                buttonTextKey="buttons.registerJobSeeker"
               />
             </div>
             {/* Employer Card */}
@@ -23,7 +23,7 @@ export default function Registration() {
               <RegistrationCard
                 id="employer"
                 imageUrl="/registration/employer.jpg"
-                buttonText="Register as Employer"
+                buttonTextKey="buttons.registerEmployer"
               />
             </div>
             {/* Supervisory Card */}
@@ -31,7 +31,7 @@ export default function Registration() {
               <RegistrationCard
                 id="superVisory"
                 imageUrl="/registration/supervisory.jpg"
-                buttonText="Register as Supervisory"
+                buttonTextKey="buttons.registerSupervisory"
               />
             </div>
           </div>

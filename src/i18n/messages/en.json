@@ -1,0 +1,165 @@
+{
+  "navbar": {
+    "home": "Home",
+    "features": "Job Support Features",
+    "findJobs": "Find Jobs",
+    "qa": "Q&A",
+    "contact": "Contact",
+    "logoAlt": "Logo",
+    "japanese": "日本語"
+  },
+  "banner": {
+    "title": "Find Your Ideal Job",
+    "subtitle": "Because your future deserves the best opportunities, more than lucky breaks.",
+    "buttons": {
+      "findJob": "Find Job"
+    }
+  },
+  "jobSearchFilter": {
+    "placeholders": {
+      "jobType": "Job Type"
+    },
+    "labels":  {
+      "region": "Region"
+    },
+    "regions": {
+      "test1": "Test1",
+      "test2": "Test2",
+      "test3": "Test3",
+      "test4": "Test4"
+    },
+    "buttons": {
+      "explore": "Explore"
+    }
+  },
+  "registrationCard": {
+    "buttons": {
+      "registerJobSeeker": "Register as Job Seeker",
+      "registerEmployer": "Register as Employer",
+      "registerSupervisory": "Register as Supervisory"
+    }
+  },
+  "employerRegistrationModal": {
+    "title": "Employer Registration",
+    "steps": {
+      "account": "Account",
+      "company": "Company",
+      "contact": "Contact",
+      "confirm": "Confirm"
+    },
+    "buttons": {
+      "close": "Close",
+      "back": "Back"
+    }
+  },
+  "registerEmployerStep1": {
+    "labels": {
+      "accountDetails": "Account Details",
+      "email": "Email Address",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "rememberMe": "Remember me"
+    },
+    "placeholders": {
+      "enterEmail": "Enter your email",
+      "enterPassword": "Enter your password",
+      "confirmYourPassword": "Confirm your password"
+    },
+    "helpers": {
+      "passwordMinLength": "Must be at least 8 characters long.",
+      "accountConfirmNote": "A confirmation link will be sent to your email address to verify your account"
+    },
+    "errors": {
+      "fillRequired": "Please fill in all required fields.",
+      "invalidEmail": "Please enter a valid email address.",
+      "passwordTooShort": "Password must be at least 8 characters long.",
+      "passwordMismatch": "Passwords do not match."
+    },
+    "buttons": {
+      "next": "Next"
+    }
+  },
+  "registerEmployerStep2": {
+    "labels": {
+      "mgmtOrgInfo": "Management Organization Information",
+      "basicInfo": "Basic Information",
+      "companyName": "Company Name",
+      "companyAddress": "Company Address",
+      "phoneNumber": "Phone Number",
+      "companyIndustry": "Company Industry",
+      "industry": "Industry",
+      "regions": "Regions",
+      "region": "Region",
+      "orgInfo": "Organizational Information",
+      "numEmployees": "Number of Employees",
+      "branchOffices": "Branch Offices",
+      "branchOfficePlaceholder": "Enter branch office location",
+      "branchOfficesList": "Branch Offices:",
+      "prInfo": "PR Information",
+      "appealPoints": "Appeal Points",
+      "fee": "Fee"
+    },
+    "placeholders": {
+      "enterCompanyName": "Enter company name",
+      "enterCompanyAddress": "Enter company address",
+      "enterPhoneNumber": "Enter phone number",
+      "selectIndustry": "Select Industry",
+      "selectRegion": "Select Region",
+      "enterNumEmployees": "Enter number of employees",
+      "enterAppealPoints": "Enter appeal points",
+      "enterFee": "Enter fee amount"
+    },
+    "errors": {
+      "fillRequired": "Please fill in all required fields.",
+      "addAtLeastOneBranch": "Please add at least one branch office."
+    },
+    "buttons": {
+      "next": "Next",
+      "add": "Add",
+      "remove": "Remove"
+    }
+  },
+  "registerEmployerStep3": {
+    "labels": {
+      "contactPerson": "Contact Person",
+      "name": "Name",
+      "departmentName": "Department Name",
+      "phoneNumber": "Phone Number",
+      "emailAddress": "Email Address"
+    },
+    "placeholders": {
+      "enterFullName": "Enter full name",
+      "enterDeptName": "Enter department name",
+      "enterPhoneNumber": "Enter phone number",
+      "enterEmailAddress": "Enter email address"
+    },
+    "helpers": {
+      "contactInfoNote": "This information will be used by the platform administrators to contact your company if needed. It will not be displayed on job listings."
+    },
+    "errors": {
+      "fillRequired": "Please fill in all required fields."
+    },
+    "buttons": {
+      "next": "Next"
+    }
+  },
+  "registerEmployerStep4": {
+    "labels": {
+      "acceptTerms": "Accept the terms of use.",
+      "acceptPrivacyPolicy": "Accept privacy policy.",
+      "acceptReceiveEmails": "Receive notification via email."
+    },
+    "helpers": {
+      "submitting": "Submitting..."
+    },
+    "errors": {
+      "acceptTermsPrivacy": "You must accept Terms of Use and Privacy Policy to continue."
+    },
+    "buttons": {
+      "submit": "Submit Registration"
+    }
+  },
+  "forgotPasswordPage": {
+    "title": "Forgot Password"
+  }
+}

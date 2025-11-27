@@ -3,6 +3,8 @@ import BootstrapClient from "./components/BootstrapClient";
 import Navbar from "./components/Navbar";
 import StoreProvider from "./StoreProvider";
 import "../../public/css/app.css";
+import NextIntlProvider from "@/i18n/NextIntlProvider";
+import { cookies } from "next/headers";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import Providers from "../app/redux/Providers"; // <-- ADD THIS
@@ -12,22 +14,29 @@ export const metadata = {
   description: "A job matching application built with Next.js",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Determine locale from cookie (NEXT_LOCALE) with fallback to 'en'
+  const cookieStore = await cookies();
+  const cookieLocale = cookieStore.get("NEXT_LOCALE")?.value as "en" | "ja" | undefined;
+  const locale: "en" | "ja" = cookieLocale === "ja" ? "ja" : "en";
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-
       <body>
         <StoreProvider>
-          <BootstrapClient />
-          <Navbar />
-          {children}
+          <NextIntlProvider locale={locale}>
+            {/* Bootstrap JS client features */}
+            <BootstrapClient />
+            {/* Global navigation */}
+            <Navbar />
+            {children}
+          </NextIntlProvider>
         </StoreProvider>
       </body>
     </html>

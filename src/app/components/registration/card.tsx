@@ -2,6 +2,7 @@
 import { useAppDispatch } from "@/redux/hooks";
 import { useState } from "react";
 import { clearRegisterEmployerData } from "@/redux/slices/registerEmployerSlice";
+import { useTranslations } from "next-intl";
 
 import { Button, Card } from "react-bootstrap";
 import EmployerRegistrationModal from "./employer/EmployerRegistrationModal";
@@ -9,7 +10,7 @@ import EmployerRegistrationModal from "./employer/EmployerRegistrationModal";
 interface RegistrationCardProps {
   id: "employer" | "jobSeeker" | "superVisory"; // Registration type identifier
   imageUrl: string; // Card image source
-  buttonText: string; // CTA button label
+  buttonTextKey: string; // Translation key for CTA button label
 }
 
 /**
@@ -18,10 +19,11 @@ interface RegistrationCardProps {
  */
 export default function RegistrationCard({
   imageUrl,
-  buttonText,
+  buttonTextKey,
   id,
 }: RegistrationCardProps) {
   const dispatch = useAppDispatch();
+  const t = useTranslations("registrationCard");
   const [showModal, setShowModal] = useState(false);
 
   // Open registration modal
@@ -76,7 +78,7 @@ export default function RegistrationCard({
       </div>
       <Card.Body className="px-5">
         <Button className="w-100 py-4" onClick={handleOpenForm} id={id}>
-          {buttonText}
+          {t(buttonTextKey)}
         </Button>
       </Card.Body>
       {handleModalRender()}

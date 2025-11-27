@@ -8,9 +8,12 @@ import {
 } from "@/redux/slices/registerEmployerSlice";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
+import { useTranslations } from "next-intl";
 
 export default function RegisterEmployerStep2() {
   const dispatch = useAppDispatch();
+  // i18n for labels/placeholders in Step 2
+  const t = useTranslations("registerEmployerStep2");
   const step2data = useAppSelector(
     (s) => s.registerEmployer.registerEmployerData.step2
   );
@@ -94,7 +97,7 @@ export default function RegisterEmployerStep2() {
     e.preventDefault();
 
     if (data.branchOffices.length === 0) {
-      alert("Please add at least one branch office.");
+      alert(t("errors.addAtLeastOneBranch"));
       return;
     }
     if (
@@ -107,7 +110,7 @@ export default function RegisterEmployerStep2() {
       data.appealPoints.trim() === "" ||
       data.fee.trim() === ""
     ) {
-      alert("Please fill in all required fields.");
+      alert(t("errors.fillRequired"));
       return;
     }
     // Save branches as comma-separated string
@@ -117,16 +120,16 @@ export default function RegisterEmployerStep2() {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h4 className="mb-5 text-center">Management Organization Information</h4>
+      <h4 className="mb-5 text-center">{t("labels.mgmtOrgInfo")}</h4>
       {/* Basic Information */}
       <div className="mb-4">
-        <h6 className="mb-3 fw-bold">Basic Information</h6>
+        <h6 className="mb-3 fw-bold">{t("labels.basicInfo")}</h6>
         <Form.Group className="mb-3" controlId="companyName">
-          <Form.Label>Company Name</Form.Label>
+          <Form.Label>{t("labels.companyName")}</Form.Label>
           <Form.Control
             type="text"
             name="companyName"
-            placeholder="Enter company name"
+            placeholder={t("placeholders.enterCompanyName")}
             value={data.companyName}
             onChange={handleChange}
             autoFocus
@@ -135,11 +138,11 @@ export default function RegisterEmployerStep2() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="companyAddress">
-          <Form.Label>Company Address</Form.Label>
+          <Form.Label>{t("labels.companyAddress")}</Form.Label>
           <Form.Control
             type="text"
             name="companyAddress"
-            placeholder="Enter company address"
+            placeholder={t("placeholders.enterCompanyAddress")}
             value={data.companyAddress}
             onChange={handleChange}
             required
@@ -147,11 +150,11 @@ export default function RegisterEmployerStep2() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="phoneNumber">
-          <Form.Label>Phone Number</Form.Label>
+          <Form.Label>{t("labels.phoneNumber")}</Form.Label>
           <Form.Control
             type="tel"
             name="phoneNumber"
-            placeholder="Enter phone number"
+            placeholder={t("placeholders.enterPhoneNumber")}
             value={data.phoneNumber}
             onChange={handleChange}
             required
@@ -161,16 +164,16 @@ export default function RegisterEmployerStep2() {
 
       {/* Company Industry */}
       <div className="mb-4">
-        <h6 className="mb-3 fw-bold">Company Industry</h6>
+        <h6 className="mb-3 fw-bold">{t("labels.companyIndustry")}</h6>
         <Form.Group controlId="industry">
-          <Form.Label>Industry</Form.Label>
+          <Form.Label>{t("labels.industry")}</Form.Label>
           <Form.Select
             name="industry"
             value={data.industry}
             onChange={handleChange}
             required
           >
-            <option value="">Select Industry</option>
+            <option value="">{t("placeholders.selectIndustry")}</option>
             {industries.map((industry) => (
               <option key={industry} value={industry}>
                 {industry}
@@ -182,16 +185,16 @@ export default function RegisterEmployerStep2() {
 
       {/* Regions */}
       <div className="mb-4">
-        <h6 className="mb-3 fw-bold">Regions</h6>
+        <h6 className="mb-3 fw-bold">{t("labels.regions")}</h6>
         <Form.Group controlId="regions">
-          <Form.Label>Region</Form.Label>
+          <Form.Label>{t("labels.region")}</Form.Label>
           <Form.Select
             name="regions"
             value={data.regions}
             onChange={handleChange}
             required
           >
-            <option value="">Select Region</option>
+            <option value="">{t("placeholders.selectRegion")}</option>
             {japanRegions.map((region) => (
               <option key={region} value={region}>
                 {region}
@@ -203,13 +206,13 @@ export default function RegisterEmployerStep2() {
 
       {/* Organizational Information */}
       <div className="mb-4">
-        <h6 className="mb-3 fw-bold">Organizational Information</h6>
+        <h6 className="mb-3 fw-bold">{t("labels.orgInfo")}</h6>
         <Form.Group className="mb-3" controlId="numberOfEmployees">
-          <Form.Label>Number of Employees</Form.Label>
+          <Form.Label>{t("labels.numEmployees")}</Form.Label>
           <Form.Control
             type="number"
             name="numberOfEmployees"
-            placeholder="Enter number of employees"
+            placeholder={t("placeholders.enterNumEmployees")}
             value={data.numberOfEmployees}
             onChange={handleChange}
             required
@@ -217,12 +220,12 @@ export default function RegisterEmployerStep2() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="branchOffices">
-          <Form.Label>Branch Offices</Form.Label>
+          <Form.Label>{t("labels.branchOffices")}</Form.Label>
           <Row>
             <Col xs={9}>
               <Form.Control
                 type="text"
-                placeholder="Enter branch office location"
+                placeholder={t("labels.branchOfficePlaceholder")}
                 value={currentBranch}
                 onChange={(e) => setCurrentBranch(e.target.value)}
                 onKeyPress={(e) => {
@@ -240,7 +243,7 @@ export default function RegisterEmployerStep2() {
                 onClick={handleAddBranch}
                 className="w-100"
               >
-                Add
+                {t("buttons.add")}
               </Button>
             </Col>
           </Row>
@@ -248,7 +251,7 @@ export default function RegisterEmployerStep2() {
           {/* Collection of Branch Offices */}
           {data.branchOffices.length > 0 && (
             <div className="mt-3">
-              <p className="text-muted small mb-2">Branch Offices:</p>
+              <p className="text-muted small mb-2">{t("labels.branchOfficesList")}</p>
               {data.branchOffices.map((branch, index) => (
                 <div
                   key={index}
@@ -261,7 +264,7 @@ export default function RegisterEmployerStep2() {
                     type="button"
                     onClick={() => handleRemoveBranch(index)}
                   >
-                    Remove
+                    {t("buttons.remove")}
                   </Button>
                 </div>
               ))}
@@ -272,13 +275,13 @@ export default function RegisterEmployerStep2() {
 
       {/* PR Information */}
       <div className="mb-4">
-        <h6 className="mb-3 fw-bold">PR Information</h6>
+        <h6 className="mb-3 fw-bold">{t("labels.prInfo")}</h6>
         <Form.Group className="mb-3" controlId="appealPoints">
-          <Form.Label>Appeal Points</Form.Label>
+          <Form.Label>{t("labels.appealPoints")}</Form.Label>
           <Form.Control
             type="number"
             name="appealPoints"
-            placeholder="Enter appeal points"
+            placeholder={t("placeholders.enterAppealPoints")}
             value={data.appealPoints}
             onChange={handleChange}
             required
@@ -286,11 +289,11 @@ export default function RegisterEmployerStep2() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="fee">
-          <Form.Label>Fee</Form.Label>
+          <Form.Label>{t("labels.fee")}</Form.Label>
           <Form.Control
             type="number"
             name="fee"
-            placeholder="Enter fee amount"
+            placeholder={t("placeholders.enterFee")}
             value={data.fee}
             onChange={handleChange}
             required
@@ -301,7 +304,7 @@ export default function RegisterEmployerStep2() {
       {/* Submit Button */}
       <div className="d-grid">
         <Button type="submit" variant="primary" className="mb-3 fw-bold p-2">
-          Next
+          {t("buttons.next")}
         </Button>
       </div>
     </Form>

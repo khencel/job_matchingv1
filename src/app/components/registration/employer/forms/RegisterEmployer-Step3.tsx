@@ -7,10 +7,12 @@ import {
   RegisterEmployerStep3Data,
 } from "@/redux/slices/registerEmployerSlice";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button, Form } from "react-bootstrap";
 
 export default function RegisterEmployerStep3() {
   const dispatch = useAppDispatch();
+  const t = useTranslations("registerEmployerStep3");
   const step3Data = useAppSelector(
     (s) => s.registerEmployer.registerEmployerData.step3
   );
@@ -41,7 +43,7 @@ export default function RegisterEmployerStep3() {
       data.phoneNumber.trim() === "" ||
       data.emailAddress.trim() === ""
     ) {
-      alert("Please fill in all required fields.");
+      alert(t("errors.fillRequired"));
       return;
     }
     dispatch(saveRegEmployerStep3(data));
@@ -50,15 +52,15 @@ export default function RegisterEmployerStep3() {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h4 className="mb-5 text-center">Contact Person</h4>
+      <h4 className="mb-5 text-center">{t("labels.contactPerson")}</h4>
       {/* Contact Information */}
       <div className="mb-4">
         <Form.Group className="mb-3" controlId="name">
-          <Form.Label>Name</Form.Label>
+          <Form.Label>{t("labels.name")}</Form.Label>
           <Form.Control
             type="text"
             name="name"
-            placeholder="Enter full name"
+            placeholder={t("placeholders.enterFullName")}
             value={data.name}
             onChange={handleChange}
             required
@@ -66,11 +68,11 @@ export default function RegisterEmployerStep3() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="departmentName">
-          <Form.Label>Department Name</Form.Label>
+          <Form.Label>{t("labels.departmentName")}</Form.Label>
           <Form.Control
             type="text"
             name="departmentName"
-            placeholder="Enter department name"
+            placeholder={t("placeholders.enterDeptName")}
             value={data.departmentName}
             onChange={handleChange}
             required
@@ -78,11 +80,11 @@ export default function RegisterEmployerStep3() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="phoneNumber">
-          <Form.Label>Phone Number</Form.Label>
+          <Form.Label>{t("labels.phoneNumber")}</Form.Label>
           <Form.Control
             type="tel"
             name="phoneNumber"
-            placeholder="Enter phone number"
+            placeholder={t("placeholders.enterPhoneNumber")}
             value={data.phoneNumber}
             onChange={handleChange}
             required
@@ -90,11 +92,11 @@ export default function RegisterEmployerStep3() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="emailAddress">
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label>{t("labels.emailAddress")}</Form.Label>
           <Form.Control
             type="email"
             name="emailAddress"
-            placeholder="Enter email address"
+            placeholder={t("placeholders.enterEmailAddress")}
             value={data.emailAddress}
             onChange={handleChange}
             required
@@ -105,12 +107,10 @@ export default function RegisterEmployerStep3() {
       {/* Submit Button */}
       <div className="d-grid">
         <p className="fs-6 fw-light fst-italic text-center text-muted">
-          This information will be used by the platform administrators to
-          contact your company if needed. It will not be displayed on job
-          listings.
+          {t("helpers.contactInfoNote")}
         </p>
         <Button type="submit" variant="primary" className="mb-3 fw-bold p-2">
-          Next
+          {t("buttons.next")}
         </Button>
       </div>
     </Form>

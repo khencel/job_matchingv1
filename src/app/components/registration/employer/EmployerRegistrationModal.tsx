@@ -6,6 +6,7 @@ import RegisterEmployerStep2 from "./forms/RegisterEmployer-Step2";
 import RegisterEmployerStep3 from "./forms/RegisterEmployer-Step3";
 import RegisterEmployerStep4 from "./forms/RegisterEmployer-Step4";
 import { ArrowLeft, XIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { goBack } from "@/redux/slices/registerEmployerSlice";
 import ProgressStepCount from "../../ProgressStepCount";
 
@@ -14,10 +15,13 @@ interface EmployerRegistrationModalProps {
   onHide: () => void;
 }
 
-export default function EmployerRegistrationModal(
-  props: EmployerRegistrationModalProps
-) {
+export default function EmployerRegistrationModal({
+  show,
+  onHide,
+}: EmployerRegistrationModalProps) {
   const dispatch = useAppDispatch();
+  // i18n: translations for Employer registration UI
+  const t = useTranslations("employerRegistrationModal");
   const currentStep = useAppSelector(
     (state) => state.registerEmployer.currentStep
   );
@@ -31,12 +35,18 @@ export default function EmployerRegistrationModal(
       case 3:
         return <RegisterEmployerStep3 />;
       case 4:
-        return <RegisterEmployerStep4 closeModal={props.onHide} />;
+        return <RegisterEmployerStep4 closeModal={onHide} />;
     }
   };
 
   return (
-    <Modal {...props} backdrop="static" keyboard={false} size="md">
+    <Modal
+      {...{ show, onHide }}
+      backdrop="static"
+      keyboard={false}
+      size="md"
+      className=""
+    >
       <Modal.Header
         className={`d-flex align-items-center border-0 ${
           currentStep !== 1 ? "justify-content-between" : "justify-content-end"
@@ -48,13 +58,13 @@ export default function EmployerRegistrationModal(
             <ArrowLeft />
           </Button>
         )}
-        <Button className="float-end" variant="muted" onClick={props.onHide}>
+        <Button className="float-end" variant="muted" onClick={onHide}>
           <XIcon />
         </Button>
       </Modal.Header>
 
       <Modal.Title className="text-center fw-bold mb-3 mt-2">
-        <h3 className="mb-3 fw-bold">Employer Registration</h3>
+        <h3 className="mb-3 fw-bold">{t("title")}</h3>
         <ProgressStepCount currentStep={currentStep} stepCount={[1, 2, 3, 4]} />
       </Modal.Title>
 

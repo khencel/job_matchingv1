@@ -7,9 +7,11 @@ import {
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
+import { useTranslations } from "next-intl";
 
 export default function RegisterEmployerStep1() {
   const dispatch = useAppDispatch();
+  const t = useTranslations("registerEmployerStep1");
   const step1Data = useAppSelector(
     (s) => s.registerEmployer.registerEmployerData.step1
   );
@@ -53,19 +55,19 @@ export default function RegisterEmployerStep1() {
       data.password.trim() === "" ||
       confirmPassword.trim() === ""
     ) {
-      alert("Please fill in all required fields.");
+      alert(t("errors.fillRequired"));
       return;
     }
     if (!emailRegex.test(data.email)) {
-      alert("Please enter a valid email address.");
+      alert(t("errors.invalidEmail"));
       return;
     }
     if (data.password.length < 8) {
-      alert("Password must be at least 8 characters long.");
+      alert(t("errors.passwordTooShort"));
       return;
     }
     if (data.password !== confirmPassword) {
-      alert("Passwords do not match.");
+      alert(t("errors.passwordMismatch"));
       return;
     }
     if (rememberMe) {
@@ -77,14 +79,14 @@ export default function RegisterEmployerStep1() {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h4 className="mb-4 text-center">Account Details</h4>
+      <h4 className="mb-4 text-center">{t("labels.accountDetails")}</h4>
       {/* Email Address */}
       <Form.Group className="mb-3" controlId="formEmail">
-        <Form.Label>Email Address</Form.Label>
+        <Form.Label>{t("labels.email")}</Form.Label>
         <Form.Control
           type="email"
           name="email"
-          placeholder="Enter your email"
+          placeholder={t("placeholders.enterEmail")}
           value={data.email}
           onChange={handleChange}
           autoFocus
@@ -94,12 +96,12 @@ export default function RegisterEmployerStep1() {
 
       {/* Password */}
       <Form.Group className="mb-3" controlId="formPassword">
-        <Form.Label>Password</Form.Label>
+        <Form.Label>{t("labels.password")}</Form.Label>
         <InputGroup>
           <Form.Control
             type={showPassword ? "text" : "password"}
             name="password"
-            placeholder="Enter your password"
+            placeholder={t("placeholders.enterPassword")}
             value={data.password}
             onChange={handleChange}
             required
@@ -115,18 +117,18 @@ export default function RegisterEmployerStep1() {
           </Button>
         </InputGroup>
         <Form.Text className="text-muted">
-          Must be at least 8 characters long.
+          {t("helpers.passwordMinLength")}
         </Form.Text>
       </Form.Group>
 
       {/* Confirm Password */}
       <Form.Group className="mb-3" controlId="formConfirmPassword">
-        <Form.Label>Confirm Password</Form.Label>
+        <Form.Label>{t("labels.confirmPassword")}</Form.Label>
         <InputGroup>
           <Form.Control
             type={showConfirmPassword ? "text" : "password"}
             name="confirmPassword"
-            placeholder="Confirm your password"
+            placeholder={t("placeholders.confirmYourPassword")}
             value={confirmPassword}
             onChange={handleChange}
             required
@@ -156,7 +158,7 @@ export default function RegisterEmployerStep1() {
         <Form.Check
           type="checkbox"
           name="rememberMe"
-          label="Remember me"
+          label={t("labels.rememberMe")}
           checked={rememberMe}
           onChange={handleChange}
         />
@@ -165,11 +167,10 @@ export default function RegisterEmployerStep1() {
       {/* Submit Button */}
       <div className="d-grid">
         <p className="fs-6 fw-light fst-italic text-center text-muted mb-5">
-          A confirmation link will be sent to your email address to verify your
-          account
+          {t("helpers.accountConfirmNote")}
         </p>
         <Button type="submit" variant="primary" className="mb-3 fw-bold p-2">
-          Next
+          {t("buttons.next")}
         </Button>
       </div>
     </Form>
