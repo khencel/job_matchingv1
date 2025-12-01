@@ -4,41 +4,45 @@ interface ProgressBarProps {
 }
 
 const ProgressStepCount = ({ currentStep, stepCount }: ProgressBarProps) => {
+  const totalSteps = stepCount.length;
+  const isLastStep = (index: number) => index === totalSteps - 1;
+
   return (
     <div>
-      <div className="mx-auto w-50">
-        <div className="d-flex justify-content-between align-items-center mb-2">
-          {[...stepCount].map((step, index) => (
+      <div className="mx-auto mt-4 w-50">
+        <div className="d-flex justify-content-center align-items-center mb-2">
+          {stepCount.map((step, index) => (
             <div
               key={step}
-              className="d-flex flex-column align-items-center"
-              style={{ flex: index < 3 ? "1 1 0" : "0 0 auto" }}
+              className="d-flex align-items-center"
             >
-              <div className="d-flex align-items-center w-100">
-                <div
-                  className={`rounded-circle d-flex align-items-center justify-content-center ${
-                    currentStep >= step
-                      ? "bg-primary text-white"
-                      : "bg-secondary text-white"
-                  }`}
-                  style={{
-                    width: "24px",
-                    height: "24px",
-                    fontSize: "12px",
-                    flexShrink: 0,
-                  }}
-                >
-                  {step}
-                </div>
-                {step < 4 && (
-                  <div
-                    className={`flex-grow-1 mx-2 ${
-                      currentStep > step ? "bg-primary" : "bg-secondary"
-                    }`}
-                    style={{ height: "4px" }}
-                  />
-                )}
+              <div
+                className={`rounded-circle d-flex align-items-center justify-content-center ${
+                  currentStep >= step
+                    ? "bg-primary text-white"
+                    : "bg-transparent text-secondary border border-secondary"
+                }`}
+                style={{
+                  width: "24px",
+                  height: "24px",
+                  fontSize: "12px",
+                  flexShrink: 0,
+                }}
+              >
+                {step}
               </div>
+              {!isLastStep(index) && (
+                <div
+                  className={`mx-1 ${
+                    currentStep > step ? "bg-primary" : "bg-secondary"
+                  }`}
+                  style={{ 
+                    width: "60px",
+                    height: "3px", 
+                    borderRadius: "2px" 
+                  }}
+                />
+              )}
             </div>
           ))}
         </div>
