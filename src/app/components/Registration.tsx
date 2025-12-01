@@ -1,4 +1,4 @@
-import RegistrationCard from "./registration/card";
+import RegistrationButton from "./registration/RegisterButton";
 
 /**
  * Registration component displaying user type selection cards
@@ -11,26 +11,23 @@ export default function Registration() {
         <div className="col-12 col-lg-10">
           <div className="row g-4">
             {/* Job Seeker Card */}
-            <div className="col-12 col-sm-6 col-lg-4">
-              <RegistrationCard
+            <div className="col-12 col-sm-6 col-lg-4"> 
+              <RegistrationButton
                 id="jobSeeker"
-                imageUrl="/registration/job_seeker.jpg"
                 buttonTextKey="buttons.registerJobSeeker"
               />
             </div>
             {/* Employer Card */}
             <div className="col-12 col-sm-6 col-lg-4">
-              <RegistrationCard
+              <RegistrationButton
                 id="employer"
-                imageUrl="/registration/employer.jpg"
                 buttonTextKey="buttons.registerEmployer"
               />
             </div>
             {/* Supervisory Card */}
             <div className="col-12 col-sm-6 col-lg-4">
-              <RegistrationCard
+              <RegistrationButton
                 id="superVisory"
-                imageUrl="/registration/supervisory.jpg"
                 buttonTextKey="buttons.registerSupervisory"
               />
             </div>

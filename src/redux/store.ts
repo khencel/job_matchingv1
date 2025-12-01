@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import registerEmployerReducer from "./slices/register/employerSlice";
-import registerSuperVisoryReducer from "./slices/register/superVisory";
+import registerSuperVisoryReducer from "./slices/register/superVisorySlice";
 
 export const makeStore = () => {
   return configureStore({

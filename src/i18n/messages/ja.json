@@ -167,4 +167,85 @@
   "forgotPasswordPage": {
     "title": "パスワードをお忘れですか"
   }
+  ,
+  "registerSupervisoryStep2": {
+    "title": "会社情報",
+    "labels": {
+      "basicInfo": "基本情報",
+      "companyName": "会社名",
+      "companyNamePhonetic": "会社名（ふりがな）",
+      "representativeName": "代表者名",
+      "headquartersAddress": "本社住所",
+      "prefecture": "都道府県",
+      "city": "市区町村",
+      "street": "番地・建物名",
+      "companyDetails": "会社詳細",
+      "numberOfEmployees": "従業員数",
+      "industry": "業種",
+      "yearFounded": "設立年",
+      "capital": "資本金",
+      "businessDescription": "事業内容"
+    },
+    "placeholders": {
+      "enterCompanyName": "会社名を入力",
+      "enterCompanyNamePhonetic": "会社名のふりがなを入力",
+      "enterRepresentativeName": "代表者名を入力",
+      "selectPrefecture": "都道府県を選択",
+      "enterCity": "市区町村を入力",
+      "enterStreet": "番地・建物名を入力",
+      "enterNumberOfEmployees": "従業員数を入力",
+      "selectIndustry": "業種を選択",
+      "enterYearFounded": "設立年を入力",
+      "enterCapital": "資本金を入力",
+      "enterBusinessDescription": "事業内容を入力"
+    },
+    "errors": {
+      "fillRequired": "必須項目を入力してください。"
+    },
+    "buttons": {
+      "next": "次へ"
+    }
+  },
+  "registerSupervisoryStep3": {
+    "title": "担当者情報",
+    "labels": {
+      "name": "氏名",
+      "department": "部署",
+      "phoneNumber": "電話番号",
+      "email": "メールアドレス"
+    },
+    "placeholders": {
+      "enterName": "氏名を入力",
+      "enterDepartment": "部署を入力",
+      "enterPhoneNumber": "電話番号を入力",
+      "enterEmail": "メールアドレスを入力"
+    },
+    "helpers": {
+      "contactInfoNote": "この情報はプラットフォーム管理者からの連絡に使用されます。"
+    },
+    "errors": {
+      "fillRequired": "必須項目を入力してください。",
+      "invalidEmail": "有効なメールアドレスを入力してください。"
+    },
+    "buttons": {
+      "next": "次へ"
+    }
+  },
+  "registerSupervisoryStep4": {
+    "title": "利用規約",
+    "labels": {
+      "acceptTerms": "利用規約に同意する",
+      "acceptPrivacyPolicy": "プライバシーポリシーに同意する",
+      "acceptReceiveEmails": "メールで通知を受け取る"
+    },
+    "helpers": {
+      "submitting": "送信中..."
+    },
+    "errors": {
+      "acceptTermsPrivacy": "続行するには、利用規約とプライバシーポリシーに同意してください。"
+    },
+    "buttons": {
+      "submit": "登録を送信"
+    }
+  }
 }

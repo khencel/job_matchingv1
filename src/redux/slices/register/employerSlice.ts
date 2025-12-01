@@ -104,7 +104,7 @@ export const registerEmployerSubmit = createAsyncThunk<
   try {
     // Simulate API call (remove when backend is ready)
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Submitted Employer Registration Data:", submissionData);
+    console.log("Employer Registration Data:", submissionData);
     return;
 
     // Uncomment when backend is ready
@@ -139,7 +139,10 @@ export const registerEmployerSlice = createSlice({
   initialState,
   reducers: {
     // Reducers for navigating Registration Step State
-    goNextStep: (state, action: PayloadAction<1 | 2 | 3 | 4>) => {
+    goNextStep: (
+      state,
+      action: PayloadAction<RegisterEmployer["currentStep"]>
+    ) => {
       state.currentStep = action.payload;
     },
     goBack: (state) => {

@@ -11,6 +11,14 @@
 .search-filter-box{
     background-color: #D9D9D9 !important;
 }
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type=number] {
+      -moz-appearance: textfield; /* Firefox */
+    }
 
 .btn-explore{
     background-color: #2f6cd3;

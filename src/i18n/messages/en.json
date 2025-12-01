@@ -32,14 +32,14 @@
       "explore": "Explore"
     }
   },
-  "registrationCard": {
+  "registerButton": {
     "buttons": {
       "registerJobSeeker": "Register as Job Seeker",
       "registerEmployer": "Register as Employer",
       "registerSupervisory": "Register as Supervisory"
     }
   },
-  "employerRegistrationModal": {
+  "registrationModal": {
     "title": "Employer Registration",
     "steps": {
       "account": "Account",
@@ -162,5 +162,123 @@
   },
   "forgotPasswordPage": {
     "title": "Forgot Password"
+  },
+  "registerSuperVisoryStep1": {
+    "title": "Account Details",
+    "labels": {
+      "email": "Email Address",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "rememberMe": "Remember me"
+    },
+    "placeholders": {
+      "enterEmail": "Enter your email",
+      "enterPassword": "Enter your password",
+      "confirmYourPassword": "Confirm your password"
+    },
+    "helpers": {
+      "passwordMinLength": "Must be at least 8 characters long.",
+      "accountConfirmNote": "A confirmation link will be sent to your email address to verify your account"
+    },
+    "errors": {
+      "fillRequired": "Please fill in all required fields.",
+      "invalidEmail": "Please enter a valid email address.",
+      "passwordTooShort": "Password must be at least 8 characters long.",
+      "passwordMismatch": "Passwords do not match.",
+      "passwordMinLength": "Must be at least 8 characters long."
+    },
+    "buttons": {
+      "next": "Next"
+    }
+  },
+  "registerJobSeekerStep1": {
+    "title": "Job Seeker Registration"
+  },
+  "registerSupervisoryStep2": {
+    "title": "Company Information",
+    "labels": {
+      "basicInfo": "Basic Information",
+      "companyName": "Company Name",
+      "companyNamePhonetic": "Company Name (Phonetic)",
+      "representativeName": "Representative Name",
+      "headquartersAddress": "Headquarters Address",
+      "prefecture": "Prefecture",
+      "city": "City/Ward",
+      "street": "Street/Building",
+      "companyDetails": "Company Details",
+      "numberOfEmployees": "Number of Employees",
+      "industry": "Industry",
+      "yearFounded": "Year Founded",
+      "capital": "Capital",
+      "businessDescription": "Business Description"
+    },
+    "placeholders": {
+      "enterCompanyName": "Enter company name",
+      "enterCompanyNamePhonetic": "Enter phonetic company name",
+      "enterRepresentativeName": "Enter representative name",
+      "selectPrefecture": "Select prefecture",
+      "enterCity": "Enter city/ward",
+      "enterStreet": "Enter street/building",
+      "enterNumberOfEmployees": "Enter number of employees",
+      "selectIndustry": "Select industry",
+      "enterYearFounded": "Enter year founded",
+      "enterCapital": "Enter capital",
+      "enterBusinessDescription": "Describe your business"
+    },
+    "errors": {
+      "tooShortCompanyName": "Name must be at least 2 characters long.",
+      "tooShortRepName": "Name must be at least 2 characters long.",
+      "fillRequired": "Please fill in all required fields.",
+      "invalidNumOfEmployees": "Need at least 1 employee.",
+      "invalidYearFounded": "Please enter a valid year."
+    },
+    "buttons": {
+      "next": "Next"
+    }
+  },
+  "registerSupervisoryStep3": {
+    "title": "Contact Person Information",
+    "labels": {
+      "name": "Name",
+      "department": "Department",
+      "phoneNumber": "Phone Number",
+      "email": "Email Address"
+    },
+    "placeholders": {
+      "enterName": "Enter full name",
+      "enterDepartment": "Enter department",
+      "enterPhoneNumber": "Enter phone number",
+      "enterEmail": "Enter email address"
+    },
+    "helpers": {
+      "contactInfoNote": "This information will be used for communication from the platform administrators."
+    },
+    "errors": {
+      "fillRequired": "Please fill in all required fields.",
+      "invalidEmail": "Please enter a valid email address.",
+      "name": "Invalid contact name.",
+      "department": "Invalid department name.",
+      "phoneNumber": "Invalid phone number."
+    },
+    "buttons": {
+      "next": "Next"
+    }
+  },
+  "registerSupervisoryStep4": {
+    "title": "Terms and Conditions",
+    "labels": {
+      "acceptTerms": "Accept the terms of use.",
+      "acceptPrivacyPolicy": "Accept privacy policy.",
+      "acceptReceiveEmails": "Receive notification via email."
+    },
+    "helpers": {
+      "submitting": "Submitting..."
+    },
+    "errors": {
+      "acceptTermsPrivacy": "You must accept Terms of Use and Privacy Policy to continue."
+    },
+    "buttons": {
+      "submit": "Submit Registration"
+    }
   }
 }

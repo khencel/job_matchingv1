@@ -4,7 +4,6 @@ import { AxiosError } from "axios";
 export interface RegisterSuperVisoryStep1Props {
   email: string;
   password: string;
-  phoneNumber: string;
 }
 
 export interface RegisterSuperVisoryStep2Data {
@@ -16,10 +15,10 @@ export interface RegisterSuperVisoryStep2Data {
     city: string;
     street: string;
   };
-  numOfEmployees: number;
+  numOfEmployees: number | null;
   industry: string;
-  yearFounded: number;
-  capital: number;
+  yearFounded: number | null;
+  capital: number | null;
   businessDescription: string;
 }
 
@@ -56,7 +55,6 @@ const initialState: RegisterSuperVisory = {
     accountInfo: {
       email: "",
       password: "",
-      phoneNumber: "",
     },
     companyInfo: {
       companyName: "",
@@ -67,10 +65,10 @@ const initialState: RegisterSuperVisory = {
         city: "",
         street: "",
       },
-      numOfEmployees: 0,
+      numOfEmployees: null,
       industry: "",
-      yearFounded: 0,
-      capital: 0,
+      yearFounded: null,
+      capital: null,
       businessDescription: "",
     },
     contactPersonInfo: {
@@ -89,7 +87,7 @@ const initialState: RegisterSuperVisory = {
   isError: false,
 };
 
-export const registerJobSeekerSubmit = createAsyncThunk<
+export const registerSuperVisorySubmit = createAsyncThunk<
   void,
   void,
   { state: { registerSuperVisory: RegisterSuperVisory } }
@@ -106,7 +104,7 @@ export const registerJobSeekerSubmit = createAsyncThunk<
 
   try {
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Submitted SuperVisory Registration Data:", submissionData);
+    console.log("SuperVisory Registration Data:", submissionData);
     return;
 
     // Uncomment when backend is ready
@@ -136,12 +134,15 @@ export const registerJobSeekerSubmit = createAsyncThunk<
   }
 });
 
-export const registerJobSeekerSlice = createSlice({
-  name: "registerJobSeeker",
+export const registerSuperVisorySlice = createSlice({
+  name: "registerSuperVisory",
   initialState,
   reducers: {
     //open modal depending on currentStep
-    goNextStep: (state, action: PayloadAction<1 | 2 | 3 | 4>) => {
+    goNextStep: (
+      state,
+      action: PayloadAction<RegisterSuperVisory["currentStep"]>
+    ) => {
       state.currentStep = action.payload;
     },
     goBack: (state) => {
@@ -156,6 +157,12 @@ export const registerJobSeekerSlice = createSlice({
           state.currentStep = 1;
           break;
       }
+    },
+    clearRegisterSuperVisoryData: (state) => {
+      state.currentStep = 1;
+      state.registerSuperVisoryData = initialState.registerSuperVisoryData;
+      state.isLoading = false;
+      state.isError = false;
     },
     // save data to state reducers for each step
     saveRegSuperVisoryStep1: (
@@ -185,18 +192,18 @@ export const registerJobSeekerSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(registerJobSeekerSubmit.pending, (state) => {
+      .addCase(registerSuperVisorySubmit.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
       })
-      .addCase(registerJobSeekerSubmit.fulfilled, (state) => {
+      .addCase(registerSuperVisorySubmit.fulfilled, (state) => {
         state.isLoading = false;
         state.isError = false;
         //Reset state after successful submission
         state.registerSuperVisoryData = initialState.registerSuperVisoryData;
         state.currentStep = 1;
       })
-      .addCase(registerJobSeekerSubmit.rejected, (state) => {
+      .addCase(registerSuperVisorySubmit.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
       });
@@ -206,9 +213,10 @@ export const registerJobSeekerSlice = createSlice({
 export const {
   goNextStep,
   goBack,
+  clearRegisterSuperVisoryData,
   saveRegSuperVisoryStep1,
   saveRegSuperVisoryStep2,
   saveRegSuperVisoryStep3,
   saveRegSuperVisoryStep4,
-} = registerJobSeekerSlice.actions;
-export default registerJobSeekerSlice.reducer;
+} = registerSuperVisorySlice.actions;
+export default registerSuperVisorySlice.reducer;
