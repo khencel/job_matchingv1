@@ -6,8 +6,7 @@
     "qa": "Q&A",
     "contact": "お問い合わせ",
     "logoAlt": "ロゴ",
-    "japanese": "日本語",
-    "languageLabel": "言語"
+    "japanese": "日本語"
   },
   "banner": {
     "title": "理想の仕事を見つけよう",
@@ -33,14 +32,14 @@
       "explore": "検索"
     }
   },
-  "registrationCard": {
+  "registerButton": {
     "buttons": {
       "registerJobSeeker": "求職者として登録",
       "registerEmployer": "雇用主として登録",
       "registerSupervisory": "監督者として登録"
     }
   },
-  "employerRegistrationModal": {
+  "registrationModal": {
     "title": "雇用主の登録",
     "steps": {
       "account": "アカウント",
@@ -56,7 +55,6 @@
   "registerEmployerStep1": {
     "title": "アカウント情報",
     "labels": {
-      "accountDetails": "アカウント情報",
       "email": "メールアドレス",
       "password": "パスワード",
       "confirmPassword": "パスワード（確認）",
@@ -84,7 +82,6 @@
   "registerEmployerStep2": {
     "title": "管理組織情報",
     "labels": {
-      "mgmtOrgInfo": "管理組織情報",
       "basicInfo": "基本情報",
       "companyName": "会社名",
       "companyAddress": "会社住所",
@@ -125,7 +122,6 @@
   "registerEmployerStep3": {
     "title": "担当者",
     "labels": {
-      "contactPerson": "担当者",
       "name": "氏名",
       "departmentName": "部署名",
       "phoneNumber": "電話番号",
@@ -166,8 +162,38 @@
   },
   "forgotPasswordPage": {
     "title": "パスワードをお忘れですか"
-  }
-  ,
+  },
+  "registerSuperVisoryStep1": {
+    "title": "アカウント情報",
+    "labels": {
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "confirmPassword": "パスワード（確認）",
+      "rememberMe": "ログイン情報を保存"
+    },
+    "placeholders": {
+      "enterEmail": "メールアドレスを入力",
+      "enterPassword": "パスワードを入力",
+      "confirmYourPassword": "パスワードを確認"
+    },
+    "helpers": {
+      "passwordMinLength": "8文字以上で入力してください。",
+      "accountConfirmNote": "確認リンクがメールで送信されます。アカウントを認証してください。"
+    },
+    "errors": {
+      "fillRequired": "必須項目を入力してください。",
+      "invalidEmail": "有効なメールアドレスを入力してください。",
+      "passwordTooShort": "パスワードは8文字以上で入力してください。",
+      "passwordMismatch": "パスワードが一致しません。",
+      "passwordMinLength": "8文字以上で入力してください。"
+    },
+    "buttons": {
+      "next": "次へ"
+    }
+  },
+  "registerJobSeekerStep1": {
+    "title": "求職者登録"
+  },
   "registerSupervisoryStep2": {
     "title": "会社情報",
     "labels": {
@@ -200,7 +226,11 @@
       "enterBusinessDescription": "事業内容を入力"
     },
     "errors": {
-      "fillRequired": "必須項目を入力してください。"
+      "tooShortCompanyName": "名前は2文字以上で入力してください。",
+      "tooShortRepName": "名前は2文字以上で入力してください。",
+      "fillRequired": "必須項目を入力してください。",
+      "invalidNumOfEmployees": "従業員は1名以上必要です。",
+      "invalidYearFounded": "有効な設立年を入力してください。"
     },
     "buttons": {
       "next": "次へ"
@@ -225,7 +255,10 @@
     },
     "errors": {
       "fillRequired": "必須項目を入力してください。",
-      "invalidEmail": "有効なメールアドレスを入力してください。"
+      "invalidEmail": "有効なメールアドレスを入力してください。",
+      "name": "担当者名が無効です。",
+      "department": "部署名が無効です。",
+      "phoneNumber": "電話番号が無効です。"
     },
     "buttons": {
       "next": "次へ"
