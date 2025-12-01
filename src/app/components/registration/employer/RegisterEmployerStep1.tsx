@@ -10,8 +10,8 @@ import { Button, Form, InputGroup } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 
 export default function RegisterEmployerStep1() {
-  const dispatch = useAppDispatch();
   const t = useTranslations("registerEmployerStep1");
+  const dispatch = useAppDispatch();
   const accountInfo = useAppSelector(
     (s) => s.registerEmployer.registerEmployerData.accountInfo
   );
@@ -168,9 +168,9 @@ export default function RegisterEmployerStep1() {
 
       {/* Submit Button */}
       <div className="d-grid">
-        <p className="fs-6 fw-light fst-italic text-center text-muted mb-5">
+        <Form.Text className="fw-light fst-italic text-center text-muted mb-3">
           {t("helpers.accountConfirmNote")}
-        </p>
+        </Form.Text>
         <Button type="submit" variant="primary" className="mb-3 fw-bold p-2">
           {t("buttons.next")}
         </Button>

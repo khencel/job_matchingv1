@@ -91,23 +91,21 @@ export default function RegisterEmployerStep4({
         </Form.Group>
       </div>
 
-      <div className="d-grid">
-        <Button
-          type="submit"
-          variant="primary"
-          className="fw-bold p-2"
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <>
-              <Spinner animation="border" size="sm" className="me-2" />
-              {t("helpers.submitting")}
-            </>
-          ) : (
-            t("buttons.submit")
-          )}
-        </Button>
-      </div>
+      <Button
+        type="submit"
+        variant="primary"
+        className="fw-bold p-2 w-100"
+        disabled={isLoading}
+      >
+        {isLoading ? (
+          <>
+            <Spinner animation="border" size="sm" className="me-2" />
+            {t("helpers.submitting")}
+          </>
+        ) : (
+          t("buttons.submit")
+        )}
+      </Button>
     </Form>
   );
 }

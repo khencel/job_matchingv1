@@ -107,7 +107,7 @@ export default function RegisterEmployerStep3() {
 
       {/* Submit Button */}
       <div className="d-grid">
-        <p className="fs-6 fw-light fst-italic text-center text-muted">
+        <p className="fw-light fst-italic text-center text-muted">
           {t("helpers.contactInfoNote")}
         </p>
         <Button type="submit" variant="primary" className="mb-3 fw-bold p-2">

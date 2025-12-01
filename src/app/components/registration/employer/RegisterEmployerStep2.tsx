@@ -230,7 +230,7 @@ export default function RegisterEmployerStep2() {
                 placeholder={t("labels.branchOfficePlaceholder")}
                 value={currentBranch}
                 onChange={(e) => setCurrentBranch(e.target.value)}
-                onKeyPress={(e) => {
+                onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
                     handleAddBranch();
@@ -240,7 +240,7 @@ export default function RegisterEmployerStep2() {
             </Col>
             <Col xs={3}>
               <Button
-                variant="secondary"
+                variant="outline-primary"
                 type="button"
                 onClick={handleAddBranch}
                 className="w-100"
@@ -306,11 +306,13 @@ export default function RegisterEmployerStep2() {
       </div>
 
       {/* Submit Button */}
-      <div className="d-grid">
-        <Button type="submit" variant="primary" className="mb-3 fw-bold p-2">
-          {t("buttons.next")}
-        </Button>
-      </div>
+      <Button
+        type="submit"
+        variant="primary"
+        className="w-100 mb-3 fw-bold p-2"
+      >
+        {t("buttons.next")}
+      </Button>
     </Form>
   );
 }
