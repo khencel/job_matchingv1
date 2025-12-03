@@ -17,6 +17,7 @@ import RegisterSuperVisoryStep4 from "./supervisory/RegisterSuperVisoryStep4";
 import RegisterJobSeekerStep1 from "./jobSeeker/RegisterJobSeekerStep1";
 import RegisterJobSeekerStep2 from "./jobSeeker/RegisterJobSeekerStep2";
 import RegisterJobSeekerStep3 from "./jobSeeker/RegisterJobSeekerStep3";
+import { goBackJobSeeker } from "@/redux/slices/register/jobSeekerSlice";
 
 interface RegistrationModalProps {
   show: boolean;
@@ -42,8 +43,14 @@ export default function RegistrationModal({
     if (formType === "employer") return state.registerEmployer.currentStep;
     if (formType === "superVisory")
       return state.registerSuperVisory.currentStep;
-    return 1; // jobSeeker default
+    return state.registerJobSeeker.currentStep;
   });
+
+  const handleGoBack = () => {
+    if (formType === "employer") return dispatch(goBackEmployer());
+    if (formType === "superVisory") return dispatch(goBackSuperVisory());
+    if (formType === "jobSeeker") return dispatch(goBackJobSeeker());
+  };
 
   const handleFormRender = () => {
     if (formType === "employer") {
@@ -66,7 +73,7 @@ export default function RegistrationModal({
         case 2:
           return <RegisterJobSeekerStep2 />;
         case 3:
-          return <RegisterJobSeekerStep3 />;
+          return <RegisterJobSeekerStep3 closeModal={onHide} />;
       }
     }
 
@@ -99,13 +106,7 @@ export default function RegistrationModal({
         closeButton={false}
       >
         {currentStep !== 1 && (
-          <Button
-            variant="muted"
-            onClick={() => {
-              if (formType === "employer") dispatch(goBackEmployer());
-              if (formType === "superVisory") dispatch(goBackSuperVisory());
-            }}
-          >
+          <Button variant="muted" onClick={handleGoBack}>
             <ArrowLeft />
           </Button>
         )}

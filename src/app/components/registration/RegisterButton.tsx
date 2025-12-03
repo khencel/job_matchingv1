@@ -1,12 +1,13 @@
 "use client";
 import { useAppDispatch } from "@/redux/hooks";
 import { useState } from "react";
-import { clearRegisterEmployerData } from "@/redux/slices/register/employerSlice";
+import { clearRegisterEmployerState } from "@/redux/slices/register/employerSlice";
 import { useTranslations } from "next-intl";
 
 import { Button } from "react-bootstrap";
 import RegistrationModal from "./RegisterModal";
-import { clearRegisterSuperVisoryData } from "@/redux/slices/register/superVisorySlice";
+import { clearRegisterSuperVisoryState } from "@/redux/slices/register/superVisorySlice";
+import { clearRegisterJobSeekerState } from "@/redux/slices/register/jobSeekerSlice";
 
 interface RegisterButtonProps {
   id: "employer" | "jobSeeker" | "superVisory"; // Registration type identifier
@@ -31,8 +32,9 @@ export default function RegisterButton({
 
   // Close modal and reset form data
   const handleCloseForm = () => {
-    dispatch(clearRegisterEmployerData());
-    dispatch(clearRegisterSuperVisoryData());
+    dispatch(clearRegisterEmployerState());
+    dispatch(clearRegisterSuperVisoryState());
+    dispatch(clearRegisterJobSeekerState());
     setShowModal(false);
   };
 
