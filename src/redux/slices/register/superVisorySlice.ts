@@ -158,7 +158,7 @@ export const registerSuperVisorySlice = createSlice({
           break;
       }
     },
-    clearRegisterSuperVisoryData: (state) => {
+    clearRegisterSuperVisoryState: (state) => {
       state.currentStep = 1;
       state.registerSuperVisoryData = initialState.registerSuperVisoryData;
       state.isLoading = false;
@@ -213,7 +213,7 @@ export const registerSuperVisorySlice = createSlice({
 export const {
   goNextStep,
   goBack,
-  clearRegisterSuperVisoryData,
+  clearRegisterSuperVisoryState,
   saveRegSuperVisoryStep1,
   saveRegSuperVisoryStep2,
   saveRegSuperVisoryStep3,

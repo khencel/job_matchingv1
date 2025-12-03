@@ -1,4 +1,4 @@
-import apiClient from "@/lib/axios";
+// import apiClient from "@/lib/axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
@@ -6,7 +6,7 @@ export interface RegisterJobSeekerStep1Data {
   nationality: string;
   gender: "male" | "female" | null;
   currentPlaceResidence: string;
-  birthdate: Date | null;
+  birthdate: string;
   visaStatus: "APPLIED" | "PENDING" | "REVIEWING" | "ISSUED" | "DENIED" | null;
   highestEducation:
     | "elementary"
@@ -46,10 +46,10 @@ const initialState: RegisterJobSeeker = {
   currentStep: 1,
   registerJobSeekerData: {
     accountInfo: {
-      nationality: "string",
+      nationality: "",
       gender: null,
       currentPlaceResidence: "",
-      birthdate: null,
+      birthdate: "",
       visaStatus: null,
       highestEducation: null,
       japaneseLevel: null,
@@ -83,18 +83,18 @@ export const registerJobSeekerSubmit = createAsyncThunk<
   };
 
   try {
-    // Simulate API call (remove when backend is ready)
-    // await new Promise((resolve) => setTimeout(resolve, 1500));
-    // console.log("Employer Registration Data:", submissionData);
-    // return;
+    //Simulate API call (remove when backend is ready)
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    console.log("Employer Registration Data:", submissionData);
+    return;
 
-    const response = await apiClient.post(
-      "http://localhost:8000/api/register/jobSeeker",
-      submissionData
-    );
-    if (response.status === 200 || response.status === 201) {
-      return;
-    }
+    // const response = await apiClient.post(
+    //   "http://localhost:8000/api/register/jobSeeker",
+    //   submissionData
+    // );
+    // if (response.status === 200 || response.status === 201) {
+    //   return;
+    // }
   } catch (error) {
     // Handle Axios errors
     if (error instanceof AxiosError) {
@@ -123,7 +123,7 @@ export const registerJobSeekerSlice = createSlice({
     ) => {
       state.currentStep = action.payload;
     },
-    goBack: (state) => {
+    goBackJobSeeker: (state) => {
       switch (state.currentStep) {
         case 3:
           state.currentStep = 2;
@@ -179,7 +179,7 @@ export const registerJobSeekerSlice = createSlice({
 
 export const {
   goNextStep,
-  goBack,
+  goBackJobSeeker,
   clearRegisterJobSeekerState,
   saveRegJobSeekerStep1,
   saveRegJobSeekerStep2,

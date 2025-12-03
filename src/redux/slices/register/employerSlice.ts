@@ -185,7 +185,7 @@ export const registerEmployerSlice = createSlice({
     },
 
     // Clear State
-    clearRegisterEmployerData: (state) => {
+    clearRegisterEmployerState: (state) => {
       state.currentStep = 1;
       state.registerEmployerData = initialState.registerEmployerData;
       state.isLoading = false;
@@ -222,6 +222,6 @@ export const {
   saveRegEmployerStep2,
   saveRegEmployerStep3,
   saveRegEmployerStep4,
-  clearRegisterEmployerData,
+  clearRegisterEmployerState,
 } = registerEmployerSlice.actions;
 export default registerEmployerSlice.reducer;
