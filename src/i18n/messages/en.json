@@ -36,11 +36,15 @@
     "buttons": {
       "registerJobSeeker": "Register as Job Seeker",
       "registerEmployer": "Register as Employer",
-      "registerSupervisory": "Register as Supervisory"
+      "registerSupervisory": "Register as Super Visory"
     }
   },
   "registrationModal": {
-    "title": "Employer Registration",
+    "title": {
+      "employer": "Employer Registration",
+      "jobSeeker": "Job Seeker Registration",
+      "supervisory": "Super Visory Registration"
+    },
     "steps": {
       "account": "Account",
       "company": "Company",
@@ -51,6 +55,9 @@
       "close": "Close",
       "back": "Back"
     }
+  },
+  "forgotPasswordPage": {
+    "title": "Forgot Password"
   },
   "registerEmployerStep1": {
     "title": "Account Details",
@@ -160,9 +167,6 @@
       "submit": "Submit Registration"
     }
   },
-  "forgotPasswordPage": {
-    "title": "Forgot Password"
-  },
   "registerSuperVisoryStep1": {
     "title": "Account Details",
     "labels": {
@@ -192,7 +196,104 @@
     }
   },
   "registerJobSeekerStep1": {
-    "title": "Job Seeker Registration"
+    "title": "Personal Information",
+    "labels": {
+      "nationality": "Nationality",
+      "gender": "Gender",
+      "currentPlaceResidence": "Current Place of Residence",
+      "birthdate": "Date of Birth",
+      "visaStatus": "Visa Status",
+      "highestEducation": "Highest Education",
+      "japaneseLevel": "Japanese Language Level (JLPT)",
+      "email": "Email Address",
+      "contactNo": "Contact Number",
+      "facebook": "Facebook Profile",
+      "optional": "Optional"
+    },
+    "placeholders": {
+      "selectNationality": "Select your nationality",
+      "nationality": "Enter your nationality",
+      "currentPlaceResidence": "Enter your current address",
+      "selectVisaStatus": "Select visa status",
+      "selectEducation": "Select your highest education",
+      "selectJapaneseLevel": "Select your Japanese level",
+      "email": "Enter your email address",
+      "contactNo": "Enter your contact number",
+      "facebook": "Enter your Facebook profile URL"
+    },
+    "options": {
+      "male": "Male",
+      "female": "Female",
+      "visaApplied": "Applied",
+      "visaPending": "Pending",
+      "visaReviewing": "Under Review",
+      "visaIssued": "Issued",
+      "visaDenied": "Denied",
+      "elementary": "Elementary School",
+      "jrHighschool": "Junior High School",
+      "srHighschool": "Senior High School",
+      "vocational": "Vocational School",
+      "bachelorDegree": "Bachelor's Degree",
+      "masterDegree": "Master's Degree",
+      "doctoralDegree": "Doctoral Degree"
+    },
+    "errors": {
+      "visaStatusRequired": "Please select your visa status.",
+      "nationalityRequired": "Please select your nationality.",
+      "genderRequired": "Please select your gender.",
+      "residenceTooShort": "Current residence must be at least 2 characters.",
+      "birthdateRequired": "Please enter your date of birth.",
+      "age18Error": "You must be at least 18 years old.",
+      "age100Error": "You must be at most 100 years old.",
+      "invalidEmail": "Please enter a valid email address.",
+      "contactNoTooShort": "Contact number must be at least 7 digits.",
+      "fillRequired": "Please fill in all required fields."
+    },
+    "buttons": {
+      "next": "Next"
+    }
+  },
+  "registerJobSeekerStep2": {
+    "title": "ID Verification",
+    "labels": {
+      "idDocument": "ID Document",
+      "uploadedFile": "Uploaded File",
+      "preview": "Preview"
+    },
+    "helpers": {
+      "fileTypeInfo": "Accepted formats: JPEG, PNG, WebP, PDF. Maximum size: 5MB."
+    },
+    "errors": {
+      "invalidFileType": "Invalid file type. Please upload an image (JPEG, PNG, WebP) or PDF.",
+      "fileTooLarge": "File size exceeds 5MB. Please upload a smaller file.",
+      "idRequired": "Please upload your ID document."
+    },
+    "buttons": {
+      "back": "Back",
+      "next": "Next",
+      "remove": "Remove"
+    }
+  },
+  "registerJobSeekerStep3": {
+    "title": "Terms and Conditions",
+    "labels": {
+      "acceptTerms": "I accept the Terms and Conditions",
+      "acceptPrivacyPolicy": "I accept the Privacy Policy",
+      "acceptReceiveEmails": "I agree to receive promotional emails (optional)"
+    },
+    "helpers": {
+      "submitting": "Submitting...",
+      "successSubmit": "Job Seeker Registration Success",
+      "errorSubmit": "Job Seeker Registration Failed"
+    },
+    "errors": {
+      "acceptT&C": "You must accept the Terms and Conditions to proceed.",
+      "acceptPrivacyPolicy": "You must accept the Privacy Policy to proceed.",
+      "acceptTermsPrivacy": "Accept Terms of Use and Privacy Policy to continue."
+    },
+    "buttons": {
+      "submit": "Submit Registration"
+    }
   },
   "registerSupervisoryStep2": {
     "title": "Company Information",

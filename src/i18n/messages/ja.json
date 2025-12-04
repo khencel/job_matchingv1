@@ -40,7 +40,11 @@
     }
   },
   "registrationModal": {
-    "title": "雇用主の登録",
+    "title": {
+      "employer": "雇用主登録",
+      "jobSeeker": "求職者登録",
+      "supervisory": "監督者登録"
+    },
     "steps": {
       "account": "アカウント",
       "company": "会社",
@@ -192,7 +196,102 @@
     }
   },
   "registerJobSeekerStep1": {
-    "title": "求職者登録"
+    "title": "個人情報",
+    "labels": {
+      "nationality": "国籍",
+      "gender": "性別",
+      "currentPlaceResidence": "現住所",
+      "birthdate": "生年月日",
+      "visaStatus": "ビザ状況",
+      "highestEducation": "最終学歴",
+      "japaneseLevel": "日本語能力（JLPT）",
+      "email": "メールアドレス",
+      "contactNo": "連絡先電話番号",
+      "facebook": "Facebookプロフィール",
+      "optional": "任意"
+    },
+    "placeholders": {
+      "selectNationality": "国籍を選択",
+      "nationality": "国籍を入力",
+      "currentPlaceResidence": "現住所を入力",
+      "selectVisaStatus": "ビザ状況を選択",
+      "selectEducation": "最終学歴を選択",
+      "selectJapaneseLevel": "日本語レベルを選択",
+      "email": "メールアドレスを入力",
+      "contactNo": "連絡先電話番号を入力",
+      "facebook": "FacebookプロフィールのURLを入力"
+    },
+    "options": {
+      "male": "男性",
+      "female": "女性",
+      "visaApplied": "申請済み",
+      "visaPending": "保留中",
+      "visaReviewing": "審査中",
+      "visaIssued": "発行済み",
+      "visaDenied": "却下",
+      "elementary": "小学校",
+      "jrHighschool": "中学校",
+      "srHighschool": "高等学校",
+      "vocational": "専門学校",
+      "bachelorDegree": "学士",
+      "masterDegree": "修士",
+      "doctoralDegree": "博士"
+    },
+    "errors": {
+      "visaStatusRequired": "ビザ状況を選択してください。",
+      "nationalityRequired": "国籍を選択してください。",
+      "genderRequired": "性別を選択してください。",
+      "residenceTooShort": "現住所は最低2文字である必要があります。",
+      "birthdateRequired": "生年月日を入力してください。",
+      "ageValidationError": "18歳以上である必要があります。",
+      "age100Error": "最大100歳である必要があります。",
+      "invalidEmail": "有効なメールアドレスを入力してください。",
+      "contactNoTooShort": "連絡先電話番号は最低7桁である必要があります。",
+      "fillRequired": "必須項目を入力してください。"
+    },
+    "buttons": {
+      "next": "次へ"
+    }
+  },
+  "registerJobSeekerStep2": {
+    "title": "本人確認書類",
+    "labels": {
+      "idDocument": "本人確認書類",
+      "uploadedFile": "アップロード済みファイル",
+      "preview": "プレビュー"
+    },
+    "helpers": {
+      "fileTypeInfo": "対応形式：JPEG、PNG、WebP、PDF。最大サイズ：5MB。"
+    },
+    "errors": {
+      "invalidFileType": "無効なファイル形式です。画像（JPEG、PNG、WebP）またはPDFをアップロードしてください。",
+      "fileTooLarge": "ファイルサイズが5MBを超えています。より小さいファイルをアップロードしてください。",
+      "idRequired": "本人確認書類をアップロードしてください。"
+    },
+    "buttons": {
+      "back": "戻る",
+      "next": "次へ",
+      "remove": "削除"
+    }
+  },
+  "registerJobSeekerStep3": {
+    "title": "利用規約",
+    "labels": {
+      "acceptTerms": "利用規約に同意します",
+      "acceptPrivacyPolicy": "プライバシーポリシーに同意します",
+      "acceptReceiveEmails": "プロモーションメールの受信に同意します（任意）"
+    },
+    "helpers": {
+      "submitting": "送信中..."
+    },
+    "errors": {
+      "acceptT&C": "利用規約に同意する必要があります。",
+      "acceptPrivacyPolicy": "プライバシーポリシーに同意する必要があります。",
+      "acceptTermsPrivacy": "利用規約とプライバシーポリシーに同意して続行してください。"
+    },
+    "buttons": {
+      "submit": "登録を送信"
+    }
   },
   "registerSupervisoryStep2": {
     "title": "会社情報",

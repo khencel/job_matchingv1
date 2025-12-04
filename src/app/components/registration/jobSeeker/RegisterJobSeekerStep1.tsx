@@ -1,4 +1,5 @@
 "use client";
+import Swal from "sweetalert2";
 import React, { useEffect, useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { useTranslations } from "next-intl";
@@ -47,34 +48,51 @@ const RegisterJobSeekerStep1 = () => {
     }));
   };
 
+  // Calculate the min and max dates for age 18-90
+  const getMinBirthdateFor90YearsOld = () => {
+    const today = new Date();
+    const minDate = new Date(
+      today.getFullYear() - 100,
+      today.getMonth(),
+      today.getDate()
+    );
+    return minDate.toISOString().split("T")[0];
+  };
+
+  const getMaxBirthdateFor18YearsOld = () => {
+    const today = new Date();
+    const maxDate = new Date(
+      today.getFullYear() - 18,
+      today.getMonth(),
+      today.getDate()
+    );
+    return maxDate.toISOString().split("T")[0];
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
-    
+
     if (form.checkValidity() === false) {
       e.stopPropagation();
       setValidated(true);
-      
+
       // Find the first invalid field and focus on it
-      const firstInvalidField = form.querySelector(':invalid') as HTMLElement;
+      const firstInvalidField = form.querySelector(":invalid") as HTMLElement;
       if (firstInvalidField) {
         firstInvalidField.focus();
       }
-      
-      // TODO: Integrate SweetAlert toast here
-      // Example: Swal.fire({
-      //   icon: 'error',
-      //   title: 'Validation Error',
-      //   text: 'Please fill in all required fields correctly',
-      //   toast: true,
-      //   position: 'top-end',
-      //   showConfirmButton: false,
-      //   timer: 3000
-      // });
-      
       return;
     }
-    
+
+    Swal.fire({
+      icon: "success",
+      title: "Personal Information Submitted",
+      toast: true,
+      position: "top",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     setValidated(true);
     dispatch(saveRegJobSeekerStep1(data));
     dispatch(goNextStep(2));
@@ -82,6 +100,7 @@ const RegisterJobSeekerStep1 = () => {
 
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      <h4 className="mb-4 text-center">{t("title")}</h4>
       <Form.Group className="mb-3">
         <Form.Label>{t("labels.nationality")}</Form.Label>
         <Form.Select
@@ -315,9 +334,15 @@ const RegisterJobSeekerStep1 = () => {
           name="birthdate"
           value={data.birthdate}
           onChange={handleChange}
+          min={getMinBirthdateFor90YearsOld()}
+          max={getMaxBirthdateFor18YearsOld()}
         />
         <Form.Control.Feedback type="invalid">
-          {t("errors.birthdateRequired")}
+          {data.birthdate === ""
+            ? t("errors.birthdateRequired")
+            : data.birthdate > getMaxBirthdateFor18YearsOld()
+            ? t("errors.age18Error")
+            : t("errors.age100Error")}
         </Form.Control.Feedback>
       </Form.Group>
 
@@ -337,7 +362,7 @@ const RegisterJobSeekerStep1 = () => {
           <option value="DENIED">{t("options.visaDenied")}</option>
         </Form.Select>
         <Form.Control.Feedback type="invalid">
-          Please select your visa status
+          {t("errors.visaStatusRequired")}
         </Form.Control.Feedback>
       </Form.Group>
 
