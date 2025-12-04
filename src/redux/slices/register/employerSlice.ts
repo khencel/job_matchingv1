@@ -17,8 +17,8 @@ export interface RegisterEmployerStep2Data {
   regions: string;
   numberOfEmployees: string;
   branchOffices: string[];
-  appealPoints: string;
-  fee: string;
+  appealPoints: number;
+  fee: number;
 }
 
 // Step 3: Contact person details
@@ -67,8 +67,8 @@ const initialState: RegisterEmployer = {
       regions: "",
       numberOfEmployees: "",
       branchOffices: [],
-      appealPoints: "",
-      fee: "",
+      appealPoints: 0,
+      fee: 0,
     },
     contactPerson: {
       name: "",
