@@ -64,10 +64,16 @@ export default function RegisterEmployerStep2() {
     // Clear error for the field on change
     setError((prevErrors) => ({ ...prevErrors, [name]: false }));
 
+    // Normalize numeric fields: drop leading zeroes like "01" -> "1" for fee/appealPoints
+    const normalizedValue =
+      name === "appealPoints" || name === "fee"
+        ? value.replace(/^0+(?=\d)/, "")
+        : value;
+
     // update data
     const updatedData = {
       ...data,
-      [name]: value,
+      [name]: normalizedValue,
     };
 
     setData(updatedData);
@@ -320,6 +326,9 @@ export default function RegisterEmployerStep2() {
             </Col>
             <Col xs={3}>
               <Button
+                disabled={
+                  currentBranch.trim() === "" || currentBranch.length < 2
+                }
                 variant="outline-primary"
                 type="button"
                 onClick={handleAddBranch}
@@ -371,7 +380,8 @@ export default function RegisterEmployerStep2() {
             placeholder={t("placeholders.enterAppealPoints")}
             value={data.appealPoints}
             onChange={handleChange}
-            isInvalid={error.appealPoints}
+            onFocus={(e) => e.target.select()}
+            isInvalid={error.appealPoints || data.appealPoints <= 0}
           />
           <Form.Control.Feedback type="invalid">
             {t("errors.fillRequired")}
@@ -388,7 +398,8 @@ export default function RegisterEmployerStep2() {
             placeholder={t("placeholders.enterFee")}
             value={data.fee}
             onChange={handleChange}
-            isInvalid={error.fee}
+            onFocus={(e) => e.target.select()}
+            isInvalid={error.fee || data.fee <= 0}
           />
           <Form.Control.Feedback type="invalid">
             {t("errors.fillRequired")}

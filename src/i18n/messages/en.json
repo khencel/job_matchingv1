@@ -117,6 +117,13 @@
       "enterFee": "Enter fee amount"
     },
     "errors": {
+      "invalidCompanyName": "Enter a valid Company Name",
+      "invalidCompanyAddress": "Enter a valid Company Address",
+      "invalidPhoneNumber": "Enter a valid Phone Number",
+      "invalidIndustry": "Select Industry",
+      "invalidNumOfEmployees": "Need at least 1 employee.",
+      "invalidRegion": "Select Region",
+      "invalidCurrentBranch": "At least minimum of 2 characters",
       "fillRequired": "Please fill in all required fields.",
       "addAtLeastOneBranch": "Please add at least one branch office."
     },
@@ -144,6 +151,10 @@
       "contactInfoNote": "This information will be used by the platform administrators to contact your company if needed. It will not be displayed on job listings."
     },
     "errors": {
+      "invalidName": "Minimum of 3 characters",
+      "invalidDepartmentName": "Enter a valid Department Name",
+      "invalidPhoneNumber": "Enter a valid Phone Number",
+      "invalidEmail": "Please enter a valid email address.",
       "fillRequired": "Please fill in all required fields."
     },
     "buttons": {
@@ -161,7 +172,8 @@
       "submitting": "Submitting..."
     },
     "errors": {
-      "acceptTermsPrivacy": "You must accept Terms of Use and Privacy Policy to continue."
+      "acceptTerms": "You must accept Terms of Use to proceed.",
+      "acceptPrivacy": "You must accept Privacy Policy to proceed."
     },
     "buttons": {
       "submit": "Submit Registration"

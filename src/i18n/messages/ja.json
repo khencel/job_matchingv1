@@ -114,6 +114,13 @@
       "enterFee": "料金を入力"
     },
     "errors": {
+      "invalidCompanyName": "有効な会社名を入力してください",
+      "invalidCompanyAddress": "有効な会社住所を入力してください",
+      "invalidPhoneNumber": "有効な電話番号を入力してください",
+      "invalidIndustry": "業界を選択してください",
+      "invalidNumOfEmployees": "従業員は1名以上必要です。",
+      "invalidRegion": "地域を選択してください",
+      "invalidCurrentBranch": "最低2文字である必要があります",
       "fillRequired": "必須項目を入力してください。",
       "addAtLeastOneBranch": "少なくとも1つの支店を追加してください。"
     },
@@ -141,6 +148,10 @@
       "contactInfoNote": "この情報は必要に応じて管理者が会社へ連絡するために使用されます。求人には表示されません。"
     },
     "errors": {
+      "invalidName": "3文字以上である必要があります",
+      "invalidDepartmentName": "有効な部署名を入力してください",
+      "invalidPhoneNumber": "有効な電話番号を入力してください",
+      "invalidEmail": "有効なメールアドレスを入力してください。",
       "fillRequired": "必須項目を入力してください。"
     },
     "buttons": {
@@ -150,15 +161,16 @@
   "registerEmployerStep4": {
     "title": "利用規約",
     "labels": {
-      "acceptTerms": "利用規約に同意する",
-      "acceptPrivacyPolicy": "プライバシーポリシーに同意する",
-      "acceptReceiveEmails": "メールで通知を受け取る"
+      "acceptTerms": "利用規約に同意する。",
+      "acceptPrivacyPolicy": "プライバシーポリシーに同意する。",
+      "acceptReceiveEmails": "メールで通知を受け取る。"
     },
     "helpers": {
       "submitting": "送信中..."
     },
     "errors": {
-      "acceptTermsPrivacy": "続行するには、利用規約とプライバシーポリシーに同意してください。"
+      "acceptTerms": "続行するには利用規約に同意する必要があります。",
+      "acceptPrivacy": "続行するにはプライバシーポリシーに同意する必要があります。"
     },
     "buttons": {
       "submit": "登録を送信"
