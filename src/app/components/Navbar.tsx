@@ -19,8 +19,18 @@ export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid d-flex align-items-center">
+        {/* Logo on the left */}
+        <a className="navbar-brand d-flex align-items-center" href="#">
+          <img
+            src="/logo.png"
+            alt={t("logoAlt")}
+            style={{ height: "80px", width: "auto", marginRight: "8px" }}
+          />
+        </a>
+
+        {/* Toggler for mobile */}
         <button
-          className="navbar-toggler"
+          className="navbar-toggler ms-auto"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -28,8 +38,9 @@ export default function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
+        {/* Navigation + language selector */}
+        <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul className="navbar-nav mb-2 mb-lg-0 d-flex align-items-center">
             <li className="nav-item">
               <a className="nav-link active" href="#">
                 {t("home")}
@@ -37,47 +48,36 @@ export default function Navbar() {
             </li>
             <li className="nav-item">
               <a className="nav-link active" href="#">
-                {t("features")}
+                {t("ourService")}
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link active" href="#">
-                {t("findJobs")}
+                {t("FAQ")}
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link active" href="#">
-                {t("qa")}
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link active" href="#">
-                {t("contact")}
+                {t("signUp")}
               </a>
             </li>
           </ul>
-        </div>
 
-        <div className="me-3 d-flex align-items-center gap-2">
-          <select
-            id="language-selector"
-            className="form-select form-select-sm"
-            value={locale}
-            onChange={handleLanguageChange}
-            aria-label="Language selector"
-            style={{ width: "auto", minWidth: "140px" }}
-          >
-            <option value="en">🇺🇸 English</option>
-            <option value="ja">🇯🇵 日本語</option>
-          </select>
+          {/* Language selector */}
+          <div className="ms-3 d-flex align-items-center">
+            <select
+              id="language-selector"
+              className="form-select form-select-sm"
+              value={locale}
+              onChange={handleLanguageChange}
+              aria-label="Language selector"
+              style={{ width: "auto", minWidth: "140px" }}
+            >
+              <option value="en">🇺🇸 English</option>
+              <option value="ja">🇯🇵 日本語</option>
+            </select>
+          </div>
         </div>
-        <a className="navbar-brand d-flex align-items-center ms-auto" href="#">
-          <img
-            src="/logo.png"
-            alt={t("logoAlt")}
-            style={{ height: "80px", width: "auto", marginRight: "8px" }}
-          />
-        </a>
       </div>
     </nav>
   );

@@ -2,6 +2,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import BootstrapClient from '../components/BootstrapClient';
 import Navbar from "../components/Navbar";
+import "../../public/css/app.css";
 
 export const metadata = {
   title: 'Next.js',

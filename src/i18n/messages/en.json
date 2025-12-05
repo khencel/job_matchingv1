@@ -1,6 +1,9 @@
 {
   "navbar": {
     "home": "Home",
+    "ourService": "Our Service",
+    "FAQ": "FAQ",
+    "signUp": "Sign Up",
     "features": "Job Support Features",
     "findJobs": "Find Jobs",
     "qa": "Q&A",
@@ -9,10 +12,10 @@
     "japanese": "日本語"
   },
   "banner": {
-    "title": "Find Your Ideal Job",
-    "subtitle": "Because your future deserves the best opportunities, more than lucky breaks.",
+    "title": "Support Your Work Style",
+    "subtitle": "Matching service to connect jo seekers, jobs and the workplace environment.",
     "buttons": {
-      "findJob": "Find Job"
+      "findJob": "Find a Job"
     }
   },
   "jobSearchFilter": {

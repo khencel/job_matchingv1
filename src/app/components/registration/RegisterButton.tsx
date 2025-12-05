@@ -68,7 +68,7 @@ export default function RegisterButton({
 
   return (
     <div>
-      <Button className="w-75 py-4 fw-bold" onClick={handleOpenForm} id={id}>
+      <Button className="w-75 py-4 btn-primary-custom fw-bold rounded-3" onClick={handleOpenForm} id={id}>
         {t(buttonTextKey)}
       </Button>
       {handleModalRender()}
