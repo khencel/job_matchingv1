@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import BootstrapClient from "./components/BootstrapClient";
-import Navbar from "./components/Navbar";
-import StoreProvider from "./StoreProvider";
-import "../../public/css/app.css";
+import BootstrapClient from "../components/BootstrapClient";
+import Navbar from "../components/Navbar";
+import StoreProvider from "../StoreProvider";
+import "../../../public/css/app.css"
 import NextIntlProvider from "@/i18n/NextIntlProvider";
 import { cookies } from "next/headers";
 import "bootstrap-icons/font/bootstrap-icons.css";

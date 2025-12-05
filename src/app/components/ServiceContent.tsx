@@ -4,10 +4,15 @@ export default function ServiceContent() {
       <div className="row justify-content-center">
         <div className="col-md-5">
           <div>
-            <h2 className="mb-4 text-center primary-custom-color">Connecting foreigners and companies - a new job change platform.</h2>
-            <div className="row">
-              <div className="col-md-3 border">
-                test
+            <h2 className="mb-4 text-center primary-custom-color">A new job change platform connecting foreign nationals and companies.</h2>
+            <div className="row justify-content-center">
+              <div className="col-md-10">
+                <ul>
+                  <li>Free job posting</li>
+                      (You can post job listings completely free of charge.)
+                  <li>Free introduction to registered support organizations</li>
+                      (Smooth acceptance of specified skilled workers.)
+                </ul>
               </div>
             </div>
           </div>
@@ -17,10 +22,10 @@ export default function ServiceContent() {
             </div>
             <div className="col-md-7 d-flex flex-column justify-content-center gap-3">
               <button className="btn btn-primary-custom rounded-3 w-100">
-                Button
+                For companies
               </button>
               <button className="btn btn-primary-custom rounded-3 w-100">
-                Button
+                For foreign job seekers
               </button>
             </div>
           </div>

@@ -1,6 +1,8 @@
 "use client";
+import { link } from "fs";
 import { useLocale, useTranslations } from "next-intl";
 import React, { useCallback } from "react";
+import Link from "next/link"; 
 
 export default function Navbar() {
   const locale = useLocale();
@@ -42,24 +44,24 @@ export default function Navbar() {
         <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
           <ul className="navbar-nav mb-2 mb-lg-0 d-flex align-items-center">
             <li className="nav-item">
-              <a className="nav-link active" href="#">
+              <a className="nav-link" href="#">
                 {t("home")}
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="#">
+              <a className="nav-link" href="#">
                 {t("ourService")}
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="#">
+              <a className="nav-link" href="#">
                 {t("FAQ")}
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="#">
-                {t("signUp")}
-              </a>
+              <Link className="nav-link" href="/login">
+                {t("signIn")}
+              </Link>
             </li>
           </ul>
 

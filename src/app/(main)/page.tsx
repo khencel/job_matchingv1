@@ -1,13 +1,12 @@
 "use client";
 
-import Banner from "./components/Banner";
-import Footer from "./components/Footer";
-import JobPost from "./components/JobPost";
-import Registration from "./components/Registration";
-import ServiceContent from "./components/ServiceContent";
-import About from "./components/About";
+import Banner from "../components/Banner";
+import Footer from "../components/Footer";
+import JobPost from "../components/JobPost";
+import Registration from "../components/Registration";
+import ServiceContent from "../components/ServiceContent";
+import About from "../components/About";
 
-import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import "animate.css";
 
