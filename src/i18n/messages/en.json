@@ -259,6 +259,9 @@
       "age100Error": "You must be at most 100 years old.",
       "invalidEmail": "Please enter a valid email address.",
       "contactNoTooShort": "Contact number must be at least 7 digits.",
+      "highestEducationRequired": "Please select your highest education.",
+      "japaneseLevelRequired": "Please select your Japanese level.",
+      "invalidFacebookUrl": "Please enter a valid Facebook profile URL.",
       "fillRequired": "Please fill in all required fields."
     },
     "buttons": {

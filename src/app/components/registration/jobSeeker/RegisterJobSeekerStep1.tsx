@@ -18,7 +18,7 @@ const RegisterJobSeekerStep1 = () => {
     (state) => state.registerJobSeeker?.registerJobSeekerData?.accountInfo
   );
 
-  const [validated, setValidated] = useState(false);
+  const [error, setError] = useState<{ [name: string]: boolean }>({});
   const [data, setData] = useState<RegisterJobSeekerStep1Data>({
     nationality: "",
     gender: null,
@@ -42,6 +42,8 @@ const RegisterJobSeekerStep1 = () => {
     >
   ) => {
     const { name, value } = e.target;
+    // Clear error for the field on change
+    setError((prev) => ({ ...prev, [name]: false }));
     setData((prev) => ({
       ...prev,
       [name]: value,
@@ -69,19 +71,75 @@ const RegisterJobSeekerStep1 = () => {
     return maxDate.toISOString().split("T")[0];
   };
 
+  const isEmailValid = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const isContactValid = (contact: string): boolean => {
+    return /^[0-9]{7,}$/.test(contact);
+  };
+
+  const isFacebookUrlValid = (url: string): boolean => {
+    if (!url) return true; // optional field
+    const fbRegex = /^(https?:\/\/)?([\w.-]+\.)?facebook\.com\/[^\s]+$/i;
+    return fbRegex.test(url.trim());
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
 
     if (form.checkValidity() === false) {
       e.stopPropagation();
-      setValidated(true);
+
+      const invalidFields = form.querySelectorAll(":invalid");
+      const newErrors: Record<string, boolean> = {};
+
+      invalidFields.forEach((field) => {
+        const input = field as HTMLInputElement;
+        if (input.name) {
+          newErrors[input.name] = true;
+        }
+      });
+      setError(newErrors);
 
       // Find the first invalid field and focus on it
       const firstInvalidField = form.querySelector(":invalid") as HTMLElement;
       if (firstInvalidField) {
         firstInvalidField.focus();
       }
+      return;
+    }
+
+    if (!isEmailValid(data.email)) {
+      setError((prev) => ({ ...prev, email: true }));
+      const emailField = form.querySelector("[name='email']") as HTMLElement;
+      if (emailField) emailField.focus();
+      return;
+    }
+
+    if (!isContactValid(data.contactNo)) {
+      setError((prev) => ({ ...prev, contactNo: true }));
+      const contactField = form.querySelector("[name='contactNo']") as HTMLElement;
+      if (contactField) contactField.focus();
+      return;
+    }
+
+    const birthdate = data.birthdate;
+    const minBirthdate = getMinBirthdateFor90YearsOld();
+    const maxBirthdate = getMaxBirthdateFor18YearsOld();
+    if (!birthdate || birthdate > maxBirthdate || birthdate < minBirthdate) {
+      setError((prev) => ({ ...prev, birthdate: true }));
+      const birthField = form.querySelector("[name='birthdate']") as HTMLElement;
+      if (birthField) birthField.focus();
+      return;
+    }
+
+    if (!isFacebookUrlValid(data.facebook)) {
+      setError((prev) => ({ ...prev, facebook: true }));
+      const fbField = form.querySelector("[name='facebook']") as HTMLElement;
+      if (fbField) fbField.focus();
       return;
     }
 
@@ -93,13 +151,30 @@ const RegisterJobSeekerStep1 = () => {
       showConfirmButton: false,
       timer: 1500,
     });
-    setValidated(true);
+    setError({});
     dispatch(saveRegJobSeekerStep1(data));
     dispatch(goNextStep(2));
   };
 
+  const birthdateInvalid =
+    error.birthdate ||
+    (!!data.birthdate &&
+      (data.birthdate > getMaxBirthdateFor18YearsOld() ||
+        data.birthdate < getMinBirthdateFor90YearsOld()));
+
+  const emailInvalid =
+    error.email || (data.email.length > 0 && !isEmailValid(data.email));
+
+  const contactInvalid =
+    error.contactNo ||
+    (data.contactNo.length > 0 && !isContactValid(data.contactNo));
+
+  const facebookInvalid =
+    error.facebook ||
+    (!!data.facebook && !isFacebookUrlValid(data.facebook));
+
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+    <Form noValidate onSubmit={handleSubmit}>
       <h4 className="mb-4 text-center">{t("title")}</h4>
       <Form.Group className="mb-3">
         <Form.Label>{t("labels.nationality")}</Form.Label>
@@ -108,6 +183,7 @@ const RegisterJobSeekerStep1 = () => {
           name="nationality"
           value={data.nationality}
           onChange={handleChange}
+          isInvalid={!!error.nationality}
         >
           <option value="">{t("placeholders.selectNationality")}</option>
           <option value="Afghan">Afghan</option>
@@ -296,6 +372,7 @@ const RegisterJobSeekerStep1 = () => {
             onChange={handleChange}
             feedback={t("errors.genderRequired")}
             feedbackType="invalid"
+            isInvalid={!!error.gender}
           />
           <Form.Check
             required
@@ -306,6 +383,7 @@ const RegisterJobSeekerStep1 = () => {
             value="female"
             checked={data.gender === "female"}
             onChange={handleChange}
+            isInvalid={!!error.gender}
           />
         </div>
       </Form.Group>
@@ -320,6 +398,11 @@ const RegisterJobSeekerStep1 = () => {
           onChange={handleChange}
           placeholder={t("placeholders.currentPlaceResidence")}
           minLength={2}
+          isInvalid={
+            error.currentPlaceResidence ||
+            (data.currentPlaceResidence.length > 0 &&
+              data.currentPlaceResidence.length < 2)
+          }
         />
         <Form.Control.Feedback type="invalid">
           {t("errors.residenceTooShort")}
@@ -336,6 +419,7 @@ const RegisterJobSeekerStep1 = () => {
           onChange={handleChange}
           min={getMinBirthdateFor90YearsOld()}
           max={getMaxBirthdateFor18YearsOld()}
+          isInvalid={birthdateInvalid}
         />
         <Form.Control.Feedback type="invalid">
           {data.birthdate === ""
@@ -353,6 +437,7 @@ const RegisterJobSeekerStep1 = () => {
           name="visaStatus"
           value={data.visaStatus || ""}
           onChange={handleChange}
+          isInvalid={!!error.visaStatus}
         >
           <option value="">{t("placeholders.selectVisaStatus")}</option>
           <option value="APPLIED">{t("options.visaApplied")}</option>
@@ -373,6 +458,7 @@ const RegisterJobSeekerStep1 = () => {
           value={data.highestEducation || ""}
           onChange={handleChange}
           required
+          isInvalid={!!error.highestEducation}
         >
           <option value="">{t("placeholders.selectEducation")}</option>
           <option value="elementary">{t("options.elementary")}</option>
@@ -384,7 +470,7 @@ const RegisterJobSeekerStep1 = () => {
           <option value="doctoralDegree">{t("options.doctoralDegree")}</option>
         </Form.Select>
         <Form.Control.Feedback type="invalid">
-          Please select your highest education
+          {t("errors.highestEducationRequired")}
         </Form.Control.Feedback>
       </Form.Group>
 
@@ -395,6 +481,7 @@ const RegisterJobSeekerStep1 = () => {
           name="japaneseLevel"
           value={data.japaneseLevel || ""}
           onChange={handleChange}
+          isInvalid={!!error.japaneseLevel}
         >
           <option value="">{t("placeholders.selectJapaneseLevel")}</option>
           <option value="N5">N5</option>
@@ -404,7 +491,7 @@ const RegisterJobSeekerStep1 = () => {
           <option value="N1">N1</option>
         </Form.Select>
         <Form.Control.Feedback type="invalid">
-          Please select your Japanese level
+          {t("errors.japaneseLevelRequired")}
         </Form.Control.Feedback>
       </Form.Group>
 
@@ -418,6 +505,7 @@ const RegisterJobSeekerStep1 = () => {
           onChange={handleChange}
           placeholder={t("placeholders.email")}
           pattern="[^\s@]+@[^\s@]+\.[^\s@]+"
+          isInvalid={emailInvalid}
         />
         <Form.Control.Feedback type="invalid">
           {t("errors.invalidEmail")}
@@ -435,6 +523,7 @@ const RegisterJobSeekerStep1 = () => {
             onChange={handleChange}
             placeholder={t("placeholders.contactNo")}
             pattern="[0-9]{7,}"
+            isInvalid={contactInvalid}
           />
           <Form.Control.Feedback type="invalid">
             {t("errors.contactNoTooShort")}
@@ -454,7 +543,11 @@ const RegisterJobSeekerStep1 = () => {
           onChange={handleChange}
           placeholder={t("placeholders.facebook")}
           minLength={5}
+          isInvalid={facebookInvalid}
         />
+        <Form.Control.Feedback type="invalid">
+          {t("errors.invalidFacebookUrl")}
+        </Form.Control.Feedback>
       </Form.Group>
 
       <Button

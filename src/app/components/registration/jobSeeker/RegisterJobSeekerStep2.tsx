@@ -22,6 +22,7 @@ const RegisterJobSeekerStep2 = () => {
   const [previewURL, setPreviewURL] = useState<string>(savedIdURL || "");
   const [fileName, setFileName] = useState<string>(savedIdURL || "");
   const [error, setError] = useState<string>("");
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -61,6 +62,11 @@ const RegisterJobSeekerStep2 = () => {
     setPreviewURL("");
     setFileName("");
     setError("");
+    // Reset file input value to allow re-uploading the same file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+    dispatch(saveRegJobSeekerStep2(""));
   };
   // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
@@ -98,6 +104,7 @@ const RegisterJobSeekerStep2 = () => {
       <Form.Group className="mb-3">
         <Form.Label>{t("labels.idDocument")}</Form.Label>
         <Form.Control
+          ref={fileInputRef}
           type="file"
           accept="image/jpeg,image/jpg,image/png"
           onChange={handleFileChange}

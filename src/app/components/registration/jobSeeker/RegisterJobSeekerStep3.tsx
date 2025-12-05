@@ -21,16 +21,25 @@ export default function RegisterJobSeekerStep3({
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((s) => s.registerJobSeeker);
   const t = useTranslations("registerJobSeekerStep3");
+  const step3Data = useAppSelector(
+    (s) => s.registerJobSeeker.registerJobSeekerData.termsAndConditions
+  );
 
-  const [validated, setValidated] = useState(false);
-  const [data, setData] = useState<RegisterJobSeekerStep3Data>({
-    acceptTerms: false,
-    acceptPrivacyPolicy: false,
-    acceptReceiveEmails: false,
-  });
+  const [data, setData] = useState<RegisterJobSeekerStep3Data>(
+    step3Data || {
+      acceptTerms: false,
+      acceptPrivacyPolicy: false,
+      acceptReceiveEmails: false,
+    }
+  );
+  const [error, setError] = useState<{ [name: string]: boolean }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
+    // Clear error for the field on change
+    setError((prevErrors) => ({ ...prevErrors, [name]: false }));
+
+    // update data
     setData((prev) => ({ ...prev, [name]: checked }));
     dispatch(saveRegJobSeekerStep3({ ...data, [name]: checked }));
   };
@@ -38,20 +47,23 @@ export default function RegisterJobSeekerStep3({
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
+
+    // Check if form is valid
     if (form.checkValidity() === false) {
       e.stopPropagation();
-      setValidated(true);
-      Swal.fire({
-        icon: "error",
-        title: t("errors.acceptTermsPrivacy"),
-        toast: true,
-        position: "top",
-        showConfirmButton: false,
-        timer: 1500,
+
+      const invalidFields = form.querySelectorAll(":invalid");
+      const newErrors: Record<string, boolean> = {};
+
+      invalidFields.forEach((field) => {
+        const input = field as HTMLInputElement;
+        if (input.name) {
+          newErrors[input.name] = true;
+        }
       });
+      setError(newErrors);
       return;
     }
-    setValidated(true);
     dispatch(saveRegJobSeekerStep3(data));
     try {
       // Final submit thunk (simulated API)
@@ -79,7 +91,7 @@ export default function RegisterJobSeekerStep3({
   };
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+    <Form noValidate onSubmit={handleSubmit}>
       <div className="mb-4">
         <h4 className="mb-5 text-center">{t("title")}</h4>
 
@@ -92,7 +104,7 @@ export default function RegisterJobSeekerStep3({
             checked={data.acceptTerms}
             onChange={handleChange}
             required
-            isInvalid={validated && !data.acceptTerms}
+            isInvalid={!!error.acceptTerms}
             feedback={t("errors.acceptT&C")}
             feedbackType="invalid"
           />
@@ -107,7 +119,7 @@ export default function RegisterJobSeekerStep3({
             checked={data.acceptPrivacyPolicy}
             onChange={handleChange}
             required
-            isInvalid={validated && !data.acceptPrivacyPolicy}
+            isInvalid={!!error.acceptPrivacyPolicy}
             feedback={t("errors.acceptPrivacyPolicy")}
             feedbackType="invalid"
           />

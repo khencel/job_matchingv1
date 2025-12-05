@@ -259,6 +259,9 @@
       "age100Error": "最大100歳である必要があります。",
       "invalidEmail": "有効なメールアドレスを入力してください。",
       "contactNoTooShort": "連絡先電話番号は最低7桁である必要があります。",
+      "highestEducationRequired": "最終学歴を選択してください。",
+      "japaneseLevelRequired": "日本語レベルを選択してください。",
+      "invalidFacebookUrl": "有効なFacebookプロフィールURLを入力してください。",
       "fillRequired": "必須項目を入力してください。"
     },
     "buttons": {
