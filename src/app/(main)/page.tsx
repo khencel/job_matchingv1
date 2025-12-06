@@ -14,7 +14,7 @@ export default function HomePage() {
   useEffect(() => {
     (async () => {
       const WOW = (await import("wowjs")).default;
-      new WOW.WOW({ live: false }).init();
+      new WOW({ live: false }).init();
     })();
   }, []);
 
