@@ -42,7 +42,7 @@ export default function RegisterEmployerStep4({
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
 
-    // Check if form is valid
+    // First validation: Check HTML5 form validity
     if (form.checkValidity() === false) {
       e.stopPropagation();
 
@@ -58,13 +58,36 @@ export default function RegisterEmployerStep4({
       setError(newErrors);
       return;
     }
+
+    // Second validation: Check custom business logic
+    let hasError = false;
+    const validationErrors: Record<string, boolean> = {};
+
+    // Validate terms and conditions acceptance
+    if (!data.acceptTerms) {
+      validationErrors.acceptTerms = true;
+      hasError = true;
+    }
+
+    // Validate privacy policy acceptance
+    if (!data.acceptPrivacyPolicy) {
+      validationErrors.acceptPrivacyPolicy = true;
+      hasError = true;
+    }
+
+    if (hasError) {
+      setError(validationErrors);
+      return;
+    }
+
+    setError({});
     dispatch(saveRegEmployerStep4(data));
     try {
       // Final submit thunk (simulated API)
       await dispatch(registerEmployerSubmit());
       Swal.fire({
         icon: "success",
-        title: "Job Seeker Registration Success",
+        title: "Employer Registration Success",
         toast: true,
         position: "top",
         showConfirmButton: false,
@@ -74,7 +97,7 @@ export default function RegisterEmployerStep4({
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Job Seeker Registration Failed",
+        title: "Employer Registration Failed",
         toast: true,
         position: "top",
         showConfirmButton: false,

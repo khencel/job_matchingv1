@@ -72,7 +72,7 @@ export default function RegisterEmployerStep1() {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
 
-    // Check if form is valid
+    // First validation: Check HTML5 form validity
     if (form.checkValidity() === false) {
       e.stopPropagation();
 
@@ -93,31 +93,34 @@ export default function RegisterEmployerStep1() {
       }
       return;
     }
-    // Additional validation checks
-    if (!isEmailValid(data.email)) {
-      setError({ email: true });
-      const emailField = form.querySelector("[name='email']") as HTMLElement;
-      if (emailField) emailField.focus();
+
+    // Second validation: Check custom business logic
+    let hasError = false;
+    const validationErrors: Record<string, boolean> = {};
+
+    if (!data.email || !isEmailValid(data.email)) {
+      validationErrors.email = true;
+      hasError = true;
+    }
+
+    if (!data.password || !isPasswordValid(data.password)) {
+      validationErrors.password = true;
+      hasError = true;
+    }
+
+    if (!confirmPassword || !isPasswordMatch(data.password, confirmPassword)) {
+      validationErrors.confirmPassword = true;
+      hasError = true;
+    }
+
+    if (hasError) {
+      setError(validationErrors);
+      const firstErrorField = Object.keys(validationErrors)[0];
+      const errorElement = form.querySelector(`[name="${firstErrorField}"]`) as HTMLElement;
+      if (errorElement) errorElement.focus();
       return;
     }
 
-    if (!isPasswordValid(data.password)) {
-      setError({ password: true });
-      const passwordField = form.querySelector(
-        "[name='password']"
-      ) as HTMLElement;
-      if (passwordField) passwordField.focus();
-      return;
-    }
-
-    if (!isPasswordMatch(data.password, confirmPassword)) {
-      setError({ confirmPassword: true });
-      const confirmField = form.querySelector(
-        "[name='confirmPassword']"
-      ) as HTMLElement;
-      if (confirmField) confirmField.focus();
-      return;
-    }
     // All validations passed - save data and show success message
     setError({});
     dispatch(saveRegEmployerStep1(data));

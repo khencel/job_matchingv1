@@ -121,6 +121,7 @@
       "invalidNumOfEmployees": "従業員は1名以上必要です。",
       "invalidRegion": "地域を選択してください",
       "invalidCurrentBranch": "最低2文字である必要があります",
+      "invalidBranchName": "支店名は最低2文字である必要があります。",
       "fillRequired": "必須項目を入力してください。",
       "addAtLeastOneBranch": "少なくとも1つの支店を追加してください。"
     },
@@ -255,7 +256,7 @@
       "genderRequired": "性別を選択してください。",
       "residenceTooShort": "現住所は最低2文字である必要があります。",
       "birthdateRequired": "生年月日を入力してください。",
-      "ageValidationError": "18歳以上である必要があります。",
+      "age18Error": "18歳以上である必要があります。",
       "age100Error": "最大100歳である必要があります。",
       "invalidEmail": "有効なメールアドレスを入力してください。",
       "contactNoTooShort": "連絡先電話番号は最低7桁である必要があります。",
@@ -297,7 +298,9 @@
       "acceptReceiveEmails": "プロモーションメールの受信に同意します（任意）"
     },
     "helpers": {
-      "submitting": "送信中..."
+      "submitting": "送信中...",
+      "successSubmit": "求職者登録成功",
+      "errorSubmit": "求職者登録失敗"
     },
     "errors": {
       "acceptT&C": "利用規約に同意する必要があります。",
@@ -344,7 +347,9 @@
       "tooShortRepName": "名前は2文字以上で入力してください。",
       "fillRequired": "必須項目を入力してください。",
       "invalidNumOfEmployees": "従業員は1名以上必要です。",
-      "invalidYearFounded": "有効な設立年を入力してください。"
+      "invalidYearFounded": "有効な設立年を入力してください。",
+      "invalidCity": "市区町村は2文字以上で入力してください。",
+      "invalidStreet": "番地は2文字以上で入力してください。"
     },
     "buttons": {
       "next": "次へ"
@@ -370,9 +375,13 @@
     "errors": {
       "fillRequired": "必須項目を入力してください。",
       "invalidEmail": "有効なメールアドレスを入力してください。",
-      "name": "担当者名が無効です。",
-      "department": "部署名が無効です。",
-      "phoneNumber": "電話番号が無効です。"
+      "invalidName": "氏名は2文字以上100文字以下である必要があります。",
+      "invalidDepartmentName": "部署名は2文字以上100文字以下である必要があります。",
+      "invalidPhoneNumber": "電話番号は7桁以上15桁以下である必要があります。"
+    },
+    "messages": {
+      "success": "成功しました！",
+      "contactPersonSaved": "担当者情報が正常に保存されました。"
     },
     "buttons": {
       "next": "次へ"
@@ -389,7 +398,15 @@
       "submitting": "送信中..."
     },
     "errors": {
-      "acceptTermsPrivacy": "続行するには、利用規約とプライバシーポリシーに同意してください。"
+      "acceptTermsPrivacy": "続行するには、利用規約とプライバシーポリシーに同意してください。",
+      "acceptTerms": "利用規約に同意する必要があります。",
+      "acceptPrivacy": "プライバシーポリシーに同意する必要があります。"
+    },
+    "messages": {
+      "success": "成功しました！",
+      "error": "エラー",
+      "registrationComplete": "登録が正常に完了しました！",
+      "registrationFailed": "登録に失敗しました。もう一度お試しください。"
     },
     "buttons": {
       "submit": "登録を送信"

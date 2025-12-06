@@ -47,7 +47,7 @@ export default function RegisterEmployerStep3() {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
 
-    // Check if form is valid
+    // First validation: Check HTML5 form validity
     if (form.checkValidity() === false) {
       e.stopPropagation();
 
@@ -70,7 +70,44 @@ export default function RegisterEmployerStep3() {
       return;
     }
 
+    // Second validation: Check custom business logic
+    let hasError = false;
+    const validationErrors: Record<string, boolean> = {};
+
+    // Validate contact name
+    if (!data.name || data.name.trim().length < 3 || data.name.trim().length > 100) {
+      validationErrors.name = true;
+      hasError = true;
+    }
+
+    // Validate department name
+    if (!data.departmentName || data.departmentName.trim().length < 3 || data.departmentName.trim().length > 100) {
+      validationErrors.departmentName = true;
+      hasError = true;
+    }
+
+    // Validate phone number
+    if (!data.phoneNumber || !idPhoneNumberValid(data.phoneNumber.trim())) {
+      validationErrors.phoneNumber = true;
+      hasError = true;
+    }
+
+    // Validate email
+    if (!data.emailAddress || !isEmailValid(data.emailAddress.trim())) {
+      validationErrors.emailAddress = true;
+      hasError = true;
+    }
+
+    if (hasError) {
+      setError(validationErrors);
+      const firstErrorField = Object.keys(validationErrors)[0];
+      const errorElement = form.querySelector(`[name="${firstErrorField}"]`) as HTMLElement;
+      if (errorElement) errorElement.focus();
+      return;
+    }
+
     // All validations passed - save data and show success message
+    setError({});
     Swal.fire({
       icon: "success",
       title: "Company Information Submitted",

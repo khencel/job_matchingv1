@@ -66,7 +66,7 @@ export default function RegisterEmployerStep2() {
 
     // Normalize numeric fields: drop leading zeroes like "01" -> "1" for fee/appealPoints
     const normalizedValue =
-      name === "appealPoints" || name === "fee"
+      name === "appealPoints" || name === "fee" || name === "numberOfEmployees"
         ? value.replace(/^0+(?=\d)/, "")
         : value;
 
@@ -108,7 +108,7 @@ export default function RegisterEmployerStep2() {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
 
-    // Check if form is valid
+    // First validation: Check HTML5 form validity
     if (form.checkValidity() === false) {
       e.stopPropagation();
 
@@ -131,7 +131,91 @@ export default function RegisterEmployerStep2() {
       return;
     }
 
+    // Second validation: Check custom business logic
+    let hasError = false;
+    const validationErrors: Record<string, boolean> = {};
+
+    // Validate company name
+    if (!data.companyName || data.companyName.trim().length < 2) {
+      validationErrors.companyName = true;
+      hasError = true;
+    }
+
+    // Validate company address
+    if (!data.companyAddress || data.companyAddress.trim().length < 2) {
+      validationErrors.companyAddress = true;
+      hasError = true;
+    }
+
+    // Validate phone number
+    if (!data.phoneNumber || !isPhoneNumberValid(data.phoneNumber)) {
+      validationErrors.phoneNumber = true;
+      hasError = true;
+    }
+
+    // Validate industry
+    if (!data.industry) {
+      validationErrors.industry = true;
+      hasError = true;
+    }
+
+    // Validate regions
+    if (!data.regions) {
+      validationErrors.regions = true;
+      hasError = true;
+    }
+
+    // Validate number of employees
+    const numEmployeesNum = Number(data.numberOfEmployees);
+    if (!data.numberOfEmployees || numEmployeesNum < 1) {
+      validationErrors.numberOfEmployees = true;
+      hasError = true;
+    }
+
+    // Validate appeal points
+    const appealPointsNum = Number(data.appealPoints);
+    if (appealPointsNum <= 0) {
+      validationErrors.appealPoints = true;
+      hasError = true;
+    }
+
+    // Validate fee
+    const feeNum = Number(data.fee);
+    if (feeNum <= 0) {
+      validationErrors.fee = true;
+      hasError = true;
+    }
+
+    // Validate branch offices
+    if (!data.branchOffices || data.branchOffices.length === 0) {
+      validationErrors.branchOffices = true;
+      hasError = true;
+    }
+
+    if (hasError) {
+      setError(validationErrors);
+      
+      // If branch offices error, focus on the branch input field
+      if (validationErrors.branchOffices) {
+        const branchInput = form.querySelector(
+          "input[placeholder*='branchOffice']"
+        ) as HTMLElement;
+        if (branchInput) {
+          setTimeout(() => branchInput.focus(), 0);
+        }
+      } else {
+        // Otherwise focus on the first error field
+        const firstErrorField = Object.keys(validationErrors)[0];
+        const errorElement = form.querySelector(
+          `[name="${firstErrorField}"]`
+        ) as HTMLElement;
+        if (errorElement) errorElement.focus();
+      }
+      return;
+    }
+
     // All validations passed - save data and show success message
+    setError({});
     Swal.fire({
       icon: "success",
       title: "Company Information Submitted",
@@ -301,13 +385,14 @@ export default function RegisterEmployerStep2() {
                 type="text"
                 placeholder={t("labels.branchOfficePlaceholder")}
                 value={currentBranch}
-                onChange={(e) => setCurrentBranch(e.target.value)}
+                onChange={(e) => {
+                  setCurrentBranch(e.target.value);
+                  // Clear error when user starts typing
+                  setError((prevErrors) => ({ ...prevErrors, branchOffices: false }));
+                }}
                 isInvalid={
-                  (!(
-                    currentBranch.length > 2 && data.branchOffices.length === 0
-                  ) &&
-                    data.branchOffices.length === 0) ||
-                  (currentBranch.length < 0 && currentBranch.length < 2)
+                  error.branchOffices ||
+                  (currentBranch.trim().length > 0 && currentBranch.trim().length < 2)
                 }
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
@@ -318,10 +403,9 @@ export default function RegisterEmployerStep2() {
               />
 
               <Form.Control.Feedback type="invalid">
-                {currentBranch.length > 0 && currentBranch.length < 2
-                  ? t("errors.invalidCurrentBranch")
-                  : data.branchOffices.length === 0 &&
-                    t("errors.addAtLeastOneBranch")}
+                {currentBranch.trim().length > 0 && currentBranch.trim().length < 2
+                  ? t("errors.invalidBranchName")
+                  : t("errors.addAtLeastOneBranch")}
               </Form.Control.Feedback>
             </Col>
             <Col xs={3}>
@@ -381,7 +465,10 @@ export default function RegisterEmployerStep2() {
             value={data.appealPoints}
             onChange={handleChange}
             onFocus={(e) => e.target.select()}
-            isInvalid={error.appealPoints || data.appealPoints <= 0}
+            isInvalid={
+              error.appealPoints ||
+              (!!data.appealPoints && Number(data.appealPoints) <= 0)
+            }
           />
           <Form.Control.Feedback type="invalid">
             {t("errors.fillRequired")}
@@ -399,7 +486,7 @@ export default function RegisterEmployerStep2() {
             value={data.fee}
             onChange={handleChange}
             onFocus={(e) => e.target.select()}
-            isInvalid={error.fee || data.fee <= 0}
+            isInvalid={error.fee || (!!data.fee && Number(data.fee) <= 0)}
           />
           <Form.Control.Feedback type="invalid">
             {t("errors.fillRequired")}

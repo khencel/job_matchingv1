@@ -85,7 +85,7 @@ export const registerJobSeekerSubmit = createAsyncThunk<
   try {
     //Simulate API call (remove when backend is ready)
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Employer Registration Data:", submissionData);
+    console.log("Job Seeker Registration Data:", submissionData);
     return;
 
     // const response = await apiClient.post(

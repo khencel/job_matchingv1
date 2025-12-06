@@ -124,6 +124,7 @@
       "invalidNumOfEmployees": "Need at least 1 employee.",
       "invalidRegion": "Select Region",
       "invalidCurrentBranch": "At least minimum of 2 characters",
+      "invalidBranchName": "Branch name must be at least 2 characters long.",
       "fillRequired": "Please fill in all required fields.",
       "addAtLeastOneBranch": "Please add at least one branch office."
     },
@@ -346,7 +347,9 @@
       "tooShortRepName": "Name must be at least 2 characters long.",
       "fillRequired": "Please fill in all required fields.",
       "invalidNumOfEmployees": "Need at least 1 employee.",
-      "invalidYearFounded": "Please enter a valid year."
+      "invalidYearFounded": "Please enter a valid year.",
+      "invalidCity": "City must be at least 2 characters.",
+      "invalidStreet": "Street address must be at least 2 characters."
     },
     "buttons": {
       "next": "Next"
@@ -372,9 +375,13 @@
     "errors": {
       "fillRequired": "Please fill in all required fields.",
       "invalidEmail": "Please enter a valid email address.",
-      "name": "Invalid contact name.",
-      "department": "Invalid department name.",
-      "phoneNumber": "Invalid phone number."
+      "invalidName": "Name must be between 2 and 100 characters.",
+      "invalidDepartmentName": "Department name must be between 2 and 100 characters.",
+      "invalidPhoneNumber": "Phone number must be 7-15 digits."
+    },
+    "messages": {
+      "success": "Success!",
+      "contactPersonSaved": "Contact person information saved successfully."
     },
     "buttons": {
       "next": "Next"
@@ -391,7 +398,15 @@
       "submitting": "Submitting..."
     },
     "errors": {
-      "acceptTermsPrivacy": "You must accept Terms of Use and Privacy Policy to continue."
+      "acceptTermsPrivacy": "You must accept Terms of Use and Privacy Policy to continue.",
+      "acceptTerms": "You must accept the terms of use.",
+      "acceptPrivacy": "You must accept the privacy policy."
+    },
+    "messages": {
+      "success": "Success!",
+      "error": "Error",
+      "registrationComplete": "Registration completed successfully!",
+      "registrationFailed": "Registration failed. Please try again."
     },
     "buttons": {
       "submit": "Submit Registration"

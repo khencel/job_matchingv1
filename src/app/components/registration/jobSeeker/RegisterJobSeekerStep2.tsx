@@ -71,7 +71,8 @@ const RegisterJobSeekerStep2 = () => {
   // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Ensure a file has been uploaded
+
+    // First validation: Check if file has been uploaded
     if (!idURL) {
       setError(t("errors.idRequired"));
       Swal.fire({
@@ -85,6 +86,22 @@ const RegisterJobSeekerStep2 = () => {
       return;
     }
 
+    // Second validation: Ensure file is not empty and is valid
+    if (!fileName || fileName.trim().length === 0) {
+      setError(t("errors.idRequired"));
+      Swal.fire({
+        icon: "error",
+        title: "Invalid File",
+        toast: true,
+        position: "top",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return;
+    }
+
+    // All validations passed - save to Redux store and go to next step
+    setError("");
     Swal.fire({
       icon: "success",
       title: "ID Document Uploaded",
@@ -93,7 +110,6 @@ const RegisterJobSeekerStep2 = () => {
       showConfirmButton: false,
       timer: 1500,
     });
-    // Save to Redux store and go to next step
     dispatch(saveRegJobSeekerStep2(idURL));
     dispatch(goNextStep(3));
   };

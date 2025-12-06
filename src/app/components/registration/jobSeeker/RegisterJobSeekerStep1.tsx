@@ -90,6 +90,7 @@ const RegisterJobSeekerStep1 = () => {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
 
+    // First validation: Check HTML5 form validity
     if (form.checkValidity() === false) {
       e.stopPropagation();
 
@@ -112,37 +113,83 @@ const RegisterJobSeekerStep1 = () => {
       return;
     }
 
-    if (!isEmailValid(data.email)) {
-      setError((prev) => ({ ...prev, email: true }));
-      const emailField = form.querySelector("[name='email']") as HTMLElement;
-      if (emailField) emailField.focus();
-      return;
+    // Second validation: Check custom business logic
+    let hasError = false;
+    const validationErrors: Record<string, boolean> = {};
+
+    // Validate nationality
+    if (!data.nationality) {
+      validationErrors.nationality = true;
+      hasError = true;
     }
 
-    if (!isContactValid(data.contactNo)) {
-      setError((prev) => ({ ...prev, contactNo: true }));
-      const contactField = form.querySelector("[name='contactNo']") as HTMLElement;
-      if (contactField) contactField.focus();
-      return;
+    // Validate gender
+    if (!data.gender) {
+      validationErrors.gender = true;
+      hasError = true;
     }
 
+    // Validate current place of residence
+    if (!data.currentPlaceResidence || data.currentPlaceResidence.trim().length < 2) {
+      validationErrors.currentPlaceResidence = true;
+      hasError = true;
+    }
+
+    // Validate birthdate
     const birthdate = data.birthdate;
     const minBirthdate = getMinBirthdateFor90YearsOld();
     const maxBirthdate = getMaxBirthdateFor18YearsOld();
     if (!birthdate || birthdate > maxBirthdate || birthdate < minBirthdate) {
-      setError((prev) => ({ ...prev, birthdate: true }));
-      const birthField = form.querySelector("[name='birthdate']") as HTMLElement;
-      if (birthField) birthField.focus();
+      validationErrors.birthdate = true;
+      hasError = true;
+    }
+
+    // Validate visa status
+    if (!data.visaStatus) {
+      validationErrors.visaStatus = true;
+      hasError = true;
+    }
+
+    // Validate highest education
+    if (!data.highestEducation) {
+      validationErrors.highestEducation = true;
+      hasError = true;
+    }
+
+    // Validate japanese level
+    if (!data.japaneseLevel) {
+      validationErrors.japaneseLevel = true;
+      hasError = true;
+    }
+
+    // Validate email
+    if (!data.email || !isEmailValid(data.email)) {
+      validationErrors.email = true;
+      hasError = true;
+    }
+
+    // Validate contact number
+    if (!data.contactNo || !isContactValid(data.contactNo)) {
+      validationErrors.contactNo = true;
+      hasError = true;
+    }
+
+    // Validate facebook URL (optional but validate if provided)
+    if (data.facebook && !isFacebookUrlValid(data.facebook)) {
+      validationErrors.facebook = true;
+      hasError = true;
+    }
+
+    if (hasError) {
+      setError(validationErrors);
+      const firstErrorField = Object.keys(validationErrors)[0];
+      const errorElement = form.querySelector(`[name="${firstErrorField}"]`) as HTMLElement;
+      if (errorElement) errorElement.focus();
       return;
     }
 
-    if (!isFacebookUrlValid(data.facebook)) {
-      setError((prev) => ({ ...prev, facebook: true }));
-      const fbField = form.querySelector("[name='facebook']") as HTMLElement;
-      if (fbField) fbField.focus();
-      return;
-    }
-
+    // All validations passed - save data and show success message
+    setError({});
     Swal.fire({
       icon: "success",
       title: "Personal Information Submitted",
@@ -151,7 +198,6 @@ const RegisterJobSeekerStep1 = () => {
       showConfirmButton: false,
       timer: 1500,
     });
-    setError({});
     dispatch(saveRegJobSeekerStep1(data));
     dispatch(goNextStep(2));
   };
