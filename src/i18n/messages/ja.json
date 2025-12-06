@@ -6,8 +6,7 @@
     "qa": "Q&A",
     "contact": "お問い合わせ",
     "logoAlt": "ロゴ",
-    "japanese": "日本語",
-    "languageLabel": "言語"
+    "japanese": "日本語"
   },
   "banner": {
     "title": "あなたの働き方をサポートします",
@@ -33,15 +32,19 @@
       "explore": "検索"
     }
   },
-  "registrationCard": {
+  "registerButton": {
     "buttons": {
       "registerJobSeeker": "求職者として登録",
       "registerEmployer": "雇用主として登録",
       "registerSupervisory": "監督者として登録"
     }
   },
-  "employerRegistrationModal": {
-    "title": "雇用主の登録",
+  "registrationModal": {
+    "title": {
+      "employer": "雇用主登録",
+      "jobSeeker": "求職者登録",
+      "supervisory": "監督者登録"
+    },
     "steps": {
       "account": "アカウント",
       "company": "会社",
@@ -56,7 +59,6 @@
   "registerEmployerStep1": {
     "title": "アカウント情報",
     "labels": {
-      "accountDetails": "アカウント情報",
       "email": "メールアドレス",
       "password": "パスワード",
       "confirmPassword": "パスワード（確認）",
@@ -84,7 +86,6 @@
   "registerEmployerStep2": {
     "title": "管理組織情報",
     "labels": {
-      "mgmtOrgInfo": "管理組織情報",
       "basicInfo": "基本情報",
       "companyName": "会社名",
       "companyAddress": "会社住所",
@@ -113,6 +114,14 @@
       "enterFee": "料金を入力"
     },
     "errors": {
+      "invalidCompanyName": "有効な会社名を入力してください",
+      "invalidCompanyAddress": "有効な会社住所を入力してください",
+      "invalidPhoneNumber": "有効な電話番号を入力してください",
+      "invalidIndustry": "業界を選択してください",
+      "invalidNumOfEmployees": "従業員は1名以上必要です。",
+      "invalidRegion": "地域を選択してください",
+      "invalidCurrentBranch": "最低2文字である必要があります",
+      "invalidBranchName": "支店名は最低2文字である必要があります。",
       "fillRequired": "必須項目を入力してください。",
       "addAtLeastOneBranch": "少なくとも1つの支店を追加してください。"
     },
@@ -125,7 +134,6 @@
   "registerEmployerStep3": {
     "title": "担当者",
     "labels": {
-      "contactPerson": "担当者",
       "name": "氏名",
       "departmentName": "部署名",
       "phoneNumber": "電話番号",
@@ -141,6 +149,10 @@
       "contactInfoNote": "この情報は必要に応じて管理者が会社へ連絡するために使用されます。求人には表示されません。"
     },
     "errors": {
+      "invalidName": "3文字以上である必要があります",
+      "invalidDepartmentName": "有効な部署名を入力してください",
+      "invalidPhoneNumber": "有効な電話番号を入力してください",
+      "invalidEmail": "有効なメールアドレスを入力してください。",
       "fillRequired": "必須項目を入力してください。"
     },
     "buttons": {
@@ -150,15 +162,16 @@
   "registerEmployerStep4": {
     "title": "利用規約",
     "labels": {
-      "acceptTerms": "利用規約に同意する",
-      "acceptPrivacyPolicy": "プライバシーポリシーに同意する",
-      "acceptReceiveEmails": "メールで通知を受け取る"
+      "acceptTerms": "利用規約に同意する。",
+      "acceptPrivacyPolicy": "プライバシーポリシーに同意する。",
+      "acceptReceiveEmails": "メールで通知を受け取る。"
     },
     "helpers": {
       "submitting": "送信中..."
     },
     "errors": {
-      "acceptTermsPrivacy": "続行するには、利用規約とプライバシーポリシーに同意してください。"
+      "acceptTerms": "続行するには利用規約に同意する必要があります。",
+      "acceptPrivacy": "続行するにはプライバシーポリシーに同意する必要があります。"
     },
     "buttons": {
       "submit": "登録を送信"
@@ -166,8 +179,138 @@
   },
   "forgotPasswordPage": {
     "title": "パスワードをお忘れですか"
-  }
-  ,
+  },
+  "registerSuperVisoryStep1": {
+    "title": "アカウント情報",
+    "labels": {
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "confirmPassword": "パスワード（確認）",
+      "rememberMe": "ログイン情報を保存"
+    },
+    "placeholders": {
+      "enterEmail": "メールアドレスを入力",
+      "enterPassword": "パスワードを入力",
+      "confirmYourPassword": "パスワードを確認"
+    },
+    "helpers": {
+      "passwordMinLength": "8文字以上で入力してください。",
+      "accountConfirmNote": "確認リンクがメールで送信されます。アカウントを認証してください。"
+    },
+    "errors": {
+      "fillRequired": "必須項目を入力してください。",
+      "invalidEmail": "有効なメールアドレスを入力してください。",
+      "passwordTooShort": "パスワードは8文字以上で入力してください。",
+      "passwordMismatch": "パスワードが一致しません。",
+      "passwordMinLength": "8文字以上で入力してください。"
+    },
+    "buttons": {
+      "next": "次へ"
+    }
+  },
+  "registerJobSeekerStep1": {
+    "title": "個人情報",
+    "labels": {
+      "nationality": "国籍",
+      "gender": "性別",
+      "currentPlaceResidence": "現住所",
+      "birthdate": "生年月日",
+      "visaStatus": "ビザ状況",
+      "highestEducation": "最終学歴",
+      "japaneseLevel": "日本語能力（JLPT）",
+      "email": "メールアドレス",
+      "contactNo": "連絡先電話番号",
+      "facebook": "Facebookプロフィール",
+      "optional": "任意"
+    },
+    "placeholders": {
+      "selectNationality": "国籍を選択",
+      "nationality": "国籍を入力",
+      "currentPlaceResidence": "現住所を入力",
+      "selectVisaStatus": "ビザ状況を選択",
+      "selectEducation": "最終学歴を選択",
+      "selectJapaneseLevel": "日本語レベルを選択",
+      "email": "メールアドレスを入力",
+      "contactNo": "連絡先電話番号を入力",
+      "facebook": "FacebookプロフィールのURLを入力"
+    },
+    "options": {
+      "male": "男性",
+      "female": "女性",
+      "visaApplied": "申請済み",
+      "visaPending": "保留中",
+      "visaReviewing": "審査中",
+      "visaIssued": "発行済み",
+      "visaDenied": "却下",
+      "elementary": "小学校",
+      "jrHighschool": "中学校",
+      "srHighschool": "高等学校",
+      "vocational": "専門学校",
+      "bachelorDegree": "学士",
+      "masterDegree": "修士",
+      "doctoralDegree": "博士"
+    },
+    "errors": {
+      "visaStatusRequired": "ビザ状況を選択してください。",
+      "nationalityRequired": "国籍を選択してください。",
+      "genderRequired": "性別を選択してください。",
+      "residenceTooShort": "現住所は最低2文字である必要があります。",
+      "birthdateRequired": "生年月日を入力してください。",
+      "age18Error": "18歳以上である必要があります。",
+      "age100Error": "最大100歳である必要があります。",
+      "invalidEmail": "有効なメールアドレスを入力してください。",
+      "contactNoTooShort": "連絡先電話番号は最低7桁である必要があります。",
+      "highestEducationRequired": "最終学歴を選択してください。",
+      "japaneseLevelRequired": "日本語レベルを選択してください。",
+      "invalidFacebookUrl": "有効なFacebookプロフィールURLを入力してください。",
+      "fillRequired": "必須項目を入力してください。"
+    },
+    "buttons": {
+      "next": "次へ"
+    }
+  },
+  "registerJobSeekerStep2": {
+    "title": "本人確認書類",
+    "labels": {
+      "idDocument": "本人確認書類",
+      "uploadedFile": "アップロード済みファイル",
+      "preview": "プレビュー"
+    },
+    "helpers": {
+      "fileTypeInfo": "対応形式：JPEG、PNG、WebP、PDF。最大サイズ：5MB。"
+    },
+    "errors": {
+      "invalidFileType": "無効なファイル形式です。画像（JPEG、PNG、WebP）またはPDFをアップロードしてください。",
+      "fileTooLarge": "ファイルサイズが5MBを超えています。より小さいファイルをアップロードしてください。",
+      "idRequired": "本人確認書類をアップロードしてください。"
+    },
+    "buttons": {
+      "back": "戻る",
+      "next": "次へ",
+      "remove": "削除"
+    }
+  },
+  "registerJobSeekerStep3": {
+    "title": "利用規約",
+    "labels": {
+      "acceptTerms": "利用規約に同意します",
+      "acceptPrivacyPolicy": "プライバシーポリシーに同意します",
+      "acceptReceiveEmails": "プロモーションメールの受信に同意します（任意）"
+    },
+    "helpers": {
+      "submitting": "送信中...",
+      "successSubmit": "求職者登録成功",
+      "errorSubmit": "求職者登録失敗"
+    },
+    "errors": {
+      "acceptT&C": "利用規約に同意する必要があります。",
+      "acceptPrivacyPolicy": "プライバシーポリシーに同意する必要があります。",
+      "acceptTermsPrivacy": "利用規約とプライバシーポリシーに同意して続行してください。"
+    },
+    "buttons": {
+      "submit": "登録を送信"
+    }
+  },
   "registerSupervisoryStep2": {
     "title": "会社情報",
     "labels": {
@@ -200,7 +343,13 @@
       "enterBusinessDescription": "事業内容を入力"
     },
     "errors": {
-      "fillRequired": "必須項目を入力してください。"
+      "tooShortCompanyName": "名前は2文字以上で入力してください。",
+      "tooShortRepName": "名前は2文字以上で入力してください。",
+      "fillRequired": "必須項目を入力してください。",
+      "invalidNumOfEmployees": "従業員は1名以上必要です。",
+      "invalidYearFounded": "有効な設立年を入力してください。",
+      "invalidCity": "市区町村は2文字以上で入力してください。",
+      "invalidStreet": "番地は2文字以上で入力してください。"
     },
     "buttons": {
       "next": "次へ"
@@ -225,7 +374,14 @@
     },
     "errors": {
       "fillRequired": "必須項目を入力してください。",
-      "invalidEmail": "有効なメールアドレスを入力してください。"
+      "invalidEmail": "有効なメールアドレスを入力してください。",
+      "invalidName": "氏名は2文字以上100文字以下である必要があります。",
+      "invalidDepartmentName": "部署名は2文字以上100文字以下である必要があります。",
+      "invalidPhoneNumber": "電話番号は7桁以上15桁以下である必要があります。"
+    },
+    "messages": {
+      "success": "成功しました！",
+      "contactPersonSaved": "担当者情報が正常に保存されました。"
     },
     "buttons": {
       "next": "次へ"
@@ -242,7 +398,15 @@
       "submitting": "送信中..."
     },
     "errors": {
-      "acceptTermsPrivacy": "続行するには、利用規約とプライバシーポリシーに同意してください。"
+      "acceptTermsPrivacy": "続行するには、利用規約とプライバシーポリシーに同意してください。",
+      "acceptTerms": "利用規約に同意する必要があります。",
+      "acceptPrivacy": "プライバシーポリシーに同意する必要があります。"
+    },
+    "messages": {
+      "success": "成功しました！",
+      "error": "エラー",
+      "registrationComplete": "登録が正常に完了しました！",
+      "registrationFailed": "登録に失敗しました。もう一度お試しください。"
     },
     "buttons": {
       "submit": "登録を送信"

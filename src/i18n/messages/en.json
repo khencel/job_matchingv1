@@ -40,11 +40,15 @@
     "buttons": {
       "registerJobSeeker": "Register as Job Seeker",
       "registerEmployer": "Register as Employer",
-      "registerSupervisory": "Register as Supervisory"
+      "registerSupervisory": "Register as Super Visory"
     }
   },
   "registrationModal": {
-    "title": "Employer Registration",
+    "title": {
+      "employer": "Employer Registration",
+      "jobSeeker": "Job Seeker Registration",
+      "supervisory": "Super Visory Registration"
+    },
     "steps": {
       "account": "Account",
       "company": "Company",
@@ -55,6 +59,9 @@
       "close": "Close",
       "back": "Back"
     }
+  },
+  "forgotPasswordPage": {
+    "title": "Forgot Password"
   },
   "registerEmployerStep1": {
     "title": "Account Details",
@@ -114,6 +121,14 @@
       "enterFee": "Enter fee amount"
     },
     "errors": {
+      "invalidCompanyName": "Enter a valid Company Name",
+      "invalidCompanyAddress": "Enter a valid Company Address",
+      "invalidPhoneNumber": "Enter a valid Phone Number",
+      "invalidIndustry": "Select Industry",
+      "invalidNumOfEmployees": "Need at least 1 employee.",
+      "invalidRegion": "Select Region",
+      "invalidCurrentBranch": "At least minimum of 2 characters",
+      "invalidBranchName": "Branch name must be at least 2 characters long.",
       "fillRequired": "Please fill in all required fields.",
       "addAtLeastOneBranch": "Please add at least one branch office."
     },
@@ -141,6 +156,10 @@
       "contactInfoNote": "This information will be used by the platform administrators to contact your company if needed. It will not be displayed on job listings."
     },
     "errors": {
+      "invalidName": "Minimum of 3 characters",
+      "invalidDepartmentName": "Enter a valid Department Name",
+      "invalidPhoneNumber": "Enter a valid Phone Number",
+      "invalidEmail": "Please enter a valid email address.",
       "fillRequired": "Please fill in all required fields."
     },
     "buttons": {
@@ -158,14 +177,12 @@
       "submitting": "Submitting..."
     },
     "errors": {
-      "acceptTermsPrivacy": "You must accept Terms of Use and Privacy Policy to continue."
+      "acceptTerms": "You must accept Terms of Use to proceed.",
+      "acceptPrivacy": "You must accept Privacy Policy to proceed."
     },
     "buttons": {
       "submit": "Submit Registration"
     }
-  },
-  "forgotPasswordPage": {
-    "title": "Forgot Password"
   },
   "registerSuperVisoryStep1": {
     "title": "Account Details",
@@ -196,7 +213,107 @@
     }
   },
   "registerJobSeekerStep1": {
-    "title": "Job Seeker Registration"
+    "title": "Personal Information",
+    "labels": {
+      "nationality": "Nationality",
+      "gender": "Gender",
+      "currentPlaceResidence": "Current Place of Residence",
+      "birthdate": "Date of Birth",
+      "visaStatus": "Visa Status",
+      "highestEducation": "Highest Education",
+      "japaneseLevel": "Japanese Language Level (JLPT)",
+      "email": "Email Address",
+      "contactNo": "Contact Number",
+      "facebook": "Facebook Profile",
+      "optional": "Optional"
+    },
+    "placeholders": {
+      "selectNationality": "Select your nationality",
+      "nationality": "Enter your nationality",
+      "currentPlaceResidence": "Enter your current address",
+      "selectVisaStatus": "Select visa status",
+      "selectEducation": "Select your highest education",
+      "selectJapaneseLevel": "Select your Japanese level",
+      "email": "Enter your email address",
+      "contactNo": "Enter your contact number",
+      "facebook": "Enter your Facebook profile URL"
+    },
+    "options": {
+      "male": "Male",
+      "female": "Female",
+      "visaApplied": "Applied",
+      "visaPending": "Pending",
+      "visaReviewing": "Under Review",
+      "visaIssued": "Issued",
+      "visaDenied": "Denied",
+      "elementary": "Elementary School",
+      "jrHighschool": "Junior High School",
+      "srHighschool": "Senior High School",
+      "vocational": "Vocational School",
+      "bachelorDegree": "Bachelor's Degree",
+      "masterDegree": "Master's Degree",
+      "doctoralDegree": "Doctoral Degree"
+    },
+    "errors": {
+      "visaStatusRequired": "Please select your visa status.",
+      "nationalityRequired": "Please select your nationality.",
+      "genderRequired": "Please select your gender.",
+      "residenceTooShort": "Current residence must be at least 2 characters.",
+      "birthdateRequired": "Please enter your date of birth.",
+      "age18Error": "You must be at least 18 years old.",
+      "age100Error": "You must be at most 100 years old.",
+      "invalidEmail": "Please enter a valid email address.",
+      "contactNoTooShort": "Contact number must be at least 7 digits.",
+      "highestEducationRequired": "Please select your highest education.",
+      "japaneseLevelRequired": "Please select your Japanese level.",
+      "invalidFacebookUrl": "Please enter a valid Facebook profile URL.",
+      "fillRequired": "Please fill in all required fields."
+    },
+    "buttons": {
+      "next": "Next"
+    }
+  },
+  "registerJobSeekerStep2": {
+    "title": "ID Verification",
+    "labels": {
+      "idDocument": "ID Document",
+      "uploadedFile": "Uploaded File",
+      "preview": "Preview"
+    },
+    "helpers": {
+      "fileTypeInfo": "Accepted formats: JPEG, PNG, WebP, PDF. Maximum size: 5MB."
+    },
+    "errors": {
+      "invalidFileType": "Invalid file type. Please upload an image (JPEG, PNG, WebP) or PDF.",
+      "fileTooLarge": "File size exceeds 5MB. Please upload a smaller file.",
+      "idRequired": "Please upload your ID document."
+    },
+    "buttons": {
+      "back": "Back",
+      "next": "Next",
+      "remove": "Remove"
+    }
+  },
+  "registerJobSeekerStep3": {
+    "title": "Terms and Conditions",
+    "labels": {
+      "acceptTerms": "I accept the Terms and Conditions",
+      "acceptPrivacyPolicy": "I accept the Privacy Policy",
+      "acceptReceiveEmails": "I agree to receive promotional emails (optional)"
+    },
+    "helpers": {
+      "submitting": "Submitting...",
+      "successSubmit": "Job Seeker Registration Success",
+      "errorSubmit": "Job Seeker Registration Failed"
+    },
+    "errors": {
+      "acceptT&C": "You must accept the Terms and Conditions to proceed.",
+      "acceptPrivacyPolicy": "You must accept the Privacy Policy to proceed.",
+      "acceptTermsPrivacy": "Accept Terms of Use and Privacy Policy to continue."
+    },
+    "buttons": {
+      "submit": "Submit Registration"
+    }
   },
   "registerSupervisoryStep2": {
     "title": "Company Information",
@@ -234,7 +351,9 @@
       "tooShortRepName": "Name must be at least 2 characters long.",
       "fillRequired": "Please fill in all required fields.",
       "invalidNumOfEmployees": "Need at least 1 employee.",
-      "invalidYearFounded": "Please enter a valid year."
+      "invalidYearFounded": "Please enter a valid year.",
+      "invalidCity": "City must be at least 2 characters.",
+      "invalidStreet": "Street address must be at least 2 characters."
     },
     "buttons": {
       "next": "Next"
@@ -260,9 +379,13 @@
     "errors": {
       "fillRequired": "Please fill in all required fields.",
       "invalidEmail": "Please enter a valid email address.",
-      "name": "Invalid contact name.",
-      "department": "Invalid department name.",
-      "phoneNumber": "Invalid phone number."
+      "invalidName": "Name must be between 2 and 100 characters.",
+      "invalidDepartmentName": "Department name must be between 2 and 100 characters.",
+      "invalidPhoneNumber": "Phone number must be 7-15 digits."
+    },
+    "messages": {
+      "success": "Success!",
+      "contactPersonSaved": "Contact person information saved successfully."
     },
     "buttons": {
       "next": "Next"
@@ -279,7 +402,15 @@
       "submitting": "Submitting..."
     },
     "errors": {
-      "acceptTermsPrivacy": "You must accept Terms of Use and Privacy Policy to continue."
+      "acceptTermsPrivacy": "You must accept Terms of Use and Privacy Policy to continue.",
+      "acceptTerms": "You must accept the terms of use.",
+      "acceptPrivacy": "You must accept the privacy policy."
+    },
+    "messages": {
+      "success": "Success!",
+      "error": "Error",
+      "registrationComplete": "Registration completed successfully!",
+      "registrationFailed": "Registration failed. Please try again."
     },
     "buttons": {
       "submit": "Submit Registration"

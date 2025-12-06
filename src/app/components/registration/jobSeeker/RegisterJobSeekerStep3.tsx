@@ -4,43 +4,44 @@ import { useState, FormEvent } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
-  saveRegSuperVisoryStep4,
-  registerSuperVisorySubmit,
-  RegisterSuperVisoryStep4Data,
-} from "@/redux/slices/register/superVisorySlice";
+  saveRegJobSeekerStep3,
+  registerJobSeekerSubmit,
+  RegisterJobSeekerStep3Data,
+} from "@/redux/slices/register/jobSeekerSlice";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 
-interface RegisterSuperVisoryStep4Props {
+interface RegisterJobSeekerStep3Props {
   closeModal: () => void;
 }
 
-export default function RegisterSuperVisoryStep4({
+export default function RegisterJobSeekerStep3({
   closeModal,
-}: RegisterSuperVisoryStep4Props) {
+}: RegisterJobSeekerStep3Props) {
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((s) => s.registerSuperVisory);
-  const t = useTranslations("registerSupervisoryStep4");
-
-  const termsAndConditions = useAppSelector(
-    (s) => s.registerSuperVisory.registerSuperVisoryData.termsAndConditions
+  const { isLoading } = useAppSelector((s) => s.registerJobSeeker);
+  const t = useTranslations("registerJobSeekerStep3");
+  const step3Data = useAppSelector(
+    (s) => s.registerJobSeeker.registerJobSeekerData.termsAndConditions
   );
 
-  const [data, setData] = useState<RegisterSuperVisoryStep4Data>(
-    termsAndConditions || {
+  const [data, setData] = useState<RegisterJobSeekerStep3Data>(
+    step3Data || {
       acceptTerms: false,
       acceptPrivacyPolicy: false,
       acceptReceiveEmails: false,
     }
   );
-
   const [error, setError] = useState<{ [name: string]: boolean }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
-    setData((prev) => ({ ...prev, [name]: checked }));
-    dispatch(saveRegSuperVisoryStep4({ ...data, [name]: checked }));
+    // Clear error for the field on change
     setError((prevErrors) => ({ ...prevErrors, [name]: false }));
+
+    // update data
+    setData((prev) => ({ ...prev, [name]: checked }));
+    dispatch(saveRegJobSeekerStep3({ ...data, [name]: checked }));
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -68,13 +69,13 @@ export default function RegisterSuperVisoryStep4({
     let hasError = false;
     const validationErrors: Record<string, boolean> = {};
 
-    // Validate acceptTerms checkbox
+    // Validate terms and conditions acceptance
     if (!data.acceptTerms) {
       validationErrors.acceptTerms = true;
       hasError = true;
     }
 
-    // Validate acceptPrivacyPolicy checkbox
+    // Validate privacy policy acceptance
     if (!data.acceptPrivacyPolicy) {
       validationErrors.acceptPrivacyPolicy = true;
       hasError = true;
@@ -85,34 +86,30 @@ export default function RegisterSuperVisoryStep4({
       return;
     }
 
-    // All validations passed - save data and submit
     setError({});
-    dispatch(saveRegSuperVisoryStep4(data));
-
+    dispatch(saveRegJobSeekerStep3(data));
     try {
       // Final submit thunk (simulated API)
-      await dispatch(registerSuperVisorySubmit()).unwrap();
+      await dispatch(registerJobSeekerSubmit());
       Swal.fire({
         icon: "success",
-        title: t("messages.success"),
-        text: t("messages.registrationComplete"),
+        title: "Job Seeker Registration Success",
         toast: true,
         position: "top",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1500,
       });
       closeModal();
     } catch (error) {
-      console.log("Error Submitting the Register Supervisory:", error);
       Swal.fire({
         icon: "error",
-        title: t("messages.error"),
-        text: t("messages.registrationFailed"),
+        title: "Job Seeker Registration Failed",
         toast: true,
         position: "top",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1500,
       });
+      console.log("Error Submitting Job Seeker Registration:", error);
     }
   };
 
@@ -131,12 +128,9 @@ export default function RegisterSuperVisoryStep4({
             onChange={handleChange}
             required
             isInvalid={!!error.acceptTerms}
+            feedback={t("errors.acceptT&C")}
+            feedbackType="invalid"
           />
-          {error.acceptTerms && (
-            <Form.Control.Feedback type="invalid" className="px-5 d-block">
-              {t("errors.acceptTerms")}
-            </Form.Control.Feedback>
-          )}
         </Form.Group>
 
         <Form.Group className="mb-4" controlId="acceptPrivacyPolicy">
@@ -149,12 +143,9 @@ export default function RegisterSuperVisoryStep4({
             onChange={handleChange}
             required
             isInvalid={!!error.acceptPrivacyPolicy}
+            feedback={t("errors.acceptPrivacyPolicy")}
+            feedbackType="invalid"
           />
-          {error.acceptPrivacyPolicy && (
-            <Form.Control.Feedback type="invalid" className="px-5 d-block">
-              {t("errors.acceptPrivacy")}
-            </Form.Control.Feedback>
-          )}
         </Form.Group>
 
         <Form.Group className="mb-5" controlId="acceptReceiveEmails">

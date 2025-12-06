@@ -2,17 +2,20 @@
 import { link } from "fs";
 import { useLocale, useTranslations } from "next-intl";
 import React, { useCallback } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link"; 
 
 export default function Navbar() {
   const locale = useLocale();
   const t = useTranslations("navbar");
+  const router = useRouter();
+
   const setLocale = useCallback((nextLocale: "en" | "ja") => {
-    const expiry = new Date();
+    const expiry = new Date(); // 1 year expiry
     expiry.setFullYear(expiry.getFullYear() + 1);
     document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; expires=${expiry.toUTCString()}`;
-    window.location.reload();
-  }, []);
+    router.refresh();
+  }, [router]);
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setLocale(e.target.value as "en" | "ja");

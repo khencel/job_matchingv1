@@ -14,6 +14,10 @@ import RegisterSuperVisoryStep1 from "./supervisory/RegisterSuperVisoryStep1";
 import RegisterSupervisoryStep2 from "./supervisory/RegisterSupervisoryStep2";
 import RegisterSuperVisoryStep3 from "./supervisory/RegisterSuperVisoryStep3";
 import RegisterSuperVisoryStep4 from "./supervisory/RegisterSuperVisoryStep4";
+import RegisterJobSeekerStep1 from "./jobSeeker/RegisterJobSeekerStep1";
+import RegisterJobSeekerStep2 from "./jobSeeker/RegisterJobSeekerStep2";
+import RegisterJobSeekerStep3 from "./jobSeeker/RegisterJobSeekerStep3";
+import { goBackJobSeeker } from "@/redux/slices/register/jobSeekerSlice";
 
 interface RegistrationModalProps {
   show: boolean;
@@ -28,24 +32,25 @@ export default function RegistrationModal({
 }: RegistrationModalProps) {
   const dispatch = useAppDispatch();
 
-  // i18n: translations for Employer registration UI
-  const handleDisplayTitle = () => {
-    switch (formType) {
-      case "employer":
-        return "registerEmployerStep1";
-      case "jobSeeker":
-        return "registerJobSeekerStep1";
-      case "superVisory":
-        return "registerSuperVisoryStep1";
-    }
+  const t = useTranslations("registrationModal");
+  const renderTitle = () => {
+    if (formType === "employer") return t("title.employer");
+    if (formType === "jobSeeker") return t("title.jobSeeker");
+    if (formType === "superVisory") return t("title.supervisory");
   };
-  const t = useTranslations(handleDisplayTitle());
 
   const currentStep = useAppSelector((state) => {
     if (formType === "employer") return state.registerEmployer.currentStep;
-    if (formType === "superVisory") return state.registerSuperVisory.currentStep;
-    return 1; // jobSeeker default
+    if (formType === "superVisory")
+      return state.registerSuperVisory.currentStep;
+    return state.registerJobSeeker.currentStep;
   });
+
+  const handleGoBack = () => {
+    if (formType === "employer") return dispatch(goBackEmployer());
+    if (formType === "superVisory") return dispatch(goBackSuperVisory());
+    if (formType === "jobSeeker") return dispatch(goBackJobSeeker());
+  };
 
   const handleFormRender = () => {
     if (formType === "employer") {
@@ -64,13 +69,11 @@ export default function RegistrationModal({
     if (formType === "jobSeeker") {
       switch (currentStep) {
         case 1:
-          return <div>Job Seeker Step 1 Form</div>;
+          return <RegisterJobSeekerStep1 />;
         case 2:
-          return <div>Job Seeker Step 2 Form</div>;
+          return <RegisterJobSeekerStep2 />;
         case 3:
-          return <div>Job Seeker Step 3 Form</div>;
-        case 4:
-          return <div>Job Seeker Step 4 Form</div>;
+          return <RegisterJobSeekerStep3 closeModal={onHide} />;
       }
     }
 
@@ -103,13 +106,7 @@ export default function RegistrationModal({
         closeButton={false}
       >
         {currentStep !== 1 && (
-          <Button
-            variant="muted"
-            onClick={() => {
-              if (formType === "employer") dispatch(goBackEmployer());
-              if (formType === "superVisory") dispatch(goBackSuperVisory());
-            }}
-          >
+          <Button variant="muted" onClick={handleGoBack}>
             <ArrowLeft />
           </Button>
         )}
@@ -119,7 +116,7 @@ export default function RegistrationModal({
       </Modal.Header>
 
       <Modal.Title className="text-center fw-bold mb-3 mt-2">
-        <h3 className="mb-3 fw-bold">{t("title")}</h3>
+        <h3 className="mb-3 fw-bold">{renderTitle()}</h3>
         <ProgressStepCount
           currentStep={currentStep}
           stepCount={formType === "jobSeeker" ? [1, 2, 3] : [1, 2, 3, 4]}

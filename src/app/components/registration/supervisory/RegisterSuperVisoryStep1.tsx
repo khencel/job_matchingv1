@@ -8,6 +8,7 @@ import {
 import { useTranslations } from "next-intl";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import Swal from "sweetalert2";
 
 const RegisterSuperVisoryStep1 = () => {
   const t = useTranslations("registerSuperVisoryStep1");
@@ -25,13 +26,29 @@ const RegisterSuperVisoryStep1 = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
+  const [error, setError] = useState<{ [name: string]: boolean }>({});
 
   useEffect(() => {
     setData(accountInfo);
   }, [accountInfo]);
 
+  const isEmailValid = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const isPasswordValid = (password: string): boolean => {
+    return password.length >= 8;
+  };
+
+  const isPasswordMatch = (password: string, confirm: string): boolean => {
+    return password === confirm && password.length > 0;
+  };
+
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const { name, value, checked } = e.target;
+    // Clear error for the field on change
+    setError((prevErrors) => ({ ...prevErrors, [name]: false }));
 
     if (name === "rememberMe") {
       setRememberMe(checked);
@@ -44,37 +61,79 @@ const RegisterSuperVisoryStep1 = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // Password length validation
-    if (data.password.length < 8) {
-      alert(t("errors.passwordMinLength")); // sweetalert can be used here
-      return;
-    }
-    // Email format validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(data.email)) {
-      alert(t("errors.invalidEmail")); // sweetalert can be used here
-      return;
-    }
-    // Password match validation
-    if (data.password !== confirmPassword) {
-      alert(t("errors.passwordMismatch")); // sweetalert can be used here
-      return;
-    }
-    // Required fields validation
-    if (
-      data.email.trim() === "" ||
-      data.password.trim() === "" ||
-      confirmPassword.trim() === ""
-    ) {
-      alert(t("errors.fillRequired")); // sweetalert can be used here
+    const form = e.currentTarget as HTMLFormElement;
+
+    // First validation: Check HTML5 form validity
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+
+      const invalidFields = form.querySelectorAll(":invalid");
+      const newErrors: Record<string, boolean> = {};
+
+      invalidFields.forEach((field) => {
+        const input = field as HTMLInputElement;
+        if (input.name) {
+          newErrors[input.name] = true;
+        }
+      });
+      setError(newErrors);
+
+      // Find and focus on first invalid field
+      const firstInvalidField = form.querySelector(":invalid") as HTMLElement;
+      if (firstInvalidField) {
+        firstInvalidField.focus();
+      }
       return;
     }
 
-    dispatch(saveRegSuperVisoryStep1(data)); // Save data to Redux store
-    dispatch(goNextStep(2)); // Proceed to next step
+    // Second validation: Check custom business logic
+    let hasError = false;
+    const validationErrors: Record<string, boolean> = {};
+
+    // Validate email format
+    if (!data.email || !isEmailValid(data.email)) {
+      validationErrors.email = true;
+      hasError = true;
+    }
+
+    // Validate password length
+    if (!data.password || !isPasswordValid(data.password)) {
+      validationErrors.password = true;
+      hasError = true;
+    }
+
+    // Validate password match
+    if (!isPasswordMatch(data.password, confirmPassword)) {
+      validationErrors.confirmPassword = true;
+      hasError = true;
+    }
+
+    if (hasError) {
+      setError(validationErrors);
+      // Focus on first error field
+      const firstErrorField = Object.keys(validationErrors)[0];
+      const errorElement = form.querySelector(
+        `[name="${firstErrorField}"]`
+      ) as HTMLElement;
+      if (errorElement) errorElement.focus();
+      return;
+    }
+
+    // All validations passed - save data and show success message
+    setError({});
+    dispatch(saveRegSuperVisoryStep1(data));
+    Swal.fire({
+      icon: "success",
+      title: "Account Information Submitted",
+      toast: true,
+      position: "top",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    dispatch(goNextStep(2));
   };
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form noValidate onSubmit={handleSubmit}>
       <h4 className="mb-4 text-center">{t("title")}</h4>
       {/* Email Address */}
       <Form.Group className="mb-3" controlId="formEmail">
@@ -87,13 +146,19 @@ const RegisterSuperVisoryStep1 = () => {
           onChange={handleChange}
           autoFocus
           required
+          isInvalid={
+            error.email || (data.email.length > 0 && !isEmailValid(data.email))
+          }
         />
+        <Form.Control.Feedback type="invalid">
+          {t("errors.invalidEmail")}
+        </Form.Control.Feedback>
       </Form.Group>
 
       {/* Password */}
       <Form.Group className="mb-3" controlId="formPassword">
         <Form.Label>{t("labels.password")}</Form.Label>
-        <InputGroup>
+        <InputGroup hasValidation>
           <Form.Control
             type={showPassword ? "text" : "password"}
             name="password"
@@ -101,6 +166,10 @@ const RegisterSuperVisoryStep1 = () => {
             value={data.password}
             onChange={handleChange}
             required
+            isInvalid={
+              error.password ||
+              (data.password.length > 0 && !isPasswordValid(data.password))
+            }
           />
           <Button
             variant="outline-secondary"
@@ -111,6 +180,9 @@ const RegisterSuperVisoryStep1 = () => {
           >
             {showPassword ? <EyeIcon size="16" /> : <EyeOffIcon size="16" />}
           </Button>
+          <Form.Control.Feedback type="invalid">
+            {t("errors.passwordTooShort")}
+          </Form.Control.Feedback>
         </InputGroup>
         <Form.Text className="text-muted">
           {t("helpers.passwordMinLength")}
@@ -120,7 +192,7 @@ const RegisterSuperVisoryStep1 = () => {
       {/* Confirm Password */}
       <Form.Group className="mb-3" controlId="formConfirmPassword">
         <Form.Label>{t("labels.confirmPassword")}</Form.Label>
-        <InputGroup>
+        <InputGroup hasValidation>
           <Form.Control
             type={showConfirmPassword ? "text" : "password"}
             name="confirmPassword"
@@ -128,6 +200,11 @@ const RegisterSuperVisoryStep1 = () => {
             value={confirmPassword}
             onChange={handleChange}
             required
+            isInvalid={
+              error.confirmPassword ||
+              (confirmPassword.length > 0 &&
+                !isPasswordMatch(data.password, confirmPassword))
+            }
           />
           <Button
             variant="outline-secondary"
@@ -146,6 +223,9 @@ const RegisterSuperVisoryStep1 = () => {
               <EyeOffIcon size="16" />
             )}
           </Button>
+          <Form.Control.Feedback type="invalid">
+            {t("errors.passwordMismatch")}
+          </Form.Control.Feedback>
         </InputGroup>
       </Form.Group>
 
@@ -162,7 +242,7 @@ const RegisterSuperVisoryStep1 = () => {
 
       {/* Submit Button */}
       <div className="d-grid">
-        <Form.Text className="fw-light fst-italic text-center text-muted mb-3">
+        <Form.Text className="mb-3">
           {t("helpers.accountConfirmNote")}
         </Form.Text>
         <Button type="submit" variant="primary" className="mb-3 fw-bold p-2">
