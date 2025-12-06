@@ -13,7 +13,7 @@ import "animate.css";
 export default function HomePage() {
   useEffect(() => {
     (async () => {
-      const WOW = (await import("wowjs")).default;
+      const { WOW } = (await import("wowjs"));
       new WOW({ live: false }).init();
     })();
   }, []);

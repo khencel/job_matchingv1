@@ -1,6 +1,10 @@
 {
   "navbar": {
     "home": "ホーム",
+    "ourService": "私たちのサービス",
+    "FAQ": "よくある質問",
+    "signIn": "サインイン",
+    "signUp": "サインアップ",
     "features": "就職支援の機能",
     "findJobs": "仕事を探す",
     "qa": "Q&A",
