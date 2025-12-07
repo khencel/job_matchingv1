@@ -1,7 +1,6 @@
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import BootstrapClient from '../components/BootstrapClient';
-import Navbar from "../components/Navbar";
+import BootstrapClient from '../../components/BootstrapClient';
 import "../../public/css/app.css";
 
 export const metadata = {

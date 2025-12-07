@@ -12,7 +12,7 @@ import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 
 // Industry options for dropdown
-const industries = [
+export const industries = [
   "Technology",
   "Healthcare",
   "Finance",

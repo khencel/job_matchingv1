@@ -4,7 +4,7 @@ import {
   RegisterSuperVisoryStep1Props,
   saveRegSuperVisoryStep1,
   goNextStep,
-} from "../../../../redux/slices/register/superVisorySlice";
+} from "../../../redux/slices/register/superVisorySlice";
 import { useTranslations } from "next-intl";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
