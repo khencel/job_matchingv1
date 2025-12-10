@@ -12,6 +12,7 @@ import { Button, Form, InputGroup } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 
+
 export default function RegisterEmployerStep1() {
   const t = useTranslations("registerEmployerStep1");
   const dispatch = useAppDispatch();

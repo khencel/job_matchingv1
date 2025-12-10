@@ -1,26 +1,24 @@
+"use client";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../public/css/login/app.css"
 import "../../../public/css/app.css"
+import ReduxProvider from "./ReduxProvider"
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
 
-export const metadata = {
-  title: 'Next.js',
-  description: 'A job matching application built with Next.js',
-}
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-        {children}
+        <ReduxProvider>
+          {children}
+          <ToastContainer position="bottom-right" autoClose={3000} />
+        </ReduxProvider>
       </body>
     </html>
-  )
+  );
 }

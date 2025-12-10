@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "src/services/authService.tsx", "src/redux/slices/login/authSlice.ts"  ],
   "exclude": ["node_modules"]
 }
