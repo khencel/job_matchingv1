@@ -10,18 +10,30 @@ const FindJobPage = () => {
     <div>
       <Navbar />
       <JobSearchFiler />
-      <Container>
-        <Row>
-          <Col sm={3}>
-            <FilterJobs />
+      <Container
+        fluid
+        className="p-0"
+        style={{ height: "100vh", overflow: "hidden" }}
+      >
+        <Row className="h-100 g-0">
+          <Col
+            sm={3}
+            className="bg-light border-end"
+            style={{ height: "100%", overflowY: "auto" }}
+          >
+            <div className="p-4">
+              <FilterJobs />
+            </div>
           </Col>
-          <Col>
-            <JobPost />
-            <JobPost />
-            <JobPost />
-            <JobPost />
-            <JobPost />
-            <JobPost />
+          <Col style={{ height: "100%", overflowY: "auto" }}>
+            <div>
+              <JobPost />
+              <JobPost />
+              <JobPost />
+              <JobPost />
+              <JobPost />
+              <JobPost />
+            </div>
           </Col>
         </Row>
       </Container>
