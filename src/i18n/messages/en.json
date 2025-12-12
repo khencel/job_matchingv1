@@ -415,5 +415,31 @@
     "buttons": {
       "submit": "Submit Registration"
     }
+  },
+  "jobDescriptionPage": {
+    "headings": {
+      "description": "Description",
+      "responsibilities": "Responsibilities",
+      "whoYouAre": "Who You Are",
+      "niceToHaves": "Nice-To-Haves",
+      "aboutThisRole": "About this role",
+      "categories": "Categories",
+      "requiredSkills": "Required Skills",
+      "perksAndBenefits": "Perks & Benefits",
+      "fullHealthcare": "Full Healthcare",
+      "jobSupport": "Job Support",
+      "relatedJobs": "Related Jobs"
+    },
+    "buttons": {
+      "apply": "Apply",
+      "showAllJobs": "Show all jobs",
+      "readMoreAboutUs": "Read more about us"
+    },
+    "labels": {
+      "applyBefore": "Apply Before",
+      "jobPostedOn": "Job Posted on",
+      "jobType": "Job Type",
+      "salary": "Salary"
+    }
+    }
   }
-}

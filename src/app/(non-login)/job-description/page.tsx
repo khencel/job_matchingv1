@@ -1,3 +1,5 @@
+"use client";
+
 import Footer from "@/components/Footer";
 import JobPost from "@/components/JobPost";
 import Navbar from "@/components/Navbar";
@@ -12,12 +14,14 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
+import { useTranslations } from "next-intl";
 
 const JobDescriptionPage = () => {
+  const t = useTranslations("jobDescriptionPage");
+  // All the data will be fetched from the database
   return (
     <div>
       <Navbar />
-
       {/* Title */}
       <div className="w-100 py-5 bg-body-secondary">
         <CardBody className="d-flex w-75 bg-body p-3 m-auto justify-content-between align-items-center">
@@ -44,7 +48,7 @@ const JobDescriptionPage = () => {
               style={{ borderRight: "1px solid #ccc", height: "36px" }}
               className="mx-3"
             ></div>
-            <Button className="btn-primary-custom">Apply</Button>
+            <Button className="btn-primary-custom">{t("buttons.apply")}</Button>
           </div>
         </CardBody>
       </div>
@@ -57,7 +61,7 @@ const JobDescriptionPage = () => {
           <Col md={8} className="p-5">
             <div className="d-flex flex-column gap-3">
               <div>
-                <h4>Description</h4>
+                <h4>{t("headings.description")}</h4>
                 <p>
                   We looking for Social Media Marketing expert to help manage
                   our online networks. You will be responsible for monitoring
@@ -67,7 +71,7 @@ const JobDescriptionPage = () => {
                 </p>
               </div>
               <div>
-                <h4>Responsibilities</h4>
+                <h4>{t("headings.responsibilities")}</h4>
                 <p>
                   -Community engagement to ensure that is supported and actively
                   represented online
@@ -83,7 +87,7 @@ const JobDescriptionPage = () => {
                 <p>-Engage with online communities</p>
               </div>
               <div>
-                <h4>Who You Are</h4>
+                <h4>{t("headings.whoYouAre")}</h4>
                 <p>
                   -You get energy from people and building the ideal work
                   environment
@@ -101,7 +105,7 @@ const JobDescriptionPage = () => {
                 </p>
               </div>
               <div>
-                <h4>Nice-To-Haves</h4>
+                <h4>{t("headings.niceToHaves")}</h4>
                 <p>-Fluent in English</p>
                 <p>-Project management skills</p>
                 <p>-Copy editing skills</p>
@@ -112,11 +116,11 @@ const JobDescriptionPage = () => {
           <Col className="p-5">
             {/* About Grid */}
             <Container>
-              <h4 className="mb-4">About this role</h4>
+              <h4 className="mb-4">{t("headings.aboutThisRole")}</h4>
               {/* About > Row 1 */}
               <Row>
                 <Col>
-                  <p className="fw-light">Apply Before</p>
+                  <p className="fw-light">{t("labels.applyBefore")}</p>
                 </Col>
                 <Col>
                   <p className="fw-medium text-end">December 1, 2025</p>
@@ -125,7 +129,7 @@ const JobDescriptionPage = () => {
               {/* About > Row 2 */}
               <Row>
                 <Col>
-                  <p className="fw-light">Job Posted on</p>
+                  <p className="fw-light">{t("labels.jobPostedOn")}</p>
                 </Col>
                 <Col>
                   <p className="fw-medium text-end">November 28, 2025</p>
@@ -134,7 +138,7 @@ const JobDescriptionPage = () => {
               {/* About > Row 3 */}
               <Row>
                 <Col>
-                  <p className="fw-light">Job Type</p>
+                  <p className="fw-light">{t("labels.jobType")}</p>
                 </Col>
                 <Col>
                   <p className="fw-medium text-end">Full-Time</p>
@@ -143,7 +147,7 @@ const JobDescriptionPage = () => {
               {/* About > Row 4 */}
               <Row>
                 <Col>
-                  <p className="fw-light">Salary</p>
+                  <p className="fw-light">{t("labels.salary")}</p>
                 </Col>
                 <Col>
                   <p className="fw-medium text-end">18,000</p>
@@ -151,9 +155,9 @@ const JobDescriptionPage = () => {
               </Row>
             </Container>
             <hr />
-            <h4>Categories</h4>
+            <h4>{t("headings.categories")}</h4>
             <hr />
-            <h4>Required Skills</h4>
+            <h4>{t("headings.requiredSkills")}</h4>
           </Col>
         </Row>
         {/* Main Row 2 */}
@@ -163,32 +167,32 @@ const JobDescriptionPage = () => {
 
       {/* Perks & Benefits Grid */}
       <Container fluid className="d-flex flex-column gap-5 px-5 py-3">
-        <h4>Perks & Benefits</h4>
+        <h4>{t("headings.perksAndBenefits")}</h4>
         {/* Row 1 */}
         <Row>
           <Col md={3}>
-            <h5>Full Healthcare</h5>
+            <h5>{t("headings.fullHealthcare")}</h5>
             <p>
               We believe in thriving communities and that starts with our team
               being happy and healthy.
             </p>
           </Col>
           <Col md={3}>
-            <h5>Full Healthcare</h5>
+            <h5>{t("headings.fullHealthcare")}</h5>
             <p>
               We believe in thriving communities and that starts with our team
               being happy and healthy.
             </p>
           </Col>
           <Col md={3}>
-            <h5>Full Healthcare</h5>
+            <h5>{t("headings.fullHealthcare")}</h5>
             <p>
               We believe in thriving communities and that starts with our team
               being happy and healthy.
             </p>
           </Col>
           <Col md={3}>
-            <h5>Full Healthcare</h5>
+            <h5>{t("headings.fullHealthcare")}</h5>
             <p>
               We believe in thriving communities and that starts with our team
               being happy and healthy.
@@ -198,7 +202,7 @@ const JobDescriptionPage = () => {
         {/* Row 2 */}
         <Row>
           <Col md={3}>
-            <h5>Full Healthcare</h5>
+            <h5>{t("headings.fullHealthcare")}</h5>
             <p>
               We believe in thriving communities and that starts with our team
               being happy and healthy.
@@ -212,7 +216,7 @@ const JobDescriptionPage = () => {
             </p>
           </Col>
           <Col md={3}>
-            <h5>Full Healthcare</h5>
+            <h5>{t("headings.fullHealthcare")}</h5>
             <p>
               We believe in thriving communities and that starts with our team
               being happy and healthy.
@@ -237,12 +241,12 @@ const JobDescriptionPage = () => {
                   alt="."
                 ></Image>
                 <div>
-                  <h3>Job Support</h3>
+                  <h3>{t("headings.jobSupport")}</h3>
                   <Button
                     variant="link"
                     className="p-0 pe-2 text-decoration-none"
                   >
-                    Read more about us
+                    {t("buttons.readMoreAboutUs")}
                     <MoveRightIcon size="16px" className="text-primary ms-2" />
                   </Button>
                 </div>
@@ -284,9 +288,9 @@ const JobDescriptionPage = () => {
       </Container>
       <hr />
       <div className="d-flex px-5 mt-5 mb-3 justify-content-between">
-        <h3 className="fw-semibold">Related Jobs</h3>
+        <h3 className="fw-semibold">{t("headings.relatedJobs")}</h3>
         <Button variant="outline-primary" className="text-decoration-none px-3">
-          Show all jobs
+          {t("buttons.showAllJobs")}
           <MoveRightIcon size="16px" className="text-primary ms-2" />
         </Button>
       </div>
