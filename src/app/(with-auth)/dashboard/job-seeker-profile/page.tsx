@@ -1,4 +1,4 @@
-import React from "react";
+"use client"
 import Navbar from "@/components/Navbar";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import {
