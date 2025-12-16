@@ -8,7 +8,6 @@ import {
   FoldersIcon,
   UserCircle,
   FolderHeartIcon,
-  MessageSquareIcon,
 } from "lucide-react";
 import Notifications from "../../../../components/Notifications";
 import SavedJobs from "../../../../components/jobSeekerProfile/SavedJobs";
@@ -55,10 +54,7 @@ const JobSeekerProfilePage = () => {
               </Nav>
             </div>
             {/* Content */}
-            <div
-              className="flex-grow-1 p-4"
-              style={{ overflowY: "auto" }} // Allows main content to scroll independently
-            >
+            <div className="flex-grow-1 p-4" style={{ overflowY: "auto" }}>
               <Tab.Content>
                 <Tab.Pane eventKey="job-seeker-profile">
                   <EditJobSeeker />
