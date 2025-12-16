@@ -16,7 +16,7 @@ const EditJobSeeker = () => {
   return (
     <Container
       fluid
-      className="d-flex flex-column gap-3 card p-5 border-0 shadow-sm bg-body-tertiary align-items-center"
+      className="d-flex flex-column gap-3 p-5 border-0 align-items-center"
     >
       <Row>
         <Col md={6}>
@@ -106,15 +106,15 @@ const EditJobSeeker = () => {
         </Row>
         <Row>
           <Form.Label>Change Password</Form.Label>
-          <Col>
+          <Col md={4}>
             <Form.Label className="text-muted">Current Password</Form.Label>
             <Form.Control type="textarea" placeholder="" />
           </Col>
-          <Col>
+          <Col md={4}>
             <Form.Label className="text-muted">New Password</Form.Label>
             <Form.Control type="textarea" placeholder="" />
           </Col>
-          <Col className="d-flex justify-content-start align-items-end">
+          <Col md={4} className="d-flex justify-content-start align-items-end">
             <Button className="rounded-pill" variant="outline-primary">
               Update Password
             </Button>
@@ -122,18 +122,19 @@ const EditJobSeeker = () => {
         </Row>
       </Container>
       <hr className="w-100" />
-      <Container fluid>
-        <h6 className="p-0 m-0 mb-2 fw-semibold">Upload Resume</h6>
-        <Container
-          fluid
-          className="d-flex justify-content-center align-items-center gap-3"
-        >
-          <Button className="rounded-pill">Upload Resume</Button>
-          <Button variant="outline-primary" className="rounded-pill">
-            Create Resume
-          </Button>
-        </Container>
-      </Container>
+      <Row className="w-100">
+        <Col md={2}>
+          <h6 className="fw-semibold">Upload Resume</h6>
+        </Col>
+        <Col md={10}>
+          <div className="d-flex gap-3 align-content-center justify-content-center flex-wrap w-100">
+            <Button className="rounded-pill">Upload Resume</Button>
+            <Button variant="outline-primary" className="rounded-pill">
+              Create Resume
+            </Button>
+          </div>
+        </Col>
+      </Row>
       <hr className="w-100" />
       <Button className="btn-primary-custom">Save Profile</Button>
     </Container>

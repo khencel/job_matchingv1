@@ -1,57 +1,64 @@
 "use client";
-import { Col, Nav, Row, Tab, Container } from "react-bootstrap";
+import { Nav, Tab } from "react-bootstrap";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EditJobSeeker from "../../../../components/jobSeekerProfile/ProfileJobSeeker";
-import { BellIcon, FoldersIcon, UserCircle } from "lucide-react";
+import {
+  BellIcon,
+  FoldersIcon,
+  UserCircle,
+  FolderHeartIcon,
+  MessageSquareIcon,
+} from "lucide-react";
 import Notifications from "../../../../components/Notifications";
+import SavedJobs from "../../../../components/jobSeekerProfile/SavedJobs";
+import AppliedJobs from "../../../../components/jobSeekerProfile/AppliedJobs";
 
 const JobSeekerProfilePage = () => {
   return (
-    <>
-      <Navbar />
-      <Container fluid className="p-5">
-        <Tab.Container id="left-tabs-example" defaultActiveKey="job-seeker-profile">
-          <Row>
-            <Col sm={3} className="px-3">
-              <Container
-                fluid
-                className="p-3 border-0 shadow-sm bg-body-tertiary"
-              >
-                <Nav variant="pills" className="flex-column gap-2">
-                  <Nav.Item>
-                    <Nav.Link eventKey="job-seeker-profile">
-                      <UserCircle /> Profile
-                    </Nav.Link>
-                  </Nav.Item>
-                  <hr className="m-0" />
-                  <Nav.Item>
-                    <Nav.Link eventKey="applied-jobs">
-                      <FoldersIcon /> Applied Jobs
-                    </Nav.Link>
-                  </Nav.Item>
-                  <hr className="m-0" />
-                  <Nav.Item>
-                    <Nav.Link eventKey="notifications">
-                      <BellIcon /> Notifications
-                    </Nav.Link>
-                  </Nav.Item>
-                  <hr className="m-0" />
-                  <Nav.Item>
-                    <Nav.Link eventKey="saved-jobs">
-                      <FoldersIcon /> Saved Jobs
-                    </Nav.Link>
-                  </Nav.Item>
-                  <hr className="m-0" />
-                  <Nav.Item>
-                    <Nav.Link eventKey="messages">
-                      <FoldersIcon /> Messages
-                    </Nav.Link>
-                  </Nav.Item>
-                </Nav>
-              </Container>
-            </Col>
-            <Col sm={9}>
+    <div>
+      <div className="vh-100 d-flex flex-column">
+        {/* Navbar */}
+        <Navbar />
+        <div className="d-flex flex-grow-1" style={{ overflow: "hidden" }}>
+          <Tab.Container
+            id="left-tabs-example"
+            defaultActiveKey="job-seeker-profile"
+          >
+            {/* Sidebar */}
+            <div className="bg-light border-end p-4 shadow-sm w-25">
+              <h3 className="fw-bold fs-3 mb-5 text-primary">Job Seeker</h3>
+              <Nav variant="pills" className="flex-column gap-4">
+                <Nav.Item>
+                  <Nav.Link
+                    eventKey="job-seeker-profile"
+                    className="d-flex gap-3"
+                  >
+                    <UserCircle /> Profile
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="applied-jobs" className="d-flex gap-3">
+                    <FoldersIcon /> Applied Jobs
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="notifications" className="d-flex gap-3">
+                    <BellIcon /> Notifications
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="saved-jobs" className="d-flex gap-3">
+                    <FolderHeartIcon /> Saved Jobs
+                  </Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </div>
+            {/* Content */}
+            <div
+              className="flex-grow-1 p-4"
+              style={{ overflowY: "auto" }} // Allows main content to scroll independently
+            >
               <Tab.Content>
                 <Tab.Pane eventKey="job-seeker-profile">
                   <EditJobSeeker />
@@ -59,16 +66,19 @@ const JobSeekerProfilePage = () => {
                 <Tab.Pane eventKey="notifications">
                   <Notifications />
                 </Tab.Pane>
-                <Tab.Pane eventKey="applied-jobs">applied-jobs</Tab.Pane>
-                <Tab.Pane eventKey="saved-jobs">saved-jobs</Tab.Pane>
-                <Tab.Pane eventKey="messages">messages</Tab.Pane>
+                <Tab.Pane eventKey="applied-jobs">
+                  <AppliedJobs />
+                </Tab.Pane>
+                <Tab.Pane eventKey="saved-jobs">
+                  <SavedJobs />
+                </Tab.Pane>
               </Tab.Content>
-            </Col>
-          </Row>
-        </Tab.Container>
-      </Container>
+            </div>
+          </Tab.Container>
+        </div>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
