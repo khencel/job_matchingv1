@@ -14,16 +14,10 @@ const EditJobSeeker = () => {
   //   }
 
   return (
-    <Container fluid className="d-flex flex-column gap-3 card p-5 border-0 shadow-sm bg-body-tertiary">
-      <Row>
-        <Col>
-          <h5 className="p-0 m-0 mb-2 fw-semibold">Basic Information</h5>
-          <p className="fs-6 p-0 m-0">
-            This is your personal information that you can update anytime.
-          </p>
-        </Col>
-      </Row>
-      <hr />
+    <Container
+      fluid
+      className="d-flex flex-column gap-3 card p-5 border-0 shadow-sm bg-body-tertiary align-items-center"
+    >
       <Row>
         <Col md={6}>
           <h6 className="p-0 m-0 mb-2 fw-semibold">Profile Photo</h6>
@@ -42,12 +36,10 @@ const EditJobSeeker = () => {
           </Button>
         </Col>
       </Row>
-      <hr />
-      <Container className="p-0">
-        <Container fluid className="p-0 m-0">
-          <h6 className="p-0 m-0 mb-2 fw-semibold">Personal Details</h6>
-        </Container>
-        <Row className="mt-4">
+      <hr className="w-100" />
+      <Container className="p-0 d-flex flex-column gap-4">
+        <h6 className="p-0 m-0 mb-2 fw-semibold">Personal Details</h6>
+        <Row>
           <Col md={4}>
             <Form.Group>
               <Form.Label>First Name</Form.Label>
@@ -68,7 +60,7 @@ const EditJobSeeker = () => {
             </Form.Group>
           </Col>
         </Row>
-        <Row className="mt-4">
+        <Row>
           <Col md={4}>
             <Form.Group>
               <Form.Label>Phone Number</Form.Label>
@@ -88,15 +80,53 @@ const EditJobSeeker = () => {
             </Form.Group>
           </Col>
         </Row>
+        <Row>
+          <Col>
+            <Form.Group>
+              <Form.Label>Experiences</Form.Label>
+              <Form.Control type="textarea" placeholder="" />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Group>
+              <Form.Label>Education</Form.Label>
+              <Form.Control type="textarea" placeholder="" />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Group>
+              <Form.Label>Skills</Form.Label>
+              <Form.Control type="textarea" placeholder="" />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Form.Label>Change Password</Form.Label>
+          <Col>
+            <Form.Label className="text-muted">Current Password</Form.Label>
+            <Form.Control type="textarea" placeholder="" />
+          </Col>
+          <Col>
+            <Form.Label className="text-muted">New Password</Form.Label>
+            <Form.Control type="textarea" placeholder="" />
+          </Col>
+          <Col className="d-flex justify-content-start align-items-end">
+            <Button className="rounded-pill" variant="outline-primary">
+              Update Password
+            </Button>
+          </Col>
+        </Row>
       </Container>
-      <hr />
+      <hr className="w-100" />
       <Container fluid>
-        <Container fluid className="d-flex gap-5 p-0 m-0 mb-3">
-          <h6 className="p-0 m-0 mb-2 fw-semibold">Upload Resume</h6>
-        </Container>
+        <h6 className="p-0 m-0 mb-2 fw-semibold">Upload Resume</h6>
         <Container
           fluid
-          className="d-flex justify-content-start align-items-center gap-3"
+          className="d-flex justify-content-center align-items-center gap-3"
         >
           <Button className="rounded-pill">Upload Resume</Button>
           <Button variant="outline-primary" className="rounded-pill">
@@ -104,8 +134,8 @@ const EditJobSeeker = () => {
           </Button>
         </Container>
       </Container>
-      <hr />
-      <Button className="btn-primary-custom w-25 ms-auto">Save Profile</Button>
+      <hr className="w-100" />
+      <Button className="btn-primary-custom">Save Profile</Button>
     </Container>
   );
 };
