@@ -3,11 +3,11 @@
 import Banner from "../../components/Banner";
 import Footer from "../../components/Footer";
 import JobPost from "../../components/JobPost";
-import Registration from "../../components/Registration";
 import ServiceContent from "../../components/ServiceContent";
-import About from '../../components/About';
+import About from "../../components/About";
 import Navbar from "@/components/Navbar";
 import JobSearchFiler from "@/components/JobSearchFilter";
+import Registration from "../../components/registration/Registration";
 
 import "animate.css";
 import { useEffect } from "react";
@@ -31,7 +31,7 @@ export default function HomePage() {
       <hr className="mt-5 w-75 mx-auto" />
       <JobPost />
       <hr className="mt-5 w-75 mx-auto" />
-      <About/>
+      <About />
       <Footer />
     </div>
   );

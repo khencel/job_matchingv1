@@ -2,7 +2,7 @@
 import { Nav, Tab } from "react-bootstrap";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import EditJobSeeker from "../../../../components/jobSeekerProfile/ProfileJobSeeker";
+import EditJobSeeker from "../../../../components/jobSeekerDashboard/ProfileJobSeeker";
 import {
   BellIcon,
   FoldersIcon,
@@ -10,8 +10,8 @@ import {
   FolderHeartIcon,
 } from "lucide-react";
 import Notifications from "../../../../components/Notifications";
-import SavedJobs from "../../../../components/jobSeekerProfile/SavedJobs";
-import AppliedJobs from "../../../../components/jobSeekerProfile/AppliedJobs";
+import SavedJobs from "../../../../components/jobSeekerDashboard/SavedJobs";
+import AppliedJobs from "../../../../components/jobSeekerDashboard/AppliedJobs";
 
 const JobSeekerProfilePage = () => {
   return (

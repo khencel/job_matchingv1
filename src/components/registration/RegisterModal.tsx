@@ -14,9 +14,9 @@ import RegisterSuperVisoryStep1 from "./supervisory/RegisterSuperVisoryStep1";
 import RegisterSupervisoryStep2 from "./supervisory/RegisterSupervisoryStep2";
 import RegisterSuperVisoryStep3 from "./supervisory/RegisterSuperVisoryStep3";
 import RegisterSuperVisoryStep4 from "./supervisory/RegisterSuperVisoryStep4";
-import RegisterJobSeekerStep1 from "./jobSeeker/RegisterJobSeekerStep1";
-import RegisterJobSeekerStep2 from "./jobSeeker/RegisterJobSeekerStep2";
-import RegisterJobSeekerStep3 from "./jobSeeker/RegisterJobSeekerStep3";
+import RegisterJobSeekerStep1 from "./jobSeeker/RegisterJobSeekerStep2";
+import RegisterJobSeekerStep2 from "./jobSeeker/RegisterJobSeekerStep3";
+import RegisterJobSeekerStep3 from "./jobSeeker/RegisterJobSeekerStep4";
 import { goBackJobSeeker } from "@/redux/slices/register/jobSeekerSlice";
 
 interface RegistrationModalProps {

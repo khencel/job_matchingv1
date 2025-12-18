@@ -10,14 +10,16 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
+import { RootState } from "@/redux/store";
 import { RegistrationStep1 } from "@/redux/slices/register/superVisorySlice";
 
-export default function RegisterEmployerStep1() {
-  const t = useTranslations("registerEmployerStep1");
+export default function Step1Register(
+  translations: string,
+  selector: (state: RootState) => RegistrationStep1
+) {
+  const t = useTranslations(translations);
   const dispatch = useAppDispatch();
-  const accountInfo = useAppSelector(
-    (s) => s.registerEmployer.registerEmployerData.accountInfo
-  );
+  const accountInfo = useAppSelector(selector);
 
   // State management for password visibility and form data
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -116,7 +118,9 @@ export default function RegisterEmployerStep1() {
     if (hasError) {
       setError(validationErrors);
       const firstErrorField = Object.keys(validationErrors)[0];
-      const errorElement = form.querySelector(`[name="${firstErrorField}"]`) as HTMLElement;
+      const errorElement = form.querySelector(
+        `[name="${firstErrorField}"]`
+      ) as HTMLElement;
       if (errorElement) errorElement.focus();
       return;
     }
