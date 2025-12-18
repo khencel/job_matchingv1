@@ -4,9 +4,9 @@ import { useState, FormEvent } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
-  saveRegJobSeekerStep3,
+  RegisterJobSeekerStep4Data,
   registerJobSeekerSubmit,
-  RegisterJobSeekerStep3Data,
+  saveRegJobSeekerStep4,
 } from "@/redux/slices/register/jobSeekerSlice";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
@@ -15,17 +15,17 @@ interface RegisterJobSeekerStep3Props {
   closeModal: () => void;
 }
 
-export default function RegisterJobSeekerStep3({
+export default function RegisterJobSeekerStep4({
   closeModal,
 }: RegisterJobSeekerStep3Props) {
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((s) => s.registerJobSeeker);
-  const t = useTranslations("registerJobSeekerStep3");
+  const t = useTranslations("registerJobSeekerStep4");
   const step3Data = useAppSelector(
     (s) => s.registerJobSeeker.registerJobSeekerData.termsAndConditions
   );
 
-  const [data, setData] = useState<RegisterJobSeekerStep3Data>(
+  const [data, setData] = useState<RegisterJobSeekerStep4Data>(
     step3Data || {
       acceptTerms: false,
       acceptPrivacyPolicy: false,
@@ -41,7 +41,7 @@ export default function RegisterJobSeekerStep3({
 
     // update data
     setData((prev) => ({ ...prev, [name]: checked }));
-    dispatch(saveRegJobSeekerStep3({ ...data, [name]: checked }));
+    dispatch(saveRegJobSeekerStep4({ ...data, [name]: checked }));
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -87,7 +87,7 @@ export default function RegisterJobSeekerStep3({
     }
 
     setError({});
-    dispatch(saveRegJobSeekerStep3(data));
+    dispatch(saveRegJobSeekerStep4(data));
     try {
       // Final submit thunk (simulated API)
       await dispatch(registerJobSeekerSubmit());

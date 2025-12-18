@@ -1,40 +1,25 @@
 "use client";
 import Swal from "sweetalert2";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   goNextStep,
-  saveRegJobSeekerStep1,
-  RegisterJobSeekerStep1Data,
+  RegisterJobSeekerStep2Data,
+  saveRegJobSeekerStep2,
 } from "@/redux/slices/register/jobSeekerSlice";
 
-const RegisterJobSeekerStep1 = () => {
-  const t = useTranslations("registerJobSeekerStep1");
+const RegisterJobSeekerStep2 = () => {
+  const t = useTranslations("registerJobSeekerStep2");
   const dispatch = useAppDispatch();
 
-  const accountInfo = useAppSelector(
-    (state) => state.registerJobSeeker?.registerJobSeekerData?.accountInfo
+  const jobSeekerData = useAppSelector(
+    (state) => state.registerJobSeeker?.registerJobSeekerData?.jobSeekerData
   );
 
   const [error, setError] = useState<{ [name: string]: boolean }>({});
-  const [data, setData] = useState<RegisterJobSeekerStep1Data>({
-    nationality: "",
-    gender: null,
-    currentPlaceResidence: "",
-    birthdate: "",
-    visaStatus: null,
-    highestEducation: null,
-    japaneseLevel: null,
-    email: "",
-    contactNo: "",
-    facebook: "",
-  });
-
-  useEffect(() => {
-    setData(accountInfo);
-  }, [accountInfo]);
+  const [data, setData] = useState<RegisterJobSeekerStep2Data>(jobSeekerData);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -130,7 +115,10 @@ const RegisterJobSeekerStep1 = () => {
     }
 
     // Validate current place of residence
-    if (!data.currentPlaceResidence || data.currentPlaceResidence.trim().length < 2) {
+    if (
+      !data.currentPlaceResidence ||
+      data.currentPlaceResidence.trim().length < 2
+    ) {
       validationErrors.currentPlaceResidence = true;
       hasError = true;
     }
@@ -183,7 +171,9 @@ const RegisterJobSeekerStep1 = () => {
     if (hasError) {
       setError(validationErrors);
       const firstErrorField = Object.keys(validationErrors)[0];
-      const errorElement = form.querySelector(`[name="${firstErrorField}"]`) as HTMLElement;
+      const errorElement = form.querySelector(
+        `[name="${firstErrorField}"]`
+      ) as HTMLElement;
       if (errorElement) errorElement.focus();
       return;
     }
@@ -198,8 +188,8 @@ const RegisterJobSeekerStep1 = () => {
       showConfirmButton: false,
       timer: 1500,
     });
-    dispatch(saveRegJobSeekerStep1(data));
-    dispatch(goNextStep(2));
+    dispatch(saveRegJobSeekerStep2(data));
+    dispatch(goNextStep(3));
   };
 
   const birthdateInvalid =
@@ -216,8 +206,7 @@ const RegisterJobSeekerStep1 = () => {
     (data.contactNo.length > 0 && !isContactValid(data.contactNo));
 
   const facebookInvalid =
-    error.facebook ||
-    (!!data.facebook && !isFacebookUrlValid(data.facebook));
+    error.facebook || (!!data.facebook && !isFacebookUrlValid(data.facebook));
 
   return (
     <Form noValidate onSubmit={handleSubmit}>
@@ -607,4 +596,4 @@ const RegisterJobSeekerStep1 = () => {
   );
 };
 
-export default RegisterJobSeekerStep1;
+export default RegisterJobSeekerStep2;

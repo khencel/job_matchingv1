@@ -1,264 +1,266 @@
 "use client";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import {
-  saveRegEmployerStep1,
-  goNextStep,
-} from "@/redux/slices/register/employerSlice";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
-import { RootState } from "@/redux/store";
 import { RegistrationStep1 } from "@/redux/slices/register/superVisorySlice";
+import { RootState } from "@/redux/store";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
-export default function Step1Register(
-  translations: string,
-  selector: (state: RootState) => RegistrationStep1
-) {
-  const t = useTranslations(translations);
-  const dispatch = useAppDispatch();
-  const accountInfo = useAppSelector(selector);
+interface Step1RegisterProps {
+    selector: (state: RootState) => RegistrationStep1;
+    saveAction: ActionCreatorWithPayload<RegistrationStep1>;
+    goNextStepAction: ActionCreatorWithPayload<1 | 2 | 3 | 4>;
+}
 
-  // State management for password visibility and form data
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [rememberMe, setRememberMe] = useState<boolean>(false);
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] =
-    useState<boolean>(false);
-  const [error, setError] = useState<{ [name: string]: boolean }>({});
-  const [data, setData] = useState<RegistrationStep1>(accountInfo);
+export default function Step1Register({
+    selector,
+    saveAction,
+    goNextStepAction,
+}: Step1RegisterProps) {
+    const t = useTranslations("Step1Register");
+    const dispatch = useAppDispatch();
+    const accountInfo = useAppSelector(selector);
 
-  // Handle input changes and update Redux store
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value, checked } = e.target;
-    // Reset error for specific field when the input changes
-    setError((prevErrors) => ({
-      ...prevErrors,
-      [name]: false,
-    }));
+    // State management for password visibility and form data
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
+    const [rememberMe, setRememberMe] = useState<boolean>(false);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [showConfirmPassword, setShowConfirmPassword] =
+        useState<boolean>(false);
+    const [error, setError] = useState<{ [name: string]: boolean }>({});
+    const [data, setData] = useState<RegistrationStep1>(accountInfo);
 
-    if (name === "confirmPassword") {
-      setConfirmPassword(value);
-    } else if (name === "rememberMe") {
-      setRememberMe(checked);
-    } else {
-      // Update email or password in data
-      setData({
-        ...data,
-        [name]: value,
-      });
-      dispatch(saveRegEmployerStep1({ ...data, [name]: value }));
-    }
-  };
+    // Handle input changes and update Redux store
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value, checked } = e.target;
+        // Reset error for specific field when the input changes
+        setError((prevErrors) => ({
+            ...prevErrors,
+            [name]: false,
+        }));
 
-  // Validate email format using regex
-  const isEmailValid = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  // Validate password requirements (minimum 8 characters)
-  const isPasswordValid = (password: string): boolean => {
-    return password.length >= 8;
-  };
-
-  // Validate password match
-  const isPasswordMatch = (password: string, confirm: string): boolean => {
-    return password === confirm && password.length > 0;
-  };
-
-  // Handle form submission with validation
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const form = e.currentTarget as HTMLFormElement;
-
-    // First validation: Check HTML5 form validity
-    if (form.checkValidity() === false) {
-      e.stopPropagation();
-
-      const invalidFields = form.querySelectorAll(":invalid");
-      const newErrors: Record<string, boolean> = {};
-
-      invalidFields.forEach((field) => {
-        const input = field as HTMLInputElement;
-        if (input.name) {
-          newErrors[input.name] = true;
+        if (name === "confirmPassword") {
+            setConfirmPassword(value);
+        } else if (name === "rememberMe") {
+            setRememberMe(checked);
+        } else {
+            // Update email or password in data
+            setData({
+                ...data,
+                [name]: value,
+            });
+            dispatch(saveAction({ ...data, [name]: value }));
         }
-      });
-      setError(newErrors);
-      // Find and focus on first invalid field
-      const firstInvalidField = form.querySelector(":invalid") as HTMLElement;
-      if (firstInvalidField) {
-        firstInvalidField.focus();
-      }
-      return;
-    }
+    };
 
-    // Second validation: Check custom business logic
-    let hasError = false;
-    const validationErrors: Record<string, boolean> = {};
+    // Validate email format using regex
+    const isEmailValid = (email: string): boolean => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
 
-    if (!data.email || !isEmailValid(data.email)) {
-      validationErrors.email = true;
-      hasError = true;
-    }
+    // Validate password requirements (minimum 8 characters)
+    const isPasswordValid = (password: string): boolean => {
+        return password.length >= 8;
+    };
 
-    if (!data.password || !isPasswordValid(data.password)) {
-      validationErrors.password = true;
-      hasError = true;
-    }
+    // Validate password match
+    const isPasswordMatch = (password: string, confirm: string): boolean => {
+        return password === confirm && password.length > 0;
+    };
 
-    if (!confirmPassword || !isPasswordMatch(data.password, confirmPassword)) {
-      validationErrors.confirmPassword = true;
-      hasError = true;
-    }
+    // Handle form submission with validation
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        const form = e.currentTarget as HTMLFormElement;
 
-    if (hasError) {
-      setError(validationErrors);
-      const firstErrorField = Object.keys(validationErrors)[0];
-      const errorElement = form.querySelector(
-        `[name="${firstErrorField}"]`
-      ) as HTMLElement;
-      if (errorElement) errorElement.focus();
-      return;
-    }
+        // First validation: Check HTML5 form validity
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
 
-    // All validations passed - save data and show success message
-    setError({});
-    dispatch(saveRegEmployerStep1(data));
-    // Show success toast notification
-    Swal.fire({
-      icon: "success",
-      title: "Account Information Submitted",
-      toast: true,
-      position: "top",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-    dispatch(goNextStep(2));
-  };
+            const invalidFields = form.querySelectorAll(":invalid");
+            const newErrors: Record<string, boolean> = {};
 
-  return (
-    <Form noValidate onSubmit={handleSubmit}>
-      <h4 className="mb-4 text-center">{t("title")}</h4>
-
-      {/* Email Address Field */}
-      <Form.Group className="mb-3" controlId="formEmail">
-        <Form.Label>{t("labels.email")}</Form.Label>
-        <Form.Control
-          required
-          type="email"
-          name="email"
-          placeholder={t("placeholders.enterEmail")}
-          value={data.email}
-          onChange={handleChange}
-          autoFocus
-          isInvalid={
-            error.email || (data.email.length > 0 && !isEmailValid(data.email))
-          }
-        />
-        <Form.Control.Feedback type="invalid">
-          {t("errors.invalidEmail")}
-        </Form.Control.Feedback>
-      </Form.Group>
-
-      {/* Password Field */}
-      <Form.Group className="mb-3" controlId="formPassword">
-        <Form.Label>{t("labels.password")}</Form.Label>
-        <InputGroup hasValidation>
-          <Form.Control
-            required
-            type={showPassword ? "text" : "password"}
-            name="password"
-            placeholder={t("placeholders.enterPassword")}
-            value={data.password}
-            onChange={handleChange}
-            isInvalid={
-              error.password ||
-              (data.password.length > 0 && !isPasswordValid(data.password))
+            invalidFields.forEach((field) => {
+                const input = field as HTMLInputElement;
+                if (input.name) {
+                    newErrors[input.name] = true;
+                }
+            });
+            setError(newErrors);
+            // Find and focus on first invalid field
+            const firstInvalidField = form.querySelector(":invalid") as HTMLElement;
+            if (firstInvalidField) {
+                firstInvalidField.focus();
             }
-          />
-          <Button
-            variant="outline-secondary"
-            size="sm"
-            type="button"
-            onClick={() => setShowPassword((prev) => !prev)}
-            aria-label={showPassword ? "Hide password" : "Show password"}
-          >
-            {showPassword ? <EyeIcon size="16" /> : <EyeOffIcon size="16" />}
-          </Button>
-          <Form.Control.Feedback type="invalid">
-            {t("errors.passwordTooShort")}
-          </Form.Control.Feedback>
-        </InputGroup>
-        <Form.Text className="text-muted">
-          {t("helpers.passwordMinLength")}
-        </Form.Text>
-      </Form.Group>
+            return;
+        }
 
-      {/* Confirm Password Field */}
-      <Form.Group className="mb-3" controlId="formConfirmPassword">
-        <Form.Label>{t("labels.confirmPassword")}</Form.Label>
-        <InputGroup hasValidation>
-          <Form.Control
-            required
-            type={showConfirmPassword ? "text" : "password"}
-            name="confirmPassword"
-            placeholder={t("placeholders.confirmYourPassword")}
-            value={confirmPassword}
-            onChange={handleChange}
-            isInvalid={
-              error.confirmPassword ||
-              (confirmPassword.length > 0 &&
-                !isPasswordMatch(data.password, confirmPassword))
-            }
-          />
-          <Button
-            variant="outline-secondary"
-            size="sm"
-            type="button"
-            onClick={() => setShowConfirmPassword((prev) => !prev)}
-            aria-label={
-              showConfirmPassword
-                ? "Hide confirm password"
-                : "Show confirm password"
-            }
-          >
-            {showConfirmPassword ? (
-              <EyeIcon size="16" />
-            ) : (
-              <EyeOffIcon size="16" />
-            )}
-          </Button>
-          <Form.Control.Feedback type="invalid">
-            {t("errors.passwordMismatch")}
-          </Form.Control.Feedback>
-        </InputGroup>
-      </Form.Group>
+        // Second validation: Check custom business logic
+        let hasError = false;
+        const validationErrors: Record<string, boolean> = {};
 
-      {/* Remember Me Checkbox */}
-      <Form.Group className="mb-3" controlId="formRememberMe">
-        <Form.Check
-          type="checkbox"
-          name="rememberMe"
-          label={t("labels.rememberMe")}
-          checked={rememberMe}
-          onChange={handleChange}
-          isValid={false}
-        />
-      </Form.Group>
+        if (!data.email || !isEmailValid(data.email)) {
+            validationErrors.email = true;
+            hasError = true;
+        }
 
-      {/* Submit Button and Account Confirmation Note */}
-      <div className="d-grid">
-        <Form.Text className="fw-light mb-3">
-          {t("helpers.accountConfirmNote")}
-        </Form.Text>
-        <Button type="submit" variant="primary" className="mb-3 fw-bold p-2">
-          {t("buttons.next")}
-        </Button>
-      </div>
-    </Form>
-  );
+        if (!data.password || !isPasswordValid(data.password)) {
+            validationErrors.password = true;
+            hasError = true;
+        }
+
+        if (!confirmPassword || !isPasswordMatch(data.password, confirmPassword)) {
+            validationErrors.confirmPassword = true;
+            hasError = true;
+        }
+
+        if (hasError) {
+            setError(validationErrors);
+            const firstErrorField = Object.keys(validationErrors)[0];
+            const errorElement = form.querySelector(`[name="${firstErrorField}"]`) as HTMLElement;
+            if (errorElement) errorElement.focus();
+            return;
+        }
+
+        // All validations passed - save data and show success message
+        setError({});
+        dispatch(saveAction(data));
+        // Show success toast notification
+        Swal.fire({
+            icon: "success",
+            title: "Account Information Submitted",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+        dispatch(goNextStepAction(2));
+    };
+
+    return (
+        <Form noValidate onSubmit={handleSubmit}>
+            <h4 className="mb-4 text-center">{t("title")}</h4>
+
+            {/* Email Address Field */}
+            <Form.Group className="mb-3" controlId="formEmail">
+                <Form.Label>{t("labels.email")}</Form.Label>
+                <Form.Control
+                    required
+                    type="email"
+                    name="email"
+                    placeholder={t("placeholders.enterEmail")}
+                    value={data.email}
+                    onChange={handleChange}
+                    autoFocus
+                    isInvalid={
+                        error.email || (data.email.length > 0 && !isEmailValid(data.email))
+                    }
+                />
+                <Form.Control.Feedback type="invalid">
+                    {t("errors.invalidEmail")}
+                </Form.Control.Feedback>
+            </Form.Group>
+
+            {/* Password Field */}
+            <Form.Group className="mb-3" controlId="formPassword">
+                <Form.Label>{t("labels.password")}</Form.Label>
+                <InputGroup hasValidation>
+                    <Form.Control
+                        required
+                        type={showPassword ? "text" : "password"}
+                        name="password"
+                        placeholder={t("placeholders.enterPassword")}
+                        value={data.password}
+                        onChange={handleChange}
+                        isInvalid={
+                            error.password ||
+                            (data.password.length > 0 && !isPasswordValid(data.password))
+                        }
+                    />
+                    <Button
+                        variant="outline-secondary"
+                        size="sm"
+                        type="button"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        aria-label={showPassword ? "Hide password" : "Show password"}
+                    >
+                        {showPassword ? <EyeIcon size="16" /> : <EyeOffIcon size="16" />}
+                    </Button>
+                    <Form.Control.Feedback type="invalid">
+                        {t("errors.passwordTooShort")}
+                    </Form.Control.Feedback>
+                </InputGroup>
+                <Form.Text className="text-muted">
+                    {t("helpers.passwordMinLength")}
+                </Form.Text>
+            </Form.Group>
+
+            {/* Confirm Password Field */}
+            <Form.Group className="mb-3" controlId="formConfirmPassword">
+                <Form.Label>{t("labels.confirmPassword")}</Form.Label>
+                <InputGroup hasValidation>
+                    <Form.Control
+                        required
+                        type={showConfirmPassword ? "text" : "password"}
+                        name="confirmPassword"
+                        placeholder={t("placeholders.confirmYourPassword")}
+                        value={confirmPassword}
+                        onChange={handleChange}
+                        isInvalid={
+                            error.confirmPassword ||
+                            (confirmPassword.length > 0 &&
+                                !isPasswordMatch(data.password, confirmPassword))
+                        }
+                    />
+                    <Button
+                        variant="outline-secondary"
+                        size="sm"
+                        type="button"
+                        onClick={() => setShowConfirmPassword((prev) => !prev)}
+                        aria-label={
+                            showConfirmPassword
+                                ? "Hide confirm password"
+                                : "Show confirm password"
+                        }
+                    >
+                        {showConfirmPassword ? (
+                            <EyeIcon size="16" />
+                        ) : (
+                            <EyeOffIcon size="16" />
+                        )}
+                    </Button>
+                    <Form.Control.Feedback type="invalid">
+                        {t("errors.passwordMismatch")}
+                    </Form.Control.Feedback>
+                </InputGroup>
+            </Form.Group>
+
+            {/* Remember Me Checkbox */}
+            <Form.Group className="mb-3" controlId="formRememberMe">
+                <Form.Check
+                    type="checkbox"
+                    name="rememberMe"
+                    label={t("labels.rememberMe")}
+                    checked={rememberMe}
+                    onChange={handleChange}
+                    isValid={false}
+                />
+            </Form.Group>
+
+            {/* Submit Button and Account Confirmation Note */}
+            <div className="d-grid">
+                <Form.Text className="fw-light mb-3">
+                    {t("helpers.accountConfirmNote")}
+                </Form.Text>
+                <Button type="submit" variant="primary" className="mb-3 fw-bold p-2">
+                    {t("buttons.next")}
+                </Button>
+            </div>
+        </Form>
+    );
 }

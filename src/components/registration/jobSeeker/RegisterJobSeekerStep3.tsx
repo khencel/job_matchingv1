@@ -7,11 +7,11 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
 import {
   goNextStep,
-  saveRegJobSeekerStep2,
+  saveRegJobSeekerStep3,
 } from "@/redux/slices/register/jobSeekerSlice";
 
-const RegisterJobSeekerStep2 = () => {
-  const t = useTranslations("registerJobSeekerStep2");
+const RegisterJobSeekerStep3 = () => {
+  const t = useTranslations("registerJobSeekerStep3");
   const dispatch = useAppDispatch();
 
   const savedIdURL = useAppSelector(
@@ -66,7 +66,7 @@ const RegisterJobSeekerStep2 = () => {
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
-    dispatch(saveRegJobSeekerStep2(""));
+    dispatch(saveRegJobSeekerStep3(""));
   };
   // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
@@ -110,8 +110,8 @@ const RegisterJobSeekerStep2 = () => {
       showConfirmButton: false,
       timer: 1500,
     });
-    dispatch(saveRegJobSeekerStep2(idURL));
-    dispatch(goNextStep(3));
+    dispatch(saveRegJobSeekerStep3(idURL));
+    dispatch(goNextStep(4));
   };
 
   return (
@@ -193,4 +193,4 @@ const RegisterJobSeekerStep2 = () => {
   );
 };
 
-export default RegisterJobSeekerStep2;
+export default RegisterJobSeekerStep3;

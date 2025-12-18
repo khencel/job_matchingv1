@@ -84,6 +84,7 @@ export const registerJobSeekerSubmit = createAsyncThunk<
 
   const submissionData = {
     accountInfo: data.accountInfo,
+    jobSeekerData: data.jobSeekerData,
     idURL: data.idURL,
     termsAndCondition: data.termsAndConditions,
   };
@@ -154,11 +155,17 @@ export const registerJobSeekerSlice = createSlice({
     },
     saveRegJobSeekerStep2: (
       state,
+      action: PayloadAction<RegisterJobSeekerStep2Data>
+    ) => {
+      state.registerJobSeekerData.jobSeekerData = action.payload;
+    },
+    saveRegJobSeekerStep3: (
+      state,
       action: PayloadAction<RegisterJobSeekerData["idURL"]>
     ) => {
       state.registerJobSeekerData.idURL = action.payload;
     },
-    saveRegJobSeekerStep3: (
+    saveRegJobSeekerStep4: (
       state,
       action: PayloadAction<RegisterJobSeekerStep4Data>
     ) => {
@@ -192,5 +199,6 @@ export const {
   saveRegJobSeekerStep1,
   saveRegJobSeekerStep2,
   saveRegJobSeekerStep3,
+  saveRegJobSeekerStep4,
 } = registerJobSeekerSlice.actions;
 export default registerJobSeekerSlice.reducer;
