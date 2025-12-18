@@ -1,8 +1,8 @@
 "use client";
 
-import { makeStore } from "@/redux/store";
 import React, { useState } from "react";
 import { Provider } from "react-redux";
+import { makeStore } from '../redux/store';
 
 export default function StoreProvider({
   children,

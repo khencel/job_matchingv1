@@ -84,7 +84,7 @@ input[type=number] {
     color: #4C95ED;
 }
 
-input{
+input:not([type="checkbox"]):not([type="radio"]){
     background-color: rgb(241, 241, 241) !important;
 }
 

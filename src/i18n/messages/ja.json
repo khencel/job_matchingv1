@@ -415,5 +415,31 @@
     "buttons": {
       "submit": "登録を送信"
     }
+  },
+  "jobDescriptionPage": {
+    "headings": {
+      "description": "詳細",
+      "responsibilities": "職務内容",
+      "whoYouAre": "求める人物像",
+      "niceToHaves": "歓迎スキル",
+      "aboutThisRole": "募集要項",
+      "categories": "カテゴリー",
+      "requiredSkills": "必須スキル",
+      "perksAndBenefits": "福利厚生",
+      "fullHealthcare": "完全医療保険",
+      "jobSupport": "就職支援",
+      "relatedJobs": "関連求人"
+    },
+    "buttons": {
+      "apply": "応募する",
+      "showAllJobs": "すべての求人を見る",
+      "readMoreAboutUs": "詳しく見る"
+    },
+    "labels": {
+      "applyBefore": "応募期限",
+      "jobPostedOn": "掲載日",
+      "jobType": "雇用形態",
+      "salary": "給与"
+    }
   }
 }

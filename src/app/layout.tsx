@@ -1,11 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import BootstrapClient from "../components/BootstrapClient";
-import Navbar from "../components/Navbar";
-import StoreProvider from "../StoreProvider";
-import "../../../public/css/app.css"
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "../../public/css/login/app.css";
+import "../../public/css/app.css";
+import BootstrapClient from "@/components/BootstrapClient";
 import NextIntlProvider from "@/i18n/NextIntlProvider";
 import { cookies } from "next/headers";
-import "bootstrap-icons/font/bootstrap-icons.css";
+import StoreProvider from "./StoreProvider";
 
 export const metadata = {
   title: "Next.js",
@@ -32,10 +32,7 @@ export default async function RootLayout({
       <body>
         <StoreProvider>
           <NextIntlProvider locale={locale}>
-            {/* Bootstrap JS client features */}
             <BootstrapClient />
-            {/* Global navigation */}
-            <Navbar />
             {children}
           </NextIntlProvider>
         </StoreProvider>
