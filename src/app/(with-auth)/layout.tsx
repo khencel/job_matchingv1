@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../../../public/css/app.css";
+import "../../../public/css/global.css";
 import "../../../public/css/filter.css";
 
 import BootstrapClient from "@/components/BootstrapClient";
