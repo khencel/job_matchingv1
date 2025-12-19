@@ -40,7 +40,10 @@ export default function JobSeekerLayout({
         {/* Navbar */}
         <Navbar />
         <div className="d-flex flex-grow-1" style={{ overflow: "hidden" }}>
-          <Tab.Container id={`sidebar ${isCollapsed && "justify-content-center"}`} activeKey={getActiveKey()}>
+          <Tab.Container
+            id={`sidebar ${isCollapsed && "justify-content-center"}`}
+            activeKey={getActiveKey()}
+          >
             {/* Sidebar */}
             <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
               <div className="sidebar-header">
