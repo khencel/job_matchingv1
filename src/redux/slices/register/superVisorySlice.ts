@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
-export interface RegisterSuperVisoryStep1Props {
+export interface RegistrationStep1 {
   email: string;
   password: string;
 }
@@ -36,7 +36,7 @@ export interface RegisterSuperVisoryStep4Data {
 }
 
 export interface RegisterSuperVisoryData {
-  accountInfo: RegisterSuperVisoryStep1Props;
+  accountInfo: RegistrationStep1;
   companyInfo: RegisterSuperVisoryStep2Data;
   contactPersonInfo: RegisterSuperVisoryStep3Data;
   termsAndConditions: RegisterSuperVisoryStep4Data;
@@ -167,7 +167,7 @@ export const registerSuperVisorySlice = createSlice({
     // save data to state reducers for each step
     saveRegSuperVisoryStep1: (
       state,
-      action: PayloadAction<RegisterSuperVisoryStep1Props>
+      action: PayloadAction<RegistrationStep1>
     ) => {
       state.registerSuperVisoryData.accountInfo = action.payload;
     },

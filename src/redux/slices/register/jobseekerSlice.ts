@@ -1,8 +1,9 @@
 // import apiClient from "@/lib/axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
+import { RegistrationStep1 } from "./superVisorySlice";
 
-export interface RegisterJobSeekerStep1Data {
+export interface RegisterJobSeekerStep2Data {
   nationality: string;
   gender: "male" | "female" | null;
   currentPlaceResidence: string;
@@ -23,20 +24,21 @@ export interface RegisterJobSeekerStep1Data {
   facebook: string;
 }
 
-export interface RegisterJobSeekerStep3Data {
+export interface RegisterJobSeekerStep4Data {
   acceptTerms: boolean;
   acceptPrivacyPolicy: boolean;
   acceptReceiveEmails: boolean;
 }
 
 export interface RegisterJobSeekerData {
-  accountInfo: RegisterJobSeekerStep1Data;
+  accountInfo: RegistrationStep1;
+  jobSeekerData: RegisterJobSeekerStep2Data;
   idURL: string;
-  termsAndConditions: RegisterJobSeekerStep3Data;
+  termsAndConditions: RegisterJobSeekerStep4Data;
 }
 
 export interface RegisterJobSeeker {
-  currentStep: 1 | 2 | 3;
+  currentStep: 1 | 2 | 3 | 4;
   registerJobSeekerData: RegisterJobSeekerData;
   isLoading: boolean;
   isError: boolean;
@@ -46,6 +48,10 @@ const initialState: RegisterJobSeeker = {
   currentStep: 1,
   registerJobSeekerData: {
     accountInfo: {
+      email: "",
+      password: "",
+    },
+    jobSeekerData: {
       nationality: "",
       gender: null,
       currentPlaceResidence: "",
@@ -78,6 +84,7 @@ export const registerJobSeekerSubmit = createAsyncThunk<
 
   const submissionData = {
     accountInfo: data.accountInfo,
+    jobSeekerData: data.jobSeekerData,
     idURL: data.idURL,
     termsAndCondition: data.termsAndConditions,
   };
@@ -125,6 +132,8 @@ export const registerJobSeekerSlice = createSlice({
     },
     goBackJobSeeker: (state) => {
       switch (state.currentStep) {
+        case 4:
+          state.currentStep = 3;
         case 3:
           state.currentStep = 2;
           break;
@@ -140,19 +149,25 @@ export const registerJobSeekerSlice = createSlice({
     },
     saveRegJobSeekerStep1: (
       state,
-      action: PayloadAction<RegisterJobSeekerStep1Data>
+      action: PayloadAction<RegistrationStep1>
     ) => {
       state.registerJobSeekerData.accountInfo = action.payload;
     },
     saveRegJobSeekerStep2: (
       state,
+      action: PayloadAction<RegisterJobSeekerStep2Data>
+    ) => {
+      state.registerJobSeekerData.jobSeekerData = action.payload;
+    },
+    saveRegJobSeekerStep3: (
+      state,
       action: PayloadAction<RegisterJobSeekerData["idURL"]>
     ) => {
       state.registerJobSeekerData.idURL = action.payload;
     },
-    saveRegJobSeekerStep3: (
+    saveRegJobSeekerStep4: (
       state,
-      action: PayloadAction<RegisterJobSeekerStep3Data>
+      action: PayloadAction<RegisterJobSeekerStep4Data>
     ) => {
       state.registerJobSeekerData.termsAndConditions = action.payload;
     },
@@ -184,5 +199,6 @@ export const {
   saveRegJobSeekerStep1,
   saveRegJobSeekerStep2,
   saveRegJobSeekerStep3,
+  saveRegJobSeekerStep4,
 } = registerJobSeekerSlice.actions;
 export default registerJobSeekerSlice.reducer;

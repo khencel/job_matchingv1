@@ -1,4 +1,4 @@
-import RegistrationButton from "./registration/RegisterButton";
+import RegistrationButton from "./RegisterButton";
 
 /**
  * Registration component displaying user type selection cards

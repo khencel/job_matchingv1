@@ -1,12 +1,7 @@
 // import apiClient from "@/lib/axios";
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
-
-// Step 1: Account credentials
-export interface RegisterEmployerStep1Data {
-  email: string;
-  password: string;
-}
+import { RegistrationStep1 } from "./superVisorySlice";
 
 // Step 2: Company information
 export interface RegisterEmployerStep2Data {
@@ -38,7 +33,7 @@ export interface RegisterEmployerStep4Data {
 
 // All employer data
 interface RegisterEmployerData {
-  accountInfo: RegisterEmployerStep1Data;
+  accountInfo: RegistrationStep1;
   employerInfo: RegisterEmployerStep2Data;
   contactPerson: RegisterEmployerStep3Data;
   termsAndConditions: RegisterEmployerStep4Data;
@@ -161,7 +156,7 @@ export const registerEmployerSlice = createSlice({
     // Save data to state
     saveRegEmployerStep1: (
       state,
-      action: PayloadAction<RegisterEmployerStep1Data>
+      action: PayloadAction<RegistrationStep1>
     ) => {
       state.registerEmployerData.accountInfo = action.payload;
     },
