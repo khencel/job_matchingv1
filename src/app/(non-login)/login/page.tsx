@@ -6,7 +6,6 @@ import { loginUser } from "@/redux/slices/login/authSlice";
 import type { RootState, AppDispatch } from "@/redux/store/index";
 import { showSuccessToast, showErrorToast } from "@/app/(util)/toaster";
 
-
 export default function Login() {
 
     const dispatch = useDispatch<AppDispatch>();
@@ -15,28 +14,29 @@ export default function Login() {
     const [password, setPassword] = useState("");
 
     const handleLogin = () => {
-      
   
-    if (!email || !password) {
-        showErrorToast("Sign in failed","Please fill in all fields");
-        return;
-      }
-      dispatch(loginUser({ email, password }))
-      .unwrap()
-      .then((res) => {
-        localStorage.setItem("token", res.access);
-        localStorage.setItem("user", JSON.stringify(res.user));
-        showSuccessToast("Sign in successful","You have successfully signed in")
-      })
-      .catch(() => {
-        showErrorToast("Sign in failed","Invalid email or password")
-      })
-      ;
+      if (!email || !password) {
+          console.log("Sign in failed");
+          showErrorToast("Sign in failed","Please fill in all fields");
+          return;
+        }
+        dispatch(loginUser({ email, password }))
+        .unwrap()
+        .then((res) => {
+          localStorage.setItem("token", res.access);
+          localStorage.setItem("user", JSON.stringify(res.user));
+          showSuccessToast("Sign in successful","You have successfully signed in")
+        })
+        .catch(() => {
+          showErrorToast("Sign in failed","Invalid email or password")
+        })
+        ;
     };
 
     return (
         <div className="row m-0">
           <div className="col-md-7 left-content">
+            <img src="/logo.png" width={400} alt="" />
           </div>
           <div className="col-md-5 d-flex align-items-center justify-content-center">
             <div className="w-75">
