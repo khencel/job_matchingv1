@@ -1,0 +1,50 @@
+.btn-primary-custom{
+    background: linear-gradient(to bottom, #53a0ff, #357ae8);
+    padding: 10px 28px;
+    border-radius: 30px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-primary-custom:hover{
+    color: white;
+    background: linear-gradient(to top, #53a0ff, #357ae8);
+}
+
+.emp-component-style{
+  background-color: #ebeef3;
+  color: rgb(116, 114, 114);
+  padding: 10px;
+}
+
+.emp-icon-style{
+  font-size: 22px;
+  color: white;
+  background: #0A65CC;
+  padding: 20%;
+  border-radius: 50%;
+}
+
+.primary-text{
+    color: #4C95ED;
+}
+
+.primary-bg{
+    background-color: #0A65CC;
+}
+
+.clickable{
+    cursor: pointer;
+}
+
+.ProseMirror {
+  min-height: 100px;
+  overflow-y: auto;  
+  /* padding: 8px; */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

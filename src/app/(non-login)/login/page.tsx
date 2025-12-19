@@ -1,38 +1,48 @@
 
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "@/redux/slices/login/authSlice";
 import type { RootState, AppDispatch } from "@/redux/store/index";
 import { showSuccessToast, showErrorToast } from "@/app/(util)/toaster";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
 
     const dispatch = useDispatch<AppDispatch>();
-    const { loading, error } = useSelector((state: RootState) => state.auth);
+    const router = useRouter();
+    
+    const { loading, isAuthenticated} = useSelector((state: RootState) => state.auth);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const handleLogin = () => {
-  
-      if (!email || !password) {
-          console.log("Sign in failed");
-          showErrorToast("Sign in failed","Please fill in all fields");
-          return;
-        }
-        dispatch(loginUser({ email, password }))
-        .unwrap()
-        .then((res) => {
-          localStorage.setItem("token", res.access);
-          localStorage.setItem("user", JSON.stringify(res.user));
-          showSuccessToast("Sign in successful","You have successfully signed in")
-        })
-        .catch(() => {
+    
+    const handleLogin = async () => {
+      if (!email.trim() || !password.trim()) {
+        showErrorToast("Sign in failed", "Please fill in all fields");
+        return;
+      }
+      try{ 
+          await dispatch(loginUser({ email, password })).unwrap();
+          
+      } catch(error){
           showErrorToast("Sign in failed","Invalid email or password")
-        })
-        ;
+      }
+      
     };
 
+
+    useEffect(() => {
+      if(isAuthenticated){
+        console.log("User is authenticated, redirecting...");
+        showSuccessToast("Sign in successful","You have successfully signed in")
+        // You can use Next.js router to redirect
+        router.push("/employer/post_a_job/job-information"); // Example redirect
+      }
+    }, [isAuthenticated]);
+
+
+
+  
     return (
         <div className="row m-0">
           <div className="col-md-7 left-content">

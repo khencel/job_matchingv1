@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../../public/css/login/app.css";
 import "../../public/css/app.css";
+import "../../public/css/global.css";
 import BootstrapClient from "@/components/BootstrapClient";
 import NextIntlProvider from "@/i18n/NextIntlProvider";
 import { cookies } from "next/headers";

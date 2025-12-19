@@ -1,7 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import "../../../public/css/app.css";
-import "../../../public/css/filter.css";
 
 import BootstrapClient from "@/components/BootstrapClient";
 import Navbar from "../../components/NavbarAuth";
@@ -30,24 +28,19 @@ export default async function RootLayout({
   const locale: "en" | "ja" = cookieLocale === "ja" ? "ja" : "en";
 
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-      </head>
-      <body>
-        <StoreProvider>
-          <NextIntlProvider locale={locale}>
-            <BootstrapClient />
-            <Navbar />
+    <>
+      <StoreProvider>
+        <NextIntlProvider locale={locale}>
+          <BootstrapClient />
+          <Navbar />
 
-            <Sidebar>
-              {children}
-            </Sidebar>
+          <Sidebar>
+            {children}
+          </Sidebar>
 
-            <Footer />
-          </NextIntlProvider>
-        </StoreProvider>
-      </body>
-    </html>
+          <Footer />
+        </NextIntlProvider>
+      </StoreProvider>
+    </>
   );
 }
