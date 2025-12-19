@@ -8,7 +8,7 @@ import {
   goNextStep,
   RegisterJobSeekerStep2Data,
   saveRegJobSeekerStep2,
-} from "@/redux/slices/register/jobSeekerSlice";
+} from "@/redux/slices/register/jobseekerSlice";
 
 const RegisterJobSeekerStep2 = () => {
   const t = useTranslations("registerJobSeekerStep2");

@@ -8,7 +8,7 @@ import Image from "next/image";
 import {
   goNextStep,
   saveRegJobSeekerStep3,
-} from "@/redux/slices/register/jobSeekerSlice";
+} from "@/redux/slices/register/jobseekerSlice";
 
 const RegisterJobSeekerStep3 = () => {
   const t = useTranslations("registerJobSeekerStep3");

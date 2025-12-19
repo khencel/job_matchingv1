@@ -7,7 +7,7 @@ import {
   RegisterJobSeekerStep4Data,
   registerJobSeekerSubmit,
   saveRegJobSeekerStep4,
-} from "@/redux/slices/register/jobSeekerSlice";
+} from "@/redux/slices/register/jobseekerSlice";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 

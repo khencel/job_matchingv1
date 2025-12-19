@@ -1,7 +1,7 @@
 import {
   goNextStep,
   saveRegJobSeekerStep1,
-} from "@/redux/slices/register/jobSeekerSlice";
+} from "@/redux/slices/register/jobseekerSlice";
 import Step1Register from "../Step1Register";
 
 const RegisterJobSeekerStep1 = () => {

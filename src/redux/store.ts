@@ -1,15 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import registerEmployerReducer from "./slices/register/employerSlice";
 import registerSuperVisoryReducer from "./slices/register/superVisorySlice";
-import registerJobSeekerReducer from "./slices/register/jobSeekerSlice";
-
+import registerJobSeekerReducer from "./slices/register/jobseekerSlice";
 
 export const makeStore = () => {
   return configureStore({
-    reducer: {  
+    reducer: {
       registerEmployer: registerEmployerReducer,
       registerSuperVisory: registerSuperVisoryReducer,
-      registerJobSeeker: registerJobSeekerReducer
+      registerJobSeeker: registerJobSeekerReducer,
     },
   });
 };
