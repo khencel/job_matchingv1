@@ -31,24 +31,19 @@ export default async function RootLayout({
   const locale: "en" | "ja" = cookieLocale === "ja" ? "ja" : "en";
 
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-      </head>
-      <body>
-        <StoreProvider>
-          <NextIntlProvider locale={locale}>
-            <BootstrapClient />
-            <Navbar />
+    <>
+      <StoreProvider>
+        <NextIntlProvider locale={locale}>
+          <BootstrapClient />
+          <Navbar />
 
-            <Sidebar>
-              {children}
-            </Sidebar>
+          <Sidebar>
+            {children}
+          </Sidebar>
 
-            <Footer />
-          </NextIntlProvider>
-        </StoreProvider>
-      </body>
-    </html>
+          <Footer />
+        </NextIntlProvider>
+      </StoreProvider>
+    </>
   );
 }

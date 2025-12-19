@@ -1,12 +1,14 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import { showSuccessToast, showErrorToast } from "@/app/(util)/toaster";
+import loginApi from "@/redux/features/auth/authService";
 
 interface AuthState {
   user: any | null; // Replace 'any' with your user type
   access: string | null;
   loading: boolean;
   error: string | null;
+  isAuthenticated?: boolean;
 }
 
 
@@ -15,9 +17,8 @@ interface LoginPayload {
   password: string;
 }
 
-// Define the response type from API
 interface LoginResponse {
-  user: any; // Replace 'any' with your user type
+  user: any;
   access: string;
 }
 
@@ -27,18 +28,25 @@ const initialState: AuthState = {
   access: null,
   loading: false,
   error: null,
+  isAuthenticated: false,
 };
 
 // Async thunk for login
 export const loginUser = createAsyncThunk<LoginResponse, LoginPayload>(
   "auth/loginUser",
   async (payload, { rejectWithValue }) => {
-    try {
-      const response = await axios.post<LoginResponse>("http://127.0.0.1:8000/api/auth/login", payload);
-      return response.data;
-    } catch (error: any) {
+    const email = payload.email;
+    const password = payload.password;
+
+    try{
+        const res = await loginApi({ email, password });
+        localStorage.setItem("token", res.data.access);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        return res.data;
+    }catch(error: any){
       return rejectWithValue(error.response?.data?.message || "Login failed");
     }
+  
   }
 );
 
@@ -61,6 +69,7 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action: PayloadAction<LoginResponse>) => {
         state.loading = false;
         state.user = action.payload.user;
+        state.isAuthenticated = true;
         state.access = action.payload.access;
       })
       .addCase(loginUser.rejected, (state, action: PayloadAction<any>) => {

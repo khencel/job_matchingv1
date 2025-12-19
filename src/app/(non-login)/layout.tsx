@@ -12,11 +12,7 @@ export default async function NonLoginRootLayout({
   children: React.ReactNode;
 }){
     return (
-        <html lang="en">
-          <head>
-            <link rel="icon" href="/favicon.ico" />
-          </head>
-          <body>
+        <>
             <ReduxProvider>
                 {children}
                 <ToastContainer
@@ -24,7 +20,6 @@ export default async function NonLoginRootLayout({
                     autoClose={3000}
                 />
             </ReduxProvider>    
-          </body>
-        </html>
+        </>  
     )
 }
