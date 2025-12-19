@@ -5,66 +5,109 @@ import {
   BellIcon,
   FolderHeartIcon,
   FoldersIcon,
+  MenuIcon,
+  MessagesSquareIcon,
   UserCircle,
 } from "lucide-react";
 import Link from "next/link";
-import React from "react";
-import { Nav, Tab } from "react-bootstrap";
+import { usePathname } from "next/navigation";
+import React, { useState } from "react";
+import { Button, Nav, Tab } from "react-bootstrap";
 
 export default function JobSeekerLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+  const pathname = usePathname();
+
+  // Determine active key based on pathname
+  const getActiveKey = () => {
+    if (pathname.includes("/applied-jobs")) return "applied-jobs";
+    if (pathname.includes("/notifications")) return "notifications";
+    if (pathname.includes("/saved-jobs")) return "saved-jobs";
+    return "job-seeker-profile"; // default
+  };
+
+  const handleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
   return (
     <div>
       <div className="vh-100 d-flex flex-column">
         {/* Navbar */}
         <Navbar />
         <div className="d-flex flex-grow-1" style={{ overflow: "hidden" }}>
-          <Tab.Container
-            id="left-tabs-example"
-            defaultActiveKey="job-seeker-profile"
-          >
+          <Tab.Container id={`sidebar ${isCollapsed && "justify-content-center"}`} activeKey={getActiveKey()}>
             {/* Sidebar */}
-            <div className="bg-light border-end p-4 shadow-sm w-25">
-              <h3 className="fw-bold fs-3 mb-5 text-primary">Job Seeker</h3>
+            <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
+              <div className="sidebar-header">
+                <h3 className="sidebar-title">
+                  {!isCollapsed && "JOB SEEKER"}
+                </h3>
+                <Button onClick={handleCollapse} className="toggle-btn">
+                  <MenuIcon className="icon" />
+                </Button>
+              </div>
               <Nav variant="pills" className="flex-column gap-4">
                 <Nav.Item>
                   <Nav.Link
                     as={Link}
                     eventKey="job-seeker-profile"
-                    className="d-flex gap-3"
+                    className="sidebar-text"
                     href="/job-seeker/profile"
                   >
-                    <UserCircle /> Profile
+                    <UserCircle /> {!isCollapsed && <span>Profile</span>}
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link
                     as={Link}
                     eventKey="applied-jobs"
-                    className="d-flex gap-3"
+                    className="sidebar-text"
                     href="/job-seeker/applied-jobs"
                   >
-                    <FoldersIcon /> Applied Jobs
+                    <FoldersIcon /> {!isCollapsed && <span>Applied Jobs</span>}
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="notifications" className="d-flex gap-3">
-                    <BellIcon /> Notifications
+                  <Nav.Link
+                    as={Link}
+                    eventKey="notifications"
+                    className="sidebar-text"
+                    href="/job-seeker/notifications"
+                  >
+                    <BellIcon /> {!isCollapsed && <span>Notifications</span>}
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="saved-jobs" className="d-flex gap-3">
-                    <FolderHeartIcon /> Saved Jobs
+                  <Nav.Link
+                    as={Link}
+                    eventKey="saved-jobs"
+                    className="sidebar-text"
+                    href="/job-seeker/saved-jobs"
+                  >
+                    <FolderHeartIcon />{" "}
+                    {!isCollapsed && <span>Saved Jobs</span>}
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link
+                    as={Link}
+                    className="sidebar-text"
+                    href="/job-seeker/messages"
+                  >
+                    <MessagesSquareIcon />{" "}
+                    {!isCollapsed && <span>Messages</span>}
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
             </div>
             {/* Content */}
             <div className="flex-grow-1 p-4" style={{ overflowY: "auto" }}>
-              {children}
+              <Tab.Content>{children}</Tab.Content>
             </div>
           </Tab.Container>
         </div>
