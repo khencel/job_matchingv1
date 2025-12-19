@@ -1,5 +1,5 @@
 "use client";
-import { Card, Form, Stack } from "react-bootstrap";
+import { Button, Card, Form, Stack } from "react-bootstrap";
 
 const Education = () => {
   return (
@@ -14,7 +14,7 @@ const Education = () => {
               <Form.Control type="number" placeholder="Enter Year Graduated" />
               <Form.Check
                 type="checkbox"
-                label="Check if you did'nt finish Primary Education"
+                label="Check if you didn't finish Primary Education"
                 className="text-primary fst-italic mt-2"
               ></Form.Check>
             </Stack>
@@ -26,7 +26,7 @@ const Education = () => {
               <Form.Control type="number" placeholder="Enter Year Graduated" />
               <Form.Check
                 type="checkbox"
-                label="Check if you did'nt finish Primary Education"
+                label="Check if you didn't finish Primary Education"
                 className="text-primary fst-italic mt-2"
               ></Form.Check>
             </Stack>
@@ -38,11 +38,12 @@ const Education = () => {
               <Form.Control type="number" placeholder="Enter Year Graduated" />
               <Form.Check
                 type="checkbox"
-                label="Check if you did'nt finish Primary Education"
+                label="Check if you didn't finish Primary Education"
                 className="text-primary fst-italic mt-2"
               ></Form.Check>
             </Stack>
           </Form.Group>
+          <Button className="btn-primary-custom">Next</Button>
         </Form>
       </Card.Body>
     </Card>

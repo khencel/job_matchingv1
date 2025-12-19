@@ -46,7 +46,7 @@ const BasicInfo = () => {
     <Card className="border-0 shadow-sm">
       <Card.Body>
         <Card.Title className="fs-4 fw-bold">Basic Information</Card.Title>
-        <Form>
+        <Form className="d-flex flex-column gap-3">
           <Form.Group className="mb-3">
             <Form.Label>First Name</Form.Label>
             <Form.Control
@@ -197,7 +197,11 @@ const BasicInfo = () => {
               onChange={handleChange}
             />
           </Form.Group>
-          <Button type="submit" onClick={handleSubmit}>
+          <Button
+            type="submit"
+            className="btn-primary-custom"
+            onClick={handleSubmit}
+          >
             Next
           </Button>
         </Form>
