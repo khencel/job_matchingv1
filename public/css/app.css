@@ -88,63 +88,80 @@ input:not([type="checkbox"]):not([type="radio"]){
     background-color: rgb(241, 241, 241) !important;
 }
 
-/* Sidebar.css */
-.sidebar {
-  width: 220px;
+.layout {
+  display: flex;
   min-height: 100vh;
-  background-color: #fff;
-  border-right: 1px solid #ddd;
-  
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: white;
+  color: black;
+  transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color:black;
+  font-size: 18px;
+  cursor: pointer;
 }
 
 .sidebar-title {
-  font-size: 12px;
-  font-weight: bold;
-  color: #888;
-  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .sidebar ul {
   list-style: none;
   padding: 0;
+  margin-top: 10px;
 }
 
-.sidebar ul li {
+.sidebar-text {
   display: flex;
   align-items: center;
-  padding: 10px 0;
+  gap: 12px;
+  padding: 12px 16px;
   cursor: pointer;
-  color: #555;
-  font-size: 14px;
-  border-radius: 4px;
 }
 
-
-.sidebar ul li:hover {
-  background-color: #e8f0fe;
-  color: #1a73e8;
-  
+.sidebar-text:hover {
+  background: #0A65CC;
+  color: white;
 }
 
-.sidebar ul li.active{
-    border-left: #0062ff 5px solid;
-    color: #1a73e8;
-    background-color: #e8f0fe;
+.sidebar-text.active {
+  background: #E7F0FA;
+  color: #0A65CC;
+  border-left: #0A65CC 7px solid;
 }
 
-
-.sidebar ul li .icon {
-  margin-right: 10px;
+.icon {
+  font-size: 18px;
 }
 
-.icon{
-    margin-left: 5px;
-    font-size: 15px;
+/* Content */
+.content {
+  flex: 1;
+  padding: 20px;
+  background: #f8fafc;
+  transition: margin-left 0.3s ease;
 }
 
-.sidebar-text{
-    font-weight:600 !important;
-}
 
 
 
