@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function JobPost() {
   return (
     <div className="container py-4">
@@ -152,7 +154,7 @@ export default function JobPost() {
                 <div className="row mt-4">
                     <div className="col">
                         <button className="btn btn-primary-custom">
-                            View More Jobs
+                            <Link href="/find-jobs" className="text-white text-decoration-none">View More Jobs</Link>
                         </button>
                     </div>
                 </div>
