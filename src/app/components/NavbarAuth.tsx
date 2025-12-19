@@ -68,8 +68,26 @@ const [user, setUser] = useState()
           <span className="navbar-toggler-icon"></span>
         </button>
 
+        
+
         {/* Navigation + language selector */}
         <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+
+          {/* Language selector */}
+          <div className="ms-3 d-flex align-items-center">
+            <select
+              id="language-selector"
+              className="form-select form-select-sm"
+              value={locale}
+              onChange={handleLanguageChange}
+              aria-label="Language selector"
+              style={{ width: "auto", minWidth: "140px" }}
+            >
+              <option value="en">🇺🇸 English</option>
+              <option value="ja">🇯🇵 日本語</option>
+            </select>
+          </div>
+
           <ul className="navbar-nav mb-2 mb-lg-0 d-flex align-items-center">
             <li className="nav-item">
               <a className="nav-link" href="#">
@@ -106,7 +124,7 @@ const [user, setUser] = useState()
                 )}
                 
               </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li><a className="dropdown-item" href="#">Change Password</a></li>
                 <li><a className="dropdown-item" href="#">{t("profile")}</a></li>
                 <li><hr className="dropdown-divider"/></li>
@@ -116,20 +134,7 @@ const [user, setUser] = useState()
 
           </ul>
 
-          {/* Language selector */}
-          <div className="ms-3 d-flex align-items-center">
-            <select
-              id="language-selector"
-              className="form-select form-select-sm"
-              value={locale}
-              onChange={handleLanguageChange}
-              aria-label="Language selector"
-              style={{ width: "auto", minWidth: "140px" }}
-            >
-              <option value="en">🇺🇸 English</option>
-              <option value="ja">🇯🇵 日本語</option>
-            </select>
-          </div>
+          
         </div>
       </div>
     </nav>

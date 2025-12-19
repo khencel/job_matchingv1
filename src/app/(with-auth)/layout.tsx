@@ -1,6 +1,6 @@
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import BootstrapClient from '../components/BootstrapClient';
+import BootstrapClient from "@/components/BootstrapClient";
 import Navbar from "../components/NavbarAuth";
 import "../../../public/css/app.css";
 import StoreProvider from "../StoreProvider";
@@ -9,7 +9,8 @@ import { cookies } from "next/headers";
 import "../../../public/css/app.css"
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../../../public/css/filter.css"
-import Footer from "../components/Footer";
+import Footer from "@/components/Footer";
+import Sidebar from "../components/sidebar";
 
 export const metadata = {
   title: 'Next.js',
@@ -29,20 +30,22 @@ export default async function RootLayout({
   const locale: "en" | "ja" = cookieLocale === "ja" ? "ja" : "en";
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-      </head>
-      <body>
-        <StoreProvider>
-          <NextIntlProvider locale={locale}>
+    <head>
+      <link rel="icon" href="/favicon.ico" />
+    </head>
+    <body>
+      <StoreProvider>
+        <NextIntlProvider locale={locale}>
           <BootstrapClient />
-          <Navbar/>
-          {children}
-          <Footer/>
-          </NextIntlProvider>
-        </StoreProvider>
-        
-      </body>
-    </html>
+          <Navbar />
+            <Sidebar />
+           
+            {children}
+             
+          <Footer />
+        </NextIntlProvider>
+      </StoreProvider>
+    </body>
+  </html>
   )
 }

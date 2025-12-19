@@ -1,5 +1,4 @@
 import { toast, ToastOptions } from "react-toastify";
-import React from "react";
 
 const defaultOptions: ToastOptions = {
   hideProgressBar: false,

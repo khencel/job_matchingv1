@@ -88,6 +88,66 @@ input:not([type="checkbox"]):not([type="radio"]){
     background-color: rgb(241, 241, 241) !important;
 }
 
+/* Sidebar.css */
+.sidebar {
+  width: 220px;
+  min-height: 100vh;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  
+}
+
+.sidebar-title {
+  font-size: 12px;
+  font-weight: bold;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  cursor: pointer;
+  color: #555;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+
+.sidebar ul li:hover {
+  background-color: #e8f0fe;
+  color: #1a73e8;
+  
+}
+
+.sidebar ul li.active{
+    border-left: #0062ff 5px solid;
+    color: #1a73e8;
+    background-color: #e8f0fe;
+}
+
+
+.sidebar ul li .icon {
+  margin-right: 10px;
+}
+
+.icon{
+    margin-left: 5px;
+    font-size: 15px;
+}
+
+.sidebar-text{
+    font-weight:600 !important;
+}
+
+
+
 @media (max-width: 768px) {
   .banner-left-content {
     position: static;

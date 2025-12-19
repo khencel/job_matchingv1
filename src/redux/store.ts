@@ -6,10 +6,10 @@ import registerJobSeekerReducer from "./slices/register/jobSeekerSlice";
 
 export const makeStore = () => {
   return configureStore({
-    reducer: {
+    reducer: {  
       registerEmployer: registerEmployerReducer,
       registerSuperVisory: registerSuperVisoryReducer,
-      registerJobSeeker: registerJobSeekerReducer,
+      registerJobSeeker: registerJobSeekerReducer
     },
   });
 };

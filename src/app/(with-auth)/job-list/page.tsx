@@ -1,4 +1,4 @@
-import JobSearchFiler from "@/app/components/JobSearchFilter"
+import JobSearchFiler from "@/components/JobSearchFilter"
 import Filter from "./filter"
 import Card from "./card"
 
