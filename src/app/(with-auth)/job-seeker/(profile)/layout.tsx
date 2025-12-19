@@ -1,19 +1,21 @@
 "use client";
-import { Nav, Tab } from "react-bootstrap";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import EditJobSeeker from "../../../../components/jobSeekerDashboard/ProfileJobSeeker";
+import Navbar from "@/components/Navbar";
 import {
   BellIcon,
+  FolderHeartIcon,
   FoldersIcon,
   UserCircle,
-  FolderHeartIcon,
 } from "lucide-react";
-import Notifications from "../../../../components/Notifications";
-import SavedJobs from "../../../../components/jobSeekerDashboard/SavedJobs";
-import AppliedJobs from "../../../../components/jobSeekerDashboard/AppliedJobs";
+import Link from "next/link";
+import React from "react";
+import { Nav, Tab } from "react-bootstrap";
 
-const JobSeekerProfilePage = () => {
+export default function JobSeekerLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <div>
       <div className="vh-100 d-flex flex-column">
@@ -30,14 +32,21 @@ const JobSeekerProfilePage = () => {
               <Nav variant="pills" className="flex-column gap-4">
                 <Nav.Item>
                   <Nav.Link
+                    as={Link}
                     eventKey="job-seeker-profile"
                     className="d-flex gap-3"
+                    href="/job-seeker/profile"
                   >
                     <UserCircle /> Profile
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="applied-jobs" className="d-flex gap-3">
+                  <Nav.Link
+                    as={Link}
+                    eventKey="applied-jobs"
+                    className="d-flex gap-3"
+                    href="/job-seeker/applied-jobs"
+                  >
                     <FoldersIcon /> Applied Jobs
                   </Nav.Link>
                 </Nav.Item>
@@ -55,20 +64,7 @@ const JobSeekerProfilePage = () => {
             </div>
             {/* Content */}
             <div className="flex-grow-1 p-4" style={{ overflowY: "auto" }}>
-              <Tab.Content>
-                <Tab.Pane eventKey="job-seeker-profile">
-                  <EditJobSeeker />
-                </Tab.Pane>
-                <Tab.Pane eventKey="notifications">
-                  <Notifications />
-                </Tab.Pane>
-                <Tab.Pane eventKey="applied-jobs">
-                  <AppliedJobs />
-                </Tab.Pane>
-                <Tab.Pane eventKey="saved-jobs">
-                  <SavedJobs />
-                </Tab.Pane>
-              </Tab.Content>
+              {children}
             </div>
           </Tab.Container>
         </div>
@@ -76,6 +72,4 @@ const JobSeekerProfilePage = () => {
       <Footer />
     </div>
   );
-};
-
-export default JobSeekerProfilePage;
+}
