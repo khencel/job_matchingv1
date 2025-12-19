@@ -40,7 +40,6 @@ export default async function RootLayout({
             <BootstrapClient />
             <Navbar />
 
-            {/* GLOBAL SIDEBAR */}
             <Sidebar>
               {children}
             </Sidebar>

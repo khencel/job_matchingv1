@@ -12,8 +12,9 @@ import {
   FaBars,
 } from "react-icons/fa";
 import { FiLayers } from "react-icons/fi";
+import{ PropsWithChildren} from "react";
 
-const Sidebar = ({ children }) => {
+const Sidebar = ({ children }: PropsWithChildren) => {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
@@ -34,7 +35,7 @@ const Sidebar = ({ children }) => {
         </div>
 
         <ul>
-          <li className="active sidebar-text">
+          <li className="sidebar-text">
             <FiLayers className="icon" />
             {!collapsed && <span>Overview</span>}
           </li>
@@ -46,7 +47,7 @@ const Sidebar = ({ children }) => {
             <FaClipboardList className="icon" />
             {!collapsed && <span>Applicants</span>}
           </li>
-          <li className="sidebar-text">
+          <li className="sidebar-text active">
             <FaPlus className="icon" />
             {!collapsed && <span>Post Job</span>}
           </li>
@@ -69,7 +70,6 @@ const Sidebar = ({ children }) => {
         </ul>
       </aside>
 
-      {/* Content */}
       <main className={`content ${collapsed ? "content-collapsed" : ""}`}>
         {children}
       </main>

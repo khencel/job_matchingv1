@@ -148,6 +148,7 @@ input:not([type="checkbox"]):not([type="radio"]){
   background: #E7F0FA;
   color: #0A65CC;
   border-left: #0A65CC 7px solid;
+  font-weight: bold;
 }
 
 .icon {
