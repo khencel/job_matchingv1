@@ -1,5 +1,5 @@
 "use client";
-import { Button, Card, Form, Stack } from "react-bootstrap";
+import { Button, Card, Form } from "react-bootstrap";
 
 const WorkExp = () => {
   const industries = [

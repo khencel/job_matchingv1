@@ -1,5 +1,5 @@
 "use client";
-import { PlusIcon, XCircleIcon, XIcon } from "lucide-react";
+import { PlusIcon, XCircleIcon } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { Badge, Button, Card, Container, Form } from "react-bootstrap";
 

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Button, Card, Form, Stack } from "react-bootstrap";
+import { Button, Card, Form } from "react-bootstrap";
 
 const Skills = () => {
   const [skills, setSkills] = useState("");
