@@ -31,6 +31,9 @@ const Skills = () => {
             <small className="text-muted d-block mt-2">
               {skills.length}/{maxLength} characters
             </small>
+            <small className="text-primary fst-italic">
+              Skills will not be displayed on resume.
+            </small>
           </Form.Group>
 
           <Button className="btn-primary-custom">Save</Button>

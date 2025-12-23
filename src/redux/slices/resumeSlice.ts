@@ -19,17 +19,17 @@ export interface ResumeEducation {
   primary: {
     schoolName: string;
     yearGraduated: string;
-    isFinished: boolean;
+    isNotFinished: boolean;
   };
   secondary: {
     schoolName: string;
     yearGraduated: string;
-    isFinished: boolean;
+    isNotFinished: boolean;
   };
   tertiary: {
     schoolName: string;
     yearGraduated: string;
-    isFinished: boolean;
+    isNotFinished: boolean;
   };
 }
 export interface ResumeLanguage {
@@ -43,11 +43,12 @@ export interface ResumeWorkExperience {
   industry: string;
   companyName: string;
   position: string;
+  employmentType: string;
   dateStarted: string;
   dateEnded: string;
 }
 
-interface ResumeBuilderData {
+export interface ResumeBuilderData {
   resumeTab: "basic-info" | "education" | "lang-level" | "skills" | "work-xp";
   basicInfo: ResumeBasicInfo;
   education: ResumeEducation;
@@ -73,9 +74,9 @@ const initialState: ResumeBuilderData = {
     photoUrl: "",
   },
   education: {
-    primary: { schoolName: "", yearGraduated: "", isFinished: false },
-    secondary: { schoolName: "", yearGraduated: "", isFinished: false },
-    tertiary: { schoolName: "", yearGraduated: "", isFinished: false },
+    primary: { schoolName: "", yearGraduated: "", isNotFinished: false },
+    secondary: { schoolName: "", yearGraduated: "", isNotFinished: false },
+    tertiary: { schoolName: "", yearGraduated: "", isNotFinished: false },
   },
   language: {
     japaneseLevel: "",
@@ -94,7 +95,7 @@ export const resumeBuilderSlice = createSlice({
     // Navigate Resume builder tab
     goNextResumeTab: (
       state,
-      action: PayloadAction<ResumeBuilderData["resumeTab"]>
+      action: PayloadAction<"basic-info" | "education" | "lang-level" | "skills" | "work-xp">
     ) => {
       state.resumeTab = action.payload;
     },
@@ -111,6 +112,13 @@ export const resumeBuilderSlice = createSlice({
       action: PayloadAction<Partial<typeof initialState.education>>
     ) => {
       state.education = { ...state.education, ...action.payload };
+    },
+
+    updateLanguage: (
+      state,
+      action: PayloadAction<Partial<typeof initialState.language>>
+    ) => {
+      state.language = { ...state.language, ...action.payload };
     },
 
     // 2. Action to update Arrays (Work Experience)
@@ -132,6 +140,7 @@ export const resumeBuilderSlice = createSlice({
         industry: "",
         companyName: "",
         position: "",
+        employmentType: "",
         dateStarted: "",
         dateEnded: "",
       });
@@ -143,9 +152,11 @@ export const resumeBuilderSlice = createSlice({
 });
 
 export const {
+  goNextResumeTab,
   updateBasicInfo,
   updateWorkExperience,
   updateEducation,
+  updateLanguage,
   addWorkExperience,
   removeWorkExperience,
 } = resumeBuilderSlice.actions;

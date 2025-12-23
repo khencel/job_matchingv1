@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import registerEmployerReducer from "./slices/register/employerSlice";
 import registerSuperVisoryReducer from "./slices/register/superVisorySlice";
 import registerJobSeekerReducer from "./slices/register/jobseekerSlice";
+import resumeBuilderReducer from "./slices/resumeSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -9,6 +10,7 @@ export const makeStore = () => {
       registerEmployer: registerEmployerReducer,
       registerSuperVisory: registerSuperVisoryReducer,
       registerJobSeeker: registerJobSeekerReducer,
+      resumeBuilder: resumeBuilderReducer,
     },
   });
 };

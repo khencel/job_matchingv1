@@ -1,6 +1,6 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { updateEducation } from "@/redux/slices/resumeSlice";
+import { goNextResumeTab, updateEducation } from "@/redux/slices/resumeSlice";
 import React, { useState } from "react";
 import { Button, Card, Form, Stack } from "react-bootstrap";
 
@@ -74,7 +74,8 @@ const Education = () => {
     // If all are not finished, clear errors and allow submission
     if (allNotFinished) {
       setFormErrors({ primary: {}, secondary: {}, tertiary: {} });
-      console.log("Education data valid:", education);
+      console.log("Education Resume valid:", education);
+      dispatch(goNextResumeTab("lang-level"));
       return;
     }
 
@@ -105,7 +106,9 @@ const Education = () => {
           if (yearNum < 1900) {
             nextErrors[level].yearGraduated = "Year must be 1900 or later.";
           } else if (yearNum > currentYear) {
-            nextErrors[level].yearGraduated = `Year cannot be greater than ${currentYear}.`;
+            nextErrors[
+              level
+            ].yearGraduated = `Year cannot be greater than ${currentYear}.`;
           }
         }
       } else if (yearStr.length > 0) {
@@ -117,7 +120,9 @@ const Education = () => {
           if (yearNum < 1900) {
             nextErrors[level].yearGraduated = "Year must be 1900 or later.";
           } else if (yearNum > currentYear) {
-            nextErrors[level].yearGraduated = `Year cannot be greater than ${currentYear}.`;
+            nextErrors[
+              level
+            ].yearGraduated = `Year cannot be greater than ${currentYear}.`;
           }
         }
       }
@@ -134,7 +139,8 @@ const Education = () => {
     }
 
     // Proceed to next step or save data
-    console.log("Education Resume Data:", education);
+    console.log("Education Resume valid:", education);
+    dispatch(goNextResumeTab("lang-level"));
   };
 
   const educationLevel = [
@@ -183,7 +189,9 @@ const Education = () => {
                 </Form.Control.Feedback>
                 <Form.Control
                   type="number"
-                  placeholder={`Enter Year ${item.isNotFinished ? "Stopped" : "Graduated"} (4 digits)`}
+                  placeholder={`Enter Year ${
+                    item.isNotFinished ? "Stopped" : "Graduated"
+                  } (4 digits)`}
                   name={`${item.id}.yearGraduated`}
                   value={item.yearGraduated}
                   onChange={handleChange}

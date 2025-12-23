@@ -4,6 +4,8 @@ import Education from "@/components/jobSeekerDashboard/resumeBuilder/Education";
 import LanguageLevel from "@/components/jobSeekerDashboard/resumeBuilder/LanguageLevel";
 import Skills from "@/components/jobSeekerDashboard/resumeBuilder/Skills";
 import WorkExp from "@/components/jobSeekerDashboard/resumeBuilder/WorkExp";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { goNextResumeTab, ResumeBuilderData } from "@/redux/slices/resumeSlice";
 import {
   BuildingIcon,
   LanguagesIcon,
@@ -16,6 +18,8 @@ import { ReactElement, useState } from "react";
 import { Button, Nav, Tab } from "react-bootstrap";
 
 const ResumeBuilderPage = () => {
+  const dispatch = useAppDispatch();
+  const resumeTab = useAppSelector((s) => s.resumeBuilder.resumeTab);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
   const handleCollapse = () => {
@@ -26,7 +30,12 @@ const ResumeBuilderPage = () => {
     <div className="d-flex flex-grow-1 overflow-hidden">
       <Tab.Container
         id={`sidebar ${isCollapsed && "justify-content-center"}`}
-        defaultActiveKey={"basic-info"}
+        activeKey={resumeTab}
+        onSelect={(key) => {
+          if (key) {
+            dispatch(goNextResumeTab(key as ResumeBuilderData["resumeTab"]));
+          }
+        }}
       >
         {/* Sidebar */}
         <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
@@ -93,15 +102,15 @@ const navItems: NavItems[] = [
     component: <LanguageLevel />,
   },
   {
-    key: "skills",
-    label: "Skills",
-    icon: <UserStar />,
-    component: <Skills />,
-  },
-  {
     key: "work-xp",
     label: "Work Experience",
     icon: <BuildingIcon />,
     component: <WorkExp />,
+  },
+  {
+    key: "skills",
+    label: "Skills",
+    icon: <UserStar />,
+    component: <Skills />,
   },
 ];
