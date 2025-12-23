@@ -85,7 +85,7 @@ const ResumeBuilderPage = () => {
               <Nav.Item key={items.key}>
                 <Nav.Link
                   eventKey={items.key}
-                  className="d-flex align-items-center gap-2"
+                  className="sidebar-text"
                 >
                   {items.icon}
                   {!isCollapsed && <span>{items.label}</span>}

@@ -30,6 +30,12 @@ const parseDate = (dateStr: string): { year: string; month: string } => {
 export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
   ({ data }, ref) => {
     const { basicInfo, education, workExperience, language } = data;
+    const educationEntries = [
+      education.primary,
+      education.secondary,
+      education.tertiary,
+    ];
+    const hasEducation = educationEntries.some((edu) => edu.schoolName);
 
     // Shared border styles for consistency
     const borderDark = "border-dark"; // Bootstrap class
@@ -159,8 +165,8 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
           </Row>
 
           {/* Helper to render rows */}
-          {[education.primary, education.secondary, education.tertiary].map(
-            (edu, idx) => {
+          {hasEducation ? (
+            educationEntries.map((edu, idx) => {
               if (!edu.schoolName) return null;
               const date = parseDate(edu.yearGraduated);
               const labels = ["Primary", "Secondary", "Tertiary"];
@@ -178,7 +184,14 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
                   </Col>
                 </Row>
               );
-            }
+            })
+          ) : (
+            <Row className="g-0 border-top border-dark">
+              <Col xs={3} className={`border-end ${borderDark}`}></Col>
+              <Col xs={9} className="p-4 text-center text-muted">
+                No educational background provided
+              </Col>
+            </Row>
           )}
 
           {/* ================= WORK EXPERIENCE ================= */}
