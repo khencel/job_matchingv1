@@ -58,6 +58,7 @@ const WorkExp = () => {
     e.preventDefault();
 
     const nextErrors: FormErrors = {};
+    const currentYear = new Date().getFullYear();
 
     // Validate all work experience entries
     if (workExperience.length === 0) {
@@ -97,12 +98,36 @@ const WorkExp = () => {
         nextErrors.dateStarted = "Start date is required.";
         setSelectedIndex(i);
         break;
+      } else {
+        const startYear = new Date(exp.dateStarted).getFullYear();
+        if (Number.isNaN(startYear)) {
+          nextErrors.dateStarted = "Start date is invalid.";
+          setSelectedIndex(i);
+          break;
+        }
+        if (startYear > currentYear) {
+          nextErrors.dateStarted = `Start year cannot be greater than ${currentYear}.`;
+          setSelectedIndex(i);
+          break;
+        }
       }
 
       if (!exp.dateEnded || exp.dateEnded.trim().length === 0) {
         nextErrors.dateEnded = "End date is required.";
         setSelectedIndex(i);
         break;
+      } else {
+        const endYear = new Date(exp.dateEnded).getFullYear();
+        if (Number.isNaN(endYear)) {
+          nextErrors.dateEnded = "End date is invalid.";
+          setSelectedIndex(i);
+          break;
+        }
+        if (endYear > currentYear) {
+          nextErrors.dateEnded = `End year cannot be greater than ${currentYear}.`;
+          setSelectedIndex(i);
+          break;
+        }
       }
 
       if (exp.dateStarted && exp.dateEnded < exp.dateStarted) {

@@ -46,7 +46,15 @@ const BasicInfo = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setProfilePicture(e.target.files[0]);
+      const file = e.target.files[0];
+      setProfilePicture(file);
+
+      // Convert selected image to data URL so the template can render it immediately
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        dispatch(updateBasicInfo({ photoUrl: reader.result as string }));
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -196,8 +204,8 @@ const BasicInfo = () => {
               isInvalid={!!formErrors.gender}
             >
               <option value="">Select gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
             </Form.Select>
             <Form.Control.Feedback type="invalid">
               {formErrors.gender}
@@ -260,10 +268,10 @@ const BasicInfo = () => {
               isInvalid={!!formErrors.status}
             >
               <option value="">Select status</option>
-              <option value="single">Single</option>
-              <option value="married">Married</option>
-              <option value="divorced">Divorced</option>
-              <option value="widowed">Widowed</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Divorced">Divorced</option>
+              <option value="Widowed">Widowed</option>
             </Form.Select>
             <Form.Control.Feedback type="invalid">
               {formErrors.status}
