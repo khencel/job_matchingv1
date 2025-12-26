@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import registerEmployerReducer from "./slices/register/employerSlice";
 import registerSuperVisoryReducer from "./slices/register/superVisorySlice";
-import registerJobSeekerReducer from "./slices/register/jobSeekerSlice";
-import skillsSlice from "./slices/employer/post_a_job/skillsSlice";
+import registerJobSeekerReducer from "./slices/register/jobseekerSlice";
+import basicInfoSlice from "./slices/employer/post_a_job/basicInfoSlice";
 
 
 export const makeStore = () => {
@@ -11,7 +11,7 @@ export const makeStore = () => {
       registerEmployer: registerEmployerReducer,
       registerSuperVisory: registerSuperVisoryReducer,
       registerJobSeeker: registerJobSeekerReducer,
-      skills: skillsSlice,
+      basicInfo: basicInfoSlice,
     },
   });
 };

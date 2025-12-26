@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
 
+
 const options = [
   { value: "apple", label: "Apple" },
   { value: "banana", label: "Banana" },
@@ -8,21 +9,17 @@ const options = [
   { value: "mango", label: "Mango" },
 ];
 
-const MultiSelectDropdown = () => {
-  const [selectedOptions, setSelectedOptions] = useState([]);
+const MultiSelectDropdown = ({ value, onChange }) => {
+  const [selectedOptions, setSelectedOptions] = useState(value || []);
 
   return (
     <div>
       <Select
         options={options}
         isMulti
-        value={selectedOptions}
-        onChange={setSelectedOptions}
+        value={value}          
+        onChange={onChange}   
       />
-
-      <p>
-        Selected: {selectedOptions.map((opt) => opt.label).join(", ")}
-      </p>
     </div>
   );
 };

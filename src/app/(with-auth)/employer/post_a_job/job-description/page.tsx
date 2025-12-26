@@ -1,7 +1,23 @@
+"use client";
+
+import { setField } from "@/redux/slices/employer/post_a_job/basicInfoSlice";
 import Header from "../headerPostAJob"
 import TextEditor from "./TextEditor";
+import type {RootState} from '@/redux/store'
+import { useSelector, useDispatch } from "react-redux"
+import { setInitialData } from "@/redux/slices/employer/post_a_job/basicInfoSlice";
+import { useRouter } from "next/navigation";
 
 export default function JobDescription(){
+
+    const basicInfo = useSelector((state: RootState) => state.basicInfo);
+    const dispatch = useDispatch();
+    const router = useRouter();
+
+    const handleNextDescription = () => {
+        dispatch(setInitialData(basicInfo));
+        router.push("/employer/post_a_job/perks-benefit");
+    }
     return(
         <>
             <Header/>
@@ -18,7 +34,7 @@ export default function JobDescription(){
                         <small>Job description must be describe one position.</small>
                     </div>
                     <div className="col">
-                        <TextEditor />
+                        <TextEditor value={basicInfo.job_desc || ""} onChange={(value) => dispatch(setField({ job_desc: value }))} />
                     </div>
                 </div>
 
@@ -29,7 +45,7 @@ export default function JobDescription(){
                         <small>Outline the core responsibilities of the position.</small>
                     </div>
                     <div className="col">
-                        <TextEditor />
+                        <TextEditor value={basicInfo.responsibility || ""} onChange={(value) => dispatch(setField({ responsibility: value }))} />
                     </div>
                 </div>
 
@@ -40,7 +56,7 @@ export default function JobDescription(){
                         <small>Add your preferred candidates qualifications.</small>
                     </div>
                     <div className="col">
-                        <TextEditor />
+                        <TextEditor value={basicInfo.who_you_are || ""} onChange={(value) => dispatch(setField({ who_you_are: value }))} />
                     </div>
                 </div>
 
@@ -51,13 +67,13 @@ export default function JobDescription(){
                         <small>Add nice-to-have skills and qualifications for the role to encourage a more diverse set of candidates to apply.</small>
                     </div>
                     <div className="col">
-                        <TextEditor />
+                        <TextEditor value={basicInfo.nice_to_have || ""} onChange={(value) => dispatch(setField({ nice_to_have: value }))} />
                     </div>
                 </div>
 
                 <div className="row justify-content-end mt-5 mb-3">
                     <div className="col-md-3 text-end">
-                            <button className="btn btn-primary-custom rounded-3">Next</button>
+                            <button onClick={handleNextDescription} className="btn btn-primary-custom rounded-3">Next</button>
                     </div>
                 </div>
             </div>

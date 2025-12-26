@@ -44,7 +44,10 @@
 .ProseMirror {
   min-height: 100px;
   overflow-y: auto;  
-  /* padding: 8px; */
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.tiptap{
+  padding: 10px;
 }

@@ -4,17 +4,18 @@ import MultiSelectDropdown from "@/components/MultipleSelect"
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import type {RootState} from '@/redux/store'
-import { addSkill, removeSkill } from "@/redux/slices/employer/post_a_job/skillsSlice"
-
-
-
+import { setField, addSkill, removeSkill, setInitialData } from "@/redux/slices/employer/post_a_job/basicInfoSlice"
+import {showErrorToast } from "@/app/(util)/toaster";
+import { useRouter } from "next/navigation"
 
 export default function PostAJob(){
     const [mounted, setMounted] = useState(false);
     const [input, setInput] = useState<string>("")
+    const router = useRouter();
 
-    const skills = useSelector((state: RootState) => state.skills.skills);
     const dispatch = useDispatch();
+
+    const basicInfo = useSelector((state: RootState) => state.basicInfo);
 
     const handleAddSkill = () => {
         const value = input.trim();
@@ -22,6 +23,33 @@ export default function PostAJob(){
             dispatch(addSkill(value));
             setInput("");
         }
+    }
+
+    const handleNext = () => {
+        const title = basicInfo.title.trim();
+        const employmentTypes = basicInfo.type_of_emp;
+        if(!title){
+            showErrorToast("Job title is required."," Please provide a job title to proceed.");
+            return;
+        }
+        if(employmentTypes.length === 0){
+            showErrorToast("Employment type is required."," Please select at least one employment type to proceed.");
+            return;
+        }
+
+        router.push("/employer/post_a_job/job-description");
+        console.log(dispatch(setInitialData(basicInfo)));
+    }
+
+    const handleCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        let updatedTypes = [...basicInfo.type_of_emp];
+        if (e.target.checked) {
+            updatedTypes.push(value);
+        } else {
+            updatedTypes = updatedTypes.filter(type => type !== value);
+        }
+        dispatch(setField({ type_of_emp: updatedTypes }));
     }
 
     useEffect(() => {
@@ -44,7 +72,7 @@ export default function PostAJob(){
                         <small>Job title must be describe one position.</small>
                     </div>
                     <div className="col">
-                        <textarea name="" placeholder="e.g Software Engineer" className="form-control" id=""></textarea>
+                        <textarea name="" value={basicInfo.title} onChange={(e)=>dispatch(setField({title: e.target.value}))} placeholder="e.g Software Engineer" className="form-control" id=""></textarea>
                         <small>At least 80 characters</small>
                     </div>
                 </div>
@@ -56,22 +84,22 @@ export default function PostAJob(){
                         <small>Please specify the estimated salary range for the role.</small>
                     </div>
                     <div className="col">
-                        <input type="number" className="form-control" placeholder="Estimate salary" />
+                        <input type="number" value={basicInfo.salary ?? ""} onChange={(e)=>dispatch(setField({salary: e.target.valueAsNumber}))} className="form-control" placeholder="Estimate salary" />
                     </div>
                 </div>
 
                 <div className="row mt-2">
                     <div className="col">
-                        <strong>Type of Employment</strong>
+                        <strong>Type of Employment <span className="text-danger">*</span></strong>
                     </div>
                     <div className="col">
-                        <input type="checkbox" /> Full-Time
+                        <input type="checkbox" value="Full-Time" checked={basicInfo.type_of_emp.includes("Full-Time")} onChange={handleCheckBox} /> Full-Time
                         <br />
-                        <input type="checkbox" /> Part-Time
+                        <input type="checkbox" value={"Part-Time"} checked={basicInfo.type_of_emp.includes("Part-Time")} onChange={handleCheckBox} /> Part-Time
                         <br />
-                        <input type="checkbox" /> Remote
+                        <input type="checkbox" value={"Remote"} checked={basicInfo.type_of_emp.includes("Remote")} onChange={handleCheckBox} /> Remote
                         <br />
-                        <input type="checkbox" /> Internship
+                        <input type="checkbox" value={"Internship"} checked={basicInfo.type_of_emp.includes("Internship")} onChange={handleCheckBox} /> Internship
                     </div>
                 </div>
 
@@ -82,7 +110,7 @@ export default function PostAJob(){
                         <small>You can select multiple job categories</small>
                     </div>
                     <div className="col">
-                        <MultiSelectDropdown />
+                        <MultiSelectDropdown value={basicInfo.category} onChange={(selectedOptions:any) => dispatch(setField({ category: selectedOptions }))}    />
                     </div>
                 </div>
 
@@ -100,7 +128,7 @@ export default function PostAJob(){
                             <span className="primary-text"><strong>+ Add Skills</strong></span>
                         </button>
                         <div className="mt-2">
-                            {skills.map((skill, index) => (
+                            {basicInfo.skill.map((skill, index) => (
                                 <span key={index} className="badge primary-bg me-2">
                                     {skill}
                                     <span className="badge clickable bg-danger p-2 ms-1" onClick={() =>dispatch(removeSkill(skill))}>X</span>
@@ -113,7 +141,12 @@ export default function PostAJob(){
 
                 <div className="row justify-content-end mt-5 mb-3">
                     <div className="col-md-3 text-end">
-                            <button className="btn btn-primary-custom rounded-3">Next</button>
+                            <button 
+                                className="btn btn-primary-custom rounded-3"
+                                onClick={handleNext}
+                            >
+                                Next
+                            </button>
                     </div>
                 </div>
             </div>

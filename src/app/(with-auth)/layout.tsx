@@ -11,6 +11,7 @@ import Sidebar from "../components/sidebar";
 import StoreProvider from "../StoreProvider";
 import NextIntlProvider from "@/i18n/NextIntlProvider";
 import { cookies } from "next/headers";
+import { ToastContainer } from "react-toastify";
 
 export const metadata = {
   title: "Next.js",
@@ -39,6 +40,10 @@ export default async function RootLayout({
 
           <Sidebar>
             {children}
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+            />
           </Sidebar>
 
           <Footer />

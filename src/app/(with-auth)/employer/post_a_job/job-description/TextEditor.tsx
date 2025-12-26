@@ -4,12 +4,23 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 
 
-export default function TextEditor() {
+
+interface TextEditorProps {
+    value: string;
+    onChange: (value: string) => void;
+}
+
+export default function TextEditor({ value, onChange }: TextEditorProps) {
 
     const editor = useEditor({
         extensions: [StarterKit],
-        content: "",
+        content: value,
         immediatelyRender: false, 
+
+        onUpdate: ({ editor }) => {
+          const html = editor.getHTML();
+          onChange(html); 
+        },
     });
 
     if (!editor) return null;
