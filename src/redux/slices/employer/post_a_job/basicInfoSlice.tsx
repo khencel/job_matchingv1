@@ -2,6 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createJobPost } from "@/redux/features/job_post/job_post_thunk";
 
 
+
+export interface Benefit {
+  id: string;
+  title: string;
+  description: string
+}
+
 export interface PostBasicInfoState {
     user_id: string | null;
     title: string;
@@ -14,10 +21,13 @@ export interface PostBasicInfoState {
     who_you_are?: string;
     nice_to_have?: string;
     status?: "idle" | "loading" | "succeeded" | "failed";
+    benefits: Benefit[];
 }
 
 const initialState: PostBasicInfoState = {
-    user_id: localStorage.getItem("user_id"),
+    user_id: typeof window !== "undefined"
+    ? localStorage.getItem("user_id")
+    : null,
     title: "",
     salary: null,
     type_of_emp: [],
@@ -28,7 +38,10 @@ const initialState: PostBasicInfoState = {
     who_you_are: "",
     nice_to_have: "",
     status: "idle",
+    benefits:[]
 };
+
+
 
 const basicInfoSlice = createSlice({
   name: "basicInfo",
@@ -50,6 +63,16 @@ const basicInfoSlice = createSlice({
       setInitialData: (state, action: PayloadAction<PostBasicInfoState>) => {
         localStorage.setItem("initialData", JSON.stringify(action.payload));
         return { ...state, ...action.payload };
+      },
+
+      addBenefit: (state, action: PayloadAction<Benefit>) => {
+          state.benefits.push(action.payload)
+      },
+
+      removeBenefit: (state, action: PayloadAction<string>) => {
+        state.benefits = state.benefits.filter(
+          benefit => benefit.id !== action.payload
+        )
       }
     },
     extraReducers: (builder) => {
@@ -60,5 +83,5 @@ const basicInfoSlice = createSlice({
     }
 });
 
-export const { setField, addSkill, removeSkill, resetForm, setInitialData } = basicInfoSlice.actions;
+export const { setField, addSkill, removeSkill, resetForm, setInitialData, addBenefit, removeBenefit } = basicInfoSlice.actions;
 export default basicInfoSlice.reducer;

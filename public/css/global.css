@@ -10,6 +10,18 @@
     display: inline-block;
 }
 
+.btn-default-custom{
+    background: #f5f5f5;
+    border-radius: 10px;
+    color: #4C95ED;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+    border-style: 1px solid black !important;
+    background-color: white;
+}
+
 .btn-primary-custom:hover{
     color: white;
     background: linear-gradient(to top, #53a0ff, #357ae8);
