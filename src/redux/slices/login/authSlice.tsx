@@ -2,14 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { showSuccessToast, showErrorToast } from "@/app/(util)/toaster";
 import loginApi from "@/redux/features/auth/authService";
-
-interface AuthState {
-  user: any | null; // Replace 'any' with your user type
-  access: string | null;
-  loading: boolean;
-  error: string | null;
-  isAuthenticated?: boolean;
-}
+import { fetchCurrentUser } from "@/redux/features/auth/auth_thunk";
 
 
 interface LoginPayload {
@@ -22,6 +15,15 @@ interface LoginResponse {
   access: string;
 }
 
+interface AuthState {
+  user: any | null; // Replace 'any' with your user type
+  access: string | null;
+  loading: boolean;
+  error: string | null;
+  isAuthenticated?: boolean;
+  user_data: any;
+}
+
 // Initial state
 const initialState: AuthState = {
   user: null,
@@ -29,6 +31,7 @@ const initialState: AuthState = {
   loading: false,
   error: null,
   isAuthenticated: false,
+  user_data: {},
 };
 
 // Async thunk for login
@@ -76,6 +79,20 @@ const authSlice = createSlice({
       .addCase(loginUser.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.error = action.payload || "Login failed";
+      });
+
+    builder
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user_data = action.payload;
+        state.isAuthenticated = true;
+      })
+      builder.addCase(fetchCurrentUser.pending, (state) => {
+      state.loading = true;
+      });
+      builder.addCase(fetchCurrentUser.rejected, (state, action) => {
+          state.loading = false;
+          state.error = action.payload as string || "Failed to fetch user";
       });
   },
 });

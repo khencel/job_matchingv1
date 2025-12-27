@@ -4,11 +4,13 @@ import registerSuperVisoryReducer from "./slices/register/superVisorySlice";
 import registerJobSeekerReducer from "./slices/register/jobseekerSlice";
 import basicInfoSlice from "./slices/employer/post_a_job/basicInfoSlice";
 import jobListing from "./slices/employer/post_a_job/JobListing"
+import authReducer from "@/redux/slices/login/authSlice";
 
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
+      auth: authReducer,
       registerEmployer: registerEmployerReducer,
       registerSuperVisory: registerSuperVisoryReducer,
       registerJobSeeker: registerJobSeekerReducer,

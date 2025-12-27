@@ -1,15 +1,22 @@
 "use client";
 import { link } from "fs";
 import { useLocale, useTranslations } from "next-intl";
-import React, { use, useCallback } from "react";
+import React, { use, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link"; 
 import { useState } from "react";
+import { useAppDispatch } from "@/redux/hooks";
+import { fetchCurrentUser } from "@/redux/features/auth/auth_thunk";
+import type { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
+
 
 export default function Navbar() {
   const locale = useLocale();
   const t = useTranslations("navbar");
   const router = useRouter();
+
+  const [user, setUser] = useState("")
 
   const setLocale = useCallback((nextLocale: "en" | "ja") => {
     const expiry = new Date(); // 1 year expiry
@@ -44,7 +51,9 @@ const getAvatarColor = (name: string) => {
   return colors[Math.abs(hash) % colors.length];
 };
 
-const [user, setUser] = useState() 
+  const fullname = () => {
+    return "Khenneth Alaiza";
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -102,7 +111,7 @@ const [user, setUser] = useState()
                   // Show actual avatar image if exists
                   <img
                     src={""}
-                    alt={"Khenneth Alaiza"}
+                    alt={fullname()}
                     className="rounded-circle"
                     style={{ width: "32px", height: "32px", objectFit: "cover" }}
                   />
@@ -113,13 +122,13 @@ const [user, setUser] = useState()
                     style={{
                       width: "32px",
                       height: "32px",
-                      backgroundColor: getAvatarColor("Khenneth Alaiza"),
+                      backgroundColor: getAvatarColor(fullname()),
                       color: "white",
                       fontWeight: "600",
                       fontSize: "14px",
                     }}
                   >
-                    {getInitials("Khenneth Alaiza")}
+                    {getInitials(fullname())}
                   </div>
                 )}
                 
