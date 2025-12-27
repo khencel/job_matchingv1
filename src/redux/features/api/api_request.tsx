@@ -9,8 +9,12 @@ export default function postAPI (data: any){
     });
 }
 
-export async function fetchAPI (url: string){
-    return axios.get(url);
+export async function fetchAPI (user_id:number){
+    return axios.get(`http://localhost:8000/api/job/list/${user_id}`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    });
 }
 
 export async function updateAPI (url: string, data: any){

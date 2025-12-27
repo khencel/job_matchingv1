@@ -13,9 +13,24 @@ import {
 } from "react-icons/fa";
 import { FiLayers } from "react-icons/fi";
 import{ PropsWithChildren} from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 
 const Sidebar = ({ children }: PropsWithChildren) => {
   const [collapsed, setCollapsed] = useState(false);
+  const pathname = usePathname();
+  const menuItems = [
+    {label: "Overview", icon:FiLayers, href: "/employer/overview"},
+    { label: "Employers Profile", icon: FaUser, href: "/employer/profile" },
+    { label: "Applicants", icon: FaClipboardList, href: "/employer/applicants" },
+    { label: "Post Job", icon: FaPlus, href: "/employer/post_a_job/job-information" },
+    { label: "Job Listings", icon: FaBuilding, href: "/employer/job_listing" },
+    { label: "All Companies", icon: FaUsers, href: "/employer/companies" },
+    { label: "Messages", icon: FaEnvelope, href: "/employer/messages" },
+    { label: "Settings", icon: FaCog, href: "/employer/settings" },
+  ];
+
 
   return (
     <div className="layout">
@@ -35,38 +50,23 @@ const Sidebar = ({ children }: PropsWithChildren) => {
         </div>
 
         <ul>
-          <li className="sidebar-text">
-            <FiLayers className="icon" />
-            {!collapsed && <span>Overview</span>}
-          </li>
-          <li className="sidebar-text">
-            <FaUser className="icon" />
-            {!collapsed && <span>Employers Profile</span>}
-          </li>
-          <li className="sidebar-text">
-            <FaClipboardList className="icon" />
-            {!collapsed && <span>Applicants</span>}
-          </li>
-          <li className="sidebar-text active">
-            <FaPlus className="icon" />
-            {!collapsed && <span>Post Job</span>}
-          </li>
-          <li className="sidebar-text">
-            <FaBuilding className="icon" />
-            {!collapsed && <span>Job Listings</span>}
-          </li>
-          <li className="sidebar-text">
-            <FaUsers className="icon" />
-            {!collapsed && <span>All Companies</span>}
-          </li>
-          <li className="sidebar-text">
-            <FaEnvelope className="icon" />
-            {!collapsed && <span>Messages</span>}
-          </li>
-          <li className="sidebar-text">
-            <FaCog className="icon" />
-            {!collapsed && <span>Settings</span>}
-          </li>
+          {menuItems.map((item) => {
+              const isActive = pathname.startsWith(item.href);
+              const Icon = item.icon;
+
+              return (
+                <li 
+                  key={item.href}
+                  className={`sidebar-text p-0 ${isActive ? "active" : ""}`}
+                >
+                   <Link href={item.href} className="sidebar-link sidebar-text">
+                    <Icon className="icon" />
+                    {!collapsed && <span>{item.label}</span>}
+                  </Link>
+                </li>
+              )
+          })}
+  
         </ul>
       </aside>
 

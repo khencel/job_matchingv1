@@ -8,14 +8,16 @@ import type { AppDispatch } from '@/redux/store';
 import { FaPlus, FaXmark } from "react-icons/fa6";
 import AddBenefitsModal from "./add_benefits_modal";
 import { useState } from "react";
-import { removeBenefit } from "@/redux/slices/employer/post_a_job/basicInfoSlice";
-import { setInitialData } from "@/redux/slices/employer/post_a_job/basicInfoSlice";
+import { removeBenefit, setInitialData, resetForm } from "@/redux/slices/employer/post_a_job/basicInfoSlice";
 import { popup } from "@/helper/pop_up";
+import { useRouter } from "next/navigation";
+
 
 export default function PerksBenefitPage() {
   const basicInfo = useSelector((state: RootState) => state.basicInfo);
   const benefits = useSelector((state:RootState) => state.basicInfo.benefits)
   const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
 
   const [showModal, setShowModal] = useState(false);
 
@@ -39,7 +41,10 @@ export default function PerksBenefitPage() {
   const handleSubmit = () => {
     const initialData = localStorage.getItem("initialData");
     const parsedData = initialData ? JSON.parse(initialData) : basicInfo;
-    dispatch(createJobPost(parsedData));
+    
+    router.push("/employer/job_listing");
+    dispatch(createJobPost(parsedData)).unwrap();
+    dispatch(resetForm());
   }
 
   return (

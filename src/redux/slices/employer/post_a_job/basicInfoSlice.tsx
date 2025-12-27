@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createJobPost } from "@/redux/features/job_post/job_post_thunk";
 
-
-
 export interface Benefit {
   id: string;
   title: string;
@@ -40,6 +38,7 @@ const initialState: PostBasicInfoState = {
     status: "idle",
     benefits:[]
 };
+
 
 
 
