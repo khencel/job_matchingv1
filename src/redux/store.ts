@@ -2,9 +2,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import registerEmployerReducer from "./slices/register/employerSlice";
 import registerSuperVisoryReducer from "./slices/register/superVisorySlice";
 import registerJobSeekerReducer from "./slices/register/jobseekerSlice";
+import resumeBuilderReducer from "./slices/resumeSlice";
+import authReducer from "./slices/login/authSlice";
 import basicInfoSlice from "./slices/employer/post_a_job/basicInfoSlice";
-import jobListing from "./slices/employer/post_a_job/JobListing"
-import authReducer from "@/redux/slices/login/authSlice";
+import jobListing from "./slices/employer/post_a_job/JobListing";
 
 
 export const makeStore = () => {
@@ -14,6 +15,8 @@ export const makeStore = () => {
       registerEmployer: registerEmployerReducer,
       registerSuperVisory: registerSuperVisoryReducer,
       registerJobSeeker: registerJobSeekerReducer,
+      resumeBuilder: resumeBuilderReducer,
+      authState: authReducer,
       basicInfo: basicInfoSlice,
       jobListing: jobListing,
     },

@@ -1,27 +1,39 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
-import { showSuccessToast, showErrorToast } from "@/app/(util)/toaster";
+import {
+  createSlice,
+  createAsyncThunk,
+  PayloadAction,
+  SerializedError,
+} from "@reduxjs/toolkit";
+import { AxiosError } from "axios";
+import Cookies from "js-cookie";
 import loginApi from "@/redux/features/auth/authService";
 import { fetchCurrentUser } from "@/redux/features/auth/auth_thunk";
 
+
+interface AuthState {
+  user: User | null; // Replace 'any' with your user type
+  access: string | null;
+  loading: boolean;
+  error: SerializedError | null;
+  isAuthenticated?: boolean;
+}
 
 interface LoginPayload {
   email: string;
   password: string;
 }
 
-interface LoginResponse {
-  user: any;
-  access: string;
+export interface User {
+  id: number;
+  email: string;
+  username: string;
+  first_name: string;
+  last_name: string;
 }
-
-interface AuthState {
-  user: any | null; // Replace 'any' with your user type
-  access: string | null;
-  loading: boolean;
-  error: string | null;
-  isAuthenticated?: boolean;
-  user_data: any;
+export interface LoginResponse {
+  refresh: string;
+  access: string;
+  user: User;
 }
 
 // Initial state
@@ -31,28 +43,42 @@ const initialState: AuthState = {
   loading: false,
   error: null,
   isAuthenticated: false,
-  user_data: {},
 };
 
 // Async thunk for login
-export const loginUser = createAsyncThunk<LoginResponse, LoginPayload>(
-  "auth/loginUser",
-  async (payload, { rejectWithValue }) => {
-    const email = payload.email;
-    const password = payload.password;
+export const loginUser = createAsyncThunk<
+  LoginResponse,
+  LoginPayload,
+  { rejectValue: string }
+>("auth/loginUser", async (payload, { rejectWithValue }) => {
+  const email = payload.email;
+  const password = payload.password;
 
-    try{
-        const res = await loginApi({ email, password });
-        localStorage.setItem("token", res.data.access);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
-        localStorage.setItem("user_id", res.data.user.id);
-        return res.data;
-    }catch(error: any){
-      return rejectWithValue(error.response?.data?.message || "Login failed");
+  try {
+    const res = await loginApi({ email, password });
+    Cookies.set("refreshToken", res.data.refresh, {
+      expires: 7,
+      secure: true,
+      sameSite: "strict",
+    });
+    return res.data;
+  } catch (error) {
+    // Handle Axios errors
+    if (error instanceof AxiosError) {
+      // Server responded with error status
+      if (error.response) {
+        const message = error.response.data?.message || "Registration failed";
+        return rejectWithValue(message);
+      }
+      // Network error (no response)
+      if (error.request) {
+        return rejectWithValue("Network error. Please check your connection.");
+      }
     }
-  
+    // Generic error fallback
+    return rejectWithValue("An unexpected error occurred. Please try again.");
   }
-);
+});
 
 const authSlice = createSlice({
   name: "auth",
@@ -62,6 +88,10 @@ const authSlice = createSlice({
       state.user = null;
       state.access = null;
       state.error = null;
+      state.isAuthenticated = false;
+      Cookies.remove("refreshToken");
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
     },
   },
   extraReducers: (builder) => {
@@ -70,30 +100,24 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(loginUser.fulfilled, (state, action: PayloadAction<LoginResponse>) => {
-        state.loading = false;
-        state.user = action.payload.user;
-        state.isAuthenticated = true;
-        state.access = action.payload.access;
-      })
-      .addCase(loginUser.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false;
-        state.error = action.payload || "Login failed";
-      });
-
-    builder
-      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.user_data = action.payload;
-        state.isAuthenticated = true;
-      })
-      builder.addCase(fetchCurrentUser.pending, (state) => {
-      state.loading = true;
-      });
-      builder.addCase(fetchCurrentUser.rejected, (state, action) => {
+      .addCase(
+        loginUser.fulfilled,
+        (state, action: PayloadAction<LoginResponse>) => {
           state.loading = false;
-          state.error = action.payload as string || "Failed to fetch user";
-      });
+          state.user = action.payload.user;
+          state.isAuthenticated = true;
+          state.access = action.payload.access;
+        }
+      )
+      .addCase(
+        loginUser.rejected,
+        (state, action: PayloadAction<string | undefined>) => {
+          state.loading = false;
+          state.error = action.payload
+            ? { message: action.payload }
+            : { message: "Login failed" };
+        }
+      );
   },
 });
 
