@@ -56,6 +56,10 @@ export default function NavbarAuth() {
     return colors[Math.abs(hash) % colors.length];
   };
 
+  const fullname = () => {
+    return "Khenneth Alaiza";
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid d-flex align-items-center">
