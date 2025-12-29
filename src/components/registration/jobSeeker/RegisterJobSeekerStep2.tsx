@@ -102,6 +102,28 @@ const RegisterJobSeekerStep2 = () => {
     let hasError = false;
     const validationErrors: Record<string, boolean> = {};
 
+    // Validate firstName
+    if (!data.firstName || data.firstName.trim().length < 2) {
+      validationErrors.firstName = true;
+      hasError = true;
+    }
+
+    // Validate midName (optional but if provided must be >= 2 chars)
+    if (
+      data.midName &&
+      data.midName.trim().length > 0 &&
+      data.midName.trim().length < 2
+    ) {
+      validationErrors.midName = true;
+      hasError = true;
+    }
+
+    // Validate lastName
+    if (!data.lastName || data.lastName.trim().length < 2) {
+      validationErrors.lastName = true;
+      hasError = true;
+    }
+
     // Validate nationality
     if (!data.nationality) {
       validationErrors.nationality = true;
@@ -206,11 +228,73 @@ const RegisterJobSeekerStep2 = () => {
     (data.contactNo.length > 0 && !isContactValid(data.contactNo));
 
   const facebookInvalid =
-    error.facebook || (!!data.facebook && !isFacebookUrlValid(data.facebook));
+    !!error.facebook || (!!data.facebook && !isFacebookUrlValid(data.facebook));
 
   return (
     <Form noValidate onSubmit={handleSubmit}>
       <h4 className="mb-4 text-center">{t("title")}</h4>
+      <Form.Group className="mb-3">
+        <Form.Label>{t("labels.firstName")}</Form.Label>
+        <Form.Control
+          required
+          type="text"
+          name="firstName"
+          value={data.firstName}
+          onChange={handleChange}
+          placeholder={t("placeholders.firstName")}
+          minLength={2}
+          isInvalid={
+            error.firstName ||
+            (data.firstName.length > 0 && data.firstName.length < 2)
+          }
+        />
+        <Form.Control.Feedback type="invalid">
+          {t("errors.nameTooShort")}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>
+          {t("labels.midName")}{" "}
+          <span className="text-muted">({t("labels.optional")})</span>
+        </Form.Label>
+        <Form.Control
+          type="text"
+          name="midName"
+          value={data.midName || ""}
+          onChange={handleChange}
+          placeholder={t("placeholders.midName")}
+          minLength={2}
+          isInvalid={!!(
+            error.midName ||
+            (data.midName && data.midName.length > 0 && data.midName.length < 2)
+          )}
+        />
+        <Form.Control.Feedback type="invalid">
+          {t("errors.nameTooShort")}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>{t("labels.lastName")}</Form.Label>
+        <Form.Control
+          required
+          type="text"
+          name="lastName"
+          value={data.lastName}
+          onChange={handleChange}
+          placeholder={t("placeholders.lastName")}
+          minLength={2}
+          isInvalid={
+            error.lastName ||
+            (data.lastName.length > 0 && data.lastName.length < 2)
+          }
+        />
+        <Form.Control.Feedback type="invalid">
+          {t("errors.nameTooShort")}
+        </Form.Control.Feedback>
+      </Form.Group>
+
       <Form.Group className="mb-3">
         <Form.Label>{t("labels.nationality")}</Form.Label>
         <Form.Select
@@ -574,11 +658,11 @@ const RegisterJobSeekerStep2 = () => {
         <Form.Control
           type="text"
           name="facebook"
-          value={data.facebook}
+          value={data.facebook || ""}
           onChange={handleChange}
           placeholder={t("placeholders.facebook")}
           minLength={5}
-          isInvalid={facebookInvalid}
+          isInvalid={!!facebookInvalid}
         />
         <Form.Control.Feedback type="invalid">
           {t("errors.invalidFacebookUrl")}

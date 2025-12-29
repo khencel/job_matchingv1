@@ -244,6 +244,9 @@
   "registerJobSeekerStep2": {
     "title": "Personal Information",
     "labels": {
+      "firstName": "First Name",
+      "midName": "Middle Name",
+      "lastName": "Last Name",
       "nationality": "Nationality",
       "gender": "Gender",
       "currentPlaceResidence": "Current Place of Residence",
@@ -257,6 +260,9 @@
       "optional": "Optional"
     },
     "placeholders": {
+      "firstName": "Enter your first name",
+      "midName": "Enter your middle name",
+      "lastName": "Enter your last name",
       "selectNationality": "Select your nationality",
       "nationality": "Enter your nationality",
       "currentPlaceResidence": "Enter your current address",
@@ -284,6 +290,7 @@
       "doctoralDegree": "Doctoral Degree"
     },
     "errors": {
+      "nameTooShort": "Name must be at least 2 characters.",
       "visaStatusRequired": "Please select your visa status.",
       "nationalityRequired": "Please select your nationality.",
       "genderRequired": "Please select your gender.",

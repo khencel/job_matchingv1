@@ -4,6 +4,9 @@ import { AxiosError } from "axios";
 import { RegistrationStep1 } from "./superVisorySlice";
 
 export interface RegisterJobSeekerStep2Data {
+  firstName: string;
+  midName?: string;
+  lastName: string;
   nationality: string;
   gender: "male" | "female" | null;
   currentPlaceResidence: string;
@@ -52,6 +55,9 @@ const initialState: RegisterJobSeeker = {
       password: "",
     },
     jobSeekerData: {
+      firstName: "",
+      midName: "",
+      lastName: "",
       nationality: "",
       gender: null,
       currentPlaceResidence: "",
