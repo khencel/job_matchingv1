@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import axios, { AxiosError } from "axios";
 
 export interface ResumeBasicInfo {
   firstName: string;
@@ -54,7 +55,51 @@ export interface ResumeBuilderData {
   education: ResumeEducation;
   language: ResumeLanguage;
   workExperience: ResumeWorkExperience[];
+  isLoading?: boolean;
+  error?: string | null;
+  savedResumeId?: string | null;
 }
+
+interface SaveResumePayload {
+  blob: Blob;
+  fileName: string;
+}
+
+// Async Thunk for saving resume to database
+export const saveResume = createAsyncThunk(
+  "resumeBuilder/saveResume",
+  async ({ blob, fileName }: SaveResumePayload, { rejectWithValue }) => {
+    try {
+      const formData = new FormData();
+      formData.append("resume_file", blob, fileName);
+
+      // MOCK endpoint
+      // Axios detects FormData and sets the header automatically.
+      // const response = await apiClient.post("backend-endpoint", formData); // -> Use apiClient for django backend
+      const response = await axios.post("/mock-api/resume/upload", formData); // Mock API
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      // Handle Axios errors
+      if (error instanceof AxiosError) {
+        // Server responded with error status
+        if (error.response) {
+          const message =
+            error.response.data?.message || "Uploading Resume Failed";
+          return rejectWithValue(message);
+        }
+        // Network error (no response)
+        if (error.request) {
+          return rejectWithValue(
+            "Network error. Please check your connection."
+          );
+        }
+      }
+      // Generic error fallback
+      return rejectWithValue("An unexpected error occurred. Please try again.");
+    }
+  }
+);
 
 const initialState: ResumeBuilderData = {
   resumeTab: "basic-info",
@@ -86,6 +131,9 @@ const initialState: ResumeBuilderData = {
     otherLanguages: "",
   },
   workExperience: [],
+  isLoading: false,
+  error: null,
+  savedResumeId: null,
 };
 
 export const resumeBuilderSlice = createSlice({
@@ -95,7 +143,9 @@ export const resumeBuilderSlice = createSlice({
     // Navigate Resume builder tab
     goNextResumeTab: (
       state,
-      action: PayloadAction<"basic-info" | "education" | "lang-level" | "skills" | "work-xp">
+      action: PayloadAction<
+        "basic-info" | "education" | "lang-level" | "skills" | "work-xp"
+      >
     ) => {
       state.resumeTab = action.payload;
     },
@@ -148,6 +198,28 @@ export const resumeBuilderSlice = createSlice({
     removeWorkExperience: (state, action: PayloadAction<number>) => {
       state.workExperience.splice(action.payload, 1);
     },
+
+    // Reset error state
+    clearError: (state) => {
+      state.error = null;
+    },
+  },
+
+  // Extra reducers for async thunk
+  extraReducers: (builder) => {
+    builder
+      .addCase(saveResume.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(saveResume.fulfilled, (state, action) => {
+        const savedResumeId = action.payload?.id || action.payload?.resumeId;
+        return { ...initialState, savedResumeId, isLoading: false, error: null };
+      })
+      .addCase(saveResume.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
   },
 });
 
@@ -159,5 +231,6 @@ export const {
   updateLanguage,
   addWorkExperience,
   removeWorkExperience,
+  clearError,
 } = resumeBuilderSlice.actions;
 export default resumeBuilderSlice.reducer;

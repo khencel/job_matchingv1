@@ -1,6 +1,8 @@
 "use client";
-import { useRef } from "react"; // 1. Needed for printing
-import { useReactToPrint } from "react-to-print"; // 2. The print hook
+import { FormEvent, useRef } from "react"; // 1. Needed for printing
+import { useReactToPrint } from "react-to-print";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 // Components
 import BasicInfo from "@/components/jobSeekerDashboard/resumeBuilder/BasicInfo";
@@ -12,7 +14,11 @@ import { ResumeTemplate } from "@/components/jobSeekerDashboard/resumeBuilder/Re
 
 // Redux & Icons
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { goNextResumeTab, ResumeBuilderData } from "@/redux/slices/resumeSlice";
+import {
+  goNextResumeTab,
+  ResumeBuilderData,
+  saveResume,
+} from "@/redux/slices/resumeSlice";
 import {
   BuildingIcon,
   LanguagesIcon,
@@ -20,21 +26,64 @@ import {
   School2Icon,
   UserPenIcon,
   UserStar,
-  DownloadIcon, // Added icon for download button
+  DownloadIcon,
+  SaveIcon,
 } from "lucide-react";
 import { ReactElement, useState } from "react";
-import { Button, Nav, Tab } from "react-bootstrap";
+import { Button, Nav, Tab, Spinner, Alert } from "react-bootstrap";
+import { setTimeout } from "timers/promises";
 
 const ResumeBuilderPage = () => {
   const dispatch = useAppDispatch();
 
   // SELECTORS
   const resumeTab = useAppSelector((s) => s.resumeBuilder.resumeTab);
+  const isLoading = useAppSelector((s) => s.resumeBuilder.isLoading);
+  const error = useAppSelector((s) => s.resumeBuilder.error);
+  const savedResumeId = useAppSelector((s) => s.resumeBuilder.savedResumeId);
+  const user = useAppSelector((s) => s.authState.user);
 
   // ⚠️ CHECK THIS: Make sure this selector matches where your actual resume data lives in Redux
   const resumeData = useAppSelector((s) => s.resumeBuilder);
 
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
+  // SAVE RESUME HANDLER
+  const handleSaveResume = async (e: FormEvent) => {
+    e.preventDefault();
+    // Make sure the resume element exists
+    if (!templateRef.current) return;
+
+    try {
+      // Convert the HTML element to a Canvas (Screenshot)
+      // scale: 2 ensures high quality text
+      const canvas = await html2canvas(templateRef.current, { scale: 2 });
+
+      // Initialize PDF (A4 Size)
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+
+      // Calculate dimensions to fit A4 perfectly
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      // Add the image to the PDF
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+      // Generate the Blob (The actual file data)
+      const blob = pdf.output("blob");
+
+      // Dispatch to Redux (Send to Backend)
+      // We wait for the upload to finish before showing the success alert
+      const fileName =
+        `${user?.first_name}-${user?.last_name}-resume` || "my-resume";
+      await dispatch(saveResume({ blob, fileName })).unwrap();
+      setShowSuccessAlert(true);
+    } catch (err) {
+      console.error("Failed to generate or save PDF:", err);
+    }
+  };
 
   // PRINT LOGIC
   const templateRef = useRef<HTMLDivElement>(null);
@@ -83,10 +132,7 @@ const ResumeBuilderPage = () => {
           <Nav variant="pills" className="flex-column gap-2 p-2">
             {navItems.map((items) => (
               <Nav.Item key={items.key}>
-                <Nav.Link
-                  eventKey={items.key}
-                  className="sidebar-text"
-                >
+                <Nav.Link eventKey={items.key} className="sidebar-text">
                   {items.icon}
                   {!isCollapsed && <span>{items.label}</span>}
                 </Nav.Link>
@@ -117,18 +163,60 @@ const ResumeBuilderPage = () => {
           className="flex-grow-1 p-4 bg-secondary bg-opacity-10 d-flex flex-column align-items-center"
           style={{ overflowY: "auto" }}
         >
-          {/* Toolbar / Download Button */}
+          {/* Success/Error Alerts */}
+          {showSuccessAlert && (
+            <Alert
+              variant="success"
+              dismissible
+              onClose={() => setShowSuccessAlert(false)}
+              className="w-100"
+              style={{ maxWidth: "210mm" }}
+            >
+              Resume saved successfully!{" "}
+              {savedResumeId && `(ID: ${savedResumeId})`}
+            </Alert>
+          )}
+          {error && (
+            <Alert
+              variant="danger"
+              dismissible
+              className="w-100"
+              style={{ maxWidth: "210mm" }}
+            >
+              {error}
+            </Alert>
+          )}
+
+          {/* Toolbar / Action Buttons */}
           <div
-            className="w-100 d-flex justify-content-end mb-3"
+            className="w-100 d-flex justify-content-end gap-2 mb-3"
             style={{ maxWidth: "210mm" }}
           >
+            <Button
+              variant="success"
+              onClick={handleSaveResume}
+              disabled={isLoading}
+              className="d-flex gap-2 align-items-center shadow-sm"
+            >
+              {isLoading ? (
+                <>
+                  <Spinner as="span" animation="border" size="sm" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <SaveIcon size={18} />
+                  Save Resume
+                </>
+              )}
+            </Button>
             <Button
               variant="primary"
               onClick={() => handlePrint()}
               className="d-flex gap-2 align-items-center shadow-sm"
             >
               <DownloadIcon size={18} />
-              Download PDF
+              Print Resume
             </Button>
           </div>
 
@@ -144,7 +232,6 @@ const ResumeBuilderPage = () => {
 
 export default ResumeBuilderPage;
 
-// ... (NavItems Interface and Array remain the same)
 interface NavItems {
   key: string;
   label: string;

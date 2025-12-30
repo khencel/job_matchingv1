@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Button, Card, Form } from "react-bootstrap";
+import { Card, Form } from "react-bootstrap";
 
 const Skills = () => {
   const [skills, setSkills] = useState("");
@@ -35,8 +35,6 @@ const Skills = () => {
               Skills will not be displayed on resume.
             </small>
           </Form.Group>
-
-          <Button className="btn-primary-custom">Save</Button>
         </Form>
       </Card.Body>
     </Card>
