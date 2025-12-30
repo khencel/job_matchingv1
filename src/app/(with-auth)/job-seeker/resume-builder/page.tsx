@@ -18,6 +18,7 @@ import {
   goNextResumeTab,
   ResumeBuilderData,
   saveResume,
+  canSaveResume,
 } from "@/redux/slices/resumeSlice";
 import {
   BuildingIcon,
@@ -31,7 +32,7 @@ import {
 } from "lucide-react";
 import { ReactElement, useState } from "react";
 import { Button, Nav, Tab, Spinner, Alert } from "react-bootstrap";
-import { setTimeout } from "timers/promises";
+import { showSuccessToast } from "@/app/(util)/toaster";
 
 const ResumeBuilderPage = () => {
   const dispatch = useAppDispatch();
@@ -42,12 +43,10 @@ const ResumeBuilderPage = () => {
   const error = useAppSelector((s) => s.resumeBuilder.error);
   const savedResumeId = useAppSelector((s) => s.resumeBuilder.savedResumeId);
   const user = useAppSelector((s) => s.authState.user);
-
-  // ⚠️ CHECK THIS: Make sure this selector matches where your actual resume data lives in Redux
   const resumeData = useAppSelector((s) => s.resumeBuilder);
+  const isSaveDisabled = !useAppSelector((s) => canSaveResume(s.resumeBuilder));
 
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
   // SAVE RESUME HANDLER
   const handleSaveResume = async (e: FormEvent) => {
@@ -79,7 +78,10 @@ const ResumeBuilderPage = () => {
       const fileName =
         `${user?.first_name}-${user?.last_name}-resume` || "my-resume";
       await dispatch(saveResume({ blob, fileName })).unwrap();
-      setShowSuccessAlert(true);
+      showSuccessToast(
+        "Resume Saved Successfully",
+        "Resume successfully saved to database."
+      );
     } catch (err) {
       console.error("Failed to generate or save PDF:", err);
     }
@@ -163,19 +165,7 @@ const ResumeBuilderPage = () => {
           className="flex-grow-1 p-4 bg-secondary bg-opacity-10 d-flex flex-column align-items-center"
           style={{ overflowY: "auto" }}
         >
-          {/* Success/Error Alerts */}
-          {showSuccessAlert && (
-            <Alert
-              variant="success"
-              dismissible
-              onClose={() => setShowSuccessAlert(false)}
-              className="w-100"
-              style={{ maxWidth: "210mm" }}
-            >
-              Resume saved successfully!{" "}
-              {savedResumeId && `(ID: ${savedResumeId})`}
-            </Alert>
-          )}
+          {/* Error Alerts */}
           {error && (
             <Alert
               variant="danger"
@@ -195,8 +185,9 @@ const ResumeBuilderPage = () => {
             <Button
               variant="success"
               onClick={handleSaveResume}
-              disabled={isLoading}
+              disabled={isLoading || isSaveDisabled}
               className="d-flex gap-2 align-items-center shadow-sm"
+              title={isSaveDisabled ? "Complete Basic Information and Language Level first" : "Save Resume"}
             >
               {isLoading ? (
                 <>
@@ -213,7 +204,9 @@ const ResumeBuilderPage = () => {
             <Button
               variant="primary"
               onClick={() => handlePrint()}
+              disabled={isSaveDisabled}
               className="d-flex gap-2 align-items-center shadow-sm"
+              title={isSaveDisabled ? "Complete Basic Information and Language Level first" : "Print Resume"}
             >
               <DownloadIcon size={18} />
               Print Resume

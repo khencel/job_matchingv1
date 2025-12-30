@@ -38,7 +38,7 @@ export interface ResumeLanguage {
   readingLevel: string;
   writingLevel: string;
   speakingLevel: string;
-  otherLanguages: string;
+  otherLanguages: string[];
 }
 export interface ResumeWorkExperience {
   industry: string;
@@ -128,7 +128,7 @@ const initialState: ResumeBuilderData = {
     readingLevel: "",
     writingLevel: "",
     speakingLevel: "",
-    otherLanguages: "",
+    otherLanguages: [],
   },
   workExperience: [],
   isLoading: false,
@@ -214,7 +214,12 @@ export const resumeBuilderSlice = createSlice({
       })
       .addCase(saveResume.fulfilled, (state, action) => {
         const savedResumeId = action.payload?.id || action.payload?.resumeId;
-        return { ...initialState, savedResumeId, isLoading: false, error: null };
+        return {
+          ...initialState,
+          savedResumeId,
+          isLoading: false,
+          error: null,
+        };
       })
       .addCase(saveResume.rejected, (state, action) => {
         state.isLoading = false;
@@ -233,4 +238,35 @@ export const {
   removeWorkExperience,
   clearError,
 } = resumeBuilderSlice.actions;
+
+// Selectors to validate completion of sections
+export const isBasicInfoComplete = (state: ResumeBuilderData): boolean => {
+  const { basicInfo } = state;
+  return (
+    basicInfo.firstName.trim() !== "" &&
+    basicInfo.lastName.trim() !== "" &&
+    basicInfo.birthday.trim() !== "" &&
+    basicInfo.gender.trim() !== "" &&
+    basicInfo.nationality.trim() !== "" &&
+    basicInfo.status.trim() !== "" &&
+    basicInfo.email.trim() !== "" &&
+    basicInfo.number.trim() !== "" &&
+    basicInfo.address.trim() !== ""
+  );
+};
+
+export const isLanguageLevelComplete = (state: ResumeBuilderData): boolean => {
+  const { language } = state;
+  return (
+    language.japaneseLevel.trim() !== "" &&
+    language.readingLevel.trim() !== "" &&
+    language.writingLevel.trim() !== "" &&
+    language.speakingLevel.trim() !== ""
+  );
+};
+
+export const canSaveResume = (state: ResumeBuilderData): boolean => {
+  return isBasicInfoComplete(state) && isLanguageLevelComplete(state);
+};
+
 export default resumeBuilderSlice.reducer;

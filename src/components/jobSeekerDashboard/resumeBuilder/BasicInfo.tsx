@@ -30,7 +30,7 @@ const BasicInfo = () => {
     >
   ) => {
     const { name, value } = e.target;
-    
+
     // Handle radio buttons for liveInJapan
     if (name === "liveInJapan") {
       dispatch(updateBasicInfo({ liveInJapan: value === "yes" }));
@@ -81,7 +81,11 @@ const BasicInfo = () => {
       const today = new Date();
       const age = today.getFullYear() - birthDate.getFullYear();
       const monthDiff = today.getMonth() - birthDate.getMonth();
-      const actualAge = monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate()) ? age - 1 : age;
+      const actualAge =
+        monthDiff < 0 ||
+        (monthDiff === 0 && today.getDate() < birthDate.getDate())
+          ? age - 1
+          : age;
 
       if (birthDate >= today) {
         nextErrors.birthday = "Birth date must be in the past.";
@@ -134,8 +138,6 @@ const BasicInfo = () => {
     }
 
     // Proceed to next step
-    console.log("Basic Info data valid:", basicInfo);
-    console.log("Profile picture:", profilePicture);
     dispatch(goNextResumeTab("education"));
   };
 
@@ -329,10 +331,7 @@ const BasicInfo = () => {
               onChange={handleChange}
             />
           </Form.Group>
-          <Button
-            type="submit"
-            className="btn-primary-custom"
-          >
+          <Button type="submit" className="btn-primary-custom">
             Next
           </Button>
         </Form>

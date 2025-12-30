@@ -26,30 +26,14 @@ const LanguageLevel = () => {
   };
 
   const [formErrors, setFormErrors] = useState<FormErrors>({});
-  const [languages, setLanguages] = useState<string[]>(() => {
-    // Initialize from Redux on mount
-    if (language.otherLanguages) {
-      try {
-        const parsed = JSON.parse(language.otherLanguages);
-        if (Array.isArray(parsed)) {
-          return parsed;
-        }
-      } catch {
-        // If not JSON, treat as comma-separated
-        const langs = language.otherLanguages
-          .split(",")
-          .map((l) => l.trim())
-          .filter(Boolean);
-        if (langs.length > 0) return langs;
-      }
-    }
-    return [];
-  });
+  const [languages, setLanguages] = useState<string[]>(
+    language.otherLanguages ?? []
+  );
   const [languageInput, setLanguageInput] = useState("");
 
   // Sync languages array to Redux whenever it changes
   useEffect(() => {
-    dispatch(updateLanguage({ otherLanguages: JSON.stringify(languages) }));
+    dispatch(updateLanguage({ otherLanguages: languages }));
   }, [languages, dispatch]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

@@ -254,10 +254,10 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
           {/* ================= LANGUAGES ================= */}
           <Row className="g-0 border-top border-dark bg-light fw-bold text-center mt-auto">
             <Col xs={3} className={`p-1 border-end ${borderDark}`}>
-              Skills
+              Japanese Level
             </Col>
             <Col xs={9} className="p-1">
-              Language & Qualifications
+              Japanese Language Efficiency
             </Col>
           </Row>
 
@@ -284,7 +284,10 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
                 </span>
               </div>
               <div>
-                <strong>Other Languages:</strong> {language.otherLanguages}
+                <strong>Other Languages:</strong>{" "}
+                {language.otherLanguages && language.otherLanguages.length > 0
+                  ? language.otherLanguages.join(", ")
+                  : "None"}
               </div>
             </Col>
           </Row>
