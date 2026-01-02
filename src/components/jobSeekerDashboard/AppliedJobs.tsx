@@ -1,6 +1,5 @@
 import axios from "axios";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Badge, Col, Row } from "react-bootstrap";
 
@@ -26,13 +25,18 @@ const AppliedJobs = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // TODO: Replace this with the actual logged-in user's ID from your Redux/Context
+  const CURRENT_USER_ID = "1";
+
   useEffect(() => {
     // Mock data Fetching
     const fetchAppliedJobs = async () => {
       try {
         setLoading(true);
         setError(null);
-        const res = await axios.get("/mock-api/applied-jobs?user_id=4");
+        const res = await axios.get(
+          `/mock-api/applied-jobs?user_id=${CURRENT_USER_ID}`
+        );
         setAppliedJobs(res.data.data || []);
       } catch (error) {
         console.error("Failed to fetch applied jobs:", error);
