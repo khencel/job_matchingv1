@@ -5,20 +5,10 @@
 
 /* Active state styling */
 .nav-item .nav-link.active {
-  color: white;
+ background: lightgray;
 }
 
 /* Make last message text white when nav item is active */
 .nav-item .nav-link.active .custom-text {
   color: rgba(255, 255, 255, 0.8);
-}
-
-/* Make company name lighter when active */
-.nav-item .nav-link.active small {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-/* Default last message text color */
-.custom-text {
-  color: gray;
 }
