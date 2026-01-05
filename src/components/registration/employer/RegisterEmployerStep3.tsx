@@ -10,6 +10,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button, Form } from "react-bootstrap";
 import Swal from "sweetalert2";
+import { isEmailValid, isPhoneNumberValid } from "@/helper/validations";
 
 export default function RegisterEmployerStep3() {
   const dispatch = useAppDispatch();
@@ -31,16 +32,6 @@ export default function RegisterEmployerStep3() {
     // Update local state and Redux store
     setData((prev) => ({ ...prev, [name]: value }));
     dispatch(saveRegEmployerStep3({ ...data, [name]: value }));
-  };
-
-  const isEmailValid = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const idPhoneNumberValid = (phoneNumber: string): boolean => {
-    const phoneRegex = /^\+?[1-9]\d{1,14}$/;
-    return phoneRegex.test(phoneNumber);
   };
 
   const handleSubmit = (e: FormEvent) => {
@@ -75,19 +66,27 @@ export default function RegisterEmployerStep3() {
     const validationErrors: Record<string, boolean> = {};
 
     // Validate contact name
-    if (!data.name || data.name.trim().length < 3 || data.name.trim().length > 100) {
+    if (
+      !data.name ||
+      data.name.trim().length < 3 ||
+      data.name.trim().length > 100
+    ) {
       validationErrors.name = true;
       hasError = true;
     }
 
     // Validate department name
-    if (!data.departmentName || data.departmentName.trim().length < 3 || data.departmentName.trim().length > 100) {
+    if (
+      !data.departmentName ||
+      data.departmentName.trim().length < 3 ||
+      data.departmentName.trim().length > 100
+    ) {
       validationErrors.departmentName = true;
       hasError = true;
     }
 
     // Validate phone number
-    if (!data.phoneNumber || !idPhoneNumberValid(data.phoneNumber.trim())) {
+    if (!data.phoneNumber || !isPhoneNumberValid(data.phoneNumber.trim())) {
       validationErrors.phoneNumber = true;
       hasError = true;
     }
@@ -101,7 +100,9 @@ export default function RegisterEmployerStep3() {
     if (hasError) {
       setError(validationErrors);
       const firstErrorField = Object.keys(validationErrors)[0];
-      const errorElement = form.querySelector(`[name="${firstErrorField}"]`) as HTMLElement;
+      const errorElement = form.querySelector(
+        `[name="${firstErrorField}"]`
+      ) as HTMLElement;
       if (errorElement) errorElement.focus();
       return;
     }
@@ -179,7 +180,7 @@ export default function RegisterEmployerStep3() {
             isInvalid={
               error.phoneNumber ||
               (data.phoneNumber.trim().length > 0 &&
-                !idPhoneNumberValid(data.phoneNumber.trim()))
+                !isPhoneNumberValid(data.phoneNumber.trim()))
             }
           />
           <Form.Control.Feedback type="invalid">

@@ -11,75 +11,6 @@ import { Button, Form, Row, Col } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 
-// Industry options
-const industries = [
-  "Technology",
-  "Healthcare",
-  "Finance",
-  "Manufacturing",
-  "Retail",
-  "Education",
-  "Hospitality",
-  "Construction",
-  "Transportation",
-  "Real Estate",
-  "Agriculture",
-  "Entertainment",
-  "Telecommunications",
-  "Energy",
-  "Other",
-];
-//Japan Prefectures
-const prefectures = [
-  "Hokkaido",
-  "Aomori",
-  "Iwate",
-  "Miyagi",
-  "Akita",
-  "Yamagata",
-  "Fukushima",
-  "Ibaraki",
-  "Tochigi",
-  "Gunma",
-  "Saitama",
-  "Chiba",
-  "Tokyo",
-  "Kanagawa",
-  "Niigata",
-  "Toyama",
-  "Ishikawa",
-  "Fukui",
-  "Yamanashi",
-  "Nagano",
-  "Gifu",
-  "Shizuoka",
-  "Aichi",
-  "Mie",
-  "Shiga",
-  "Kyoto",
-  "Osaka",
-  "Hyogo",
-  "Nara",
-  "Wakayama",
-  "Tottori",
-  "Shimane",
-  "Okayama",
-  "Hiroshima",
-  "Yamaguchi",
-  "Tokushima",
-  "Kagawa",
-  "Ehime",
-  "Kochi",
-  "Fukuoka",
-  "Saga",
-  "Nagasaki",
-  "Kumamoto",
-  "Oita",
-  "Miyazaki",
-  "Kagoshima",
-  "Okinawa",
-];
-
 export default function RegisterSupervisoryStep2() {
   const dispatch = useAppDispatch();
   const t = useTranslations("registerSupervisoryStep2");
@@ -87,23 +18,7 @@ export default function RegisterSupervisoryStep2() {
     (s) => s.registerSuperVisory.registerSuperVisoryData.companyInfo
   );
 
-  const [data, setData] = useState<RegisterSuperVisoryStep2Data>(
-    companyInfo || {
-      companyName: "",
-      companyNamePhonetic: "",
-      repName: "",
-      hqAddress: {
-        prefecture: "",
-        city: "",
-        street: "",
-      },
-      numOfEmployees: null,
-      industry: "",
-      yearFounded: null,
-      capital: null,
-      businessDescription: "",
-    }
-  );
+  const [data, setData] = useState<RegisterSuperVisoryStep2Data>(companyInfo);
   const [error, setError] = useState<{ [name: string]: boolean }>({});
 
   useEffect(() => {
@@ -172,7 +87,10 @@ export default function RegisterSupervisoryStep2() {
     }
 
     // Validate company name phonetic
-    if (!data.companyNamePhonetic || data.companyNamePhonetic.trim().length < 2) {
+    if (
+      !data.companyNamePhonetic ||
+      data.companyNamePhonetic.trim().length < 2
+    ) {
       validationErrors.companyNamePhonetic = true;
       hasError = true;
     }
@@ -216,7 +134,11 @@ export default function RegisterSupervisoryStep2() {
 
     // Validate year founded
     const yearNum = Number(data.yearFounded);
-    if (!data.yearFounded || yearNum < 1800 || yearNum > new Date().getFullYear()) {
+    if (
+      !data.yearFounded ||
+      yearNum < 1800 ||
+      yearNum > new Date().getFullYear()
+    ) {
       validationErrors.yearFounded = true;
       hasError = true;
     }
@@ -228,7 +150,10 @@ export default function RegisterSupervisoryStep2() {
     }
 
     // Validate business description
-    if (!data.businessDescription || data.businessDescription.trim().length === 0) {
+    if (
+      !data.businessDescription ||
+      data.businessDescription.trim().length === 0
+    ) {
       validationErrors.businessDescription = true;
       hasError = true;
     }
@@ -367,7 +292,8 @@ export default function RegisterSupervisoryStep2() {
                 minLength={2}
                 isInvalid={
                   !!error.city ||
-                  (data.hqAddress.city.length > 0 && data.hqAddress.city.length < 2)
+                  (data.hqAddress.city.length > 0 &&
+                    data.hqAddress.city.length < 2)
                 }
               />
               <Form.Control.Feedback type="invalid">
@@ -388,7 +314,8 @@ export default function RegisterSupervisoryStep2() {
                 minLength={2}
                 isInvalid={
                   !!error.street ||
-                  (data.hqAddress.street.length > 0 && data.hqAddress.street.length < 2)
+                  (data.hqAddress.street.length > 0 &&
+                    data.hqAddress.street.length < 2)
                 }
               />
               <Form.Control.Feedback type="invalid">
@@ -516,3 +443,71 @@ export default function RegisterSupervisoryStep2() {
     </Form>
   );
 }
+// Industry options
+const industries = [
+  "Technology",
+  "Healthcare",
+  "Finance",
+  "Manufacturing",
+  "Retail",
+  "Education",
+  "Hospitality",
+  "Construction",
+  "Transportation",
+  "Real Estate",
+  "Agriculture",
+  "Entertainment",
+  "Telecommunications",
+  "Energy",
+  "Other",
+];
+//Japan Prefectures
+const prefectures = [
+  "Hokkaido",
+  "Aomori",
+  "Iwate",
+  "Miyagi",
+  "Akita",
+  "Yamagata",
+  "Fukushima",
+  "Ibaraki",
+  "Tochigi",
+  "Gunma",
+  "Saitama",
+  "Chiba",
+  "Tokyo",
+  "Kanagawa",
+  "Niigata",
+  "Toyama",
+  "Ishikawa",
+  "Fukui",
+  "Yamanashi",
+  "Nagano",
+  "Gifu",
+  "Shizuoka",
+  "Aichi",
+  "Mie",
+  "Shiga",
+  "Kyoto",
+  "Osaka",
+  "Hyogo",
+  "Nara",
+  "Wakayama",
+  "Tottori",
+  "Shimane",
+  "Okayama",
+  "Hiroshima",
+  "Yamaguchi",
+  "Tokushima",
+  "Kagawa",
+  "Ehime",
+  "Kochi",
+  "Fukuoka",
+  "Saga",
+  "Nagasaki",
+  "Kumamoto",
+  "Oita",
+  "Miyazaki",
+  "Kagoshima",
+  "Okinawa",
+];

@@ -26,13 +26,8 @@ export default function RegisterSuperVisoryStep4({
     (s) => s.registerSuperVisory.registerSuperVisoryData.termsAndConditions
   );
 
-  const [data, setData] = useState<RegisterSuperVisoryStep4Data>(
-    termsAndConditions || {
-      acceptTerms: false,
-      acceptPrivacyPolicy: false,
-      acceptReceiveEmails: false,
-    }
-  );
+  const [data, setData] =
+    useState<RegisterSuperVisoryStep4Data>(termsAndConditions);
 
   const [error, setError] = useState<{ [name: string]: boolean }>({});
 

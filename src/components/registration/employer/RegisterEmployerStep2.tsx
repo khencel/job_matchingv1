@@ -10,6 +10,7 @@ import { ChangeEvent, useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
+import { isPhoneNumberValid } from "@/helper/validations";
 
 // Industry options for dropdown
 export const industries = [
@@ -91,10 +92,6 @@ export default function RegisterEmployerStep2() {
     }
   };
 
-  const isPhoneNumberValid = (phoneNumber: string): boolean => {
-    const phoneRegex = /^\+?[1-9]\d{1,14}$/;
-    return phoneRegex.test(phoneNumber);
-  };
   // Remove branch office from the list
   const handleRemoveBranch = (index: number) => {
     setData({
@@ -213,7 +210,6 @@ export default function RegisterEmployerStep2() {
       }
       return;
     }
-
     // All validations passed - save data and show success message
     setError({});
     Swal.fire({

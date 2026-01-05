@@ -10,6 +10,7 @@ import { ChangeEvent, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
+import { isEmailValid, isPhoneNumberValid } from "@/helper/validations";
 
 export default function RegisterSuperVisoryStep3() {
   const dispatch = useAppDispatch();
@@ -28,18 +29,6 @@ export default function RegisterSuperVisoryStep3() {
   );
 
   const [error, setError] = useState<{ [name: string]: boolean }>({});
-
-  const isEmailValid = (email: string): boolean => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
-
-  const isPhoneNumberValid = (phoneNumber: string): boolean => {
-    return (
-      phoneNumber.length >= 7 &&
-      phoneNumber.length <= 15 &&
-      !isNaN(Number(phoneNumber))
-    );
-  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -79,13 +68,21 @@ export default function RegisterSuperVisoryStep3() {
     const validationErrors: Record<string, boolean> = {};
 
     // Validate name
-    if (!data.name || data.name.trim().length < 2 || data.name.trim().length > 100) {
+    if (
+      !data.name ||
+      data.name.trim().length < 2 ||
+      data.name.trim().length > 100
+    ) {
       validationErrors.name = true;
       hasError = true;
     }
 
     // Validate department
-    if (!data.department || data.department.trim().length < 2 || data.department.trim().length > 100) {
+    if (
+      !data.department ||
+      data.department.trim().length < 2 ||
+      data.department.trim().length > 100
+    ) {
       validationErrors.department = true;
       hasError = true;
     }
@@ -188,7 +185,8 @@ export default function RegisterSuperVisoryStep3() {
           required
           isInvalid={
             !!error.phoneNumber ||
-            (data.phoneNumber.length > 0 && !isPhoneNumberValid(data.phoneNumber))
+            (data.phoneNumber.length > 0 &&
+              !isPhoneNumberValid(data.phoneNumber))
           }
         />
         <Form.Control.Feedback type="invalid">
@@ -206,7 +204,8 @@ export default function RegisterSuperVisoryStep3() {
           onChange={handleChange}
           required
           isInvalid={
-            !!error.email || (data.email.length > 0 && !isEmailValid(data.email))
+            !!error.email ||
+            (data.email.length > 0 && !isEmailValid(data.email))
           }
         />
         <Form.Control.Feedback type="invalid">

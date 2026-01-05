@@ -25,13 +25,7 @@ export default function RegisterJobSeekerStep4({
     (s) => s.registerJobSeeker.registerJobSeekerData.termsAndConditions
   );
 
-  const [data, setData] = useState<RegisterJobSeekerStep4Data>(
-    step3Data || {
-      acceptTerms: false,
-      acceptPrivacyPolicy: false,
-      acceptReceiveEmails: false,
-    }
-  );
+  const [data, setData] = useState<RegisterJobSeekerStep4Data>(step3Data);
   const [error, setError] = useState<{ [name: string]: boolean }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
