@@ -9,7 +9,7 @@ import {
   RegisterJobSeekerStep2Data,
   saveRegJobSeekerStep2,
 } from "@/redux/slices/register/jobseekerSlice";
-import { isEmailValid, isPhoneNumberValid } from "@/helper/validations";
+import { isPhoneNumberValid } from "@/helper/validations";
 
 const RegisterJobSeekerStep2 = () => {
   const t = useTranslations("registerJobSeekerStep2");
@@ -164,12 +164,6 @@ const RegisterJobSeekerStep2 = () => {
       hasError = true;
     }
 
-    // Validate email
-    if (!data.email || !isEmailValid(data.email)) {
-      validationErrors.email = true;
-      hasError = true;
-    }
-
     // Validate contact number
     if (!data.contactNo || !isPhoneNumberValid(data.contactNo)) {
       validationErrors.contactNo = true;
@@ -211,9 +205,6 @@ const RegisterJobSeekerStep2 = () => {
     (!!data.birthdate &&
       (data.birthdate > getMaxBirthdateFor18YearsOld() ||
         data.birthdate < getMinBirthdateFor90YearsOld()));
-
-  const emailInvalid =
-    error.email || (data.email.length > 0 && !isEmailValid(data.email));
 
   const contactInvalid =
     error.contactNo ||
@@ -446,23 +437,6 @@ const RegisterJobSeekerStep2 = () => {
         </Form.Select>
         <Form.Control.Feedback type="invalid">
           {t("errors.japaneseLevelRequired")}
-        </Form.Control.Feedback>
-      </Form.Group>
-
-      <Form.Group className="mb-3">
-        <Form.Label>{t("labels.email")}</Form.Label>
-        <Form.Control
-          required
-          type="email"
-          name="email"
-          value={data.email}
-          onChange={handleChange}
-          placeholder={t("placeholders.email")}
-          pattern="[^\s@]+@[^\s@]+\.[^\s@]+"
-          isInvalid={emailInvalid}
-        />
-        <Form.Control.Feedback type="invalid">
-          {t("errors.invalidEmail")}
         </Form.Control.Feedback>
       </Form.Group>
 

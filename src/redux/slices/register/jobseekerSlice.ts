@@ -2,6 +2,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import { RegistrationStep1 } from "./superVisorySlice";
+import apiClient from "@/lib/axios";
 
 export interface RegisterJobSeekerStep2Data {
   firstName: string;
@@ -22,7 +23,6 @@ export interface RegisterJobSeekerStep2Data {
     | "doctoralDegree"
     | null;
   japaneseLevel: "N5" | "N4" | "N3" | "N2" | "N1" | null;
-  email: string;
   contactNo: string;
   facebook: string;
 }
@@ -65,7 +65,6 @@ const initialState: RegisterJobSeeker = {
       visaStatus: null,
       highestEducation: null,
       japaneseLevel: null,
-      email: "",
       contactNo: "",
       facebook: "",
     },
@@ -89,29 +88,26 @@ export const registerJobSeekerSubmit = createAsyncThunk<
   const data = state.registerJobSeekerData;
 
   const submissionData = {
-    accountInfo: data.accountInfo,
-    jobSeekerData: data.jobSeekerData,
-    idURL: data.idURL,
-    termsAndCondition: data.termsAndConditions,
+    email: data.accountInfo.email,
+    password: data.accountInfo.password,
+    first_name: data.jobSeekerData.firstName,
+    last_name: data.jobSeekerData.lastName,
+    user_type: "job_seeker",
+    details: JSON.stringify(data),
   };
 
   try {
-    //Simulate API call (remove when backend is ready)
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Job Seeker Registration Data:", submissionData);
-    return;
-
-    // const response = await apiClient.post(
-    //   "http://localhost:8000/api/register/jobSeeker",
-    //   submissionData
-    // );
-    // if (response.status === 200 || response.status === 201) {
-    //   return;
-    // }
+    const response = await apiClient.post("auth/store", submissionData);
+    if (response.status === 200 || response.status === 201) {
+      return response.data;
+    }
   } catch (error) {
     // Handle Axios errors
     if (error instanceof AxiosError) {
       // Server responded with error status
+      if (error.response?.status === 400) {
+        return rejectWithValue("Email already exist");
+      }
       if (error.response) {
         const message = error.response.data?.message || "Registration failed";
         return rejectWithValue(message);

@@ -84,7 +84,7 @@ export default function RegisterJobSeekerStep4({
     dispatch(saveRegJobSeekerStep4(data));
     try {
       // Final submit thunk (simulated API)
-      await dispatch(registerJobSeekerSubmit());
+      const res = await dispatch(registerJobSeekerSubmit()).unwrap();
       Swal.fire({
         icon: "success",
         title: "Job Seeker Registration Success",
@@ -93,17 +93,20 @@ export default function RegisterJobSeekerStep4({
         showConfirmButton: false,
         timer: 1500,
       });
+      console.log("Job Seeker Registration Success", res);
       closeModal();
     } catch (error) {
+      const displayError =
+        typeof error === "string" ? error : JSON.stringify(error);
       Swal.fire({
         icon: "error",
-        title: "Job Seeker Registration Failed",
+        title: displayError,
         toast: true,
         position: "top",
         showConfirmButton: false,
         timer: 1500,
       });
-      console.log("Error Submitting Job Seeker Registration:", error);
+      console.log("Error on Job Seeker Registration:", error);
     }
   };
 
