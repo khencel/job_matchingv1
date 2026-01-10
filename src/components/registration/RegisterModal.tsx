@@ -7,7 +7,7 @@ import RegisterEmployerStep3 from "./employer/RegisterEmployerStep3";
 import RegisterEmployerStep4 from "./employer/RegisterEmployerStep4";
 import { ArrowLeft, XIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { goBack as goBackEmployer } from "@/redux/slices/register/employerSlice";
+import { goBack as goBackEmployer } from "@/redux/slices/register/employer/employerSlice";
 import { goBack as goBackSuperVisory } from "@/redux/slices/register/superVisorySlice";
 import ProgressStepCount from "../ProgressStepCount";
 import RegisterSuperVisoryStep1 from "./supervisory/RegisterSuperVisoryStep1";

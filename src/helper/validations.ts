@@ -16,6 +16,6 @@ export const isPasswordMatch = (password: string, confirm: string): boolean => {
 
 // Phone number validation
 export const isPhoneNumberValid = (phoneNumber: string): boolean => {
-  const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+  const phoneRegex = /^\+?[0-9]\d{1,14}$/;
   return phoneRegex.test(phoneNumber);
 };

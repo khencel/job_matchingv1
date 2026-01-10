@@ -1,14 +1,14 @@
 // import apiClient from "@/lib/axios";
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { AxiosError } from "axios";
-import { RegistrationStep1 } from "./superVisorySlice";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RegistrationStep1 } from "../superVisorySlice";
+import { isEmailExistThunk, registerEmployerThunk } from "./employerThunk";
 
 // Step 2: Company information
 export interface RegisterEmployerStep2Data {
   companyName: string;
   companyAddress: string;
   phoneNumber: string;
-  industry: string;
+  industries: string[];
   regions: string;
   numberOfEmployees: string;
   branchOffices: string[];
@@ -58,7 +58,7 @@ const initialState: RegisterEmployer = {
       companyName: "",
       companyAddress: "",
       phoneNumber: "",
-      industry: "",
+      industries: [],
       regions: "",
       numberOfEmployees: "",
       branchOffices: [],
@@ -80,54 +80,6 @@ const initialState: RegisterEmployer = {
   isLoading: false,
   isError: false,
 };
-
-export const registerEmployerSubmit = createAsyncThunk<
-  void,
-  void,
-  { state: { registerEmployer: RegisterEmployer } }
->("registerEmployer/Submit", async (_, { getState, rejectWithValue }) => {
-  const state = getState().registerEmployer;
-  const data = state.registerEmployerData;
-
-  const submissionData = {
-    accountInfo: data.accountInfo,
-    employerInfo: data.employerInfo,
-    contactPerson: data.contactPerson,
-    termsAndConditions: data.termsAndConditions,
-  };
-
-  try {
-    // Simulate API call (remove when backend is ready)
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Employer Registration Data:", submissionData);
-    return;
-
-    // Uncomment when backend is ready
-    // const response = await apiClient.post(
-    //   "http://localhost:8000/api/register/employer",
-    //   submissionData
-    // );
-    // if (response.status === 200 || response.status === 201) {
-    //   return;
-    // }
-    // throw new Error("Unexpected response status");
-  } catch (error) {
-    // Handle Axios errors
-    if (error instanceof AxiosError) {
-      // Server responded with error status
-      if (error.response) {
-        const message = error.response.data?.message || "Registration failed";
-        return rejectWithValue(message);
-      }
-      // Network error (no response)
-      if (error.request) {
-        return rejectWithValue("Network error. Please check your connection.");
-      }
-    }
-    // Generic error fallback
-    return rejectWithValue("An unexpected error occurred. Please try again.");
-  }
-});
 
 export const registerEmployerSlice = createSlice({
   name: "registerEmployer",
@@ -154,10 +106,7 @@ export const registerEmployerSlice = createSlice({
       }
     },
     // Save data to state
-    saveRegEmployerStep1: (
-      state,
-      action: PayloadAction<RegistrationStep1>
-    ) => {
+    saveRegEmployerStep1: (state, action: PayloadAction<RegistrationStep1>) => {
       state.registerEmployerData.accountInfo = action.payload;
     },
     saveRegEmployerStep2: (
@@ -187,26 +136,39 @@ export const registerEmployerSlice = createSlice({
       state.isError = false;
     },
   },
+
   extraReducers: (builder) => {
-    builder
-      // Handle pending state
-      .addCase(registerEmployerSubmit.pending, (state) => {
+    builder.addAsyncThunk(registerEmployerThunk, {
+      pending: (state) => {
         state.isLoading = true;
         state.isError = false;
-      })
-      // Handle successful submission
-      .addCase(registerEmployerSubmit.fulfilled, (state) => {
-        state.isLoading = false;
+      },
+      fulfilled: (state) => {
         state.isError = false;
-        // Reset data and close modal after successful submission
+        state.isLoading = false;
         state.registerEmployerData = initialState.registerEmployerData;
         state.currentStep = 1;
-      })
-      // Handle failed submission
-      .addCase(registerEmployerSubmit.rejected, (state) => {
-        state.isLoading = false;
+      },
+      rejected: (state) => {
         state.isError = true;
-      });
+        state.isLoading = false;
+      },
+    });
+    // check email if existing
+    builder.addAsyncThunk(isEmailExistThunk, {
+      pending: (state) => {
+        state.isLoading = true;
+        state.isError = false;
+      },
+      fulfilled: (state) => {
+        state.isError = false;
+        state.isLoading = false;
+      },
+      rejected: (state) => {
+        state.isError = true;
+        state.isLoading = false;
+      },
+    });
   },
 });
 

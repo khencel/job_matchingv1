@@ -5,7 +5,7 @@ import {
   saveRegEmployerStep2,
   RegisterEmployerStep2Data,
   goNextStep,
-} from "@/redux/slices/register/employerSlice";
+} from "@/redux/slices/register/employer/employerSlice";
 import { ChangeEvent, useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { useTranslations } from "next-intl";
@@ -28,7 +28,6 @@ export const industries = [
   "Entertainment",
   "Telecommunications",
   "Energy",
-  "Other",
 ];
 
 // Japan regions for dropdown
@@ -54,6 +53,7 @@ export default function RegisterEmployerStep2() {
 
   // State management for form inputs and validation
   const [currentBranch, setCurrentBranch] = useState<string>("");
+  const [currentIndustry, setCurrentIndustry] = useState<string>("");
   const [error, setError] = useState<{ [name: string]: boolean }>({});
   const [data, setData] = useState<RegisterEmployerStep2Data>(employerInfo);
 
@@ -97,6 +97,25 @@ export default function RegisterEmployerStep2() {
     setData({
       ...data,
       branchOffices: data.branchOffices.filter((_, i) => i !== index),
+    });
+  };
+
+  // Add industry to the list
+  const handleAddIndustry = () => {
+    if (currentIndustry.trim() !== "" && !data.industries.includes(currentIndustry)) {
+      setData({
+        ...data,
+        industries: [...data.industries, currentIndustry],
+      });
+      setCurrentIndustry("");
+    }
+  };
+
+  // Remove industry from the list
+  const handleRemoveIndustry = (index: number) => {
+    setData({
+      ...data,
+      industries: data.industries.filter((_, i) => i !== index),
     });
   };
 
@@ -150,9 +169,9 @@ export default function RegisterEmployerStep2() {
       hasError = true;
     }
 
-    // Validate industry
-    if (!data.industry) {
-      validationErrors.industry = true;
+    // Validate industries
+    if (!data.industries || data.industries.length === 0) {
+      validationErrors.industries = true;
       hasError = true;
     }
 
@@ -301,25 +320,68 @@ export default function RegisterEmployerStep2() {
       {/* Company Industry Section */}
       <div className="mb-4">
         <h6 className="mb-3 fw-bold">{t("labels.companyIndustry")}</h6>
-        <Form.Group controlId="industry">
+        <Form.Group controlId="industries">
           <Form.Label>{t("labels.industry")}</Form.Label>
-          <Form.Select
-            required
-            name="industry"
-            value={data.industry}
-            onChange={handleChange}
-            isInvalid={error.industry || data.industry.length < 0}
-          >
-            <option value="">{t("placeholders.selectIndustry")}</option>
-            {industries.map((industry) => (
-              <option key={industry} value={industry}>
-                {industry}
-              </option>
-            ))}
-          </Form.Select>
-          <Form.Control.Feedback type="invalid">
-            {t("errors.invalidIndustry")}
-          </Form.Control.Feedback>
+          <Row>
+            <Col xs={9}>
+              <Form.Select
+                name="currentIndustry"
+                value={currentIndustry}
+                onChange={(e) => {
+                  setCurrentIndustry(e.target.value);
+                  // Clear error when user selects
+                  setError((prevErrors) => ({ ...prevErrors, industries: false }));
+                }}
+                isInvalid={error.industries && currentIndustry === ""}
+              >
+                <option value="">{t("placeholders.selectIndustry")}</option>
+                {industries.map((industry) => (
+                  <option key={industry} value={industry}>
+                    {industry}
+                  </option>
+                ))}
+              </Form.Select>
+              <Form.Control.Feedback type="invalid">
+                {t("errors.invalidIndustry")}
+              </Form.Control.Feedback>
+            </Col>
+            <Col xs={3}>
+              <Button
+                disabled={currentIndustry === "" || data.industries.includes(currentIndustry)}
+                variant="outline-primary"
+                type="button"
+                onClick={handleAddIndustry}
+                className="w-100"
+              >
+                {t("buttons.add")}
+              </Button>
+            </Col>
+          </Row>
+
+          {/* Display Added Industries */}
+          {data.industries.length > 0 && (
+            <div className="mt-3">
+              <p className="text-muted small mb-2">
+                {t("labels.selectedIndustries")}
+              </p>
+              {data.industries.map((industry, index) => (
+                <div
+                  key={index}
+                  className="d-flex justify-content-between align-items-center mb-2 p-2 bg-light rounded"
+                >
+                  <span>{industry}</span>
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    type="button"
+                    onClick={() => handleRemoveIndustry(index)}
+                  >
+                    {t("buttons.remove")}
+                  </Button>
+                </div>
+              ))}
+            </div>
+          )}
         </Form.Group>
       </div>
 
