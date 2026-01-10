@@ -5,7 +5,7 @@ import {
   goNextStep,
 } from "@/redux/slices/register/employer/employerSlice";
 import Step1Register from "../Step1Register";
-import { isEmailExistThunk } from "@/redux/slices/register/job-seeker/jobSeekerThunk";
+import { isEmailExistThunk } from "@/redux/slices/register/employer/employerThunk";
 
 export default function RegisterEmployerStep1() {
   return (

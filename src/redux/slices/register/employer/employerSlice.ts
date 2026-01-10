@@ -1,6 +1,6 @@
 // import apiClient from "@/lib/axios";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RegistrationStep1 } from "../superVisorySlice";
+import { RegistrationStep1 } from "../super-visory/superVisorySlice";
 import { isEmailExistThunk, registerEmployerThunk } from "./employerThunk";
 
 // Step 2: Company information

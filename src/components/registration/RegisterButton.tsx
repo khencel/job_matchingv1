@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 
 import { Button } from "react-bootstrap";
 import RegistrationModal from "./RegisterModal";
-import { clearRegisterSuperVisoryState } from "@/redux/slices/register/superVisorySlice";
+import { clearRegisterSuperVisoryState } from "@/redux/slices/register/super-visory/superVisorySlice";
 import { clearRegisterJobSeekerState } from "@/redux/slices/register/job-seeker/jobseekerSlice";
 
 interface RegisterButtonProps {

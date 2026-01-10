@@ -5,7 +5,7 @@ import {
   saveRegSuperVisoryStep3,
   RegisterSuperVisoryStep3Data,
   goNextStep,
-} from "@/redux/slices/register/superVisorySlice";
+} from "@/redux/slices/register/super-visory/superVisorySlice";
 import { ChangeEvent, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useTranslations } from "next-intl";

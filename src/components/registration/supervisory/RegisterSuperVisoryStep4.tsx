@@ -5,11 +5,11 @@ import { Form, Button, Spinner } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   saveRegSuperVisoryStep4,
-  registerSuperVisorySubmit,
   RegisterSuperVisoryStep4Data,
-} from "@/redux/slices/register/superVisorySlice";
+} from "@/redux/slices/register/super-visory/superVisorySlice";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
+import { registerSuperVisoryThunk } from "@/redux/slices/register/super-visory/superVisoryThunk";
 
 interface RegisterSuperVisoryStep4Props {
   closeModal: () => void;
@@ -83,18 +83,17 @@ export default function RegisterSuperVisoryStep4({
     // All validations passed - save data and submit
     setError({});
     dispatch(saveRegSuperVisoryStep4(data));
-
     try {
       // Final submit thunk (simulated API)
-      await dispatch(registerSuperVisorySubmit()).unwrap();
+      await dispatch(registerSuperVisoryThunk()).unwrap();
       Swal.fire({
+        title: "Verify Your Email",
+        text: `We've sent a verification email to your registered email
+        address. Click the verification link to activate
+        your account.`,
         icon: "success",
-        title: t("messages.success"),
-        text: t("messages.registrationComplete"),
-        toast: true,
-        position: "top",
-        showConfirmButton: false,
-        timer: 2000,
+        footer: `If you don't see the email, please check your spam or junk
+                 folder.`,
       });
       closeModal();
     } catch (error) {

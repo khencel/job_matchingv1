@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
+import {
+  isEmailExistThunk,
+  registerSuperVisoryThunk,
+} from "./superVisoryThunk";
 
 export interface RegistrationStep1 {
   email: string;
@@ -87,53 +91,6 @@ const initialState: RegisterSuperVisory = {
   isError: false,
 };
 
-export const registerSuperVisorySubmit = createAsyncThunk<
-  void,
-  void,
-  { state: { registerSuperVisory: RegisterSuperVisory } }
->("registerSuperVisory/Submit", async (_, { getState, rejectWithValue }) => {
-  const state = getState().registerSuperVisory;
-  const data = state.registerSuperVisoryData;
-
-  const submissionData = {
-    accountInfo: data.accountInfo,
-    companyInfo: data.companyInfo,
-    contactPersonInfo: data.contactPersonInfo,
-    termsAndConditions: data.termsAndConditions,
-  };
-
-  try {
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("SuperVisory Registration Data:", submissionData);
-    return;
-
-    // Uncomment when backend is ready
-    // const response = await apiClient.post(
-    //   "http://localhost:8000/api/register/supervisory",
-    //   submissionData
-    // );
-    // if (response.status === 200 || response.status === 201) {
-    //   return;
-    // }
-    // throw new Error("Unexpected response status");
-  } catch (error) {
-    // Handle Axios errors
-    if (error instanceof AxiosError) {
-      // Server responded with error status
-      if (error.response) {
-        const message = error.response.data?.message || "Registration failed";
-        return rejectWithValue(message);
-      }
-      // Network error (no response)
-      if (error.request) {
-        return rejectWithValue("Network error. Please check your connection.");
-      }
-    }
-    // Generic error fallback
-    return rejectWithValue("An unexpected error occurred. Please try again.");
-  }
-});
-
 export const registerSuperVisorySlice = createSlice({
   name: "registerSuperVisory",
   initialState,
@@ -191,22 +148,37 @@ export const registerSuperVisorySlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(registerSuperVisorySubmit.pending, (state) => {
+    builder.addAsyncThunk(registerSuperVisoryThunk, {
+      pending: (state) => {
         state.isLoading = true;
         state.isError = false;
-      })
-      .addCase(registerSuperVisorySubmit.fulfilled, (state) => {
-        state.isLoading = false;
+      },
+      fulfilled: (state) => {
         state.isError = false;
-        //Reset state after successful submission
+        state.isLoading = false;
         state.registerSuperVisoryData = initialState.registerSuperVisoryData;
         state.currentStep = 1;
-      })
-      .addCase(registerSuperVisorySubmit.rejected, (state) => {
-        state.isLoading = false;
+      },
+      rejected: (state) => {
         state.isError = true;
-      });
+        state.isLoading = false;
+      },
+    });
+    // check email if existing
+    builder.addAsyncThunk(isEmailExistThunk, {
+      pending: (state) => {
+        state.isLoading = true;
+        state.isError = false;
+      },
+      fulfilled: (state) => {
+        state.isError = false;
+        state.isLoading = false;
+      },
+      rejected: (state) => {
+        state.isError = true;
+        state.isLoading = false;
+      },
+    });
   },
 });
 

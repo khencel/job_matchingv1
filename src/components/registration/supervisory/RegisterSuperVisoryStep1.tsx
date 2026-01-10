@@ -1,7 +1,8 @@
+import { isEmailExistThunk } from "@/redux/slices/register/super-visory/superVisoryThunk";
 import {
   saveRegSuperVisoryStep1,
   goNextStep,
-} from "../../../redux/slices/register/superVisorySlice";
+} from "../../../redux/slices/register/super-visory/superVisorySlice";
 import Step1Register from "../Step1Register";
 
 const RegisterSuperVisoryStep1 = () => {
@@ -13,6 +14,7 @@ const RegisterSuperVisoryStep1 = () => {
         }
         saveAction={saveRegSuperVisoryStep1}
         goNextStepAction={goNextStep}
+        checkEmail={isEmailExistThunk}
       />
     </div>
   );
