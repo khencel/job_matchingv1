@@ -6,6 +6,7 @@ import resumeBuilderReducer from "./slices/resumeSlice";
 import authReducer from "./slices/login/authSlice";
 import basicInfoSlice from "./slices/employer/post_a_job/basicInfoSlice";
 import jobListing from "./slices/employer/post_a_job/JobListing";
+import profileSlice from "./slices/profile/profileSlice"
 
 
 export const makeStore = () => {
@@ -19,6 +20,7 @@ export const makeStore = () => {
       authState: authReducer,
       basicInfo: basicInfoSlice,
       jobListing: jobListing,
+      profileSlice: profileSlice
     },
   });
 };

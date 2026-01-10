@@ -15,6 +15,7 @@ import { FiLayers } from "react-icons/fi";
 import{ PropsWithChildren} from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { FaFileMedical } from "react-icons/fa6";
 
 
 const Sidebar = ({ children }: PropsWithChildren) => {
@@ -26,8 +27,9 @@ const Sidebar = ({ children }: PropsWithChildren) => {
     { label: "Applicants", icon: FaClipboardList, href: "/employer/applicants" },
     { label: "Post Job", icon: FaPlus, href: "/employer/post_a_job/job-information" },
     { label: "Job Listings", icon: FaBuilding, href: "/employer/job_listing" },
-    { label: "All Companies", icon: FaUsers, href: "/employer/companies" },
-    { label: "Messages", icon: FaEnvelope, href: "/employer/messages" },
+    // { label: "All Companies", icon: FaUsers, href: "/employer/companies" },
+    // { label: "Messages", icon: FaEnvelope, href: "/employer/messages" },
+    { label: "Perks & Benefits", icon: FaFileMedical , href: "/employer/messages" },
     { label: "Settings", icon: FaCog, href: "/employer/settings" },
   ];
 

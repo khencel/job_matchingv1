@@ -1,4 +1,8 @@
-export default function Header(){
+import FormattedDate from "@/components/date_format";
+
+export default function Header({data}:{data:any}){
+    console.log(data);
+    
     return(
         <>
             <div className="" style={{
@@ -19,29 +23,29 @@ export default function Header(){
                                     <br />
                                     <span className="text-primary">JOBSupport</span>
                                     <br />
-                                    <span className="text-primary">https://JOBSupport.com</span>
+                                    <span className="text-primary">{data.email}</span>
                                     <br />
                                 </div>
                                 <div className="row">
                                     <div className="col">
                                         <small className="text-style">Founded</small>
                                         <br />
-                                        <strong className="info-style">November 28, 2025</strong>
+                                        <strong className="info-style"><FormattedDate date={data.userDetails_emp.company_information.founded}/></strong>
                                     </div>
                                     <div className="col">
                                         <small className="text-style">Employees</small>
                                         <br />
-                                        <strong className="info-style">1823</strong>
+                                        <strong className="info-style">{data.userDetails_emp.company_information.no_of_emp}</strong>
                                     </div>
                                     <div className="col">
                                         <small className="text-style">Location</small>
                                         <br />
-                                        <strong className="info-style">Japan</strong>
+                                        <strong className="info-style">{data.userDetails_emp.company_information.region}</strong>
                                     </div>
                                     <div className="col">
                                         <small className="text-style">Industry</small>
                                         <br />
-                                        <strong className="info-style">Information Technology</strong>
+                                        <strong className="info-style">{data.userDetails_emp.company_information.company_industry}</strong>
                                     </div>
                                 </div>
                             </div>
