@@ -7,7 +7,7 @@ import {
   RegisterJobSeekerStep4Data,
   saveRegJobSeekerStep4,
 } from "@/redux/slices/register/job-seeker/jobseekerSlice";
-import { registerJobSeekerThunk } from "@/redux/slices/register/job-seeker/jobSeeker_thunk";
+import { registerJobSeekerThunk } from "@/redux/slices/register/job-seeker/jobSeekerThunk";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 
