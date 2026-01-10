@@ -8,7 +8,7 @@ import {
   goNextStep,
   RegisterJobSeekerStep2Data,
   saveRegJobSeekerStep2,
-} from "@/redux/slices/register/jobseekerSlice";
+} from "@/redux/slices/register/job-seeker/jobseekerSlice";
 import { isPhoneNumberValid } from "@/helper/validations";
 
 const RegisterJobSeekerStep2 = () => {

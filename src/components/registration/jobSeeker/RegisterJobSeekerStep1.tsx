@@ -1,8 +1,9 @@
 import {
   goNextStep,
   saveRegJobSeekerStep1,
-} from "@/redux/slices/register/jobseekerSlice";
+} from "@/redux/slices/register/job-seeker/jobseekerSlice";
 import Step1Register from "../Step1Register";
+import { isEmailExistThunk } from "@/redux/slices/register/job-seeker/jobSeeker_thunk";
 
 const RegisterJobSeekerStep1 = () => {
   return (
@@ -13,6 +14,7 @@ const RegisterJobSeekerStep1 = () => {
         }
         saveAction={saveRegJobSeekerStep1}
         goNextStepAction={goNextStep}
+        checkEmail={isEmailExistThunk}
       />
     </div>
   );
