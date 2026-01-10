@@ -23,4 +23,8 @@ export const showErrorToast = (title: string, description: string) => {
   toast.error(<ToastBody title={title} description={description} />, defaultOptions);
 };
 
+export const showWarningToast = (title: string, description: string) => {
+  toast.warning(<ToastBody title={title} description={description} />, defaultOptions);
+};
+
 

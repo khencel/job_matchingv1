@@ -2,6 +2,7 @@
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import { useEffect } from "react";
 
 
 
@@ -22,6 +23,16 @@ export default function TextEditor({ value, onChange }: TextEditorProps) {
           onChange(html); 
         },
     });
+
+    useEffect(() => {
+      if (!editor) return;
+
+      const currentHTML = editor.getHTML();
+
+      if (value !== currentHTML) {
+        editor.commands.setContent(value || "");
+      }
+    }, [value, editor]);
 
     if (!editor) return null;
 

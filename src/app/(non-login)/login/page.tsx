@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { loginUser } from "@/redux/slices/login/authSlice";
-import { showSuccessToast, showErrorToast } from "@/app/(util)/toaster";
+import { showSuccessToast, showErrorToast, showWarningToast } from "@/app/(util)/toaster";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
@@ -19,8 +19,27 @@ export default function Login() {
       return;
     }
     try {
-      await dispatch(loginUser({ email, password })).unwrap();
-      router.push("/"); // Redirect on successful login
+      const res = await dispatch(loginUser({ email, password })).unwrap();
+      const verified_email = res.user.is_email_verified;
+      const role = res.user.role;
+      console.log(res);
+      
+      if (!verified_email) {
+        showWarningToast("Sign in failed", "Please verify your email");
+        return;
+      }
+
+
+      if (role === "employer") {
+          router.push("/employer/overview");
+      }
+
+      if (role === "job_seeker") {
+        router.push("/"); 
+      }
+  
+       
+      // router.push("/"); 
       showSuccessToast("Sign in successful", "Welcome back!");
     } catch (error) {
       console.log(error);
@@ -50,6 +69,11 @@ export default function Login() {
               type="text"
               className="form-control"
               placeholder="Email"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleLogin();
+                }
+              }}
             />
           </div>
 
@@ -68,6 +92,11 @@ export default function Login() {
               type="password"
               className="form-control"
               placeholder="Password"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleLogin();
+                }
+              }}
             />
           </div>
           <div className="mt-3 text-center">

@@ -1,0 +1,13 @@
+
+.text-style{
+    color: gray;
+    font-weight: 500;
+}
+
+.info-style{
+    font-size: 12px;
+}
+
+.first-indent {
+  text-indent: 2em;
+}

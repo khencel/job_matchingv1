@@ -9,6 +9,7 @@ import StoreProvider from "../../StoreProvider";
 import NextIntlProvider from "@/i18n/NextIntlProvider";
 import { cookies } from "next/headers";
 import { ToastContainer } from "react-toastify";
+import "../../../../public/css/employer/style.css"
 
 export const metadata = {
   title: "Next.js",

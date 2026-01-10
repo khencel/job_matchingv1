@@ -3,12 +3,18 @@ import { useLocale, useTranslations } from "next-intl";
 import React, { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/redux/hooks";
+import { logout } from "@/redux/slices/login/authSlice";
+import { useDispatch } from "react-redux";
+
+
 
 export default function NavbarAuth() {
   const locale = useLocale();
   const t = useTranslations("navbar");
   const router = useRouter();
   const user = useAppSelector((s) => s.authState.user);
+  const dispatch = useDispatch();
+
 
   const setLocale = useCallback(
     (nextLocale: "en" | "ja") => {
@@ -59,6 +65,12 @@ export default function NavbarAuth() {
   const fullname = () => {
     return "Khenneth Alaiza";
   }
+
+  const handleLogout = () => {
+      dispatch(logout());
+      router.push("/login")
+  };
+
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -165,9 +177,9 @@ export default function NavbarAuth() {
                   <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <button className="dropdown-item" onClick={handleLogout}>
                     {t("logout")}
-                  </a>
+                  </button>
                 </li>
               </ul>
             </li>
