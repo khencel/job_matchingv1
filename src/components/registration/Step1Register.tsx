@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 import { RegistrationStep1 } from "@/redux/slices/register/superVisorySlice";
 import { RootState } from "@/redux/store";
-import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
+import { ActionCreatorWithPayload, AsyncThunk } from "@reduxjs/toolkit";
 import {
   isEmailValid,
   isPasswordMatch,
@@ -19,12 +19,18 @@ interface Step1RegisterProps {
   selector: (state: RootState) => RegistrationStep1;
   saveAction: ActionCreatorWithPayload<RegistrationStep1>;
   goNextStepAction: ActionCreatorWithPayload<1 | 2 | 3 | 4>;
+  checkEmail?: AsyncThunk<
+    { exists: boolean },
+    { email: string },
+    { rejectValue: string }
+  >;
 }
 
 export default function Step1Register({
   selector,
   saveAction,
   goNextStepAction,
+  checkEmail,
 }: Step1RegisterProps) {
   const t = useTranslations("Step1Register");
   const dispatch = useAppDispatch();
@@ -63,7 +69,7 @@ export default function Step1Register({
   };
 
   // Handle form submission with validation
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
 
@@ -118,19 +124,49 @@ export default function Step1Register({
       return;
     }
 
-    // All validations passed - save data and show success message
-    setError({});
+    // All validations passed - start check if email exist
     dispatch(saveAction(data));
-    // Show success toast notification
-    Swal.fire({
-      icon: "success",
-      title: "Account Information Submitted",
-      toast: true,
-      position: "top",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-    dispatch(goNextStepAction(2));
+
+    // If checkEmail function is provided, validate email existence
+    if (checkEmail) {
+      try {
+        await dispatch(checkEmail({ email: data.email })).unwrap();
+        Swal.fire({
+          icon: "success",
+          title: "Account Information Submitted",
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setError({});
+        dispatch(goNextStepAction(2));
+      } catch (error) {
+        const displayError =
+          typeof error === "string" ? error : JSON.stringify(error);
+        Swal.fire({
+          icon: "error",
+          title: displayError,
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        console.log("Error on Job Seeker Registration:", error);
+      }
+    } else {
+      // No email check function provided, proceed to next step
+      Swal.fire({
+        icon: "success",
+        title: "Account Information Submitted",
+        toast: true,
+        position: "top",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setError({});
+      dispatch(goNextStepAction(2));
+    }
   };
 
   return (

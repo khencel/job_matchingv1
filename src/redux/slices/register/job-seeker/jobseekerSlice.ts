@@ -1,7 +1,7 @@
 // import apiClient from "@/lib/axios";
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AxiosError } from "axios";
-import { RegistrationStep1 } from "./superVisorySlice";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RegistrationStep1 } from "../superVisorySlice";
+import { isEmailExistThunk, registerJobSeekerThunk } from "./jobSeeker_thunk";
 
 export interface RegisterJobSeekerStep2Data {
   firstName: string;
@@ -22,7 +22,6 @@ export interface RegisterJobSeekerStep2Data {
     | "doctoralDegree"
     | null;
   japaneseLevel: "N5" | "N4" | "N3" | "N2" | "N1" | null;
-  email: string;
   contactNo: string;
   facebook: string;
 }
@@ -65,7 +64,6 @@ const initialState: RegisterJobSeeker = {
       visaStatus: null,
       highestEducation: null,
       japaneseLevel: null,
-      email: "",
       contactNo: "",
       facebook: "",
     },
@@ -79,52 +77,6 @@ const initialState: RegisterJobSeeker = {
   isLoading: false,
   isError: false,
 };
-
-export const registerJobSeekerSubmit = createAsyncThunk<
-  void,
-  void,
-  { state: { registerJobSeeker: RegisterJobSeeker } }
->("registerJobSeeker/Submit", async (_, { getState, rejectWithValue }) => {
-  const state = getState().registerJobSeeker;
-  const data = state.registerJobSeekerData;
-
-  const submissionData = {
-    accountInfo: data.accountInfo,
-    jobSeekerData: data.jobSeekerData,
-    idURL: data.idURL,
-    termsAndCondition: data.termsAndConditions,
-  };
-
-  try {
-    //Simulate API call (remove when backend is ready)
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Job Seeker Registration Data:", submissionData);
-    return;
-
-    // const response = await apiClient.post(
-    //   "http://localhost:8000/api/register/jobSeeker",
-    //   submissionData
-    // );
-    // if (response.status === 200 || response.status === 201) {
-    //   return;
-    // }
-  } catch (error) {
-    // Handle Axios errors
-    if (error instanceof AxiosError) {
-      // Server responded with error status
-      if (error.response) {
-        const message = error.response.data?.message || "Registration failed";
-        return rejectWithValue(message);
-      }
-      // Network error (no response)
-      if (error.request) {
-        return rejectWithValue("Network error. Please check your connection.");
-      }
-    }
-    // Generic error fallback
-    return rejectWithValue("An unexpected error occurred. Please try again.");
-  }
-});
 
 export const registerJobSeekerSlice = createSlice({
   name: "registerJobSeeker",
@@ -179,7 +131,8 @@ export const registerJobSeekerSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addAsyncThunk(registerJobSeekerSubmit, {
+    // registering job seeker
+    builder.addAsyncThunk(registerJobSeekerThunk, {
       pending: (state) => {
         state.isLoading = true;
         state.isError = false;
@@ -189,6 +142,21 @@ export const registerJobSeekerSlice = createSlice({
         state.isLoading = false;
         state.registerJobSeekerData = initialState.registerJobSeekerData;
         state.currentStep = 1;
+      },
+      rejected: (state) => {
+        state.isError = true;
+        state.isLoading = false;
+      },
+    });
+    // check email if existing
+    builder.addAsyncThunk(isEmailExistThunk, {
+      pending: (state) => {
+        state.isLoading = true;
+        state.isError = false;
+      },
+      fulfilled: (state) => {
+        state.isError = false;
+        state.isLoading = false;
       },
       rejected: (state) => {
         state.isError = true;

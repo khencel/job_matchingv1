@@ -18,7 +18,7 @@ import RegisterJobSeekerStep1 from "./jobSeeker/RegisterJobSeekerStep1";
 import RegisterJobSeekerStep2 from "./jobSeeker/RegisterJobSeekerStep2";
 import RegisterJobSeekerStep3 from "./jobSeeker/RegisterJobSeekerStep3";
 import RegisterJobSeekerStep4 from "./jobSeeker/RegisterJobSeekerStep4";
-import { goBackJobSeeker } from "@/redux/slices/register/jobseekerSlice";
+import { goBackJobSeeker } from "@/redux/slices/register/job-seeker/jobseekerSlice";
 
 interface RegistrationModalProps {
   show: boolean;

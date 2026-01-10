@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import registerEmployerReducer from "./slices/register/employerSlice";
 import registerSuperVisoryReducer from "./slices/register/superVisorySlice";
-import registerJobSeekerReducer from "./slices/register/jobseekerSlice";
+import registerJobSeekerReducer from "./slices/register/job-seeker/jobseekerSlice";
 import resumeBuilderReducer from "./slices/resumeSlice";
 import authReducer from "./slices/login/authSlice";
 import basicInfoSlice from "./slices/employer/post_a_job/basicInfoSlice";

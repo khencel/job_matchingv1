@@ -1,4 +1,4 @@
-import { RegisterJobSeekerStep2Data } from "@/redux/slices/register/jobseekerSlice";
+import { RegisterJobSeekerStep2Data } from "@/redux/slices/register/job-seeker/jobseekerSlice";
 import { NextResponse } from "next/server";
 
 // 1. Mock Data Dictionary
@@ -14,7 +14,6 @@ const MOCK_USERS: Record<string, RegisterJobSeekerStep2Data> = {
     visaStatus: "APPLIED",
     highestEducation: "bachelorDegree",
     japaneseLevel: "N2",
-    email: "sampleUser@gmail.com",
     contactNo: "09333333333",
     facebook: "sample/facebook/link",
   },
@@ -29,7 +28,6 @@ const MOCK_USERS: Record<string, RegisterJobSeekerStep2Data> = {
     visaStatus: "APPLIED",
     highestEducation: "bachelorDegree",
     japaneseLevel: "N2",
-    email: "sampleUser@gmail.com",
     contactNo: "09333333333",
     facebook: "sample/facebook/link",
   },
