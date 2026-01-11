@@ -131,7 +131,7 @@ const ResumeBuilderPage = () => {
               <MenuIcon />
             </Button>
           </div>
-          <Nav variant="pills" className="flex-column gap-2 p-2">
+          <Nav variant="pills" className="flex-column p-2">
             {navItems.map((items) => (
               <Nav.Item key={items.key}>
                 <Nav.Link eventKey={items.key} className="sidebar-text">
@@ -187,7 +187,11 @@ const ResumeBuilderPage = () => {
               onClick={handleSaveResume}
               disabled={isLoading || isSaveDisabled}
               className="d-flex gap-2 align-items-center shadow-sm"
-              title={isSaveDisabled ? "Complete Basic Information and Language Level first" : "Save Resume"}
+              title={
+                isSaveDisabled
+                  ? "Complete Basic Information and Language Level first"
+                  : "Save Resume"
+              }
             >
               {isLoading ? (
                 <>
@@ -206,7 +210,11 @@ const ResumeBuilderPage = () => {
               onClick={() => handlePrint()}
               disabled={isSaveDisabled}
               className="d-flex gap-2 align-items-center shadow-sm"
-              title={isSaveDisabled ? "Complete Basic Information and Language Level first" : "Print Resume"}
+              title={
+                isSaveDisabled
+                  ? "Complete Basic Information and Language Level first"
+                  : "Print Resume"
+              }
             >
               <DownloadIcon size={18} />
               Print Resume
@@ -244,12 +252,6 @@ const navItems: NavItems[] = [
     label: "Education",
     icon: <School2Icon size={20} />,
     component: <Education />,
-  },
-  {
-    key: "lang-level",
-    label: "Language Level",
-    icon: <LanguagesIcon size={20} />,
-    component: <LanguageLevel />,
   },
   {
     key: "work-xp",

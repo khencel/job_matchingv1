@@ -13,6 +13,7 @@ export interface ResumeData {
   education: ResumeEducation;
   language: ResumeLanguage;
   workExperience: ResumeWorkExperience[];
+  skills: string[];
 }
 
 interface ResumeTemplateProps {
@@ -29,7 +30,7 @@ const parseDate = (dateStr: string): { year: string; month: string } => {
 // 3. The Component
 export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
   ({ data }, ref) => {
-    const { basicInfo, education, workExperience, language } = data;
+    const { basicInfo, education, workExperience } = data;
     const educationEntries = [
       education.primary,
       education.secondary,
@@ -67,9 +68,9 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
               <Row className="g-0" style={{ height: "70%" }}>
                 <Col className={`p-3 border-end ${borderDark}`}>
                   <div className="small text-muted mb-1">Name</div>
-                  <h2 className="fw-bold mb-0">{`${basicInfo.firstName} ${
+                  <h5 className="fw-bold mb-0">{`${basicInfo.firstName} ${
                     basicInfo.midName || ""
-                  } ${basicInfo.lastName}`}</h2>
+                  } ${basicInfo.lastName}`}</h5>
                 </Col>
                 <Col
                   xs={3}
@@ -148,18 +149,15 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
             <Col xs={2} className={`p-1 border-end ${borderDark}`}>
               Year
             </Col>
-            <Col xs={1} className={`p-1 border-end ${borderDark}`}>
-              Month
-            </Col>
-            <Col xs={9} className="p-1">
+            <Col xs={10} className="p-1">
               Education & Work History
             </Col>
           </Row>
 
           {/* ================= EDUCATION ================= */}
           <Row className="g-0">
-            <Col xs={3} className={`border-end ${borderDark}`}></Col>
-            <Col xs={9} className="p-1 fw-bold text-center">
+            <Col xs={2} className={`border-end ${borderDark}`}></Col>
+            <Col xs={10} className="p-1 fw-bold text-center">
               Education
             </Col>
           </Row>
@@ -175,10 +173,7 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
                   <Col xs={2} className={`text-center ${cellStyle}`}>
                     {date.year}
                   </Col>
-                  <Col xs={1} className={`text-center ${cellStyle}`}>
-                    {date.month}
-                  </Col>
-                  <Col xs={9} className="p-2">
+                  <Col xs={10} className="p-2">
                     {edu.schoolName} ({labels[idx]}) -{" "}
                     {edu.isNotFinished ? "Incomplete" : "Graduated"}
                   </Col>
@@ -187,8 +182,8 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
             })
           ) : (
             <Row className="g-0 border-top border-dark">
-              <Col xs={3} className={`border-end ${borderDark}`}></Col>
-              <Col xs={9} className="p-4 text-center text-muted">
+              <Col xs={2} className={`border-end ${borderDark}`}></Col>
+              <Col xs={10} className="p-4 text-center text-muted">
                 No educational background provided
               </Col>
             </Row>
@@ -196,8 +191,8 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
 
           {/* ================= WORK EXPERIENCE ================= */}
           <Row className="g-0 border-top border-dark">
-            <Col xs={3} className={`border-end ${borderDark}`}></Col>
-            <Col xs={9} className="p-1 fw-bold text-center">
+            <Col xs={2} className={`border-end ${borderDark}`}></Col>
+            <Col xs={10} className="p-1 fw-bold text-center">
               Work Experience
             </Col>
           </Row>
@@ -213,17 +208,14 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
                     <Col xs={2} className={`text-center ${cellStyle}`}>
                       {startDate.year}
                     </Col>
-                    <Col xs={1} className={`text-center ${cellStyle}`}>
-                      {startDate.month}
-                    </Col>
-                    <Col xs={9} className="p-2">
+                    <Col xs={10} className="p-2">
                       Joined <strong>{job.companyName}</strong> ({job.industry})
                     </Col>
                   </Row>
                   {/* Position Row (No date) */}
                   <Row className="g-0 border-top border-dark">
-                    <Col xs={3} className={`border-end ${borderDark}`}></Col>
-                    <Col xs={9} className="p-2 ps-4">
+                    <Col xs={2} className={`border-end ${borderDark}`}></Col>
+                    <Col xs={10} className="p-2 ps-4">
                       Position: {job.position}
                     </Col>
                   </Row>
@@ -232,10 +224,7 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
                     <Col xs={2} className={`text-center ${cellStyle}`}>
                       {endDate.year}
                     </Col>
-                    <Col xs={1} className={`text-center ${cellStyle}`}>
-                      {endDate.month}
-                    </Col>
-                    <Col xs={9} className="p-2">
+                    <Col xs={10} className="p-2">
                       Left {job.companyName}
                     </Col>
                   </Row>
@@ -244,53 +233,39 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
             })
           ) : (
             <Row className="g-0 border-top border-dark">
-              <Col xs={3} className={`border-end ${borderDark}`}></Col>
-              <Col xs={9} className="p-4 text-center text-muted">
-                No work history provided
+              <Col xs={2} className={`border-end ${borderDark}`}></Col>
+              <Col xs={10} className="p-4 text-center text-muted">
+                No work experience
               </Col>
             </Row>
           )}
 
-          {/* ================= LANGUAGES ================= */}
-          <Row className="g-0 border-top border-dark bg-light fw-bold text-center mt-auto">
-            <Col xs={3} className={`p-1 border-end ${borderDark}`}>
-              Japanese Level
-            </Col>
-            <Col xs={9} className="p-1">
-              Japanese Language Efficiency
-            </Col>
-          </Row>
+          {/* ================= SKILLS ================= */}
+          {data.skills && data.skills.length > 0 && (
+            <div>
+              <Row className="g-0 border-top border-dark bg-light fw-bold text-center mt-auto">
+                <Col xs={12} className="p-1">
+                  Skills
+                </Col>
+              </Row>
 
-          <Row
-            className="g-0 border-top border-dark"
-            style={{ minHeight: "80px" }}
-          >
-            <Col
-              xs={3}
-              className={`d-flex align-items-center justify-content-center border-end ${borderDark}`}
-            >
-              JP Level: {language.japaneseLevel}
-            </Col>
-            <Col xs={9} className="p-2">
-              <div className="mb-2">
-                <span className="me-3">
-                  <strong>Reading:</strong> {language.readingLevel}
-                </span>
-                <span className="me-3">
-                  <strong>Writing:</strong> {language.writingLevel}
-                </span>
-                <span>
-                  <strong>Speaking:</strong> {language.speakingLevel}
-                </span>
-              </div>
-              <div>
-                <strong>Other Languages:</strong>{" "}
-                {language.otherLanguages && language.otherLanguages.length > 0
-                  ? language.otherLanguages.join(", ")
-                  : "None"}
-              </div>
-            </Col>
-          </Row>
+              <Row
+                className="g-0 border-top border-dark"
+                style={{ minHeight: "60px" }}
+              >
+                <Col xs={12} className="p-2">
+                  <div>
+                    {data.skills.map((skill, index) => (
+                      <span key={index}>
+                        {skill}
+                        {index < data.skills.length - 1 ? ", " : ""}
+                      </span>
+                    ))}
+                  </div>
+                </Col>
+              </Row>
+            </div>
+          )}
         </Container>
       </div>
     );
