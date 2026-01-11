@@ -12,12 +12,11 @@ import profileSlice from "./slices/profile/profileSlice"
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      auth: authReducer,
+      authState: authReducer,
       registerEmployer: registerEmployerReducer,
       registerSuperVisory: registerSuperVisoryReducer,
       registerJobSeeker: registerJobSeekerReducer,
       resumeBuilder: resumeBuilderReducer,
-      authState: authReducer,
       basicInfo: basicInfoSlice,
       jobListing: jobListing,
       profileSlice: profileSlice

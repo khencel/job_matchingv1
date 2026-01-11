@@ -1,5 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AxiosError } from "axios";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   isEmailExistThunk,
   registerSuperVisoryThunk,

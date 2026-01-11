@@ -9,7 +9,6 @@ import Cookies from "js-cookie";
 import loginApi from "@/redux/features/auth/authService";
 import { fetchCurrentUser } from "@/redux/features/auth/auth_thunk";
 
-
 interface AuthState {
   user: User | null; // Replace 'any' with your user type
   access: string | null;
@@ -53,9 +52,9 @@ export const loginUser = createAsyncThunk<
   LoginResponse,
   LoginPayload,
   { rejectValue: string }
->("auth/loginUser", async (payload, { rejectWithValue }) => {
-  const email = payload.email;
-  const password = payload.password;
+>("auth/loginUser", async (arg, { rejectWithValue }) => {
+  const email = arg.email;
+  const password = arg.password;
 
   try {
     const res = await loginApi({ email, password });
