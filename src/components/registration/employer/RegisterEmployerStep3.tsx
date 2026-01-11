@@ -5,7 +5,7 @@ import {
   saveRegEmployerStep3,
   RegisterEmployerStep3Data,
   goNextStep,
-} from "@/redux/slices/register/employerSlice";
+} from "@/redux/slices/register/employer/employerSlice";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button, Form } from "react-bootstrap";

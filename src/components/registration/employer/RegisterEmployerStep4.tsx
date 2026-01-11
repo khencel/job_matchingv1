@@ -5,11 +5,11 @@ import { Form, Button, Spinner } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   saveRegEmployerStep4,
-  registerEmployerSubmit,
   RegisterEmployerStep4Data,
-} from "@/redux/slices/register/employerSlice";
+} from "@/redux/slices/register/employer/employerSlice";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
+import { registerEmployerThunk } from "@/redux/slices/register/employer/employerThunk";
 
 interface RegisterEmployerStep4Props {
   closeModal: () => void;
@@ -83,15 +83,15 @@ export default function RegisterEmployerStep4({
     setError({});
     dispatch(saveRegEmployerStep4(data));
     try {
-      // Final submit thunk (simulated API)
-      await dispatch(registerEmployerSubmit());
+      await dispatch(registerEmployerThunk());
       Swal.fire({
+        title: "Verify Your Email",
+        text: `We've sent a verification email to your registered email
+                  address. Click the verification link to activate
+                  your account.`,
         icon: "success",
-        title: "Employer Registration Success",
-        toast: true,
-        position: "top",
-        showConfirmButton: false,
-        timer: 1500,
+        footer: `If you don't see the email, please check your spam or junk
+                  folder.`,
       });
       closeModal();
     } catch (error) {

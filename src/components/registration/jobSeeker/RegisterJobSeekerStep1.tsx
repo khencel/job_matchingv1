@@ -3,7 +3,7 @@ import {
   saveRegJobSeekerStep1,
 } from "@/redux/slices/register/job-seeker/jobseekerSlice";
 import Step1Register from "../Step1Register";
-import { isEmailExistThunk } from "@/redux/slices/register/job-seeker/jobSeeker_thunk";
+import { isEmailExistThunk } from "@/redux/slices/register/job-seeker/jobSeekerThunk";
 
 const RegisterJobSeekerStep1 = () => {
   return (
