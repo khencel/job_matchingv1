@@ -1,10 +1,10 @@
 "use client";
 import {
   BellIcon,
+  File,
   FolderHeartIcon,
   FoldersIcon,
   MenuIcon,
-  MessagesSquareIcon,
   UserCircle,
 } from "lucide-react";
 import Link from "next/link";
@@ -87,15 +87,15 @@ export default function JobSeekerLayout({
                 <FolderHeartIcon /> {!isCollapsed && <span>Saved Jobs</span>}
               </Nav.Link>
             </Nav.Item>
-            {/* <Nav.Item>
+            <Nav.Item>
               <Nav.Link
                 as={Link}
                 className="sidebar-text"
-                href="/job-seeker/messages"
+                href="/job-seeker/resume-builder"
               >
-                <MessagesSquareIcon /> {!isCollapsed && <span>Messages</span>}
+                <File /> {!isCollapsed && <span>Create Resume</span>}
               </Nav.Link>
-            </Nav.Item> */}
+            </Nav.Item>
           </Nav>
         </div>
         {/* Content */}
