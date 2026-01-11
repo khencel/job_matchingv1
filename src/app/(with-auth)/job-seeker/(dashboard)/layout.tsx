@@ -46,7 +46,7 @@ export default function JobSeekerLayout({
               <MenuIcon className="icon" />
             </Button>
           </div>
-          <Nav variant="pills" className="flex-column gap-4">
+          <Nav variant="pills" className="flex-column">
             <Nav.Item>
               <Nav.Link
                 as={Link}
@@ -87,7 +87,7 @@ export default function JobSeekerLayout({
                 <FolderHeartIcon /> {!isCollapsed && <span>Saved Jobs</span>}
               </Nav.Link>
             </Nav.Item>
-            <Nav.Item>
+            {/* <Nav.Item>
               <Nav.Link
                 as={Link}
                 className="sidebar-text"
@@ -95,7 +95,7 @@ export default function JobSeekerLayout({
               >
                 <MessagesSquareIcon /> {!isCollapsed && <span>Messages</span>}
               </Nav.Link>
-            </Nav.Item>
+            </Nav.Item> */}
           </Nav>
         </div>
         {/* Content */}

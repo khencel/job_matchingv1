@@ -127,7 +127,7 @@ export default function Navbar() {
                     style={{
                       width: "32px",
                       height: "32px",
-                      backgroundColor: getAvatarColor("Khenneth Alaiza"),
+                      backgroundColor: getAvatarColor(user?.email || "User"),
                       color: "white",
                       fontWeight: "600",
                       fontSize: "14px",

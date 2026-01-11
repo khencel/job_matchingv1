@@ -2,13 +2,23 @@
 import { useLocale, useTranslations } from "next-intl";
 import React, { useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { UserCircle2 } from "lucide-react";
+import { Button } from "react-bootstrap";
+import { logout } from "@/redux/slices/login/authSlice";
 
 export default function NavbarAuth() {
   const locale = useLocale();
   const t = useTranslations("navbar");
   const router = useRouter();
+
   const user = useAppSelector((s) => s.authState.user);
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push("/");
+  };
 
   const setLocale = useCallback(
     (nextLocale: "en" | "ja") => {
@@ -55,10 +65,6 @@ export default function NavbarAuth() {
     }
     return colors[Math.abs(hash) % colors.length];
   };
-
-  const fullname = () => {
-    return "Khenneth Alaiza";
-  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -119,32 +125,21 @@ export default function NavbarAuth() {
                 aria-expanded="false"
               >
                 {user ? (
-                  // Show actual avatar image if exists
-                  <img
-                    src={""}
-                    alt={fullname()}
-                    className="rounded-circle"
-                    style={{
-                      width: "32px",
-                      height: "32px",
-                      objectFit: "cover",
-                    }}
-                  />
-                ) : (
-                  // Show initials if no avatar
                   <div
                     className="rounded-circle d-flex align-items-center justify-content-center"
                     style={{
                       width: "32px",
                       height: "32px",
-                      backgroundColor: getAvatarColor(fullname()),
+                      backgroundColor: getAvatarColor(user.email),
                       color: "white",
                       fontWeight: "600",
                       fontSize: "14px",
                     }}
                   >
-                    {getInitials(fullname())}
+                    {getInitials(user.email)}
                   </div>
+                ) : (
+                  <UserCircle2 />
                 )}
               </a>
               <ul
@@ -165,9 +160,9 @@ export default function NavbarAuth() {
                   <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <Button className="dropdown-item" onClick={handleLogout}>
                     {t("logout")}
-                  </a>
+                  </Button>
                 </li>
               </ul>
             </li>

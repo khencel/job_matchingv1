@@ -11,12 +11,11 @@ import jobListing from "./slices/employer/post_a_job/JobListing";
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      auth: authReducer,
+      authState: authReducer,
       registerEmployer: registerEmployerReducer,
       registerSuperVisory: registerSuperVisoryReducer,
       registerJobSeeker: registerJobSeekerReducer,
       resumeBuilder: resumeBuilderReducer,
-      authState: authReducer,
       basicInfo: basicInfoSlice,
       jobListing: jobListing,
     },
