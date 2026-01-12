@@ -60,80 +60,76 @@ const WorkExp = () => {
     const nextErrors: FormErrors = {};
     const currentYear = new Date().getFullYear();
 
-    // Validate all work experience entries
-    if (workExperience.length === 0) {
-      nextErrors.industry = "Please add at least one work experience.";
-      setFormErrors(nextErrors);
-      return;
-    }
+    // Validate only if work experience entries exist
+    if (workExperience.length > 0) {
+      for (let i = 0; i < workExperience.length; i++) {
+        const exp = workExperience[i];
 
-    for (let i = 0; i < workExperience.length; i++) {
-      const exp = workExperience[i];
-
-      if (!exp.industry || exp.industry.trim().length === 0) {
-        nextErrors.industry = "Industry is required.";
-        setSelectedIndex(i);
-        break;
-      }
-
-      if (!exp.companyName || exp.companyName.trim().length === 0) {
-        nextErrors.companyName = "Company name is required.";
-        setSelectedIndex(i);
-        break;
-      }
-
-      if (!exp.position || exp.position.trim().length === 0) {
-        nextErrors.position = "Position is required.";
-        setSelectedIndex(i);
-        break;
-      }
-
-      if (!exp.employmentType || exp.employmentType.trim().length === 0) {
-        nextErrors.employmentType = "Employment type is required.";
-        setSelectedIndex(i);
-        break;
-      }
-
-      if (!exp.dateStarted || exp.dateStarted.trim().length === 0) {
-        nextErrors.dateStarted = "Start date is required.";
-        setSelectedIndex(i);
-        break;
-      } else {
-        const startYear = new Date(exp.dateStarted).getFullYear();
-        if (Number.isNaN(startYear)) {
-          nextErrors.dateStarted = "Start date is invalid.";
+        if (!exp.industry || exp.industry.trim().length === 0) {
+          nextErrors.industry = "Industry is required.";
           setSelectedIndex(i);
           break;
         }
-        if (startYear > currentYear) {
-          nextErrors.dateStarted = `Start year cannot be greater than ${currentYear}.`;
-          setSelectedIndex(i);
-          break;
-        }
-      }
 
-      if (!exp.dateEnded || exp.dateEnded.trim().length === 0) {
-        nextErrors.dateEnded = "End date is required.";
-        setSelectedIndex(i);
-        break;
-      } else {
-        const endYear = new Date(exp.dateEnded).getFullYear();
-        if (Number.isNaN(endYear)) {
-          nextErrors.dateEnded = "End date is invalid.";
+        if (!exp.companyName || exp.companyName.trim().length === 0) {
+          nextErrors.companyName = "Company name is required.";
           setSelectedIndex(i);
           break;
         }
-        if (endYear > currentYear) {
-          nextErrors.dateEnded = `End year cannot be greater than ${currentYear}.`;
-          setSelectedIndex(i);
-          break;
-        }
-      }
 
-      if (exp.dateStarted && exp.dateEnded < exp.dateStarted) {
-        nextErrors.dateEnded = "End date must be after or equal to start date.";
-        setSelectedIndex(i);
-        break;
+        if (!exp.position || exp.position.trim().length === 0) {
+          nextErrors.position = "Position is required.";
+          setSelectedIndex(i);
+          break;
+        }
+
+        if (!exp.employmentType || exp.employmentType.trim().length === 0) {
+          nextErrors.employmentType = "Employment type is required.";
+          setSelectedIndex(i);
+          break;
+        }
+
+        if (!exp.dateStarted || exp.dateStarted.trim().length === 0) {
+          nextErrors.dateStarted = "Start date is required.";
+          setSelectedIndex(i);
+          break;
+        } else {
+          const startYear = new Date(exp.dateStarted).getFullYear();
+          if (Number.isNaN(startYear)) {
+            nextErrors.dateStarted = "Start date is invalid.";
+            setSelectedIndex(i);
+            break;
+          }
+          if (startYear > currentYear) {
+            nextErrors.dateStarted = `Start year cannot be greater than ${currentYear}.`;
+            setSelectedIndex(i);
+            break;
+          }
+        }
+
+        if (!exp.dateEnded || exp.dateEnded.trim().length === 0) {
+          nextErrors.dateEnded = "End date is required.";
+          setSelectedIndex(i);
+          break;
+        } else {
+          const endYear = new Date(exp.dateEnded).getFullYear();
+          if (Number.isNaN(endYear)) {
+            nextErrors.dateEnded = "End date is invalid.";
+            setSelectedIndex(i);
+            break;
+          }
+          if (endYear > currentYear) {
+            nextErrors.dateEnded = `End year cannot be greater than ${currentYear}.`;
+            setSelectedIndex(i);
+            break;
+          }
+        }
+
+        if (exp.dateStarted && exp.dateEnded < exp.dateStarted) {
+          nextErrors.dateEnded = "End date must be after or equal to start date.";
+          setSelectedIndex(i);
+          break;
+        }
       }
     }
 
@@ -330,7 +326,7 @@ const WorkExp = () => {
             </>
           )}
 
-          <div className="d-flex gap-2">
+          <div className="d-flex row gap-3">
             <Button
               type="button"
               variant="outline-primary"
@@ -341,7 +337,6 @@ const WorkExp = () => {
             <Button
               type="submit"
               className="btn-primary-custom"
-              disabled={workExperience.length === 0}
             >
               Next
             </Button>

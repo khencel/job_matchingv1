@@ -140,7 +140,7 @@ const Education = () => {
 
     // Proceed to next step or save data
     console.log("Education Resume valid:", education);
-    dispatch(goNextResumeTab("lang-level"));
+    dispatch(goNextResumeTab("work-xp"));
   };
 
   const educationLevel = [

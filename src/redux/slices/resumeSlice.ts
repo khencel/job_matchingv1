@@ -58,6 +58,7 @@ export interface ResumeBuilderData {
   isLoading?: boolean;
   error?: string | null;
   savedResumeId?: string | null;
+  skills: string[];
 }
 
 interface SaveResumePayload {
@@ -134,6 +135,7 @@ const initialState: ResumeBuilderData = {
   isLoading: false,
   error: null,
   savedResumeId: null,
+  skills: [],
 };
 
 export const resumeBuilderSlice = createSlice({
@@ -182,6 +184,21 @@ export const resumeBuilderSlice = createSlice({
         // @ts-expect-error - Dynamic key access
         state.workExperience[index][field] = value;
       }
+    },
+
+    //update Skills
+    updateSkills: (state, action: PayloadAction<string[]>) => {
+      state.skills = action.payload;
+    },
+
+    addSkill: (state, action: PayloadAction<string>) => {
+      if (action.payload.trim() !== "") {
+        state.skills.push(action.payload.trim());
+      }
+    },
+
+    removeSkill: (state, action: PayloadAction<number>) => {
+      state.skills.splice(action.payload, 1);
     },
 
     // 3. Actions to Add/Remove items
@@ -234,6 +251,9 @@ export const {
   updateWorkExperience,
   updateEducation,
   updateLanguage,
+  updateSkills,
+  addSkill,
+  removeSkill,
   addWorkExperience,
   removeWorkExperience,
   clearError,
