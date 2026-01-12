@@ -2,7 +2,6 @@
 
 import Header from "./header"
 import Body from "./body"
-import Team from "./team"
 import PerksBenefits from "./perks_benefits"
 import { getProfile } from "@/redux/slices/profile/profilethunk"
 import { useAppDispatch } from "@/redux/hooks"
@@ -36,7 +35,7 @@ export default function Profile(){
             {profile && <Header data={profile} />}
             {profile && <Body data={profile} />}
             <hr />
-            {profile && <Team data={profile} />}
+            {/* {profile && <Team data={profile} />} */}
             <hr />
             {profile && <PerksBenefits data={profile} />}
         </>

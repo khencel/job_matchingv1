@@ -11,3 +11,44 @@
 .first-indent {
   text-indent: 2em;
 }
+
+.statusActivity {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* overview */
+
+.recent_activity_avatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.text_rencent_jobs{
+  color:rgb(89, 89, 89);
+  font-size:14px;
+}
+
+.status_text{
+  color: green;
+}
+
+.status_text_expired{
+  color:red
+}
+
+.applicants_text{
+  color: gray;
+}
+
+/* Applicants */
+
+.applicant_avatar{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

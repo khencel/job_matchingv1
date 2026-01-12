@@ -29,7 +29,7 @@ const Sidebar = ({ children }: PropsWithChildren) => {
     { label: "Job Listings", icon: FaBuilding, href: "/employer/job_listing" },
     // { label: "All Companies", icon: FaUsers, href: "/employer/companies" },
     // { label: "Messages", icon: FaEnvelope, href: "/employer/messages" },
-    { label: "Perks & Benefits", icon: FaFileMedical , href: "/employer/messages" },
+    { label: "Perks & Benefits", icon: FaFileMedical , href: "/employer/perks_benefits" },
     { label: "Settings", icon: FaCog, href: "/employer/settings" },
   ];
 

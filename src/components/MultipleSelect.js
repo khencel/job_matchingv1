@@ -3,10 +3,10 @@ import Select from "react-select";
 
 
 const options = [
-  { value: "apple", label: "Apple" },
-  { value: "banana", label: "Banana" },
-  { value: "orange", label: "Orange" },
-  { value: "mango", label: "Mango" },
+  { value: "apple", label: "IT Solution" },
+  { value: "banana", label: "Call Center" },
+  { value: "orange", label: "IT Consultant" },
+  { value: "mango", label: "Production" },
 ];
 
 const MultiSelectDropdown = ({ value, onChange }) => {
