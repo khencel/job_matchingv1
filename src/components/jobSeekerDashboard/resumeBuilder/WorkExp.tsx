@@ -44,7 +44,7 @@ const WorkExp = () => {
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >,
     index: number
-  ) => { 
+  ) => {
     const { name, value } = e.target as HTMLInputElement | HTMLSelectElement;
     dispatch(updateWorkExperience({ index, field: name, value }));
 
@@ -126,7 +126,8 @@ const WorkExp = () => {
         }
 
         if (exp.dateStarted && exp.dateEnded < exp.dateStarted) {
-          nextErrors.dateEnded = "End date must be after or equal to start date.";
+          nextErrors.dateEnded =
+            "End date must be after or equal to start date.";
           setSelectedIndex(i);
           break;
         }
@@ -215,8 +216,7 @@ const WorkExp = () => {
         <Form className="d-flex flex-column gap-3" onSubmit={handleSubmit}>
           {workExperience.length === 0 ? (
             <div className="alert alert-info">
-              No work experience added yet. Click &quot;Add Work
-              Experience&quot; to add one.
+              No work experience.
             </div>
           ) : (
             <>
@@ -326,21 +326,16 @@ const WorkExp = () => {
             </>
           )}
 
-          <div className="d-flex row gap-3">
-            <Button
-              type="button"
-              variant="outline-primary"
-              onClick={handleAddWorkExperience}
-            >
-              + Add Work Experience
-            </Button>
-            <Button
-              type="submit"
-              className="btn-primary-custom"
-            >
-              Next
-            </Button>
-          </div>
+          <Button
+            type="button"
+            variant="outline-primary"
+            onClick={handleAddWorkExperience}
+          >
+            + Add Work Experience
+          </Button>
+          <Button type="submit" className="btn-primary-custom">
+            Next
+          </Button>
         </Form>
       </Card.Body>
     </Card>

@@ -63,21 +63,11 @@ export const loginUser = createAsyncThunk<
       secure: true,
       sameSite: "strict",
     });
-
-    if(res.data.user.is_email_verified === false){
-      return res.data;
-    }
-
-    Cookies.set("access", res.data.access, {
-      expires: 1 / 24,
+    Cookies.set("accessToken", res.data.access, {
+      expires: 7,
       secure: true,
       sameSite: "strict",
     });
-
-    localStorage.setItem("token", res.data.access);
-    localStorage.setItem("user", JSON.stringify(res.data.user));
-    localStorage.setItem("user_id", res.data.user.id.toString());
-  
     return res.data;
   } catch (error) {
     // Handle Axios errors
@@ -107,9 +97,7 @@ const authSlice = createSlice({
       state.error = null;
       state.isAuthenticated = false;
       Cookies.remove("refreshToken");
-      Cookies.remove("access");
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
+      Cookies.remove("accessToken");
     },
   },
   extraReducers: (builder) => {
