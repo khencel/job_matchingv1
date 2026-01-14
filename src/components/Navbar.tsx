@@ -156,10 +156,10 @@ export default function Navbar() {
                       <FolderHeartIcon />
                       <span className="ms-2">Saved Jobs</span>
                     </Dropdown.Item>
-                    <Dropdown.Item as={Link} href="/job-seeker/messages">
+                    {/* <Dropdown.Item as={Link} href="/job-seeker/messages">
                       <MessagesSquareIcon />
                       <span className="ms-2">Messages</span>
-                    </Dropdown.Item>
+                    </Dropdown.Item> */}
                     <hr className="my-0 mx-auto" style={{ width: "90%" }} />
                     <Dropdown.Item onClick={handleLogout} href="/">
                       <LogOutIcon />
