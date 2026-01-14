@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProfile } from "@/redux/slices/profile/profilethunk";
+import { getProfile, updateProfile } from "@/redux/slices/profile/profilethunk";
 
 interface ProfileState {
     profile: any;
@@ -18,6 +18,7 @@ const profileSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+        // GET PROFILE
         builder
             .addCase(getProfile.pending, (state) => {
                 state.status = "loading";
@@ -31,6 +32,22 @@ const profileSlice = createSlice({
                 state.status = "failed";
                 state.error = action.payload as string || "Something went wrong";
             })
+
+        // UPDATE PROFILE 
+        builder
+            .addCase(updateProfile.pending, (state) => {
+                state.status = "loading";
+                state.error = null;
+            })
+            .addCase(updateProfile.fulfilled, (state, action) => {
+                state.status = "succeeded";
+                state.profile = action.payload;
+            })
+            .addCase(updateProfile.rejected, (state, action) => {
+                state.status = "failed"
+                state.error = action.payload as string || "Failed to update profile";
+            })
+
     }
         
 })
