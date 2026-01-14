@@ -94,8 +94,7 @@ const authSlice = createSlice({
       state.error = null;
       state.isAuthenticated = false;
       Cookies.remove("refreshToken");
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
+      Cookies.remove("accessToken");
     },
   },
   extraReducers: (builder) => {
