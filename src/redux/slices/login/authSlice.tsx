@@ -60,6 +60,11 @@ export const loginUser = createAsyncThunk<
       secure: true,
       sameSite: "strict",
     });
+    Cookies.set("accessToken", res.data.access, {
+      expires: 7,
+      secure: true,
+      sameSite: "strict",
+    });
     return res.data;
   } catch (error) {
     // Handle Axios errors
