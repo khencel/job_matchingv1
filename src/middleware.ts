@@ -1,4 +1,4 @@
-"use client";
+
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtDecode } from "jwt-decode";

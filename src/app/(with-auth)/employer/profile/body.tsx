@@ -3,7 +3,7 @@ export default function Body({data}:{data:any}){
         <>
             <div className="py-4">
                 <div className="row">
-                    <div className="col">
+                    <div className="col bg-light p-4">
                         <h3><strong>Company Profile</strong></h3>
                         <p className="first-indent lh-lg text-secondary">
                             {data.userDetails_emp.company_information.profile}
@@ -15,6 +15,8 @@ export default function Body({data}:{data:any}){
                         {data.email}
                         <br />
                         {data.userDetails_emp.company_information.phone}
+                        
+
                     </div>
                 </div>
             </div>

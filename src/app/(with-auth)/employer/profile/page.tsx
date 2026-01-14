@@ -10,19 +10,15 @@ import type { RootState } from "@/redux/store"
 import { useEffect } from "react"
 import SpinnerComponent from "@/components/spinner"
 
-
-
 export default function Profile(){
     const dispatch = useAppDispatch()
     const {profile,status,error} = useSelector((state:RootState) => state.profileSlice)
-
 
     useEffect(() => {
         const user_id = Number(localStorage.getItem("user_id"))
         dispatch(getProfile(user_id))
     }, [dispatch])
     
-
     if(status === "loading"){
         return <SpinnerComponent />
     }
@@ -38,6 +34,7 @@ export default function Profile(){
             {/* {profile && <Team data={profile} />} */}
             <hr />
             {profile && <PerksBenefits data={profile} />}
+
         </>
     )
 }

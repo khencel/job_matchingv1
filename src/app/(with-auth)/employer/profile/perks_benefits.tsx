@@ -1,4 +1,4 @@
-export default function PerksBenefits(){
+export default function PerksBenefits({data}:{data:any}){
     return(
         <>
             <div className="py-4">

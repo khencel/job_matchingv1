@@ -1,8 +1,14 @@
 import FormattedDate from "@/components/date_format";
+import EditModalProfile from "./editModal";
+import { useState } from "react";
 
 export default function Header({data}:{data:any}){
-    console.log(data);
-    
+
+    const [showModal, setShowModal] = useState(false);
+
+    const handleEditModal = () => setShowModal(true);
+    const handleClose = () => setShowModal(false);
+
     return(
         <>
             <div className="" style={{
@@ -52,10 +58,11 @@ export default function Header({data}:{data:any}){
                         </div>
                     </div>
                     <div className="col-md-2 d-flex align-items-center">
-                        <button className="btn btn-primary-custom rounded-3">Edit Profile</button>
+                        <button className="btn btn-primary-custom rounded-3" onClick={handleEditModal}>Edit Profile</button>
                     </div>
                 </div>
             </div>
+            <EditModalProfile handleShow={showModal} handleClose={handleClose} />
         </>
     )
 }

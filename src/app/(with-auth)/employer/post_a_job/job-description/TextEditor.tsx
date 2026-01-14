@@ -38,30 +38,43 @@ export default function TextEditor({ value, onChange }: TextEditorProps) {
 
 
   return (
-    <div className="border rounded p-3 bg-white">
-        
-      <EditorContent editor={editor} className="ProseMirror mb-2" />
-      
-      <div className="mb-2 d-flex gap-1">
-        <button onClick={() => editor.chain().focus().toggleBold().run()}>
-          <b>B</b>
-        </button>
+  <div className="editor-wrapper">
+    {/* Toolbar */}
+    <div className="editor-toolbar">
+      <button
+        className={editor.isActive("bold") ? "active" : ""}
+        onClick={() => editor.chain().focus().toggleBold().run()}
+      >
+        <b>B</b>
+      </button>
 
-        <button onClick={() => editor.chain().focus().toggleItalic().run()}>
-          <i>I</i>
-        </button>
+      <button
+        className={editor.isActive("italic") ? "active" : ""}
+        onClick={() => editor.chain().focus().toggleItalic().run()}
+      >
+        <i>I</i>
+      </button>
 
-        <button onClick={() => editor.chain().focus().toggleBulletList().run()}>
-          •
-        </button>
+      <button
+        className={editor.isActive("bulletList") ? "active" : ""}
+        onClick={() => editor.chain().focus().toggleBulletList().run()}
+      >
+        •
+      </button>
 
-        <button onClick={() => editor.chain().focus().toggleOrderedList().run()}>
-          1.
-        </button>
-        
-      </div>
-
-      
+      <button
+        className={editor.isActive("orderedList") ? "active" : ""}
+        onClick={() => editor.chain().focus().toggleOrderedList().run()}
+      >
+        1.
+      </button>
     </div>
-  );
+
+    {/* Editor */}
+    <div className="editor-content">
+      <EditorContent editor={editor} />
+    </div>
+  </div>
+);
+
 }

@@ -82,3 +82,59 @@
   color: rgb(116, 114, 114);
   padding: 10px;
 }
+
+.standard-text{
+  color:rgb(89, 89, 89);
+}
+
+.editor-wrapper {
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  background: #fff;
+}
+
+/* Toolbar */
+.editor-toolbar {
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+  border-bottom: 1px solid #e5e5e5;
+  background: #f8f9fa;
+}
+
+.editor-toolbar button {
+  border: none;
+  background: transparent;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.editor-toolbar button:hover {
+  background: #e9ecef;
+}
+
+.editor-toolbar button.active {
+  background: #dee2e6;
+}
+
+/* Editor content */
+.editor-content {
+  padding: 12px;
+  min-height: 150px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Remove default focus outline */
+.ProseMirror {
+  outline: none;
+}
+
+/* Subtle focus like MS Word */
+.editor-wrapper:focus-within {
+  border-color: #bfc5cb;
+}
+
+

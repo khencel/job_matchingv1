@@ -35,7 +35,6 @@ export interface LoginResponse {
   refresh: string;
   access: string;
   user: User;
-  
 }
 
 // Initial state
@@ -97,7 +96,11 @@ const authSlice = createSlice({
       state.error = null;
       state.isAuthenticated = false;
       Cookies.remove("refreshToken");
-      Cookies.remove("accessToken");
+      Cookies.remove("access");
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      localStorage.removeItem("user_id");
+      localStorage.removeItem("initialData");
     },
   },
   extraReducers: (builder) => {
