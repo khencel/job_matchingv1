@@ -40,8 +40,11 @@ const profileSlice = createSlice({
                 state.error = null;
             })
             .addCase(updateProfile.fulfilled, (state, action) => {
+                state.profile = {
+                    ...state.profile,
+                    ...action.payload,
+                };
                 state.status = "succeeded";
-                state.profile = action.payload;
             })
             .addCase(updateProfile.rejected, (state, action) => {
                 state.status = "failed"

@@ -17,8 +17,6 @@ interface EditModalProps {
 
 export default function Editmodal({handleShow, handleClose, data}: EditModalProps){
     const dispatch = useAppDispatch();
-    console.log(data);
-    
     const [formData, setFormData] = useState({
         title:"",
         salary:"",

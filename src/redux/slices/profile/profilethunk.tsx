@@ -28,8 +28,13 @@ export const updateProfile = createAsyncThunk(
             const formData = new FormData();
 
             formData.append("details", JSON.stringify(payload.details));
-            formData.append("avatar", payload.avatar ?? ""); // empty string kung null
-            formData.append("banner", payload.banner ?? "");
+            if (payload.avatar instanceof File) {
+                formData.append("avatar", payload.avatar);
+            }
+
+            if (payload.banner instanceof File) {
+                formData.append("banner", payload.banner);
+            }
 
     
             const res = await standard_update_api(`/api/auth/user/update/${payload.user_id}/`, formData);
