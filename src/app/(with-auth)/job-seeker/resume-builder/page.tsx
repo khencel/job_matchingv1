@@ -131,7 +131,7 @@ const ResumeBuilderPage = () => {
               <MenuIcon />
             </Button>
           </div>
-          <Nav variant="pills" className="flex-column p-2">
+          <Nav className="flex-column">
             {navItems.map((items) => (
               <Nav.Item key={items.key}>
                 <Nav.Link eventKey={items.key} className="sidebar-text">

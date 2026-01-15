@@ -22,6 +22,7 @@ export default function JobSeekerLayout({
 
   // Determine active key based on pathname
   const getActiveKey = () => {
+    if (pathname.includes("/job-seeker/profile")) return "job-seeker-profile";
     if (pathname.includes("/applied-jobs")) return "applied-jobs";
     if (pathname.includes("/notifications")) return "notifications";
     if (pathname.includes("/saved-jobs")) return "saved-jobs";
@@ -45,7 +46,7 @@ export default function JobSeekerLayout({
               <MenuIcon className="icon" />
             </Button>
           </div>
-          <Nav variant="pills" className="flex-column">
+          <Nav className="flex-column">
             <Nav.Item>
               <Nav.Link
                 as={Link}

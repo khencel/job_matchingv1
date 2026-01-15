@@ -215,8 +215,7 @@ const WorkExp = () => {
         <Form className="d-flex flex-column gap-3" onSubmit={handleSubmit}>
           {workExperience.length === 0 ? (
             <div className="alert alert-info">
-              No work experience added yet. Click &quot;Add Work
-              Experience&quot; to add one.
+              No work experience added yet.
             </div>
           ) : (
             <>
