@@ -40,7 +40,7 @@ export default function JobDescription(){
 
                 <div className="row mt-2">
                     <div className="col">
-                        <strong>Responssibility <span className="text-danger">*</span></strong>
+                        <strong>Responsibility <span className="text-danger">*</span></strong>
                         <br />
                         <small>Outline the core responsibilities of the position.</small>
                     </div>

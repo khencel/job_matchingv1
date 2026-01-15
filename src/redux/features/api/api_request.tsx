@@ -38,9 +38,16 @@ export async function standard_get_api(url: string){
 }
 
 
-export async function updateAPI (url: string, data: any){
+export async function standard_update_api (url: string, data: any){
     const token = localStorage.getItem("token");
     const baseUrl = "http://localhost:8000"
+
+    return axios.put(baseUrl+url, data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+        }
+    });
 }
 
 export async function standard_delete_api (url: string){

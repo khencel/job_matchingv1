@@ -4,7 +4,7 @@ import { BiArrowBack } from "react-icons/bi";
 import { FaCalendarCheck, FaSliders } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "@/redux/hooks";
@@ -12,12 +12,21 @@ import { listJobPost, deleteJobPost } from "@/redux/features/job_post/job_post_t
 
 import { setPage, setPageSize } from "@/redux/slices/employer/post_a_job/JobListing";
 import { popup } from "@/helper/pop_up";
+import Editmodal from "./edit_modal";
+import { setInitialData } from "@/redux/slices/employer/post_a_job/basicInfoSlice";
+
 
 export default function JobListing() {
     const dispatch = useAppDispatch();
     const { items, status, error, loading, count, next, previous, currentPage, pageSize } = 
         useSelector((state: RootState) => state.jobListing);
     
+    
+    const [showModal, setShowModal] = useState(false);
+    const [selectedData, setSelectedData] = useState<any>(null);
+
+    const handleClose = () => setShowModal(false);
+
     
     useEffect(() => {
         const userId = Number(localStorage.getItem("user_id"));
@@ -61,6 +70,12 @@ export default function JobListing() {
         if (!userId) return;
         await dispatch(deleteJobPost(id));
         dispatch(listJobPost({ userId, page: currentPage, pageSize }));
+    }
+
+
+    const handleEdit = (data: any) => {
+        setSelectedData(data);
+        setShowModal(true);
     }
 
     return (
@@ -136,7 +151,7 @@ export default function JobListing() {
 
                                                     <ul className="dropdown-menu dropdown-menu-end">
                                                     <li>
-                                                        <button className="dropdown-item">Edit</button>
+                                                        <button className="dropdown-item" onClick={() => handleEdit(item)}>Edit</button>
                                                     </li>
                                                     <li>
                                                         <button className="dropdown-item text-danger" onClick={() => handleDelete(item.id)}>Delete</button>
@@ -211,6 +226,12 @@ export default function JobListing() {
                     )}
                 </div>
             </div>
+
+            <Editmodal
+                handleShow={showModal}
+                handleClose={handleClose}
+                data={selectedData}
+            />
         </>
     );
 }

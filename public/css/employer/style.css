@@ -1,0 +1,97 @@
+
+.text-style{
+    color: gray;
+    font-weight: 500;
+}
+
+.info-style{
+    font-size: 12px;
+}
+
+.first-indent {
+  text-indent: 2em;
+}
+
+.statusActivity {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* overview */
+
+.recent_activity_avatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.text_rencent_jobs{
+  color:rgb(89, 89, 89);
+  font-size:14px;
+}
+
+.status_text{
+  color: green;
+}
+
+.status_text_expired{
+  color:red
+}
+
+.applicants_text{
+  color: gray;
+}
+
+/* Applicants */
+
+.applicant_avatar{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+/* Profile  */
+
+.edit_profile_modal {
+  max-width: 90%;
+}
+
+.edit-logo-profile{
+  width: 100%;       
+  height: 120px;     
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f9f9f9;
+}
+
+.logo-preview {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;   
+}
+
+.edit-banner-profile {
+    width: 100%;
+    height: 180px;            
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.banner-preview {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;        
+}

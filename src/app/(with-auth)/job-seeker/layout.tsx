@@ -1,5 +1,5 @@
-import Navbar from "@/components/Navbar";
 import { PropsWithChildren } from "react";
+import Navbar from "../../components/NavbarAuth";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
