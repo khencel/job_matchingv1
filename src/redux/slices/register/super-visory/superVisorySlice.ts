@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
+  editSuperVisoryThunk,
   isEmailExistThunk,
   registerSuperVisoryThunk,
 } from "./superVisoryThunk";
@@ -147,7 +148,25 @@ export const registerSuperVisorySlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // register supervisory account
     builder.addAsyncThunk(registerSuperVisoryThunk, {
+      pending: (state) => {
+        state.isLoading = true;
+        state.isError = false;
+      },
+      fulfilled: (state) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.registerSuperVisoryData = initialState.registerSuperVisoryData;
+        state.currentStep = 1;
+      },
+      rejected: (state) => {
+        state.isError = true;
+        state.isLoading = false;
+      },
+    });
+    // edit supervisory account
+    builder.addAsyncThunk(editSuperVisoryThunk, {
       pending: (state) => {
         state.isLoading = true;
         state.isError = false;

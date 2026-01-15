@@ -40,12 +40,12 @@ export default function JobSeekerLayout({
         {/* Sidebar */}
         <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
           <div className="sidebar-header">
-            <h3 className="sidebar-title">{!isCollapsed && "JOB SEEKER"}</h3>
-            <Button onClick={handleCollapse} className="toggle-btn">
+            <h3 className="sidebar-title">{!isCollapsed && "SUPER VISORY"}</h3>
+            <Button onClick={handleCollapse} className="toggle-btn"> 
               <MenuIcon className="icon" />
             </Button>
           </div>
-          <Nav variant="pills" className="flex-column">
+          <Nav className="flex-column">
             {SideBarNavItems.map((item, idx) => (
               <Nav.Item key={idx}>
                 <Nav.Link
@@ -99,6 +99,6 @@ const SideBarNavItems: SideBarNavItem[] = [
     eventKey: "settings",
     href: "/super-visory/settings",
     icon: <SettingsIcon />,
-    label: "Settings",
+    label: "Account Settings",
   },
 ];
