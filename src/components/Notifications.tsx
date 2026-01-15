@@ -1,3 +1,4 @@
+"use client";
 import { NotificationInterface } from "@/app/mock-api/notifications/[userId]/route";
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";

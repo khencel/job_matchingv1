@@ -25,7 +25,6 @@ export default function JobSeekerLayout({
     if (pathname.includes("/applied-jobs")) return "applied-jobs";
     if (pathname.includes("/notifications")) return "notifications";
     if (pathname.includes("/saved-jobs")) return "saved-jobs";
-    return "job-seeker-profile"; // default
   };
 
   const handleCollapse = () => {
