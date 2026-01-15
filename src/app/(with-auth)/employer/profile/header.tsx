@@ -5,29 +5,29 @@ import { useState } from "react";
 export default function Header({data}:{data:any}){
 
     const [showModal, setShowModal] = useState(false);
-
+    
     const handleEditModal = () => setShowModal(true);
     const handleClose = () => setShowModal(false);
-
+    const companyInfo = data.userDetails_emp?.company_information || {};
     return(
         <>
             <div className="" style={{
-                                        backgroundImage:"linear-gradient(rgba(235, 235, 235, 0.94), rgba(255, 255, 255, 0.85)), url('/img/employer/images.jpg')",
-                                        backgroundSize:"cover",
-                                        backgroundRepeat:"no-repeat",
-                                        backgroundPosition:"center",
+                                        backgroundImage: `linear-gradient(rgba(162, 162, 162, 0.4), rgba(255, 255, 255, 0.85)), url(${data.banner})`,
+                                        backgroundSize: "cover",
+                                        backgroundRepeat: "no-repeat",
+                                        backgroundPosition: "center",
                                     }}>
                 <div className="row">
                     <div className="col-md-10">
                         <div className="row">
                             <div className="col-3 d-flex justify-content-center align-items-center">
-                                <img src="/logo.png" className="img-fluid" alt="" />
+                                <img src={data.avatar} style={{width:'150px'}} alt="" />
                             </div>
                             <div className="col-9">
                                 <div className="">
-                                    <strong><h2>Employer Profile</h2></strong>
+                                    <strong className="text-white"><h2>Employer Profile</h2></strong>
                                     <br />
-                                    <span className="text-primary">JOBSupport</span>
+                                    <span className="text-primary">{companyInfo.name}</span>
                                     <br />
                                     <span className="text-primary">{data.email}</span>
                                     <br />
@@ -36,22 +36,22 @@ export default function Header({data}:{data:any}){
                                     <div className="col">
                                         <small className="text-style">Founded</small>
                                         <br />
-                                        <strong className="info-style"><FormattedDate date={data.userDetails_emp.company_information.founded}/></strong>
+                                        <strong className="info-style"><FormattedDate date={companyInfo.founded}/></strong>
                                     </div>
                                     <div className="col">
                                         <small className="text-style">Employees</small>
                                         <br />
-                                        <strong className="info-style">{data.userDetails_emp.company_information.no_of_emp}</strong>
+                                        <strong className="info-style">{companyInfo.no_of_emp}</strong>
                                     </div>
                                     <div className="col">
                                         <small className="text-style">Location</small>
                                         <br />
-                                        <strong className="info-style">{data.userDetails_emp.company_information.region}</strong>
+                                        <strong className="info-style">{companyInfo.region}</strong>
                                     </div>
                                     <div className="col">
                                         <small className="text-style">Industry</small>
                                         <br />
-                                        <strong className="info-style">{data.userDetails_emp.company_information.company_industry}</strong>
+                                        <strong className="info-style">{companyInfo.company_industry}</strong>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@ export default function Header({data}:{data:any}){
                     </div>
                 </div>
             </div>
-            <EditModalProfile handleShow={showModal} handleClose={handleClose} />
+            <EditModalProfile handleShow={showModal} handleClose={handleClose} companyProfile={data} />
         </>
     )
 }

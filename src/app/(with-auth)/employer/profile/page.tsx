@@ -15,8 +15,7 @@ import SpinnerComponent from "@/components/spinner"
 export default function Profile(){
     const dispatch = useAppDispatch()
     const {profile,status,error} = useSelector((state:RootState) => state.profileSlice)
-
-
+    
     useEffect(() => {
         const user_id = Number(localStorage.getItem("user_id"))
         dispatch(getProfile(user_id))
@@ -36,7 +35,6 @@ export default function Profile(){
             {profile && <Body data={profile} />}
             <hr />
             {/* {profile && <Team data={profile} />} */}
-            <hr />
             {profile && <PerksBenefits data={profile} />}
         </>
     )

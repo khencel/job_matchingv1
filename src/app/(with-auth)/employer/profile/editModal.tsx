@@ -4,7 +4,10 @@ import Modal from "react-bootstrap/Modal";
 import TextEditor from "../post_a_job/job-description/TextEditor";
 import { useAppDispatch } from "@/redux/hooks";
 import { updateProfile } from "@/redux/slices/profile/profilethunk";
-
+import { useEffect } from "react";
+import { getProfile } from "@/redux/slices/profile/profilethunk";
+import { popup } from "@/helper/pop_up";
+import { showSuccessToast } from "@/app/(util)/toaster";
 
 
 interface EditModalProps {
@@ -14,18 +17,22 @@ interface EditModalProps {
 }
 
 export default function EditModalProfile({ handleShow, handleClose, companyProfile }: EditModalProps) {
-
     const dispatch = useAppDispatch();
-
+    
     const logoInputRef = useRef<HTMLInputElement>(null);
     const [logoPreview, setLogoPreview] = useState<string | null>(null);
     const [logoFile, setLogoFile] = useState<File | null>(null);
-    const [companyName, setCompanyName] = useState(companyProfile?.name || "");
-    const [companyProfileText, setCompanyProfileText] = useState(companyProfile?.profile || "");
-    const [founded, setFounded] = useState(companyProfile?.founded || "");
-    const [employees, setEmployees] = useState(companyProfile?.employees || 0);
-    const [region, setRegion] = useState(companyProfile?.region || "");
-    const [industry, setIndustry] = useState(companyProfile?.industry || "");
+    
+    const [companyName, setCompanyName] = useState("");
+    const [companyProfileText, setCompanyProfileText] = useState("");
+    const [founded, setFounded] = useState("");
+    const [employees, setEmployees] = useState(0);
+    const [region, setRegion] = useState("");
+    const [industry, setIndustry] = useState("");
+
+    const bannerInputRef = useRef<HTMLInputElement>(null);
+    const [bannerPreview, setBannerPreview] = useState<string | null>(null);
+    const [bannerFile, setBannerFile] = useState<File | null>(null);
 
 
     const handleReplaceLogo = () => {
@@ -43,11 +50,6 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
         setLogoPreview(URL.createObjectURL(file));
     };
 
-    // BANNER
-    const bannerInputRef = useRef<HTMLInputElement>(null);
-    const [bannerPreview, setBannerPreview] = useState<string | null>(null);
-    const [bannerFile, setBannerFile] = useState<File | null>(null);
-
     const handleReplaceBanner = () => {
         bannerInputRef.current?.click();
     };
@@ -58,6 +60,19 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
         setBannerFile(file);
         setBannerPreview(URL.createObjectURL(file));
     };
+
+    const saveChanges = () => {
+        popup({
+            title: "Update Profile?",
+            text: "Profile will be updated",
+            confirmText: 'yes, Update it!',
+            icon:"warning",
+            onConfirm: () => {
+                handleSave()
+            }
+        })
+            
+    }
 
     const handleSave = () => {
         const details = {
@@ -74,14 +89,21 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
             user_id: Number(localStorage.getItem("user_id"))
         };
 
-        // Only attach files if they exist
-        if (logoFile) payload.avatar = logoFile;
-        if (bannerFile) payload.banner = bannerFile;
+       
+        if (logoFile instanceof File) {
+            payload.avatar = logoFile;
+        }
 
-        // Dispatch API call
+        if (bannerFile instanceof File) {
+            payload.banner = bannerFile;
+        }
+
         dispatch(updateProfile(payload))
             .unwrap()
             .then(() => {
+                const user_id = Number(localStorage.getItem("user_id"));
+                dispatch(getProfile(user_id));
+                showSuccessToast("Update successful", "Profile has been updated successfully")
                 handleClose();
             })
             .catch((err) => {
@@ -89,7 +111,22 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
             });
     };
 
-
+    // Update state when companyProfile changes
+    useEffect(() => {
+        
+        const companyInfo = companyProfile?.userDetails_emp?.company_information || {};
+        console.log(companyInfo);
+        
+        setCompanyName(companyInfo.name || "");
+        setFounded(companyInfo.founded || "");
+        setEmployees(companyInfo.no_of_emp || 0);
+        setRegion(companyInfo.region || "");
+        setCompanyProfileText(companyInfo.profile || "");
+        setIndustry(companyInfo.industry || "");
+        setLogoPreview(companyProfile.avatar || null);
+        setBannerPreview(companyProfile.banner || null);
+        
+    }, [companyProfile]);
 
     return (
         <>
@@ -214,7 +251,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                             className="form-control" 
                                             type="number" 
                                             value={employees}
-                                            onChange={(e) => setEmployees(e.target.value)}
+                                            onChange={(e) => setEmployees(Number(e.target.value))}
                                         />
                                     </div>
                                     <div className="col">
@@ -249,7 +286,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleSave}>
+                    <Button className="btn-primary-custom rounded-3" onClick={saveChanges}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

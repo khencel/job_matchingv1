@@ -45,6 +45,7 @@ export async function standard_update_api (url: string, data: any){
     return axios.put(baseUrl+url, data, {
         headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
         }
     });
 }
