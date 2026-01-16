@@ -1,12 +1,45 @@
-import { Card, CardBody, CardTitle, Container } from "react-bootstrap";
+"use client";
+
+import CompanyForm from "@/components/registration/supervisory/CompanyForm";
+import CompanyDisplay from "@/components/registration/supervisory/CompanyDisplay";
+import { useAppSelector } from "@/redux/hooks";
+import { Card, CardBody, Container, Button } from "react-bootstrap";
+import { useState } from "react";
 
 export default function SuperVisorySettingsPage() {
+  const data = useAppSelector(
+    (s) => s.registerSuperVisory.registerSuperVisoryData.companyInfo
+  );
+  const [editMode, setEditMode] = useState(false);
+
+  const handleSubmit = (formData: typeof data) => {
+    console.log("Form submitted with data:", formData);
+    // TODO: dispatch update to backend/store
+    setEditMode(false);
+  };
+
   return (
-    <Container fluid className="p-5">
-      <Card>
+    <Container fluid className="p-0">
+      <Card className="border-0">
         <CardBody>
-          <CardTitle>Account Information</CardTitle>
-          <hr />
+          <div className="d-flex justify-content-end mb-3">
+            <Button
+              variant={editMode ? "secondary" : "primary"}
+              onClick={() => setEditMode((v) => !v)}
+            >
+              {editMode ? "Cancel" : "Edit"}
+            </Button>
+          </div>
+
+          {editMode ? (
+            <CompanyForm
+              initialValues={data}
+              onSubmit={handleSubmit}
+              submitLabel="Update"
+            />
+          ) : (
+            <CompanyDisplay data={data} />
+          )}
         </CardBody>
       </Card>
     </Container>

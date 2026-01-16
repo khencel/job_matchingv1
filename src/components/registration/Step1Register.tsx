@@ -152,7 +152,7 @@ export default function Step1Register({
           showConfirmButton: false,
           timer: 1500,
         });
-        console.log("Error on Job Seeker Registration:", error);
+        console.log("Error on Registration:", error);
       }
     } else {
       // No email check function provided, proceed to next step

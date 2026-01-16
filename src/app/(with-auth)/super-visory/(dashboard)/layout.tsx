@@ -38,7 +38,7 @@ export default function JobSeekerLayout({
         activeKey={getActiveKey()}
       >
         {/* Sidebar */}
-        <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
+        <div className={`sidebar ${isCollapsed ? "collapsed" : ""} border-end`}>
           <div className="sidebar-header">
             <h3 className="sidebar-title">{!isCollapsed && "SUPER VISORY"}</h3>
             <Button onClick={handleCollapse} className="toggle-btn"> 
