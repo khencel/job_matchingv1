@@ -10,26 +10,64 @@ import AddModal from "./add_modal";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
-import { indexPerksBenefits } from "@/redux/slices/perks_benefits/perksBenefitsThunk";
+import { indexPerksBenefits, deletePerksBenefits } from "@/redux/slices/perks_benefits/perksBenefitsThunk";
 import FormattedDate from "@/components/date_format";
+import Dropdown from "react-bootstrap/Dropdown";
+import { popup } from "@/helper/pop_up";
+import { showSuccessToast } from "@/app/(util)/toaster";
+import EditModal from "./edit_modal";
+
 
 
 export default function PerksBenefitsPage(){
     const [showModal, setShowModal] = useState(false);
+    const [showModalEdit, setShowModalEdit] = useState(false);
     const dispatch = useAppDispatch();
-    
+
     const {items, status, error} = useAppSelector((state) => state.perksAndBenefitsSlice);
+    const [selectedPerks, setSelectedPerks] = useState<any>([]);
+
 
     const handleAdd = () => {
         setShowModal(true);
     }
     const handleClose = () => setShowModal(false);
 
-    useEffect(() => {
+
+   
+
+    const handleDelete = (id: number) => {
+        popup({
+            title: "Delete Perks & Benefits?",
+            text: "Are you sure you want to delete this Perks & Benefits?",
+            confirmText: 'yes, Create it!',
+            icon:"warning",
+            onConfirm: () => {
+                    dispatch(deletePerksBenefits(id));
+                    showSuccessToast('Delete Item','Perks & Benefits deleted successfully')
+                    handleClose();
+                }
+        })        
+    }
+
+    const getPerks = () => {
         const user_id = typeof window !== "undefined" ? localStorage.getItem("user_id"): null;
         if(user_id){
             dispatch(indexPerksBenefits(Number(user_id)));
         }
+    }
+
+
+    const handleEdit = (data: {}) => {
+        setShowModalEdit(true);
+        setSelectedPerks(data);
+
+    }
+    const handleCloseEdit = () => setShowModalEdit(false);
+
+
+    useEffect(() => {
+       getPerks();
     }, []);
 
 
@@ -91,8 +129,28 @@ export default function PerksBenefitsPage(){
                                             <td>{perk.description}</td>
                                             <td>{<FormattedDate date={perk.created_at}/>}</td>
                                             <td>
-                                                <HiDotsHorizontal className="cursor-pointer" />
+                                                <Dropdown align="end">
+                                                    <Dropdown.Toggle
+                                                        variant="link"
+                                                        className="p-0 text-dark shadow-none no-caret"
+                                                    >
+                                                        <HiDotsHorizontal size={20} />
+                                                    </Dropdown.Toggle>
+
+                                                    <Dropdown.Menu>
+                                                        <Dropdown.Item onClick={() => handleEdit(perk)}>
+                                                            Edit
+                                                        </Dropdown.Item>
+                                                        <Dropdown.Item
+                                                            className="text-danger"
+                                                            onClick={() => handleDelete(perk.id)}
+                                                        >
+                                                            Delete
+                                                        </Dropdown.Item>
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
                                             </td>
+
                                         </tr>
                                     ))}
 
@@ -102,6 +160,7 @@ export default function PerksBenefitsPage(){
                 </div>
             </div>
             <AddModal handleShow={showModal} handleClose={handleClose} />
+            <EditModal showModalEdit={showModalEdit} closeModalEdit={handleCloseEdit} data={selectedPerks}/>
         </>
     );
 }

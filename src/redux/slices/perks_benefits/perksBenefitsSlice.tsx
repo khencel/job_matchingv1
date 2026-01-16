@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { addPerksBenefits, indexPerksBenefits } from "@/redux/slices/perks_benefits/perksBenefitsThunk";
+import { addPerksBenefits, indexPerksBenefits, deletePerksBenefits, updatePerksBenefits } from "@/redux/slices/perks_benefits/perksBenefitsThunk";
 
 
 export interface PerksBenefitsItem {
@@ -36,7 +36,12 @@ const perksAndBenefitsSlice = createSlice({
         setField: (state, action: PayloadAction<Partial<PerksBenefitsState>>) => {
             return { ...state, ...action.payload };
         },
-        resetForm: () => initialState,
+        resetForm: (state) => {
+            state.name = "";
+            state.description = "";
+            state.error = null;
+            state.status = "idle";
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -66,6 +71,37 @@ const perksAndBenefitsSlice = createSlice({
                 state.status = "failed"
                 state.error = action.payload as string || "Something went wrong";
             })
+        
+            // Delete Perks 
+        builder
+            .addCase(deletePerksBenefits.pending, (state) => {
+                state.status = "loading";
+            })
+            .addCase(deletePerksBenefits.fulfilled, (state, action) => {
+                state.status = "succeeded";
+                state.items = state.items.filter((item) => item.id !== action.payload.id);
+            })
+            .addCase(deletePerksBenefits.rejected, (state, action) => {
+                state.status = "failed";
+            })
+
+            // Update Perks 
+        builder
+            .addCase(updatePerksBenefits.pending, (state) => {
+                state.status = "loading";
+            })
+            .addCase(updatePerksBenefits.fulfilled, (state, action) => {
+                state.status = "succeeded";
+                const index = state.items.findIndex(item => item.id === action.payload.id);
+                if (index !== -1) {
+                    state.items[index] = action.payload; 
+                }
+            })
+            .addCase(updatePerksBenefits.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.payload as string || "Update failed";
+            })
+             
     }
 })
 

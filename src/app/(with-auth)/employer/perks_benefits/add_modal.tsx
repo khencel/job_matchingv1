@@ -31,7 +31,7 @@ export default function AddModal({handleShow, handleClose}: AddModalProps){
                     dispatch(resetForm())
                     handleClose();
                 }
-            })
+        })
     }
 
     return (

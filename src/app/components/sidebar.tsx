@@ -30,7 +30,7 @@ const Sidebar = ({ children }: PropsWithChildren) => {
     // { label: "All Companies", icon: FaUsers, href: "/employer/companies" },
     // { label: "Messages", icon: FaEnvelope, href: "/employer/messages" },
     { label: "Perks & Benefits", icon: FaFileMedical , href: "/employer/perks_benefits" },
-    { label: "Settings", icon: FaCog, href: "/employer/settings" },
+    // { label: "Settings", icon: FaCog, href: "/employer/settings" },
   ];
 
 

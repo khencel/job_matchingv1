@@ -95,3 +95,7 @@
     max-height: 100%;
     object-fit: cover;        
 }
+
+.no-caret::after {
+    display: none !important;
+}
