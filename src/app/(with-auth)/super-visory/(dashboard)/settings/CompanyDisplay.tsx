@@ -3,7 +3,7 @@
 import React from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import { useTranslations } from "next-intl";
-import { CompanyFormData } from "./CompanyForm";
+import { CompanyFormData } from "@/components/registration/supervisory/CompanyForm";
 
 interface Props {
   data: CompanyFormData;
@@ -44,7 +44,9 @@ export default function CompanyDisplay({ data }: Props) {
 
       <Card className="mb-4 p-3 bg-light border-0">
         <Card.Body>
-          <h6 className="mb-3 fw-bold text-primary">{t("labels.headquartersAddress")}</h6>
+          <h6 className="mb-3 fw-bold text-primary">
+            {t("labels.headquartersAddress")}
+          </h6>
 
           <Row className="mb-2">
             <Col md={4}>{t("labels.prefecture")}</Col>
@@ -65,7 +67,9 @@ export default function CompanyDisplay({ data }: Props) {
 
       <Card className="mb-4 p-3 bg-light border-0">
         <Card.Body>
-          <h6 className="mb-3 fw-bold text-primary">{t("labels.companyDetails")}</h6>
+          <h6 className="mb-3 fw-bold text-primary">
+            {t("labels.companyDetails")}
+          </h6>
 
           <Row className="mb-2">
             <Col md={4}>{t("labels.numberOfEmployees")}</Col>
