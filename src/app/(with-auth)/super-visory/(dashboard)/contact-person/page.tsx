@@ -1,3 +1,3 @@
-export default function AccountSettingsPage() {
+export default function ContactPage() {
   return <div>SuperVisory Trainings Page</div>;
 }

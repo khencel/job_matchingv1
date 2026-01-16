@@ -1,6 +1,8 @@
 "use client";
 import {
   BellIcon,
+  Building2Icon,
+  ContactIcon,
   FileUserIcon,
   LayersIcon,
   MenuIcon,
@@ -25,6 +27,8 @@ export default function JobSeekerLayout({
     if (pathname.includes("/trainees")) return "trainees";
     if (pathname.includes("/notifications")) return "notifications";
     if (pathname.includes("/settings")) return "settings";
+    if (pathname.includes("/company-profile")) return "company-profile";
+    if (pathname.includes("/contact-person")) return "contact-person";
   };
 
   const handleCollapse = () => {
@@ -41,7 +45,7 @@ export default function JobSeekerLayout({
         <div className={`sidebar ${isCollapsed ? "collapsed" : ""} border-end`}>
           <div className="sidebar-header">
             <h3 className="sidebar-title">{!isCollapsed && "SUPER VISORY"}</h3>
-            <Button onClick={handleCollapse} className="toggle-btn"> 
+            <Button onClick={handleCollapse} className="toggle-btn">
               <MenuIcon className="icon" />
             </Button>
           </div>
@@ -94,6 +98,18 @@ const SideBarNavItems: SideBarNavItem[] = [
     href: "/super-visory/notifications",
     icon: <BellIcon />,
     label: "Notifications",
+  },
+  {
+    eventKey: "company-profile",
+    href: "/super-visory/company-profile",
+    icon: <Building2Icon />,
+    label: "Company Profile",
+  },
+  {
+    eventKey: "contact-person",
+    href: "/super-visory/contact-person",
+    icon: <ContactIcon />,
+    label: "Contact Person",
   },
   {
     eventKey: "settings",

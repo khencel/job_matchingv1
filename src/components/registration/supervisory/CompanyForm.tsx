@@ -30,9 +30,8 @@ interface CompanyFormProps {
 export default function CompanyForm({
   initialValues,
   onSubmit,
-  submitLabel, // Default label
+  submitLabel,
 }: CompanyFormProps) {
-  // You might want to use a generic namespace like "Common.CompanyForm"
   const t = useTranslations("registerSupervisoryStep2");
 
   const [data, setData] = useState<CompanyFormData>(initialValues);
