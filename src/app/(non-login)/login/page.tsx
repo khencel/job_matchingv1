@@ -1,9 +1,13 @@
 "use client";
 import { useState } from "react";
-import { loginUser } from "@/redux/slices/login/authSlice";
-import { showSuccessToast, showErrorToast, showWarningToast } from "@/app/(util)/toaster";
+import {
+  showSuccessToast,
+  showErrorToast,
+  showWarningToast,
+} from "@/app/(util)/toaster";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { loginUser } from "@/redux/features/auth/auth_thunk";
 
 export default function Login() {
   const dispatch = useAppDispatch();
@@ -23,23 +27,21 @@ export default function Login() {
       const verified_email = res.user.is_email_verified;
       const role = res.user.role;
       console.log(res);
-      
+
       if (!verified_email) {
         showWarningToast("Sign in failed", "Please verify your email");
         return;
       }
 
-
       if (role === "employer") {
-          router.push("/employer/overview");
+        router.push("/employer/overview");
       }
 
       if (role === "job_seeker") {
-        router.push("/"); 
+        router.push("/");
       }
-  
-       
-      // router.push("/"); 
+
+      // router.push("/");
       showSuccessToast("Sign in successful", "Welcome back!");
     } catch (error) {
       console.log(error);
@@ -56,8 +58,10 @@ export default function Login() {
         <div className="col-md-5 d-flex align-items-center justify-content-center">
           <div className="w-75">
             <div className="mb-4 text-center">
-                <h3 className="fw-bold">Sign In</h3>
-                <p className="text-muted">Welcome back! Please login to your account</p>
+              <h3 className="fw-bold">Sign In</h3>
+              <p className="text-muted">
+                Welcome back! Please login to your account
+              </p>
             </div>
             <div className="input-group">
               <span className="input-group-text">
@@ -143,8 +147,7 @@ export default function Login() {
             </div>
           </div>
         </div>
-        </div>
+      </div>
     </>
-    
   );
 }
