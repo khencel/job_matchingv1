@@ -10,7 +10,7 @@ import loginApi from "@/redux/features/auth/authService";
 import { fetchCurrentUser } from "@/redux/features/auth/auth_thunk";
 
 interface AuthState {
-  user: User | null; // Replace 'any' with your user type
+  user: User | null;
   access: string | null;
   loading: boolean;
   error: SerializedError | null;
@@ -26,6 +26,7 @@ export interface User {
   id: number;
   email: string;
   username: string;
+  avatar_url: string | null;
   first_name: string;
   last_name: string;
   is_email_verified: boolean;
@@ -35,7 +36,6 @@ export interface LoginResponse {
   refresh: string;
   access: string;
   user: User;
-  
 }
 
 // Initial state
@@ -64,7 +64,7 @@ export const loginUser = createAsyncThunk<
       sameSite: "strict",
     });
 
-    if(res.data.user.is_email_verified === false){
+    if (res.data.user.is_email_verified === false) {
       return res.data;
     }
 
@@ -77,7 +77,7 @@ export const loginUser = createAsyncThunk<
     localStorage.setItem("token", res.data.access);
     localStorage.setItem("user", JSON.stringify(res.data.user));
     localStorage.setItem("user_id", res.data.user.id.toString());
-  
+
     return res.data;
   } catch (error) {
     // Handle Axios errors

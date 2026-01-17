@@ -83,7 +83,7 @@ export default function RegisterEmployerStep4({
     setError({});
     dispatch(saveRegEmployerStep4(data));
     try {
-      await dispatch(registerEmployerThunk());
+      const res = await dispatch(registerEmployerThunk()).unwrap();
       Swal.fire({
         title: "Verify Your Email",
         text: `We've sent a verification email to your registered email
@@ -94,6 +94,7 @@ export default function RegisterEmployerStep4({
                   folder.`,
       });
       closeModal();
+      console.log(res);
     } catch (error) {
       Swal.fire({
         icon: "error",

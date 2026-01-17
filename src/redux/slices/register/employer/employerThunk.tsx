@@ -28,7 +28,9 @@ export const registerEmployerThunk = createAsyncThunk<
     if (error instanceof AxiosError) {
       // Server responded with error status
       if (error.response) {
-        const message = error.response.data?.message || "Registration failed";
+        const message =
+          error.response.data?.message ||
+          "Registration failed. Please try again.";
         return rejectWithValue(message);
       }
       // Network error (no response)

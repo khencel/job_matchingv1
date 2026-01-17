@@ -13,9 +13,9 @@ export const registerJobSeekerThunk = createAsyncThunk<
 
   const submissionData = {
     email: data.accountInfo.email,
-    password: data.accountInfo.password,
     first_name: data.jobSeekerData.firstName,
     last_name: data.jobSeekerData.lastName,
+    password: data.accountInfo.password,
     user_type: "job_seeker",
     details: JSON.stringify(data),
   };
@@ -26,6 +26,7 @@ export const registerJobSeekerThunk = createAsyncThunk<
       return response.data;
     }
   } catch (error) {
+    console.log(error);
     // Handle Axios errors
     if (error instanceof AxiosError) {
       // Server responded with error status
@@ -50,8 +51,7 @@ export const isEmailExistThunk = createAsyncThunk<
   { exists: boolean },
   { email: string },
   { rejectValue: string }
->("registerJobSeeker/checkEmail", 
-  async (arg, { rejectWithValue }) => {
+>("registerJobSeeker/checkEmail", async (arg, { rejectWithValue }) => {
   try {
     // Use encodeURIComponent to handle special characters like '@' in the URL
     const res = await apiClient.get(

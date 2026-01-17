@@ -1,16 +1,46 @@
 import { useAppSelector } from "@/redux/hooks";
 import { ImageIcon, Edit2 } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { useState, useRef } from "react";
+import { Container, Row, Col, Button, Form, Spinner } from "react-bootstrap";
+import { uploadProfilePhoto } from "@/app/mock-api/mockProfileApi"; // added import
 
 const EditJobSeeker = () => {
   const router = useRouter();
   const user = useAppSelector((s) => s.authState.user);
   const [isEditMode, setIsEditMode] = useState(false);
 
+  // Added states & ref for photo upload
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
   const handleEditToggle = () => {
     setIsEditMode(!isEditMode);
+  };
+
+  // open file picker
+  const handleUploadPhoto = () => {
+    fileInputRef.current?.click();
+  };
+
+  // handle file selection + mock upload
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const uploadedUrl = await uploadProfilePhoto(file);
+      // For now we only keep preview locally; in real app we'd dispatch update to backend/store
+      setPhotoPreview(uploadedUrl);
+    } catch (err) {
+      console.error("Upload failed", err);
+    } finally {
+      setUploading(false);
+      // reset input so same file can be picked again
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
   };
 
   return (
@@ -42,9 +72,53 @@ const EditJobSeeker = () => {
           md={6}
           className="d-flex justify-content-center align-items-center flex-wrap gap-3"
         >
-          <ImageIcon size={124} className="border p-3 rounded-circle" />
-          <Button className="rounded-pill" size="sm">
-            Change Photo
+          <div className="border-1 rounded">
+            {photoPreview ? (
+              // show preview from mock upload
+              <Image
+                src={photoPreview}
+                alt="Profile Preview"
+                width={100}
+                height={100}
+                className="rounded-circle"
+                style={{ objectFit: "cover" }}
+              />
+            ) : user?.avatar_url ? (
+              // existing user photo
+              <Image
+                src={user.avatar_url}
+                alt="Profile Photo"
+                width={100}
+                height={100}
+                className="rounded-circle"
+              />
+            ) : (
+              <ImageIcon size={100} />
+            )}
+          </div>
+
+          {/* hidden file input */}
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            style={{ display: "none" }}
+          />
+
+          <Button
+            className="rounded-pill"
+            size="sm"
+            onClick={handleUploadPhoto}
+            disabled={uploading}
+          >
+            {uploading ? (
+              <>
+                <Spinner animation="border" size="sm" /> Uploading...
+              </>
+            ) : (
+              "Upload Photo"
+            )}
           </Button>
         </Col>
       </Row>
