@@ -109,6 +109,9 @@ export const logoutUser = createAsyncThunk<void, void, { rejectValue: string }>(
 
     if (!refreshToken) {
       dispatch(forceLogout());
+      localStorage.clear();
+      Cookies.remove("access");
+      Cookies.remove("refreshToken");
       return rejectWithValue("No refresh token available");
     }
 

@@ -51,6 +51,7 @@ const getInitials = (name: string) => {
 export default function Navbar() {
   const locale = useLocale();
   const t = useTranslations("navbar");
+
   const router = useRouter();
   const dispatch = useAppDispatch();
   const user = useAppSelector((s) => s.authState.user);
@@ -70,7 +71,12 @@ export default function Navbar() {
   };
 
   const handleLogout = () => {
-    dispatch(logoutUser());
+    try {
+      dispatch(logoutUser());
+    } catch (error) {
+      console.log("Force logout due to error:", error);
+      return;
+    }
     showSuccessToast("Logout Successfully", "");
   };
 
