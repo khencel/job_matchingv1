@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { UserCircle2 } from "lucide-react";
 import { Button } from "react-bootstrap";
-import { logout } from "@/redux/slices/login/authSlice";
+import { forceLogout } from "@/redux/slices/login/authSlice";
 
 export default function NavbarAuth() {
   const locale = useLocale();
@@ -16,7 +16,7 @@ export default function NavbarAuth() {
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(forceLogout());
     router.push("/");
   };
 

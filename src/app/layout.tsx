@@ -7,6 +7,7 @@ import BootstrapClient from "@/components/BootstrapClient";
 import NextIntlProvider from "@/i18n/NextIntlProvider";
 import { cookies } from "next/headers";
 import StoreProvider from "./StoreProvider";
+import AuthRefresher from "@/components/auth/AuthRefresher";
 
 export const metadata = {
   title: "Next.js",
@@ -33,6 +34,7 @@ export default async function RootLayout({
       <body>
         <StoreProvider>
           <NextIntlProvider locale={locale}>
+            <AuthRefresher />
             <BootstrapClient />
             {children}
           </NextIntlProvider>

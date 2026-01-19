@@ -5,17 +5,16 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { Button, Dropdown } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import {
   BellIcon,
   FolderHeartIcon,
   FoldersIcon,
   LogOutIcon,
-  MessagesSquareIcon,
   UserCircleIcon,
 } from "lucide-react";
-import { logout } from "@/redux/slices/login/authSlice";
 import { showSuccessToast } from "@/app/(util)/toaster";
+import { logoutUser } from "@/redux/features/auth/auth_thunk";
 
 // Function to generate a color based on name
 const getAvatarColor = (name: string) => {
@@ -54,7 +53,6 @@ export default function Navbar() {
   const t = useTranslations("navbar");
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const isAuthenticated = useAppSelector((s) => s.authState.isAuthenticated);
   const user = useAppSelector((s) => s.authState.user);
 
   const setLocale = useCallback(
@@ -64,7 +62,7 @@ export default function Navbar() {
       document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; expires=${expiry.toUTCString()}`;
       router.refresh();
     },
-    [router]
+    [router],
   );
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -72,7 +70,7 @@ export default function Navbar() {
   };
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logoutUser());
     showSuccessToast("Logout Successfully", "");
   };
 
@@ -115,7 +113,7 @@ export default function Navbar() {
                 {t("FAQ")}
               </a>
             </li>
-            {isAuthenticated ? (
+            {user ? (
               <Dropdown>
                 <Dropdown.Toggle
                   variant="primary"
