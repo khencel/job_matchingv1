@@ -1,11 +1,11 @@
 import apiClient from "@/lib/axios";
 
-interface LoginBody {
+export interface LoginPayload {
   email: string;
   password: string;
 }
 // API call for login
-export function loginApi(data: LoginBody) {
+export function loginApi(data: LoginPayload) {
   return apiClient.post("/auth/login", data);
 }
 // API call for refreshing token
@@ -21,6 +21,6 @@ export function logoutApi(token: string) {
   return apiClient.post("/auth/logout", { token });
 }
 // API call for fetching current user
-export function fetchCurrentUserApi() {
-  return apiClient.get("/auth/get-user");
+export function getCurrentUserApi() {
+  return apiClient.get("/auth/get-data");
 }

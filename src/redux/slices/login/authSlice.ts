@@ -1,26 +1,31 @@
 import { fetchCurrentUser, loginUser } from "@/redux/features/auth/auth_thunk";
 import { createSlice, PayloadAction, SerializedError } from "@reduxjs/toolkit";
+import { RegisterEmployerData } from "../register/employer/employerSlice";
+import { RegisterJobSeekerData } from "../register/job-seeker/jobseekerSlice";
+import { RegisterSuperVisoryData } from "../register/super-visory/superVisorySlice";
+export interface User {
+  id: number;
+  email: string;
+  username: string;
+  first_name: string;
+  last_name: string;
+  is_email_verified: boolean;
+  role: "job_seeker" | "employer" | "admin";
+  avatar?: string | null; // Optional (From GetUser)
+  banner?: string | null; // Optional (From GetUser)
+
+  // 2. HANDLE DYNAMIC DETAILS (The key to your problem)
+  // Make them optional (?). Login won't have them, GetUser will.
+  userDetails_emp?: RegisterEmployerData | null;
+  userDetails_job_seeker?: RegisterJobSeekerData | null;
+  userDetails_supervisory?: RegisterSuperVisoryData | null;
+}
 interface AuthState {
   user: User | null;
   access: string | null;
   loading: boolean;
   error: SerializedError | null;
-}
-
-export interface LoginPayload {
-  email: string;
-  password: string;
-}
-
-export interface User {
-  id: number;
-  email: string;
-  username: string;
-  avatar_url: string | null;
-  first_name: string;
-  last_name: string;
-  is_email_verified: boolean;
-  role: string;
+  isInitialized?: boolean;
 }
 export interface LoginResponse {
   refresh: string;
@@ -33,6 +38,7 @@ const initialState: AuthState = {
   user: null,
   access: null,
   loading: false,
+  isInitialized: false,
   error: null,
 };
 
@@ -44,6 +50,7 @@ const authSlice = createSlice({
       state.user = null;
       state.access = null;
       state.error = null;
+      state.isInitialized = true;
     },
   },
   extraReducers: (builder) => {
@@ -58,7 +65,6 @@ const authSlice = createSlice({
         (state, action: PayloadAction<LoginResponse>) => {
           state.loading = false;
           state.user = action.payload.user;
-          state.access = action.payload.access;
         },
       )
       .addCase(loginUser.rejected, (state, action) => {
@@ -73,16 +79,14 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(
-        fetchCurrentUser.fulfilled,
-        (state, action: PayloadAction<User>) => {
-          state.loading = false;
-          state.user = action.payload;
-        },
-      )
-      .addCase(fetchCurrentUser.rejected, (state, action) => {
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.error = action.error;
+        state.user = action.payload.user;
+        state.isInitialized = true;
+      })
+      .addCase(fetchCurrentUser.rejected, (state) => {
+        state.loading = false;
+        state.isInitialized = true;
       });
   },
 });

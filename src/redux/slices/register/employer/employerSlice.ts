@@ -32,7 +32,7 @@ export interface RegisterEmployerStep4Data {
 }
 
 // All employer data
-interface RegisterEmployerData {
+export interface RegisterEmployerData {
   accountInfo: RegistrationStep1;
   employerInfo: RegisterEmployerStep2Data;
   contactPerson: RegisterEmployerStep3Data;

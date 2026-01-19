@@ -26,7 +26,6 @@ export default function Login() {
       const res = await dispatch(loginUser({ email, password })).unwrap();
       const verified_email = res.user.is_email_verified;
       const role = res.user.role;
-      console.log(res); 
 
       if (!verified_email) {
         showWarningToast("Sign in failed", "Please verify your email");
