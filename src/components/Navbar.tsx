@@ -131,7 +131,7 @@ export default function Navbar() {
                     style={{
                       width: "32px",
                       height: "32px",
-                      backgroundColor: getAvatarColor(user?.email || "User"),
+                      backgroundColor: getAvatarColor(user?.email),
                       color: "white",
                       fontWeight: "600",
                       fontSize: "14px",

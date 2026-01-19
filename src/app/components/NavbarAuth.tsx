@@ -5,19 +5,29 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { UserCircle2 } from "lucide-react";
 import { Button } from "react-bootstrap";
-import { forceLogout } from "@/redux/slices/login/authSlice";
+import { logoutUser } from "@/redux/features/auth/auth_thunk";
+import { showSuccessToast } from "../(util)/toaster";
 
 export default function NavbarAuth() {
   const locale = useLocale();
   const t = useTranslations("navbar");
   const router = useRouter();
 
+  const access = useAppSelector((s) => s.authState.access);
   const user = useAppSelector((s) => s.authState.user);
+
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
-    dispatch(forceLogout());
-    router.push("/");
+    try {
+      dispatch(logoutUser());
+    } catch (error) {
+      console.log("Force logout due to error:", error);
+      return;
+    } finally {
+      router.push("/");
+      showSuccessToast("Logout Successfully", "");
+    }
   };
 
   const setLocale = useCallback(
@@ -27,7 +37,7 @@ export default function NavbarAuth() {
       document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; expires=${expiry.toUTCString()}`;
       router.refresh();
     },
-    [router]
+    [router],
   );
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -130,13 +140,13 @@ export default function NavbarAuth() {
                     style={{
                       width: "32px",
                       height: "32px",
-                      backgroundColor: getAvatarColor(user.email),
+                      backgroundColor: getAvatarColor(user?.email),
                       color: "white",
                       fontWeight: "600",
                       fontSize: "14px",
                     }}
                   >
-                    {getInitials(user.email)}
+                    {getInitials(user?.email)}
                   </div>
                 ) : (
                   <UserCircle2 />
