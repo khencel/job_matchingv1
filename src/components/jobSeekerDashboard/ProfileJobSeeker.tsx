@@ -1,14 +1,16 @@
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { ImageIcon, Edit2 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Container, Row, Col, Button, Form, Spinner } from "react-bootstrap";
 import { uploadProfilePhoto } from "@/app/mock-api/mockProfileApi"; // added import
+import { fetchCurrentUser } from "@/redux/features/auth/auth_thunk";
 
 const EditJobSeeker = () => {
+  const dispatch = useAppDispatch();
   const router = useRouter();
-  const user = useAppSelector((s) => s.authState.user);
+  const user = useAppSelector((s) => s.authState.user?.userDetails_job_seeker);
   const [isEditMode, setIsEditMode] = useState(false);
 
   // Added states & ref for photo upload
@@ -42,6 +44,18 @@ const EditJobSeeker = () => {
       if (fileInputRef.current) fileInputRef.current.value = "";
     }
   };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        // This will call your API and populate Redux
+        await dispatch(fetchCurrentUser()).unwrap();
+      } catch (error) {
+        console.log("Session expired or invalid.", error);
+      }
+    };
+    fetchUser();
+  }, [dispatch]);
 
   return (
     <Container
@@ -83,10 +97,10 @@ const EditJobSeeker = () => {
                 className="rounded-circle"
                 style={{ objectFit: "cover" }}
               />
-            ) : user?.avatar_url ? (
+            ) : user?.idURL ? (
               // existing user photo
               <Image
-                src={user.avatar_url}
+                src={user.idURL}
                 alt="Profile Photo"
                 width={100}
                 height={100}
@@ -130,10 +144,13 @@ const EditJobSeeker = () => {
             <Form.Group>
               <Form.Label>First Name</Form.Label>
               {isEditMode ? (
-                <Form.Control type="text" defaultValue={user?.first_name} />
+                <Form.Control
+                  type="text"
+                  defaultValue={user?.jobSeekerData.firstName}
+                />
               ) : (
                 <p className="form-control-plaintext">
-                  {user?.first_name || "N/A"}
+                  {user?.jobSeekerData.firstName || "N/A"}
                 </p>
               )}
             </Form.Group>
@@ -142,9 +159,14 @@ const EditJobSeeker = () => {
             <Form.Group>
               <Form.Label>Middle Name</Form.Label>
               {isEditMode ? (
-                <Form.Control type="text" placeholder="Mid" />
+                <Form.Control
+                  type="text"
+                  defaultValue={user?.jobSeekerData.midName}
+                />
               ) : (
-                <p className="form-control-plaintext">N/A</p>
+                <p className="form-control-plaintext">
+                  {user?.jobSeekerData.midName || "N/A"}
+                </p>
               )}
             </Form.Group>
           </Col>
@@ -152,10 +174,13 @@ const EditJobSeeker = () => {
             <Form.Group>
               <Form.Label>Last Name</Form.Label>
               {isEditMode ? (
-                <Form.Control type="text" defaultValue={user?.last_name} />
+                <Form.Control
+                  type="text"
+                  defaultValue={user?.jobSeekerData.lastName}
+                />
               ) : (
                 <p className="form-control-plaintext">
-                  {user?.last_name || "N/A"}
+                  {user?.jobSeekerData.lastName || "N/A"}
                 </p>
               )}
             </Form.Group>
@@ -166,9 +191,14 @@ const EditJobSeeker = () => {
             <Form.Group>
               <Form.Label>Phone Number</Form.Label>
               {isEditMode ? (
-                <Form.Control type="tel" placeholder="0934343" />
+                <Form.Control
+                  type="tel"
+                  placeholder={user?.jobSeekerData.contactNo}
+                />
               ) : (
-                <p className="form-control-plaintext">N/A</p>
+                <p className="form-control-plaintext">
+                  {user?.jobSeekerData.contactNo}
+                </p>
               )}
             </Form.Group>
           </Col>
@@ -178,7 +208,9 @@ const EditJobSeeker = () => {
               {isEditMode ? (
                 <Form.Control type="email" placeholder="johndoe@email.com" />
               ) : (
-                <p className="form-control-plaintext">{user?.email || "N/A"}</p>
+                <p className="form-control-plaintext">
+                  {user?.accountInfo.email || "N/A"}
+                </p>
               )}
             </Form.Group>
           </Col>
@@ -188,7 +220,9 @@ const EditJobSeeker = () => {
               {isEditMode ? (
                 <Form.Control type="date" placeholder="11/03/2003" />
               ) : (
-                <p className="form-control-plaintext">N/A</p>
+                <p className="form-control-plaintext">
+                  {user?.jobSeekerData.birthdate || "N/A"}
+                </p>
               )}
             </Form.Group>
           </Col>
@@ -246,11 +280,11 @@ const EditJobSeeker = () => {
             <Form.Label>Change Password</Form.Label>
             <Col md={4}>
               <Form.Label className="text-muted">Current Password</Form.Label>
-              <Form.Control type="password" placeholder="" />
+              <Form.Control type="password" placeholder="••••••••" />
             </Col>
             <Col md={4}>
               <Form.Label className="text-muted">New Password</Form.Label>
-              <Form.Control type="password" placeholder="" />
+              <Form.Control type="password" placeholder="••••••••" />
             </Col>
             <Col
               md={4}

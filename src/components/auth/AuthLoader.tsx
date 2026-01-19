@@ -12,7 +12,6 @@ export default function AuthLoader({
   children: React.ReactNode;
 }) {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.authState.user);
   const { isInitialized } = useAppSelector((state) => state.authState);
   const [isChecking, setIsChecking] = useState(true);
 
@@ -36,15 +35,14 @@ export default function AuthLoader({
     initAuth();
   }, [dispatch]);
 
-  console.log("Redux is working fine",user);
-
   // 4. While checking, show a full-screen loader (or nothing)
   if (isChecking && !isInitialized) {
     return (
-      <div className="flex h-screen w-full items-center justify-center bg-white">
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ minHeight: "100vh" }}
+      >
+        <Spinner animation="border" role="status" />
       </div>
     );
   }
