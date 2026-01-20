@@ -7,7 +7,6 @@ import jsPDF from "jspdf";
 // Components
 import BasicInfo from "@/components/jobSeekerDashboard/resumeBuilder/BasicInfo";
 import Education from "@/components/jobSeekerDashboard/resumeBuilder/Education";
-import LanguageLevel from "@/components/jobSeekerDashboard/resumeBuilder/LanguageLevel";
 import Skills from "@/components/jobSeekerDashboard/resumeBuilder/Skills";
 import WorkExp from "@/components/jobSeekerDashboard/resumeBuilder/WorkExp";
 import { ResumeTemplate } from "@/components/jobSeekerDashboard/resumeBuilder/ResumeTemplate"; // Import your Template
@@ -22,7 +21,6 @@ import {
 } from "@/redux/slices/resumeSlice";
 import {
   BuildingIcon,
-  LanguagesIcon,
   MenuIcon,
   School2Icon,
   UserPenIcon,
@@ -41,7 +39,6 @@ const ResumeBuilderPage = () => {
   const resumeTab = useAppSelector((s) => s.resumeBuilder.resumeTab);
   const isLoading = useAppSelector((s) => s.resumeBuilder.isLoading);
   const error = useAppSelector((s) => s.resumeBuilder.error);
-  const savedResumeId = useAppSelector((s) => s.resumeBuilder.savedResumeId);
   const user = useAppSelector((s) => s.authState.user);
   const resumeData = useAppSelector((s) => s.resumeBuilder);
   const isSaveDisabled = !useAppSelector((s) => canSaveResume(s.resumeBuilder));
@@ -51,37 +48,47 @@ const ResumeBuilderPage = () => {
   // SAVE RESUME HANDLER
   const handleSaveResume = async (e: FormEvent) => {
     e.preventDefault();
-    // Make sure the resume element exists
     if (!templateRef.current) return;
 
     try {
-      // Convert the HTML element to a Canvas (Screenshot)
-      // scale: 2 ensures high quality text
-      const canvas = await html2canvas(templateRef.current, { scale: 2 });
+      // 1. Lower the scale. scale: 2 is overkill for a standard A4 resume.
+      // Use 1.5 or 1 for much smaller file sizes.
+      const canvas = await html2canvas(templateRef.current, { scale: 1 });
 
-      // Initialize PDF (A4 Size)
-      const imgData = canvas.toDataURL("image/png");
+      // 2. Use JPEG instead of PNG. Resumes have lots of white space.
+      // JPEG compression (e.g., 0.7) will slash your file size by 70-80%.
+      const imgData = canvas.toDataURL("image/jpeg", 0.7);
+
       const pdf = new jsPDF("p", "mm", "a4");
-
-      // Calculate dimensions to fit A4 perfectly
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-      // Add the image to the PDF
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      // 3. Add compression to the PDF image
+      pdf.addImage(
+        imgData,
+        "JPEG",
+        0,
+        0,
+        pdfWidth,
+        pdfHeight,
+        undefined,
+        "FAST",
+      );
 
-      // Generate the Blob (The actual file data)
       const blob = pdf.output("blob");
 
-      // Dispatch to Redux (Send to Backend)
-      // We wait for the upload to finish before showing the success alert
-      const fileName =
-        `${user?.first_name}-${user?.last_name}-resume` || "my-resume";
+      // DEBUG: Check the size before sending
+      console.log(`Blob size: ${(blob.size / 1024 / 1024).toFixed(2)} MB`);
+
+      if (blob.size > 10 * 1024 * 1024) {
+        alert("Resume file is too large. Reduce image resolution or content.");
+        return;
+      }
+
+      const fileName = `${user?.first_name || "user"}-resume`;
       await dispatch(saveResume({ blob, fileName })).unwrap();
-      showSuccessToast(
-        "Resume Saved Successfully",
-        "Resume successfully saved to database."
-      );
+
+      showSuccessToast("Success", "Resume saved.");
     } catch (err) {
       console.error("Failed to generate or save PDF:", err);
     }

@@ -73,12 +73,11 @@ export const saveResume = createAsyncThunk(
     try {
       const formData = new FormData();
       formData.append("resume_file", blob, fileName);
-
+      console.log("Size in MB:", blob.size / 1024 / 1024);
       // MOCK endpoint
       // Axios detects FormData and sets the header automatically.
       // const response = await apiClient.post("backend-endpoint", formData); // -> Use apiClient for django backend
       const response = await axios.post("/mock-api/resume/upload", formData); // Mock API
-      console.log(response.data);
       return response.data;
     } catch (error) {
       // Handle Axios errors
@@ -92,14 +91,14 @@ export const saveResume = createAsyncThunk(
         // Network error (no response)
         if (error.request) {
           return rejectWithValue(
-            "Network error. Please check your connection."
+            "Network error. Please check your connection.",
           );
         }
       }
       // Generic error fallback
       return rejectWithValue("An unexpected error occurred. Please try again.");
     }
-  }
+  },
 );
 
 const initialState: ResumeBuilderData = {
@@ -147,28 +146,28 @@ export const resumeBuilderSlice = createSlice({
       state,
       action: PayloadAction<
         "basic-info" | "education" | "lang-level" | "skills" | "work-xp"
-      >
+      >,
     ) => {
       state.resumeTab = action.payload;
     },
     // 1. Action to update flat objects (Basic Info)
     updateBasicInfo: (
       state,
-      action: PayloadAction<Partial<typeof initialState.basicInfo>>
+      action: PayloadAction<Partial<typeof initialState.basicInfo>>,
     ) => {
       state.basicInfo = { ...state.basicInfo, ...action.payload };
     },
 
     updateEducation: (
       state,
-      action: PayloadAction<Partial<typeof initialState.education>>
+      action: PayloadAction<Partial<typeof initialState.education>>,
     ) => {
       state.education = { ...state.education, ...action.payload };
     },
 
     updateLanguage: (
       state,
-      action: PayloadAction<Partial<typeof initialState.language>>
+      action: PayloadAction<Partial<typeof initialState.language>>,
     ) => {
       state.language = { ...state.language, ...action.payload };
     },
@@ -177,7 +176,7 @@ export const resumeBuilderSlice = createSlice({
     // We need the index to know which job to update
     updateWorkExperience: (
       state,
-      action: PayloadAction<{ index: number; field: string; value: string }>
+      action: PayloadAction<{ index: number; field: string; value: string }>,
     ) => {
       const { index, field, value } = action.payload;
       if (state.workExperience[index]) {
@@ -229,7 +228,7 @@ export const resumeBuilderSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(saveResume.fulfilled, (state, action) => {
+      .addCase(saveResume.fulfilled, (_, action) => {
         const savedResumeId = action.payload?.id || action.payload?.resumeId;
         return {
           ...initialState,
@@ -286,7 +285,7 @@ export const isLanguageLevelComplete = (state: ResumeBuilderData): boolean => {
 };
 
 export const canSaveResume = (state: ResumeBuilderData): boolean => {
-  return isBasicInfoComplete(state) && isLanguageLevelComplete(state);
+  return isBasicInfoComplete(state);
 };
 
 export default resumeBuilderSlice.reducer;

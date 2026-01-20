@@ -15,7 +15,7 @@ export const registerEmployerThunk = createAsyncThunk<
     email: data.accountInfo.email,
     password: data.accountInfo.password,
     user_type: "employer",
-    details: JSON.stringify(data),
+    details: data,
   };
 
   try {
@@ -24,6 +24,7 @@ export const registerEmployerThunk = createAsyncThunk<
       return response.data;
     }
   } catch (error) {
+    console.log(error);
     // Handle Axios errors
     if (error instanceof AxiosError) {
       // Server responded with error status
@@ -51,7 +52,7 @@ export const isEmailExistThunk = createAsyncThunk<
   try {
     // Use encodeURIComponent to handle special characters like '@' in the URL
     const res = await apiClient.get(
-      `/auth/check-email/${encodeURIComponent(arg.email)}/`
+      `/auth/check-email/${encodeURIComponent(arg.email)}/`,
     );
     // Logic Check: If your backend returns 200 OK but { exists: true }
     if (res.data.exists) {
