@@ -82,3 +82,10 @@
   color: rgb(116, 114, 114);
   padding: 10px;
 }
+
+.clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;   /* ilang lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

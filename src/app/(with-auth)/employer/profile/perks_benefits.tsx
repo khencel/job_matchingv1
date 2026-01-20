@@ -1,4 +1,4 @@
-export default function PerksBenefits(){
+export default function PerksBenefits({data}:{data:any}){
     return(
         <>
             <div className="py-4">
@@ -8,62 +8,19 @@ export default function PerksBenefits(){
                         <small>This job comes with several perks and benefits.</small>
                         <br />
                         <div className="row">
-                            <div className="col-md-3">
-                                <div className=" p-2">
-                                    <strong>Full Healthcare</strong>
-                                    <p>
-                                        <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</small>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-md-3">
-                                <div className=" p-2">
-                                    <strong>Unlimited Vacation</strong>
-                                    <p>
-                                        <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</small>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-md-3">
-                                <div className=" p-2">
-                                    <strong>Skill Development</strong>
-                                    <p>
-                                        <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</small>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-md-3">
-                                <div className=" p-2">
-                                    <strong>Team Submmits</strong>
-                                    <p>
-                                        <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</small>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-md-3">
-                                <div className=" p-2">
-                                    <strong>Remote Working</strong>
-                                    <p>
-                                        <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</small>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-md-3">
-                                <div className=" p-2">
-                                    <strong>Commuter Benefits</strong>
-                                    <p>
-                                        <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</small>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-md-3">
-                                <div className=" p-2">
-                                    <strong>We give back</strong>
-                                    <p>
-                                        <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</small>
-                                    </p>
-                                </div>
-                            </div>
+                            
+                            {data.map((item:any,index:number) => {
+                                return(
+                                    <div className="col-md-3" key={index}>
+                                        <div className=" p-2">
+                                            <strong>{item.name}</strong>
+                                            <p>
+                                                <small>{item.description}</small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                 </div>

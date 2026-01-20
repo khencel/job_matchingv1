@@ -40,7 +40,12 @@ export default function Login() {
         router.push("/");
       }
 
-      // router.push("/");
+      if (role === "admin") {
+        router.push("/admin/overview"); 
+      }
+  
+       
+      // router.push("/"); 
       showSuccessToast("Sign in successful", "Welcome back!");
     } catch (error) {
       console.log(error);

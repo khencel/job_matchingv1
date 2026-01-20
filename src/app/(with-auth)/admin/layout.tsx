@@ -4,7 +4,9 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import BootstrapClient from "@/components/BootstrapClient";
 import Navbar from "../../components/NavbarAuth";
 import Footer from "@/components/Footer";
-import Sidebar from "../../components/sidebar";
+
+
+import Sidebar from "../admin/sidebar";
 import StoreProvider from "../../StoreProvider";
 import NextIntlProvider from "@/i18n/NextIntlProvider";
 import { cookies } from "next/headers";

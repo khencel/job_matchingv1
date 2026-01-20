@@ -28,14 +28,14 @@ export default function Profile(){
     if(status === "failed"){
         return <p>{error}</p>
     }
-
+    console.log(profile)
     return(
         <>
             {profile && <Header data={profile} />}
             {profile && <Body data={profile} />}
             <hr />
             {/* {profile && <Team data={profile} />} */}
-            {profile && <PerksBenefits data={profile} />}
+            {profile && <PerksBenefits data={profile.perks_benefits} />}
         </>
     )
 }

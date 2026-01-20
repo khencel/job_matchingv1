@@ -13,7 +13,7 @@ import { listJobPost, deleteJobPost } from "@/redux/features/job_post/job_post_t
 import { setPage, setPageSize } from "@/redux/slices/employer/post_a_job/JobListing";
 import { popup } from "@/helper/pop_up";
 import Editmodal from "./edit_modal";
-import { setInitialData } from "@/redux/slices/employer/post_a_job/basicInfoSlice";
+
 
 
 export default function JobListing() {

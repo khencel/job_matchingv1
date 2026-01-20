@@ -8,6 +8,7 @@ import basicInfoSlice from "./slices/employer/post_a_job/basicInfoSlice";
 import jobListing from "./slices/employer/post_a_job/JobListing";
 import profileSlice from "./slices/profile/profileSlice"
 import perksAndBenefitsSlice from "./slices/perks_benefits/perksBenefitsSlice";
+import applicantReducer from "./slices/applicants/applicantSlice";
 
 
 
@@ -23,6 +24,7 @@ export const makeStore = () => {
       jobListing: jobListing,
       profileSlice: profileSlice,
       perksAndBenefitsSlice: perksAndBenefitsSlice,
+      applicants: applicantReducer,
     },
   });
 };

@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import { listJobPost, deleteJobPost } from '@/redux/features/job_post/job_post_thunk';
+import { showAllJobs } from './jobListingThunk';
 
 interface ItemState {
     items: any[];
@@ -39,25 +40,37 @@ const itemSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-        .addCase(listJobPost.pending, state => {state.status = "loading"})
-        .addCase(listJobPost.fulfilled, (state, action) => {
-            state.loading = false;
-            state.status = 'succeeded';
-            state.items = action.payload.results;
-            state.count = action.payload.count;
-            state.next = action.payload.next;
-            state.previous = action.payload.previous;
-        })
-        .addCase(listJobPost.rejected, state => {state.status = "failed"})
+            .addCase(listJobPost.pending, state => {state.status = "loading"})
+            .addCase(listJobPost.fulfilled, (state, action) => {
+                state.loading = false;
+                state.status = 'succeeded';
+                state.items = action.payload.results;
+                state.count = action.payload.count;
+                state.next = action.payload.next;
+                state.previous = action.payload.previous;
+            })
+            .addCase(listJobPost.rejected, state => {state.status = "failed"})
 
-        .addCase(deleteJobPost.pending, state => {state.status = "loading"})
-        .addCase(deleteJobPost.fulfilled, (state, action) => {
-            state.loading = false;
-            state.status = 'succeeded';
-            state.items = state.items.filter(item => item.id !== action.payload.id);
-            state.count -= 1;
-        })
-        .addCase(deleteJobPost.rejected, state => {state.status = "failed"})
+            .addCase(deleteJobPost.pending, state => {state.status = "loading"})
+            .addCase(deleteJobPost.fulfilled, (state, action) => {
+                state.loading = false;
+                state.status = 'succeeded';
+                state.items = state.items.filter(item => item.id !== action.payload.id);
+                state.count -= 1;
+            })
+            .addCase(deleteJobPost.rejected, state => {state.status = "failed"})
+
+        // Show All Jobs 
+        builder
+            .addCase(showAllJobs.pending, state => {state.status = "loading"})
+            .addCase(showAllJobs.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.items = action.payload;
+            })
+            .addCase(showAllJobs.rejected, state => {
+                state.status = "failed";
+                state.error = "Something went wrong";
+            })
     }
 });
 
