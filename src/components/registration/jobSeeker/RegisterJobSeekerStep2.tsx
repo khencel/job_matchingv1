@@ -6,10 +6,10 @@ import { useTranslations } from "next-intl";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   goNextStep,
-  RegisterJobSeekerStep2Data,
   saveRegJobSeekerStep2,
 } from "@/redux/slices/register/job-seeker/jobseekerSlice";
 import { isPhoneNumberValid } from "@/helper/validations";
+import { RegisterJobSeekerStep2Data } from "@/types/job-seeker";
 
 const RegisterJobSeekerStep2 = () => {
   const t = useTranslations("registerJobSeekerStep2");

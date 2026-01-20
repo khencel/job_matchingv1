@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { addSkill, removeSkill } from "@/redux/slices/resumeSlice";
-import { Card, Form, Button, Badge, ListGroup } from "react-bootstrap";
+import { Card, Form, Button, ListGroup } from "react-bootstrap";
 
 const Skills = () => {
   const dispatch = useAppDispatch();

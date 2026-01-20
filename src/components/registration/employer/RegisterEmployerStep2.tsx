@@ -3,7 +3,6 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   saveRegEmployerStep2,
-  RegisterEmployerStep2Data,
   goNextStep,
 } from "@/redux/slices/register/employer/employerSlice";
 import { ChangeEvent, useState } from "react";
@@ -11,6 +10,7 @@ import { Button, Form, Row, Col } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 import { isPhoneNumberValid } from "@/helper/validations";
+import { RegisterEmployerStep2Data } from "@/types/employer";
 
 // Industry options for dropdown
 export const industries = [

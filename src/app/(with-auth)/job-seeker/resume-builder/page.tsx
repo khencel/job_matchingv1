@@ -15,7 +15,6 @@ import { ResumeTemplate } from "@/components/jobSeekerDashboard/resumeBuilder/Re
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   goNextResumeTab,
-  ResumeBuilderData,
   saveResume,
   canSaveResume,
 } from "@/redux/slices/resumeSlice";
@@ -31,6 +30,7 @@ import {
 import { ReactElement, useState } from "react";
 import { Button, Nav, Tab, Spinner, Alert } from "react-bootstrap";
 import { showSuccessToast } from "@/app/(util)/toaster";
+import { ResumeBuilderData } from "@/types/resume-builder";
 
 const ResumeBuilderPage = () => {
   const dispatch = useAppDispatch();

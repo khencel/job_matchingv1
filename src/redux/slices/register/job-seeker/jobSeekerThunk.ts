@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { RegisterJobSeeker } from "./jobseekerSlice";
 import apiClient from "@/lib/axios";
 import { AxiosError } from "axios";
+import { RegisterJobSeeker } from "@/types/job-seeker";
 
 export const registerJobSeekerThunk = createAsyncThunk<
   void,

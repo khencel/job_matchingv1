@@ -2,7 +2,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 import {
   LoginResponse,
-  User,
   forceLogout,
 } from "@/redux/slices/login/authSlice";
 import { AxiosError } from "axios";
@@ -14,6 +13,7 @@ import {
   verifyToken,
 } from "./authService";
 import { RootState } from "@/redux/store";
+import { User } from "@/types/user-register";
 
 interface GetUserResponse {
   message: string;

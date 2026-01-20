@@ -1,25 +1,7 @@
 import { fetchCurrentUser, loginUser } from "@/redux/features/auth/auth_thunk";
+import { User } from "@/types/user-register";
 import { createSlice, PayloadAction, SerializedError } from "@reduxjs/toolkit";
-import { RegisterEmployerData } from "../register/employer/employerSlice";
-import { RegisterJobSeekerData } from "../register/job-seeker/jobseekerSlice";
-import { RegisterSuperVisoryData } from "../register/super-visory/superVisorySlice";
-export interface User {
-  id: number;
-  email: string;
-  username: string;
-  first_name: string;
-  last_name: string;
-  is_email_verified: boolean;
-  role: "job_seeker" | "employer" | "admin";
-  avatar?: string | null; // Optional (From GetUser)
-  banner?: string | null; // Optional (From GetUser)
 
-  // 2. HANDLE DYNAMIC DETAILS (The key to your problem)
-  // Make them optional (?). Login won't have them, GetUser will.
-  userDetails_emp?: RegisterEmployerData | null;
-  userDetails_job_seeker?: RegisterJobSeekerData | null;
-  userDetails_supervisory?: RegisterSuperVisoryData | null;
-}
 interface AuthState {
   user: User | null;
   access: string | null;

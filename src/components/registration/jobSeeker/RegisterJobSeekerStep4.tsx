@@ -4,12 +4,12 @@ import { useState, FormEvent } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
-  RegisterJobSeekerStep4Data,
   saveRegJobSeekerStep4,
 } from "@/redux/slices/register/job-seeker/jobseekerSlice";
 import { registerJobSeekerThunk } from "@/redux/slices/register/job-seeker/jobSeekerThunk";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
+import { RegisterJobSeekerStep4Data } from "@/types/job-seeker";
 
 interface RegisterJobSeekerStep3Props {
   closeModal: () => void;

@@ -1,8 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import { publicApi } from "@/lib/axios";
-import { User } from "../../login/authSlice";
-import { RegisterUserArgs } from "@/types/user";
+import { RegisterUserArgs, User } from "@/types/user-register";
 
 export const registerEmployerThunk = createAsyncThunk<
   User, // Return type

@@ -3,13 +3,13 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   saveRegSuperVisoryStep2,
-  RegisterSuperVisoryStep2Data,
   goNextStep,
 } from "@/redux/slices/register/super-visory/superVisorySlice";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
+import { RegisterSuperVisoryStep2Data } from "@/types/super-visory";
 
 export default function RegisterSupervisoryStep2() {
   const dispatch = useAppDispatch();

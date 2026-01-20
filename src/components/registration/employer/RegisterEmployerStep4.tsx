@@ -5,12 +5,12 @@ import { Form, Button, Spinner } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   saveRegEmployerStep4,
-  RegisterEmployerStep4Data,
 } from "@/redux/slices/register/employer/employerSlice";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 import { registerEmployerThunk } from "@/redux/slices/register/employer/employerThunk";
-import { RegisterUserArgs } from "@/types/user";
+import { RegisterUserArgs } from "@/types/user-register";
+import { RegisterEmployerStep4Data } from "@/types/employer";
 
 interface RegisterEmployerStep4Props {
   closeModal: () => void;

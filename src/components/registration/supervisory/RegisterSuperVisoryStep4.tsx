@@ -5,11 +5,11 @@ import { Form, Button, Spinner } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   saveRegSuperVisoryStep4,
-  RegisterSuperVisoryStep4Data,
 } from "@/redux/slices/register/super-visory/superVisorySlice";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 import { registerSuperVisoryThunk } from "@/redux/slices/register/super-visory/superVisoryThunk";
+import { RegisterSuperVisoryStep4Data } from "@/types/super-visory";
 
 interface RegisterSuperVisoryStep4Props {
   closeModal: () => void;
