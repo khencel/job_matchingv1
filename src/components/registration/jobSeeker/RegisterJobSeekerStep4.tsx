@@ -3,13 +3,12 @@
 import { useState, FormEvent } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import {
-  saveRegJobSeekerStep4,
-} from "@/redux/slices/register/job-seeker/jobseekerSlice";
-import { registerJobSeekerThunk } from "@/redux/slices/register/job-seeker/jobSeekerThunk";
+import { saveRegJobSeekerStep4 } from "@/redux/slices/register/job-seeker/jobseekerSlice";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 import { RegisterJobSeekerStep4Data } from "@/types/job-seeker";
+import { registerThunk } from "@/redux/slices/register/registerThunk";
+import { RegisterUserArgs } from "@/types/user-register";
 
 interface RegisterJobSeekerStep3Props {
   closeModal: () => void;
@@ -22,7 +21,10 @@ export default function RegisterJobSeekerStep4({
   const { isLoading } = useAppSelector((s) => s.registerJobSeeker);
   const t = useTranslations("registerJobSeekerStep4");
   const step3Data = useAppSelector(
-    (s) => s.registerJobSeeker.registerJobSeekerData.termsAndConditions
+    (s) => s.registerJobSeeker.registerJobSeekerData.termsAndConditions,
+  );
+  const jobSeekerData = useAppSelector(
+    (s) => s.registerJobSeeker.registerJobSeekerData,
   );
 
   const [data, setData] = useState<RegisterJobSeekerStep4Data>(step3Data);
@@ -82,9 +84,16 @@ export default function RegisterJobSeekerStep4({
 
     setError({});
     dispatch(saveRegJobSeekerStep4(data));
+
+    const fullFormData: RegisterUserArgs = {
+      email: jobSeekerData.accountInfo.email,
+      password: jobSeekerData.accountInfo.password,
+      user_type: "job_seeker",
+      details: JSON.stringify(jobSeekerData),
+    };
     try {
       // Final submit thunk (simulated API)
-      const res = await dispatch(registerJobSeekerThunk()).unwrap();
+      const res = await dispatch(registerThunk(fullFormData)).unwrap();
       Swal.fire({
         title: "Verify Your Email",
         text: `We've sent a verification email to your registered email

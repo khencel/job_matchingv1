@@ -1,16 +1,14 @@
 "use client";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import {
-  saveRegEmployerStep3,
-  goNextStep,
-} from "@/redux/slices/register/employer/employerSlice";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button, Form } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { isEmailValid, isPhoneNumberValid } from "@/helper/validations";
 import { RegisterEmployerStep3Data } from "@/types/employer";
+import { saveRegEmployerStep3 } from "@/redux/slices/register/employer/employerSlice";
+import { goNextStep } from "@/redux/slices/register/super-visory/superVisorySlice";
 
 export default function RegisterEmployerStep3() {
   const dispatch = useAppDispatch();

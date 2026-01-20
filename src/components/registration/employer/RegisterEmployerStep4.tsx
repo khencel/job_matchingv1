@@ -3,14 +3,13 @@
 import { useState, FormEvent } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import {
-  saveRegEmployerStep4,
-} from "@/redux/slices/register/employer/employerSlice";
+
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
-import { registerEmployerThunk } from "@/redux/slices/register/employer/employerThunk";
 import { RegisterUserArgs } from "@/types/user-register";
 import { RegisterEmployerStep4Data } from "@/types/employer";
+import { saveRegEmployerStep4 } from "@/redux/slices/register/employer/employerSlice";
+import { registerThunk } from "@/redux/slices/register/registerThunk";
 
 interface RegisterEmployerStep4Props {
   closeModal: () => void;
@@ -95,7 +94,7 @@ export default function RegisterEmployerStep4({
     };
 
     try {
-      const res = await dispatch(registerEmployerThunk(fullFormData)).unwrap();
+      const res = await dispatch(registerThunk(fullFormData)).unwrap();
       Swal.fire({
         title: "Verify Your Email",
         text: `We've sent a verification email to your registered email

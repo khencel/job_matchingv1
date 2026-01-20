@@ -3,13 +3,12 @@
 import { useState, FormEvent } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import {
-  saveRegSuperVisoryStep4,
-} from "@/redux/slices/register/super-visory/superVisorySlice";
+import { saveRegSuperVisoryStep4 } from "@/redux/slices/register/super-visory/superVisorySlice";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
-import { registerSuperVisoryThunk } from "@/redux/slices/register/super-visory/superVisoryThunk";
 import { RegisterSuperVisoryStep4Data } from "@/types/super-visory";
+import { registerThunk } from "@/redux/slices/register/registerThunk";
+import { RegisterUserArgs } from "@/types/user-register";
 
 interface RegisterSuperVisoryStep4Props {
   closeModal: () => void;
@@ -22,10 +21,12 @@ export default function RegisterSuperVisoryStep4({
   const { isLoading } = useAppSelector((s) => s.registerSuperVisory);
   const t = useTranslations("registerSupervisoryStep4");
 
-  const termsAndConditions = useAppSelector(
-    (s) => s.registerSuperVisory.registerSuperVisoryData.termsAndConditions
+  const superVisoryData = useAppSelector(
+    (s) => s.registerSuperVisory.registerSuperVisoryData,
   );
-
+  const termsAndConditions = useAppSelector(
+    (s) => s.registerSuperVisory.registerSuperVisoryData.termsAndConditions,
+  );
   const [data, setData] =
     useState<RegisterSuperVisoryStep4Data>(termsAndConditions);
 
@@ -83,9 +84,17 @@ export default function RegisterSuperVisoryStep4({
     // All validations passed - save data and submit
     setError({});
     dispatch(saveRegSuperVisoryStep4(data));
+
+    const fullFormData: RegisterUserArgs = {
+      email: superVisoryData.accountInfo.email,
+      password: superVisoryData.accountInfo.password,
+      user_type: "super_visory",
+      details: JSON.stringify(superVisoryData),
+    };
+
     try {
       // Final submit thunk (simulated API)
-      await dispatch(registerSuperVisoryThunk()).unwrap();
+      await dispatch(registerThunk(fullFormData)).unwrap();
       Swal.fire({
         title: "Verify Your Email",
         text: `We've sent a verification email to your registered email

@@ -1,11 +1,11 @@
 "use client";
 
 import {
-  saveRegEmployerStep1,
   goNextStep,
+  saveRegEmployerStep1,
 } from "@/redux/slices/register/employer/employerSlice";
 import Step1Register from "../Step1Register";
-import { isEmailExistThunk } from "@/redux/slices/register/employer/employerThunk";
+import { isEmailExistThunk } from "@/redux/slices/register/registerThunk";
 
 export default function RegisterEmployerStep1() {
   return (

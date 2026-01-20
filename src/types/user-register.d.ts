@@ -1,4 +1,4 @@
-import { RegisterEmployerData } from "@/redux/slices/register/employer/employerSlice";
+import { RegisterEmployerData } from "@/redux/slices/register/employerSlice";
 import { RegisterJobSeekerData } from "@/redux/slices/register/job-seeker/jobseekerSlice";
 import { RegisterSuperVisoryData } from "@/redux/slices/register/super-visory/superVisorySlice";
 

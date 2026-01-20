@@ -1,6 +1,5 @@
 // import apiClient from "@/lib/axios";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { isEmailExistThunk, registerEmployerThunk } from "./employerThunk";
 import {
   RegisterEmployer,
   RegisterEmployerStep2Data,
@@ -8,6 +7,7 @@ import {
   RegisterEmployerStep4Data,
 } from "@/types/employer";
 import { RegistrationStep1 } from "@/types/user-register";
+import { isEmailExistThunk, registerThunk } from "../registerThunk";
 
 const initialState: RegisterEmployer = {
   currentStep: 1,
@@ -101,17 +101,17 @@ export const registerEmployerSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(registerEmployerThunk.pending, (state) => {
+      .addCase(registerThunk.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
       })
-      .addCase(registerEmployerThunk.fulfilled, (state) => {
+      .addCase(registerThunk.fulfilled, (state) => {
         state.isError = false;
         state.isLoading = false;
         state.registerEmployerData = initialState.registerEmployerData;
         state.currentStep = 1;
       })
-      .addCase(registerEmployerThunk.rejected, (state) => {
+      .addCase(registerThunk.rejected, (state) => {
         state.isError = true;
         state.isLoading = false;
       });

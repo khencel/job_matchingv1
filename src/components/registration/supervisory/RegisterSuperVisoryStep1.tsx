@@ -1,4 +1,4 @@
-import { isEmailExistThunk } from "@/redux/slices/register/super-visory/superVisoryThunk";
+import { isEmailExistThunk } from "@/redux/slices/register/registerThunk";
 import {
   saveRegSuperVisoryStep1,
   goNextStep,

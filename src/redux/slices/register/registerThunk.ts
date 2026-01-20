@@ -1,40 +1,25 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import apiClient from "@/lib/axios";
 import { AxiosError } from "axios";
-import { RegisterJobSeeker } from "@/types/job-seeker";
+import { publicApi } from "@/lib/axios";
+import { RegisterUserArgs, User } from "@/types/user-register";
 
-export const registerJobSeekerThunk = createAsyncThunk<
-  void,
-  void,
-  { state: { registerJobSeeker: RegisterJobSeeker } }
->("registerJobSeeker/Submit", async (_, { getState, rejectWithValue }) => {
-  const state = getState().registerJobSeeker;
-  const data = state.registerJobSeekerData;
-
-  const submissionData = {
-    email: data.accountInfo.email,
-    first_name: data.jobSeekerData.firstName,
-    last_name: data.jobSeekerData.lastName,
-    password: data.accountInfo.password,
-    user_type: "job_seeker",
-    details: JSON.stringify(data),
-  };
-
+export const registerThunk = createAsyncThunk<
+  User, // Return type
+  RegisterUserArgs, // Argument type
+  { rejectValue: string }
+>("register/Submit", async (formData, { rejectWithValue }) => {
   try {
-    const response = await apiClient.post("auth/store", submissionData);
-    if (response.status === 200 || response.status === 201) {
-      return response.data;
-    }
+    const response = await publicApi.post("auth/store", formData);
+    return response.data;
   } catch (error) {
     console.log(error);
     // Handle Axios errors
     if (error instanceof AxiosError) {
       // Server responded with error status
-      if (error.response?.status === 400) {
-        return rejectWithValue("Email already exist");
-      }
       if (error.response) {
-        const message = error.response.data?.message || "Registration failed";
+        const message =
+          error.response.data?.message ||
+          "Registration failed. Please try again.";
         return rejectWithValue(message);
       }
       // Network error (no response)
@@ -51,11 +36,11 @@ export const isEmailExistThunk = createAsyncThunk<
   { exists: boolean },
   { email: string },
   { rejectValue: string }
->("registerJobSeeker/checkEmail", async (arg, { rejectWithValue }) => {
+>("registerEmployer/checkEmail", async (arg, { rejectWithValue }) => {
   try {
     // Use encodeURIComponent to handle special characters like '@' in the URL
-    const res = await apiClient.get(
-      `/auth/check-email/${encodeURIComponent(arg.email)}/`
+    const res = await publicApi.get(
+      `/auth/check-email/${encodeURIComponent(arg.email)}/`,
     );
     // Logic Check: If your backend returns 200 OK but { exists: true }
     if (res.data.exists) {

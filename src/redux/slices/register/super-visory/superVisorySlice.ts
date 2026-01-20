@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {
-  editSuperVisoryThunk,
-  isEmailExistThunk,
-  registerSuperVisoryThunk,
-} from "./superVisoryThunk";
+import { editSuperVisoryThunk } from "./superVisoryThunk";
 import { RegistrationStep1 } from "@/types/user-register";
-import { RegisterSuperVisory, RegisterSuperVisoryStep2Data, RegisterSuperVisoryStep3Data, RegisterSuperVisoryStep4Data } from "@/types/super-visory";
+import {
+  RegisterSuperVisory,
+  RegisterSuperVisoryStep2Data,
+  RegisterSuperVisoryStep3Data,
+  RegisterSuperVisoryStep4Data,
+} from "@/types/super-visory";
+import { isEmailExistThunk, registerThunk } from "../registerThunk";
 
 const initialState: RegisterSuperVisory = {
   currentStep: 1,
@@ -52,7 +54,7 @@ export const registerSuperVisorySlice = createSlice({
     //open modal depending on currentStep
     goNextStep: (
       state,
-      action: PayloadAction<RegisterSuperVisory["currentStep"]>
+      action: PayloadAction<RegisterSuperVisory["currentStep"]>,
     ) => {
       state.currentStep = action.payload;
     },
@@ -78,32 +80,32 @@ export const registerSuperVisorySlice = createSlice({
     // save data to state reducers for each step
     saveRegSuperVisoryStep1: (
       state,
-      action: PayloadAction<RegistrationStep1>
+      action: PayloadAction<RegistrationStep1>,
     ) => {
       state.registerSuperVisoryData.accountInfo = action.payload;
     },
     saveRegSuperVisoryStep2: (
       state,
-      action: PayloadAction<RegisterSuperVisoryStep2Data>
+      action: PayloadAction<RegisterSuperVisoryStep2Data>,
     ) => {
       state.registerSuperVisoryData.companyInfo = action.payload;
     },
     saveRegSuperVisoryStep3: (
       state,
-      action: PayloadAction<RegisterSuperVisoryStep3Data>
+      action: PayloadAction<RegisterSuperVisoryStep3Data>,
     ) => {
       state.registerSuperVisoryData.contactPersonInfo = action.payload;
     },
     saveRegSuperVisoryStep4: (
       state,
-      action: PayloadAction<RegisterSuperVisoryStep4Data>
+      action: PayloadAction<RegisterSuperVisoryStep4Data>,
     ) => {
       state.registerSuperVisoryData.termsAndConditions = action.payload;
     },
   },
   extraReducers: (builder) => {
     // register supervisory account
-    builder.addAsyncThunk(registerSuperVisoryThunk, {
+    builder.addAsyncThunk(registerThunk, {
       pending: (state) => {
         state.isLoading = true;
         state.isError = false;
