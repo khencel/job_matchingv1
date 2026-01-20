@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { getProfile } from "@/redux/slices/profile/profilethunk";
 import { popup } from "@/helper/pop_up";
 import { showSuccessToast } from "@/app/(util)/toaster";
+import Cookies from "js-cookie";
 
 
 interface EditModalProps {
@@ -86,7 +87,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
 
         const payload: any = {
             details,
-            user_id: Number(localStorage.getItem("user_id"))
+            user_id: Number(Cookies.get("user_id")),
         };
 
        
@@ -101,7 +102,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
         dispatch(updateProfile(payload))
             .unwrap()
             .then(() => {
-                const user_id = Number(localStorage.getItem("user_id"));
+                const user_id = Number(Cookies.get("user_id"));
                 dispatch(getProfile(user_id));
                 showSuccessToast("Update successful", "Profile has been updated successfully")
                 handleClose();

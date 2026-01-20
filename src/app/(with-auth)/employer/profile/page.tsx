@@ -9,6 +9,7 @@ import { useSelector } from "react-redux"
 import type { RootState } from "@/redux/store"
 import { useEffect } from "react"
 import SpinnerComponent from "@/components/spinner"
+import Cookies from "js-cookie"
 
 
 
@@ -17,7 +18,7 @@ export default function Profile(){
     const {profile,status,error} = useSelector((state:RootState) => state.profileSlice)
     
     useEffect(() => {
-        const user_id = Number(localStorage.getItem("user_id"))
+        const user_id = Number(Cookies.get("user_id"))
         dispatch(getProfile(user_id))
     }, [dispatch])
     

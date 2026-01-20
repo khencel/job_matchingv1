@@ -1,7 +1,8 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export default function postAPI (data: any){
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("access");
     return axios.post("http://localhost:8000/api/job/create/", data, {
         headers: {
             Authorization: `Bearer ${token}`
@@ -18,7 +19,7 @@ export async function fetchAPI (user_id:number){
 }
 
 export async function standard_post_api(url: string, data: any){
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("access");
     const baseUrl = "http://localhost:8000"
     return axios.post(baseUrl+url, data, {
         headers: {
@@ -28,7 +29,7 @@ export async function standard_post_api(url: string, data: any){
 }
 
 export async function standard_get_api(url: string){
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("access");
     const baseUrl = "http://localhost:8000"
     return axios.get(baseUrl+url, {
         headers: {
@@ -39,7 +40,7 @@ export async function standard_get_api(url: string){
 
 
 export async function standard_update_api (url: string, data: any){
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("access");
     const baseUrl = "http://localhost:8000"
 
     return axios.put(baseUrl+url, data, {
@@ -51,7 +52,7 @@ export async function standard_update_api (url: string, data: any){
 }
 
 export async function standard_delete_api (url: string){
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("access");
     const baseUrl = "http://localhost:8000"
     return axios.delete(baseUrl+url, {
         headers: {

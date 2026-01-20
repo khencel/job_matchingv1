@@ -13,6 +13,7 @@ import { listJobPost, deleteJobPost } from "@/redux/features/job_post/job_post_t
 import { setPage, setPageSize } from "@/redux/slices/employer/post_a_job/JobListing";
 import { popup } from "@/helper/pop_up";
 import Editmodal from "./edit_modal";
+import Cookies from "js-cookie";
 
 
 
@@ -29,7 +30,7 @@ export default function JobListing() {
 
     
     useEffect(() => {
-        const userId = Number(localStorage.getItem("user_id"));
+        const userId = Number(Cookies.get("user_id"));
         if (userId) {
             dispatch(listJobPost({ userId, page: currentPage, pageSize }));
         }
@@ -66,7 +67,7 @@ export default function JobListing() {
     }
 
     const btnDelete = async (id: number) => {
-        const userId = Number(localStorage.getItem("user_id"));
+        const userId = Number(Cookies.get("user_id"));
         if (!userId) return;
         await dispatch(deleteJobPost(id));
         dispatch(listJobPost({ userId, page: currentPage, pageSize }));
