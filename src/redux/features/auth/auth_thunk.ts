@@ -10,9 +10,7 @@ import {
 } from "./authService";
 import { RootState } from "@/redux/store";
 import { User } from "@/types/user-register";
-
-import { logout } from "@/redux/slices/login/authSlice";
-import { LoginResponse } from "@/redux/slices/login/authSlice";
+import { forceLogout, LoginResponse } from "@/redux/slices/login/authSlice";
 
 interface GetUserResponse {
   message: string;
@@ -107,7 +105,7 @@ export const logoutUser = createAsyncThunk<void, void, { rejectValue: string }>(
     const refreshToken = Cookies.get("refreshToken");
 
     if (!refreshToken) {
-      dispatch(logout());
+      dispatch(forceLogout());
       localStorage.clear();
       Cookies.remove("access");
       Cookies.remove("refreshToken");
@@ -128,39 +126,40 @@ export const logoutUser = createAsyncThunk<void, void, { rejectValue: string }>(
 );
 
 // verify token thunk
-export const verifyAccessToken = createAsyncThunk<
-  void,
-  void,
-  { rejectValue: string }
->("auth/verifyToken", async (_, { dispatch, rejectWithValue, getState }) => {
-  const state = getState() as RootState;
-  const accessToken = state.authState.access;
+export const verifyAccessToken = createAsyncThunk(
+  "auth/verifyToken",
+  async (_, { dispatch, rejectWithValue, getState }) => {
+    const state = getState() as RootState;
+    const accessToken = state.authState.access;
 
-  if (!accessToken) {
-    dispatch(logout());
-    Cookies.remove("refreshToken");
-    Cookies.remove("access");
-    return rejectWithValue("No access token available");
-  }
-
-  try {
-    await verifyToken(accessToken);
-    return;
-  } catch (error) {
-    // Handle Axios errors
-    if (error instanceof AxiosError) {
-      // Server responded with error status
-      if (error.response) {
-        const message =
-          error.response.data.detail || "Token verification failed";
-        return rejectWithValue(message);
-      }
-      // Network error (no response)
-      if (error.request) {
-        return rejectWithValue("Network error. Please check your connection.");
-      }
+    if (!accessToken) {
+      dispatch(forceLogout());
+      Cookies.remove("refreshToken");
+      Cookies.remove("access");
+      return rejectWithValue("No access token available");
     }
-    // Generic error fallback
-    return rejectWithValue("An unexpected error occurred. Please try again.");
-  }
-});
+
+    try {
+      await verifyToken(accessToken);
+      return;
+    } catch (error) {
+      // Handle Axios errors
+      if (error instanceof AxiosError) {
+        // Server responded with error status
+        if (error.response) {
+          const message =
+            error.response.data.detail || "Token verification failed";
+          return rejectWithValue(message);
+        }
+        // Network error (no response)
+        if (error.request) {
+          return rejectWithValue(
+            "Network error. Please check your connection.",
+          );
+        }
+      }
+      // Generic error fallback
+      return rejectWithValue("An unexpected error occurred. Please try again.");
+    }
+  },
+);
