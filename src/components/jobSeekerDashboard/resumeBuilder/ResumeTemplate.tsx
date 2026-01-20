@@ -1,9 +1,4 @@
-import {
-  ResumeBasicInfo,
-  ResumeEducation,
-  ResumeLanguage,
-  ResumeWorkExperience,
-} from "@/redux/slices/resumeSlice";
+import { ResumeBasicInfo, ResumeEducation, ResumeLanguage, ResumeWorkExperience } from "@/types/resume-builder";
 import React, { forwardRef } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 

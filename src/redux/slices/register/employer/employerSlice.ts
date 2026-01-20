@@ -1,51 +1,13 @@
 // import apiClient from "@/lib/axios";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RegistrationStep1 } from "../super-visory/superVisorySlice";
-import { isEmailExistThunk, registerEmployerThunk } from "./employerThunk";
-
-// Step 2: Company information
-export interface RegisterEmployerStep2Data {
-  companyName: string;
-  companyAddress: string;
-  phoneNumber: string;
-  industries: string[];
-  regions: string;
-  numberOfEmployees: string;
-  branchOffices: string[];
-  appealPoints: number;
-  fee: number;
-}
-
-// Step 3: Contact person details
-export interface RegisterEmployerStep3Data {
-  name: string;
-  departmentName: string;
-  phoneNumber: string;
-  emailAddress: string;
-}
-
-// Step 4: Agreement checkboxes
-export interface RegisterEmployerStep4Data {
-  acceptTerms: boolean;
-  acceptPrivacyPolicy: boolean;
-  acceptReceiveEmails: boolean;
-}
-
-// All employer data
-interface RegisterEmployerData {
-  accountInfo: RegistrationStep1;
-  employerInfo: RegisterEmployerStep2Data;
-  contactPerson: RegisterEmployerStep3Data;
-  termsAndConditions: RegisterEmployerStep4Data;
-}
-
-// Main state interface for employer registration
-export interface RegisterEmployer {
-  currentStep: 1 | 2 | 3 | 4; // Current registration step (1-4)
-  registerEmployerData: RegisterEmployerData;
-  isLoading: boolean;
-  isError: boolean;
-}
+import {
+  RegisterEmployer,
+  RegisterEmployerStep2Data,
+  RegisterEmployerStep3Data,
+  RegisterEmployerStep4Data,
+} from "@/types/employer";
+import { RegistrationStep1 } from "@/types/user-register";
+import { isEmailExistThunk, registerThunk } from "../registerThunk";
 
 const initialState: RegisterEmployer = {
   currentStep: 1,
@@ -88,7 +50,7 @@ export const registerEmployerSlice = createSlice({
     // Reducers for navigating Registration Step State
     goNextStep: (
       state,
-      action: PayloadAction<RegisterEmployer["currentStep"]>
+      action: PayloadAction<RegisterEmployer["currentStep"]>,
     ) => {
       state.currentStep = action.payload;
     },
@@ -111,19 +73,19 @@ export const registerEmployerSlice = createSlice({
     },
     saveRegEmployerStep2: (
       state,
-      action: PayloadAction<RegisterEmployerStep2Data>
+      action: PayloadAction<RegisterEmployerStep2Data>,
     ) => {
       state.registerEmployerData.employerInfo = action.payload;
     },
     saveRegEmployerStep3: (
       state,
-      action: PayloadAction<RegisterEmployerStep3Data>
+      action: PayloadAction<RegisterEmployerStep3Data>,
     ) => {
       state.registerEmployerData.contactPerson = action.payload;
     },
     saveRegEmployerStep4: (
       state,
-      action: PayloadAction<RegisterEmployerStep4Data>
+      action: PayloadAction<RegisterEmployerStep4Data>,
     ) => {
       state.registerEmployerData.termsAndConditions = action.payload;
     },
@@ -138,37 +100,35 @@ export const registerEmployerSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addAsyncThunk(registerEmployerThunk, {
-      pending: (state) => {
+    builder
+      .addCase(registerThunk.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
-      },
-      fulfilled: (state) => {
+      })
+      .addCase(registerThunk.fulfilled, (state) => {
         state.isError = false;
         state.isLoading = false;
         state.registerEmployerData = initialState.registerEmployerData;
         state.currentStep = 1;
-      },
-      rejected: (state) => {
+      })
+      .addCase(registerThunk.rejected, (state) => {
         state.isError = true;
         state.isLoading = false;
-      },
-    });
+      });
     // check email if existing
-    builder.addAsyncThunk(isEmailExistThunk, {
-      pending: (state) => {
+    builder
+      .addCase(isEmailExistThunk.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
-      },
-      fulfilled: (state) => {
+      })
+      .addCase(isEmailExistThunk.fulfilled, (state) => {
         state.isError = false;
         state.isLoading = false;
-      },
-      rejected: (state) => {
+      })
+      .addCase(isEmailExistThunk.rejected, (state) => {
         state.isError = true;
         state.isLoading = false;
-      },
-    });
+      });
   },
 });
 

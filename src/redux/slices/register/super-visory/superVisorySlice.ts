@@ -1,57 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { editSuperVisoryThunk } from "./superVisoryThunk";
+import { RegistrationStep1 } from "@/types/user-register";
 import {
-  editSuperVisoryThunk,
-  isEmailExistThunk,
-  registerSuperVisoryThunk,
-} from "./superVisoryThunk";
-
-export interface RegistrationStep1 {
-  email: string;
-  password: string;
-}
-
-export interface RegisterSuperVisoryStep2Data {
-  companyName: string;
-  companyNamePhonetic: string;
-  repName: string;
-  hqAddress: {
-    prefecture: string;
-    city: string;
-    street: string;
-  };
-  numOfEmployees: number | null;
-  industry: string;
-  yearFounded: number | null;
-  capital: number | null;
-  businessDescription: string;
-}
-
-export interface RegisterSuperVisoryStep3Data {
-  name: string;
-  department: string;
-  phoneNumber: string;
-  email: string;
-}
-
-export interface RegisterSuperVisoryStep4Data {
-  acceptTerms: boolean;
-  acceptPrivacyPolicy: boolean;
-  acceptReceiveEmails: boolean;
-}
-
-export interface RegisterSuperVisoryData {
-  accountInfo: RegistrationStep1;
-  companyInfo: RegisterSuperVisoryStep2Data;
-  contactPersonInfo: RegisterSuperVisoryStep3Data;
-  termsAndConditions: RegisterSuperVisoryStep4Data;
-}
-
-export interface RegisterSuperVisory {
-  currentStep: 1 | 2 | 3 | 4;
-  registerSuperVisoryData: RegisterSuperVisoryData;
-  isLoading: boolean;
-  isError: boolean;
-}
+  RegisterSuperVisory,
+  RegisterSuperVisoryStep2Data,
+  RegisterSuperVisoryStep3Data,
+  RegisterSuperVisoryStep4Data,
+} from "@/types/super-visory";
+import { isEmailExistThunk, registerThunk } from "../registerThunk";
 
 const initialState: RegisterSuperVisory = {
   currentStep: 1,
@@ -98,7 +54,7 @@ export const registerSuperVisorySlice = createSlice({
     //open modal depending on currentStep
     goNextStep: (
       state,
-      action: PayloadAction<RegisterSuperVisory["currentStep"]>
+      action: PayloadAction<RegisterSuperVisory["currentStep"]>,
     ) => {
       state.currentStep = action.payload;
     },
@@ -124,32 +80,32 @@ export const registerSuperVisorySlice = createSlice({
     // save data to state reducers for each step
     saveRegSuperVisoryStep1: (
       state,
-      action: PayloadAction<RegistrationStep1>
+      action: PayloadAction<RegistrationStep1>,
     ) => {
       state.registerSuperVisoryData.accountInfo = action.payload;
     },
     saveRegSuperVisoryStep2: (
       state,
-      action: PayloadAction<RegisterSuperVisoryStep2Data>
+      action: PayloadAction<RegisterSuperVisoryStep2Data>,
     ) => {
       state.registerSuperVisoryData.companyInfo = action.payload;
     },
     saveRegSuperVisoryStep3: (
       state,
-      action: PayloadAction<RegisterSuperVisoryStep3Data>
+      action: PayloadAction<RegisterSuperVisoryStep3Data>,
     ) => {
       state.registerSuperVisoryData.contactPersonInfo = action.payload;
     },
     saveRegSuperVisoryStep4: (
       state,
-      action: PayloadAction<RegisterSuperVisoryStep4Data>
+      action: PayloadAction<RegisterSuperVisoryStep4Data>,
     ) => {
       state.registerSuperVisoryData.termsAndConditions = action.payload;
     },
   },
   extraReducers: (builder) => {
     // register supervisory account
-    builder.addAsyncThunk(registerSuperVisoryThunk, {
+    builder.addAsyncThunk(registerThunk, {
       pending: (state) => {
         state.isLoading = true;
         state.isError = false;

@@ -1,16 +1,14 @@
 "use client";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import {
-  saveRegEmployerStep2,
-  RegisterEmployerStep2Data,
-  goNextStep,
-} from "@/redux/slices/register/employer/employerSlice";
 import { ChangeEvent, useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 import { isPhoneNumberValid } from "@/helper/validations";
+import { RegisterEmployerStep2Data } from "@/types/employer";
+import { saveRegEmployerStep2 } from "@/redux/slices/register/employer/employerSlice";
+import { goNextStep } from "@/redux/slices/register/super-visory/superVisorySlice";
 
 // Industry options for dropdown
 export const industries = [
@@ -48,7 +46,7 @@ export default function RegisterEmployerStep2() {
   // i18n for labels/placeholders in Step 2
   const t = useTranslations("registerEmployerStep2");
   const employerInfo = useAppSelector(
-    (s) => s.registerEmployer.registerEmployerData.employerInfo
+    (s) => s.registerEmployer.registerEmployerData.employerInfo,
   );
 
   // State management for form inputs and validation
@@ -59,7 +57,7 @@ export default function RegisterEmployerStep2() {
 
   // Handle input changes and update Redux store
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     // Clear error for the field on change
@@ -102,7 +100,10 @@ export default function RegisterEmployerStep2() {
 
   // Add industry to the list
   const handleAddIndustry = () => {
-    if (currentIndustry.trim() !== "" && !data.industries.includes(currentIndustry)) {
+    if (
+      currentIndustry.trim() !== "" &&
+      !data.industries.includes(currentIndustry)
+    ) {
       setData({
         ...data,
         industries: [...data.industries, currentIndustry],
@@ -210,11 +211,11 @@ export default function RegisterEmployerStep2() {
 
     if (hasError) {
       setError(validationErrors);
-      
+
       // If branch offices error, focus on the branch input field
       if (validationErrors.branchOffices) {
         const branchInput = form.querySelector(
-          "input[placeholder*='branchOffice']"
+          "input[placeholder*='branchOffice']",
         ) as HTMLElement;
         if (branchInput) {
           setTimeout(() => branchInput.focus(), 0);
@@ -223,7 +224,7 @@ export default function RegisterEmployerStep2() {
         // Otherwise focus on the first error field
         const firstErrorField = Object.keys(validationErrors)[0];
         const errorElement = form.querySelector(
-          `[name="${firstErrorField}"]`
+          `[name="${firstErrorField}"]`,
         ) as HTMLElement;
         if (errorElement) errorElement.focus();
       }
@@ -330,7 +331,10 @@ export default function RegisterEmployerStep2() {
                 onChange={(e) => {
                   setCurrentIndustry(e.target.value);
                   // Clear error when user selects
-                  setError((prevErrors) => ({ ...prevErrors, industries: false }));
+                  setError((prevErrors) => ({
+                    ...prevErrors,
+                    industries: false,
+                  }));
                 }}
                 isInvalid={error.industries && currentIndustry === ""}
               >
@@ -347,7 +351,10 @@ export default function RegisterEmployerStep2() {
             </Col>
             <Col xs={3}>
               <Button
-                disabled={currentIndustry === "" || data.industries.includes(currentIndustry)}
+                disabled={
+                  currentIndustry === "" ||
+                  data.industries.includes(currentIndustry)
+                }
                 variant="outline-primary"
                 type="button"
                 onClick={handleAddIndustry}
@@ -446,11 +453,15 @@ export default function RegisterEmployerStep2() {
                 onChange={(e) => {
                   setCurrentBranch(e.target.value);
                   // Clear error when user starts typing
-                  setError((prevErrors) => ({ ...prevErrors, branchOffices: false }));
+                  setError((prevErrors) => ({
+                    ...prevErrors,
+                    branchOffices: false,
+                  }));
                 }}
                 isInvalid={
                   error.branchOffices ||
-                  (currentBranch.trim().length > 0 && currentBranch.trim().length < 2)
+                  (currentBranch.trim().length > 0 &&
+                    currentBranch.trim().length < 2)
                 }
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
@@ -461,7 +472,8 @@ export default function RegisterEmployerStep2() {
               />
 
               <Form.Control.Feedback type="invalid">
-                {currentBranch.trim().length > 0 && currentBranch.trim().length < 2
+                {currentBranch.trim().length > 0 &&
+                currentBranch.trim().length < 2
                   ? t("errors.invalidBranchName")
                   : t("errors.addAtLeastOneBranch")}
               </Form.Control.Feedback>

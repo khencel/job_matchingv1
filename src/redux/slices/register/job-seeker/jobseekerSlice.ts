@@ -1,50 +1,13 @@
 // import apiClient from "@/lib/axios";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RegistrationStep1 } from "../super-visory/superVisorySlice";
-import { isEmailExistThunk, registerJobSeekerThunk } from "./jobSeekerThunk";
-
-export interface RegisterJobSeekerStep2Data {
-  firstName: string;
-  midName?: string;
-  lastName: string;
-  nationality: string;
-  gender: "male" | "female" | null;
-  currentPlaceResidence: string;
-  birthdate: string;
-  visaStatus: "APPLIED" | "PENDING" | "REVIEWING" | "ISSUED" | "DENIED" | null;
-  highestEducation:
-    | "elementary"
-    | "jr-highschool"
-    | "sr-highschool"
-    | "vocational"
-    | "bachelorDegree"
-    | "masterDegree"
-    | "doctoralDegree"
-    | null;
-  japaneseLevel: "N5" | "N4" | "N3" | "N2" | "N1" | null;
-  contactNo: string;
-  facebook: string;
-}
-
-export interface RegisterJobSeekerStep4Data {
-  acceptTerms: boolean;
-  acceptPrivacyPolicy: boolean;
-  acceptReceiveEmails: boolean;
-}
-
-export interface RegisterJobSeekerData {
-  accountInfo: RegistrationStep1;
-  jobSeekerData: RegisterJobSeekerStep2Data;
-  idURL: string;
-  termsAndConditions: RegisterJobSeekerStep4Data;
-}
-
-export interface RegisterJobSeeker {
-  currentStep: 1 | 2 | 3 | 4;
-  registerJobSeekerData: RegisterJobSeekerData;
-  isLoading: boolean;
-  isError: boolean;
-}
+import {
+  RegisterJobSeeker,
+  RegisterJobSeekerData,
+  RegisterJobSeekerStep2Data,
+  RegisterJobSeekerStep4Data,
+} from "@/types/job-seeker";
+import { RegistrationStep1 } from "@/types/user-register";
+import { isEmailExistThunk, registerThunk } from "../registerThunk";
 
 const initialState: RegisterJobSeeker = {
   currentStep: 1,
@@ -84,7 +47,7 @@ export const registerJobSeekerSlice = createSlice({
   reducers: {
     goNextStep: (
       state,
-      action: PayloadAction<RegisterJobSeeker["currentStep"]>
+      action: PayloadAction<RegisterJobSeeker["currentStep"]>,
     ) => {
       state.currentStep = action.payload;
     },
@@ -107,32 +70,32 @@ export const registerJobSeekerSlice = createSlice({
     },
     saveRegJobSeekerStep1: (
       state,
-      action: PayloadAction<RegistrationStep1>
+      action: PayloadAction<RegistrationStep1>,
     ) => {
       state.registerJobSeekerData.accountInfo = action.payload;
     },
     saveRegJobSeekerStep2: (
       state,
-      action: PayloadAction<RegisterJobSeekerStep2Data>
+      action: PayloadAction<RegisterJobSeekerStep2Data>,
     ) => {
       state.registerJobSeekerData.jobSeekerData = action.payload;
     },
     saveRegJobSeekerStep3: (
       state,
-      action: PayloadAction<RegisterJobSeekerData["idURL"]>
+      action: PayloadAction<RegisterJobSeekerData["idURL"]>,
     ) => {
       state.registerJobSeekerData.idURL = action.payload;
     },
     saveRegJobSeekerStep4: (
       state,
-      action: PayloadAction<RegisterJobSeekerStep4Data>
+      action: PayloadAction<RegisterJobSeekerStep4Data>,
     ) => {
       state.registerJobSeekerData.termsAndConditions = action.payload;
     },
   },
   extraReducers: (builder) => {
     // registering job seeker
-    builder.addAsyncThunk(registerJobSeekerThunk, {
+    builder.addAsyncThunk(registerThunk, {
       pending: (state) => {
         state.isLoading = true;
         state.isError = false;

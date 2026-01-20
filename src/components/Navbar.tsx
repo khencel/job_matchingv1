@@ -5,17 +5,16 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { Button, Dropdown } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import {
   BellIcon,
   FolderHeartIcon,
   FoldersIcon,
   LogOutIcon,
-  MessagesSquareIcon,
   UserCircleIcon,
 } from "lucide-react";
-import { logout } from "@/redux/slices/login/authSlice";
 import { showSuccessToast } from "@/app/(util)/toaster";
+import { logoutUser } from "@/redux/features/auth/auth_thunk";
 
 // Function to generate a color based on name
 const getAvatarColor = (name: string) => {
@@ -52,9 +51,9 @@ const getInitials = (name: string) => {
 export default function Navbar() {
   const locale = useLocale();
   const t = useTranslations("navbar");
+
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const isAuthenticated = useAppSelector((s) => s.authState.isAuthenticated);
   const user = useAppSelector((s) => s.authState.user);
 
   const setLocale = useCallback(
@@ -64,7 +63,7 @@ export default function Navbar() {
       document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; expires=${expiry.toUTCString()}`;
       router.refresh();
     },
-    [router]
+    [router],
   );
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -72,7 +71,12 @@ export default function Navbar() {
   };
 
   const handleLogout = () => {
-    dispatch(logout());
+    try {
+      dispatch(logoutUser());
+    } catch (error) {
+      console.log("Force logout due to error:", error);
+      return;
+    }
     showSuccessToast("Logout Successfully", "");
   };
 
@@ -115,7 +119,7 @@ export default function Navbar() {
                 {t("FAQ")}
               </a>
             </li>
-            {isAuthenticated ? (
+            {user ? (
               <Dropdown>
                 <Dropdown.Toggle
                   variant="primary"
@@ -127,7 +131,7 @@ export default function Navbar() {
                     style={{
                       width: "32px",
                       height: "32px",
-                      backgroundColor: getAvatarColor(user?.email || "User"),
+                      backgroundColor: getAvatarColor(user?.email),
                       color: "white",
                       fontWeight: "600",
                       fontSize: "14px",
@@ -156,10 +160,10 @@ export default function Navbar() {
                       <FolderHeartIcon />
                       <span className="ms-2">Saved Jobs</span>
                     </Dropdown.Item>
-                    <Dropdown.Item as={Link} href="/job-seeker/messages">
+                    {/* <Dropdown.Item as={Link} href="/job-seeker/messages">
                       <MessagesSquareIcon />
                       <span className="ms-2">Messages</span>
-                    </Dropdown.Item>
+                    </Dropdown.Item> */}
                     <hr className="my-0 mx-auto" style={{ width: "90%" }} />
                     <Dropdown.Item onClick={handleLogout} href="/">
                       <LogOutIcon />

@@ -1,13 +1,13 @@
 "use client";
 import { useAppDispatch } from "@/redux/hooks";
 import { useState } from "react";
-import { clearRegisterEmployerState } from "@/redux/slices/register/employer/employerSlice";
 import { useTranslations } from "next-intl";
 
 import { Button } from "react-bootstrap";
 import RegistrationModal from "./RegisterModal";
 import { clearRegisterSuperVisoryState } from "@/redux/slices/register/super-visory/superVisorySlice";
 import { clearRegisterJobSeekerState } from "@/redux/slices/register/job-seeker/jobseekerSlice";
+import { clearRegisterEmployerState } from "@/redux/slices/register/employer/employerSlice";
 
 interface RegisterButtonProps {
   id: "employer" | "jobSeeker" | "superVisory"; // Registration type identifier

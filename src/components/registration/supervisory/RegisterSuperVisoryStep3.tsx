@@ -3,12 +3,12 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   saveRegSuperVisoryStep3,
-  RegisterSuperVisoryStep3Data,
   goNextStep,
 } from "@/redux/slices/register/super-visory/superVisorySlice";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 import ContactPersonForm from "@/components/registration/supervisory/ContactPersonForm";
+import { RegisterSuperVisoryStep3Data } from "@/types/super-visory";
 
 export default function RegisterSuperVisoryStep3() {
   const dispatch = useAppDispatch();

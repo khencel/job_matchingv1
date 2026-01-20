@@ -6,7 +6,6 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
-import { RegistrationStep1 } from "@/redux/slices/register/super-visory/superVisorySlice";
 import { RootState } from "@/redux/store";
 import { ActionCreatorWithPayload, AsyncThunk } from "@reduxjs/toolkit";
 import {
@@ -14,6 +13,7 @@ import {
   isPasswordMatch,
   isPasswordValid,
 } from "@/helper/validations";
+import { RegistrationStep1 } from "@/types/user-register";
 
 interface Step1RegisterProps {
   selector: (state: RootState) => RegistrationStep1;

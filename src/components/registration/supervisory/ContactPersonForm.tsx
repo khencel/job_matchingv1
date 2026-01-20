@@ -4,7 +4,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import { isEmailValid, isPhoneNumberValid } from "@/helper/validations";
-import { RegisterSuperVisoryStep3Data } from "@/redux/slices/register/super-visory/superVisorySlice";
+import { RegisterSuperVisoryStep3Data } from "@/types/super-visory";
 
 interface ContactPersonFormProps {
   initialValues: RegisterSuperVisoryStep3Data;
