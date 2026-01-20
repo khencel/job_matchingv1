@@ -66,8 +66,11 @@ const authSlice = createSlice({
         state.user = action.payload.user;
         state.isInitialized = true;
       })
-      .addCase(fetchCurrentUser.rejected, (state) => {
+      .addCase(fetchCurrentUser.rejected, (state, action) => {
         state.loading = false;
+        state.error = action.payload
+          ? { message: action.payload }
+          : { message: "Failed to fetch user" };
         state.isInitialized = true;
       });
   },
