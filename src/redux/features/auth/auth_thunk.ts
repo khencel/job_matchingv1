@@ -1,9 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
-import {
-  LoginResponse,
-  forceLogout,
-} from "@/redux/slices/login/authSlice";
 import { AxiosError } from "axios";
 import {
   getCurrentUserApi,
@@ -14,6 +10,9 @@ import {
 } from "./authService";
 import { RootState } from "@/redux/store";
 import { User } from "@/types/user-register";
+
+import { logout } from "@/redux/slices/login/authSlice";
+import { LoginResponse } from "@/redux/slices/login/authSlice";
 
 interface GetUserResponse {
   message: string;
@@ -108,7 +107,7 @@ export const logoutUser = createAsyncThunk<void, void, { rejectValue: string }>(
     const refreshToken = Cookies.get("refreshToken");
 
     if (!refreshToken) {
-      dispatch(forceLogout());
+      dispatch(logout());
       localStorage.clear();
       Cookies.remove("access");
       Cookies.remove("refreshToken");
@@ -138,7 +137,7 @@ export const verifyAccessToken = createAsyncThunk<
   const accessToken = state.authState.access;
 
   if (!accessToken) {
-    dispatch(forceLogout());
+    dispatch(logout());
     Cookies.remove("refreshToken");
     Cookies.remove("access");
     return rejectWithValue("No access token available");

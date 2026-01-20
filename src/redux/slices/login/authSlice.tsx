@@ -6,8 +6,8 @@ import {
 } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import Cookies from "js-cookie";
-import loginApi from "@/redux/features/auth/authService";
-import { fetchCurrentUser } from "@/redux/features/auth/auth_thunk";
+
+import {loginApi} from "../../features/auth/authService";
 
 interface AuthState {
   user: User | null; // Replace 'any' with your user type
