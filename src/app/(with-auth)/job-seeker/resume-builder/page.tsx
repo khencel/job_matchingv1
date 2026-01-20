@@ -124,7 +124,7 @@ const ResumeBuilderPage = () => {
         {/* COLUMN 1: Sidebar */}
         <div
           className={`sidebar ${isCollapsed ? "collapsed" : ""} border-end`}
-          style={{ width: isCollapsed ? "80px" : "250px", transition: "0.3s" }}
+          style={{ width: isCollapsed ? "80px" : "15%", transition: "0.3s" }}
         >
           <div className="sidebar-header p-3 d-flex justify-content-between align-items-center">
             <h5 className="sidebar-title m-0 text-truncate">
@@ -154,12 +154,11 @@ const ResumeBuilderPage = () => {
         {/* Added specific width or flex-basis so it doesn't get squished by the PDF */}
         <div
           className="flex-grow-1 p-4 bg-white border-end"
-          style={{ overflowY: "auto", maxWidth: "40%" }}
+          style={{ overflowY: "auto", width: "25%" }}
         >
           <Tab.Content>
             {navItems.map((item) => (
               <Tab.Pane eventKey={item.key} key={item.key}>
-                <h4 className="mb-4">{item.label}</h4>
                 {item.component}
               </Tab.Pane>
             ))}
