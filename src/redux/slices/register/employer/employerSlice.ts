@@ -88,7 +88,7 @@ export const registerEmployerSlice = createSlice({
     // Reducers for navigating Registration Step State
     goNextStep: (
       state,
-      action: PayloadAction<RegisterEmployer["currentStep"]>
+      action: PayloadAction<RegisterEmployer["currentStep"]>,
     ) => {
       state.currentStep = action.payload;
     },
@@ -111,19 +111,19 @@ export const registerEmployerSlice = createSlice({
     },
     saveRegEmployerStep2: (
       state,
-      action: PayloadAction<RegisterEmployerStep2Data>
+      action: PayloadAction<RegisterEmployerStep2Data>,
     ) => {
       state.registerEmployerData.employerInfo = action.payload;
     },
     saveRegEmployerStep3: (
       state,
-      action: PayloadAction<RegisterEmployerStep3Data>
+      action: PayloadAction<RegisterEmployerStep3Data>,
     ) => {
       state.registerEmployerData.contactPerson = action.payload;
     },
     saveRegEmployerStep4: (
       state,
-      action: PayloadAction<RegisterEmployerStep4Data>
+      action: PayloadAction<RegisterEmployerStep4Data>,
     ) => {
       state.registerEmployerData.termsAndConditions = action.payload;
     },
@@ -138,37 +138,35 @@ export const registerEmployerSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addAsyncThunk(registerEmployerThunk, {
-      pending: (state) => {
+    builder
+      .addCase(registerEmployerThunk.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
-      },
-      fulfilled: (state) => {
+      })
+      .addCase(registerEmployerThunk.fulfilled, (state) => {
         state.isError = false;
         state.isLoading = false;
         state.registerEmployerData = initialState.registerEmployerData;
         state.currentStep = 1;
-      },
-      rejected: (state) => {
+      })
+      .addCase(registerEmployerThunk.rejected, (state) => {
         state.isError = true;
         state.isLoading = false;
-      },
-    });
+      });
     // check email if existing
-    builder.addAsyncThunk(isEmailExistThunk, {
-      pending: (state) => {
+    builder
+      .addCase(isEmailExistThunk.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
-      },
-      fulfilled: (state) => {
+      })
+      .addCase(isEmailExistThunk.fulfilled, (state) => {
         state.isError = false;
         state.isLoading = false;
-      },
-      rejected: (state) => {
+      })
+      .addCase(isEmailExistThunk.rejected, (state) => {
         state.isError = true;
         state.isLoading = false;
-      },
-    });
+      });
   },
 });
 

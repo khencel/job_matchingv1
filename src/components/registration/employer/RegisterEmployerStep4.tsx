@@ -10,6 +10,7 @@ import {
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 import { registerEmployerThunk } from "@/redux/slices/register/employer/employerThunk";
+import { RegisterUserArgs } from "@/types/user";
 
 interface RegisterEmployerStep4Props {
   closeModal: () => void;
@@ -22,7 +23,10 @@ export default function RegisterEmployerStep4({
   const { isLoading } = useAppSelector((s) => s.registerEmployer);
   const t = useTranslations("registerEmployerStep4");
   const tnc = useAppSelector(
-    (s) => s.registerEmployer.registerEmployerData.termsAndConditions
+    (s) => s.registerEmployer.registerEmployerData.termsAndConditions,
+  );
+  const employerData = useAppSelector(
+    (s) => s.registerEmployer.registerEmployerData,
   );
 
   const [data, setData] = useState<RegisterEmployerStep4Data>(tnc);
@@ -82,8 +86,16 @@ export default function RegisterEmployerStep4({
 
     setError({});
     dispatch(saveRegEmployerStep4(data));
+
+    const fullFormData: RegisterUserArgs = {
+      email: employerData.accountInfo.email,
+      password: employerData.accountInfo.password,
+      user_type: "employer",
+      details: JSON.stringify(employerData),
+    };
+
     try {
-      const res = await dispatch(registerEmployerThunk()).unwrap();
+      const res = await dispatch(registerEmployerThunk(fullFormData)).unwrap();
       Swal.fire({
         title: "Verify Your Email",
         text: `We've sent a verification email to your registered email
@@ -105,6 +117,7 @@ export default function RegisterEmployerStep4({
         timer: 1500,
       });
       console.log("Error Submitting the Register Employer:", error);
+    } finally {
     }
   };
 

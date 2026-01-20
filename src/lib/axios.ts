@@ -9,10 +9,18 @@ const apiClient = axios.create({
   },
 });
 
+export const publicApi = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api/",
+  withCredentials: false,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
 // Flag to prevent multiple refresh requests
 let isRefreshing = false;
 let failedQueue: Array<{
-  resolve: (value: any) => void;
+  resolve: (value: any) => void; 
   reject: (reason?: any) => void;
 }> = [];
 
