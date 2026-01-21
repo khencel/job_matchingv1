@@ -105,7 +105,7 @@ export default function RegisterEmployerStep4({
                   folder.`,
       });
       closeModal();
-      console.log(res);
+      console.log("Employer Registered:", res.userDetails_emp);
     } catch (error) {
       Swal.fire({
         icon: "error",

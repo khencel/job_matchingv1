@@ -7,7 +7,7 @@ import { RegisterSuperVisoryData } from "@/redux/slices/register/super-visory/su
 export interface RegisterUserArgs {
   email: string;
   password: string;
-  user_type: "employer" | "job_seeker" | "super_visory";
+  user_type: "employer" | "job_seeker" | "supervisory";
   details: string;
 }
 

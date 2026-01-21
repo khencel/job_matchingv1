@@ -88,13 +88,13 @@ export default function RegisterSuperVisoryStep4({
     const fullFormData: RegisterUserArgs = {
       email: superVisoryData.accountInfo.email,
       password: superVisoryData.accountInfo.password,
-      user_type: "super_visory",
+      user_type: "supervisory",
       details: JSON.stringify(superVisoryData),
     };
 
     try {
       // Final submit thunk (simulated API)
-      await dispatch(registerThunk(fullFormData)).unwrap();
+      const res = await dispatch(registerThunk(fullFormData)).unwrap();
       Swal.fire({
         title: "Verify Your Email",
         text: `We've sent a verification email to your registered email
@@ -104,6 +104,7 @@ export default function RegisterSuperVisoryStep4({
         footer: `If you don't see the email, please check your spam or junk
                  folder.`,
       });
+      console.log("Super Visory Registered:", res.userDetails_supervisory);
       closeModal();
     } catch (error) {
       console.log("Error Submitting the Register Supervisory:", error);

@@ -103,7 +103,7 @@ export default function RegisterJobSeekerStep3({
         footer: `If you don't see the email, please check your spam or junk
             folder.`,
       });
-      console.log("Job Seeker Registration Success", res);
+      console.log("Job Seeker Registered:", res.userDetails_job_seeker);
       closeModal();
     } catch (error) {
       const displayError =
