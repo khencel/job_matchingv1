@@ -7,8 +7,10 @@ import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 import { isPhoneNumberValid } from "@/helper/validations";
 import { RegisterEmployerStep2Data } from "@/types/employer";
-import { saveRegEmployerStep2 } from "@/redux/slices/register/employer/employerSlice";
-import { goNextStep } from "@/redux/slices/register/super-visory/superVisorySlice";
+import {
+  goNextStep,
+  saveRegEmployerStep2,
+} from "@/redux/slices/register/employer/employerSlice";
 
 // Industry options for dropdown
 export const industries = [
