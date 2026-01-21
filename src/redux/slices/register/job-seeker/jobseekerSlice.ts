@@ -2,7 +2,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   RegisterJobSeeker,
-  RegisterJobSeekerData,
   RegisterJobSeekerStep2Data,
   RegisterJobSeekerStep4Data,
 } from "@/types/job-seeker";
@@ -30,7 +29,6 @@ const initialState: RegisterJobSeeker = {
       contactNo: "",
       facebook: "",
     },
-    idURL: "",
     termsAndConditions: {
       acceptTerms: false,
       acceptPrivacyPolicy: false,
@@ -82,12 +80,6 @@ export const registerJobSeekerSlice = createSlice({
     },
     saveRegJobSeekerStep3: (
       state,
-      action: PayloadAction<RegisterJobSeekerData["idURL"]>,
-    ) => {
-      state.registerJobSeekerData.idURL = action.payload;
-    },
-    saveRegJobSeekerStep4: (
-      state,
       action: PayloadAction<RegisterJobSeekerStep4Data>,
     ) => {
       state.registerJobSeekerData.termsAndConditions = action.payload;
@@ -136,6 +128,5 @@ export const {
   saveRegJobSeekerStep1,
   saveRegJobSeekerStep2,
   saveRegJobSeekerStep3,
-  saveRegJobSeekerStep4,
 } = registerJobSeekerSlice.actions;
 export default registerJobSeekerSlice.reducer;

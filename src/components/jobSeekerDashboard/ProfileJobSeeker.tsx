@@ -45,18 +45,6 @@ const EditJobSeeker = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        // This will call your API and populate Redux
-        await dispatch(fetchCurrentUser()).unwrap();
-      } catch (error) {
-        console.log("Session expired or invalid.", error);
-      }
-    };
-    fetchUser();
-  }, [dispatch]);
-
   return (
     <Container
       fluid
@@ -223,54 +211,6 @@ const EditJobSeeker = () => {
                 <p className="form-control-plaintext">
                   {user?.jobSeekerData.birthdate || "N/A"}
                 </p>
-              )}
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Form.Group>
-              <Form.Label>Experiences</Form.Label>
-              {isEditMode ? (
-                <Form.Control
-                  as="textarea"
-                  rows={3}
-                  placeholder="Enter your work experience"
-                />
-              ) : (
-                <p className="form-control-plaintext">N/A</p>
-              )}
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Form.Group>
-              <Form.Label>Education</Form.Label>
-              {isEditMode ? (
-                <Form.Control
-                  as="textarea"
-                  rows={3}
-                  placeholder="Enter your education"
-                />
-              ) : (
-                <p className="form-control-plaintext">N/A</p>
-              )}
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Form.Group>
-              <Form.Label>Skills</Form.Label>
-              {isEditMode ? (
-                <Form.Control
-                  as="textarea"
-                  rows={3}
-                  placeholder="Enter your skills"
-                />
-              ) : (
-                <p className="form-control-plaintext">N/A</p>
               )}
             </Form.Group>
           </Col>

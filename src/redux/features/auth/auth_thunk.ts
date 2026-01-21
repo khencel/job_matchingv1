@@ -26,7 +26,10 @@ export const fetchCurrentUser = createAsyncThunk<
   try {
     // AUTOMATIC: Your Axios Interceptor attaches the Bearer token here.
     const res = await getCurrentUserApi();
-    console.log(res);
+    console.log(
+      "Fetch current user:",
+      res.data.user.userDetails_job_seeker.jobSeekerData,
+    );
     return res.data;
   } catch (error) {
     if (error instanceof AxiosError) {

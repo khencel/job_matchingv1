@@ -32,7 +32,6 @@ export interface RegisterJobSeekerStep4Data {
 export interface RegisterJobSeekerData {
   accountInfo: RegistrationStep1;
   jobSeekerData: RegisterJobSeekerStep2Data;
-  idURL: string;
   termsAndConditions: RegisterJobSeekerStep4Data;
 }
 
