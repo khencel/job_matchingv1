@@ -59,6 +59,7 @@ export interface ResumeBuilderData {
 }
 
 interface SaveResumePayload {
-  blob: Blob;
-  fileName: string;
+  user: number;
+  resume_info: string;
+  resume: File;
 }

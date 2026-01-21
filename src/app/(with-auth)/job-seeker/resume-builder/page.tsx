@@ -41,6 +41,10 @@ const ResumeBuilderPage = () => {
   const error = useAppSelector((s) => s.resumeBuilder.error);
   const user = useAppSelector((s) => s.authState.user);
   const resumeData = useAppSelector((s) => s.resumeBuilder);
+  const basicInfo = useAppSelector((s) => s.resumeBuilder.basicInfo);
+  const education = useAppSelector((s) => s.resumeBuilder.education);
+  const workExperience = useAppSelector((s) => s.resumeBuilder.workExperience);
+  const skills = useAppSelector((s) => s.resumeBuilder.skills);
   const isSaveDisabled = !useAppSelector((s) => canSaveResume(s.resumeBuilder));
 
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
@@ -51,19 +55,16 @@ const ResumeBuilderPage = () => {
     if (!templateRef.current) return;
 
     try {
-      // 1. Lower the scale. scale: 2 is overkill for a standard A4 resume.
-      // Use 1.5 or 1 for much smaller file sizes.
+      // Generate canvas from the resume template
       const canvas = await html2canvas(templateRef.current, { scale: 1 });
-
-      // 2. Use JPEG instead of PNG. Resumes have lots of white space.
-      // JPEG compression (e.g., 0.7) will slash your file size by 70-80%.
+      // Convert canvas to JPEG image data with compression
       const imgData = canvas.toDataURL("image/jpeg", 0.7);
-
+      // Create a new PDF document
       const pdf = new jsPDF("p", "mm", "a4");
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-      // 3. Add compression to the PDF image
+      // Add the image to the PDF with compression
       pdf.addImage(
         imgData,
         "JPEG",
@@ -74,9 +75,8 @@ const ResumeBuilderPage = () => {
         undefined,
         "FAST",
       );
-
+      // Convert the PDF to a Blob object
       const blob = pdf.output("blob");
-
       // DEBUG: Check the size before sending
       console.log(`Blob size: ${(blob.size / 1024 / 1024).toFixed(2)} MB`);
 
@@ -85,8 +85,22 @@ const ResumeBuilderPage = () => {
         return;
       }
 
-      const fileName = `${user?.first_name || "user"}-resume`;
-      await dispatch(saveResume({ blob, fileName })).unwrap();
+      const resumeInfo = {
+        basicInfo: basicInfo,
+        education: education,
+        workExperience: workExperience,
+        skills: skills,
+      };
+
+      if (!user) return;
+
+      await dispatch(
+        saveResume({
+          user: user.id,
+          resume_info: JSON.stringify(resumeInfo),
+          resume: new File([blob], "resume.pdf", { type: "application/pdf" }),
+        }),
+      ).unwrap();
 
       showSuccessToast("Success", "Resume saved.");
     } catch (err) {
@@ -98,8 +112,8 @@ const ResumeBuilderPage = () => {
   const templateRef = useRef<HTMLDivElement>(null);
   const handlePrint = useReactToPrint({
     contentRef: templateRef,
-    documentTitle: `Resume-${resumeData?.basicInfo?.firstName} ${
-      resumeData?.basicInfo?.lastName || "Draft"
+    documentTitle: `Resume-${basicInfo?.firstName} ${
+      basicInfo?.lastName || "Draft"
     }`,
   });
 
@@ -151,10 +165,9 @@ const ResumeBuilderPage = () => {
         </div>
 
         {/* COLUMN 2: Input Fields (Middle Pane) */}
-        {/* Added specific width or flex-basis so it doesn't get squished by the PDF */}
         <div
           className="flex-grow-1 p-4 bg-white border-end"
-          style={{ overflowY: "auto", width: "25%" }}
+          style={{ overflowY: "auto", maxWidth: "25%" }}
         >
           <Tab.Content>
             {navItems.map((item) => (

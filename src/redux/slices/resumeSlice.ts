@@ -1,21 +1,31 @@
+import apiClient from "@/lib/axios";
 import { ResumeBuilderData, SaveResumePayload } from "@/types/resume-builder";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 
 // Async Thunk for saving resume to database
 export const saveResume = createAsyncThunk(
   "resumeBuilder/saveResume",
-  async ({ blob, fileName }: SaveResumePayload, { rejectWithValue }) => {
+  async (
+    { user, resume_info, resume }: SaveResumePayload,
+    { rejectWithValue },
+  ) => {
     try {
-      const formData = new FormData();
-      formData.append("resume_file", blob, fileName);
-      console.log("Size in MB:", blob.size / 1024 / 1024);
-      // MOCK endpoint
+      const submitData: SaveResumePayload = {
+        user,
+        resume_info,
+        resume,
+      };
+
       // Axios detects FormData and sets the header automatically.
-      // const response = await apiClient.post("backend-endpoint", formData); // -> Use apiClient for django backend
-      const response = await axios.post("/mock-api/resume/upload", formData); // Mock API
+      const response = await apiClient.post("resume/", submitData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return response.data;
     } catch (error) {
+      console.log(error);
       // Handle Axios errors
       if (error instanceof AxiosError) {
         // Server responded with error status
