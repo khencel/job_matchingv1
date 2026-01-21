@@ -350,14 +350,11 @@
       "acceptReceiveEmails": "プロモーションメールの受信に同意します（任意）"
     },
     "helpers": {
-      "submitting": "送信中...",
-      "successSubmit": "求職者登録成功",
-      "errorSubmit": "求職者登録失敗"
+      "submitting": "送信中..."
     },
     "errors": {
       "acceptT&C": "利用規約に同意する必要があります。",
-      "acceptPrivacyPolicy": "プライバシーポリシーに同意する必要があります。",
-      "acceptTermsPrivacy": "利用規約とプライバシーポリシーに同意して続行してください。"
+      "acceptPrivacyPolicy": "プライバシーポリシーに同意する必要があります。"
     },
     "buttons": {
       "submit": "登録を送信"

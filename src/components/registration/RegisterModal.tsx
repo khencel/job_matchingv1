@@ -16,9 +16,8 @@ import RegisterSuperVisoryStep3 from "./supervisory/RegisterSuperVisoryStep3";
 import RegisterSuperVisoryStep4 from "./supervisory/RegisterSuperVisoryStep4";
 import RegisterJobSeekerStep1 from "./jobSeeker/RegisterJobSeekerStep1";
 import RegisterJobSeekerStep2 from "./jobSeeker/RegisterJobSeekerStep2";
-import RegisterJobSeekerStep3 from "./jobSeeker/RegisterJobSeekerStep3";
-import RegisterJobSeekerStep4 from "./jobSeeker/RegisterJobSeekerStep4";
 import { goBackJobSeeker } from "@/redux/slices/register/job-seeker/jobseekerSlice";
+import RegisterJobSeekerStep3 from "./jobSeeker/RegisterJobSeekerStep3";
 
 interface RegistrationModalProps {
   show: boolean;
@@ -74,9 +73,7 @@ export default function RegistrationModal({
         case 2:
           return <RegisterJobSeekerStep2 />;
         case 3:
-          return <RegisterJobSeekerStep3 />;
-        case 4:
-          return <RegisterJobSeekerStep4 closeModal={onHide} />;
+          return <RegisterJobSeekerStep3 closeModal={onHide} />;
       }
     }
 
@@ -122,7 +119,7 @@ export default function RegistrationModal({
         <h3 className="mb-3 fw-bold">{renderTitle()}</h3>
         <ProgressStepCount
           currentStep={currentStep}
-          stepCount={[1, 2, 3, 4]}
+          stepCount={formType === "jobSeeker" ? [1, 2, 3] : [1, 2, 3, 4]}
         />
       </Modal.Title>
 

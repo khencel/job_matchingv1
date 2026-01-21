@@ -311,27 +311,6 @@
     }
   },
   "registerJobSeekerStep3": {
-    "title": "ID Verification",
-    "labels": {
-      "idDocument": "ID Document",
-      "uploadedFile": "Uploaded File",
-      "preview": "Preview"
-    },
-    "helpers": {
-      "fileTypeInfo": "Accepted formats: JPEG, PNG, WebP, PDF. Maximum size: 5MB."
-    },
-    "errors": {
-      "invalidFileType": "Invalid file type. Please upload an image (JPEG, PNG, WebP) or PDF.",
-      "fileTooLarge": "File size exceeds 5MB. Please upload a smaller file.",
-      "idRequired": "Please upload your ID document."
-    },
-    "buttons": {
-      "back": "Back",
-      "next": "Next",
-      "remove": "Remove"
-    }
-  },
-  "registerJobSeekerStep4": {
     "title": "Terms and Conditions",
     "labels": {
       "acceptTerms": "I accept the Terms and Conditions",
@@ -339,14 +318,11 @@
       "acceptReceiveEmails": "I agree to receive promotional emails (optional)"
     },
     "helpers": {
-      "submitting": "Submitting...",
-      "successSubmit": "Job Seeker Registration Success",
-      "errorSubmit": "Job Seeker Registration Failed"
+      "submitting": "Submitting..."
     },
     "errors": {
       "acceptT&C": "You must accept the Terms and Conditions to proceed.",
-      "acceptPrivacyPolicy": "You must accept the Privacy Policy to proceed.",
-      "acceptTermsPrivacy": "Accept Terms of Use and Privacy Policy to continue."
+      "acceptPrivacyPolicy": "You must accept the Privacy Policy to proceed."
     },
     "buttons": {
       "submit": "Submit Registration"
