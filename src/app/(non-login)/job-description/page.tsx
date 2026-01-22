@@ -1,7 +1,6 @@
 "use client";
 
 import Footer from "@/components/Footer";
-import JobPost from "@/components/JobPost";
 import Navbar from "@/components/Navbar";
 import { BookmarkIcon, MoveRightIcon, Share2Icon } from "lucide-react";
 import Image from "next/image";
@@ -294,7 +293,6 @@ const JobDescriptionPage = () => {
           <MoveRightIcon size="16px" className="text-primary ms-2" />
         </Button>
       </div>
-      <JobPost />
       <Footer />
     </div>
   );
