@@ -1,10 +1,11 @@
 import FilterJobs from "@/components/FilterJobs";
-import JobPost from "@/components/JobPost";
+import JobCard from "@/components/JobCard";
 import JobSearchFiler from "@/components/JobSearchFilter";
 import Navbar from "@/components/Navbar";
 import { Col, Container, Row } from "react-bootstrap";
 
 const FindJobPage = () => {
+  // TODO: Fetch job postings and map them to JobCard components
   return (
     <div>
       <Navbar />
@@ -20,19 +21,12 @@ const FindJobPage = () => {
             className="bg-light border-end"
             style={{ height: "100%", overflowY: "auto" }}
           >
-            <div className="p-4">
+            <div className="px-2">
               <FilterJobs />
             </div>
           </Col>
           <Col style={{ height: "100%", overflowY: "auto" }}>
-            <div>
-              <JobPost />
-              <JobPost />
-              <JobPost />
-              <JobPost />
-              <JobPost />
-              <JobPost />
-            </div>
+            <div className="py-4 px-2"></div>
           </Col>
         </Row>
       </Container>

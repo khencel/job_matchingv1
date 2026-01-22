@@ -6,11 +6,12 @@ import resumeBuilderReducer from "./slices/resumeSlice";
 import authReducer from "./slices/login/authSlice";
 import basicInfoSlice from "./slices/employer/post_a_job/basicInfoSlice";
 import jobListing from "./slices/employer/post_a_job/JobListing";
-import profileSlice from "./slices/profile/profileSlice"
+import profileSlice from "./slices/profile/profileSlice";
 import perksAndBenefitsSlice from "./slices/perks_benefits/perksBenefitsSlice";
 import applicantReducer from "./slices/applicants/applicantSlice";
-
-
+import applyJobSlice from "./slices/jobs/applyToJobSlice";
+import appliedJobSlice from "./slices/jobs/appliedJobSlice";
+import jobPostSlice from "./slices/jobs/jobPostSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -25,6 +26,9 @@ export const makeStore = () => {
       profileSlice: profileSlice,
       perksAndBenefitsSlice: perksAndBenefitsSlice,
       applicants: applicantReducer,
+      jobSlice: applyJobSlice,
+      appliedJob: appliedJobSlice,
+      jobPost: jobPostSlice,
     },
   });
 };
