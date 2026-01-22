@@ -22,5 +22,5 @@ export const getAppliedJobs = async (page: number, page_size: number) => {
 
 // Get Job by Id
 export const getJobById = async (jobId: number) => {
-  return await apiClient.get(`/job/details/${jobId}/`);
+  return await apiClient.get(`/job/details/${jobId}`);
 };

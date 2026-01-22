@@ -12,12 +12,75 @@ import {
   Container,
   Row,
   Col,
+  Spinner,
 } from "react-bootstrap";
 import { useTranslations } from "next-intl";
+import { applyToJob, fetchJobDetails } from "@/redux/slices/jobs/jobsThunk";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useParams, useRouter } from "next/navigation";
+import { formatDate } from "@/helper/formatDate";
+import { showErrorToast } from "@/app/(util)/toaster";
 
 const JobDescriptionPage = () => {
   const t = useTranslations("jobDescriptionPage");
+  const router = useRouter();
   // All the data will be fetched from the database
+  // 1. Get the ID from the URL (e.g., /job-description/5 -> id = "5")
+  const params = useParams();
+  const id = params.id;
+
+  const dispatch = useAppDispatch();
+  // Get job details from the Redux store
+  const { jobDetails, loading, error } = useAppSelector(
+    (state) => state.jobPost,
+  );
+  const applyStatus = useAppSelector((state) => state.jobSlice.applyStatus);
+  const userId = useAppSelector((state) => state.authState.user?.id);
+
+  // Fetch data when the ID changes
+  useEffect(() => {
+    if (id) {
+      // @ts-expect-error : id is string, but our thunk expects a number
+      dispatch(fetchJobDetails(id));
+    }
+  }, [id, dispatch]);
+
+  // Loading State
+  if (loading) {
+    return (
+      <Container className="d-flex justify-content-center align-items-center vh-50">
+        <Spinner animation="border" variant="primary" />
+      </Container>
+    );
+  }
+  // Error State
+  if (error) {
+    return (
+      <Container className="py-5 text-danger text-center">{error}</Container>
+    );
+  }
+  // Empty/Not Found State
+  if (!jobDetails) {
+    return <Container className="py-5 text-center">Job not found.</Container>;
+  }
+
+  const handleClickApply = () => {
+    if (!userId) {
+      showErrorToast("Not Logged In", "Please log in to apply for jobs.");
+      router.push("/login");
+      return;
+    }
+    try {
+      dispatch(applyToJob({ user: userId, job_post: jobDetails.id }));
+    } catch (error) {
+      showErrorToast("Error applying to job", "Please try again later.");
+      console.log("Error applying", error);
+    }
+  };
+
+  const isApplied = true; // Placeholder: Replace with actual logic to check if the user has applied
+
   return (
     <div>
       <Navbar />
@@ -32,8 +95,12 @@ const JobDescriptionPage = () => {
               alt="sample pic"
             ></Image>
             <div className="d-flex flex-column gap-2">
-              <CardTitle>Sales Admin</CardTitle>
-              <CardSubtitle>Japan - Full Time</CardSubtitle>
+              <CardTitle className="fw-bold text-dark">
+                {jobDetails.title}
+              </CardTitle>
+              <CardSubtitle className="fw-normal text-dark small">
+                {jobDetails.type_of_emp.type}
+              </CardSubtitle>
             </div>
           </div>
           <div className="d-flex justify-content-center align-items-center gap-2">
@@ -47,7 +114,25 @@ const JobDescriptionPage = () => {
               style={{ borderRight: "1px solid #ccc", height: "36px" }}
               className="mx-3"
             ></div>
-            <Button className="btn-primary-custom">{t("buttons.apply")}</Button>
+            <Button
+              className="btn-primary-custom"
+              onClick={handleClickApply}
+              disabled={applyStatus === "loading" || isApplied}
+            >
+              {applyStatus === "loading" ? (
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              ) : isApplied ? (
+                "Application Sent"
+              ) : (
+                t("buttons.apply")
+              )}
+            </Button>
           </div>
         </CardBody>
       </div>
@@ -61,53 +146,19 @@ const JobDescriptionPage = () => {
             <div className="d-flex flex-column gap-3">
               <div>
                 <h4>{t("headings.description")}</h4>
-                <p>
-                  We looking for Social Media Marketing expert to help manage
-                  our online networks. You will be responsible for monitoring
-                  our social media channels, creating content, finding effective
-                  ways to engage the community and incentivize others to engage
-                  on our channels.
-                </p>
+                <p>{jobDetails.job_desc}</p>
               </div>
               <div>
                 <h4>{t("headings.responsibilities")}</h4>
-                <p>
-                  -Community engagement to ensure that is supported and actively
-                  represented online
-                </p>
-                <p>
-                  -Focus on social media content development and publication
-                </p>
-                <p>-Marketing and strategy support</p>
-                <p>
-                  -Stay on top of trends on social media platforms, and suggest
-                  content ideas to the team
-                </p>
-                <p>-Engage with online communities</p>
+                {jobDetails.responsibility}
               </div>
               <div>
                 <h4>{t("headings.whoYouAre")}</h4>
-                <p>
-                  -You get energy from people and building the ideal work
-                  environment
-                </p>
-                <p>
-                  -You have a sense for beautiful spaces and office experiences
-                </p>
-                <p>
-                  -You are a confident office manager, ready for added
-                  responsibilities
-                </p>
-                <p>{"-You're detail-oriented and creative"}</p>
-                <p>
-                  {"-You're a growth marketer and know how to run campaigns"}
-                </p>
+                {jobDetails.who_you_are}
               </div>
               <div>
                 <h4>{t("headings.niceToHaves")}</h4>
-                <p>-Fluent in English</p>
-                <p>-Project management skills</p>
-                <p>-Copy editing skills</p>
+                {jobDetails.nice_to_have}
               </div>
             </div>
           </Col>
@@ -116,113 +167,76 @@ const JobDescriptionPage = () => {
             {/* About Grid */}
             <Container>
               <h4 className="mb-4">{t("headings.aboutThisRole")}</h4>
-              {/* About > Row 1 */}
-              <Row>
-                <Col>
-                  <p className="fw-light">{t("labels.applyBefore")}</p>
-                </Col>
-                <Col>
-                  <p className="fw-medium text-end">December 1, 2025</p>
-                </Col>
-              </Row>
-              {/* About > Row 2 */}
               <Row>
                 <Col>
                   <p className="fw-light">{t("labels.jobPostedOn")}</p>
                 </Col>
                 <Col>
-                  <p className="fw-medium text-end">November 28, 2025</p>
+                  <p className="fw-medium text-end">
+                    {formatDate(jobDetails.created_at)}
+                  </p>
                 </Col>
               </Row>
-              {/* About > Row 3 */}
               <Row>
                 <Col>
                   <p className="fw-light">{t("labels.jobType")}</p>
                 </Col>
                 <Col>
-                  <p className="fw-medium text-end">Full-Time</p>
+                  <p className="fw-medium text-end">
+                    {jobDetails.type_of_emp.type}
+                  </p>
                 </Col>
               </Row>
-              {/* About > Row 4 */}
               <Row>
                 <Col>
                   <p className="fw-light">{t("labels.salary")}</p>
                 </Col>
                 <Col>
-                  <p className="fw-medium text-end">18,000</p>
+                  <p className="fw-medium text-end">
+                    $ {jobDetails.salary.toLocaleString()}
+                  </p>
                 </Col>
               </Row>
             </Container>
             <hr />
-            <h4>{t("headings.categories")}</h4>
+            <div>
+              <h4>{t("headings.categories")}</h4>
+              <p>{jobDetails.category.category}</p>
+            </div>
             <hr />
-            <h4>{t("headings.requiredSkills")}</h4>
+            <div>
+              <h4>{t("headings.requiredSkills")}</h4>
+              <p>{jobDetails.skill.skill}</p>
+            </div>
           </Col>
         </Row>
         {/* Main Row 2 */}
         <Row></Row>
       </Container>
-      <hr />
 
       {/* Perks & Benefits Grid */}
-      <Container fluid className="d-flex flex-column gap-5 px-5 py-3">
-        <h4>{t("headings.perksAndBenefits")}</h4>
-        {/* Row 1 */}
-        <Row>
-          <Col md={3}>
-            <h5>{t("headings.fullHealthcare")}</h5>
-            <p>
-              We believe in thriving communities and that starts with our team
-              being happy and healthy.
-            </p>
-          </Col>
-          <Col md={3}>
-            <h5>{t("headings.fullHealthcare")}</h5>
-            <p>
-              We believe in thriving communities and that starts with our team
-              being happy and healthy.
-            </p>
-          </Col>
-          <Col md={3}>
-            <h5>{t("headings.fullHealthcare")}</h5>
-            <p>
-              We believe in thriving communities and that starts with our team
-              being happy and healthy.
-            </p>
-          </Col>
-          <Col md={3}>
-            <h5>{t("headings.fullHealthcare")}</h5>
-            <p>
-              We believe in thriving communities and that starts with our team
-              being happy and healthy.
-            </p>
-          </Col>
-        </Row>
-        {/* Row 2 */}
-        <Row>
-          <Col md={3}>
-            <h5>{t("headings.fullHealthcare")}</h5>
-            <p>
-              We believe in thriving communities and that starts with our team
-              being happy and healthy.
-            </p>
-          </Col>
-          <Col md={3}>
-            <h5>Full Healthcare</h5>
-            <p>
-              We believe in thriving communities and that starts with our team
-              being happy and healthy.
-            </p>
-          </Col>
-          <Col md={3}>
-            <h5>{t("headings.fullHealthcare")}</h5>
-            <p>
-              We believe in thriving communities and that starts with our team
-              being happy and healthy.
-            </p>
-          </Col>
-        </Row>
-      </Container>
+      {jobDetails.benefits.length < 1 ? (
+        <></>
+      ) : (
+        <>
+          <hr />
+          {jobDetails.benefits.map((item, idx) => {
+            <Container
+              key={idx}
+              fluid
+              className="d-flex flex-column gap-5 px-5 py-3"
+            >
+              <h4>{t("headings.perksAndBenefits")}</h4>
+              {/* Row 1 */}
+              <Row>
+                <Col md={3}>
+                  <h5>{item}</h5>
+                </Col>
+              </Row>
+            </Container>;
+          })}
+        </>
+      )}
       <hr />
       {/* About Job Support */}
       <Container fluid className="p-5">
@@ -287,8 +301,12 @@ const JobDescriptionPage = () => {
       </Container>
       <hr />
       <div className="d-flex px-5 mt-5 mb-3 justify-content-between">
-        <h3 className="fw-semibold">{t("headings.relatedJobs")}</h3>
-        <Button variant="outline-primary" className="text-decoration-none px-3">
+        <h3 className="fw-semibold text-dark">More Jobs</h3>
+        <Button
+          variant="outline-primary"
+          className="text-decoration-none px-3"
+          onClick={() => router.push("/find-jobs")}
+        >
           {t("buttons.showAllJobs")}
           <MoveRightIcon size="16px" className="text-primary ms-2" />
         </Button>

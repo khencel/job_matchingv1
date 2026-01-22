@@ -1,4 +1,4 @@
-import { formatDate } from "@/helper/formatData";
+import { formatDate } from "@/helper/formatDate";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchAppliedJobs } from "@/redux/slices/jobs/jobsThunk";
 import Link from "next/link";
@@ -33,7 +33,12 @@ const AppliedJobs = () => {
       {/* Header Section */}
       <div className="mb-4">
         <h2 className="fw-bold text-dark">My Applications</h2>
-        <p className="text-muted">Track the status of your job applications</p>
+        <p className="text-muted h-100 gap-2 d-flex align-items-center">
+          Total Applications:
+          <Badge bg="dark" pill>
+            {appliedJob?.count}
+          </Badge>
+        </p>
       </div>
 
       {loading && (
@@ -75,7 +80,7 @@ const AppliedJobs = () => {
 
           return (
             <Link
-              href={`/job-description/${job.id}`}
+              href={`/job-description/${details.id}`}
               key={job.id}
               className="text-decoration-none text-dark"
             >

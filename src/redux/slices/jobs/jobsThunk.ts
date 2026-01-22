@@ -1,4 +1,3 @@
-import apiClient from "@/lib/axios";
 import {
   GetAppliedJobsParams,
   GetAppliedJobsResponse,
@@ -71,13 +70,14 @@ export const fetchAppliedJobs = createAsyncThunk<
 );
 
 // Get Job by Id
-export const fetchJobById = createAsyncThunk(
+export const fetchJobDetails = createAsyncThunk(
   "jobApply/fetchJobById",
   async (jobId: number, { rejectWithValue }) => {
     try {
       const res = await getJobById(jobId);
       return res.data;
     } catch (error) {
+      console.log("Error fetching job details:",error)
       if (error instanceof AxiosError) {
         if (error.response) {
           return rejectWithValue(
