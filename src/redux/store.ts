@@ -10,6 +10,7 @@ import profileSlice from "./slices/profile/profileSlice";
 import perksAndBenefitsSlice from "./slices/perks_benefits/perksBenefitsSlice";
 import applicantReducer from "./slices/applicants/applicantSlice";
 import applyJobSlice from "./slices/apply_job/applyJobSlice";
+import appliedJobSlice from "./slices/apply_job/appliedJobSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -25,6 +26,7 @@ export const makeStore = () => {
       perksAndBenefitsSlice: perksAndBenefitsSlice,
       applicants: applicantReducer,
       jobSlice: applyJobSlice,
+      appliedJob: appliedJobSlice,
     },
   });
 };

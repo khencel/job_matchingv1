@@ -45,14 +45,26 @@ export interface ApplyToJobResponse {
   deleted?: boolean;
 }
 
-interface GetAppliedJobResponse {
+export interface GetAppliedJobResponse {
   count: number;
   next: string | null;
   previous: string | null;
-  results: JobPosting[];
+  results: ResultInterface[];
 }
 
-interface AppliedJobParams {
+export interface AppliedJobParams {
   page?: number;
   page_size?: number;
+}
+
+export interface AppliedJobEntry {
+  id: number;
+  user: ApplyUser;
+  job_post: {
+    jopPostDetails: JobPosting;
+    employerDetails: User | null;
+  };
+  deleted: boolean;
+  created_at: string;
+  updated_at: string;
 }
