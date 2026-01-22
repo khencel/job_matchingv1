@@ -4,7 +4,7 @@ import {
   GetAppliedJobResponse,
   JobPosting,
 } from "@/types/applyJob";
-import { applyToJob, getAppliedJobs, getJobPostings } from "./applyJobThunk";
+import { applyToJob, fetchJobPostings } from "./jobsThunk";
 
 type RequestStatus = "idle" | "loading" | "succeeded" | "failed";
 
@@ -44,15 +44,15 @@ const applyJobSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // Fetch Job Postings
-      .addCase(getJobPostings.pending, (state) => {
+      .addCase(fetchJobPostings.pending, (state) => {
         state.jobPostsStatus = "loading";
         state.jobPostsError = null;
       })
-      .addCase(getJobPostings.fulfilled, (state, action) => {
+      .addCase(fetchJobPostings.fulfilled, (state, action) => {
         state.jobPostsStatus = "succeeded";
         state.jobPosts = action.payload;
       })
-      .addCase(getJobPostings.rejected, (state, action) => {
+      .addCase(fetchJobPostings.rejected, (state, action) => {
         state.jobPostsStatus = "failed";
         state.jobPostsError =
           (action.payload as string) ||
@@ -74,22 +74,6 @@ const applyJobSlice = createSlice({
           (action.payload as string) ||
           action.error.message ||
           "Failed to apply for job.";
-      })
-      // Get Applied Jobs
-      .addCase(getAppliedJobs.pending, (state) => {
-        state.appliedJobsStatus = "loading";
-        state.appliedJobsError = null;
-      })
-      .addCase(getAppliedJobs.fulfilled, (state, action) => {
-        state.appliedJobsStatus = "succeeded";
-        state.appliedJobs = action.payload;
-      })
-      .addCase(getAppliedJobs.rejected, (state, action) => {
-        state.appliedJobsStatus = "failed";
-        state.appliedJobsError =
-          (action.payload as string) ||
-          action.error.message ||
-          "Failed to fetch applied jobs.";
       });
   },
 });

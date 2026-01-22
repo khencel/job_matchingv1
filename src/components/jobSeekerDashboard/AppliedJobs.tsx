@@ -1,13 +1,9 @@
 import { formatDate } from "@/helper/formatData";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchAppliedJobs } from "@/redux/slices/apply_job/appliedJobSlice";
+import { fetchAppliedJobs } from "@/redux/slices/jobs/jobsThunk";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Col, Pagination, Row, Badge, Container } from "react-bootstrap";
-
-// Optional: Add a simple CSS for the hover effect in your global css or styled component
-// .job-card-hover { transition: all 0.2s ease-in-out; }
-// .job-card-hover:hover { transform: translateY(-3px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important; }
 
 const AppliedJobs = () => {
   const dispatch = useAppDispatch();
@@ -73,7 +69,7 @@ const AppliedJobs = () => {
       )}
 
       {/* Job Cards */}
-      <div className="">
+      <div className="job-card-hover">
         {appliedJob?.results?.map((job) => {
           const details = job.job_post.jobPostDetails;
 

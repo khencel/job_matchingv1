@@ -9,8 +9,8 @@ import jobListing from "./slices/employer/post_a_job/JobListing";
 import profileSlice from "./slices/profile/profileSlice";
 import perksAndBenefitsSlice from "./slices/perks_benefits/perksBenefitsSlice";
 import applicantReducer from "./slices/applicants/applicantSlice";
-import applyJobSlice from "./slices/apply_job/applyJobSlice";
-import appliedJobSlice from "./slices/apply_job/appliedJobSlice";
+import applyJobSlice from "./slices/jobs/applyToJobSlice";
+import appliedJobSlice from "./slices/jobs/appliedJobSlice";
 
 export const makeStore = () => {
   return configureStore({

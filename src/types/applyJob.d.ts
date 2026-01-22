@@ -24,7 +24,7 @@ export interface JobPosting {
 }
 
 export interface ApplyToJobRequest {
-  user: string;
+  user: number;
   job_post: number;
 }
 
