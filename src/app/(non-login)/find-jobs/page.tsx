@@ -1,11 +1,26 @@
+"use client";
 import FilterJobs from "@/components/FilterJobs";
 import JobCard from "@/components/JobCard";
 import JobSearchFiler from "@/components/JobSearchFilter";
 import Navbar from "@/components/Navbar";
+import { getJobPostings } from "@/redux/slices/jobs/jobServices";
+import { JobPosting } from "@/types/applyJob";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
 const FindJobPage = () => {
-  // TODO: Fetch job postings and map them to JobCard components
+  const router = useRouter();
+  const [jobsLists, setJobsLists] = useState<JobPosting[]>([]);
+
+  useEffect(() => {
+    async function fetchJobDetails() {
+      const res = await getJobPostings();
+      setJobsLists(res.data);
+    }
+    fetchJobDetails();
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -26,7 +41,16 @@ const FindJobPage = () => {
             </div>
           </Col>
           <Col style={{ height: "100%", overflowY: "auto" }}>
-            <div className="py-4 px-2"></div>
+            <Row className="g-3 p-3">
+              {jobsLists.map((job) => (
+                <Col md={4} sm={6} key={job.id} className="">
+                  <JobCard
+                    job={job}
+                    onClick={() => router.push(`job-description/${job.id}`)}
+                  />
+                </Col>
+              ))}
+            </Row>
           </Col>
         </Row>
       </Container>
