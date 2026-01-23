@@ -52,7 +52,7 @@ export default function JobPost() {
               </button>
             </div>
           </div>
-        </div>
+      </div>
       </div>
     </div>
   );

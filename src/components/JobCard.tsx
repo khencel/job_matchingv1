@@ -50,6 +50,12 @@ const JobCard = ({ job, onClick, className }: JobCardProps) => {
     >
       <div className="card-body d-flex flex-column gap-3">
         <div className="d-flex flex-column gap-1">
+          <img 
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop" 
+              className="card-img-top" 
+              alt="Person working on laptop"
+              style={{ height: '250px', objectFit: 'cover' }}
+          />
           <h2 className="h5 fw-semibold mb-0 text-truncate" title={job.title}>
             {job.title}
           </h2>
