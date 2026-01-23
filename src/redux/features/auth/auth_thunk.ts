@@ -77,7 +77,13 @@ export const loginUser = createAsyncThunk<
     });
     // 1 hour expiry for access token
     Cookies.set("access", res.data.access, {
-      expires: 1 / 24,
+      expires: 7,
+      secure: true,
+      sameSite: "strict",
+    });
+
+    Cookies.set("user_id", res.data.user.id.toString(), {
+      expires: 7,
       secure: true,
       sameSite: "strict",
     });

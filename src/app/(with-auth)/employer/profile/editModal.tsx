@@ -76,17 +76,24 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
     }
 
     const handleSave = () => {
-        const details = {
-            companyName,
-            companyProfileText,
-            founded,
-            employees,
-            region,
-            industry
+        
+        const updatedEmployerDetails = {
+            ...companyProfile.userDetails_emp.company_information, // kopya ng lahat
+            name: companyName,
+            profile: companyProfileText,
+            founded: founded,
+            no_of_emp: employees,
+            region: region,
+            company_industry: industry
         };
 
+        const userDetails_emp = {
+            ...companyProfile.userDetails_emp,
+            company_information: updatedEmployerDetails
+        }
+
         const payload: any = {
-            details,
+            userDetails_emp,
             user_id: Number(Cookies.get("user_id")),
         };
 
@@ -98,7 +105,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
         if (bannerFile instanceof File) {
             payload.banner = bannerFile;
         }
-
+      
         dispatch(updateProfile(payload))
             .unwrap()
             .then(() => {

@@ -3,7 +3,7 @@ import { standard_get_api, standard_update_api } from "@/redux/features/api/api_
 
 
 interface UpdateProfilePayload{
-    details:any;
+    userDetails_emp:any;
     avatar: File | null;
     banner: File | null;
     user_id: number;
@@ -27,7 +27,7 @@ export const updateProfile = createAsyncThunk(
         try {
             const formData = new FormData();
 
-            formData.append("details", JSON.stringify(payload.details));
+            formData.append("details", JSON.stringify(payload.userDetails_emp));
             if (payload.avatar instanceof File) {
                 formData.append("avatar", payload.avatar);
             }

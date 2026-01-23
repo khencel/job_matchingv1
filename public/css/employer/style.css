@@ -99,3 +99,7 @@
 .no-caret::after {
     display: none !important;
 }
+
+.download-border-applicant{
+  border-color: #a7c1de !important;
+}

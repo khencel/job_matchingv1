@@ -8,7 +8,7 @@ export default function Body({data}:{data:any}){
                         <p
                             className="first-indent lh-lg text-secondary"
                             dangerouslySetInnerHTML={{
-                                __html: data.userDetails_emp.company_information.profile,
+                                __html: data.userDetails_emp?.company_information?.profile,
                             }}
                         />
 

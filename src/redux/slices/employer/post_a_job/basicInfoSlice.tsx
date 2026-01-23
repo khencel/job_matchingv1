@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { createJobPost } from "@/redux/features/job_post/job_post_thunk";
+import { createJobPost, updateJobPost } from "@/redux/features/job_post/job_post_thunk";
+import Cookies from "js-cookie";
 
 export interface Benefit {
   id: string;
@@ -24,7 +25,7 @@ export interface PostBasicInfoState {
 
 const initialState: PostBasicInfoState = {
     user_id: typeof window !== "undefined"
-    ? localStorage.getItem("user_id")
+    ? Cookies.get("user_id") || null
     : null,
     title: "",
     salary: null,
@@ -38,6 +39,19 @@ const initialState: PostBasicInfoState = {
     status: "idle",
     benefits:[]
 };
+
+export interface UpdateJobPostPayload {
+  id: number;
+  title: string;
+  salary: number | null;
+  type_of_emp: string[];
+  category?: { value: string; label: string }[];
+  job_desc?: string;
+  responsibility?: string;
+  who_you_are?: string;
+  nice_to_have?: string;
+  skill: string[];
+}
 
 
 
@@ -79,6 +93,13 @@ const basicInfoSlice = createSlice({
         .addCase(createJobPost.pending, state => { state.status = "loading"} )
         .addCase(createJobPost.fulfilled, state => { state.status = "succeeded"} )
         .addCase(createJobPost.rejected, state => { state.status = "failed"} )
+
+      builder
+        .addCase(updateJobPost.pending, state => { state.status = "loading"} )
+        .addCase(updateJobPost.fulfilled, state => {
+          state.status = "succeeded";
+        })
+        .addCase(updateJobPost.rejected, state => { state.status = "failed"} )
     }
 });
 

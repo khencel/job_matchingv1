@@ -16,6 +16,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { popup } from "@/helper/pop_up";
 import { showSuccessToast } from "@/app/(util)/toaster";
 import EditModal from "./edit_modal";
+import Cookies from "js-cookie";
 
 
 
@@ -51,7 +52,7 @@ export default function PerksBenefitsPage(){
     }
 
     const getPerks = () => {
-        const user_id = typeof window !== "undefined" ? localStorage.getItem("user_id"): null;
+        const user_id = typeof window !== "undefined" ? Cookies.get("user_id"): null;
         if(user_id){
             dispatch(indexPerksBenefits(Number(user_id)));
         }

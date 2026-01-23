@@ -10,10 +10,19 @@ import type { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setPageSize, setPage } from "@/redux/slices/applicants/applicantSlice";
+import FormattedDate from "@/components/date_format";
+import { useState } from "react";
+import ViewEmployer from "./viewEmployer";
+import ViewApplicant from "./viewApplicant";
 
 export default function AdminApplicants() {
     const dispatch = useAppDispatch();
     const {items, status, error, next, previous, currentPage, pageSize, count}= useSelector((state: RootState) => state.applicants);
+    const [showEmployer, setShowEmployer] = useState(false);
+    const [showApplicant, setShowApplicant] = useState(false);
+
+    const [selectedEmployer, setSelectedEmployer] = useState<any>(null);
+    const [selectedApplicant, setSelectedApplicant] = useState<any>(null);
 
     const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
             dispatch(setPageSize(Number(e.target.value)));
@@ -23,6 +32,17 @@ export default function AdminApplicants() {
         };
 
     const totalPages = Math.ceil(count / pageSize);
+
+
+    const handleViewEmployer = (data: any) => {
+        setShowEmployer(true);
+        setSelectedEmployer(data);
+    }
+    
+    const handleViewApplicant = (data: any) => {
+        setShowApplicant(true);
+        setSelectedApplicant(data);
+    }
 
     useEffect(() => {
         dispatch(fetchApplicants({page: currentPage, pageSize}));
@@ -58,7 +78,7 @@ export default function AdminApplicants() {
                                     <th className="text-start p-2">Full Name</th>
                                     <th className="text-start p-2">Hiring Stage</th>
                                     <th className="text-start p-2">Joined</th>
-                                    <th className="text-start p-2">Role</th>
+                                    <th className="text-start p-2">Job Role</th>
                                     <th className="text-start p-2">Employer</th>
                                     <th className="text-start p-2">Action</th>
                                 </tr>
@@ -69,11 +89,37 @@ export default function AdminApplicants() {
                                         return (
                                             <tr key={index}>
                                                 <td className="text-start p-2 text-capitalize">{item.user.userDetails.firstName} {item.user.userDetails.lastName}</td>
-                                                <td className="text-start p-2">john.doe@example.com</td>
-                                                <td className="text-start p-2">Job Seeker</td>
-                                                <td className="text-start p-2">Active</td>
-                                                <td className="text-start p-2">2024-01-15</td>
-                                                <td className="text-start p-2"><HiDotsHorizontal /></td>
+                                                <td className="text-start p-2"><span className="badge bg-default text-dark border border-dark">Pending</span></td>
+                                                <td className="text-start p-2"><FormattedDate date={item.created_at} /></td>
+                                                <td className="text-start p-2">{item.job_post.jopPostDetails.title}</td>
+                                                <td className="text-start p-2">{item.job_post.employerDetails.userDetails_emp.company_information.name}</td>
+                                                <td className="text-start p-2">
+                                                    <div className="dropdown">
+                                                        <button
+                                                        className="btn btn-sm btn-light"
+                                                        type="button"
+                                                        data-bs-toggle="dropdown"
+                                                        aria-expanded="false"
+                                                        >
+                                                        <HiDotsHorizontal />
+                                                        </button>
+
+                                                        <ul className="dropdown-menu dropdown-menu-end">
+                                                            <li>
+                                                                <button className="dropdown-item" onClick={() => handleViewEmployer(item)}>View Employer</button>
+                                                            </li>
+                                                            <li>
+                                                                <button className="dropdown-item" onClick={() => handleViewApplicant(item)}>View Applicant</button>
+                                                            </li>
+                                                            <li>
+                                                                <button className="dropdown-item text-success">Approved</button>
+                                                            </li>
+                                                            <li>
+                                                                <button className="dropdown-item text-danger">Reject</button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         )
                                     })
@@ -142,6 +188,17 @@ export default function AdminApplicants() {
                     </ul>
                 </nav>
             </div>
+            <ViewEmployer 
+                showModalEdit={showEmployer} 
+                closeModalEdit={() => setShowEmployer(false)} 
+                data={selectedEmployer} 
+            />
+
+            <ViewApplicant 
+                handleShow={showApplicant} 
+                handleClose={() => setShowApplicant(false)} 
+                data={selectedApplicant} 
+            />  
         </>
     );
 }

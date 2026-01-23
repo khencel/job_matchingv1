@@ -7,43 +7,112 @@ import TextEditor from '../post_a_job/job-description/TextEditor';
 import AddSkill from '../add_skill';
 import { useAppDispatch } from '@/redux/hooks';
 import { setField } from '@/redux/slices/employer/post_a_job/basicInfoSlice';
+import { updateJobPost } from '@/redux/features/job_post/job_post_thunk';
+import { listJobPost } from '@/redux/features/job_post/job_post_thunk';
+import type { RootState } from "@/redux/store";
+import { useSelector } from 'react-redux';
+import { popup } from '@/helper/pop_up';
+import { showSuccessToast } from '@/app/(util)/toaster';
 
 interface EditModalProps {
     handleShow: boolean;
     handleClose: () => void;
+    currentPage: number;
     data: any;
 }
 
 
-export default function Editmodal({handleShow, handleClose, data}: EditModalProps){
+export default function Editmodal({handleShow, handleClose, data, currentPage}: EditModalProps){
+
+    const basicInfo = useSelector((state: RootState) => state.basicInfo);
+
+
     const dispatch = useAppDispatch();
     const [formData, setFormData] = useState({
-        title:"",
-        salary:"",
+        id: null as number | null,
+        title: "",
+        salary: "",
         type_of_emp: [] as string[],
-        category:"",
-        job_desc:"",
-        responsibilities:"",
-        who_you_are:"",
-        nice_to_have:"",
+        category: [] as { value: string; label: string }[],
+        job_desc: "",
+        responsibilities: "",
+        who_you_are: "",
+        nice_to_have: "",
         skill: [] as string[]
     })
+
+    const handleUpdate = async () => {
+        popup({
+            title: 'Are you sure?',
+            text: 'Do you want to update this job post?',
+            icon: 'warning',
+            onConfirm: () => {
+                updatePostJob()
+            }
+        })
+    };
+
+    const updatePostJob = async () => {
+        if (!formData.id) return;
+        const skillFromRedux = basicInfo.skill;
+        await dispatch(updateJobPost({
+            id: formData.id,
+            title: formData.title,
+            salary: Number(formData.salary),
+            type_of_emp: formData.type_of_emp,
+            category: formData.category,
+            job_desc: formData.job_desc,
+            responsibility: formData.responsibilities,
+            who_you_are: formData.who_you_are,
+            nice_to_have: formData.nice_to_have,
+            skill: formData.skill
+        })).unwrap();
+
+        const updatedList: any = await dispatch(listJobPost({
+            userId: Number(data.user_id),
+            page: currentPage,
+            pageSize: 10
+        })).unwrap();
+
+        const updatedJob = updatedList.results.find((job: any) => job.id === formData.id);
+
+        if (updatedJob) {
+            setFormData({
+                id: updatedJob.id,
+                title: updatedJob.title || "",
+                salary: updatedJob.salary || "",
+                type_of_emp: updatedJob.type_of_emp || [],
+                category: updatedJob.category || [],
+                job_desc: updatedJob.job_desc || "",
+                responsibilities: updatedJob.responsibility || "",
+                who_you_are: updatedJob.who_you_are || "",
+                nice_to_have: updatedJob.nice_to_have || "",
+                skill: skillFromRedux || []
+            });
+        }
+        showSuccessToast('Success', 'Job post updated successfully')
+        handleClose();
+    };
+
+
 
     useEffect(() => {
         if(data){
             setFormData({
-                title:data.title || "",
-                salary:data.salary || "",
-                type_of_emp:data.type_of_emp || [],
-                category:data.category || [],
-                job_desc:data.job_desc || "",
-                responsibilities:data.responsibility || "",
-                who_you_are:data.who_you_are || "",
-                nice_to_have:data.nice_to_have || "",
-                skill:data.skill || []
+                id: data.id,
+                title: data.title || "",
+                salary: data.salary || "",
+                type_of_emp: data.type_of_emp || [],
+                category: data.category || [],
+                job_desc: data.job_desc || "",
+                responsibilities: data.responsibility || "",
+                who_you_are: data.who_you_are || "",
+                nice_to_have: data.nice_to_have || "",
+                skill: data.skill || []
             })
 
             dispatch(setField({
+                type_of_emp: data.type_of_emp || [],
                 skill: data.skill || [],
             }))
         }
@@ -54,7 +123,7 @@ export default function Editmodal({handleShow, handleClose, data}: EditModalProp
       aria-labelledby="contained-modal-title-vcenter"
       centered show={handleShow} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>Edit Job Post</Modal.Title>
             </Modal.Header>
             <Modal.Body className='p-0'>
                 <div className="emp-component-style mt-2">
@@ -97,12 +166,14 @@ export default function Editmodal({handleShow, handleClose, data}: EditModalProp
                                         checked={formData.type_of_emp.includes(type)}
                                         onChange={(e) => {
                                             const updated = e.target.checked
-                                                ? [...formData.type_of_emp, type]
-                                                : formData.type_of_emp.filter(t => t !== type);
+                                            ? [...formData.type_of_emp, type]
+                                            : formData.type_of_emp.filter(t => t !== type);
 
                                             setFormData({ ...formData, type_of_emp: updated });
+                                            dispatch(setField({ type_of_emp: updated }));
                                         }}
-                                    />
+                                        />
+
                                     {" "}{type}
                                 </div>
                             ))}
@@ -119,7 +190,7 @@ export default function Editmodal({handleShow, handleClose, data}: EditModalProp
                         <div className="col">
                             <MultiSelectDropdown
                                 value={formData.category}
-                                onChange={(value: string) =>
+                                onChange={(value: { value: string; label: string }[]) =>
                                     setFormData({ ...formData, category: value })
                                 }
                             />
@@ -133,7 +204,12 @@ export default function Editmodal({handleShow, handleClose, data}: EditModalProp
                             <small>Add required skills for the job</small>
                         </div>
                         <div className="col">
-                            <AddSkill />
+                            
+                            <AddSkill
+                                skills={formData.skill}
+                                onAddSkill={(newSkill) => setFormData({...formData, skill: [...formData.skill, newSkill]})}
+                                onRemoveSkill={(skillToRemove) => setFormData({...formData, skill: formData.skill.filter(s => s !== skillToRemove)})}
+                            />
 
                         </div>
                     </div>
@@ -192,7 +268,7 @@ export default function Editmodal({handleShow, handleClose, data}: EditModalProp
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={handleClose}>
+                <Button variant="primary" onClick={handleUpdate}>
                     Save Changes
                 </Button>
             </Modal.Footer>

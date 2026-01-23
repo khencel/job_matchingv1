@@ -14,6 +14,7 @@ import { setPage, setPageSize } from "@/redux/slices/employer/post_a_job/JobList
 import { popup } from "@/helper/pop_up";
 import Editmodal from "./edit_modal";
 import Cookies from "js-cookie";
+import { showSuccessToast } from "@/app/(util)/toaster";
 
 
 
@@ -61,7 +62,7 @@ export default function JobListing() {
         confirmText: 'yes, Delete it!',
         icon:"warning",
         onConfirm: () => {
-            btnDelete(id)
+                btnDelete(id)
             }
         })
     }
@@ -71,6 +72,7 @@ export default function JobListing() {
         if (!userId) return;
         await dispatch(deleteJobPost(id));
         dispatch(listJobPost({ userId, page: currentPage, pageSize }));
+        showSuccessToast("Success", "Job post deleted successfully");
     }
 
 
@@ -232,6 +234,7 @@ export default function JobListing() {
                 handleShow={showModal}
                 handleClose={handleClose}
                 data={selectedData}
+                currentPage={currentPage}
             />
         </>
     );
