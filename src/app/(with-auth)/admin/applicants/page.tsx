@@ -43,7 +43,8 @@ export default function AdminApplicants() {
         setShowApplicant(true);
         setSelectedApplicant(data);
     }
-
+    console.log(items);
+    
     useEffect(() => {
         dispatch(fetchApplicants({page: currentPage, pageSize}));
     }, [dispatch]);
@@ -91,7 +92,7 @@ export default function AdminApplicants() {
                                                 <td className="text-start p-2 text-capitalize">{item.user.userDetails.firstName} {item.user.userDetails.lastName}</td>
                                                 <td className="text-start p-2"><span className="badge bg-default text-dark border border-dark">Pending</span></td>
                                                 <td className="text-start p-2"><FormattedDate date={item.created_at} /></td>
-                                                <td className="text-start p-2">{item.job_post.jopPostDetails.title}</td>
+                                                <td className="text-start p-2">{item.job_post.jobPostDetails?.title}</td>
                                                 <td className="text-start p-2">{item.job_post.employerDetails.userDetails_emp.company_information.name}</td>
                                                 <td className="text-start p-2">
                                                     <div className="dropdown">

@@ -11,12 +11,14 @@ interface ViewEmployerProps {
 
 export default function ViewEmployer({showModalEdit, closeModalEdit, data}: ViewEmployerProps) {
     data = data || {};
+    console.log(data);
+    
     const company_name = data?.job_post?.employerDetails?.userDetails_emp?.company_information?.name || 'Employer Details';
     const logo = data?.job_post?.employerDetails?.avatar || '';
     const profile = data?.job_post?.employerDetails?.userDetails_emp?.company_information?.profile || '';
 
     // Job Post 
-    const job_posts = data?.job_post?.jopPostDetails || [];
+    const job_posts = data?.job_post?.jobPostDetails || [];
     const description = job_posts.job_desc || '';
     const responsibilities = job_posts.responsibility || '';
     const nice_to_have = job_posts.nice_to_have || '';

@@ -12,7 +12,7 @@ import { RootState } from "@/redux/store";
 import { User } from "@/types/user-register";
 import { forceLogout, LoginResponse } from "@/redux/slices/login/authSlice";
 
-interface GetUserResponse {
+export interface GetUserResponse {
   message: string;
   user: User;
 }
@@ -26,10 +26,7 @@ export const fetchCurrentUser = createAsyncThunk<
   try {
     // AUTOMATIC: Your Axios Interceptor attaches the Bearer token here.
     const res = await getCurrentUserApi();
-    console.log(
-      "Fetch current user:",
-      res.data.user.userDetails_job_seeker.jobSeekerData,
-    );
+    console.log("Fetch current user:", res.data);
     return res.data;
   } catch (error) {
     if (error instanceof AxiosError) {
@@ -59,7 +56,7 @@ export const loginUser = createAsyncThunk<
   LoginResponse,
   LoginPayload,
   { rejectValue: string }
->("auth/loginUser", async (arg, { rejectWithValue }) => {
+>("auth/loginUser", async (arg, { dispatch, rejectWithValue }) => {
   const email = arg.email;
   const password = arg.password;
 
@@ -87,7 +84,7 @@ export const loginUser = createAsyncThunk<
       secure: true,
       sameSite: "strict",
     });
-
+    dispatch(fetchCurrentUser());
     return res.data;
   } catch (error) {
     // Handle Axios errors
