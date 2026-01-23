@@ -117,11 +117,11 @@ export const logoutUser = createAsyncThunk<void, void, { rejectValue: string }>(
 
     try {
       await logoutApi(refreshToken);
-      dispatch(forceLogout());
       return;
     } catch (error) {
       console.log("Force logout due to error:", error);
     } finally {
+      dispatch(forceLogout());
       localStorage.clear();
       Cookies.remove("access");
       Cookies.remove("refreshToken");
