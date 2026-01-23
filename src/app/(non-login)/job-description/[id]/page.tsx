@@ -20,7 +20,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useParams, useRouter } from "next/navigation";
 import { formatDate } from "@/helper/formatDate";
-import { showErrorToast } from "@/app/(util)/toaster";
+import { showErrorToast, showSuccessToast } from "@/app/(util)/toaster";
 
 const JobDescriptionPage = () => {
   const t = useTranslations("jobDescriptionPage");
@@ -73,13 +73,17 @@ const JobDescriptionPage = () => {
     }
     try {
       dispatch(applyToJob({ user: userId, job_post: jobDetails.id }));
+      showSuccessToast(
+        "Application Successful",
+        "You have successfully applied to the job.",
+      );
     } catch (error) {
       showErrorToast("Error applying to job", "Please try again later.");
       console.log("Error applying", error);
     }
   };
 
-  const isApplied = true; // Placeholder: Replace with actual logic to check if the user has applied
+  const isApplied = false; // Placeholder: Replace with actual logic to check if the user has applied
 
   return (
     <div>
