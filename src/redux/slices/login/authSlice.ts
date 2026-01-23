@@ -1,4 +1,8 @@
-import { fetchCurrentUser, loginUser } from "@/redux/features/auth/auth_thunk";
+import {
+  fetchCurrentUser,
+  GetUserResponse,
+  loginUser,
+} from "@/redux/features/auth/auth_thunk";
 import { User } from "@/types/user-register";
 import { createSlice, PayloadAction, SerializedError } from "@reduxjs/toolkit";
 
@@ -61,11 +65,14 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.user = action.payload.user;
-        state.isInitialized = true;
-      })
+      .addCase(
+        fetchCurrentUser.fulfilled,
+        (state, action: PayloadAction<GetUserResponse>) => {
+          state.loading = false;
+          state.user = action.payload.user;
+          state.isInitialized = true;
+        },
+      )
       .addCase(fetchCurrentUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload
