@@ -14,6 +14,9 @@ import FormattedDate from "@/components/date_format";
 import { useState } from "react";
 import ViewEmployer from "./viewEmployer";
 import ViewApplicant from "./viewApplicant";
+import { popup } from "@/helper/pop_up";
+import { updateStatus } from "@/redux/slices/applicants/applicantThunk";
+import { showSuccessToast } from "@/app/(util)/toaster";
 
 export default function AdminApplicants() {
     const dispatch = useAppDispatch();
@@ -43,6 +46,32 @@ export default function AdminApplicants() {
         setShowApplicant(true);
         setSelectedApplicant(data);
     }
+
+    const handleChangeStatus = (id:number,status: string) => {
+        const payload = {
+            id,
+            status
+        }
+        popup({
+            title: "Are you sure?",
+            text: "Change status for this applicant?",
+            confirmText: "Yes",
+            icon: "warning",
+            onConfirm: () => {
+                dispatch(updateStatus(payload))
+                .unwrap()
+                .then(() => {
+                    dispatch(fetchApplicants({ page: currentPage, pageSize }));
+                    showSuccessToast('Change status','Status has been change')
+                })
+                .catch((err) => {
+                    console.error("Failed to update status:", err);
+                })
+            },
+        });
+    }
+
+    
     console.log(items);
     
     useEffect(() => {
@@ -63,9 +92,9 @@ export default function AdminApplicants() {
                 <div className="col">
                     <strong>Users List ({count} total)</strong>
                 </div>
-                <div className="col-2 text-end">
+                {/* <div className="col-2 text-end">
                     <FaSearch className="text-primary" /> Search Users
-                </div>
+                </div> */}
                 <div className="col-2 text-end">
                     <FaSliders className="text-primary" /> Filter
                 </div>
@@ -90,7 +119,7 @@ export default function AdminApplicants() {
                                         return (
                                             <tr key={index}>
                                                 <td className="text-start p-2 text-capitalize">{item.user.userDetails.firstName} {item.user.userDetails.lastName}</td>
-                                                <td className="text-start p-2"><span className="badge bg-default text-dark border border-dark">Pending</span></td>
+                                                <td className="text-start p-2"><span className={`badge bg-default border border-dark ${item?.status == 'approved'?'bg-success':'bg-danger'}`}>{item.status || 'pending'}</span></td>
                                                 <td className="text-start p-2"><FormattedDate date={item.created_at} /></td>
                                                 <td className="text-start p-2">{item.job_post.jobPostDetails?.title}</td>
                                                 <td className="text-start p-2">{item.job_post.employerDetails.userDetails_emp.company_information.name}</td>
@@ -113,10 +142,10 @@ export default function AdminApplicants() {
                                                                 <button className="dropdown-item" onClick={() => handleViewApplicant(item)}>View Applicant</button>
                                                             </li>
                                                             <li>
-                                                                <button className="dropdown-item text-success">Approved</button>
+                                                                <button className="dropdown-item text-success" onClick={() => handleChangeStatus(item.id,"approved")}>Approved</button>
                                                             </li>
                                                             <li>
-                                                                <button className="dropdown-item text-danger">Reject</button>
+                                                                <button className="dropdown-item text-danger" onClick={() => handleChangeStatus(item.id, "rejected")}>Reject</button>
                                                             </li>
                                                         </ul>
                                                     </div>

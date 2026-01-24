@@ -41,8 +41,8 @@ export default function ViewEmployer({showModalEdit, closeModalEdit, data}: View
                     <div className="col-md-6">
                         <strong>About Company</strong> 
                         <br />
-                        <div>
-                            <img src={`http://127.0.0.1:8000${logo}`} className='img-fluid' alt="" />
+                        <div className='mb-5 text-center'>
+                            <img src={`http://127.0.0.1:8000${logo}`} style={{width:"50%"}}  alt="" />
                         </div>
                         <div>
                             Company Profile

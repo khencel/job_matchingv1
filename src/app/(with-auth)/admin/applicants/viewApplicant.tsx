@@ -1,7 +1,12 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { AddButton } from '@/components/Button';
-import { FaFileAlt, FaDownload  } from "react-icons/fa";
+import { FaFileAlt, FaDownload, FaBirthdayCake, FaMapMarkedAlt, FaLocationArrow, FaEnvelope, FaFacebook  } from "react-icons/fa";
+import FormattedDate from '@/components/date_format';
+import { FiLayers } from "react-icons/fi";
+import { BsGenderAmbiguous } from "react-icons/bs";
+import { GiGraduateCap } from "react-icons/gi";
+import { BsFillTelephoneFill } from "react-icons/bs";
 
 interface ViewApplicantProps {
     handleShow: boolean;
@@ -12,6 +17,7 @@ interface ViewApplicantProps {
 export default function ViewApplicant({handleShow, handleClose, data}: ViewApplicantProps){
     
     const userdata = data?.user?.userDetails;
+    console.log(data);
     
     return (
         <Modal 
@@ -25,12 +31,12 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
             <Modal.Body>
                 <div className="row">
                     <div className="col-2 p-3">
-                        <div className='applicant_avatar text-center' style={{backgroundImage:`url('http://127.0.0.1:8000${userdata?.avatar}')`,width: '100px', height: '100px', backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '50%', margin: '0 auto'   }}>
+                        <div className='applicant_avatar text-center' style={{backgroundImage:`url('http://127.0.0.1:8000${userdata?.avatar || '/media/avatar/avatardefault.png'}')`,width: '100px', height: '100px', backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '50%', margin: '0 auto'   }}>
                            
                         </div>
                     </div>
                     <div className="col-10 p-3">
-                        <h5><strong className='text-capitalize'>{userdata?.first_name} {userdata?.last_name}</strong></h5>
+                        <h5><strong className='text-capitalize'>{userdata?.firstName} {userdata?.lastName}</strong></h5>
                         <small>Software Engineer</small>
                     </div>
                 </div>
@@ -57,63 +63,63 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                         <div className="row standar-div">
                             <div className="col-6">
                                 <div>
-                                    logo
+                                    <FaBirthdayCake className='text-primary' />
                                     <small>
                                         <br />
                                         DATE OF BIRTH
                                         <br />
-                                        <strong>November 11, 1990</strong>
+                                        <strong><FormattedDate date={userdata?.birthdate} /></strong>
                                     </small>
                                 </div>
 
                                 <div className='mt-4'>
-                                    logo
+                                    <FaFileAlt  className='text-primary' />
                                     <small>
                                         <br />
                                         VISA STATUS
                                         <br />
-                                        <strong>November 11, 1990</strong>
+                                        <strong>{userdata?.visaStatus}</strong>
                                     </small>
                                 </div>
 
                                 <div className='mt-4'>
-                                    logo
+                                    <FiLayers  className='text-primary' />
                                     <small>
                                         <br />
                                         JAPANESE LANGUAGE LEVEL
                                         <br />
-                                        <strong>November 11, 1990</strong>
+                                        <strong>{userdata?.japaneseLevel}</strong>
                                     </small>
                                 </div>
                             </div>
                             <div className="col-6">
                                 <div>
-                                    logo
+                                    <FaMapMarkedAlt   className='text-primary' />
                                     <small>
                                         <br />
                                         NATIONALITY
                                         <br />
-                                        <strong>November 11, 1990</strong>
+                                        <strong>{userdata?.nationality}</strong>
                                     </small>
                                 </div>
 
                                 <div className='mt-4'>
-                                    logo
+                                    <BsGenderAmbiguous  className='text-primary' />
                                     <small>
                                         <br />
                                         GENDER
                                         <br />
-                                        <strong>November 11, 1990</strong>
+                                        <strong>{userdata?.gender}</strong>
                                     </small>
                                 </div>
 
                                 <div className='mt-4'>
-                                    logo
+                                    <GiGraduateCap  className='text-primary' />
                                     <small>
                                         <br />
                                         VOCATIONAL MAJOR
                                         <br />
-                                        <strong>November 11, 1990</strong>
+                                        <strong>{userdata?.highestEducation}</strong>
                                     </small>
                                 </div>
                             </div>
@@ -150,56 +156,56 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                 <br />
                                 <div className='row mt-3'>
                                     <div className="col-2 text-center">
-                                        <FaFileAlt style={{fontSize:"50px"}} />
+                                        <FaLocationArrow className='text-primary' style={{fontSize:"25px"}} />
                                     </div>
                                     <div className="col-9">
                                         <small>
                                             Location
                                             <br />
                                             <strong>
-                                                Calibuyo, Tanza Cavite
+                                                {userdata?.currentPlaceResidence}
                                             </strong>
                                         </small>
                                     </div>
                                 </div>
                                 <div className='row mt-3'>
                                     <div className="col-2 text-center">
-                                        <FaFileAlt style={{fontSize:"50px"}} />
+                                        <BsFillTelephoneFill className='text-primary'   style={{fontSize:"25px"}} />
                                     </div>
                                     <div className="col-9">
                                         <small>
-                                            Location
+                                            TELEPHONE
                                             <br />
                                             <strong>
-                                                Calibuyo, Tanza Cavite
+                                                {userdata?.contactNo}
                                             </strong>
                                         </small>
                                     </div>
                                 </div>
                                 <div className='row mt-3'>
                                     <div className="col-2 text-center">
-                                        <FaFileAlt style={{fontSize:"50px"}} />
+                                        <FaEnvelope className='text-primary' style={{fontSize:"25px"}} />
                                     </div>
                                     <div className="col-9">
                                         <small>
-                                            Location
+                                            EMAIL ADDRESS
                                             <br />
                                             <strong>
-                                                Calibuyo, Tanza Cavite
+                                                {data?.user?.email || "No email"}
                                             </strong>
                                         </small>
                                     </div>
                                 </div>
                                 <div className='row mt-3'>
                                     <div className="col-2 text-center">
-                                        <FaFileAlt style={{fontSize:"50px"}} />
+                                        <FaFacebook className='text-primary'  style={{fontSize:"25px"}} />
                                     </div>
                                     <div className="col-9">
                                         <small>
-                                            Location
+                                            FACEBOOK
                                             <br />
                                             <strong>
-                                                Calibuyo, Tanza Cavite
+                                                {userdata?.facebook || "No facebook"}
                                             </strong>
                                         </small>
                                     </div>
