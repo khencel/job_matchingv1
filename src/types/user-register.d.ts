@@ -19,7 +19,7 @@ export interface User {
   first_name: string;
   last_name: string;
   is_email_verified: boolean;
-  role: "job_seeker" | "employer" | "admin" | "super_visory";
+  role: "job_seeker" | "employer" | "admin" | "supervisory";
   avatar?: string | null; // Optional (From GetUser)
   banner?: string | null; // Optional (From GetUser)
 

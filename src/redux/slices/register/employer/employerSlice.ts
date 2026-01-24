@@ -7,7 +7,7 @@ import {
   RegisterEmployerStep4Data,
 } from "@/types/employer";
 import { RegistrationStep1 } from "@/types/user-register";
-import { isEmailExistThunk, registerThunk } from "../registerThunk";
+import { registerThunk } from "../registerThunk";
 
 const initialState: RegisterEmployer = {
   currentStep: 1,
@@ -112,20 +112,6 @@ export const registerEmployerSlice = createSlice({
         state.currentStep = 1;
       })
       .addCase(registerThunk.rejected, (state) => {
-        state.isError = true;
-        state.isLoading = false;
-      });
-    // check email if existing
-    builder
-      .addCase(isEmailExistThunk.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
-      .addCase(isEmailExistThunk.fulfilled, (state) => {
-        state.isError = false;
-        state.isLoading = false;
-      })
-      .addCase(isEmailExistThunk.rejected, (state) => {
         state.isError = true;
         state.isLoading = false;
       });

@@ -1,12 +1,9 @@
 "use client";
 import {
-  BellIcon,
-  Building2Icon,
-  ContactIcon,
   FileUserIcon,
   LayersIcon,
   MenuIcon,
-  SettingsIcon,
+  UserCircle2Icon,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -24,11 +21,8 @@ export default function JobSeekerLayout({
   // Determine active key based on pathname
   const getActiveKey = () => {
     if (pathname.includes("/overview")) return "overview";
-    if (pathname.includes("/trainees")) return "trainees";
-    if (pathname.includes("/notifications")) return "notifications";
-    if (pathname.includes("/settings")) return "settings";
-    if (pathname.includes("/company-profile")) return "company-profile";
-    if (pathname.includes("/contact-person")) return "contact-person";
+    if (pathname.includes("/applicants")) return "applicants";
+    if (pathname.includes("/profile")) return "profile";
   };
 
   const handleCollapse = () => {
@@ -88,33 +82,15 @@ const SideBarNavItems: SideBarNavItem[] = [
     label: "Overview",
   },
   {
-    eventKey: "trainees",
-    href: "/super-visory/trainees",
+    eventKey: "applicants",
+    href: "/super-visory/applicants",
     icon: <FileUserIcon />,
-    label: "Trainees",
+    label: "Applicants",
   },
   {
-    eventKey: "notifications",
-    href: "/super-visory/notifications",
-    icon: <BellIcon />,
-    label: "Notifications",
-  },
-  {
-    eventKey: "company-profile",
-    href: "/super-visory/company-profile",
-    icon: <Building2Icon />,
-    label: "Company Profile",
-  },
-  {
-    eventKey: "contact-person",
-    href: "/super-visory/contact-person",
-    icon: <ContactIcon />,
-    label: "Contact Person",
-  },
-  {
-    eventKey: "settings",
-    href: "/super-visory/settings",
-    icon: <SettingsIcon />,
-    label: "Account Settings",
+    eventKey: "profile",
+    href: "/super-visory/profile",
+    icon: <UserCircle2Icon />,
+    label: "Profile",
   },
 ];

@@ -28,17 +28,23 @@ import { updateProfileThunk } from "@/redux/slices/updateProfile/updataProfileTh
 import { setJobSeekerField } from "@/redux/slices/updateProfile/updateProfileSlice";
 import { FaFacebook } from "react-icons/fa";
 import { isPhoneNumberValid } from "@/helper/validations";
+import { RegisterJobSeekerData } from "@/types/job-seeker";
 
 const EditJobSeeker = () => {
   const dispatch = useAppDispatch();
   // Read-only source
-  const user = useAppSelector((s) => s.authState.user?.userDetails_job_seeker);
+  const AuthUser = useAppSelector(
+    (s) => s.authState.user?.userDetails_job_seeker,
+  );
+  const avatar = useAppSelector((s) => s.authState.user?.avatar);
   // Editable source
   const updateUser = useAppSelector((s) => s.updateProfile.details);
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
-  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(
+    avatar || null,
+  );
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -112,10 +118,20 @@ const EditJobSeeker = () => {
       return;
     }
 
+    const finalUpdatedUser: RegisterJobSeekerData = {
+      accountInfo: {
+        ...AuthUser.accountInfo,
+      },
+      termsAndConditions: {
+        ...AuthUser.termsAndConditions,
+      },
+      ...updateUser,
+    };
+
     try {
       await dispatch(
         updateProfileThunk({
-          details: updateUser,
+          details: finalUpdatedUser,
           avatar: avatarFile,
           banner: null,
         }),
@@ -134,7 +150,7 @@ const EditJobSeeker = () => {
       return updateUser.jobSeekerData[field] || "";
     }
     // @ts-expect-ignore
-    return user?.jobSeekerData?.[field] || "N/A";
+    return AuthUser?.jobSeekerData?.[field] || "N/A";
   };
 
   return (
@@ -162,9 +178,9 @@ const EditJobSeeker = () => {
                       fill
                       style={{ objectFit: "cover" }}
                     />
-                  ) : user?.idURL ? (
+                  ) : avatar ? (
                     <Image
-                      src={user.idURL}
+                      src={avatar}
                       alt="User"
                       fill
                       style={{ objectFit: "cover" }}
@@ -207,7 +223,7 @@ const EditJobSeeker = () => {
                     <div className="d-flex align-items-center gap-1">
                       <Mail size={16} />
                       <span className="small">
-                        {user?.accountInfo?.email || "No Email"}
+                        {AuthUser?.accountInfo?.email || "No Email"}
                       </span>
                     </div>
                     <div className="d-flex align-items-center gap-1">
@@ -567,7 +583,7 @@ const EditJobSeeker = () => {
                       />
                     ) : (
                       <a
-                        href="#"
+                        href={getValue("facebook")}
                         className="text-decoration-none text-truncate d-block"
                         style={{ maxWidth: "200px" }}
                       >

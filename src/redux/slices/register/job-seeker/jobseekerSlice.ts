@@ -6,7 +6,7 @@ import {
   RegisterJobSeekerStep4Data,
 } from "@/types/job-seeker";
 import { RegistrationStep1 } from "@/types/user-register";
-import { isEmailExistThunk, registerThunk } from "../registerThunk";
+import { registerThunk } from "../registerThunk";
 
 const initialState: RegisterJobSeeker = {
   currentStep: 1,
@@ -97,21 +97,6 @@ export const registerJobSeekerSlice = createSlice({
         state.isLoading = false;
         state.registerJobSeekerData = initialState.registerJobSeekerData;
         state.currentStep = 1;
-      },
-      rejected: (state) => {
-        state.isError = true;
-        state.isLoading = false;
-      },
-    });
-    // check email if existing
-    builder.addAsyncThunk(isEmailExistThunk, {
-      pending: (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      },
-      fulfilled: (state) => {
-        state.isError = false;
-        state.isLoading = false;
       },
       rejected: (state) => {
         state.isError = true;
