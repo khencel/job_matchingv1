@@ -12,6 +12,7 @@ import applicantReducer from "./slices/applicants/applicantSlice";
 import applyJobSlice from "./slices/jobs/applyToJobSlice";
 import appliedJobSlice from "./slices/jobs/appliedJobSlice";
 import jobPostSlice from "./slices/jobs/jobPostSlice";
+import updateProfileSlice from "./slices/updateProfile/updateProfileSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -29,6 +30,7 @@ export const makeStore = () => {
       jobSlice: applyJobSlice,
       appliedJob: appliedJobSlice,
       jobPost: jobPostSlice,
+      updateProfile: updateProfileSlice,
     },
   });
 };

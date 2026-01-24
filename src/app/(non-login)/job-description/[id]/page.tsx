@@ -21,6 +21,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useParams, useRouter } from "next/navigation";
 import { formatDate } from "@/helper/formatDate";
 import { showErrorToast, showSuccessToast } from "@/app/(util)/toaster";
+import JobPost from "@/components/JobPost";
 
 const JobDescriptionPage = () => {
   const t = useTranslations("jobDescriptionPage");
@@ -49,8 +50,8 @@ const JobDescriptionPage = () => {
   // Loading State
   if (loading) {
     return (
-      <Container className="d-flex justify-content-center align-items-center vh-50">
-        <Spinner animation="border" variant="primary" />
+      <Container className="m-auto">
+        <Spinner animation="grow" variant="primary" />
       </Container>
     );
   }
@@ -304,17 +305,8 @@ const JobDescriptionPage = () => {
         </Row>
       </Container>
       <hr />
-      <div className="d-flex px-5 mt-5 mb-3 justify-content-between">
-        <h3 className="fw-semibold text-dark">More Jobs</h3>
-        <Button
-          variant="outline-primary"
-          className="text-decoration-none px-3"
-          onClick={() => router.push("/find-jobs")}
-        >
-          {t("buttons.showAllJobs")}
-          <MoveRightIcon size="16px" className="text-primary ms-2" />
-        </Button>
-      </div>
+      <h3 className="fw-semibold text-dark ms-5 mt-5">More Jobs</h3>
+      <JobPost />
       <Footer />
     </div>
   );

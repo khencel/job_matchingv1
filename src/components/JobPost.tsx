@@ -29,9 +29,9 @@ export default function JobPost() {
       <div className="row justify-content-center wow animate__animated animate__fadeInUp">
         <div className="col-md-10">
           <div className="row justify-content-center">
-            <div className="row ">
-              {jobPostings.slice(0, 4).map((job) => (
-                <div className="col-md-3 d-flex" key={job.id}>
+            <div className="row g-3 p-3">
+              {jobPostings.slice(0, 6).map((job) => (
+                <div className="col-md-4 d-flex " key={job.id}>
                   <JobCard
                     job={job}
                     onClick={() => router.push(`job-description/${job.id}`)}
@@ -42,13 +42,11 @@ export default function JobPost() {
           </div>
           <div className="row mt-4">
             <div className="col">
-              <button className="btn btn-primary-custom">
-                <Link
-                  href="/find-jobs"
-                  className="text-white text-decoration-none"
-                >
-                  View More Jobs
-                </Link>
+              <button
+                className="btn btn-primary-custom"
+                onClick={() => router.push("/find-jobs")}
+              >
+                View More Jobs
               </button>
             </div>
           </div>

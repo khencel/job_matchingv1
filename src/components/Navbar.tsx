@@ -105,19 +105,9 @@ export default function Navbar() {
         >
           <ul className="navbar-nav mb-2 mb-lg-0 d-flex align-items-center">
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link className="nav-link me-3" href="/">
                 {t("home")}
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                {t("ourService")}
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                {t("FAQ")}
-              </a>
+              </Link>
             </li>
             {user ? (
               <Dropdown>

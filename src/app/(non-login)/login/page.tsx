@@ -41,11 +41,14 @@ export default function Login() {
       }
 
       if (role === "admin") {
-        router.push("/admin/overview"); 
+        router.push("/admin/overview");
       }
-  
-       
-      // router.push("/"); 
+
+      if (role === "super_visory") {
+        router.push("/super-visory/overview");
+      }
+
+      // router.push("/");
       showSuccessToast("Sign in successful", "Welcome back!");
     } catch (error) {
       console.log(error);
