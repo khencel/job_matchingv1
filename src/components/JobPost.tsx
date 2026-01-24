@@ -30,8 +30,8 @@ export default function JobPost() {
         <div className="col-md-10">
           <div className="row justify-content-center">
             <div className="row g-3 p-3">
-              {jobPostings.slice(0, 6).map((job) => (
-                <div className="col-md-4 d-flex " key={job.id}>
+              {jobPostings.slice(0, 4).map((job) => (
+                <div className="col-md-3 d-flex " key={job.id}>
                   <JobCard
                     job={job}
                     onClick={() => router.push(`job-description/${job.id}`)}

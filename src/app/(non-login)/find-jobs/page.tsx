@@ -43,7 +43,7 @@ const FindJobPage = () => {
           <Col style={{ height: "100%", overflowY: "auto" }}>
             <Row className="g-3 p-3">
               {jobsLists.map((job) => (
-                <Col md={4} sm={6} key={job.id} className="">
+                <Col lg={3} md={4} sm={6} key={job.id} className="">
                   <JobCard
                     job={job}
                     onClick={() => router.push(`job-description/${job.id}`)}
