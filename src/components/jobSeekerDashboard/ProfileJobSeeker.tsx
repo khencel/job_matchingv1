@@ -11,6 +11,11 @@ import {
   User,
   Mail,
   Phone,
+  FileDownIcon,
+  FileText,
+  UploadCloud,
+  Trash2Icon,
+  UploadIcon,
 } from "lucide-react";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
@@ -37,16 +42,25 @@ const EditJobSeeker = () => {
     (s) => s.authState.user?.userDetails_job_seeker,
   );
   const avatar = useAppSelector((s) => s.authState.user?.avatar);
+
+  // Get the resume path from Redux
+  const existingResume = useAppSelector(
+    (s) => s.authState.user?.userDetails_job_seeker?.resume,
+  );
   // Editable source
   const updateUser = useAppSelector((s) => s.updateProfile.details);
 
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [avatarFile, setAvatarFile] = useState<File | null>(null);
-  const [photoPreview, setPhotoPreview] = useState<string | null>(
-    avatar || null,
-  );
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [resumePreview, setResumePreview] = useState<string | null>(null);
+
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const fileResumeRef = useRef<HTMLInputElement | null>(null);
 
   const VISA_OPTIONS = ["APPLIED", "PENDING", "REVIEWING", "ISSUED", "DENIED"];
   const JAPANESE_LEVEL_OPTIONS = ["N5", "N4", "N3", "N2", "N1"];
@@ -67,7 +81,6 @@ const EditJobSeeker = () => {
   const handleEditToggle = () => setIsEditMode(!isEditMode);
 
   const handleInputChange = (field: string, value: string) => {
-    // Assuming all these fields are inside 'jobSeekerData' based on your JSON
     dispatch(setJobSeekerField({ field, value, nestedField: "jobSeekerData" }));
     setErrors((prev) => ({ ...prev, [field]: "" }));
   };
@@ -77,6 +90,37 @@ const EditJobSeeker = () => {
     if (!file) return;
     setAvatarFile(file);
     setPhotoPreview(URL.createObjectURL(file));
+  };
+
+  const handleCancelResumeUpload = () => {
+    setResumeFile(null);
+    setResumePreview(null);
+    if (fileResumeRef.current) {
+      fileResumeRef.current.value = "";
+    }
+  };
+
+  const handleResumeFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setResumeFile(file);
+    setResumePreview(URL.createObjectURL(file));
+  };
+
+  const handleUpdateResume = async () => {
+    if (!resumeFile || resumePreview) return;
+
+    try {
+      await dispatch(
+        updateProfileThunk({
+          resume: resumeFile,
+        }),
+      ).unwrap();
+      setIsEditMode(false);
+      dispatch(fetchCurrentUser());
+    } catch (err) {
+      console.error("Failed to save", err);
+    }
   };
 
   const handleSaveProfile = async () => {
@@ -133,7 +177,6 @@ const EditJobSeeker = () => {
         updateProfileThunk({
           details: finalUpdatedUser,
           avatar: avatarFile,
-          banner: null,
         }),
       ).unwrap();
       setIsEditMode(false);
@@ -153,6 +196,13 @@ const EditJobSeeker = () => {
     return AuthUser?.jobSeekerData?.[field] || "N/A";
   };
 
+  // LOGIC: Determine which resume to show (Local Preview > Backend URL)
+  const displayResumeUrl = resumePreview
+    ? resumePreview
+    : existingResume
+      ? `http://localhost:8000${existingResume}`
+      : null;
+
   return (
     <Container fluid className="p-4 bg-light min-vh-100">
       {/* --- HEADER SECTION --- */}
@@ -168,7 +218,7 @@ const EditJobSeeker = () => {
             >
               <div className="position-relative d-inline-block">
                 <div
-                  className="rounded-circle border border-4 border-white overflow-hidden bg-white shadow-sm"
+                  className="position-relative rounded-circle border border-4 border-white overflow-hidden bg-white shadow-sm"
                   style={{ width: "140px", height: "140px" }}
                 >
                   {photoPreview ? (
@@ -180,10 +230,11 @@ const EditJobSeeker = () => {
                     />
                   ) : avatar ? (
                     <Image
-                      src={avatar}
-                      alt="User"
+                      src={`http://localhost:8000${avatar}`}
+                      alt="User Avatar"
                       fill
                       style={{ objectFit: "cover" }}
+                      unoptimized
                     />
                   ) : (
                     <div className="w-100 h-100 d-flex align-items-center justify-content-center bg-light text-secondary">
@@ -243,32 +294,55 @@ const EditJobSeeker = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="d-flex gap-2">
+                <div className="d-flex flex-column gap-2">
                   {isEditMode ? (
                     <>
                       <Button
-                        variant="outline-danger"
                         className="d-flex align-items-center gap-2"
-                        onClick={handleEditToggle}
-                      >
-                        <X size={16} /> Cancel
-                      </Button>
-                      <Button
-                        className="btn-primary-custom d-flex align-items-center gap-2"
                         onClick={handleSaveProfile}
+                        size="sm"
                       >
                         <Save size={16} /> Save Changes
                       </Button>
+                      <Button
+                        variant="outline-danger"
+                        className="d-flex align-items-center justify-content-center gap-2"
+                        onClick={handleEditToggle}
+                        size="sm"
+                      >
+                        <X size={16} /> Cancel Edit
+                      </Button>
                     </>
                   ) : (
-                    <Button
-                      variant="outline-primary"
-                      className="d-flex align-items-center gap-2"
-                      onClick={handleEditToggle}
-                    >
-                      <Edit2 size={16} /> Edit Profile
-                    </Button>
+                    <>
+                      <Button
+                        variant="primary"
+                        className="d-flex align-items-center gap-2"
+                        onClick={handleEditToggle}
+                        size="sm"
+                      >
+                        <Edit2 size={16} /> Edit Profile
+                      </Button>
+                      {!displayResumeUrl && (
+                        <Button
+                          variant="secondary"
+                          className="d-flex align-items-center gap-2"
+                          onClick={() => fileResumeRef.current?.click()}
+                          size="sm"
+                        >
+                          <FileDownIcon size={16} /> Upload Resume
+                        </Button>
+                      )}
+                    </>
                   )}
+                  {/* Hidden Input for Resume */}
+                  <input
+                    type="file"
+                    ref={fileResumeRef}
+                    hidden
+                    accept=".pdf, image/*"
+                    onChange={handleResumeFileChange}
+                  />
                 </div>
               </div>
             </Col>
@@ -281,6 +355,7 @@ const EditJobSeeker = () => {
         {/* LEFT COLUMN: Personal Identity */}
         <Col lg={8}>
           <Card className="border-0 shadow-sm h-100">
+            {/* ... Existing Personal Info Code ... */}
             <Card.Header className="bg-white border-0 pt-4 px-4 pb-0">
               <h5 className="fw-bold mb-0">Personal Information</h5>
             </Card.Header>
@@ -595,6 +670,80 @@ const EditJobSeeker = () => {
               </Card.Body>
             </Card>
           </div>
+        </Col>
+      </Row>
+
+      {/* --- RESUME SECTION (MODIFIED) --- */}
+      <Row className="mt-4">
+        <Col md={12}>
+          <Card className="border-0 shadow-sm h-100">
+            <Card.Header className="bg-white border-0 pt-4 px-4 pb-0 d-flex justify-content-between align-items-center">
+              <h5 className="fw-bold mb-0 d-flex align-items-center gap-2">
+                <FileText size={20} /> Resume
+              </h5>
+              {displayResumeUrl && (
+                <div className="d-flex gap-2">
+                  <Button
+                    variant="outline-danger"
+                    size="sm"
+                    className="d-flex align-items-center gap-1"
+                    onClick={handleCancelResumeUpload}
+                  >
+                    <Trash2Icon size={14} /> Cancel Upload
+                  </Button>
+                  <Button
+                    variant="outline-primary"
+                    size="sm"
+                    onClick={handleUpdateResume}
+                  >
+                    <UploadIcon size={14} /> Update Resume
+                  </Button>
+                </div>
+              )}
+            </Card.Header>
+            <Card.Body className="p-4">
+              {displayResumeUrl ? (
+                // IF RESUME EXISTS: Show Standard Iframe
+                <div
+                  className="w-100 rounded border bg-light"
+                  style={{ height: "600px", overflow: "hidden" }}
+                >
+                  <iframe
+                    src={displayResumeUrl}
+                    width="100%"
+                    height="100%"
+                    title="Resume Preview"
+                    style={{ border: "none" }}
+                  />
+                </div>
+              ) : (
+                // IF NO RESUME: Show Upload Prompt
+                <div
+                  className="d-flex flex-column align-items-center justify-content-center p-5 border border-2 border-secondary border-opacity-25 rounded bg-light"
+                  style={{ borderStyle: "dashed !important" }}
+                >
+                  <div className="bg-white p-3 rounded-circle shadow-sm mb-3">
+                    <UploadCloud size={32} className="text-primary" />
+                  </div>
+                  <h6 className="fw-bold mb-1">No resume uploaded yet</h6>
+                  <p
+                    className="text-muted small mb-3 text-center"
+                    style={{ maxWidth: "400px" }}
+                  >
+                    Upload your resume to increase your chances of getting
+                    hired. Employers are more likely to view profiles with
+                    resumes.
+                  </p>
+                  <Button
+                    variant="primary"
+                    onClick={() => fileResumeRef.current?.click()}
+                  >
+                    Upload Resume
+                  </Button>
+                </div>
+              )}
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
     </Container>
