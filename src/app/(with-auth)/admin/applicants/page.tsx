@@ -10,6 +10,7 @@ import type { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setPageSize, setPage } from "@/redux/slices/applicants/applicantSlice";
+
 import FormattedDate from "@/components/date_format";
 import { useState } from "react";
 import ViewEmployer from "./viewEmployer";

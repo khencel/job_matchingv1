@@ -1,11 +1,37 @@
+"use client"
+
 import { BiArrowBack } from "react-icons/bi";
 import { FaCalendarCheck } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { AddButton } from "@/components/Button";
 import { FaPlus } from "react-icons/fa6";
+import type { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "@/redux/hooks";
+import { useEffect } from "react";
+import { fetchJobSeekerApplicant } from "@/redux/slices/employer/applicants/jobSeekerApplicantThunk";
+import { setPage, setPageSize } from "@/redux/slices/employer/applicants/jobSeekerApplicantSlice";
+import FormattedDate from "@/components/date_format";
 
 export default function Applicants(){
+    const dispatch = useAppDispatch();
+    const {items, status, error, next, previous, currentPage, pageSize, count} = useSelector((state: RootState) => state.jobSeekerApplicant);
+    
+
+    const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+            dispatch(setPageSize(Number(e.target.value)));
+        };
+    const handlePageChange = (newPage: number) => {
+            dispatch(setPage(newPage));
+        };
+
+    const totalPages = Math.ceil(count / pageSize);
+
+    useEffect(() => {
+        dispatch(fetchJobSeekerApplicant({page: currentPage, pageSize: pageSize}));
+    }, [dispatch]);
+
     return (
             <>
                 <div className="row standar-div">
@@ -16,7 +42,7 @@ export default function Applicants(){
     
                 <div className="row standar-div mt-2">
                     <div className="col">
-                        <h4 className="text-primary text-center"><span><strong>Total Applicants: 100</strong></span></h4>
+                        <h4 className="text-primary text-center"><span><strong>Total Applicants: {count}</strong></span></h4>
                     </div>
                 </div>
     
@@ -34,92 +60,103 @@ export default function Applicants(){
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div className="row">
-                                                        <div className="col-2">
-                                                            <div className="applicant_avatar" style={{backgroundImage:"url('/img/service/animated_guy.png')"}}>
+                                            {
+                                                items.map((item: any, index: number) => {
+                                                    let name = item?.user?.userDetails?.firstName + " " + item?.user?.userDetails?.lastName
+                                                    let job_role = item?.job_post?.jobPostDetails?.title
+                                                    let avatar = "http://127.0.0.1:8000"+item?.user?.avatar
+                                                    let default_avatar = "http://127.0.0.1:8000/media/avatar/avatardefault.png"
+                                                    return (
+                                                        <tr key={item.id}>
+                                                            <td>
+                                                                <div className="row">
+                                                                    <div className="col-2">
+                                                                        <div className="applicant_avatar" style={{backgroundImage:`url(${avatar?avatar:default_avatar})`}}>
 
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-10 pt-1">
-                                                            <span className="text-primary">Khenneth Alaiza</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span className="badge border border-dark text-black p-2 rounded-4">Shortlisted</span>
-                                                </td>
-                                                <td><span className="text-primary">December 12, 2025</span></td>
-                                                <td><span className="text-primary">Cloud Engineer</span></td>
-                                                <td>
-                                                    <button className="btn btn-primary-custom rounded-3">See Application</button>
-                                                </td>
-                                            </tr>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="col-10 pt-1">
+                                                                        <span className="text-primary text-capitalize">{name}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <span className="badge border border-dark text-black p-2 rounded-4">{item.status}</span>
+                                                            </td>
+                                                            <td><span className="text-primary"><FormattedDate date={item.created_at} /></span></td>
+                                                            <td><span className="text-primary">{job_role}</span></td>
+                                                            <td>
+                                                                <button className="btn btn-primary-custom rounded-3">See Application</button>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                })
+                                            }
+                                            
                                     </tbody>
                                 </table>
                             </>
                     </div>
                 </div>
-                <div className="row standar-div mt-2">
-                    <div className="col">
-                        {/* Pagination Controls */}
-                            <div className="d-flex justify-content-between align-items-center mt-3">
-                                <div className="d-flex align-items-center">
-                                    <label className="me-2">Items per page:</label>
-                                    <select 
-                                        className="form-select form-select-sm" 
-                                        style={{ width: 'auto' }}
-                                        
-                                       
-                                    >
-                                        <option value={5}>5</option>
-                                        <option value={10}>10</option>
-                                        <option value={25}>25</option>
-                                        <option value={50}>50</option>
-                                    </select>
-                                    <span className="ms-3 text-muted">
-                                        Showing 1 to 0 of 0
-                                    </span>
-                                </div>
-
-                                <nav>
-                                    <ul className="pagination mb-0">
-                                        <li className="">
-                                            <button 
-                                                className="page-link" 
-                                            >
-                                                Previous
-                                            </button>
-                                        </li>
-                                        
-                                       
-                                            <li 
-                                               
-                                                className=""
-                                            >
-                                                <button 
-                                                    className="page-link" 
-                                                >
-                                                   1
-                                                </button>
-                                            </li>
-                                       
-                                        
-                                        <li >
-                                            <button 
-                                                className="page-link" 
-                                        
-                                            >
-                                                Next
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                    </div>
-                </div>
                 
+                {/* Pagination Controls */}
+                <div className="d-flex justify-content-between align-items-center mt-3">
+                    <div className="d-flex align-items-center">
+                        <label className="me-2">Items per page:</label>
+                        <select 
+                            className="form-select form-select-sm" 
+                            style={{ width: 'auto' }}
+                            value={pageSize}
+                            onChange={handlePageSizeChange}
+                        >
+                            <option value={5}>5</option>
+                            <option value={10}>10</option>
+                            <option value={25}>25</option>
+                            <option value={50}>50</option>
+                        </select>
+                        <span className="ms-3 text-muted">
+                            Showing {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, count)} of {count}
+                        </span>
+                    </div>
+
+                    <nav>
+                        <ul className="pagination mb-0">
+                            <li className={`page-item ${!previous ? 'disabled' : ''}`}>
+                                <button 
+                                    className="page-link" 
+                                    onClick={() => handlePageChange(currentPage - 1)}
+                                    disabled={!previous}
+                                >
+                                    Previous
+                                </button>
+                            </li>
+                            
+                            {[...Array(totalPages)].map((_, index) => (
+                                <li 
+                                    key={index + 1} 
+                                    className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}
+                                >
+                                    <button 
+                                        className="page-link" 
+                                        onClick={() => handlePageChange(index + 1)}
+                                    >
+                                        {index + 1}
+                                    </button>
+                                </li>
+                            ))}
+                            
+                            <li className={`page-item ${!next ? 'disabled' : ''}`}>
+                                <button 
+                                    className="page-link" 
+                                    onClick={() => handlePageChange(currentPage + 1)}
+                                    disabled={!next}
+                                >
+                                    Next
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </>
         );
 }

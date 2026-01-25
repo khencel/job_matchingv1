@@ -17,7 +17,17 @@ interface ViewApplicantProps {
 export default function ViewApplicant({handleShow, handleClose, data}: ViewApplicantProps){
     
     const userdata = data?.user?.userDetails;
-    console.log(data);
+
+    const handleDownloadResume = (data: any) => {
+        const baseUrl = "http://127.0.0.1:8000";
+        const filePath = data?.user?.resume?.resume;
+
+        if (!filePath) return alert("Walang resume na ma-download.");
+
+        const fileUrl = `${baseUrl}${filePath}`;
+
+        window.open(fileUrl, "_blank");
+    };
     
     return (
         <Modal 
@@ -31,7 +41,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
             <Modal.Body>
                 <div className="row">
                     <div className="col-2 p-3">
-                        <div className='applicant_avatar text-center' style={{backgroundImage:`url('http://127.0.0.1:8000${userdata?.avatar || '/media/avatar/avatardefault.png'}')`,width: '100px', height: '100px', backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '50%', margin: '0 auto'   }}>
+                        <div className='applicant_avatar text-center' style={{backgroundImage:`url('http://127.0.0.1:8000${data?.user?.avatar || '/media/avatar/avatardefault.png'}')`,width: '100px', height: '100px', backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '50%', margin: '0 auto'   }}>
                            
                         </div>
                     </div>
@@ -134,7 +144,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                     </div>
                                     <div className="col-6">
                                         <small>
-                                            Esther Howard
+                                            Custom Resume
                                             <br />
                                             <strong>
                                                 PDF
@@ -142,8 +152,8 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                         </small>
                                     </div>
                                     <div className="col-3">
-                                        <div className=' p-2 text-primary text-end' style={{cursor:'pointer'}}>
-                                            <FaDownload style={{fontSize:"30"}} />
+                                        <div className=' p-2 text-primary text-end' >
+                                            <FaDownload onClick={() => handleDownloadResume(data)} style={{fontSize:"30",cursor:'pointer'}} />
                                         </div>
                                     </div>
                                 </div>
