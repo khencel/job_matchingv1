@@ -48,7 +48,7 @@ export default function RegisterEmployerStep2() {
   // i18n for labels/placeholders in Step 2
   const t = useTranslations("registerEmployerStep2");
   const employerInfo = useAppSelector(
-    (s) => s.registerEmployer.registerEmployerData.employerInfo,
+    (s) => s.registerEmployer.registerEmployerData.company_information,
   );
 
   // State management for form inputs and validation
@@ -67,7 +67,7 @@ export default function RegisterEmployerStep2() {
 
     // Normalize numeric fields: drop leading zeroes like "01" -> "1" for fee/appealPoints
     const normalizedValue =
-      name === "appealPoints" || name === "fee" || name === "numberOfEmployees"
+      name === "appeal_point" || name === "fee" || name === "no_of_emp"
         ? value.replace(/^0+(?=\d)/, "")
         : value;
 
@@ -86,7 +86,7 @@ export default function RegisterEmployerStep2() {
     if (currentBranch.trim() !== "") {
       setData({
         ...data,
-        branchOffices: [...data.branchOffices, currentBranch],
+        branch_office: [...data.branch_office, currentBranch],
       });
       setCurrentBranch("");
     }
@@ -96,7 +96,7 @@ export default function RegisterEmployerStep2() {
   const handleRemoveBranch = (index: number) => {
     setData({
       ...data,
-      branchOffices: data.branchOffices.filter((_, i) => i !== index),
+      branch_office: data.branch_office.filter((_, i) => i !== index),
     });
   };
 
@@ -104,11 +104,11 @@ export default function RegisterEmployerStep2() {
   const handleAddIndustry = () => {
     if (
       currentIndustry.trim() !== "" &&
-      !data.industries.includes(currentIndustry)
+      !data.company_industry.includes(currentIndustry)
     ) {
       setData({
         ...data,
-        industries: [...data.industries, currentIndustry],
+        company_industry: [...data.company_industry, currentIndustry],
       });
       setCurrentIndustry("");
     }
@@ -118,7 +118,7 @@ export default function RegisterEmployerStep2() {
   const handleRemoveIndustry = (index: number) => {
     setData({
       ...data,
-      industries: data.industries.filter((_, i) => i !== index),
+      company_industry: data.company_industry.filter((_, i) => i !== index),
     });
   };
 
@@ -155,46 +155,46 @@ export default function RegisterEmployerStep2() {
     const validationErrors: Record<string, boolean> = {};
 
     // Validate company name
-    if (!data.companyName || data.companyName.trim().length < 2) {
-      validationErrors.companyName = true;
+    if (!data.name || data.name.trim().length < 2) {
+      validationErrors.name = true;
       hasError = true;
     }
 
     // Validate company address
-    if (!data.companyAddress || data.companyAddress.trim().length < 2) {
-      validationErrors.companyAddress = true;
+    if (!data.address || data.address.trim().length < 2) {
+      validationErrors.address = true;
       hasError = true;
     }
 
     // Validate phone number
-    if (!data.phoneNumber || !isPhoneNumberValid(data.phoneNumber)) {
-      validationErrors.phoneNumber = true;
+    if (!data.phone || !isPhoneNumberValid(data.phone.trim())) {
+      validationErrors.phone = true;
       hasError = true;
     }
 
     // Validate industries
-    if (!data.industries || data.industries.length === 0) {
-      validationErrors.industries = true;
+    if (!data.company_industry || data.company_industry.length === 0) {
+      validationErrors.company_industry = true;
       hasError = true;
     }
 
     // Validate regions
-    if (!data.regions) {
-      validationErrors.regions = true;
+    if (!data.region) {
+      validationErrors.region = true;
       hasError = true;
     }
 
     // Validate number of employees
-    const numEmployeesNum = Number(data.numberOfEmployees);
-    if (!data.numberOfEmployees || numEmployeesNum < 1) {
-      validationErrors.numberOfEmployees = true;
+    const numEmployeesNum = Number(data.no_of_emp);
+    if (!data.no_of_emp || numEmployeesNum < 1) {
+      validationErrors.no_of_emp = true;
       hasError = true;
     }
 
     // Validate appeal points
-    const appealPointsNum = Number(data.appealPoints);
+    const appealPointsNum = Number(data.appeal_point);
     if (appealPointsNum <= 0) {
-      validationErrors.appealPoints = true;
+      validationErrors.appeal_point = true;
       hasError = true;
     }
 
@@ -206,8 +206,8 @@ export default function RegisterEmployerStep2() {
     }
 
     // Validate branch offices
-    if (!data.branchOffices || data.branchOffices.length === 0) {
-      validationErrors.branchOffices = true;
+    if (!data.branch_office || data.branch_office.length === 0) {
+      validationErrors.branch_office = true;
       hasError = true;
     }
 
@@ -215,9 +215,9 @@ export default function RegisterEmployerStep2() {
       setError(validationErrors);
 
       // If branch offices error, focus on the branch input field
-      if (validationErrors.branchOffices) {
+      if (validationErrors.branch_office) {
         const branchInput = form.querySelector(
-          "input[placeholder*='branchOffice']",
+          "input[placeholder*='branch_office']",
         ) as HTMLElement;
         if (branchInput) {
           setTimeout(() => branchInput.focus(), 0);
@@ -261,14 +261,13 @@ export default function RegisterEmployerStep2() {
           <Form.Control
             required
             type="text"
-            name="companyName"
+            name="name"
             placeholder={t("placeholders.enterCompanyName")}
-            value={data.companyName}
+            value={data.name}
             onChange={handleChange}
             isInvalid={
-              error.companyName ||
-              (data.companyName.trim().length < 2 &&
-                data.companyName.trim().length > 0)
+              error.name ||
+              (data.name.trim().length < 2 && data.name.trim().length > 0)
             }
             autoFocus
           />
@@ -283,14 +282,13 @@ export default function RegisterEmployerStep2() {
           <Form.Control
             required
             type="text"
-            name="companyAddress"
+            name="address"
             placeholder={t("placeholders.enterCompanyAddress")}
-            value={data.companyAddress}
+            value={data.address}
             onChange={handleChange}
             isInvalid={
-              error.companyAddress ||
-              (data.companyAddress.trim().length < 2 &&
-                data.companyAddress.trim().length > 0)
+              error.address ||
+              (data.address.trim().length < 2 && data.address.trim().length > 0)
             }
           />
           <Form.Control.Feedback type="invalid">
@@ -304,14 +302,13 @@ export default function RegisterEmployerStep2() {
           <Form.Control
             required
             type="tel"
-            name="phoneNumber"
+            name="phone"
             placeholder={t("placeholders.enterPhoneNumber")}
-            value={data.phoneNumber}
+            value={data.phone}
             onChange={handleChange}
             isInvalid={
-              error.phoneNumber ||
-              (data.phoneNumber.trim().length > 0 &&
-                !isPhoneNumberValid(data.phoneNumber))
+              error.phone ||
+              (data.phone.trim().length > 0 && !isPhoneNumberValid(data.phone))
             }
           />
           <Form.Control.Feedback type="invalid">
@@ -323,22 +320,22 @@ export default function RegisterEmployerStep2() {
       {/* Company Industry Section */}
       <div className="mb-4">
         <h6 className="mb-3 fw-bold">{t("labels.companyIndustry")}</h6>
-        <Form.Group controlId="industries">
+        <Form.Group controlId="company_industry">
           <Form.Label>{t("labels.industry")}</Form.Label>
           <Row>
             <Col xs={9}>
               <Form.Select
-                name="currentIndustry"
+                name="current_industry"
                 value={currentIndustry}
                 onChange={(e) => {
                   setCurrentIndustry(e.target.value);
                   // Clear error when user selects
                   setError((prevErrors) => ({
                     ...prevErrors,
-                    industries: false,
+                    currentIndustry: false,
                   }));
                 }}
-                isInvalid={error.industries && currentIndustry === ""}
+                isInvalid={error.company_industry && currentIndustry === ""}
               >
                 <option value="">{t("placeholders.selectIndustry")}</option>
                 {industries.map((industry) => (
@@ -355,7 +352,7 @@ export default function RegisterEmployerStep2() {
               <Button
                 disabled={
                   currentIndustry === "" ||
-                  data.industries.includes(currentIndustry)
+                  data.company_industry.includes(currentIndustry)
                 }
                 variant="outline-primary"
                 type="button"
@@ -368,12 +365,12 @@ export default function RegisterEmployerStep2() {
           </Row>
 
           {/* Display Added Industries */}
-          {data.industries.length > 0 && (
+          {data.company_industry.length > 0 && (
             <div className="mt-3">
               <p className="text-muted small mb-2">
                 {t("labels.selectedIndustries")}
               </p>
-              {data.industries.map((industry, index) => (
+              {data.company_industry.map((industry, index) => (
                 <div
                   key={index}
                   className="d-flex justify-content-between align-items-center mb-2 p-2 bg-light rounded"
@@ -401,10 +398,10 @@ export default function RegisterEmployerStep2() {
           <Form.Label>{t("labels.region")}</Form.Label>
           <Form.Select
             required
-            name="regions"
-            value={data.regions}
+            name="region"
+            value={data.region}
             onChange={handleChange}
-            isInvalid={error.regions || data.regions.length < 0}
+            isInvalid={error.region || data.region.length < 0}
           >
             <option value="">{t("placeholders.selectRegion")}</option>
             {japanRegions.map((region) => (
@@ -429,13 +426,12 @@ export default function RegisterEmployerStep2() {
           <Form.Control
             required
             type="number"
-            name="numberOfEmployees"
+            name="no_of_emp"
             placeholder={t("placeholders.enterNumEmployees")}
-            value={data.numberOfEmployees}
+            value={data.no_of_emp}
             onChange={handleChange}
             isInvalid={
-              error.numberOfEmployees ||
-              (data.numberOfEmployees < "0" && data.numberOfEmployees > "1")
+              error.no_of_emp || (data.no_of_emp < "0" && data.no_of_emp > "1")
             }
           />
           <Form.Control.Feedback type="invalid">
@@ -496,12 +492,12 @@ export default function RegisterEmployerStep2() {
           </Row>
 
           {/* Display Added Branch Offices */}
-          {data.branchOffices.length > 0 && (
+          {data.branch_office.length > 0 && (
             <div className="mt-3">
               <p className="text-muted small mb-2">
                 {t("labels.branchOfficesList")}
               </p>
-              {data.branchOffices.map((branch, index) => (
+              {data.branch_office.map((branch, index) => (
                 <div
                   key={index}
                   className="d-flex justify-content-between align-items-center mb-2 p-2 bg-light rounded"
@@ -532,14 +528,14 @@ export default function RegisterEmployerStep2() {
           <Form.Control
             required
             type="number"
-            name="appealPoints"
+            name="appeal_point"
             placeholder={t("placeholders.enterAppealPoints")}
-            value={data.appealPoints}
+            value={data.appeal_point}
             onChange={handleChange}
             onFocus={(e) => e.target.select()}
             isInvalid={
               error.appealPoints ||
-              (!!data.appealPoints && Number(data.appealPoints) <= 0)
+              (!!data.appeal_point && Number(data.appeal_point) <= 0)
             }
           />
           <Form.Control.Feedback type="invalid">
@@ -562,6 +558,47 @@ export default function RegisterEmployerStep2() {
           />
           <Form.Control.Feedback type="invalid">
             {t("errors.fillRequired")}
+          </Form.Control.Feedback>
+        </Form.Group>
+
+        {/* Founded Date */}
+        <Form.Group className="mb-3" controlId="founded">
+          <Form.Label>Company Founded</Form.Label>
+          <Form.Control
+            required
+            type="date"
+            name="founded"
+            placeholder={"Enter Company Founded Date"}
+            value={data.founded}
+            onChange={handleChange}
+            onFocus={(e) => e.target.select()}
+            isInvalid={
+              error.founded || (!!data.founded && Number(data.founded) <= 0)
+            }
+          />
+          <Form.Control.Feedback type="invalid">
+            {"Please enter founded date"}
+          </Form.Control.Feedback>
+        </Form.Group>
+
+        {/* Company Profile */}
+        <Form.Group className="mb-3" controlId="profile">
+          <Form.Label>Company Profile</Form.Label>
+          <Form.Control
+            required
+            type="text"
+            as="textarea"
+            name="profile"
+            placeholder={"Enter Company Biography"}
+            value={data.profile}
+            onChange={handleChange}
+            onFocus={(e) => e.target.select()}
+            isInvalid={
+              error.profile || (!!data.profile && Number(data.profile) <= 0)
+            }
+          />
+          <Form.Control.Feedback type="invalid">
+            {"Please enter company biography"}
           </Form.Control.Feedback>
         </Form.Group>
       </div>

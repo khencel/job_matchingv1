@@ -7,20 +7,23 @@ import { Button, Form } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { isEmailValid, isPhoneNumberValid } from "@/helper/validations";
 import { RegisterEmployerStep3Data } from "@/types/employer";
-import { goNextStep, saveRegEmployerStep3 } from "@/redux/slices/register/employer/employerSlice";
+import {
+  goNextStep,
+  saveRegEmployerStep3,
+} from "@/redux/slices/register/employer/employerSlice";
 
 export default function RegisterEmployerStep3() {
   const dispatch = useAppDispatch();
   const t = useTranslations("registerEmployerStep3");
   const contactPerson = useAppSelector(
-    (s) => s.registerEmployer.registerEmployerData.contactPerson
+    (s) => s.registerEmployer.registerEmployerData.contact_person,
   );
 
   const [data, setData] = useState<RegisterEmployerStep3Data>(contactPerson);
   const [error, setError] = useState<{ [name: string]: boolean }>({});
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     // Clear error for the field on change
@@ -74,23 +77,23 @@ export default function RegisterEmployerStep3() {
 
     // Validate department name
     if (
-      !data.departmentName ||
-      data.departmentName.trim().length < 3 ||
-      data.departmentName.trim().length > 100
+      !data.department_name ||
+      data.department_name.trim().length < 3 ||
+      data.department_name.trim().length > 100
     ) {
-      validationErrors.departmentName = true;
+      validationErrors.department_name = true;
       hasError = true;
     }
 
     // Validate phone number
-    if (!data.phoneNumber || !isPhoneNumberValid(data.phoneNumber.trim())) {
-      validationErrors.phoneNumber = true;
+    if (!data.phone || !isPhoneNumberValid(data.phone.trim())) {
+      validationErrors.phone = true;
       hasError = true;
     }
 
     // Validate email
-    if (!data.emailAddress || !isEmailValid(data.emailAddress.trim())) {
-      validationErrors.emailAddress = true;
+    if (!data.email || !isEmailValid(data.email.trim())) {
+      validationErrors.email = true;
       hasError = true;
     }
 
@@ -98,7 +101,7 @@ export default function RegisterEmployerStep3() {
       setError(validationErrors);
       const firstErrorField = Object.keys(validationErrors)[0];
       const errorElement = form.querySelector(
-        `[name="${firstErrorField}"]`
+        `[name="${firstErrorField}"]`,
       ) as HTMLElement;
       if (errorElement) errorElement.focus();
       return;
@@ -148,16 +151,16 @@ export default function RegisterEmployerStep3() {
           <Form.Label>{t("labels.departmentName")}</Form.Label>
           <Form.Control
             type="text"
-            name="departmentName"
+            name="department_name"
             placeholder={t("placeholders.enterDeptName")}
-            value={data.departmentName}
+            value={data.department_name}
             onChange={handleChange}
             required
             isInvalid={
-              error.departmentName ||
-              (data.departmentName.trim().length > 0 &&
-                (data.departmentName.trim().length < 3 ||
-                  data.departmentName.trim().length > 100))
+              error.department_name ||
+              (data.department_name.trim().length > 0 &&
+                (data.department_name.trim().length < 3 ||
+                  data.department_name.trim().length > 100))
             }
           />
           <Form.Control.Feedback type="invalid">
@@ -169,15 +172,15 @@ export default function RegisterEmployerStep3() {
           <Form.Label>{t("labels.phoneNumber")}</Form.Label>
           <Form.Control
             type="tel"
-            name="phoneNumber"
+            name="phone"
             placeholder={t("placeholders.enterPhoneNumber")}
-            value={data.phoneNumber}
+            value={data.phone}
             onChange={handleChange}
             required
             isInvalid={
-              error.phoneNumber ||
-              (data.phoneNumber.trim().length > 0 &&
-                !isPhoneNumberValid(data.phoneNumber.trim()))
+              error.phone ||
+              (data.phone.trim().length > 0 &&
+                !isPhoneNumberValid(data.phone.trim()))
             }
           />
           <Form.Control.Feedback type="invalid">
@@ -189,15 +192,14 @@ export default function RegisterEmployerStep3() {
           <Form.Label>{t("labels.emailAddress")}</Form.Label>
           <Form.Control
             type="email"
-            name="emailAddress"
+            name="email"
             placeholder={t("placeholders.enterEmailAddress")}
-            value={data.emailAddress}
+            value={data.email}
             onChange={handleChange}
             required
             isInvalid={
-              error.emailAddress ||
-              (data.emailAddress.trim().length > 0 &&
-                !isEmailValid(data.emailAddress.trim()))
+              error.email ||
+              (data.email.trim().length > 0 && !isEmailValid(data.email.trim()))
             }
           />
           <Form.Control.Feedback type="invalid">
