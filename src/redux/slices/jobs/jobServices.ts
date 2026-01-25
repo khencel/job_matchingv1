@@ -6,8 +6,8 @@ export const getJobPostings = async () => {
 };
 
 // Apply to Job
-export const postApplyToJob = async (userId: number, jobPostId: number) => {
-  return await apiClient.post(`/apply/`, { user: userId, job_post: jobPostId });
+export const postApplyToJob = async (userId: number, jobPostId: number, employer_id: number) => {
+  return await apiClient.post(`/apply/`, { user: userId, job_post: jobPostId, employer: employer_id });
 };
 
 // get applied jobs with pagination
