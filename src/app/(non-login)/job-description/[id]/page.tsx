@@ -151,19 +151,29 @@ const JobDescriptionPage = () => {
             <div className="d-flex flex-column gap-3">
               <div>
                 <h4>{t("headings.description")}</h4>
-                <p>{jobDetails.job_desc}</p>
+                <p dangerouslySetInnerHTML={{
+                                        __html: jobDetails.job_desc
+                                    }}/>
               </div>
               <div>
                 <h4>{t("headings.responsibilities")}</h4>
-                {jobDetails.responsibility}
+                <span dangerouslySetInnerHTML={{
+                                        __html: jobDetails.responsibility
+                                    }} />
+                
               </div>
               <div>
                 <h4>{t("headings.whoYouAre")}</h4>
-                {jobDetails.who_you_are}
+                <span dangerouslySetInnerHTML={{
+                                        __html: jobDetails.who_you_are
+                                    }} />
               </div>
               <div>
                 <h4>{t("headings.niceToHaves")}</h4>
-                {jobDetails.nice_to_have}
+                <span dangerouslySetInnerHTML={{
+                                        __html: jobDetails.nice_to_have
+                                    }} />
+              
               </div>
             </div>
           </Col>
@@ -209,10 +219,10 @@ const JobDescriptionPage = () => {
               <p>{jobDetails.category.category}</p>
             </div>
             <hr />
-            <div>
+            {/* <div>
               <h4>{t("headings.requiredSkills")}</h4>
               <p>{jobDetails.skill.skill}</p>
-            </div>
+            </div> */}
           </Col>
         </Row>
         {/* Main Row 2 */}
