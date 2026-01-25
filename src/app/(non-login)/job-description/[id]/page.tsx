@@ -73,7 +73,13 @@ const JobDescriptionPage = () => {
       return;
     }
     try {
-      dispatch(applyToJob({ user: userId, job_post: jobDetails.id }));
+      dispatch(
+        applyToJob({
+          user: userId,
+          job_post: jobDetails.id,
+          employer: jobDetails.user_id,
+        }),
+      );
       showSuccessToast(
         "Application Successful",
         "You have successfully applied to the job.",

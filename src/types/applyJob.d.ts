@@ -26,6 +26,7 @@ export interface JobPosting {
 export interface ApplyToJobRequest {
   user: number;
   job_post: number;
+  employer: number;
 }
 
 interface ApplyUser {

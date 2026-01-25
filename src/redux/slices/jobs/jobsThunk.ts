@@ -32,14 +32,17 @@ export const fetchJobPostings = createAsyncThunk<JobPosting[]>(
 export const applyToJob = createAsyncThunk<
   ApplyToJobResponse,
   ApplyToJobRequest
->("applyJob/applyToJob", async ({ user, job_post }, { rejectWithValue }) => {
-  try {
-    const res = await postApplyToJob(user, job_post);
-    return res.data;
-  } catch (error) {
-    return rejectWithValue(error);
-  }
-});
+>(
+  "applyJob/applyToJob",
+  async ({ user, job_post, employer }, { rejectWithValue }) => {
+    try {
+      const res = await postApplyToJob(user, job_post, employer);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
 
 // Thunk to get applied jobs with pagination
 export const fetchAppliedJobs = createAsyncThunk<
@@ -77,7 +80,7 @@ export const fetchJobDetails = createAsyncThunk(
       const res = await getJobById(jobId);
       return res.data;
     } catch (error) {
-      console.log("Error fetching job details:",error)
+      console.log("Error fetching job details:", error);
       if (error instanceof AxiosError) {
         if (error.response) {
           return rejectWithValue(
