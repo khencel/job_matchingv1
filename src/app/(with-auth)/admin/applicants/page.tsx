@@ -72,8 +72,6 @@ export default function AdminApplicants() {
     }
 
     
-    console.log(items);
-    
     useEffect(() => {
         dispatch(fetchApplicants({page: currentPage, pageSize}));
     }, [dispatch]);
