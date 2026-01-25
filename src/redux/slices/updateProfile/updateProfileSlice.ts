@@ -44,10 +44,61 @@ const updateProfileSlice = createSlice({
         }
         // If it's on the account info level (like email)
         else if (nestedField === "accountInfo") {
-          // Handle account info updates if your backend allows it
+          state.details.accountInfo = {
+            ...state.details.accountInfo,
+            [field]: value,
+          };
+        } else if (nestedField === "termsAndConditions") {
+          state.details.termsAndConditions = {
+            ...state.details.termsAndConditions,
+            [field]: value,
+          };
         } else {
           // Direct merge if structure differs
           state.details = { ...state.details, [field]: value };
+        }
+      }
+    },
+    setSupervisoryField: (
+      state,
+      action: PayloadAction<{
+        field: string;
+        value: string | number | boolean;
+        nestedField?: string;
+        subNestedField?: string;
+      }>,
+    ) => {
+      // 1. Remove .supervisoryData check. Just check details.
+      if (state.details) {
+        const { field, value, nestedField, subNestedField } = action.payload;
+
+        // A. Handle HQ Address (Level 3)
+        if (nestedField === "companyInfo" && subNestedField === "hqAddress") {
+          state.details.companyInfo.hqAddress = {
+            ...state.details.companyInfo.hqAddress,
+            [field]: value,
+          };
+        }
+        // B. Handle Company Info (Level 2 - Direct fields like capital, industry)
+        else if (nestedField === "companyInfo") {
+          state.details.companyInfo = {
+            ...state.details.companyInfo,
+            [field]: value,
+          };
+        }
+        // C. Handle Contact Person (Level 2)
+        else if (nestedField === "contactPersonInfo") {
+          state.details.contactPersonInfo = {
+            ...state.details.contactPersonInfo,
+            [field]: value,
+          };
+        }
+        // D. Handle Account Info
+        else if (nestedField === "accountInfo") {
+          state.details.accountInfo = {
+            ...state.details.accountInfo,
+            [field]: value,
+          };
         }
       }
     },
@@ -72,6 +123,9 @@ const updateProfileSlice = createSlice({
   },
 });
 
-export const { clearUpdateProfileState, setJobSeekerField } =
-  updateProfileSlice.actions;
+export const {
+  clearUpdateProfileState,
+  setJobSeekerField,
+  setSupervisoryField,
+} = updateProfileSlice.actions;
 export default updateProfileSlice.reducer;

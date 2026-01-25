@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { editSuperVisoryThunk } from "./superVisoryThunk";
 import { RegistrationStep1 } from "@/types/user-register";
 import {
   RegisterSuperVisory,
@@ -7,7 +6,7 @@ import {
   RegisterSuperVisoryStep3Data,
   RegisterSuperVisoryStep4Data,
 } from "@/types/super-visory";
-import { isEmailExistThunk, registerThunk } from "../registerThunk";
+import { registerThunk } from "../registerThunk";
 
 const initialState: RegisterSuperVisory = {
   currentStep: 1,
@@ -115,38 +114,6 @@ export const registerSuperVisorySlice = createSlice({
         state.isLoading = false;
         state.registerSuperVisoryData = initialState.registerSuperVisoryData;
         state.currentStep = 1;
-      },
-      rejected: (state) => {
-        state.isError = true;
-        state.isLoading = false;
-      },
-    });
-    // edit supervisory account
-    builder.addAsyncThunk(editSuperVisoryThunk, {
-      pending: (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      },
-      fulfilled: (state) => {
-        state.isError = false;
-        state.isLoading = false;
-        state.registerSuperVisoryData = initialState.registerSuperVisoryData;
-        state.currentStep = 1;
-      },
-      rejected: (state) => {
-        state.isError = true;
-        state.isLoading = false;
-      },
-    });
-    // check email if existing
-    builder.addAsyncThunk(isEmailExistThunk, {
-      pending: (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      },
-      fulfilled: (state) => {
-        state.isError = false;
-        state.isLoading = false;
       },
       rejected: (state) => {
         state.isError = true;

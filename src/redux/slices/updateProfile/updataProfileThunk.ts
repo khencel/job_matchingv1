@@ -5,15 +5,16 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
 interface updateProfileArgs {
-  details: RegisterJobSeekerData | RegisterSuperVisoryData;
-  avatar: File | null;
-  banner: File | null;
+  details?: RegisterJobSeekerData | RegisterSuperVisoryData;
+  avatar?: File | null;
+  banner?: File | null;
+  resume?: File | null;
 }
 
 export const updateProfileThunk = createAsyncThunk(
   "profile/updateProfile",
   async (
-    { details, avatar, banner }: updateProfileArgs,
+    { details, avatar, banner, resume }: updateProfileArgs,
     { rejectWithValue },
   ) => {
     try {
@@ -25,6 +26,9 @@ export const updateProfileThunk = createAsyncThunk(
       }
       if (banner instanceof File) {
         formData.append("banner", banner);
+      }
+      if (resume instanceof File) {
+        formData.append("resume", resume);
       }
 
       const res = await apiClient.put("auth/update/user", formData, {

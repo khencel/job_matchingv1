@@ -44,7 +44,7 @@ export default function Login() {
         router.push("/admin/overview");
       }
 
-      if (role === "super_visory") {
+      if (role === "supervisory") {
         router.push("/super-visory/overview");
       }
 
