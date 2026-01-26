@@ -105,7 +105,7 @@ export const loginUser = createAsyncThunk<
 });
 
 // Async thunk for logout
-export const logoutUser = createAsyncThunk<void, void, { rejectValue: string }>(
+export const logoutUser = createAsyncThunk(
   "auth/logoutUser",
   async (_, { dispatch, rejectWithValue }) => {
     const refreshToken = Cookies.get("refreshToken");

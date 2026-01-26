@@ -1,4 +1,9 @@
-import { ResumeBasicInfo, ResumeEducation, ResumeLanguage, ResumeWorkExperience } from "@/types/resume-builder";
+import {
+  ResumeBasicInfo,
+  ResumeEducation,
+  ResumeLanguage,
+  ResumeWorkExperience,
+} from "@/types/resume-builder";
 import React, { forwardRef } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 
@@ -264,7 +269,7 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
         </Container>
       </div>
     );
-  }
+  },
 );
 
 ResumeTemplate.displayName = "ResumeTemplate";

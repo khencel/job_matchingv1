@@ -1,7 +1,7 @@
 "use client";
 import {
-  BellIcon,
   File,
+  FileUserIcon,
   FolderHeartIcon,
   FoldersIcon,
   MenuIcon,
@@ -24,7 +24,7 @@ export default function JobSeekerLayout({
   const getActiveKey = () => {
     if (pathname.includes("/job-seeker/profile")) return "job-seeker-profile";
     if (pathname.includes("/applied-jobs")) return "applied-jobs";
-    if (pathname.includes("/notifications")) return "notifications";
+    if (pathname.includes("/documents")) return "documents";
     if (pathname.includes("/saved-jobs")) return "saved-jobs";
   };
 
@@ -70,21 +70,21 @@ export default function JobSeekerLayout({
             <Nav.Item>
               <Nav.Link
                 as={Link}
-                eventKey="notifications"
-                className="sidebar-text"
-                href="/job-seeker/notifications"
-              >
-                <BellIcon /> {!isCollapsed && <span>Notifications</span>}
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
                 eventKey="saved-jobs"
                 className="sidebar-text"
                 href="/job-seeker/saved-jobs"
               >
                 <FolderHeartIcon /> {!isCollapsed && <span>Saved Jobs</span>}
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                as={Link}
+                eventKey="documents"
+                className="sidebar-text"
+                href="/job-seeker/documents"
+              >
+                <FileUserIcon /> {!isCollapsed && <span>Documents</span>}
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>

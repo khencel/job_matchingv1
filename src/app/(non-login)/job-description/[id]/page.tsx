@@ -1,7 +1,7 @@
 "use client";
 
 import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/navbar/Navbar";
 import { BookmarkIcon, MoveRightIcon, Share2Icon } from "lucide-react";
 import Image from "next/image";
 import {

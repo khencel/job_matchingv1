@@ -22,6 +22,7 @@ export interface User {
   role: "job_seeker" | "employer" | "admin" | "supervisory";
   avatar?: string | null; // Optional (From GetUser)
   banner?: string | null; // Optional (From GetUser)
+  resume?: string | null; // Optional (From GetUser)
 
   // 2. HANDLE DYNAMIC DETAILS (The key to your problem)
   // Make them optional (?). Login won't have them, GetUser will.
