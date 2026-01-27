@@ -21,11 +21,11 @@ const initialState: RegisterEmployer = {
       phone: "",
       company_industry: [],
       region: "",
-      no_of_emp: "",
+      no_of_emp: 0,
       branch_office: [],
       appeal_point: 0,
       fee: 0,
-      founded: "",
+      founded: 0,
       profile: "",
     },
     contact_person: {
@@ -84,10 +84,8 @@ export const registerEmployerSlice = createSlice({
     },
     saveRegEmployerStep4: (state, action) => {
       state.registerEmployerData.accept_terms = action.payload.accept_terms;
-      state.registerEmployerData.accept_privacy =
-        action.payload.accept_privacy;
-      state.registerEmployerData.receive_email =
-        action.payload.receive_email;
+      state.registerEmployerData.accept_privacy = action.payload.accept_privacy;
+      state.registerEmployerData.receive_email = action.payload.receive_email;
     },
 
     // Clear State

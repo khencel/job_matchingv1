@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
@@ -56,6 +56,9 @@ export default function RegisterEmployerStep2() {
   const [currentIndustry, setCurrentIndustry] = useState<string>("");
   const [error, setError] = useState<{ [name: string]: boolean }>({});
   const [data, setData] = useState<RegisterEmployerStep2Data>(employerInfo);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const branchInputRef = useRef<HTMLInputElement>(null);
+  const industrySelectRef = useRef<HTMLSelectElement>(null);
 
   // Handle input changes and update Redux store
   const handleChange = (
@@ -84,11 +87,14 @@ export default function RegisterEmployerStep2() {
   // Add branch office to the list
   const handleAddBranch = () => {
     if (currentBranch.trim() !== "") {
-      setData({
+      const updatedData = {
         ...data,
         branch_office: [...data.branch_office, currentBranch],
-      });
+      };
+      setData(updatedData);
+      dispatch(saveRegEmployerStep2(updatedData));
       setCurrentBranch("");
+      setError((prevErrors) => ({ ...prevErrors, branch_office: false }));
     }
   };
 
@@ -106,11 +112,14 @@ export default function RegisterEmployerStep2() {
       currentIndustry.trim() !== "" &&
       !data.company_industry.includes(currentIndustry)
     ) {
-      setData({
+      const updatedData = {
         ...data,
         company_industry: [...data.company_industry, currentIndustry],
-      });
+      };
+      setData(updatedData);
+      dispatch(saveRegEmployerStep2(updatedData));
       setCurrentIndustry("");
+      setError((prevErrors) => ({ ...prevErrors, company_industry: false }));
     }
   };
 
@@ -125,6 +134,7 @@ export default function RegisterEmployerStep2() {
   // Handle form submission with validation
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitted(true);
     const form = e.currentTarget as HTMLFormElement;
 
     // First validation: Check HTML5 form validity
@@ -150,7 +160,6 @@ export default function RegisterEmployerStep2() {
       return;
     }
 
-    // Second validation: Check custom business logic
     let hasError = false;
     const validationErrors: Record<string, boolean> = {};
 
@@ -214,26 +223,21 @@ export default function RegisterEmployerStep2() {
     if (hasError) {
       setError(validationErrors);
 
-      // If branch offices error, focus on the branch input field
       if (validationErrors.branch_office) {
-        const branchInput = form.querySelector(
-          "input[placeholder*='branch_office']",
-        ) as HTMLElement;
-        if (branchInput) {
-          setTimeout(() => branchInput.focus(), 0);
-        }
+        setTimeout(() => branchInputRef.current?.focus(), 0);
+      } else if (validationErrors.company_industry) {
+        setTimeout(() => industrySelectRef.current?.focus(), 0);
       } else {
-        // Otherwise focus on the first error field
         const firstErrorField = Object.keys(validationErrors)[0];
         const errorElement = form.querySelector(
           `[name="${firstErrorField}"]`,
-        ) as HTMLElement;
-        if (errorElement) errorElement.focus();
+        ) as HTMLElement | null;
+        errorElement?.focus();
       }
       return;
     }
-    // All validations passed - save data and show success message
     setError({});
+    setIsSubmitted(false);
     Swal.fire({
       icon: "success",
       title: "Company Information Submitted",
@@ -246,6 +250,10 @@ export default function RegisterEmployerStep2() {
     dispatch(saveRegEmployerStep2(data));
     dispatch(goNextStep(3));
   };
+
+  const showIndustryError =
+    error.company_industry ||
+    (isSubmitted && data.company_industry.length === 0);
 
   return (
     <Form noValidate onSubmit={handleSubmit}>
@@ -326,16 +334,16 @@ export default function RegisterEmployerStep2() {
             <Col xs={9}>
               <Form.Select
                 name="current_industry"
+                ref={industrySelectRef}
                 value={currentIndustry}
                 onChange={(e) => {
                   setCurrentIndustry(e.target.value);
-                  // Clear error when user selects
                   setError((prevErrors) => ({
                     ...prevErrors,
-                    currentIndustry: false,
+                    company_industry: false,
                   }));
                 }}
-                isInvalid={error.company_industry && currentIndustry === ""}
+                isInvalid={showIndustryError}
               >
                 <option value="">{t("placeholders.selectIndustry")}</option>
                 {industries.map((industry) => (
@@ -430,9 +438,7 @@ export default function RegisterEmployerStep2() {
             placeholder={t("placeholders.enterNumEmployees")}
             value={data.no_of_emp}
             onChange={handleChange}
-            isInvalid={
-              error.no_of_emp || (data.no_of_emp < "0" && data.no_of_emp > "1")
-            }
+            isInvalid={error.no_of_emp || data.no_of_emp < 0}
           />
           <Form.Control.Feedback type="invalid">
             {t("errors.invalidNumOfEmployees")}
@@ -446,20 +452,18 @@ export default function RegisterEmployerStep2() {
             <Col xs={9}>
               <Form.Control
                 type="text"
+                ref={branchInputRef}
                 placeholder={t("labels.branchOfficePlaceholder")}
                 value={currentBranch}
                 onChange={(e) => {
                   setCurrentBranch(e.target.value);
-                  // Clear error when user starts typing
                   setError((prevErrors) => ({
                     ...prevErrors,
-                    branchOffices: false,
+                    branch_office: false,
                   }));
                 }}
                 isInvalid={
-                  error.branchOffices ||
-                  (currentBranch.trim().length > 0 &&
-                    currentBranch.trim().length < 2)
+                  error.branch_office || data.branch_office.length === 0
                 }
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
@@ -533,10 +537,7 @@ export default function RegisterEmployerStep2() {
             value={data.appeal_point}
             onChange={handleChange}
             onFocus={(e) => e.target.select()}
-            isInvalid={
-              error.appealPoints ||
-              (!!data.appeal_point && Number(data.appeal_point) <= 0)
-            }
+            isInvalid={error.appealPoints || data.appeal_point < 0}
           />
           <Form.Control.Feedback type="invalid">
             {t("errors.fillRequired")}
@@ -554,7 +555,7 @@ export default function RegisterEmployerStep2() {
             value={data.fee}
             onChange={handleChange}
             onFocus={(e) => e.target.select()}
-            isInvalid={error.fee || (!!data.fee && Number(data.fee) <= 0)}
+            isInvalid={error.fee || data.fee < 0}
           />
           <Form.Control.Feedback type="invalid">
             {t("errors.fillRequired")}
@@ -563,17 +564,19 @@ export default function RegisterEmployerStep2() {
 
         {/* Founded Date */}
         <Form.Group className="mb-3" controlId="founded">
-          <Form.Label>Company Founded</Form.Label>
+          <Form.Label>Company Founded Year</Form.Label>
           <Form.Control
             required
-            type="date"
+            type="number"
             name="founded"
-            placeholder={"Enter Company Founded Date"}
+            placeholder={"Enter Company Founded Year (Greater than 1000)"}
             value={data.founded}
             onChange={handleChange}
             onFocus={(e) => e.target.select()}
             isInvalid={
-              error.founded || (!!data.founded && Number(data.founded) <= 0)
+              error.founded ||
+              (data.founded > 0 && data.founded <= 1000) ||
+              data.founded > new Date().getFullYear()
             }
           />
           <Form.Control.Feedback type="invalid">
@@ -594,7 +597,8 @@ export default function RegisterEmployerStep2() {
             onChange={handleChange}
             onFocus={(e) => e.target.select()}
             isInvalid={
-              error.profile || (!!data.profile && Number(data.profile) <= 0)
+              error.profile ||
+              (data.profile.length > 0 && data.profile.length < 5)
             }
           />
           <Form.Control.Feedback type="invalid">

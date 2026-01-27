@@ -97,8 +97,8 @@ export default function RegisterEmployerStep4({
     const { accountInfo, ...finalSubmissionDetails } = employerData;
 
     const fullFormData: RegisterUserArgs = {
-      email: employerData.accountInfo.email,
-      password: employerData.accountInfo.password,
+      email: accountInfo.email,
+      password: accountInfo.password,
       user_type: "employer",
       details: JSON.stringify(finalSubmissionDetails),
     };

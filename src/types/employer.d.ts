@@ -6,9 +6,9 @@ export interface RegisterEmployerStep2Data {
   phone: string;
   region: string;
   address: string;
-  founded: string; // add
-  profile: string; // add
-  no_of_emp: string;
+  founded: number;
+  profile: string;
+  no_of_emp: number;
   appeal_point: number;
   branch_office: string[];
   company_industry: string[];
