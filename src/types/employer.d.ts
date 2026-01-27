@@ -1,23 +1,25 @@
 import { RegistrationStep1 } from "./user-register";
 
 export interface RegisterEmployerStep2Data {
-  companyName: string;
-  companyAddress: string;
-  phoneNumber: string;
-  industries: string[];
-  regions: string;
-  numberOfEmployees: string;
-  branchOffices: string[];
-  appealPoints: number;
   fee: number;
+  name: string;
+  phone: string;
+  region: string;
+  address: string;
+  founded: string; // add
+  profile: string; // add
+  no_of_emp: string;
+  appeal_point: number;
+  branch_office: string[];
+  company_industry: string[];
 }
 
 // Step 3: Contact person details
 export interface RegisterEmployerStep3Data {
   name: string;
-  departmentName: string;
-  phoneNumber: string;
-  emailAddress: string;
+  email: string;
+  phone: string;
+  department_name: string;
 }
 
 // Step 4: Agreement checkboxes
@@ -30,9 +32,11 @@ export interface RegisterEmployerStep4Data {
 // All employer data
 export interface RegisterEmployerData {
   accountInfo: RegistrationStep1;
-  employerInfo: RegisterEmployerStep2Data;
-  contactPerson: RegisterEmployerStep3Data;
-  termsAndConditions: RegisterEmployerStep4Data;
+  company_information: RegisterEmployerStep2Data;
+  contact_person: RegisterEmployerStep3Data;
+  accept_terms: boolean;
+  accept_privacy: boolean;
+  receive_email: boolean;
 }
 
 // Main state interface for employer registration

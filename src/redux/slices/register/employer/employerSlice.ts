@@ -4,7 +4,6 @@ import {
   RegisterEmployer,
   RegisterEmployerStep2Data,
   RegisterEmployerStep3Data,
-  RegisterEmployerStep4Data,
 } from "@/types/employer";
 import { RegistrationStep1 } from "@/types/user-register";
 import { registerThunk } from "../registerThunk";
@@ -16,28 +15,28 @@ const initialState: RegisterEmployer = {
       email: "",
       password: "",
     },
-    employerInfo: {
-      companyName: "",
-      companyAddress: "",
-      phoneNumber: "",
-      industries: [],
-      regions: "",
-      numberOfEmployees: "",
-      branchOffices: [],
-      appealPoints: 0,
-      fee: 0,
-    },
-    contactPerson: {
+    company_information: {
       name: "",
-      departmentName: "",
-      phoneNumber: "",
-      emailAddress: "",
+      address: "",
+      phone: "",
+      company_industry: [],
+      region: "",
+      no_of_emp: "",
+      branch_office: [],
+      appeal_point: 0,
+      fee: 0,
+      founded: "",
+      profile: "",
     },
-    termsAndConditions: {
-      acceptTerms: false,
-      acceptPrivacyPolicy: false,
-      acceptReceiveEmails: false,
+    contact_person: {
+      name: "",
+      department_name: "",
+      phone: "",
+      email: "",
     },
+    accept_terms: false,
+    accept_privacy: false,
+    receive_email: false,
   },
   isLoading: false,
   isError: false,
@@ -75,19 +74,20 @@ export const registerEmployerSlice = createSlice({
       state,
       action: PayloadAction<RegisterEmployerStep2Data>,
     ) => {
-      state.registerEmployerData.employerInfo = action.payload;
+      state.registerEmployerData.company_information = action.payload;
     },
     saveRegEmployerStep3: (
       state,
       action: PayloadAction<RegisterEmployerStep3Data>,
     ) => {
-      state.registerEmployerData.contactPerson = action.payload;
+      state.registerEmployerData.contact_person = action.payload;
     },
-    saveRegEmployerStep4: (
-      state,
-      action: PayloadAction<RegisterEmployerStep4Data>,
-    ) => {
-      state.registerEmployerData.termsAndConditions = action.payload;
+    saveRegEmployerStep4: (state, action) => {
+      state.registerEmployerData.accept_terms = action.payload.accept_terms;
+      state.registerEmployerData.accept_privacy =
+        action.payload.accept_privacy;
+      state.registerEmployerData.receive_email =
+        action.payload.receive_email;
     },
 
     // Clear State

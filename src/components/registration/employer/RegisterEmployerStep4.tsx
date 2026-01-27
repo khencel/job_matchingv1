@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 import { RegisterUserArgs } from "@/types/user-register";
-import { RegisterEmployerStep4Data } from "@/types/employer";
 import { saveRegEmployerStep4 } from "@/redux/slices/register/employer/employerSlice";
 import { registerThunk } from "@/redux/slices/register/registerThunk";
 
@@ -21,14 +20,16 @@ export default function RegisterEmployerStep4({
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((s) => s.registerEmployer);
   const t = useTranslations("registerEmployerStep4");
-  const tnc = useAppSelector(
-    (s) => s.registerEmployer.registerEmployerData.termsAndConditions,
-  );
+  const tnc = useAppSelector((s) => s.registerEmployer.registerEmployerData);
   const employerData = useAppSelector(
     (s) => s.registerEmployer.registerEmployerData,
   );
 
-  const [data, setData] = useState<RegisterEmployerStep4Data>(tnc);
+  const [data, setData] = useState({
+    accept_terms: tnc.accept_terms,
+    accept_privacy: tnc.accept_privacy,
+    receive_email: tnc.receive_email,
+  });
   const [error, setError] = useState<{ [name: string]: boolean }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +39,14 @@ export default function RegisterEmployerStep4({
 
     // update data
     setData((prev) => ({ ...prev, [name]: checked }));
-    dispatch(saveRegEmployerStep4({ ...data, [name]: checked }));
+    dispatch(
+      saveRegEmployerStep4({
+        accept_terms: name === "accept_terms" ? checked : data.accept_terms,
+        accept_privacy:
+          name === "accept_privacy" ? checked : data.accept_privacy,
+        receive_email: name === "receive_email" ? checked : data.receive_email,
+      }),
+    );
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -67,14 +75,14 @@ export default function RegisterEmployerStep4({
     const validationErrors: Record<string, boolean> = {};
 
     // Validate terms and conditions acceptance
-    if (!data.acceptTerms) {
-      validationErrors.acceptTerms = true;
+    if (!data.accept_terms) {
+      validationErrors.accept_terms = true;
       hasError = true;
     }
 
     // Validate privacy policy acceptance
-    if (!data.acceptPrivacyPolicy) {
-      validationErrors.acceptPrivacyPolicy = true;
+    if (!data.accept_privacy) {
+      validationErrors.accept_privacy = true;
       hasError = true;
     }
 
@@ -86,11 +94,13 @@ export default function RegisterEmployerStep4({
     setError({});
     dispatch(saveRegEmployerStep4(data));
 
+    const { accountInfo, ...finalSubmissionDetails } = employerData;
+
     const fullFormData: RegisterUserArgs = {
       email: employerData.accountInfo.email,
       password: employerData.accountInfo.password,
       user_type: "employer",
-      details: JSON.stringify(employerData),
+      details: JSON.stringify(finalSubmissionDetails),
     };
 
     try {
@@ -129,12 +139,12 @@ export default function RegisterEmployerStep4({
           <Form.Check
             className="px-5"
             type="checkbox"
-            name="acceptTerms"
+            name="accept_terms"
             label={t("labels.acceptTerms")}
-            checked={data.acceptTerms}
+            checked={data.accept_terms}
             onChange={handleChange}
             required
-            isInvalid={error.acceptTerms}
+            isInvalid={error.accept_terms}
             feedback={t("errors.acceptTerms")}
             feedbackType="invalid"
           />
@@ -144,12 +154,12 @@ export default function RegisterEmployerStep4({
           <Form.Check
             className="px-5"
             type="checkbox"
-            name="acceptPrivacyPolicy"
+            name="accept_privacy"
             label={t("labels.acceptPrivacyPolicy")}
-            checked={data.acceptPrivacyPolicy}
+            checked={data.accept_privacy}
             onChange={handleChange}
             required
-            isInvalid={error.acceptPrivacyPolicy}
+            isInvalid={error.accept_privacy}
             feedback={t("errors.acceptPrivacy")}
             feedbackType="invalid"
           />
@@ -159,9 +169,9 @@ export default function RegisterEmployerStep4({
           <Form.Check
             className="px-5"
             type="checkbox"
-            name="acceptReceiveEmails"
+            name="receive_email"
             label={t("labels.acceptReceiveEmails")}
-            checked={data.acceptReceiveEmails}
+            checked={data.receive_email}
             onChange={handleChange}
           />
         </Form.Group>
