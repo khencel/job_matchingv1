@@ -1,53 +1,30 @@
 "use client";
-import { FormEvent, useRef } from "react"; // 1. Needed for printing
+import { FormEvent, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 // Components
-import BasicInfo from "@/components/jobSeekerDashboard/resumeBuilder/BasicInfo";
-import Education from "@/components/jobSeekerDashboard/resumeBuilder/Education";
-import Skills from "@/components/jobSeekerDashboard/resumeBuilder/Skills";
-import WorkExp from "@/components/jobSeekerDashboard/resumeBuilder/WorkExp";
-import { ResumeTemplate } from "@/components/jobSeekerDashboard/resumeBuilder/ResumeTemplate"; // Import your Template
+import { ResumeTemplate } from "@/app/(with-auth)/job-seeker/resume-builder/ResumeTemplate";
+import ResumeForm from "./resume-form";
 
 // Redux & Icons
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import {
-  goNextResumeTab,
-  saveResume,
-  canSaveResume,
-} from "@/redux/slices/resumeSlice";
-import {
-  BuildingIcon,
-  MenuIcon,
-  School2Icon,
-  UserPenIcon,
-  UserStar,
-  DownloadIcon,
-  SaveIcon,
-} from "lucide-react";
-import { ReactElement, useState } from "react";
-import { Button, Nav, Tab, Spinner, Alert } from "react-bootstrap";
+import { saveResume } from "@/redux/slices/resumeSlice";
+import { DownloadIcon, SaveIcon } from "lucide-react";
+import { Button, Spinner, Row, Col } from "react-bootstrap";
 import { showSuccessToast } from "@/app/(util)/toaster";
-import { ResumeBuilderData } from "@/types/resume-builder";
 
 const ResumeBuilderPage = () => {
   const dispatch = useAppDispatch();
 
   // SELECTORS
-  const resumeTab = useAppSelector((s) => s.resumeBuilder.resumeTab);
-  const isLoading = useAppSelector((s) => s.resumeBuilder.isLoading);
-  const error = useAppSelector((s) => s.resumeBuilder.error);
-  const user = useAppSelector((s) => s.authState.user);
-  const resumeData = useAppSelector((s) => s.resumeBuilder);
-  const basicInfo = useAppSelector((s) => s.resumeBuilder.basicInfo);
-  const education = useAppSelector((s) => s.resumeBuilder.education);
-  const workExperience = useAppSelector((s) => s.resumeBuilder.workExperience);
-  const skills = useAppSelector((s) => s.resumeBuilder.skills);
-  const isSaveDisabled = !useAppSelector((s) => canSaveResume(s.resumeBuilder));
-
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+  const {
+    data: resumeData,
+    isLoading,
+    error,
+  } = useAppSelector((state) => state.resumeBuilder);
+  const user = useAppSelector((state) => state.authState.user);
 
   // SAVE RESUME HANDLER
   const handleSaveResume = async (e: FormEvent) => {
@@ -85,19 +62,12 @@ const ResumeBuilderPage = () => {
         return;
       }
 
-      const resumeInfo = {
-        basicInfo: basicInfo,
-        education: education,
-        workExperience: workExperience,
-        skills: skills,
-      };
-
       if (!user) return;
 
       await dispatch(
         saveResume({
           user: user.id,
-          resume_info: JSON.stringify(resumeInfo),
+          resume_info: JSON.stringify(resumeData),
           resume: new File([blob], "resume.pdf", { type: "application/pdf" }),
         }),
       ).unwrap();
@@ -112,90 +82,20 @@ const ResumeBuilderPage = () => {
   const templateRef = useRef<HTMLDivElement>(null);
   const handlePrint = useReactToPrint({
     contentRef: templateRef,
-    documentTitle: `Resume-${basicInfo?.firstName} ${
-      basicInfo?.lastName || "Draft"
-    }`,
+    documentTitle: `Resume-Drafts`,
   });
-
-  const handleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
-  };
 
   return (
     <div
       className="d-flex flex-grow-1 overflow-hidden"
       style={{ height: "100vh" }}
     >
-      <Tab.Container
-        id={`sidebar ${isCollapsed && "justify-content-center"}`}
-        activeKey={resumeTab}
-        onSelect={(key) => {
-          if (key) {
-            dispatch(goNextResumeTab(key as ResumeBuilderData["resumeTab"]));
-          }
-        }}
-      >
-        {/* COLUMN 1: Sidebar */}
-        <div
-          className={`sidebar ${isCollapsed ? "collapsed" : ""} border-end`}
-          style={{ width: isCollapsed ? "80px" : "15%", transition: "0.3s" }}
-        >
-          <div className="sidebar-header p-3 d-flex justify-content-between align-items-center">
-            <h5 className="sidebar-title m-0 text-truncate">
-              {!isCollapsed && "RESUME BUILDER"}
-            </h5>
-            <Button
-              variant="link"
-              onClick={handleCollapse}
-              className="p-0 text-dark"
-            >
-              <MenuIcon />
-            </Button>
-          </div>
-          <Nav className="flex-column">
-            {navItems.map((items) => (
-              <Nav.Item key={items.key}>
-                <Nav.Link eventKey={items.key} className="sidebar-text">
-                  {items.icon}
-                  {!isCollapsed && <span>{items.label}</span>}
-                </Nav.Link>
-              </Nav.Item>
-            ))}
-          </Nav>
-        </div>
+      <Row className="g-4 flex-grow-1 w-100" style={{ height: "100%" }}>
+        <Col md={4} className="h-100">
+          <ResumeForm />
+        </Col>
 
-        {/* COLUMN 2: Input Fields (Middle Pane) */}
-        <div
-          className="flex-grow-1 p-4 bg-white border-end"
-          style={{ overflowY: "auto", maxWidth: "25%" }}
-        >
-          <Tab.Content>
-            {navItems.map((item) => (
-              <Tab.Pane eventKey={item.key} key={item.key}>
-                {item.component}
-              </Tab.Pane>
-            ))}
-          </Tab.Content>
-        </div>
-
-        {/* COLUMN 3: Resume Preview (Right Pane) */}
-        {/* This must be distinct from Tab.Content because it shows the WHOLE document */}
-        <div
-          className="flex-grow-1 p-4 bg-secondary bg-opacity-10 d-flex flex-column align-items-center"
-          style={{ overflowY: "auto" }}
-        >
-          {/* Error Alerts */}
-          {error && (
-            <Alert
-              variant="danger"
-              dismissible
-              className="w-100"
-              style={{ maxWidth: "210mm" }}
-            >
-              {error}
-            </Alert>
-          )}
-
+        <Col lg={8} className="d-flex flex-column align-items-center h-100">
           {/* Toolbar / Action Buttons */}
           <div
             className="w-100 d-flex justify-content-end gap-2 mb-3"
@@ -204,13 +104,8 @@ const ResumeBuilderPage = () => {
             <Button
               variant="success"
               onClick={handleSaveResume}
-              disabled={isLoading || isSaveDisabled}
               className="d-flex gap-2 align-items-center shadow-sm"
-              title={
-                isSaveDisabled
-                  ? "Complete Basic Information and Language Level first"
-                  : "Save Resume"
-              }
+              title="Save Resume"
             >
               {isLoading ? (
                 <>
@@ -227,61 +122,31 @@ const ResumeBuilderPage = () => {
             <Button
               variant="primary"
               onClick={() => handlePrint()}
-              disabled={isSaveDisabled}
               className="d-flex gap-2 align-items-center shadow-sm"
-              title={
-                isSaveDisabled
-                  ? "Complete Basic Information and Language Level first"
-                  : "Print Resume"
-              }
+              title="Print Resume"
             >
               <DownloadIcon size={18} />
               Print Resume
             </Button>
           </div>
-
           {/* The Actual Resume Template */}
-          <div className="shadow-lg bg-white">
-            <ResumeTemplate ref={templateRef} data={resumeData} />
+          <div
+            className="shadow-lg bg-white w-100 flex-grow-1"
+            style={{
+              maxWidth: "210mm",
+              width: "100%",
+              maxHeight: "calc(100vh - 180px)",
+              overflowY: "auto",
+            }}
+          >
+            <div className="p-3">
+              <ResumeTemplate ref={templateRef} data={resumeData} />
+            </div>
           </div>
-        </div>
-      </Tab.Container>
+        </Col>
+      </Row>
     </div>
   );
 };
 
 export default ResumeBuilderPage;
-
-interface NavItems {
-  key: string;
-  label: string;
-  icon: ReactElement;
-  component: ReactElement;
-}
-
-const navItems: NavItems[] = [
-  {
-    key: "basic-info",
-    label: "Basic Information",
-    icon: <UserPenIcon size={20} />,
-    component: <BasicInfo />,
-  },
-  {
-    key: "education",
-    label: "Education",
-    icon: <School2Icon size={20} />,
-    component: <Education />,
-  },
-  {
-    key: "work-xp",
-    label: "Work Experience",
-    icon: <BuildingIcon size={20} />,
-    component: <WorkExp />,
-  },
-  {
-    key: "skills",
-    label: "Skills",
-    icon: <UserStar size={20} />,
-    component: <Skills />,
-  },
-];

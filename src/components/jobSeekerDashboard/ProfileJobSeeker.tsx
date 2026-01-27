@@ -44,9 +44,7 @@ const EditJobSeeker = () => {
   const avatar = useAppSelector((s) => s.authState.user?.avatar);
 
   // Get the resume path from Redux
-  const existingResume = useAppSelector(
-    (s) => s.authState.user?.userDetails_job_seeker?.resume,
-  );
+  const existingResume = useAppSelector((s) => s.authState.user?.resume);
   // Editable source
   const updateUser = useAppSelector((s) => s.updateProfile.details);
 
@@ -681,25 +679,6 @@ const EditJobSeeker = () => {
               <h5 className="fw-bold mb-0 d-flex align-items-center gap-2">
                 <FileText size={20} /> Resume
               </h5>
-              {displayResumeUrl && (
-                <div className="d-flex gap-2">
-                  <Button
-                    variant="outline-danger"
-                    size="sm"
-                    className="d-flex align-items-center gap-1"
-                    onClick={handleCancelResumeUpload}
-                  >
-                    <Trash2Icon size={14} /> Cancel Upload
-                  </Button>
-                  <Button
-                    variant="outline-primary"
-                    size="sm"
-                    onClick={handleUpdateResume}
-                  >
-                    <UploadIcon size={14} /> Update Resume
-                  </Button>
-                </div>
-              )}
             </Card.Header>
             <Card.Body className="p-4">
               {displayResumeUrl ? (
