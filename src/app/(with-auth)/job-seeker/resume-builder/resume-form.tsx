@@ -1,12 +1,13 @@
 "use client";
 
-import { ChangeEvent, useMemo, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 import { Button, Card, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { Plus, Trash2, X } from "lucide-react";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { updateResumeData } from "@/redux/slices/resumeSlice";
 import { ResumeData } from "@/types/resume-builder";
+import Image from "next/image";
 
 type EducationKey = "year" | "month" | "description";
 type WorkKey = "year" | "month" | "description";
@@ -57,12 +58,16 @@ const ResumeForm = () => {
 
   const validationRules: Record<string, (value: string) => string | null> = {
     fullName: (value) => (value.trim() ? null : "Full name is required."),
+    gender: (value) => (value.trim() ? null : "Gender is required."),
     email: (value) =>
       /\S+@\S+\.\S+/.test(value) ? null : "Please provide a valid email.",
     phone: (value) =>
       value.trim().length >= 7 ? null : "Phone number is too short.",
     address: (value) => (value.trim() ? null : "Address is required."),
     birthdate: (value) => (value ? null : "Birthdate is required."),
+    age: (value) => (Number(value) > 0 ? null : "Age is required."),
+    postalCode: (value) => (value.trim() ? null : "Postal code is required."),
+    reasons: (value) => (value.trim() ? null : "Motivation is required."),
   };
 
   const runValidation = (name: string, value: string) => {
@@ -71,12 +76,36 @@ const ResumeForm = () => {
     setErrors((prev) => ({ ...prev, [name]: message || "" }));
   };
 
+  const validateAllRequired = () => {
+    const nextErrors: Record<string, string> = {};
+
+    (Object.keys(validationRules) as Array<keyof ResumeData>).forEach(
+      (field) => {
+        const rawValue = resumeData[field];
+        const value =
+          rawValue === undefined || rawValue === null ? "" : String(rawValue);
+        const message = validationRules[field]?.(value) || "";
+        if (message) nextErrors[field] = message;
+      },
+    );
+
+    if (!resumeData.photoUrl?.trim()) {
+      nextErrors.photoUrl = "Photo is required.";
+    }
+
+    setErrors(nextErrors);
+  };
+
+  useEffect(() => {
+    validateAllRequired();
+  }, [resumeData]);
+
   const dispatchUpdate = (payload: Partial<ResumeData>) => {
     dispatch(updateResumeData(payload));
   };
 
   const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     runValidation(name, value);
@@ -196,6 +225,7 @@ const ResumeForm = () => {
     reader.onload = () => {
       const result = typeof reader.result === "string" ? reader.result : "";
       dispatchUpdate({ photoUrl: result });
+      setErrors((prev) => ({ ...prev, photoUrl: "" }));
     };
     reader.readAsDataURL(file);
   };
@@ -206,6 +236,7 @@ const ResumeForm = () => {
 
   const clearPhoto = () => {
     dispatchUpdate({ photoUrl: "" });
+    setErrors((prev) => ({ ...prev, photoUrl: "Photo is required." }));
     if (photoInputRef.current) photoInputRef.current.value = "";
   };
 
@@ -275,7 +306,11 @@ const ResumeForm = () => {
                     min={0}
                     value={resumeData.age || 0}
                     onChange={handleInputChange}
+                    isInvalid={Boolean(errors.age)}
                   />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.age}
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
@@ -286,7 +321,8 @@ const ResumeForm = () => {
                   <Form.Select
                     name="gender"
                     value={resumeData.gender}
-                    onChange={() => handleInputChange}
+                    onChange={handleInputChange}
+                    isInvalid={Boolean(errors.gender)}
                   >
                     <option value="">Select...</option>
                     <option value="female">Female</option>
@@ -294,6 +330,9 @@ const ResumeForm = () => {
                     <option value="non-binary">Non-binary</option>
                     <option value="prefer-not">Prefer not to say</option>
                   </Form.Select>
+                  <Form.Control.Feedback type="invalid">
+                    {errors.gender}
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
               <Col md={6}>
@@ -306,14 +345,12 @@ const ResumeForm = () => {
                         style={{ width: 64, height: 64 }}
                       >
                         {resumeData.photoUrl ? (
-                          <img
+                          <Image
                             src={resumeData.photoUrl}
                             alt="Resume avatar"
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              objectFit: "fill",
-                            }}
+                            width={100}
+                            height={100}
+                            objectFit="contain"
                           />
                         ) : (
                           <div className="h-100 w-100 d-flex align-items-center justify-content-center text-muted">
@@ -342,6 +379,9 @@ const ResumeForm = () => {
                     <Form.Text muted>PNG or JPG, up to 2MB.</Form.Text>
                     {uploadError && (
                       <div className="text-danger small">{uploadError}</div>
+                    )}
+                    {!resumeData.photoUrl && errors.photoUrl && (
+                      <div className="text-danger small">{errors.photoUrl}</div>
                     )}
                     <input
                       type="file"
@@ -414,7 +454,11 @@ const ResumeForm = () => {
                     value={resumeData.postalCode}
                     onChange={handleInputChange}
                     placeholder="123-4567"
+                    isInvalid={Boolean(errors.postalCode)}
                   />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.postalCode}
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
               <Col md={6}>
@@ -726,7 +770,11 @@ const ResumeForm = () => {
                 value={resumeData.reasons}
                 onChange={handleInputChange}
                 placeholder="Share your motivation or key points"
+                isInvalid={Boolean(errors.reasons)}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.reasons}
+              </Form.Control.Feedback>
             </Form.Group>
           </section>
         </Form>

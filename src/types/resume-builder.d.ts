@@ -87,17 +87,13 @@ export interface ResumeData {
     phone?: string;
     email?: string;
   };
-
   // Education & Work history
   education: Array<{ year: string; month: string; description: string }>;
   work: Array<{ year: string; month: string; description: string }>;
-
   // Licenses / Qualifications
   licenses?: Array<{ year: string; month: string; qualification: string }>;
-
   // Reasons / Statement
   reasons?: string;
-
   // Personal preferences
   preferences?: string[];
   createdAt?: string; // YYYY-MM-DD (作成日)

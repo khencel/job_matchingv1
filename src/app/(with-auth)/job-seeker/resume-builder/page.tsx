@@ -1,5 +1,5 @@
 "use client";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useMemo, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -19,12 +19,33 @@ const ResumeBuilderPage = () => {
   const dispatch = useAppDispatch();
 
   // SELECTORS
-  const {
-    data: resumeData,
-    isLoading,
-    error,
-  } = useAppSelector((state) => state.resumeBuilder);
+  const { data: resumeData, isLoading } = useAppSelector(
+    (state) => state.resumeBuilder,
+  );
   const user = useAppSelector((state) => state.authState.user);
+
+  const isResumeValid = useMemo(() => {
+    const hasRequiredText = (value?: string) => Boolean(value?.trim());
+    const hasValidEmail = (value?: string) =>
+      Boolean(value && /\S+@\S+\.\S+/.test(value));
+    const hasValidPhone = (value?: string) =>
+      Boolean(value && value.trim().length >= 7);
+    const hasValidAge =
+      typeof resumeData.age === "number" && resumeData.age > 0;
+
+    return (
+      hasRequiredText(resumeData.fullName) &&
+      hasRequiredText(resumeData.birthdate) &&
+      hasValidAge &&
+      hasRequiredText(resumeData.gender) &&
+      hasRequiredText(resumeData.photoUrl) &&
+      hasValidEmail(resumeData.email) &&
+      hasValidPhone(resumeData.phone) &&
+      hasRequiredText(resumeData.address) &&
+      hasRequiredText(resumeData.postalCode) &&
+      hasRequiredText(resumeData.reasons)
+    );
+  }, [resumeData]);
 
   // SAVE RESUME HANDLER
   const handleSaveResume = async (e: FormEvent) => {
@@ -56,11 +77,6 @@ const ResumeBuilderPage = () => {
       const blob = pdf.output("blob");
       // DEBUG: Check the size before sending
       console.log(`Blob size: ${(blob.size / 1024 / 1024).toFixed(2)} MB`);
-
-      if (blob.size > 10 * 1024 * 1024) {
-        alert("Resume file is too large. Reduce image resolution or content.");
-        return;
-      }
 
       if (!user) return;
 
@@ -106,6 +122,7 @@ const ResumeBuilderPage = () => {
               onClick={handleSaveResume}
               className="d-flex gap-2 align-items-center shadow-sm"
               title="Save Resume"
+              disabled={!isResumeValid || isLoading}
             >
               {isLoading ? (
                 <>

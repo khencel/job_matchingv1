@@ -1,6 +1,6 @@
 import apiClient from "@/lib/axios";
 import { ResumeData, SaveResumePayload } from "@/types/resume-builder";
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
 // Async Thunk for saving resume to database
