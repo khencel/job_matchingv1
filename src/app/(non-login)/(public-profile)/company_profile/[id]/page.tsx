@@ -1,66 +1,59 @@
 "use client";
 
-import { Container, Row, Col, Card, Badge, Image } from "react-bootstrap";
+import { Container, Row, Col, Card, Badge } from "react-bootstrap";
 import "../company-profile.css";
-
-const employerData = {
-  contact_person: {
-    name: "Mccel Villanueva",
-    email: "ss@email.com",
-    phone: "999999",
-    department_name: "dada",
-  },
-  company_information: {
-    fee: "1",
-    name: "employer",
-    phone: "11111111",
-    region: "Kanto",
-    address: "e,ployer",
-    founded: "2001",
-    profile: "dasdas",
-    no_of_emp: "1",
-    appeal_point: "1",
-    branch_office: ["dkj"],
-    company_industry: ["Healthcare"],
-    perks_benefits: [],
-    avatar: null,
-    banner: null,
-  },
-};
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { getPublicProfile } from "@/redux/slices/publicProfileSlice";
 
 const CompanyProfilePage = () => {
-  const { contact_person, company_information } = employerData;
-  const hasBanner = Boolean(company_information.banner);
-  const hasAvatar = Boolean(company_information.avatar);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
-  const bannerStyle = {
-    backgroundImage: hasBanner
-      ? `url(${company_information.banner})`
-      : undefined,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  };
+  const params = useParams();
+  const id = params.id;
 
-  const avatarStyle = {
-    backgroundImage: hasAvatar
-      ? `url(${company_information.avatar})`
-      : undefined,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  };
+  useEffect(() => {
+    if (id) {
+      // @ts-expect-error : id is string, but our thunk expects a number
+      dispatch(getPublicProfile(id));
+      console.log(user);
+    }
+  }, [id, dispatch]);
+
+  const { user, loading } = useAppSelector((state) => state.publicProfile);
+
+  if (user?.role === "job_seeker") {
+    return router.push(`/job_seeker_profile/${id}`);
+  }
+  if (user?.role === "supervisory") {
+    return router.push(`/supervisory_profile/${id}`);
+  }
+
+  const company_information = user?.userDetails_emp.company_information;
+  const contact_person = user?.userDetails_emp.contact_person;
+
+  const hasAvatar = Boolean(user?.avatar);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user || !company_information || !contact_person) {
+    return (
+      <div className="text-center">No company profile data available.</div>
+    );
+  }
 
   return (
     <div className="company-profile-wrapper">
       <Container className="mt-4 mb-5">
         <Card className="company-profile-card">
-          <div className="banner banner-gradient" style={bannerStyle}></div>
-
+          <div className="banner banner-gradient"></div>
           <Card.Body className="company-profile-body">
             <div className="avatar-header-container">
-              <div
-                className={`avatar ${hasAvatar ? "with-image" : ""}`}
-                style={avatarStyle}
-              >
+              <div className={`avatar ${hasAvatar ? "with-image" : ""}`}>
                 {!hasAvatar &&
                   company_information.name.slice(0, 1).toUpperCase()}
               </div>
@@ -178,11 +171,19 @@ const CompanyProfilePage = () => {
                   <Card.Body>
                     <h3 className="detail-card-title">Company industry</h3>
                     <div className="industry-container">
-                      {company_information.company_industry.map((industry) => (
-                        <Badge pill bg="primary-subtle" text="dark" className="py-2 px-3" key={industry}>
-                          {industry}
-                        </Badge>
-                      ))}
+                      {company_information.company_industry.map(
+                        (industry: string) => (
+                          <Badge
+                            pill
+                            bg="primary-subtle"
+                            text="dark"
+                            className="py-2 px-3"
+                            key={industry}
+                          >
+                            {industry}
+                          </Badge>
+                        ),
+                      )}
                     </div>
                   </Card.Body>
                 </Card>
@@ -191,11 +192,13 @@ const CompanyProfilePage = () => {
                   <Card.Body>
                     <h3 className="detail-card-title">Branch offices</h3>
                     <ul className="branch-list">
-                      {company_information.branch_office.map((branch) => (
-                        <li key={branch} className="branch-item">
-                          {branch}
-                        </li>
-                      ))}
+                      {company_information.branch_office.map(
+                        (branch: string) => (
+                          <li key={branch} className="branch-item">
+                            {branch}
+                          </li>
+                        ),
+                      )}
                     </ul>
                   </Card.Body>
                 </Card>
@@ -203,11 +206,11 @@ const CompanyProfilePage = () => {
                 <Card className="perks-card">
                   <Card.Body>
                     <h3 className="detail-card-title">Perks & benefits</h3>
-                    {company_information.perks_benefits.length === 0 ? (
+                    {!user.perks_benefits ? (
                       <p className="perks-empty-message">No perks added yet.</p>
                     ) : (
                       <ul className="branch-list">
-                        {company_information.perks_benefits.map((perk) => (
+                        {user.perks_benefits.map((perk) => (
                           <li key={perk} className="perk-item">
                             {perk}
                           </li>

@@ -2,7 +2,6 @@
 
 import Footer from "@/components/Footer";
 import Navbar from "@/components/navbar/Navbar";
-import { BookmarkIcon, MoveRightIcon, Share2Icon } from "lucide-react";
 import Image from "next/image";
 import {
   Button,
@@ -19,7 +18,6 @@ import { applyToJob, fetchJobDetails } from "@/redux/slices/jobs/jobsThunk";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useParams, useRouter } from "next/navigation";
-import { formatDate } from "@/helper/formatDate";
 import JobPost from "@/components/JobPost";
 import Swal from "sweetalert2";
 
@@ -117,23 +115,29 @@ const JobDescriptionPage = () => {
               width={75}
               src={"/globe.svg"}
               height={75}
-              alt="sample pic"
+              alt="Company Logo"
             ></Image>
             <div className="d-flex flex-column gap-2">
               <CardTitle className="fw-bold text-dark">
                 {jobDetails.title}
               </CardTitle>
               <CardSubtitle className="fw-normal text-dark small">
-                {jobDetails.type_of_emp.type}
+                {
+                  jobDetails.employer[0].userDetails_emp.company_information
+                    .name
+                }
               </CardSubtitle>
             </div>
           </div>
           <div className="d-flex justify-content-center align-items-center gap-2">
-            <Button variant="ghost">
-              <Share2Icon />
-            </Button>
-            <Button variant="ghost">
-              <BookmarkIcon />
+            <Button
+              onClick={() =>
+                router.push(`/company_profile/${jobDetails.user_id}`)
+              }
+              variant="outline-secondary"
+              className="rounded-pill py-1"
+            >
+              Visit Profile
             </Button>
             <div
               style={{ borderRight: "1px solid #ccc", height: "36px" }}
@@ -195,11 +199,6 @@ const JobDescriptionPage = () => {
               <Row>
                 <Col>
                   <p className="fw-light">{t("labels.jobPostedOn")}</p>
-                </Col>
-                <Col>
-                  <p className="fw-medium text-end">
-                    {formatDate(jobDetails.created_at)}
-                  </p>
                 </Col>
               </Row>
               <Row>
