@@ -220,6 +220,16 @@ export default function RegisterEmployerStep2() {
       hasError = true;
     }
 
+    if (data.founded <= 1000 || data.founded > new Date().getFullYear()) {
+      validationErrors.founded = true;
+      hasError = true;
+    }
+
+    if (!data.profile || data.profile.length < 5) {
+      validationErrors.profile = true;
+      hasError = true;
+    }
+
     if (hasError) {
       setError(validationErrors);
 
@@ -537,7 +547,7 @@ export default function RegisterEmployerStep2() {
             value={data.appeal_point}
             onChange={handleChange}
             onFocus={(e) => e.target.select()}
-            isInvalid={error.appealPoints || data.appeal_point < 0}
+            isInvalid={error.appeal_point || data.appeal_point < 0}
           />
           <Form.Control.Feedback type="invalid">
             {t("errors.fillRequired")}
@@ -574,9 +584,7 @@ export default function RegisterEmployerStep2() {
             onChange={handleChange}
             onFocus={(e) => e.target.select()}
             isInvalid={
-              error.founded ||
-              (data.founded > 0 && data.founded <= 1000) ||
-              data.founded > new Date().getFullYear()
+              error.founded || (data.founded > 0 && data.founded <= 1000)
             }
           />
           <Form.Control.Feedback type="invalid">
