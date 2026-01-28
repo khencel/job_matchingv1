@@ -56,49 +56,58 @@ const ResumeForm = () => {
     [resumeData.licenses],
   );
 
-  const validationRules: Record<string, (value: string) => string | null> = {
-    fullName: (value) => (value.trim() ? null : "Full name is required."),
-    gender: (value) => (value.trim() ? null : "Gender is required."),
-    email: (value) =>
-      /\S+@\S+\.\S+/.test(value) ? null : "Please provide a valid email.",
-    phone: (value) =>
-      value.trim().length >= 7 ? null : "Phone number is too short.",
-    address: (value) => (value.trim() ? null : "Address is required."),
-    birthdate: (value) => (value ? null : "Birthdate is required."),
-    age: (value) => (Number(value) > 0 ? null : "Age is required."),
-    postalCode: (value) => (value.trim() ? null : "Postal code is required."),
-    reasons: (value) => (value.trim() ? null : "Motivation is required."),
-  };
+  // 1. Validation Rules
+  // We use useMemo so the object reference doesn't change on every render
+  const validationRules = useMemo<
+    Record<string, (value: string) => string | null>
+  >(
+    () => ({
+      fullName: (value) => (value.trim() ? null : "Full name is required."),
+      gender: (value) => (value.trim() ? null : "Gender is required."),
+      email: (value) =>
+        /\S+@\S+\.\S+/.test(value) ? null : "Please provide a valid email.",
+      phone: (value) =>
+        value.trim().length >= 7 ? null : "Phone number is too short.",
+      address: (value) => (value.trim() ? null : "Address is required."),
+      birthdate: (value) => (value ? null : "Birthdate is required."),
+      age: (value) => (Number(value) > 0 ? null : "Age is required."),
+      postalCode: (value) => (value.trim() ? null : "Postal code is required."),
+      reasons: (value) => (value.trim() ? null : "Motivation is required."),
+      photoUrl: (value) => (value.trim() ? null : "Photo is required."),
+    }),
+    [],
+  );
+
+  // 2. NEW: Trigger Validation on Mount
+  useEffect(() => {
+    const initialErrors: Record<string, string> = {};
+
+    // Loop through all rules and check current Redux data
+    Object.keys(validationRules).forEach((key) => {
+      // Get value from resumeData (safely cast to string for validation)
+      const fieldKey = key as keyof ResumeData;
+      const rawValue = resumeData[fieldKey];
+      const stringValue =
+        rawValue === undefined || rawValue === null ? "" : String(rawValue);
+
+      const message = validationRules[key](stringValue);
+      if (message) {
+        initialErrors[key] = message;
+      }
+    });
+
+    // Set all errors at once
+    setErrors(initialErrors);
+
+    // Dependencies: empty array [] ensures this runs ONLY on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const runValidation = (name: string, value: string) => {
     if (!validationRules[name]) return;
     const message = validationRules[name](value);
     setErrors((prev) => ({ ...prev, [name]: message || "" }));
   };
-
-  const validateAllRequired = () => {
-    const nextErrors: Record<string, string> = {};
-
-    (Object.keys(validationRules) as Array<keyof ResumeData>).forEach(
-      (field) => {
-        const rawValue = resumeData[field];
-        const value =
-          rawValue === undefined || rawValue === null ? "" : String(rawValue);
-        const message = validationRules[field]?.(value) || "";
-        if (message) nextErrors[field] = message;
-      },
-    );
-
-    if (!resumeData.photoUrl?.trim()) {
-      nextErrors.photoUrl = "Photo is required.";
-    }
-
-    setErrors(nextErrors);
-  };
-
-  useEffect(() => {
-    validateAllRequired();
-  }, [resumeData]);
 
   const dispatchUpdate = (payload: Partial<ResumeData>) => {
     dispatch(updateResumeData(payload));
@@ -108,6 +117,7 @@ const ResumeForm = () => {
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
+    // This will clear the error as soon as the input is valid
     runValidation(name, value);
 
     const field = name as keyof ResumeData;
@@ -116,6 +126,7 @@ const ResumeForm = () => {
     dispatchUpdate({ [field]: parsedValue } as Partial<ResumeData>);
   };
 
+  // ... (Rest of your component functions: handleOtherContactChange, etc. remain the same) ...
   const handleOtherContactChange = (
     key: keyof NonNullable<ResumeData["otherContact"]>,
     value: string,
@@ -245,7 +256,7 @@ const ResumeForm = () => {
       <Card.Header className="bg-white">
         <div className="d-flex align-items-center justify-content-between">
           <div>
-            <Card.Title className="mb-0">Resume Details</Card.Title>
+            <Card.Title>Resume Details</Card.Title>
             <Card.Subtitle className="text-muted">
               Update fields to see the preview refresh instantly.
             </Card.Subtitle>
@@ -350,7 +361,7 @@ const ResumeForm = () => {
                             alt="Resume avatar"
                             width={100}
                             height={100}
-                            objectFit="contain"
+                            style={{ objectFit: "contain" }}
                           />
                         ) : (
                           <div className="h-100 w-100 d-flex align-items-center justify-content-center text-muted">
@@ -360,11 +371,13 @@ const ResumeForm = () => {
                       </div>
                       <div className="d-flex flex-column gap-2 flex-grow-1">
                         <Button
-                          variant="outline-secondary"
+                          variant="primary"
                           size="sm"
                           onClick={triggerPhotoUpload}
                         >
-                          Upload Image
+                          {resumeData.photoUrl
+                            ? "Change Image"
+                            : "Upload Image"}
                         </Button>
                         <Button
                           variant="outline-danger"
@@ -380,7 +393,7 @@ const ResumeForm = () => {
                     {uploadError && (
                       <div className="text-danger small">{uploadError}</div>
                     )}
-                    {!resumeData.photoUrl && errors.photoUrl && (
+                    {errors.photoUrl && (
                       <div className="text-danger small">{errors.photoUrl}</div>
                     )}
                     <input

@@ -106,17 +106,23 @@ const ResumeBuilderPage = () => {
       className="d-flex flex-grow-1 overflow-hidden"
       style={{ height: "100vh" }}
     >
-      <Row className="g-4 flex-grow-1 w-100" style={{ height: "100%" }}>
-        <Col md={4} className="h-100">
+      <Row className="g-4 flex-grow-1 w-100 h-100 p-4 overflow-hidden">
+        <Col md={5} className="h-100">
           <ResumeForm />
         </Col>
 
-        <Col lg={8} className="d-flex flex-column align-items-center h-100">
+        <Col lg={7} className="d-flex flex-column align-items-center h-100">
           {/* Toolbar / Action Buttons */}
           <div
-            className="w-100 d-flex justify-content-end gap-2 mb-3"
+            className="w-100 d-flex justify-content-end align-items-center gap-2 mb-3"
             style={{ maxWidth: "210mm" }}
           >
+            {isResumeValid ? null : (
+              <small className="text-danger">
+                Complete details before saving the resume. <br />
+                (Name, Photo, Contact Info, Address, Reasons)
+              </small>
+            )}
             <Button
               variant="success"
               onClick={handleSaveResume}
