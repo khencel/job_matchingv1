@@ -53,6 +53,7 @@ const EditJobSeeker = () => {
 
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
+  const [dateNow, setDateNow] = useState<number>();
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const fileResumeRef = useRef<HTMLInputElement | null>(null);
@@ -70,8 +71,8 @@ const EditJobSeeker = () => {
   ];
 
   const resumeUrl = useMemo(() => {
-    return `http://localhost:8000/media/${existingResume}`;
-  }, [existingResume]);
+    return `http://localhost:8000/media/${existingResume}?${dateNow}`;
+  }, [existingResume, dateNow]);
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
@@ -147,6 +148,7 @@ const EditJobSeeker = () => {
           avatar: avatarFile,
         }),
       ).unwrap();
+      setDateNow(Date.now());
       setIsEditMode(false);
       dispatch(fetchCurrentUser());
     } catch (err) {
