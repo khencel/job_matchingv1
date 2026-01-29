@@ -6,15 +6,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Dropdown } from "react-bootstrap";
-import {
-  BellIcon,
-  FolderHeartIcon,
-  FoldersIcon,
-  LogOutIcon,
-  UserCircleIcon,
-} from "lucide-react";
 import { showSuccessToast } from "@/app/(util)/toaster";
 import { logoutUser } from "@/redux/features/auth/auth_thunk";
+import DropdownNav from "@/components/navbar/DropdownNav";
 
 // Function to generate a color based on name
 const getAvatarColor = (name: string) => {
@@ -133,33 +127,7 @@ export default function Navbar() {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <div className="p-2 d-flex flex-column gap-3">
-                    <Dropdown.Item as={Link} href="/job-seeker/profile">
-                      <UserCircleIcon />
-                      <span className="ms-2">Profile</span>
-                    </Dropdown.Item>
-                    <Dropdown.Item as={Link} href="/job-seeker/applied-jobs">
-                      <FoldersIcon />
-                      <span className="ms-2">Application</span>
-                    </Dropdown.Item>
-                    <Dropdown.Item as={Link} href="/job-seeker/notifications">
-                      <BellIcon />
-                      <span className="ms-2">Notifications</span>
-                    </Dropdown.Item>
-                    <Dropdown.Item as={Link} href="/job-seeker/saved-jobs">
-                      <FolderHeartIcon />
-                      <span className="ms-2">Saved Jobs</span>
-                    </Dropdown.Item>
-                    {/* <Dropdown.Item as={Link} href="/job-seeker/messages">
-                      <MessagesSquareIcon />
-                      <span className="ms-2">Messages</span>
-                    </Dropdown.Item> */}
-                    <hr className="my-0 mx-auto" style={{ width: "90%" }} />
-                    <Dropdown.Item onClick={handleLogout} href="/">
-                      <LogOutIcon />
-                      <span className="ms-2">Logout</span>
-                    </Dropdown.Item>
-                  </div>
+                  <DropdownNav handleLogout={handleLogout} />
                 </Dropdown.Menu>
               </Dropdown>
             ) : (

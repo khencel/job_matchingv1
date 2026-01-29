@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 import JobPost from "../../components/JobPost";
 import ServiceContent from "../../components/ServiceContent";
 import About from "../../components/About";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/navbar/Navbar";
 import JobSearchFiler from "@/components/JobSearchFilter";
 import Registration from "../../components/registration/Registration";
 import "animate.css";

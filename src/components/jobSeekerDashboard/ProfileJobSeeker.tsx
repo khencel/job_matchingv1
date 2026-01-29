@@ -14,11 +14,9 @@ import {
   FileDownIcon,
   FileText,
   UploadCloud,
-  Trash2Icon,
-  UploadIcon,
 } from "lucide-react";
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import {
   Container,
   Row,
@@ -34,30 +32,28 @@ import { setJobSeekerField } from "@/redux/slices/updateProfile/updateProfileSli
 import { FaFacebook } from "react-icons/fa";
 import { isPhoneNumberValid } from "@/helper/validations";
 import { RegisterJobSeekerData } from "@/types/job-seeker";
+import { useRouter } from "next/navigation";
 
 const EditJobSeeker = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   // Read-only source
+  const email = useAppSelector((s) => s.authState.user?.email);
   const AuthUser = useAppSelector(
     (s) => s.authState.user?.userDetails_job_seeker,
   );
   const avatar = useAppSelector((s) => s.authState.user?.avatar);
 
   // Get the resume path from Redux
-  const existingResume = useAppSelector(
-    (s) => s.authState.user?.userDetails_job_seeker?.resume,
-  );
-  // Editable source
+  const existingResume = useAppSelector((s) => s.authState.user?.resume);
   const updateUser = useAppSelector((s) => s.updateProfile.details);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isEditMode, setIsEditMode] = useState(false);
 
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
-  const [resumePreview, setResumePreview] = useState<string | null>(null);
-
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
-  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [dateNow, setDateNow] = useState<number>();
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const fileResumeRef = useRef<HTMLInputElement | null>(null);
@@ -73,6 +69,10 @@ const EditJobSeeker = () => {
     { value: "masterDegree", label: "Master's Degree" },
     { value: "doctoralDegree", label: "Doctoral Degree" },
   ];
+
+  const resumeUrl = useMemo(() => {
+    return `http://localhost:8000/media/${existingResume}?${dateNow}`;
+  }, [existingResume, dateNow]);
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
@@ -90,37 +90,6 @@ const EditJobSeeker = () => {
     if (!file) return;
     setAvatarFile(file);
     setPhotoPreview(URL.createObjectURL(file));
-  };
-
-  const handleCancelResumeUpload = () => {
-    setResumeFile(null);
-    setResumePreview(null);
-    if (fileResumeRef.current) {
-      fileResumeRef.current.value = "";
-    }
-  };
-
-  const handleResumeFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setResumeFile(file);
-    setResumePreview(URL.createObjectURL(file));
-  };
-
-  const handleUpdateResume = async () => {
-    if (!resumeFile || resumePreview) return;
-
-    try {
-      await dispatch(
-        updateProfileThunk({
-          resume: resumeFile,
-        }),
-      ).unwrap();
-      setIsEditMode(false);
-      dispatch(fetchCurrentUser());
-    } catch (err) {
-      console.error("Failed to save", err);
-    }
   };
 
   const handleSaveProfile = async () => {
@@ -179,6 +148,7 @@ const EditJobSeeker = () => {
           avatar: avatarFile,
         }),
       ).unwrap();
+      setDateNow(Date.now());
       setIsEditMode(false);
       dispatch(fetchCurrentUser());
     } catch (err) {
@@ -195,13 +165,6 @@ const EditJobSeeker = () => {
     // @ts-expect-ignore
     return AuthUser?.jobSeekerData?.[field] || "N/A";
   };
-
-  // LOGIC: Determine which resume to show (Local Preview > Backend URL)
-  const displayResumeUrl = resumePreview
-    ? resumePreview
-    : existingResume
-      ? `http://localhost:8000${existingResume}`
-      : null;
 
   return (
     <Container fluid className="p-4 bg-light min-vh-100">
@@ -273,9 +236,7 @@ const EditJobSeeker = () => {
                   <div className="d-flex flex-wrap gap-3 text-muted">
                     <div className="d-flex align-items-center gap-1">
                       <Mail size={16} />
-                      <span className="small">
-                        {AuthUser?.accountInfo?.email || "No Email"}
-                      </span>
+                      <span className="small">{email}</span>
                     </div>
                     <div className="d-flex align-items-center gap-1">
                       <Phone size={16} />
@@ -323,7 +284,7 @@ const EditJobSeeker = () => {
                       >
                         <Edit2 size={16} /> Edit Profile
                       </Button>
-                      {!displayResumeUrl && (
+                      {!existingResume && (
                         <Button
                           variant="secondary"
                           className="d-flex align-items-center gap-2"
@@ -335,14 +296,6 @@ const EditJobSeeker = () => {
                       )}
                     </>
                   )}
-                  {/* Hidden Input for Resume */}
-                  <input
-                    type="file"
-                    ref={fileResumeRef}
-                    hidden
-                    accept=".pdf, image/*"
-                    onChange={handleResumeFileChange}
-                  />
                 </div>
               </div>
             </Col>
@@ -681,35 +634,16 @@ const EditJobSeeker = () => {
               <h5 className="fw-bold mb-0 d-flex align-items-center gap-2">
                 <FileText size={20} /> Resume
               </h5>
-              {displayResumeUrl && (
-                <div className="d-flex gap-2">
-                  <Button
-                    variant="outline-danger"
-                    size="sm"
-                    className="d-flex align-items-center gap-1"
-                    onClick={handleCancelResumeUpload}
-                  >
-                    <Trash2Icon size={14} /> Cancel Upload
-                  </Button>
-                  <Button
-                    variant="outline-primary"
-                    size="sm"
-                    onClick={handleUpdateResume}
-                  >
-                    <UploadIcon size={14} /> Update Resume
-                  </Button>
-                </div>
-              )}
             </Card.Header>
             <Card.Body className="p-4">
-              {displayResumeUrl ? (
+              {existingResume ? (
                 // IF RESUME EXISTS: Show Standard Iframe
                 <div
                   className="w-100 rounded border bg-light"
-                  style={{ height: "600px", overflow: "hidden" }}
+                  style={{ height: "600px" }}
                 >
                   <iframe
-                    src={displayResumeUrl}
+                    src={resumeUrl}
                     width="100%"
                     height="100%"
                     title="Resume Preview"
@@ -725,20 +659,20 @@ const EditJobSeeker = () => {
                   <div className="bg-white p-3 rounded-circle shadow-sm mb-3">
                     <UploadCloud size={32} className="text-primary" />
                   </div>
-                  <h6 className="fw-bold mb-1">No resume uploaded yet</h6>
+                  <h6 className="fw-bold mb-1">No resume created yet</h6>
                   <p
                     className="text-muted small mb-3 text-center"
                     style={{ maxWidth: "400px" }}
                   >
-                    Upload your resume to increase your chances of getting
+                    Create your resume to increase your chances of getting
                     hired. Employers are more likely to view profiles with
                     resumes.
                   </p>
                   <Button
                     variant="primary"
-                    onClick={() => fileResumeRef.current?.click()}
+                    onClick={() => router.push("/job-seeker/resume-builder")}
                   >
-                    Upload Resume
+                    Create Resume
                   </Button>
                 </div>
               )}

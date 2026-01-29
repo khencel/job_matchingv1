@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/navbar/Navbar";
 import { PropsWithChildren } from "react";
 
 export default function SuperVisoryLayout({ children }: PropsWithChildren) {

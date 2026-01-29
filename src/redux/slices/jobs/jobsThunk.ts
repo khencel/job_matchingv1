@@ -78,6 +78,7 @@ export const fetchJobDetails = createAsyncThunk(
   async (jobId: number, { rejectWithValue }) => {
     try {
       const res = await getJobById(jobId);
+      console.log(res.data);
       return res.data;
     } catch (error) {
       console.log("Error fetching job details:", error);

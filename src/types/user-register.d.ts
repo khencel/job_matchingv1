@@ -20,8 +20,10 @@ export interface User {
   last_name: string;
   is_email_verified: boolean;
   role: "job_seeker" | "employer" | "admin" | "supervisory";
-  avatar?: string | null; // Optional (From GetUser)
-  banner?: string | null; // Optional (From GetUser)
+  avatar?: string | null;
+  banner?: string | null;
+  resume?: string | null;
+  resume?: string | null;
 
   // 2. HANDLE DYNAMIC DETAILS (The key to your problem)
   // Make them optional (?). Login won't have them, GetUser will.

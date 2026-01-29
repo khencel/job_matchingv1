@@ -2,7 +2,7 @@
 import FilterJobs from "@/components/FilterJobs";
 import JobCard from "@/components/JobCard";
 import JobSearchFiler from "@/components/JobSearchFilter";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/navbar/Navbar";
 import { getJobPostings } from "@/redux/slices/jobs/jobServices";
 import { JobPosting } from "@/types/applyJob";
 import { useRouter } from "next/navigation";

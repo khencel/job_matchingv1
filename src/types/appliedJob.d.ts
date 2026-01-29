@@ -1,5 +1,6 @@
 // Applied Jobs API Response Interfaces
 import { User } from "@/types/user-register";
+import { RegisterEmployerData } from "./employer";
 
 export interface UserDetails {
   gender: string;
@@ -46,7 +47,10 @@ export interface JobPostDetails {
   who_you_are: string;
   nice_to_have: string;
   benefits: string[];
-  created_at: string;
+  employer: Array<{
+    avatar: string;
+    userDetails_emp: RegisterEmployerData;
+  }>;
 }
 
 export interface JobPost {

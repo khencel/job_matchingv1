@@ -1,8 +1,7 @@
 "use client";
 
 import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
-import { BookmarkIcon, MoveRightIcon, Share2Icon } from "lucide-react";
+import Navbar from "@/components/navbar/Navbar";
 import Image from "next/image";
 import {
   Button,
@@ -19,9 +18,8 @@ import { applyToJob, fetchJobDetails } from "@/redux/slices/jobs/jobsThunk";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useParams, useRouter } from "next/navigation";
-import { formatDate } from "@/helper/formatDate";
-import { showErrorToast, showSuccessToast } from "@/app/(util)/toaster";
 import JobPost from "@/components/JobPost";
+import Swal from "sweetalert2";
 
 const JobDescriptionPage = () => {
   const t = useTranslations("jobDescriptionPage");
@@ -37,7 +35,7 @@ const JobDescriptionPage = () => {
     (state) => state.jobPost,
   );
   const applyStatus = useAppSelector((state) => state.jobSlice.applyStatus);
-  const userId = useAppSelector((state) => state.authState.user?.id);
+  const user = useAppSelector((state) => state.authState.user);
 
   // Fetch data when the ID changes
   useEffect(() => {
@@ -67,25 +65,39 @@ const JobDescriptionPage = () => {
   }
 
   const handleClickApply = () => {
-    if (!userId) {
-      showErrorToast("Not Logged In", "Please log in to apply for jobs.");
+    if (!user) {
+      Swal.fire({
+        icon: "error",
+        title: "Not Logged In",
+        text: "Please log in to apply for jobs.",
+      });
       router.push("/login");
       return;
     }
+
+    if (!user.resume) {
+      Swal.fire({
+        icon: "warning",
+        title: "Resume Required",
+        text: "Please upload your resume before applying for jobs.",
+      });
+      return;
+    }
+
     try {
       dispatch(
         applyToJob({
-          user: userId,
+          user: user.id,
           job_post: jobDetails.id,
           employer: jobDetails.user_id,
         }),
       );
-      showSuccessToast(
-        "Application Successful",
-        "You have successfully applied to the job.",
-      );
+      Swal.fire({
+        icon: "success",
+        title: "Application Sent",
+        text: "Your application has been sent successfully!",
+      });
     } catch (error) {
-      showErrorToast("Error applying to job", "Please try again later.");
       console.log("Error applying", error);
     }
   };
@@ -103,23 +115,29 @@ const JobDescriptionPage = () => {
               width={75}
               src={"/globe.svg"}
               height={75}
-              alt="sample pic"
+              alt="Company Logo"
             ></Image>
             <div className="d-flex flex-column gap-2">
               <CardTitle className="fw-bold text-dark">
                 {jobDetails.title}
               </CardTitle>
               <CardSubtitle className="fw-normal text-dark small">
-                {jobDetails.type_of_emp.type}
+                {
+                  jobDetails.employer[0].userDetails_emp.company_information
+                    .name
+                }
               </CardSubtitle>
             </div>
           </div>
           <div className="d-flex justify-content-center align-items-center gap-2">
-            <Button variant="ghost">
-              <Share2Icon />
-            </Button>
-            <Button variant="ghost">
-              <BookmarkIcon />
+            <Button
+              onClick={() =>
+                router.push(`/company_profile/${jobDetails.user_id}`)
+              }
+              variant="outline-secondary"
+              className="rounded-pill py-1"
+            >
+              Visit Profile
             </Button>
             <div
               style={{ borderRight: "1px solid #ccc", height: "36px" }}
@@ -139,7 +157,7 @@ const JobDescriptionPage = () => {
                   aria-hidden="true"
                 />
               ) : isApplied ? (
-                "Application Sent"
+                "Applied"
               ) : (
                 t("buttons.apply")
               )}
@@ -191,11 +209,6 @@ const JobDescriptionPage = () => {
               <Row>
                 <Col>
                   <p className="fw-light">{t("labels.jobPostedOn")}</p>
-                </Col>
-                <Col>
-                  <p className="fw-medium text-end">
-                    {formatDate(jobDetails.created_at)}
-                  </p>
                 </Col>
               </Row>
               <Row>
@@ -258,68 +271,6 @@ const JobDescriptionPage = () => {
           })}
         </>
       )}
-      <hr />
-      {/* About Job Support */}
-      <Container fluid className="p-5">
-        <Row>
-          <Col
-            md={6}
-            className="px-5 d-flex flex-column justify-content-center align-items-center"
-          >
-            <div className="d-flex flex-column align-items-start gap-3">
-              <div className="d-flex justify-content-center align-items-center gap-3">
-                <Image
-                  width={200}
-                  src={"/logo.png"}
-                  height={50}
-                  alt="."
-                ></Image>
-                <div>
-                  <h3>{t("headings.jobSupport")}</h3>
-                  <Button
-                    variant="link"
-                    className="p-0 pe-2 text-decoration-none"
-                  >
-                    {t("buttons.readMoreAboutUs")}
-                    <MoveRightIcon size="16px" className="text-primary ms-2" />
-                  </Button>
-                </div>
-              </div>
-              <p>
-                Jobsupport is a company that sda d v VWEJFWE FEVF G AG RG E RE E
-                EM QE GR EM GVER G REGQR Gfggg gew gerg reg ergwrg g erge
-              </p>
-            </div>
-          </Col>
-          <Col md={6} className="p-5">
-            <div className="d-flex gap-3 m-auto justify-content-center align-items-center">
-              <Image
-                width={250}
-                src={"/img/card/card1.jpg"}
-                height={250}
-                alt="."
-                className="border rounded-3"
-              ></Image>
-              <div className="d-flex flex-column gap-3">
-                <Image
-                  width={125}
-                  src={"/img/card/card2.jpg"}
-                  height={125}
-                  alt="."
-                  className="border rounded-3"
-                ></Image>
-                <Image
-                  width={125}
-                  src={"/img/card/card3.jpg"}
-                  height={125}
-                  alt="."
-                  className="border rounded-3"
-                ></Image>
-              </div>
-            </div>
-          </Col>
-        </Row>
-      </Container>
       <hr />
       <h3 className="fw-semibold text-dark ms-5 mt-5">More Jobs</h3>
       <JobPost />
