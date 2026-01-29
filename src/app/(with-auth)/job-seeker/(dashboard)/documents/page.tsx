@@ -15,7 +15,9 @@ import Swal from "sweetalert2";
 import apiClient from "@/lib/axios";
 import {
   CloudUploadIcon,
+  FileIcon,
   FilesIcon,
+  FileX2Icon,
   PlusCircleIcon,
   Trash2Icon,
   UploadIcon,
@@ -24,6 +26,8 @@ import { useAppSelector } from "@/redux/hooks";
 
 const DocumentsPage = () => {
   const user_id = useAppSelector((s) => s.authState.user?.id);
+  const documents = useAppSelector((s) => s.authState.user?.documents || []);
+
   const [uploadedFiles, setUploadedFiles] = useState<FileList | null>(null);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,30 +68,15 @@ const DocumentsPage = () => {
     setUploadedFiles(null);
   };
 
-  // Placeholder for uploaded documents list
-  const [documents, setDocuments] = useState([
-    {
-      id: 1,
-      name: "Resume.pdf",
-      size: "245 KB",
-      uploadDate: "2026-01-25",
-      type: "PDF",
-    },
-    {
-      id: 2,
-      name: "Cover_Letter.docx",
-      size: "128 KB",
-      uploadDate: "2026-01-24",
-      type: "DOCX",
-    },
-    {
-      id: 3,
-      name: "Certificates.pdf",
-      size: "892 KB",
-      uploadDate: "2026-01-20",
-      type: "PDF",
-    },
-  ]);
+  const fileName = (doc: string) => {
+    const name = doc.split(`user_${user_id}/`).pop();
+    return name?.split(".")[0];
+  };
+
+  const fileType = (doc: string) => {
+    const parts = doc.split(`user_${user_id}/`).pop();
+    return parts?.split(".").pop()?.toUpperCase();
+  };
 
   // Placeholder handler for file upload
   const handleFileUpload = async () => {
@@ -271,16 +260,7 @@ const DocumentsPage = () => {
               <Card.Body className="p-0">
                 {documents.length === 0 ? (
                   <div className="text-center py-5">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="48"
-                      height="48"
-                      fill="currentColor"
-                      className="bi bi-inbox text-muted mb-3"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm9.954 5H10.45a2.5 2.5 0 0 1-4.9 0H1.066l.32 2.562a.5.5 0 0 0 .497.438h12.234a.5.5 0 0 0 .496-.438L14.933 9zM3.809 3.563A1.5 1.5 0 0 1 4.981 3h6.038a1.5 1.5 0 0 1 1.172.563l3.7 4.625a.5.5 0 0 1 .105.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z" />
-                    </svg>
+                    <FileX2Icon size={50} className="text-muted mb-3" />
                     <p className="text-muted mb-0">No documents uploaded yet</p>
                   </div>
                 ) : (
@@ -288,76 +268,33 @@ const DocumentsPage = () => {
                     <thead className="bg-light">
                       <tr>
                         <th className="border-0 py-3">File Name</th>
-                        <th className="border-0 py-3">Type</th>
-                        <th className="border-0 py-3">Size</th>
-                        <th className="border-0 py-3">Upload Date</th>
+                        <th className="border-0 py-3">File Type</th>
                         <th className="border-0 py-3 text-end">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {documents.map((doc) => (
-                        <tr key={doc.id}>
+                      {documents.map((doc, idx) => (
+                        <tr key={idx}>
                           <td className="align-middle py-3">
                             <div className="d-flex align-items-center">
                               <div className="me-3">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="24"
-                                  height="24"
-                                  fill="currentColor"
-                                  className="bi bi-file-earmark-text text-primary"
-                                  viewBox="0 0 16 16"
-                                >
-                                  <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z" />
-                                  <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
-                                </svg>
+                                <FileIcon className="text-primary" />
                               </div>
                               <div>
-                                <div className="fw-semibold">{doc.name}</div>
+                                <div className="fw-semibold">
+                                  {fileName(doc.documents)}
+                                </div>
                               </div>
                             </div>
                           </td>
                           <td className="align-middle py-3">
-                            <Badge bg="info" className="px-2 py-1">
-                              {doc.type}
-                            </Badge>
-                          </td>
-                          <td className="align-middle py-3 text-muted">
-                            {doc.size}
-                          </td>
-                          <td className="align-middle py-3 text-muted">
-                            {doc.uploadDate}
+                            <div className="d-flex align-items-center">
+                              <Badge bg="dark">{fileType(doc.documents)}</Badge>
+                            </div>
                           </td>
                           <td className="align-middle py-3 text-end">
-                            <Button
-                              variant="outline-primary"
-                              size="sm"
-                              className="me-2"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                fill="currentColor"
-                                className="bi bi-download"
-                                viewBox="0 0 16 16"
-                              >
-                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                              </svg>
-                            </Button>
                             <Button variant="outline-danger" size="sm">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                fill="currentColor"
-                                className="bi bi-trash"
-                                viewBox="0 0 16 16"
-                              >
-                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
-                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
-                              </svg>
+                              <Trash2Icon />
                             </Button>
                           </td>
                         </tr>
