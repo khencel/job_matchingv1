@@ -11,8 +11,59 @@ import {
   Form,
 } from "react-bootstrap";
 import { useState } from "react";
+import Swal from "sweetalert2";
+import apiClient from "@/lib/axios";
+import {
+  CloudUploadIcon,
+  FilesIcon,
+  PlusCircleIcon,
+  Trash2Icon,
+  UploadIcon,
+} from "lucide-react";
+import { useAppSelector } from "@/redux/hooks";
 
 const DocumentsPage = () => {
+  const user_id = useAppSelector((s) => s.authState.user?.id);
+  const [uploadedFiles, setUploadedFiles] = useState<FileList | null>(null);
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (uploadedFiles) {
+      // Combine existing files with newly selected files
+      const combinedFiles = new DataTransfer();
+
+      Array.from(uploadedFiles).forEach((file) =>
+        combinedFiles.items.add(file),
+      );
+
+      if (e.target.files) {
+        Array.from(e.target.files).forEach((file) =>
+          combinedFiles.items.add(file),
+        );
+      }
+      setUploadedFiles(combinedFiles.files);
+      return;
+    }
+    setUploadedFiles(e.target.files);
+  };
+
+  const handleRemoveFile = (index: number) => {
+    if (!uploadedFiles) return;
+
+    // Convert FileList to array and remove the file at index
+    const filesArray = Array.from(uploadedFiles);
+    filesArray.splice(index, 1);
+
+    // Create a new DataTransfer to simulate a FileList
+    const dataTransfer = new DataTransfer();
+    filesArray.forEach((file) => dataTransfer.items.add(file));
+
+    setUploadedFiles(filesArray.length > 0 ? dataTransfer.files : null);
+  };
+
+  const handleClearAllFiles = () => {
+    setUploadedFiles(null);
+  };
+
   // Placeholder for uploaded documents list
   const [documents, setDocuments] = useState([
     {
@@ -39,10 +90,51 @@ const DocumentsPage = () => {
   ]);
 
   // Placeholder handler for file upload
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // Logic will be handled by the user
-    const files = event.target.files;
-    console.log("Files selected:", files);
+  const handleFileUpload = async () => {
+    if (!uploadedFiles || uploadedFiles.length === 0) {
+      Swal.fire({
+        icon: "warning",
+        title: "No Files Selected",
+        text: "Please select files to upload.",
+      });
+      return;
+    }
+
+    const formData = new FormData();
+
+    if (user_id) {
+      formData.append("user", user_id.toString());
+    }
+
+    if (uploadedFiles) {
+      Array.from(uploadedFiles).forEach((file) => {
+        formData.append("files", file);
+      });
+    }
+
+    try {
+      const res = await apiClient.post("documents/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      Swal.fire({
+        icon: "success",
+        title: "Upload Successful",
+        text: "Your documents have been uploaded successfully.",
+      });
+      console.log("Uploaded Files", res);
+      setUploadedFiles(null);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Upload Failed",
+        text: "There was an error uploading your documents. Please try again.",
+      });
+      console.log("Error uploading documents", error);
+    }
+
+    console.log("Files selected:", uploadedFiles);
   };
 
   return (
@@ -72,56 +164,96 @@ const DocumentsPage = () => {
           <Col>
             <Card className="shadow-sm border-0">
               <Card.Body className="p-4">
-                <div className="text-center py-5">
+                {uploadedFiles && uploadedFiles.length > 0 && (
                   <div className="mb-4">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="64"
-                      height="64"
-                      fill="currentColor"
-                      className="bi bi-cloud-arrow-up text-primary mb-3"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z"
-                      />
-                      <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
-                    </svg>
+                    <h6 className="fw-bold mb-3">Preview Files</h6>
+                    <div className="border rounded p-3 bg-light">
+                      {Array.from(uploadedFiles).map((file, index) => (
+                        <div
+                          key={index}
+                          className={`d-flex justify-content-between align-items-center py-2 ${uploadedFiles.length - 1 !== index ? "border-bottom" : ""}`}
+                        >
+                          <div className="d-flex align-items-center">
+                            <FilesIcon className="text-primary me-2 text-primary-emphasis" />
+                            <div>
+                              <div className="fw-semibold text-dark">
+                                {file.name}
+                              </div>
+                              <div className="text-muted small">
+                                {(file.size / 1024).toFixed(2)} KB
+                              </div>
+                            </div>
+                          </div>
+                          <Button
+                            variant="outline-danger"
+                            size="sm"
+                            onClick={() => handleRemoveFile(index)}
+                          >
+                            <Trash2Icon />
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <h5 className="mb-3">Upload Your Documents</h5>
-                  <p className="text-muted mb-4">
-                    Select multiple files to upload at once. Supported formats:
-                    PDF, DOC, DOCX, JPG, PNG
-                  </p>
+                )}
+
+                <div className="text-center py-5">
+                  {!uploadedFiles || uploadedFiles.length === 0 ? (
+                    <>
+                      <div className="mb-4">
+                        <CloudUploadIcon size={80} className="text-primary" />
+                      </div>
+                      <h5 className="mb-3">Upload Your Documents</h5>
+                      <p className="text-muted mb-4">
+                        Select multiple files to upload at once. Supported
+                        formats: PDF, DOC, DOCX, JPG, PNG
+                      </p>
+                    </>
+                  ) : null}
                   <Form.Group>
                     <Form.Label htmlFor="fileUpload" className="mb-0">
                       <Button
-                        variant="primary"
-                        size="lg"
-                        className="px-5"
+                        variant="outline-primary"
+                        // @ts-expect-error md is valid
+                        size="md"
+                        className="px-3 mb-3"
                         as="span"
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          fill="currentColor"
-                          className="bi bi-plus-circle me-2"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                        </svg>
-                        Choose Files to Upload
+                        <PlusCircleIcon className="me-1" />
+                        {uploadedFiles && uploadedFiles.length > 0
+                          ? "Choose More Files"
+                          : "Choose Files"}
                       </Button>
+                      {uploadedFiles && uploadedFiles.length > 0 && (
+                        <div className="d-flex gap-2 justify-content-center">
+                          <Button
+                            variant="primary"
+                            // @ts-expect-error md is valid
+                            size="md"
+                            className="px-3"
+                            onClick={handleFileUpload}
+                          >
+                            <UploadIcon className="me-1" />
+                            Upload Files
+                          </Button>
+                          <Button
+                            variant="outline-dark"
+                            // @ts-expect-error md is valid
+                            size="md"
+                            className="px-3"
+                            onClick={handleClearAllFiles}
+                          >
+                            Clear
+                          </Button>
+                        </div>
+                      )}
                     </Form.Label>
                     <Form.Control
                       id="fileUpload"
                       type="file"
                       multiple
-                      onChange={handleFileUpload}
                       className="d-none"
+                      onChange={handleFileSelect}
                     />
                   </Form.Group>
                 </div>

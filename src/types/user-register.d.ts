@@ -24,6 +24,7 @@ export interface User {
   banner?: string | null;
   resume?: string | null;
   resume?: string | null;
+  perks_benefits?: string[];
 
   // 2. HANDLE DYNAMIC DETAILS (The key to your problem)
   // Make them optional (?). Login won't have them, GetUser will.
