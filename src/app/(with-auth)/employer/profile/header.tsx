@@ -9,6 +9,9 @@ export default function Header({data}:{data:any}){
     const handleEditModal = () => setShowModal(true);
     const handleClose = () => setShowModal(false);
     const companyInfo = data.userDetails_emp?.company_information || {};
+
+    console.log(companyInfo.company_industry);
+    
     return(
         <>
             <div className="" style={{
@@ -51,7 +54,7 @@ export default function Header({data}:{data:any}){
                                     <div className="col">
                                         <small className="text-style">Industry</small>
                                         <br />
-                                        <strong className="info-style">{companyInfo.company_industry}</strong>
+                                        <strong className="info-style">{companyInfo.company_industry.join(', ')}</strong>
                                     </div>
                                 </div>
                             </div>

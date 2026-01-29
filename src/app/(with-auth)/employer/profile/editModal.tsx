@@ -9,6 +9,7 @@ import { getProfile } from "@/redux/slices/profile/profilethunk";
 import { popup } from "@/helper/pop_up";
 import { showSuccessToast } from "@/app/(util)/toaster";
 import Cookies from "js-cookie";
+import MultipleSelect from "@/components/MultipleSelectStandard";
 
 
 interface EditModalProps {
@@ -16,6 +17,23 @@ interface EditModalProps {
     handleClose: () => void;
     companyProfile?: any;
 }
+
+export const industries = [
+  "Technology",
+  "Healthcare",
+  "Finance",
+  "Manufacturing",
+  "Retail",
+  "Education",
+  "Hospitality",
+  "Construction",
+  "Transportation",
+  "Real Estate",
+  "Agriculture",
+  "Entertainment",
+  "Telecommunications",
+  "Energy",
+];
 
 export default function EditModalProfile({ handleShow, handleClose, companyProfile }: EditModalProps) {
     const dispatch = useAppDispatch();
@@ -29,11 +47,20 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
     const [founded, setFounded] = useState("");
     const [employees, setEmployees] = useState(0);
     const [region, setRegion] = useState("");
-    const [industry, setIndustry] = useState("");
+    const [industry, setIndustry] = useState<
+        { label: string; value: string }[]
+    >([]);
+
+    const industryOptions = industries.map(item => ({
+        label: item,
+        value: item,
+    }));
 
     const bannerInputRef = useRef<HTMLInputElement>(null);
     const [bannerPreview, setBannerPreview] = useState<string | null>(null);
     const [bannerFile, setBannerFile] = useState<File | null>(null);
+
+    
 
 
     const handleReplaceLogo = () => {
@@ -78,13 +105,13 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
     const handleSave = () => {
         
         const updatedEmployerDetails = {
-            ...companyProfile.userDetails_emp.company_information, // kopya ng lahat
+            ...companyProfile.userDetails_emp.company_information, 
             name: companyName,
             profile: companyProfileText,
             founded: founded,
             no_of_emp: employees,
             region: region,
-            company_industry: industry
+            company_industry: industry.map(item => item.value)
         };
 
         const userDetails_emp = {
@@ -121,18 +148,33 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
 
     // Update state when companyProfile changes
     useEffect(() => {
-        
         const companyInfo = companyProfile?.userDetails_emp?.company_information || {};
-        console.log(companyInfo);
         
         setCompanyName(companyInfo.name || "");
         setFounded(companyInfo.founded || "");
         setEmployees(companyInfo.no_of_emp || 0);
         setRegion(companyInfo.region || "");
         setCompanyProfileText(companyInfo.profile || "");
-        setIndustry(companyInfo.industry || "");
+        
+        const existingIndustry = companyInfo.company_industry;
+
+        if (Array.isArray(existingIndustry)) {
+            setIndustry(
+                existingIndustry.map((item: string) => ({
+                    label: item,
+                    value: item,
+                }))
+            );
+        } else {
+            setIndustry([]);
+        }
+
+
+
         setLogoPreview(companyProfile.avatar || null);
         setBannerPreview(companyProfile.banner || null);
+
+     
         
     }, [companyProfile]);
 
@@ -275,11 +317,11 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                     <div className="col">
                                         Industry
                                         <br />
-                                        <input 
-                                            className="form-control" 
-                                            type="text" 
+                                        <MultipleSelect
+                                            data={industryOptions}
                                             value={industry}
-                                            onChange={(e) => setIndustry(e.target.value)}
+                                            onChange={setIndustry}
+                                            placeholder="Select industry"
                                         />
                                     </div>
                                 </div>

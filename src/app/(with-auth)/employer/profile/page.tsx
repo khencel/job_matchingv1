@@ -29,8 +29,6 @@ export default function Profile(){
     if(status === "failed"){
         return <p>{error}</p>
     }
-
-    console.log(profile);
     
     return(
         <>
