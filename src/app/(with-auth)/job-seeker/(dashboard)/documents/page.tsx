@@ -23,11 +23,13 @@ import {
   UploadIcon,
 } from "lucide-react";
 import { useAppSelector } from "@/redux/hooks";
+import PreviewFile from "@/components/PreviewFile";
 
 const DocumentsPage = () => {
   const user_id = useAppSelector((s) => s.authState.user?.id);
   const documents = useAppSelector((s) => s.authState.user?.documents || []);
 
+  const [previewFile, setPreviewFile] = useState<string | null>(null);
   const [uploadedFiles, setUploadedFiles] = useState<FileList | null>(null);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +68,10 @@ const DocumentsPage = () => {
 
   const handleClearAllFiles = () => {
     setUploadedFiles(null);
+  };
+
+  const handleFileClick = (file: string) => {
+    setPreviewFile(file);
   };
 
   const fileName = (doc: string) => {
@@ -128,6 +134,11 @@ const DocumentsPage = () => {
 
   return (
     <Tab.Pane eventKey="documents">
+      <PreviewFile
+        filePath={previewFile}
+        fileName={fileName(previewFile || "Document") || "Document"}
+        onClose={() => setPreviewFile(null)}
+      />
       <Container fluid className="py-4">
         <Row className="mb-4">
           <Col>
@@ -275,7 +286,11 @@ const DocumentsPage = () => {
                     <tbody>
                       {documents.map((doc, idx) => (
                         <tr key={idx}>
-                          <td className="align-middle py-3">
+                          <td
+                            className="align-middle py-3"
+                            onClick={() => handleFileClick(doc.documents)}
+                            style={{ cursor: "pointer" }}
+                          >
                             <div className="d-flex align-items-center">
                               <div className="me-3">
                                 <FileIcon className="text-primary" />
@@ -287,7 +302,7 @@ const DocumentsPage = () => {
                               </div>
                             </div>
                           </td>
-                          <td className="align-middle py-3">
+                          <td>
                             <div className="d-flex align-items-center">
                               <Badge bg="dark">{fileType(doc.documents)}</Badge>
                             </div>
