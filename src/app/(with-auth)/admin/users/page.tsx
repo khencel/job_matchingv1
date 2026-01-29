@@ -16,8 +16,8 @@ import { showSuccessToast } from "@/app/(util)/toaster";
 export default function AdminUsers() {
     
     const {items, status, error, next, previous, currentPage, pageSize, count}= useSelector((state: RootState) => state.getAllUserByFilter);
-    const [filter, setFilter] = useState(null)
     const dispatch = useAppDispatch();
+    const [filter, setFilter] = useState<{ role: string }>({ role: "all" });
 
     const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
             dispatch(setPageSize(Number(e.target.value)));
@@ -28,68 +28,19 @@ export default function AdminUsers() {
 
     const totalPages = Math.ceil(count / pageSize);
     
-    const handleFilter = (filter_val:string) => {
-        let newFilter: any = {};
-
-        if(filter_val === "all"){
-            newFilter = null
-        }
-
-        if(filter_val === "job_seeker"){
-            newFilter.filter = { role: "job_seeker" };
-        }
-
-        if(filter_val === "employer"){
-            newFilter.filter = { role: "employer" };
-        }
-
-        if(filter_val === "supervisory"){
-            newFilter.filter = { role: "supervisory" };
-        }
-
-        setFilter(newFilter);
-        dispatch(fetchUsers({ page: currentPage, pageSize, filter: newFilter }));
+    const handleFilter = (val:string) => {
+        setFilter({ role: val });
+        dispatch(setPage(1));
     }
 
-    const handleChangeRedirect = (id: number, emp_details: any) => {
 
-        popup({
-            title: "Are you sure?",
-            text: "Change redirect for this employer?",
-            confirmText: "Yes",
-            onConfirm: () => {
-                let redirect_job_seeker = emp_details?.redirect_job_seeker || false;
-                let redirect_job_seeker_new_value = false;
-
-                if(redirect_job_seeker){
-                    redirect_job_seeker_new_value = false;
-                } else {
-                    redirect_job_seeker_new_value = true;
-                }
-                
-                const updatedDetails = {
-                    ...emp_details,           
-                    redirect_job_seeker: redirect_job_seeker_new_value 
-                };
-
-                const payload = {
-                    details: JSON.stringify(updatedDetails)
-                };
-
-                dispatch(updateStatus({ id, payload }))
-                dispatch(fetchUsers({ page: currentPage, pageSize, filter }));
-                showSuccessToast('Change redirect','Redirect has been change')
-
-            },
-        })
-
-        
-    }
-
-    
     useEffect(() => {
-        dispatch(fetchUsers({ page: currentPage, pageSize, filter }));
-    }, [dispatch, currentPage, pageSize, filter]); 
+        dispatch(fetchUsers({
+            page: currentPage,
+            pageSize,
+            filter
+        }));
+    }, [dispatch, currentPage, pageSize, filter]);
 
     return (
     <>
@@ -186,17 +137,7 @@ export default function AdminUsers() {
                                                         {item.role === "employer" && (
                                                             <ul className="dropdown-menu dropdown-menu-end">
                                                                 <li>
-                                                                    <button 
-                                                                        className="dropdown-item"
-                                                                        onClick={() => handleChangeRedirect(item.id, item.userDetails_emp)}
-                                                                    >
-                                                                        Redirect to Job Seeker 
-                                                                        <strong>
-                                                                            <sup className={item.userDetails_emp.redirect_job_seeker ? "text-success" : "text-danger"}>
-                                                                                {item.userDetails_emp.redirect_job_seeker ? "ON" : "OFF"}
-                                                                            </sup> 
-                                                                        </strong>
-                                                                    </button>
+                                                                   <button className="dropdown-item">View Employer</button>
                                                                 </li>
                                                             </ul>
                                                         )}

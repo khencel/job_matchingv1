@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchApplicants } from "@/redux/slices/applicants/applicantThunk";
+import { fetchApplicants, fetchAllCompany, fetchApplicantsNoPagination } from "@/redux/slices/applicants/applicantThunk";
 
 
 export interface ApplicantState {
@@ -11,6 +11,11 @@ export interface ApplicantState {
     currentPage: number;
     pageSize: number;
     count: number;
+
+    company: any[];
+
+    // no pagination 
+    itemToPrint: any[];
 }
 
 const initialState: ApplicantState = {
@@ -22,6 +27,8 @@ const initialState: ApplicantState = {
     currentPage: 1,
     pageSize: 10,
     count: 0,
+    company: [],
+    itemToPrint: []
 }
 
 const applicantSlice = createSlice({
@@ -50,6 +57,17 @@ const applicantSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.error.message || null;
             });
+
+        builder 
+            .addCase(fetchAllCompany.fulfilled, (state, action) => {
+                state.company = action.payload
+            })
+
+        builder 
+            .addCase(fetchApplicantsNoPagination.fulfilled, (state, action) => {
+                state.itemToPrint = action.payload.results
+            })
+            
     }
 });
 

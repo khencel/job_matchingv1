@@ -9,7 +9,6 @@ export interface Benefit {
 }
 
 export interface PostBasicInfoState {
-    user_id: string | null;
     title: string;
     salary: number | null;
     type_of_emp: Array<string>;
@@ -24,9 +23,6 @@ export interface PostBasicInfoState {
 }
 
 const initialState: PostBasicInfoState = {
-    user_id: typeof window !== "undefined"
-    ? Cookies.get("user_id") || null
-    : null,
     title: "",
     salary: null,
     type_of_emp: [],
@@ -52,8 +48,6 @@ export interface UpdateJobPostPayload {
   nice_to_have?: string;
   skill: string[];
 }
-
-
 
 
 const basicInfoSlice = createSlice({

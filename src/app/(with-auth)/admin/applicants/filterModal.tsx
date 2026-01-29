@@ -12,7 +12,9 @@ interface FilterModalProps {
                     {
                         company?: string,
                         gender?: string,
-                        visa?:string
+                        visa?:string,
+                        firstName?:string,
+                        lastName?:string
                     }
     ) => void
 }
@@ -21,12 +23,16 @@ export default function FilterModal({handleShow, handleClose, companyList, onApp
     const [selectedCompany, setSelectedCompany] = useState('');
     const [selectedGender, setSelectedGender] = useState('');
     const [selectedVisa, setSelectedVisa] = useState('');
+    const [firstName, setFirstname] = useState('');
+    const [lastName, setLastname] = useState('');
 
     const handleApply = () => {
         onApplyFilter({ 
                         company: selectedCompany, 
                         gender: selectedGender, 
-                        visa: selectedVisa
+                        visa: selectedVisa,
+                        firstName: firstName,
+                        lastName:lastName
                     });
         handleClose();
     }
@@ -58,6 +64,27 @@ export default function FilterModal({handleShow, handleClose, companyList, onApp
                                 
                             </select>
                         </div>
+                    </div>
+                    <div className="row mt-3">
+                            <div className="col">
+                                <strong>First Name:</strong>
+                                <br />
+                                <input type="text"
+                                    className="form-control"
+                                    value={firstName}
+                                    onChange={(e) => setFirstname(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="col">
+                                <strong>Last Name:</strong>
+                                <br />
+                                <input type="text"
+                                    className="form-control"
+                                    value={lastName}
+                                    onChange={(e) => setLastname(e.target.value)}
+                                />
+                            </div>
                     </div>
                     <div className="row mt-3">
                         <div className="col">

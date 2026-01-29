@@ -21,7 +21,7 @@ export default function Header({data}:{data:any}){
                     <div className="col-md-10">
                         <div className="row">
                             <div className="col-3 d-flex justify-content-center align-items-center">
-                                <img src={data.avatar} style={{width:'150px'}} alt="" />
+                                <img src={data.avatar || 'http://127.0.0.1:8000/media/avatar/default_logo.png'} style={{width:'150px'}} alt="" />
                             </div>
                             <div className="col-9">
                                 <div className="">

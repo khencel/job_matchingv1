@@ -5,7 +5,7 @@ import { FaCalendarCheck, FaSliders } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useAppDispatch } from "@/redux/hooks";
-import { fetchApplicants } from "@/redux/slices/applicants/applicantThunk";
+import { fetchApplicants, fetchAllCompany, fetchApplicantsNoPagination } from "@/redux/slices/applicants/applicantThunk";
 import type { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -16,21 +16,33 @@ import { useState } from "react";
 import ViewEmployer from "./viewEmployer";
 import ViewApplicant from "./viewApplicant";
 import { popup } from "@/helper/pop_up";
-import { updateStatus } from "@/redux/slices/applicants/applicantThunk";
 import { showSuccessToast } from "@/app/(util)/toaster";
+import FilterModal from "./filterModal";
+
+import * as XLSX from "xlsx-js-style";
+import { saveAs } from 'file-saver';
+
+
 
 export default function AdminApplicants() {
     const dispatch = useAppDispatch();
-    const {items, status, error, next, previous, currentPage, pageSize, count}= useSelector((state: RootState) => state.applicants);
+    const {items, status, error, next, previous, currentPage, pageSize, count, company, itemToPrint}= useSelector((state: RootState) => state.applicants);
     const [showEmployer, setShowEmployer] = useState(false);
     const [showApplicant, setShowApplicant] = useState(false);
 
     const [selectedEmployer, setSelectedEmployer] = useState<any>(null);
     const [selectedApplicant, setSelectedApplicant] = useState<any>(null);
 
+    const [openFilterModal, setOpenFilterModal] = useState(false)
+
+    const [listCompany, setListCompany] = useState<any>([])
+
+    const [currentFilter, setCurrentFilter] = useState<{ company?: string; gender?: string; visa?: string }>({});
+
+
     const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-            dispatch(setPageSize(Number(e.target.value)));
-        };
+        dispatch(setPageSize(Number(e.target.value))); 
+    };
     const handlePageChange = (newPage: number) => {
             dispatch(setPage(newPage));
         };
@@ -48,42 +60,89 @@ export default function AdminApplicants() {
         setSelectedApplicant(data);
     }
 
-    const handleChangeStatus = (id:number,status: string) => {
-        const payload = {
-            id,
-            status
-        }
-        popup({
-            title: "Are you sure?",
-            text: "Change status for this applicant?",
-            confirmText: "Yes",
-            icon: "warning",
-            onConfirm: () => {
-                dispatch(updateStatus(payload))
-                .unwrap()
-                .then(() => {
-                    dispatch(fetchApplicants({ page: currentPage, pageSize }));
-                    showSuccessToast('Change status','Status has been change')
-                })
-                .catch((err) => {
-                    console.error("Failed to update status:", err);
-                })
-            },
-        });
+
+    const handleFilter = () => {
+        setListCompany(company)
+        setOpenFilterModal(true)
     }
+
+    const handleFilterApply = (filterData: { 
+                                company?: string; 
+                                gender?: string, 
+                                visa?: string,
+                                firstName?: string,
+                                lastName?: string
+    }) => {
+    
+        setCurrentFilter(filterData); 
+        dispatch(fetchApplicants({
+            page: 1, 
+            pageSize,
+            ...filterData 
+        }));
+    }
+
+
+    const handleDownloadExcel = () => {
+        console.log(itemToPrint);
+        
+        if(itemToPrint.length === 0) return;
+
+        const dataForExcel = itemToPrint.map((item:any) => ({
+            "FIRST NAME": `${item.user.userDetails.firstName}`,
+            "LAST NAME": `${item.user.userDetails.lastName}`,
+            "EMPLOYER": `${item.job_post.employerDetails.userDetails_emp.company_information.name}`,
+            "JOB ROLE": `${item.job_post.jobPostDetails.title}`,
+        }));
+
+        const worksheet = XLSX.utils.json_to_sheet(dataForExcel);
+
+        const range = XLSX.utils.decode_range(worksheet["!ref"]!);
+        for (let C = range.s.c; C <= range.e.c; ++C) {
+            const cellAddress = XLSX.utils.encode_cell({ r: 0, c: C });
+            if (worksheet[cellAddress]) {
+                worksheet[cellAddress].s = {
+                    font: { bold: true }
+                };
+            }
+        }
+
+        worksheet['!cols'] = Object.keys(dataForExcel[0]).map((key) => {
+            const maxLength = Math.max(
+                key.length,
+                ...dataForExcel.map((row:any) =>
+                    row[key] ? row[key].toString().length : 0
+                )
+            );
+            return { wch: maxLength + 4 };
+        });
+        
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Applicants");
+
+        const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+        const blob = new Blob([excelBuffer], { type: "application/octet-stream" });
+        saveAs(blob, "Filtered_Applicants.xlsx");
+    };
 
     
     useEffect(() => {
-        dispatch(fetchApplicants({page: currentPage, pageSize}));
-    }, [dispatch]);
+        dispatch(fetchApplicants({page: currentPage, pageSize, ...currentFilter}));
+        dispatch(fetchAllCompany())
+        dispatch(fetchApplicantsNoPagination(currentFilter))
+
+        
+    }, [dispatch,currentPage, pageSize, currentFilter]);
     return (
         <>
             <div className="row standar-div">
                 <div className="col">
                     <h5><strong><BiArrowBack /> Applicants Listing</strong></h5>
                 </div>
-                <div className="col text-end">
-                    <span>November - December 2025 <FaCalendarCheck className="text-primary" /></span>
+                <div className="col-2 border text-end me-2">
+                    <button className="btn btn-success btn-sm" onClick={handleDownloadExcel}>
+                        Download Excel
+                    </button>
                 </div>
             </div>
 
@@ -94,8 +153,12 @@ export default function AdminApplicants() {
                 {/* <div className="col-2 text-end">
                     <FaSearch className="text-primary" /> Search Users
                 </div> */}
-                <div className="col-2 text-end">
-                    <FaSliders className="text-primary" /> Filter
+                
+                <div className="col-1 text-end">
+                    <span style={{cursor:"pointer"}} onClick={handleFilter}>
+                        <FaSliders className="text-primary"  /> Filter
+                    </span>
+                    
                 </div>
             </div>
 
@@ -140,12 +203,6 @@ export default function AdminApplicants() {
                                                             <li>
                                                                 <button className="dropdown-item" onClick={() => handleViewApplicant(item)}>View Applicant</button>
                                                             </li>
-                                                            <li>
-                                                                <button className="dropdown-item text-success" onClick={() => handleChangeStatus(item.id,"approved")}>Approved</button>
-                                                            </li>
-                                                            <li>
-                                                                <button className="dropdown-item text-danger" onClick={() => handleChangeStatus(item.id, "rejected")}>Reject</button>
-                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </td>
@@ -169,6 +226,7 @@ export default function AdminApplicants() {
                         value={pageSize}
                         onChange={handlePageSizeChange}
                     >
+                        <option value={2}>2</option>
                         <option value={5}>5</option>
                         <option value={10}>10</option>
                         <option value={25}>25</option>
@@ -228,6 +286,13 @@ export default function AdminApplicants() {
                 handleClose={() => setShowApplicant(false)} 
                 data={selectedApplicant} 
             />  
+
+            <FilterModal
+                handleShow={openFilterModal}
+                handleClose={() => setOpenFilterModal(false)}
+                companyList={listCompany}
+                onApplyFilter={handleFilterApply}
+            />
         </>
     );
 }

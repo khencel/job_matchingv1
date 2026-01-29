@@ -7,6 +7,8 @@ import type {RootState} from '@/redux/store'
 import { setField, addSkill, removeSkill, setInitialData } from "@/redux/slices/employer/post_a_job/basicInfoSlice"
 import {showErrorToast } from "@/app/(util)/toaster";
 import { useRouter } from "next/navigation"
+import Cookies from "js-cookie";
+
 
 export default function PostAJob(){
     const [mounted, setMounted] = useState(false);
