@@ -23,6 +23,13 @@ export interface JobPosting {
   created_at: string;
 }
 
+export interface JobPostById {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: JobPosting[];
+}
+
 export interface ApplyToJobRequest {
   user: number;
   job_post: number;

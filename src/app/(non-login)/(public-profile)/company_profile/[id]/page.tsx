@@ -7,19 +7,33 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { getPublicProfile } from "@/redux/slices/publicProfileSlice";
 import Image from "next/image";
+import { fetchJobPostById } from "@/redux/slices/jobs/jobsThunk";
+import JobCard from "@/components/JobCard";
 
 const CompanyProfilePage = () => {
-  const dispatch = useAppDispatch();
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const jobs = useAppSelector((s) => s.jobPostById.data.results);
 
   const params = useParams();
   const id = params.id;
 
   useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        dispatch(fetchJobPostById(Number(id)));
+      } catch (error) {
+        console.error("Error fetching job posts by ID:", error);
+      }
+    };
+    fetchJobs();
+  }, [dispatch, id]);
+
+  useEffect(() => {
     if (id) {
       // @ts-expect-error : id is string, but our thunk expects a number
       dispatch(getPublicProfile(id));
-      console.log(user);
     }
   }, [id, dispatch]);
 
@@ -51,9 +65,7 @@ const CompanyProfilePage = () => {
     <div className="company-profile-wrapper">
       <Container className="mt-4 mb-5">
         <Card className="company-profile-card">
-          <div
-            className={`banner ${user.banner ? "" : "banner-gradient"}`}
-          >
+          <div className={`banner ${user.banner ? "" : "banner-gradient"}`}>
             {user.banner && (
               <Image
                 src={user.banner}
@@ -259,17 +271,34 @@ const CompanyProfilePage = () => {
             <Row>
               <Col className="text-md-end">
                 <Badge pill className="px-3 py-2 mb-2">
-                  Total jobs: 0
+                  Total jobs: {jobs.length}
                 </Badge>
               </Col>
             </Row>
 
-            <div className="jobs-placeholder">
-              <p className="jobs-placeholder-title">No jobs listed yet.</p>
-              <p className="jobs-placeholder-subtitle">
-                Your posted jobs will appear here once created.
-              </p>
-            </div>
+            {jobs ? (
+              <Row>
+                {jobs.map((job) => (
+                  <Col
+                    key={job.id}
+                    lg={3}
+                    md={4}
+                    s={6}
+                    xs={12}
+                    className="mb-4"
+                  >
+                    <JobCard job={job} />
+                  </Col>
+                ))}
+              </Row>
+            ) : (
+              <div className="jobs-placeholder">
+                <p className="jobs-placeholder-title">No jobs listed yet.</p>
+                <p className="jobs-placeholder-subtitle">
+                  Your posted jobs will appear here once created.
+                </p>
+              </div>
+            )}
           </Card.Body>
         </Card>
       </Container>

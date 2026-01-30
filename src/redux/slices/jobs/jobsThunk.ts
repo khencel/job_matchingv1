@@ -5,6 +5,7 @@ import {
 import {
   ApplyToJobRequest,
   ApplyToJobResponse,
+  JobPostById,
   JobPosting,
 } from "@/types/applyJob";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -12,16 +13,29 @@ import { AxiosError } from "axios";
 import {
   getAppliedJobs,
   getJobById,
+  getJobPostById,
   getJobPostings,
   postApplyToJob,
 } from "./jobServices";
 
 // Thunk to get job postings
-export const fetchJobPostings = createAsyncThunk<JobPosting[]>(
+export const fetchJobPostings = createAsyncThunk<JobPosting>(
   "applyJob/getJobPostings",
   async (_, { rejectWithValue }) => {
     try {
       const res = await getJobPostings();
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
+export const fetchJobPostById = createAsyncThunk<JobPostById, number>(
+  "applyJob/getJobPostById",
+  async (id, { rejectWithValue }) => {
+    try {
+      const res = await getJobPostById(id);
       return res.data;
     } catch (error) {
       return rejectWithValue(error);

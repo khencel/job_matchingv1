@@ -16,8 +16,8 @@ import updateProfileSlice from "./slices/updateProfile/updateProfileSlice";
 import getAllUserByFilter from "./slices/applicants/userSlice";
 import jobSeekerApplicant from "./slices/employer/applicants/jobSeekerApplicantSlice";
 
-
 import publicProfileSlice from "./slices/publicProfileSlice";
+import jobPostByIdSlice from "./slices/jobs/jobPostByIdSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -37,8 +37,9 @@ export const makeStore = () => {
       jobPost: jobPostSlice,
       updateProfile: updateProfileSlice,
       getAllUserByFilter: getAllUserByFilter,
-      jobSeekerApplicant:jobSeekerApplicant,
+      jobSeekerApplicant: jobSeekerApplicant,
       publicProfile: publicProfileSlice,
+      jobPostById: jobPostByIdSlice,
     },
   });
 };
