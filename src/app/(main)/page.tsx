@@ -11,6 +11,10 @@ import Registration from "../../components/registration/Registration";
 import "animate.css";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import JobSupportFeatures from "./jobSupportFeatures";
+import QASection from "./qAndA";
+import ContactUs from "./contactUs";
+
 
 export default function HomePage() {
   const [hasAccess, setHasAccess] = useState(false);
@@ -32,7 +36,7 @@ export default function HomePage() {
   return (
     <div>
       <Navbar />
-      <JobSearchFiler />
+      <JobSearchFiler/>
       <Banner />
       <hr className="mt-5 w-75 mx-auto" />
 
@@ -44,6 +48,10 @@ export default function HomePage() {
       <JobPost />
       <hr className="mt-5 w-75 mx-auto" />
       <About />
+      <JobSupportFeatures />
+      <QASection />
+      <ContactUs />
+      <hr className="mt-5 w-75 mx-auto" />
       <Footer />
     </div>
   );

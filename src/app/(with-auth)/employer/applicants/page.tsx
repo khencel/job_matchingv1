@@ -25,7 +25,8 @@ export default function Applicants(){
     const handlePageChange = (newPage: number) => {
             dispatch(setPage(newPage));
         };
-
+    console.log(items);
+    
     const totalPages = Math.ceil(count / pageSize);
 
     useEffect(() => {
@@ -64,14 +65,14 @@ export default function Applicants(){
                                                 items.map((item: any, index: number) => {
                                                     let name = item?.user?.userDetails?.firstName + " " + item?.user?.userDetails?.lastName
                                                     let job_role = item?.job_post?.jobPostDetails?.title
-                                                    let avatar = "http://127.0.0.1:8000"+item?.user?.avatar
-                                                    let default_avatar = "http://127.0.0.1:8000/media/avatar/avatardefault.png"
+                                                    let avatar = item?.user?.avatar
+                                                    let default_avatar = "/media/avatar/avatardefault.png"
                                                     return (
-                                                        <tr key={item.id}>
+                                                        <tr key={item.id}> 
                                                             <td>
                                                                 <div className="row">
                                                                     <div className="col-2">
-                                                                        <div className="applicant_avatar" style={{backgroundImage:`url(${avatar?avatar:default_avatar})`}}>
+                                                                        <div className="applicant_avatar" style={{backgroundImage:`url(http://127.0.0.1:8000${avatar?avatar:default_avatar})`}}>
 
                                                                         </div>
                                                                     </div>
@@ -81,7 +82,7 @@ export default function Applicants(){
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <span className="badge border border-dark text-black p-2 rounded-4">{item.status}</span>
+                                                                <span className="badge border border-dark text-black p-2 rounded-4">{item.status?item.status:'Pending'}</span>
                                                             </td>
                                                             <td><span className="text-primary"><FormattedDate date={item.created_at} /></span></td>
                                                             <td><span className="text-primary">{job_role}</span></td>

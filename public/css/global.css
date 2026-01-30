@@ -89,3 +89,153 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.login-container {
+  background: #f0f2f5;
+}
+
+/* Left Side */
+.left-side {
+  flex: 1;
+  min-height: 300px;
+  background: linear-gradient(135deg, #8e9eab, #eef2f3);
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.logo {
+  width: 180px;
+  max-width: 50%;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 1s ease;
+  z-index: 10;
+}
+
+.animate-logo {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.logo-text {
+  font-weight: 600;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+/* Shapes */
+.animated-shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.2;
+  animation: float 6s ease-in-out infinite;
+}
+
+.shape1 {
+  width: 100px;
+  height: 100px;
+  background: #ff6b6b;
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.shape2 {
+  width: 150px;
+  height: 150px;
+  background: #ffd93d;
+  top: 50%;
+  left: 50%;
+  animation-delay: 2s;
+}
+
+.shape3 {
+  width: 80px;
+  height: 80px;
+  background: #6bcfff;
+  bottom: 20%;
+  right: 15%;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-15px) translateX(10px); }
+}
+
+/* Right Side */
+.right-side {
+  flex: 1;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all 1s ease;
+  padding: 2rem;
+}
+
+.fade-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.form-container {
+  background: #fff;
+  max-width: 400px;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.input-focus:focus {
+  border-color: #2575fc;
+  box-shadow: 0 0 8px rgba(37, 117, 252, 0.5);
+  outline: none;
+}
+
+.btn-gradient {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .login-container {
+    flex-direction: column;
+  }
+  .left-side, .right-side {
+    flex: unset;
+    width: 100%;
+  }
+  .logo {
+    max-width: 35%;
+  }
+  .logo-text {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .logo {
+    max-width: 50%;
+  }
+  .logo-text {
+    font-size: 1.1rem;
+  }
+  .form-container {
+    padding: 1.5rem;
+  }
+}

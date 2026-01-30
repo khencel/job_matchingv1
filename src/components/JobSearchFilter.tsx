@@ -1,7 +1,7 @@
 export default function JobSearchFiler() {
   return (
     <>
-      <div className="job-search-filter d-flex justify-content-center p-3">
+      <div className="job-search-filter d-flex justify-content-center p-3" style={{marginTop:"6%"}}>
         <div className="w-75 bg-white rounded search-filter-box">
           <div className="row g-2 p-1">
             <div className="col-md-5">

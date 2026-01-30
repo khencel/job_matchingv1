@@ -75,11 +75,17 @@ interface SideBarNavItem {
 }
 
 const SideBarNavItems: SideBarNavItem[] = [
+  // {
+  //   eventKey: "overview",
+  //   href: "/super-visory/overview",
+  //   icon: <LayersIcon />,
+  //   label: "Overview",
+  // },
   {
-    eventKey: "overview",
-    href: "/super-visory/overview",
-    icon: <LayersIcon />,
-    label: "Overview",
+    eventKey: "profile",
+    href: "/super-visory/profile",
+    icon: <UserCircle2Icon />,
+    label: "Profile",
   },
   {
     eventKey: "applicants",
@@ -87,10 +93,5 @@ const SideBarNavItems: SideBarNavItem[] = [
     icon: <FileUserIcon />,
     label: "Applicants",
   },
-  {
-    eventKey: "profile",
-    href: "/super-visory/profile",
-    icon: <UserCircle2Icon />,
-    label: "Profile",
-  },
+  
 ];

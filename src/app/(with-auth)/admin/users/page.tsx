@@ -137,59 +137,48 @@ export default function AdminUsers() {
                                                         {item.role === "employer" && (
                                                             <ul className="dropdown-menu dropdown-menu-end">
                                                                 <li>
-                                                                   <button className="dropdown-item">View Employer</button>
+                                                                    <button className="dropdown-item">Deactivate</button>
                                                                 </li>
+                                                                <li>
+                                                                    <button className="dropdown-item">Activate</button>
+                                                                </li>
+                                                    
                                                             </ul>
                                                         )}
 
                                                         {item.role === "job_seeker" && (
                                                             <ul className="dropdown-menu dropdown-menu-end">
                                                                 <li>
-                                                                <button className="dropdown-item">View Employer</button>
+                                                                    <button className="dropdown-item">Deactivate</button>
                                                                 </li>
                                                                 <li>
-                                                                <button className="dropdown-item">View Applicant</button>
+                                                                    <button className="dropdown-item">Activate</button>
                                                                 </li>
-                                                                <li>
-                                                                <button className="dropdown-item text-success">Approved</button>
-                                                                </li>
-                                                                <li>
-                                                                <button className="dropdown-item text-danger">Reject</button>
-                                                                </li>
+                                                    
                                                             </ul>
                                                         )}
 
                                                         {item.role === "supervisory" && (
                                                             <ul className="dropdown-menu dropdown-menu-end">
                                                                 <li>
-                                                                <button className="dropdown-item">View Employer</button>
+                                                                    <button className="dropdown-item">Deactivate</button>
                                                                 </li>
                                                                 <li>
-                                                                <button className="dropdown-item">View Applicant</button>
+                                                                    <button className="dropdown-item">Activate</button>
                                                                 </li>
-                                                                <li>
-                                                                <button className="dropdown-item text-success">Approved</button>
-                                                                </li>
-                                                                <li>
-                                                                <button className="dropdown-item text-danger">Reject</button>
-                                                                </li>
+                                                    
                                                             </ul>
                                                         )}
 
                                                         {item.role === "admin" && (
                                                             <ul className="dropdown-menu dropdown-menu-end">
                                                                 <li>
-                                                                <button className="dropdown-item">View Employer</button>
+                                                                    <button className="dropdown-item">Deactivate</button>
                                                                 </li>
                                                                 <li>
-                                                                <button className="dropdown-item">View Applicant</button>
+                                                                    <button className="dropdown-item">Activate</button>
                                                                 </li>
-                                                                <li>
-                                                                <button className="dropdown-item text-success">Approved</button>
-                                                                </li>
-                                                                <li>
-                                                                <button className="dropdown-item text-danger">Reject</button>
-                                                                </li>
+                                                    
                                                             </ul>
                                                         )}
                                                     </div>

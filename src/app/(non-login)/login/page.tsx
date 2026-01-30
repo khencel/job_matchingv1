@@ -1,13 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { loginUser } from "@/redux/features/auth/auth_thunk";
 import {
   showSuccessToast,
   showErrorToast,
   showWarningToast,
 } from "@/app/(util)/toaster";
-import { useRouter } from "next/navigation";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { loginUser } from "@/redux/features/auth/auth_thunk";
 
 export default function Login() {
   const dispatch = useAppDispatch();
@@ -16,6 +16,11 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [fadeIn, setFadeIn] = useState(false);
+
+  useEffect(() => {
+    setFadeIn(true);
+  }, []);
 
   const handleLogin = async () => {
     if (!email.trim() || !password.trim()) {
@@ -32,23 +37,21 @@ export default function Login() {
         return;
       }
 
-      if (role === "employer") {
-        router.push("/employer/overview");
+      switch (role) {
+        case "employer":
+          router.push("/employer/overview");
+          break;
+        case "job_seeker":
+          router.push("/");
+          break;
+        case "admin":
+          router.push("/admin/overview");
+          break;
+        case "supervisory":
+          router.push("/super-visory/profile");
+          break;
       }
 
-      if (role === "job_seeker") {
-        router.push("/");
-      }
-
-      if (role === "admin") {
-        router.push("/admin/overview");
-      }
-
-      if (role === "supervisory") {
-        router.push("/super-visory/overview");
-      }
-
-      // router.push("/");
       showSuccessToast("Sign in successful", "Welcome back!");
     } catch (error) {
       console.log(error);
@@ -57,104 +60,74 @@ export default function Login() {
   };
 
   return (
-    <>
-      <div className="row m-0">
-        <div className="col-md-7 left-content d-flex align-items-center justify-content-center">
-          <img src="/logo.png" width={400} alt="" />
-        </div>
-        <div className="col-md-5 d-flex align-items-center justify-content-center">
-          <div className="w-75">
-            <div className="mb-4 text-center">
-              <h3 className="fw-bold">Sign In</h3>
-              <p className="text-muted">
-                Welcome back! Please login to your account
-              </p>
-            </div>
-            <div className="input-group">
-              <span className="input-group-text">
-                <img
-                  src="/img/login/mail.png"
-                  alt="email"
-                  width="20"
-                  height="20"
-                />
-              </span>
-              <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                type="text"
-                className="form-control"
-                placeholder="Email"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleLogin();
-                  }
-                }}
-              />
-            </div>
+    <div className="login-container d-flex vh-100 flex-column flex-lg-row">
+      {/* Left Side */}
+      <div className="left-side d-flex flex-column align-items-center justify-content-center position-relative text-center">
+        <img
+          src="/logo.png"
+          alt="Logo"
+          className={`logo ${fadeIn ? "animate-logo" : ""}`}
+        />
+        <h2 className="logo-text mt-3">Welcome to Our Platform</h2>
+        <p className="text-muted mb-0">Connect. Apply. Grow.</p>
 
-            <div className="input-group mt-3">
-              <span className="input-group-text">
-                <img
-                  src="/img/login/padlock.png"
-                  alt="email"
-                  width="20"
-                  height="20"
-                />
-              </span>
-              <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                className="form-control"
-                placeholder="Password"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleLogin();
-                  }
-                }}
-              />
-            </div>
-            <div className="mt-3 text-center">
-              <div>
-                <button
-                  disabled={loading}
-                  onClick={handleLogin}
-                  className="btn btn-primary-custom w-75 rounded-3"
-                >
-                  Sign In
-                </button>
-              </div>
+        {/* Animated shapes */}
+        <div className="animated-shape shape1"></div>
+        <div className="animated-shape shape2"></div>
+        <div className="animated-shape shape3"></div>
+      </div>
 
-              <div className="mt-2">
-                <span className="primary-text">Forgot Password?</span>
-              </div>
-            </div>
-            <hr />
-            <div className="text-center">
-              <span className="">Register As</span>
+      {/* Right Side */}
+      <div
+        className={`right-side d-flex align-items-center justify-content-center ${
+          fadeIn ? "fade-in" : ""
+        }`}
+      >
+        <div className="form-container p-4 shadow-lg rounded-4 w-100">
+          <h3 className="fw-bold mb-2 text-center">Sign In</h3>
+          <p className="text-muted text-center mb-4">
+            Welcome back! Please login to your account
+          </p>
 
-              <div className="row mt-2">
-                <div className="col">
-                  <button className="btb btn-primary-custom rounded-3">
-                    Job Seeker
-                  </button>
-                </div>
-                <div className="col">
-                  <button className="btb btn-primary-custom rounded-3">
-                    Employer
-                  </button>
-                </div>
-                <div className="col">
-                  <button className="btb btn-primary-custom rounded-3">
-                    Supervisory
-                  </button>
-                </div>
-              </div>
-            </div>
+          <div className="form-floating mb-3">
+            <input
+              type="email"
+              className="form-control input-focus"
+              id="floatingEmail"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleLogin()}
+            />
+            <label htmlFor="floatingEmail">Email</label>
+          </div>
+
+          <div className="form-floating mb-4">
+            <input
+              type="password"
+              className="form-control input-focus"
+              id="floatingPassword"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleLogin()}
+            />
+            <label htmlFor="floatingPassword">Password</label>
+          </div>
+
+          <button
+            className="btn btn-gradient w-100 rounded-3 mb-3"
+            onClick={handleLogin}
+            disabled={loading}
+          >
+            {loading ? "Signing In..." : "Sign In"}
+          </button>
+
+          <div className="text-center">
+            <span className="text-primary cursor-pointer">Forgot Password?</span>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

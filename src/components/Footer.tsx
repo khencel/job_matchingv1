@@ -39,7 +39,7 @@ export default function Footer() {
                 <a className="nav-link text-dark" href="#">Job Support Features</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-dark" href="#">Find Jobs</a>
+                <a className="nav-link text-dark" href="#">About Us</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link text-dark" href="#">Q&A</a>

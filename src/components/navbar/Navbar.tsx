@@ -75,7 +75,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
       <div className="container-fluid d-flex align-items-center">
         {/* Logo on the left */}
         <Link className="navbar-brand d-flex align-items-center" href="/">
@@ -102,6 +102,26 @@ export default function Navbar() {
               <Link className="nav-link me-3" href="/">
                 {t("home")}
               </Link>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link me-3" href="/#job_support_features">
+                Job Support Features
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link me-3" href="/#about_us">
+                About Us
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link me-3" href="/#q_and_a">
+                Q&A
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link me-3" href="/#contact_us">
+                Contacts
+              </a>
             </li>
             {user ? (
               <Dropdown>

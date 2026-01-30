@@ -6,31 +6,36 @@ import RegistrationButton from "./RegisterButton";
  */
 export default function Registration() {
   return (
-    <div className="container py-4">
-      <div className="row justify-content-center text-center">
-        <div className="col-12 col-lg-10">
-          <div className="row g-4">
-            {/* Job Seeker Card */}
-            <div className="col-12 col-sm-6 col-lg-4"> 
-              <RegistrationButton
-                id="jobSeeker"
-                buttonTextKey="buttons.registerJobSeeker"
-              />
-            </div>
-            {/* Employer Card */}
-            <div className="col-12 col-sm-6 col-lg-4">
-              <RegistrationButton
-                id="employer"
-                buttonTextKey="buttons.registerEmployer"
-              />
-            </div>
-            {/* Supervisory Card */}
-            <div className="col-12 col-sm-6 col-lg-4">
-              <RegistrationButton
-                id="superVisory"
-                buttonTextKey="buttons.registerSupervisory"
-              />
-            </div>
+    <div className="container py-5">
+      <h2 className="text-center mb-5 fw-bold">Choose Your Role</h2>
+      <div className="row g-4 justify-content-center">
+        <div className="col-12 col-sm-6 col-lg-4">
+          <div className="card shadow p-4 text-center h-100 ">
+            <p className="mb-3">Looking for your dream job?</p>
+            <RegistrationButton
+              id="jobSeeker"
+              buttonTextKey="buttons.registerJobSeeker"
+            />
+          </div>
+        </div>
+
+        <div className="col-12 col-sm-6 col-lg-4">
+          <div className="card shadow p-4 text-center h-100">
+            <p className="mb-3">Hire the best talent!</p>
+            <RegistrationButton
+              id="employer"
+              buttonTextKey="buttons.registerEmployer"
+            />
+          </div>
+        </div>
+
+        <div className="col-12 col-sm-6 col-lg-4">
+          <div className="card shadow p-4 text-center h-100">
+            <p className="mb-3">Manage and supervise effectively</p>
+            <RegistrationButton
+              id="superVisory"
+              buttonTextKey="buttons.registerSupervisory"
+            />
           </div>
         </div>
       </div>

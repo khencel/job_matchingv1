@@ -1,4 +1,5 @@
-import { RegisterJobSeekerStep2Data } from "@/redux/slices/register/job-seeker/jobseekerSlice";
+import { registerJobSeekerSlice } from "@/redux/slices/register/job-seeker/jobseekerSlice";
+import { RegisterJobSeekerStep2Data } from "@/types/job-seeker";
 import { NextResponse } from "next/server";
 
 // 1. Mock Data Dictionary
