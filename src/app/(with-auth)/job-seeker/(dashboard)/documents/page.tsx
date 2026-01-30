@@ -76,7 +76,7 @@ const DocumentsPage = () => {
 
   const fileName = (doc: string) => {
     const name = doc.split(`user_${user_id}/`).pop();
-    return name?.split(".")[0];
+    return name?.split(".").shift();
   };
 
   const fileType = (doc: string) => {

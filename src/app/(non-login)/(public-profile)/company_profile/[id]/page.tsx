@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { getPublicProfile } from "@/redux/slices/publicProfileSlice";
+import Image from "next/image";
 
 const CompanyProfilePage = () => {
   const dispatch = useAppDispatch();
@@ -50,12 +51,35 @@ const CompanyProfilePage = () => {
     <div className="company-profile-wrapper">
       <Container className="mt-4 mb-5">
         <Card className="company-profile-card">
-          <div className="banner banner-gradient"></div>
+          <div
+            className={`banner ${user.banner ? "" : "banner-gradient"}`}
+          >
+            {user.banner && (
+              <Image
+                src={user.banner}
+                alt="Company Banner"
+                fill
+                objectFit="cover"
+                className="banner-image"
+                unoptimized
+              />
+            )}
+          </div>
           <Card.Body className="company-profile-body">
             <div className="avatar-header-container">
               <div className={`avatar ${hasAvatar ? "with-image" : ""}`}>
-                {!hasAvatar &&
-                  company_information.name.slice(0, 1).toUpperCase()}
+                {!user.avatar ? (
+                  company_information.name.slice(0, 1).toUpperCase()
+                ) : (
+                  <Image
+                    src={user.avatar}
+                    alt="Company Avatar"
+                    fill
+                    objectFit="cover"
+                    className="avatar-image"
+                    unoptimized
+                  />
+                )}
               </div>
               <div className="">
                 <h1 className="company-name">{company_information.name}</h1>
