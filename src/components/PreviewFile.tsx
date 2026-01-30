@@ -19,14 +19,19 @@ const PreviewFile = ({
   const [fileType, setFileType] = useState<string>("");
 
   useEffect(() => {
-    if (filePath) {
-      setLoading(true);
-      setError(null);
-      // Extract file type from filePath
-      const extension = filePath.split(".").pop()?.toLowerCase() || "";
-      setFileType(extension);
-      setLoading(false);
-    }
+    if (!filePath) return;
+
+    const loadFile = async () => {
+      if (filePath) {
+        setLoading(true);
+        setError(null);
+        // Extract file type from filePath
+        const extension = filePath.split(".").pop()?.toLowerCase() || "";
+        setFileType(extension);
+        setLoading(false);
+      }
+    };
+    loadFile();
   }, [filePath]);
 
   if (!filePath) return null;
