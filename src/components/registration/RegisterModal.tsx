@@ -96,7 +96,7 @@ export default function RegistrationModal({
       {...{ show, onHide }}
       backdrop="static"
       keyboard={false}
-      size="md"
+      size="lg"
       className=""
     >
       <Modal.Header
