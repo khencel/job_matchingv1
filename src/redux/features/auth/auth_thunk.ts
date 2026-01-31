@@ -108,9 +108,9 @@ export const loginUser = createAsyncThunk<
 export const logoutUser = createAsyncThunk(
   "auth/logoutUser",
   async (_, { dispatch, rejectWithValue }) => {
-    const refreshToken = Cookies.get("refreshToken");
+    const refresh = Cookies.get("refreshToken");
 
-    if (!refreshToken) {
+    if (!refresh) {
       dispatch(forceLogout());
       localStorage.clear();
       Cookies.remove("access");
@@ -118,8 +118,11 @@ export const logoutUser = createAsyncThunk(
       return rejectWithValue("No refresh token available");
     }
 
+    const formData = new FormData();
+    formData.append("refresh", refresh);
+
     try {
-      await logoutApi(refreshToken);
+      await logoutApi(formData);
       return;
     } catch (error) {
       console.log("Force logout due to error:", error);

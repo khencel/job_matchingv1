@@ -275,26 +275,14 @@ const EditJobSeeker = () => {
                       </Button>
                     </>
                   ) : (
-                    <>
-                      <Button
-                        variant="primary"
-                        className="d-flex align-items-center gap-2"
-                        onClick={handleEditToggle}
-                        size="sm"
-                      >
-                        <Edit2 size={16} /> Edit Profile
-                      </Button>
-                      {!existingResume && (
-                        <Button
-                          variant="secondary"
-                          className="d-flex align-items-center gap-2"
-                          onClick={() => fileResumeRef.current?.click()}
-                          size="sm"
-                        >
-                          <FileDownIcon size={16} /> Upload Resume
-                        </Button>
-                      )}
-                    </>
+                    <Button
+                      variant="primary"
+                      className="d-flex align-items-center gap-2"
+                      onClick={handleEditToggle}
+                      size="sm"
+                    >
+                      <Edit2 size={16} /> Edit Profile
+                    </Button>
                   )}
                 </div>
               </div>

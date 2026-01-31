@@ -1,21 +1,30 @@
-import { useAppSelector } from "@/redux/hooks";
+import { logoutUser } from "@/redux/features/auth/auth_thunk";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   FileUserIcon,
-  FolderHeartIcon,
   FoldersIcon,
   LayersIcon,
   LogOutIcon,
   UserCircle2Icon,
 } from "lucide-react";
 import Link from "next/link";
-import { DropdownItem } from "react-bootstrap";
+import { useRouter } from "next/navigation";
+import { Button, DropdownItem } from "react-bootstrap";
 
-interface DropdownProps {
-  handleLogout: () => void;
-}
-
-const DropdownNav = ({ handleLogout }: DropdownProps) => {
+const DropdownNav = () => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const role = useAppSelector((s) => s.authState.user?.role);
+
+  const handleLogout = () => {
+    try {
+      dispatch(logoutUser());
+      router.push("/");
+    } catch (error) {
+      console.log("Force logout due to error:", error);
+      return;
+    }
+  };
 
   return (
     <div>
@@ -45,7 +54,7 @@ const DropdownNav = ({ handleLogout }: DropdownProps) => {
             ))}
           </>
         )}
-        <DropdownItem className="py-2" onClick={handleLogout} href="/">
+        <DropdownItem as={Button} onClick={handleLogout} className="py-2">
           <LogOutIcon className="text-danger" />
           <span className="ms-2 text-danger">Logout</span>
         </DropdownItem>
@@ -67,11 +76,6 @@ const dropdownItems = {
       label: "Application",
       icon: <FoldersIcon />,
       href: "/job-seeker/applied-jobs",
-    },
-    {
-      label: "Saved Jobs",
-      icon: <FolderHeartIcon />,
-      href: "/job-seeker/saved-jobs",
     },
     {
       label: "Documents",

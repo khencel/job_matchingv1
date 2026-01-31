@@ -22,10 +22,12 @@ import {
   Trash2Icon,
   UploadIcon,
 } from "lucide-react";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import PreviewFile from "@/components/PreviewFile";
+import { fetchCurrentUser } from "@/redux/features/auth/auth_thunk";
 
 const DocumentsPage = () => {
+  const dispatch = useAppDispatch();
   const user_id = useAppSelector((s) => s.authState.user?.id);
   const documents = useAppSelector((s) => s.authState.user?.documents || []);
 
@@ -120,6 +122,7 @@ const DocumentsPage = () => {
       });
       console.log("Uploaded Files", res);
       setUploadedFiles(null);
+      dispatch(fetchCurrentUser());
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -128,7 +131,6 @@ const DocumentsPage = () => {
       });
       console.log("Error uploading documents", error);
     }
-
     console.log("Files selected:", uploadedFiles);
   };
 
