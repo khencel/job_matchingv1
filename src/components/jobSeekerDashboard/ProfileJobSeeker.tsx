@@ -265,7 +265,7 @@ const EditJobSeeker = () => {
                         onClick={handleSaveProfile}
                         size="sm"
                       >
-                        <Save size={16} /> Save Changes
+                        <Save size={16} /> {t("saveChanges")}
                       </Button>
                       <Button
                         variant="outline-danger"
@@ -273,7 +273,7 @@ const EditJobSeeker = () => {
                         onClick={handleEditToggle}
                         size="sm"
                       >
-                        <X size={16} /> Cancel Edit
+                        <X size={16} /> {t("cancelEdit")}
                       </Button>
                     </>
                   ) : (
@@ -283,7 +283,7 @@ const EditJobSeeker = () => {
                       onClick={handleEditToggle}
                       size="sm"
                     >
-                      <Edit2 size={16} /> Edit Profile
+                      <Edit2 size={16} /> {t("editProfile")}
                     </Button>
                   )}
                 </div>
@@ -307,7 +307,7 @@ const EditJobSeeker = () => {
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      First Name
+                      {t("firstName")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -328,7 +328,7 @@ const EditJobSeeker = () => {
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Middle Name
+                      {t("middleName")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -345,7 +345,7 @@ const EditJobSeeker = () => {
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Last Name
+                      {t("lastName")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -367,7 +367,7 @@ const EditJobSeeker = () => {
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Birthdate
+                      {t("birthdate")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -389,7 +389,7 @@ const EditJobSeeker = () => {
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Gender
+                      {t("gender")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Select
@@ -399,10 +399,10 @@ const EditJobSeeker = () => {
                         }
                         isInvalid={!!errors.gender}
                       >
-                        <option value="">Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
+                        <option value="">{t("selectGender")}</option>
+                        <option value="male">{t("male")}</option>
+                        <option value="female">{t("female")}</option>
+                        <option value="other">{t("other")}</option>
                       </Form.Select>
                     ) : (
                       <p className="fw-medium text-capitalize">
@@ -417,7 +417,7 @@ const EditJobSeeker = () => {
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Nationality
+                      {t("nationality")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -441,7 +441,7 @@ const EditJobSeeker = () => {
                 <Col md={12}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Current Residence
+                      {t("currentResidence")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -452,7 +452,7 @@ const EditJobSeeker = () => {
                             e.target.value,
                           )
                         }
-                        placeholder="City, Country"
+                        placeholder={t("city")}
                         isInvalid={!!errors.currentPlaceResidence}
                       />
                     ) : (
@@ -477,7 +477,7 @@ const EditJobSeeker = () => {
             <Card className="border-0 shadow-sm">
               <Card.Header className="bg-white border-0 pt-4 px-4 pb-0">
                 <h6 className="fw-bold mb-0 d-flex align-items-center gap-2">
-                  <Briefcase size={18} /> Professional Status
+                  <Briefcase size={18} /> {t("professionalStatus")}
                 </h6>
               </Card.Header>
               <Card.Body className="p-4">
@@ -493,7 +493,7 @@ const EditJobSeeker = () => {
                       }
                       isInvalid={!!errors.visaStatus}
                     >
-                      <option value="">Select status</option>
+                      <option value="">{t("selectStatus")}</option>
                       {VISA_OPTIONS.map((status) => (
                         <option key={status} value={status}>
                           {status}
@@ -520,7 +520,7 @@ const EditJobSeeker = () => {
 
                 <div className="mb-3">
                   <Form.Label className="text-muted small fw-semibold">
-                    Japanese Level
+                    {t("japaneseLevel")}
                   </Form.Label>
                   {isEditMode ? (
                     <Form.Select
@@ -530,7 +530,7 @@ const EditJobSeeker = () => {
                       }
                       isInvalid={!!errors.japaneseLevel}
                     >
-                      <option value="">Select level</option>
+                      <option value="">{t("selectLevel")}</option>
                       {JAPANESE_LEVEL_OPTIONS.map((level) => (
                         <option key={level} value={level}>
                           {level}
@@ -547,7 +547,7 @@ const EditJobSeeker = () => {
 
                 <div>
                   <Form.Label className="text-muted small fw-semibold">
-                    Highest Education
+                    {t("highestEducation")}
                   </Form.Label>
                   {isEditMode ? (
                     <Form.Select
@@ -557,7 +557,7 @@ const EditJobSeeker = () => {
                       }
                       isInvalid={!!errors.highestEducation}
                     >
-                      <option value="">Select education</option>
+                      <option value="">{t("selectEducation")}</option>
                       {EDUCATION_OPTIONS.map((option) => (
                         <option key={option.value} value={option.value}>
                           {option.label}
@@ -581,13 +581,13 @@ const EditJobSeeker = () => {
             <Card className="border-0 shadow-sm">
               <Card.Header className="bg-white border-0 pt-4 px-4 pb-0">
                 <h6 className="fw-bold mb-0 d-flex align-items-center gap-2">
-                  <Globe size={18} /> Social Links
+                  <Globe size={18} /> {t("socialLinks")}
                 </h6>
               </Card.Header>
               <Card.Body className="p-4">
                 <Form.Group>
                   <Form.Label className="text-muted small fw-semibold">
-                    Facebook
+                    {t("facebook")}
                   </Form.Label>
                   <div className="d-flex align-items-center gap-2">
                     <FaFacebook size={18} className="text-primary" />
@@ -597,7 +597,7 @@ const EditJobSeeker = () => {
                         onChange={(e) =>
                           handleInputChange("facebook", e.target.value)
                         }
-                        placeholder="Profile URL or Username"
+                        placeholder={t("profileURLUsername")}
                       />
                     ) : (
                       <a
@@ -605,7 +605,7 @@ const EditJobSeeker = () => {
                         className="text-decoration-none text-truncate d-block"
                         style={{ maxWidth: "200px" }}
                       >
-                        {getValue("facebook") || "Not linked"}
+                        {getValue("facebook") || t("notLinked")}
                       </a>
                     )}
                   </div>
@@ -622,7 +622,7 @@ const EditJobSeeker = () => {
           <Card className="border-0 shadow-sm h-100">
             <Card.Header className="bg-white border-0 pt-4 px-4 pb-0 d-flex justify-content-between align-items-center">
               <h5 className="fw-bold mb-0 d-flex align-items-center gap-2">
-                <FileText size={20} /> Resume
+                <FileText size={20} /> {t("resume")}
               </h5>
             </Card.Header>
             <Card.Body className="p-4">
@@ -649,20 +649,18 @@ const EditJobSeeker = () => {
                   <div className="bg-white p-3 rounded-circle shadow-sm mb-3">
                     <UploadCloud size={32} className="text-primary" />
                   </div>
-                  <h6 className="fw-bold mb-1">No resume created yet</h6>
+                  <h6 className="fw-bold mb-1">{t("noResumeYet")}</h6>
                   <p
                     className="text-muted small mb-3 text-center"
                     style={{ maxWidth: "400px" }}
                   >
-                    Create your resume to increase your chances of getting
-                    hired. Employers are more likely to view profiles with
-                    resumes.
+                    {t("createResumeDescription")}
                   </p>
                   <Button
                     variant="primary"
                     onClick={() => router.push("/job-seeker/resume-builder")}
                   >
-                    Create Resume
+                    {t("createResume")}
                   </Button>
                 </div>
               )}

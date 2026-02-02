@@ -1,10 +1,23 @@
 {
   "myDocuments": "My Documents",
+  "uploadManageDocuments": "Upload and manage your documents here",
+  "documents": "Documents",
   "previewFiles": "Preview Files",
-  "uploadDocuments": "Upload Your Documents",
+  "uploadYourDocuments": "Upload Your Documents",
+  "selectMultipleFilesSupported": "Select multiple files (PDF, DOC, DOCX, JPG, PNG supported)",
+  "chooseFiles": "Choose Files",
+  "chooseMoreFiles": "Choose More Files",
+  "uploadFiles": "Upload Files",
+  "clear": "Clear",
   "uploadedDocuments": "Uploaded Documents",
-  "noDocuments": "No documents uploaded yet",
+  "noDocumentsUploaded": "No documents uploaded yet",
   "fileName": "File Name",
   "fileType": "File Type",
-  "actions": "Actions"
+  "actions": "Actions",
+  "noFilesSelected": "No Files Selected",
+  "selectFilesUpload": "Please select files to upload",
+  "uploadSuccess": "Upload Successful",
+  "uploadSuccessMsg": "Your documents have been uploaded successfully",
+  "uploadFailed": "Upload Failed",
+  "uploadFailedMsg": "An error occurred while uploading your documents"
 }

@@ -1,10 +1,23 @@
 {
   "myDocuments": "マイドキュメント",
+  "uploadManageDocuments": "ここでドキュメントをアップロードして管理できます",
+  "documents": "ドキュメント",
   "previewFiles": "ファイルをプレビュー",
-  "uploadDocuments": "ドキュメントをアップロード",
+  "uploadYourDocuments": "ドキュメントをアップロード",
+  "selectMultipleFilesSupported": "複数ファイルを選択（PDF、DOC、DOCX、JPG、PNG対応）",
+  "chooseFiles": "ファイルを選択",
+  "chooseMoreFiles": "さらにファイルを選択",
+  "uploadFiles": "ファイルをアップロード",
+  "clear": "クリア",
   "uploadedDocuments": "アップロードされたドキュメント",
-  "noDocuments": "ドキュメントはまだアップロードされていません",
+  "noDocumentsUploaded": "ドキュメントはまだアップロードされていません",
   "fileName": "ファイル名",
   "fileType": "ファイルタイプ",
-  "actions": "アクション"
+  "actions": "アクション",
+  "noFilesSelected": "ファイルが選択されていません",
+  "selectFilesUpload": "アップロードするファイルを選択してください",
+  "uploadSuccess": "アップロード成功",
+  "uploadSuccessMsg": "ドキュメントが正常にアップロードされました",
+  "uploadFailed": "アップロード失敗",
+  "uploadFailedMsg": "ドキュメントのアップロード中にエラーが発生しました"
 }
