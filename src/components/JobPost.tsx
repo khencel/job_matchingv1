@@ -1,12 +1,14 @@
-import Link from "next/link";
+"use client";
 import JobCard from "./JobCard";
 import { useEffect, useState } from "react";
 import { getJobPostings } from "@/redux/slices/jobs/jobServices";
 import { JobPosting } from "@/types/applyJob";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function JobPost() {
   const router = useRouter();
+  const t = useTranslations("jobPost");
   const [jobPostings, setJobPostings] = useState<JobPosting[]>([]);
 
   useEffect(() => {
@@ -46,13 +48,12 @@ export default function JobPost() {
                 className="btn btn-primary-custom"
                 onClick={() => router.push("/find-jobs")}
               >
-                View More Jobs
+                {t("viewMoreJobs")}
               </button>
             </div>
           </div>
-      </div>
+        </div>
       </div>
     </div>
- 
   );
 }

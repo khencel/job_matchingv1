@@ -571,6 +571,28 @@
     },
     "copyright": "© Copyright Jobsearch 2025. All rights reserved"
   },
+  "jobPost": {
+    "viewMoreJobs": "もっと見る"
+  },
+  "loginPage": {
+    "logoTitle": "私たちのプラットフォームへようこそ",
+    "logoSubtitle": "繋がる。応募する。成長する。",
+    "title": "サインイン",
+    "subtitle": "お帰りなさい！アカウントにログインしてください",
+    "emailLabel": "メールアドレス",
+    "passwordLabel": "パスワード",
+    "signInButton": "サインイン",
+    "signingInButton": "サインイン中...",
+    "forgotPassword": "パスワードをお忘れですか？",
+    "toasts": {
+      "signInFailed": "サインインに失敗しました",
+      "fillAllFields": "すべてのフィールドを入力してください",
+      "verifyEmail": "メールアドレスを確認してください",
+      "signInSuccessful": "サインインに成功しました",
+      "welcomeBack": "お帰りなさい！",
+      "invalidCredentials": "メールアドレスまたはパスワードが無効です"
+    }
+  },
   "jobDescriptionPage": {
     "headings": {
       "description": "詳細",
