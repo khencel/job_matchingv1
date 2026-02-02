@@ -1,25 +1,32 @@
 {
-  "title": "利用規約",
+  "title": "連絡先担当者情報",
   "labels": {
-    "acceptTerms": "利用規約に同意する",
-    "acceptPrivacyPolicy": "プライバシーポリシーに同意する",
-    "acceptReceiveEmails": "メール通知を受け取る"
+    "name": "名前",
+    "department": "部門",
+    "phoneNumber": "電話番号",
+    "email": "メールアドレス"
+  },
+  "placeholders": {
+    "enterName": "フルネームを入力",
+    "enterDepartment": "部門を入力",
+    "enterPhoneNumber": "電話番号を入力",
+    "enterEmail": "メールアドレスを入力"
   },
   "helpers": {
-    "submitting": "送信中..."
+    "contactInfoNote": "この情報はプラットフォーム管理者からの連絡に使用されます。"
   },
   "errors": {
-    "acceptTermsPrivacy": "利用規約とプライバシーポリシーに同意する必要があります。",
-    "acceptTerms": "利用規約に同意する必要があります。",
-    "acceptPrivacy": "プライバシーポリシーに同意する必要があります。"
+    "fillRequired": "すべての必須項目を入力してください。",
+    "invalidEmail": "有効なメールアドレスを入力してください。",
+    "invalidName": "名前は2～100文字である必要があります。",
+    "invalidDepartmentName": "部門名は2～100文字である必要があります。",
+    "invalidPhoneNumber": "電話番号は7～15桁である必要があります。"
   },
   "messages": {
     "success": "成功！",
-    "error": "エラー",
-    "registrationComplete": "登録が完了しました！",
-    "registrationFailed": "登録に失敗しました。もう一度お試しください。"
+    "contactPersonSaved": "連絡先情報が正常に保存されました。"
   },
   "buttons": {
-    "submit": "登録を送信"
+    "next": "次へ"
   }
 }

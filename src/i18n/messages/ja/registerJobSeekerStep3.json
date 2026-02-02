@@ -1,44 +1,18 @@
 {
-  "title": "企業情報",
+  "title": "利用規約と条件",
   "labels": {
-    "basicInfo": "基本情報",
-    "companyName": "企業名",
-    "companyNamePhonetic": "企業名（ふりがな）",
-    "representativeName": "代表者名",
-    "headquartersAddress": "本社住所",
-    "prefecture": "都道府県",
-    "city": "市区町村",
-    "street": "番地・建物",
-    "companyDetails": "企業詳細",
-    "numberOfEmployees": "従業員数",
-    "industry": "業種",
-    "yearFounded": "設立年",
-    "capital": "資本金",
-    "businessDescription": "事業説明"
+    "acceptTerms": "利用規約に同意します",
+    "acceptPrivacyPolicy": "プライバシーポリシーに同意します",
+    "acceptReceiveEmails": "プロモーションメールの受け取りに同意します（オプション）"
   },
-  "placeholders": {
-    "enterCompanyName": "企業名を入力",
-    "enterCompanyNamePhonetic": "企業名（ふりがな）を入力",
-    "enterRepresentativeName": "代表者名を入力",
-    "selectPrefecture": "都道府県を選択",
-    "enterCity": "市区町村を入力",
-    "enterStreet": "番地・建物を入力",
-    "enterNumberOfEmployees": "従業員数を入力",
-    "selectIndustry": "業種を選択",
-    "enterYearFounded": "設立年を入力",
-    "enterCapital": "資本金を入力",
-    "enterBusinessDescription": "事業を説明"
+  "helpers": {
+    "submitting": "送信中..."
   },
   "errors": {
-    "tooShortCompanyName": "企業名は最低2文字である必要があります。",
-    "tooShortRepName": "名前は最低2文字である必要があります。",
-    "fillRequired": "すべての必須項目を入力してください。",
-    "invalidNumOfEmployees": "最低1人の従業員が必要です。",
-    "invalidYearFounded": "有効な年を入力してください。",
-    "invalidCity": "市区町村は最低2文字である必要があります。",
-    "invalidStreet": "番地・建物は最低2文字である必要があります。"
+    "acceptT&C": "続行するには利用規約に同意する必要があります。",
+    "acceptPrivacyPolicy": "続行するにはプライバシーポリシーに同意する必要があります。"
   },
   "buttons": {
-    "next": "次へ"
+    "submit": "登録を送信"
   }
 }

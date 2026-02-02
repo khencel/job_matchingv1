@@ -1,30 +1,42 @@
 {
-  "title": "連絡先担当者情報",
+  "title": "企業情報",
   "labels": {
-    "name": "名前",
-    "department": "部門",
-    "phoneNumber": "電話番号",
-    "email": "メールアドレス"
+    "basicInfo": "基本情報",
+    "companyName": "企業名",
+    "companyNamePhonetic": "企業名（フリガナ）",
+    "representativeName": "代表者名",
+    "headquartersAddress": "本社住所",
+    "prefecture": "都道府県",
+    "city": "市区町村",
+    "street": "丁目・号・建物名",
+    "companyDetails": "企業詳細",
+    "numberOfEmployees": "従業員数",
+    "industry": "業種",
+    "yearFounded": "設立年",
+    "capital": "資本金",
+    "businessDescription": "事業説明"
   },
   "placeholders": {
-    "enterName": "フルネームを入力",
-    "enterDepartment": "部門を入力",
-    "enterPhoneNumber": "電話番号を入力",
-    "enterEmail": "メールアドレスを入力"
-  },
-  "helpers": {
-    "contactInfoNote": "この情報はプラットフォーム管理者からの連絡に使用されます。"
+    "enterCompanyName": "企業名を入力",
+    "enterCompanyNamePhonetic": "フリガナの企業名を入力",
+    "enterRepresentativeName": "代表者名を入力",
+    "selectPrefecture": "都道府県を選択",
+    "enterCity": "市区町村を入力",
+    "enterStreet": "丁目・号・建物名を入力",
+    "enterNumberOfEmployees": "従業員数を入力",
+    "selectIndustry": "業種を選択",
+    "enterYearFounded": "設立年を入力",
+    "enterCapital": "資本金を入力",
+    "enterBusinessDescription": "事業を説明してください"
   },
   "errors": {
+    "tooShortCompanyName": "名前は最低2文字である必要があります。",
+    "tooShortRepName": "名前は最低2文字である必要があります。",
     "fillRequired": "すべての必須項目を入力してください。",
-    "invalidEmail": "有効なメールアドレスを入力してください。",
-    "invalidName": "名前は2～100文字である必要があります。",
-    "invalidDepartmentName": "部門名は2～100文字である必要があります。",
-    "invalidPhoneNumber": "電話番号は7～15桁である必要があります。"
-  },
-  "messages": {
-    "success": "成功！",
-    "contactPersonSaved": "連絡先情報が正常に保存されました。"
+    "invalidNumOfEmployees": "最低1人の従業員が必要です。",
+    "invalidYearFounded": "有効な年を入力してください。",
+    "invalidCity": "市区町村は最低2文字である必要があります。",
+    "invalidStreet": "住所は最低2文字である必要があります。"
   },
   "buttons": {
     "next": "次へ"
