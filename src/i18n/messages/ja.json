@@ -3,6 +3,7 @@
     "home": "ホーム",
     "ourService": "私たちのサービス",
     "FAQ": "よくある質問",
+    "aboutUs": "私たちについて",
     "signIn": "サインイン",
     "signUp": "サインアップ",
     "features": "就職支援の機能",
@@ -10,6 +11,8 @@
     "qa": "Q&A",
     "contact": "お問い合わせ",
     "logoAlt": "ロゴ",
+    "logout": "ログアウト",
+    "profile": "マイプロフィール",
     "japanese": "日本語"
   },
   "banner": {

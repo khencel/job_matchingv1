@@ -92,22 +92,22 @@ export default function Navbar() {
             </li>
             <li className="nav-item">
               <Link className="nav-link me-3" href="/#job_support_features">
-                Job Support Features
+                {t("features")}
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link me-3" href="/#about_us">
-                About Us
+                {t("aboutUs")}
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link me-3" href="/#q_and_a">
-                Q&A
+                {t("qa")}
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link me-3" href="/#contact_us">
-                Contacts
+                {t("contact")}
               </Link>
             </li>
             {user ? (
