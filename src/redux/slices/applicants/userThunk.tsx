@@ -13,6 +13,11 @@ interface EmpDetailsUpdate {
     id?: number;
 }
 
+interface ChangePasswordPayload{
+    current_password?: string,
+    new_password?: string
+}
+
 export const fetchUsers = createAsyncThunk(
     "users/fetchUsers",
     async ({page = 1, pageSize = 10, filter}: ListUsersParams, { rejectWithValue }) => {
@@ -42,6 +47,18 @@ export const updateIsActive = createAsyncThunk(
     async (user_id: number,{ rejectWithValue }) => {
         try{
             const res = await standard_get_api(`/api/auth/change-status/${user_id}/`);
+            return res.data;
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    }
+)
+
+export const changePassword = createAsyncThunk(
+    "user/changePassword",
+    async (payload: ChangePasswordPayload, {rejectWithValue}) => {
+        try{
+            const res = await standard_post_api(`/api/auth/check-user-password`, payload);
             return res.data;
         } catch (error) {
             return rejectWithValue(error);

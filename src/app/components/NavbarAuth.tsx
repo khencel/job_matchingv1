@@ -7,6 +7,8 @@ import { UserCircle2 } from "lucide-react";
 import { Button } from "react-bootstrap";
 import { logoutUser } from "@/redux/features/auth/auth_thunk";
 import { showSuccessToast } from "../(util)/toaster";
+import { useState } from "react";
+import ChangePassword from "./changePasswordModal";
 
 export default function NavbarAuth() {
   const locale = useLocale();
@@ -15,7 +17,7 @@ export default function NavbarAuth() {
 
   const access = useAppSelector((s) => s.authState.access);
   const user = useAppSelector((s) => s.authState.user);
-
+  const [changePassOpenModal, setChangePassOpenModal] = useState(false)
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
@@ -76,109 +78,119 @@ export default function NavbarAuth() {
     return colors[Math.abs(hash) % colors.length];
   };
 
+
+  const handleChangePassword = () => {
+      setChangePassOpenModal(true)
+  }
+  const handleClose = () => setChangePassOpenModal(false);
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid d-flex align-items-center">
-        {/* Logo on the left */}
-        <a className="navbar-brand d-flex align-items-center" href="#">
-          <img
-            src="/logo.png"
-            alt={t("logoAlt")}
-            style={{ height: "80px", width: "auto", marginRight: "8px" }}
-          />
-        </a>
+    <>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container-fluid d-flex align-items-center">
+          {/* Logo on the left */}
+          <a className="navbar-brand d-flex align-items-center" href="#">
+            <img
+              src="/logo.png"
+              alt={t("logoAlt")}
+              style={{ height: "80px", width: "auto", marginRight: "8px" }}
+            />
+          </a>
 
-        {/* Toggler for mobile */}
-        <button
-          className="navbar-toggler ms-auto"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+          {/* Toggler for mobile */}
+          <button
+            className="navbar-toggler ms-auto"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
-        {/* Navigation + language selector */}
-        <div
-          className="collapse navbar-collapse justify-content-end"
-          id="navbarSupportedContent"
-        >
-          {/* Language selector */}
-          <div className="ms-3 d-flex align-items-center">
-            <select
-              id="language-selector"
-              className="form-select form-select-sm"
-              value={locale}
-              onChange={handleLanguageChange}
-              aria-label="Language selector"
-              style={{ width: "auto", minWidth: "140px" }}
-            >
-              <option value="en">🇺🇸 English</option>
-              <option value="ja">🇯🇵 日本語</option>
-            </select>
+          {/* Navigation + language selector */}
+          <div
+            className="collapse navbar-collapse justify-content-end"
+            id="navbarSupportedContent"
+          >
+            {/* Language selector */}
+            <div className="ms-3 d-flex align-items-center">
+              <select
+                id="language-selector"
+                className="form-select form-select-sm"
+                value={locale}
+                onChange={handleLanguageChange}
+                aria-label="Language selector"
+                style={{ width: "auto", minWidth: "140px" }}
+              >
+                <option value="en">🇺🇸 English</option>
+                <option value="ja">🇯🇵 日本語</option>
+              </select>
+            </div>
+
+            <ul className="navbar-nav mb-2 mb-lg-0 d-flex align-items-center">
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  {t("findJobs")}
+                </a>
+              </li>
+
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {user ? (
+                    <div
+                      className="rounded-circle d-flex align-items-center justify-content-center"
+                      style={{
+                        width: "32px",
+                        height: "32px",
+                        backgroundColor: getAvatarColor(user?.email),
+                        color: "white",
+                        fontWeight: "600",
+                        fontSize: "14px",
+                      }}
+                    >
+                      {getInitials(user?.email)}
+                    </div>
+                  ) : (
+                    <UserCircle2 />
+                  )}
+                </a>
+                <ul
+                  className="dropdown-menu dropdown-menu-end"
+                  aria-labelledby="navbarDropdown"
+                >
+                  <li>
+                    <button className="dropdown-item" onClick={()=> handleChangePassword()}>
+                      Change Password
+                    </button>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      {t("profile")}
+                    </a>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
+                    <Button className="dropdown-item" onClick={handleLogout}>
+                      {t("logout")}
+                    </Button>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </div>
-
-          <ul className="navbar-nav mb-2 mb-lg-0 d-flex align-items-center">
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                {t("findJobs")}
-              </a>
-            </li>
-
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                {user ? (
-                  <div
-                    className="rounded-circle d-flex align-items-center justify-content-center"
-                    style={{
-                      width: "32px",
-                      height: "32px",
-                      backgroundColor: getAvatarColor(user?.email),
-                      color: "white",
-                      fontWeight: "600",
-                      fontSize: "14px",
-                    }}
-                  >
-                    {getInitials(user?.email)}
-                  </div>
-                ) : (
-                  <UserCircle2 />
-                )}
-              </a>
-              <ul
-                className="dropdown-menu dropdown-menu-end"
-                aria-labelledby="navbarDropdown"
-              >
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Change Password
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    {t("profile")}
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <Button className="dropdown-item" onClick={handleLogout}>
-                    {t("logout")}
-                  </Button>
-                </li>
-              </ul>
-            </li>
-          </ul>
         </div>
-      </div>
-    </nav>
+      </nav>
+      <ChangePassword handleShow={changePassOpenModal} handleClose={handleClose} />
+    </>
+    
   );
 }
