@@ -9,7 +9,7 @@ import type { RootState } from "@/redux/store";
 import { useAppDispatch } from "@/redux/hooks";
 import { setPage, setPageSize } from "@/redux/slices/applicants/userSlice";
 import { useEffect, useState } from "react";
-import { fetchUsers, updateStatus } from "@/redux/slices/applicants/userThunk";
+import { fetchUsers, updateStatus, updateIsActive } from "@/redux/slices/applicants/userThunk";
 import { popup } from "@/helper/pop_up";
 import { showSuccessToast } from "@/app/(util)/toaster";
 
@@ -31,6 +31,33 @@ export default function AdminUsers() {
     const handleFilter = (val:string) => {
         setFilter({ role: val });
         dispatch(setPage(1));
+    }
+
+    const verifyChangeStatus = (id:number) => {
+        popup({
+            title:"Change Status",
+            text:"Are you sure, Your want to change the status?",
+            icon:"warning",
+            onConfirm: () => {
+                handleIsActive(id)
+            }
+        })
+    }
+
+    const handleIsActive = async (id:number) => {
+        try {
+            await dispatch(updateIsActive(id)).unwrap();
+
+            dispatch(fetchUsers({
+                page: currentPage,
+                pageSize,
+                filter
+            }));
+
+            showSuccessToast("Update Status","User status updated successfully");
+        } catch (err) {
+            console.error(err);
+        }
     }
 
 
@@ -120,69 +147,43 @@ export default function AdminUsers() {
                                             </td>
                                             <td className="text-start p-2">{item.email}</td>
                                             <td className="text-start p-2">{item.role}</td>
-                                            <td className="text-start p-2">{item.is_active?"Active":"Not active"}</td>
+                                            <td className={`text-start p-2`}>
+                                                <span className={`badge p-2 ${item.is_active?'bg-success':'bg-danger'}`}>
+                                                    {item.is_active?"Active":"Not active"}
+                                                </span>
+                                                
+                                            </td>
                                             <td className="text-start p-2">{item.created_at}</td>
 
                                             <td className="text-start p-2">
-                                                    
-                                                    <div className="dropdown">
-                                                        <button
-                                                            className="btn btn-sm btn-light"
-                                                            type="button"
-                                                            data-bs-toggle="dropdown"
-                                                            aria-expanded="false"
-                                                        >
-                                                            <HiDotsHorizontal />
-                                                        </button>
-                                                        {item.role === "employer" && (
-                                                            <ul className="dropdown-menu dropdown-menu-end">
-                                                                <li>
-                                                                    <button className="dropdown-item">Deactivate</button>
-                                                                </li>
-                                                                <li>
-                                                                    <button className="dropdown-item">Activate</button>
-                                                                </li>
-                                                    
-                                                            </ul>
-                                                        )}
-
-                                                        {item.role === "job_seeker" && (
-                                                            <ul className="dropdown-menu dropdown-menu-end">
-                                                                <li>
-                                                                    <button className="dropdown-item">Deactivate</button>
-                                                                </li>
-                                                                <li>
-                                                                    <button className="dropdown-item">Activate</button>
-                                                                </li>
-                                                    
-                                                            </ul>
-                                                        )}
-
-                                                        {item.role === "supervisory" && (
-                                                            <ul className="dropdown-menu dropdown-menu-end">
-                                                                <li>
-                                                                    <button className="dropdown-item">Deactivate</button>
-                                                                </li>
-                                                                <li>
-                                                                    <button className="dropdown-item">Activate</button>
-                                                                </li>
-                                                    
-                                                            </ul>
-                                                        )}
-
-                                                        {item.role === "admin" && (
-                                                            <ul className="dropdown-menu dropdown-menu-end">
-                                                                <li>
-                                                                    <button className="dropdown-item">Deactivate</button>
-                                                                </li>
-                                                                <li>
-                                                                    <button className="dropdown-item">Activate</button>
-                                                                </li>
-                                                    
-                                                            </ul>
-                                                        )}
-                                                    </div>
-                                                
+                                                    {
+                                                        item.role !== "admin" && (
+                                                            <div className="dropdown">
+                                                        
+                                                                <button
+                                                                    className="btn btn-sm btn-light"
+                                                                    type="button"
+                                                                    data-bs-toggle="dropdown"
+                                                                    aria-expanded="false"
+                                                                >
+                                                                    <HiDotsHorizontal />
+                                                                </button>
+                                                            
+                                                                <ul className="dropdown-menu dropdown-menu-end">
+                                                                    {
+                                                                        item.is_active === true?
+                                                                            <li>
+                                                                                <button className="dropdown-item" onClick={() => verifyChangeStatus(item.id)}>Deactivate</button>
+                                                                            </li>
+                                                                            :
+                                                                            <li>
+                                                                                <button className="dropdown-item" onClick={() => verifyChangeStatus(item.id)}>Activate</button>
+                                                                            </li>
+                                                                    }
+                                                                </ul>
+                                                            </div>
+                                                        )
+                                                    }
                                                 </td>
                                         </tr>
                                     )

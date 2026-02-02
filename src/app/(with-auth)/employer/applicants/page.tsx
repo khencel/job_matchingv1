@@ -25,7 +25,6 @@ export default function Applicants(){
     const handlePageChange = (newPage: number) => {
             dispatch(setPage(newPage));
         };
-    console.log(items);
     
     const totalPages = Math.ceil(count / pageSize);
 

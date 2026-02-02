@@ -19,7 +19,7 @@ export default function Banner() {
                   {t("title")}
                 </h1>
 
-                <p className="mt-3 fs-5 text-muted">
+                <p className="mt-3 fs-5 text-muted matching">
                   {t("subtitle")}
                 </p>
 
@@ -34,7 +34,7 @@ export default function Banner() {
               <div className="col-12 col-md-6 text-center">
                 <img
                   src="/banner/img2.png"
-                  className="img-fluid"
+                  className="img-fluid banner-image"
                   alt="Banner Illustration"
                   style={{ maxHeight: "400px", objectFit: "contain" }}
                 />

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { standard_post_api, standard_update_api } from "@/redux/features/api/api_request";
+import { standard_get_api, standard_post_api, standard_update_api } from "@/redux/features/api/api_request";
 
 
 interface ListUsersParams {
@@ -31,6 +31,18 @@ export const updateStatus = createAsyncThunk(
         try{
             const response = await standard_update_api(`/api/auth/update/employer/details/${id}/`,payload);
             return response.data;
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    }
+)
+
+export const updateIsActive = createAsyncThunk(
+    "users/updateIsActive",
+    async (user_id: number,{ rejectWithValue }) => {
+        try{
+            const res = await standard_get_api(`/api/auth/change-status/${user_id}/`);
+            return res.data;
         } catch (error) {
             return rejectWithValue(error);
         }

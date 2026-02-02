@@ -239,3 +239,54 @@
     padding: 1.5rem;
   }
 }
+
+
+/* mobile  */
+@media (max-width: 480px) {
+  .job-search-filter{
+    margin-top: 28% !important;
+  }
+
+  .banner-title{
+      font-size: 19px;
+      margin-top: -16%;
+  }
+
+  .matching{
+      font-size: 14px !important;
+  }
+
+  .banner-image{
+    height: 275px;
+  }
+
+  .banner {
+      height: 50vh;
+  }
+
+  .regiter-choose{
+    font-size: 19px;
+  }
+
+  .register-div{
+    padding: 0px !important;
+    margin-top: 0px !important;
+  }
+
+  .btn-primary-custom{
+      width: 211px !important;
+  }
+
+  .primary-custom-color{
+      font-size: 19px;
+  }
+
+  .service-avatar{
+    width:50%
+  }
+
+  .filter-search{
+    text-align: center;
+  }
+}
+

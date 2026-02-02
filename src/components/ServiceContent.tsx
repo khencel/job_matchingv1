@@ -17,17 +17,18 @@ export default function ServiceContent() {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-5">
-              <img src="/img/service/animated_guy.png" className="img-fluid" alt="" />
+            <div className="col-md-5 text-center">
+              <img src="/img/service/animated_guy.png" className="img-fluid service-avatar" alt="" />
             </div>
-            <div className="col-md-7 d-flex flex-column justify-content-center gap-3">
-              <button className="btn btn-primary-custom rounded-3 w-100">
+            <div className="col-md-7 d-flex flex-column align-items-center gap-3">
+              <button className="btn btn-primary-custom rounded-3">
                 For companies
               </button>
-              <button className="btn btn-primary-custom rounded-3 w-100">
+              <button className="btn btn-primary-custom rounded-3">
                 For foreign job seekers
               </button>
             </div>
+
           </div>
         </div>
       </div>
