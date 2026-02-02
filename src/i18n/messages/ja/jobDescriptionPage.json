@@ -1,0 +1,26 @@
+{
+  "headings": {
+    "description": "説明",
+    "responsibilities": "責任",
+    "whoYouAre": "あなたは誰か",
+    "niceToHaves": "あると良い機能",
+    "aboutThisRole": "このロールについて",
+    "categories": "カテゴリー",
+    "requiredSkills": "必要なスキル",
+    "perksAndBenefits": "特典と利点",
+    "fullHealthcare": "フルヘルスケア",
+    "jobSupport": "仕事サポート",
+    "relatedJobs": "関連する仕事"
+  },
+  "buttons": {
+    "apply": "応募",
+    "showAllJobs": "すべての仕事を表示",
+    "readMoreAboutUs": "私たちについて詳しく読む"
+  },
+  "labels": {
+    "applyBefore": "応募する前に",
+    "jobPostedOn": "投稿日",
+    "jobType": "仕事の種類",
+    "salary": "給料"
+  }
+}

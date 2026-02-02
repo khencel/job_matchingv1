@@ -1,0 +1,77 @@
+{
+  "jobListing": {
+    "title": "Job Listings",
+    "noJobs": "No jobs posted yet",
+    "postNewJob": "Post New Job",
+    "editJob": "Edit",
+    "deleteJob": "Delete",
+    "viewApplications": "View Applications",
+    "totalApplications": "Total Applications",
+    "jobStatus": "Status",
+    "postedDate": "Posted Date",
+    "closeDate": "Close Date"
+  },
+  "postJob": {
+    "title": "Post a Job",
+    "jobInformation": "Job Information",
+    "jobTitle": "Job Title",
+    "jobDescription": "Job Description",
+    "requiredSkills": "Required Skills",
+    "salaryRange": "Salary Range",
+    "jobType": "Job Type",
+    "fullTime": "Full Time",
+    "partTime": "Part Time",
+    "contract": "Contract",
+    "location": "Location",
+    "perksAndBenefits": "Perks & Benefits",
+    "healthInsurance": "Health Insurance",
+    "retirement": "Retirement Plan",
+    "flexibleHours": "Flexible Hours",
+    "nextStep": "Next Step",
+    "submitJob": "Submit Job Posting"
+  },
+  "applicants": {
+    "title": "Applicants",
+    "noApplicants": "No applicants yet",
+    "applicantName": "Applicant Name",
+    "position": "Position",
+    "appliedDate": "Applied Date",
+    "status": "Status",
+    "viewProfile": "View Profile",
+    "viewResume": "View Resume",
+    "shortlisted": "Shortlisted",
+    "rejected": "Rejected",
+    "accepted": "Accepted",
+    "pending": "Pending"
+  },
+  "profile": {
+    "title": "Company Profile",
+    "editProfile": "Edit Profile",
+    "companyName": "Company Name",
+    "industry": "Industry",
+    "website": "Website",
+    "description": "Company Description",
+    "location": "Headquarters Location",
+    "employees": "Number of Employees",
+    "about": "About Us",
+    "socialLinks": "Social Links",
+    "saveChanges": "Save Changes"
+  },
+  "overview": {
+    "title": "Overview",
+    "activeJobs": "Active Jobs",
+    "totalApplications": "Total Applications",
+    "newApplications": "New Applications",
+    "recentApplicants": "Recent Applicants",
+    "topPerformingJobs": "Top Performing Jobs"
+  },
+  "perksBenefits": {
+    "title": "Perks & Benefits",
+    "addBenefit": "Add Benefit",
+    "editBenefit": "Edit Benefit",
+    "deleteBenefit": "Delete Benefit",
+    "benefitName": "Benefit Name",
+    "benefitDescription": "Benefit Description",
+    "noBenefits": "No benefits configured yet"
+  }
+}

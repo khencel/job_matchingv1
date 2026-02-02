@@ -1,0 +1,10 @@
+{
+  "myDocuments": "マイドキュメント",
+  "previewFiles": "ファイルをプレビュー",
+  "uploadDocuments": "ドキュメントをアップロード",
+  "uploadedDocuments": "アップロードされたドキュメント",
+  "noDocuments": "ドキュメントはまだアップロードされていません",
+  "fileName": "ファイル名",
+  "fileType": "ファイルタイプ",
+  "actions": "アクション"
+}

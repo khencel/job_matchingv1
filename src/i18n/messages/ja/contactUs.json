@@ -1,0 +1,20 @@
+{
+  "badge": "お問い合わせ",
+  "title": "仕事サポートにお問い合わせ",
+  "subtitle": "ご質問やご支援が必要ですか？サポートいたします。",
+  "contactInfoTitle": "連絡先情報",
+  "email": "support@jobsupport.com",
+  "phone": "+81 90 0123 4567",
+  "location": "日本",
+  "availability": "サポートチームは月～金、午前9時～午後6時までご利用可能です。",
+  "formTitle": "メッセージを送信",
+  "placeholders": {
+    "fullName": "フルネーム",
+    "email": "メールアドレス",
+    "subject": "件名",
+    "message": "メッセージ"
+  },
+  "buttons": {
+    "send": "メッセージを送信"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "title": "Account Information",
+  "labels": {
+    "email": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "rememberMe": "Remember me"
+  },
+  "placeholders": {
+    "enterEmail": "Enter your email address",
+    "enterPassword": "Enter your password",
+    "confirmYourPassword": "Confirm your password"
+  },
+  "errors": {
+    "invalidEmail": "Please enter a valid email address.",
+    "passwordTooShort": "Password must be at least 8 characters.",
+    "passwordMismatch": "Passwords do not match."
+  },
+  "helpers": {
+    "passwordMinLength": "Password must be at least 8 characters.",
+    "accountConfirmNote": "By proceeding, you confirm that your account information is accurate."
+  },
+  "buttons": {
+    "next": "Next"
+  }
+}

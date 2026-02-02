@@ -1,0 +1,20 @@
+{
+  "badge": "Contact Us",
+  "title": "Get in Touch with Job Support",
+  "subtitle": "Have questions or need assistance? We're here to help.",
+  "contactInfoTitle": "Contact Information",
+  "email": "support@jobsupport.com",
+  "phone": "+63 900 123 4567",
+  "location": "Philippines",
+  "availability": "Our support team is available Monday to Friday, 9:00 AM – 6:00 PM.",
+  "formTitle": "Send Us a Message",
+  "placeholders": {
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "subject": "Subject",
+    "message": "Your Message"
+  },
+  "buttons": {
+    "send": "Send Message"
+  }
+}

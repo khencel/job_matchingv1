@@ -1,0 +1,35 @@
+{
+  "supervisoryApplicants": {
+    "title": "Applicants",
+    "totalApplicants": "Total Applicants",
+    "name": "Name",
+    "position": "Position Applied",
+    "applicationDate": "Application Date",
+    "status": "Status",
+    "viewDetails": "View Details",
+    "recommendForPlacement": "Recommend for Placement",
+    "reject": "Reject",
+    "noApplicants": "No applicants at this time"
+  },
+  "supervisoryProfile": {
+    "title": "Organization Profile",
+    "editProfile": "Edit Profile",
+    "organizationName": "Organization Name",
+    "contactEmail": "Contact Email",
+    "phone": "Phone Number",
+    "address": "Address",
+    "description": "Organization Description",
+    "registeredWorkers": "Registered Workers",
+    "placedWorkers": "Placed Workers",
+    "saveChanges": "Save Changes"
+  },
+  "supervisoryOverview": {
+    "title": "Overview",
+    "registeredWorkers": "Registered Workers",
+    "placedWorkers": "Placed Workers",
+    "pendingCases": "Pending Cases",
+    "completedPlacements": "Completed Placements",
+    "recentApplications": "Recent Applications",
+    "workerStatistics": "Worker Statistics"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "jobListing": "求人掲載",
+  "editJobPost": "求人を編集",
+  "role": "職種",
+  "datePosted": "掲載日",
+  "salary": "給与",
+  "jobType": "雇用形態",
+  "applicants": "応募者",
+  "edit": "編集",
+  "delete": "削除",
+  "itemsPerPage": "1ページあたりの項目数",
+  "optionLoadingMessage": "読み込み中..."
+}

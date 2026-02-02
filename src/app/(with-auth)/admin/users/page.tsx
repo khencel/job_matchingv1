@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl";
 import { BiArrowBack } from "react-icons/bi";
 import { FaCalendarCheck, FaSliders } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
@@ -14,7 +15,7 @@ import { popup } from "@/helper/pop_up";
 import { showSuccessToast } from "@/app/(util)/toaster";
 
 export default function AdminUsers() {
-    
+    const t = useTranslations("adminUsers");
     const {items, status, error, next, previous, currentPage, pageSize, count}= useSelector((state: RootState) => state.getAllUserByFilter);
     const dispatch = useAppDispatch();
     const [filter, setFilter] = useState<{ role: string }>({ role: "all" });
@@ -46,19 +47,19 @@ export default function AdminUsers() {
     <>
         <div className="row standar-div">
             <div className="col">
-                <h5><strong><BiArrowBack /> Users Listing</strong></h5>
+                <h5><strong><BiArrowBack /> {t("usersListing")}</strong></h5>
             </div>
             <div className="col text-end">
-                <span>November - December 2025 <FaCalendarCheck className="text-primary" /></span>
+                <span>{t("dateRange")} <FaCalendarCheck className="text-primary" /></span>
             </div>
         </div>
 
         <div className="row standar-div mt-2">
             <div className="col">
-                <strong>Users List ({count} total)</strong>
+                <strong>{t("usersList")} ({count} {t("total")})</strong>
             </div>
             <div className="col-2 text-end">
-                <FaSearch className="text-primary" /> Search Users
+                <FaSearch className="text-primary" /> {t("searchUsers")}
             </div>
             <div className="col-2 text-end">
                 <button
@@ -67,21 +68,21 @@ export default function AdminUsers() {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
             >
-            <FaSliders className="me-1" /> Filter
+            <FaSliders className="me-1" /> {t("filter")}
         </button>
 
         <ul className="dropdown-menu dropdown-menu-end">
             <li>
-                <button className="dropdown-item" onClick={() => handleFilter("all")}>All</button>
+                <button className="dropdown-item" onClick={() => handleFilter("all")}>{t("filterAll")}</button>
             </li>
             <li>
-                <button className="dropdown-item" onClick={() => handleFilter("job_seeker")}>Job Seeker</button>
+                <button className="dropdown-item" onClick={() => handleFilter("job_seeker")}>{t("filterJobSeeker")}</button>
             </li>
             <li>
-                <button className="dropdown-item" onClick={() => handleFilter("employer")}>Employer</button>
+                <button className="dropdown-item" onClick={() => handleFilter("employer")}>{t("filterEmployer")}</button>
             </li>
             <li>
-                <button className="dropdown-item" onClick={() => handleFilter("supervisory")}>Supervisory</button>
+                <button className="dropdown-item" onClick={() => handleFilter("supervisory")}>{t("filterSupervisory")}</button>
             </li>
         </ul>
             </div>
@@ -92,12 +93,12 @@ export default function AdminUsers() {
                     <table className="table table-hover">
                         <thead>
                             <tr>
-                                <th className="text-start p-2">Name</th>
-                                <th className="text-start p-2">Email</th>
-                                <th className="text-start p-2">Role</th>
-                                <th className="text-start p-2">Status</th>
-                                <th className="text-start p-2">Joined</th>
-                                <th className="text-start p-2">Action</th>
+                                <th className="text-start p-2">{t("name")}</th>
+                                <th className="text-start p-2">{t("email")}</th>
+                                <th className="text-start p-2">{t("role")}</th>
+                                <th className="text-start p-2">{t("status")}</th>
+                                <th className="text-start p-2">{t("joined")}</th>
+                                <th className="text-start p-2">{t("action")}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -120,7 +121,7 @@ export default function AdminUsers() {
                                             </td>
                                             <td className="text-start p-2">{item.email}</td>
                                             <td className="text-start p-2">{item.role}</td>
-                                            <td className="text-start p-2">{item.is_active?"Active":"Not active"}</td>
+                                            <td className="text-start p-2">{item.is_active?t("active"):t("notActive")}</td>
                                             <td className="text-start p-2">{item.created_at}</td>
 
                                             <td className="text-start p-2">
@@ -137,10 +138,10 @@ export default function AdminUsers() {
                                                         {item.role === "employer" && (
                                                             <ul className="dropdown-menu dropdown-menu-end">
                                                                 <li>
-                                                                    <button className="dropdown-item">Deactivate</button>
+                                                                    <button className="dropdown-item">{t("deactivate")}</button>
                                                                 </li>
                                                                 <li>
-                                                                    <button className="dropdown-item">Activate</button>
+                                                                    <button className="dropdown-item">{t("activate")}</button>
                                                                 </li>
                                                     
                                                             </ul>
@@ -149,10 +150,10 @@ export default function AdminUsers() {
                                                         {item.role === "job_seeker" && (
                                                             <ul className="dropdown-menu dropdown-menu-end">
                                                                 <li>
-                                                                    <button className="dropdown-item">Deactivate</button>
+                                                                    <button className="dropdown-item">{t("deactivate")}</button>
                                                                 </li>
                                                                 <li>
-                                                                    <button className="dropdown-item">Activate</button>
+                                                                    <button className="dropdown-item">{t("activate")}</button>
                                                                 </li>
                                                     
                                                             </ul>
@@ -161,10 +162,10 @@ export default function AdminUsers() {
                                                         {item.role === "supervisory" && (
                                                             <ul className="dropdown-menu dropdown-menu-end">
                                                                 <li>
-                                                                    <button className="dropdown-item">Deactivate</button>
+                                                                    <button className="dropdown-item">{t("deactivate")}</button>
                                                                 </li>
                                                                 <li>
-                                                                    <button className="dropdown-item">Activate</button>
+                                                                    <button className="dropdown-item">{t("activate")}</button>
                                                                 </li>
                                                     
                                                             </ul>
@@ -173,10 +174,10 @@ export default function AdminUsers() {
                                                         {item.role === "admin" && (
                                                             <ul className="dropdown-menu dropdown-menu-end">
                                                                 <li>
-                                                                    <button className="dropdown-item">Deactivate</button>
+                                                                    <button className="dropdown-item">{t("deactivate")}</button>
                                                                 </li>
                                                                 <li>
-                                                                    <button className="dropdown-item">Activate</button>
+                                                                    <button className="dropdown-item">{t("activate")}</button>
                                                                 </li>
                                                     
                                                             </ul>
@@ -196,7 +197,7 @@ export default function AdminUsers() {
 
         <div className="d-flex justify-content-between align-items-center mt-3">
         <div className="d-flex align-items-center">
-            <label className="me-2">Items per page:</label>
+            <label className="me-2">{t("itemsPerPage")}:</label>
             <select 
                 className="form-select form-select-sm" 
                 style={{ width: 'auto' }}
@@ -209,7 +210,7 @@ export default function AdminUsers() {
                 <option value={50}>50</option>
             </select>
             <span className="ms-3 text-muted">
-                Showing {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, count)} of {count}
+                {t("showing")} {((currentPage - 1) * pageSize) + 1} {t("to")} {Math.min(currentPage * pageSize, count)} {t("of")} {count}
             </span>
         </div>
 
@@ -221,7 +222,7 @@ export default function AdminUsers() {
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={!previous}
                     >
-                        Previous
+                        {t("previous")}
                     </button>
                 </li>
                 
@@ -245,7 +246,7 @@ export default function AdminUsers() {
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={!next}
                     >
-                        Next
+                        {t("next")}
                     </button>
                 </li>
             </ul>

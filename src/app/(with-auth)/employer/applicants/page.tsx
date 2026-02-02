@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl";
 import { BiArrowBack } from "react-icons/bi";
 import { FaCalendarCheck } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
@@ -15,6 +16,7 @@ import { setPage, setPageSize } from "@/redux/slices/employer/applicants/jobSeek
 import FormattedDate from "@/components/date_format";
 
 export default function Applicants(){
+    const t = useTranslations("employerApplicants");
     const dispatch = useAppDispatch();
     const {items, status, error, next, previous, currentPage, pageSize, count} = useSelector((state: RootState) => state.jobSeekerApplicant);
     
@@ -37,13 +39,13 @@ export default function Applicants(){
             <>
                 <div className="row standar-div">
                     <div className="col">
-                        <h5><strong><BiArrowBack /> Applicants</strong></h5>
+                        <h5><strong><BiArrowBack /> {t("applicants")}</strong></h5>
                     </div>
                 </div>
     
                 <div className="row standar-div mt-2">
                     <div className="col">
-                        <h4 className="text-primary text-center"><span><strong>Total Applicants: {count}</strong></span></h4>
+                        <h4 className="text-primary text-center"><span><strong>{t("totalApplicants")}: {count}</strong></span></h4>
                     </div>
                 </div>
     
@@ -53,11 +55,11 @@ export default function Applicants(){
                                 <table className="table">
                                     <thead>
                                         <tr>
-                                            <th>Full Name</th>
-                                            <th>Hiring Stage</th>
-                                            <th>Applied Date</th>
-                                            <th>Job Role</th>
-                                            <th>Action</th>
+                                            <th>{t("fullName")}</th>
+                                            <th>{t("hiringStage")}</th>
+                                            <th>{t("appliedDate")}</th>
+                                            <th>{t("jobRole")}</th>
+                                            <th>{t("action")}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -82,12 +84,12 @@ export default function Applicants(){
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <span className="badge border border-dark text-black p-2 rounded-4">{item.status?item.status:'Pending'}</span>
+                                                                <span className="badge border border-dark text-black p-2 rounded-4">{item.status?item.status:t("pending")}</span>
                                                             </td>
                                                             <td><span className="text-primary"><FormattedDate date={item.created_at} /></span></td>
                                                             <td><span className="text-primary">{job_role}</span></td>
                                                             <td>
-                                                                <button className="btn btn-primary-custom rounded-3">See Application</button>
+                                                                <button className="btn btn-primary-custom rounded-3">{t("seeApplication")}</button>
                                                             </td>
                                                         </tr>
                                                     )
@@ -103,7 +105,7 @@ export default function Applicants(){
                 {/* Pagination Controls */}
                 <div className="d-flex justify-content-between align-items-center mt-3">
                     <div className="d-flex align-items-center">
-                        <label className="me-2">Items per page:</label>
+                        <label className="me-2">{t("itemsPerPage")}:</label>
                         <select 
                             className="form-select form-select-sm" 
                             style={{ width: 'auto' }}
@@ -116,7 +118,7 @@ export default function Applicants(){
                             <option value={50}>50</option>
                         </select>
                         <span className="ms-3 text-muted">
-                            Showing {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, count)} of {count}
+                            {t("showing")} {((currentPage - 1) * pageSize) + 1} {t("to")} {Math.min(currentPage * pageSize, count)} {t("of")} {count}
                         </span>
                     </div>
 
@@ -128,7 +130,7 @@ export default function Applicants(){
                                     onClick={() => handlePageChange(currentPage - 1)}
                                     disabled={!previous}
                                 >
-                                    Previous
+                                    {t("previous")}
                                 </button>
                             </li>
                             
@@ -152,7 +154,7 @@ export default function Applicants(){
                                     onClick={() => handlePageChange(currentPage + 1)}
                                     disabled={!next}
                                 >
-                                    Next
+                                    {t("next")}
                                 </button>
                             </li>
                         </ul>

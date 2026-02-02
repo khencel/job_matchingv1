@@ -1,0 +1,16 @@
+{
+  "usersListing": "ユーザー一覧",
+  "filterAll": "すべて",
+  "filterJobSeeker": "求職者",
+  "filterEmployer": "雇用主",
+  "filterSupervisory": "監督者",
+  "name": "名前",
+  "email": "メール",
+  "role": "ロール",
+  "status": "ステータス",
+  "joined": "参加日",
+  "action": "アクション",
+  "deactivate": "無効化",
+  "activate": "有効化",
+  "itemsPerPage": "1ページあたりの項目数"
+}

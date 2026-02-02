@@ -1,0 +1,32 @@
+{
+  "title": "連絡先担当者情報",
+  "labels": {
+    "name": "名前",
+    "department": "部門",
+    "phoneNumber": "電話番号",
+    "email": "メールアドレス"
+  },
+  "placeholders": {
+    "enterName": "フルネームを入力",
+    "enterDepartment": "部門を入力",
+    "enterPhoneNumber": "電話番号を入力",
+    "enterEmail": "メールアドレスを入力"
+  },
+  "helpers": {
+    "contactInfoNote": "この情報はプラットフォーム管理者からの連絡に使用されます。"
+  },
+  "errors": {
+    "fillRequired": "すべての必須項目を入力してください。",
+    "invalidEmail": "有効なメールアドレスを入力してください。",
+    "invalidName": "名前は2～100文字である必要があります。",
+    "invalidDepartmentName": "部門名は2～100文字である必要があります。",
+    "invalidPhoneNumber": "電話番号は7～15桁である必要があります。"
+  },
+  "messages": {
+    "success": "成功！",
+    "contactPersonSaved": "連絡先情報が正常に保存されました。"
+  },
+  "buttons": {
+    "next": "次へ"
+  }
+}

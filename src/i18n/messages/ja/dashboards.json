@@ -1,0 +1,41 @@
+{
+  "employerDashboard": {
+    "greeting": "こんにちは",
+    "subtitle": "毎日のアクティビティと申請はこちらです",
+    "statusActivity": "ステータスアクティビティ",
+    "chart": "申請チャート",
+    "recentActivity": "最近のアクティビティ",
+    "recentPostJob": "最近投稿された求人",
+    "dailyStats": "日次統計",
+    "applicationCount": "合計申請数",
+    "postedJobs": "投稿された求人"
+  },
+  "jobSeekerDashboard": {
+    "greeting": "ようこそ",
+    "subtitle": "あなたの仕事探しダッシュボード",
+    "appliedJobs": "申請した求人",
+    "savedJobs": "保存した求人",
+    "recommendedJobs": "おすすめ",
+    "documents": "マイドキュメント",
+    "profile": "マイプロフィール",
+    "resumeBuilder": "履歴書ビルダー"
+  },
+  "adminDashboard": {
+    "title": "管理者概要",
+    "welcome": "管理者概要ページへようこそ。",
+    "totalUsers": "ユーザー総数",
+    "totalJobs": "総求人数",
+    "totalApplications": "総申請数",
+    "pendingApprovals": "保留中の承認",
+    "activeEmployers": "アクティブな採用担当者",
+    "activeJobSeekers": "アクティブな求職者"
+  },
+  "supervisoryDashboard": {
+    "title": "監督概要",
+    "welcome": "監督ダッシュボードへようこそ",
+    "registeredWorkers": "登録済みワーカー",
+    "placedWorkers": "配置されたワーカー",
+    "pendingCases": "保留中のケース",
+    "activeApplications": "アクティブな申請"
+  }
+}

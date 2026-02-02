@@ -1,0 +1,17 @@
+{
+  "title": {
+    "employer": "採用担当者登録",
+    "jobSeeker": "求職者登録",
+    "supervisory": "管理者登録"
+  },
+  "steps": {
+    "account": "アカウント",
+    "company": "企業",
+    "contact": "連絡先",
+    "confirm": "確認"
+  },
+  "buttons": {
+    "close": "閉じる",
+    "back": "戻る"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "title": "利用規約",
+  "labels": {
+    "acceptTerms": "利用規約に同意する",
+    "acceptPrivacyPolicy": "プライバシーポリシーに同意する",
+    "acceptReceiveEmails": "メール通知を受け取る"
+  },
+  "helpers": {
+    "submitting": "送信中..."
+  },
+  "errors": {
+    "acceptTermsPrivacy": "利用規約とプライバシーポリシーに同意する必要があります。",
+    "acceptTerms": "利用規約に同意する必要があります。",
+    "acceptPrivacy": "プライバシーポリシーに同意する必要があります。"
+  },
+  "messages": {
+    "success": "成功！",
+    "error": "エラー",
+    "registrationComplete": "登録が完了しました！",
+    "registrationFailed": "登録に失敗しました。もう一度お試しください。"
+  },
+  "buttons": {
+    "submit": "登録を送信"
+  }
+}

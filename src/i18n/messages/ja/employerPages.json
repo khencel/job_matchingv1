@@ -1,0 +1,77 @@
+{
+  "jobListing": {
+    "title": "求人一覧",
+    "noJobs": "まだ求人が投稿されていません",
+    "postNewJob": "新しい求人を投稿",
+    "editJob": "編集",
+    "deleteJob": "削除",
+    "viewApplications": "申請を表示",
+    "totalApplications": "合計申請数",
+    "jobStatus": "ステータス",
+    "postedDate": "投稿日",
+    "closeDate": "締切日"
+  },
+  "postJob": {
+    "title": "求人を投稿",
+    "jobInformation": "求人情報",
+    "jobTitle": "職種",
+    "jobDescription": "職務記述書",
+    "requiredSkills": "必要なスキル",
+    "salaryRange": "給与範囲",
+    "jobType": "雇用形態",
+    "fullTime": "正社員",
+    "partTime": "パートタイム",
+    "contract": "契約社員",
+    "location": "所在地",
+    "perksAndBenefits": "待遇・福利厚生",
+    "healthInsurance": "健康保険",
+    "retirement": "退職金制度",
+    "flexibleHours": "柔軟な勤務時間",
+    "nextStep": "次へ",
+    "submitJob": "求人を投稿"
+  },
+  "applicants": {
+    "title": "申請者",
+    "noApplicants": "申請者がまだいません",
+    "applicantName": "申請者名",
+    "position": "職位",
+    "appliedDate": "申請日",
+    "status": "ステータス",
+    "viewProfile": "プロフィールを表示",
+    "viewResume": "履歴書を表示",
+    "shortlisted": "ショートリスト",
+    "rejected": "却下",
+    "accepted": "承認",
+    "pending": "保留中"
+  },
+  "profile": {
+    "title": "企業プロフィール",
+    "editProfile": "プロフィールを編集",
+    "companyName": "企業名",
+    "industry": "業種",
+    "website": "ウェブサイト",
+    "description": "企業説明",
+    "location": "本社所在地",
+    "employees": "従業員数",
+    "about": "企業について",
+    "socialLinks": "ソーシャルリンク",
+    "saveChanges": "変更を保存"
+  },
+  "overview": {
+    "title": "概要",
+    "activeJobs": "アクティブな求人",
+    "totalApplications": "合計申請数",
+    "newApplications": "新しい申請",
+    "recentApplicants": "最近の申請者",
+    "topPerformingJobs": "トップパフォーマンス求人"
+  },
+  "perksBenefits": {
+    "title": "待遇・福利厚生",
+    "addBenefit": "福利厚生を追加",
+    "editBenefit": "編集",
+    "deleteBenefit": "削除",
+    "benefitName": "福利厚生名",
+    "benefitDescription": "福利厚生説明",
+    "noBenefits": "福利厚生がまだ設定されていません"
+  }
+}

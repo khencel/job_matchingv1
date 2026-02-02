@@ -1,0 +1,35 @@
+{
+  "supervisoryApplicants": {
+    "title": "申請者",
+    "totalApplicants": "申請者総数",
+    "name": "名前",
+    "position": "申請職位",
+    "applicationDate": "申請日",
+    "status": "ステータス",
+    "viewDetails": "詳細を表示",
+    "recommendForPlacement": "配置を推奨",
+    "reject": "却下",
+    "noApplicants": "現在申請者がいません"
+  },
+  "supervisoryProfile": {
+    "title": "組織プロフィール",
+    "editProfile": "プロフィールを編集",
+    "organizationName": "組織名",
+    "contactEmail": "連絡先メール",
+    "phone": "電話番号",
+    "address": "住所",
+    "description": "組織説明",
+    "registeredWorkers": "登録済みワーカー",
+    "placedWorkers": "配置されたワーカー",
+    "saveChanges": "変更を保存"
+  },
+  "supervisoryOverview": {
+    "title": "概要",
+    "registeredWorkers": "登録済みワーカー",
+    "placedWorkers": "配置されたワーカー",
+    "pendingCases": "保留中のケース",
+    "completedPlacements": "完了した配置",
+    "recentApplications": "最近の申請",
+    "workerStatistics": "ワーカー統計"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "title": "Terms and Conditions",
+  "labels": {
+    "acceptTerms": "Accept the terms of use.",
+    "acceptPrivacyPolicy": "Accept privacy policy.",
+    "acceptReceiveEmails": "Receive notification via email."
+  },
+  "helpers": {
+    "submitting": "Submitting..."
+  },
+  "errors": {
+    "acceptTermsPrivacy": "You must accept Terms of Use and Privacy Policy to continue.",
+    "acceptTerms": "You must accept the terms of use.",
+    "acceptPrivacy": "You must accept the privacy policy."
+  },
+  "messages": {
+    "success": "Success!",
+    "error": "Error",
+    "registrationComplete": "Registration completed successfully!",
+    "registrationFailed": "Registration failed. Please try again."
+  },
+  "buttons": {
+    "submit": "Submit Registration"
+  }
+}

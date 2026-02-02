@@ -1,3 +1,5 @@
+"use client";
+import { useTranslations } from "next-intl";
 import StatusActivity from "./status_activity"
 import Chart from "./chart"
 import RecentActivity from "./recentActivity"
@@ -5,11 +7,12 @@ import RecentPostJob from "./recentPostJob"
 
 
 export default function Overview(){
+    const t = useTranslations("employerOverview");
     return(
         <>
-            <strong>Hello</strong>
+            <strong>{t("hello")}</strong>
             <br />
-            <small>Here is your daily activities and application</small>
+            <small>{t("dailyActivities")}</small>
             <br />
             <StatusActivity />
                

@@ -2,10 +2,13 @@ import { formatDate } from "@/helper/formatDate";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchAppliedJobs } from "@/redux/slices/jobs/jobsThunk";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Col, Pagination, Row, Badge, Container } from "react-bootstrap";
 
 const AppliedJobs = () => {
+  const tAppliedJobs = useTranslations("jobSeekerPages.appliedJobs");
+  const tNavbar = useTranslations("navbar");
   const dispatch = useAppDispatch();
   const { loading, error, appliedJob } = useAppSelector((s) => s.appliedJob);
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,7 +26,7 @@ const AppliedJobs = () => {
     // You can expand this logic based on your real status values
     return (
       <Badge bg="primary" pill className="px-3 py-2">
-        {status || "Applied"}
+        {status || tAppliedJobs("applied")}
       </Badge>
     );
   };
@@ -32,9 +35,9 @@ const AppliedJobs = () => {
     <Container className="py-5">
       {/* Header Section */}
       <div className="mb-4">
-        <h2 className="fw-bold text-dark">My Applications</h2>
+        <h2 className="fw-bold text-dark">{tAppliedJobs("title")}</h2>
         <p className="text-muted h-100 gap-2 d-flex align-items-center">
-          Total Applications:
+          {tAppliedJobs("totalApplications")}:
           <Badge bg="dark" pill>
             {appliedJob?.count}
           </Badge>
@@ -43,7 +46,7 @@ const AppliedJobs = () => {
 
       {loading && (
         <div className="text-center py-5 text-muted">
-          Loading applications...
+          {tAppliedJobs("loadingApplications")}
         </div>
       )}
       {error && <div className="text-center py-5 text-danger">{error}</div>}
@@ -52,10 +55,10 @@ const AppliedJobs = () => {
       {!loading && appliedJob?.results?.length === 0 && (
         <div className="text-center py-5 bg-light rounded-3">
           <h5 className="text-muted">
-            You haven{"'"}t applied to any jobs yet.
+            {tAppliedJobs("noApplications")}
           </h5>
           <Link href="/find-jobs" className="btn btn-primary mt-3">
-            Find Jobs
+            {tNavbar("findJobs")}
           </Link>
         </div>
       )}
@@ -63,12 +66,12 @@ const AppliedJobs = () => {
       {/* Table Header - Hidden on small screens for cleaner mobile look */}
       {appliedJob?.results?.length > 0 && (
         <Row className="d-none d-md-flex mb-3 px-3 text-uppercase fs-7 text-muted fw-bold">
-          <Col md={6}>Role & Company</Col>
+          <Col md={6}>{tAppliedJobs("roleAndCompany")}</Col>
           <Col md={3} className="text-center">
-            Date Applied
+            {tAppliedJobs("appliedDate")}
           </Col>
           <Col md={3} className="text-center">
-            Status
+            {tAppliedJobs("status")}
           </Col>
         </Row>
       )}
@@ -123,7 +126,7 @@ const AppliedJobs = () => {
                 {/* 2. Date */}
                 <Col md={3} className="text-md-center mt-3 mt-md-0">
                   <small className="text-muted d-block d-md-none fw-bold mb-1">
-                    Applied On:
+                    {tAppliedJobs("appliedOn")}:
                   </small>
                   <span className="fw-medium text-secondary">
                     {formatDate(job.created_at)}
@@ -135,7 +138,7 @@ const AppliedJobs = () => {
                   md={3}
                   className="text-md-center mt-3 mt-md-0 d-flex justify-content-md-center align-items-center"
                 >
-                  {getStatusBadge("Applied")}
+                  {getStatusBadge(tAppliedJobs("applied"))}
                 </Col>
               </Row>
             </Link>

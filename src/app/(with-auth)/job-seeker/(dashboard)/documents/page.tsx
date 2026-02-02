@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 import {
   Tab,
   Container,
@@ -27,6 +28,7 @@ import PreviewFile from "@/components/PreviewFile";
 import { fetchCurrentUser } from "@/redux/features/auth/auth_thunk";
 
 const DocumentsPage = () => {
+  const t = useTranslations("documentsPage");
   const dispatch = useAppDispatch();
   const user_id = useAppSelector((s) => s.authState.user?.id);
   const documents = useAppSelector((s) => s.authState.user?.documents || []);
@@ -91,8 +93,8 @@ const DocumentsPage = () => {
     if (!uploadedFiles || uploadedFiles.length === 0) {
       Swal.fire({
         icon: "warning",
-        title: "No Files Selected",
-        text: "Please select files to upload.",
+        title: t("noFilesSelected"),
+        text: t("selectFilesUpload"),
       });
       return;
     }
@@ -117,8 +119,8 @@ const DocumentsPage = () => {
       });
       Swal.fire({
         icon: "success",
-        title: "Upload Successful",
-        text: "Your documents have been uploaded successfully.",
+        title: t("uploadSuccess"),
+        text: t("uploadSuccessMsg"),
       });
       console.log("Uploaded Files", res);
       setUploadedFiles(null);
@@ -126,8 +128,8 @@ const DocumentsPage = () => {
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Upload Failed",
-        text: "There was an error uploading your documents. Please try again.",
+        title: t("uploadFailed"),
+        text: t("uploadFailedMsg"),
       });
       console.log("Error uploading documents", error);
     }
@@ -148,13 +150,13 @@ const DocumentsPage = () => {
               <Card.Body className="p-4">
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <div>
-                    <h4 className="mb-1 fw-bold">My Documents</h4>
+                    <h4 className="mb-1 fw-bold">{t("myDocuments")}</h4>
                     <p className="text-muted mb-0">
-                      Upload and manage your documents
+                      {t("uploadManageDocuments")}
                     </p>
                   </div>
                   <Badge bg="primary" className="px-3 py-2">
-                    {documents.length} Documents
+                    {documents.length} {t("documents")}
                   </Badge>
                 </div>
               </Card.Body>
@@ -168,7 +170,7 @@ const DocumentsPage = () => {
               <Card.Body className="p-4">
                 {uploadedFiles && uploadedFiles.length > 0 && (
                   <div className="mb-4">
-                    <h6 className="fw-bold mb-3">Preview Files</h6>
+                    <h6 className="fw-bold mb-3">{t("previewFiles")}</h6>
                     <div className="border rounded p-3 bg-light">
                       {Array.from(uploadedFiles).map((file, index) => (
                         <div
@@ -205,10 +207,9 @@ const DocumentsPage = () => {
                       <div className="mb-4">
                         <CloudUploadIcon size={80} className="text-primary" />
                       </div>
-                      <h5 className="mb-3">Upload Your Documents</h5>
+                      <h5 className="mb-3">{t("uploadYourDocuments")}</h5>
                       <p className="text-muted mb-4">
-                        Select multiple files to upload at once. Supported
-                        formats: PDF, DOC, DOCX, JPG, PNG
+                        {t("selectMultipleFilesSupported")}
                       </p>
                     </>
                   ) : null}
@@ -223,8 +224,8 @@ const DocumentsPage = () => {
                       >
                         <PlusCircleIcon className="me-1" />
                         {uploadedFiles && uploadedFiles.length > 0
-                          ? "Choose More Files"
-                          : "Choose Files"}
+                          ? t("chooseMoreFiles")
+                          : t("chooseFiles")}
                       </Button>
                       {uploadedFiles && uploadedFiles.length > 0 && (
                         <div className="d-flex gap-2 justify-content-center">
@@ -236,7 +237,7 @@ const DocumentsPage = () => {
                             onClick={handleFileUpload}
                           >
                             <UploadIcon className="me-1" />
-                            Upload Files
+                            {t("uploadFiles")}
                           </Button>
                           <Button
                             variant="outline-dark"
@@ -245,7 +246,7 @@ const DocumentsPage = () => {
                             className="px-3"
                             onClick={handleClearAllFiles}
                           >
-                            Clear
+                            {t("clear")}
                           </Button>
                         </div>
                       )}
@@ -268,21 +269,21 @@ const DocumentsPage = () => {
           <Col>
             <Card className="shadow-sm border-0">
               <Card.Header className="bg-white py-3">
-                <h5 className="mb-0 fw-bold">Uploaded Documents</h5>
+                <h5 className="mb-0 fw-bold">{t("uploadedDocuments")}</h5>
               </Card.Header>
               <Card.Body className="p-0">
                 {documents.length === 0 ? (
                   <div className="text-center py-5">
                     <FileX2Icon size={50} className="text-muted mb-3" />
-                    <p className="text-muted mb-0">No documents uploaded yet</p>
+                    <p className="text-muted mb-0">{t("noDocumentsUploaded")}</p>
                   </div>
                 ) : (
                   <Table responsive hover className="mb-0">
                     <thead className="bg-light">
                       <tr>
-                        <th className="border-0 py-3">File Name</th>
-                        <th className="border-0 py-3">File Type</th>
-                        <th className="border-0 py-3 text-end">Actions</th>
+                        <th className="border-0 py-3">{t("fileName")}</th>
+                        <th className="border-0 py-3">{t("fileType")}</th>
+                        <th className="border-0 py-3 text-end">{t("actions")}</th>
                       </tr>
                     </thead>
                     <tbody>

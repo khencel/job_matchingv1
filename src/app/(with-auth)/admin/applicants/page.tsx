@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { BiArrowBack } from "react-icons/bi";
 import { FaCalendarCheck, FaSliders } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
@@ -25,6 +26,7 @@ import { saveAs } from 'file-saver';
 
 
 export default function AdminApplicants() {
+    const t = useTranslations("adminApplicants");
     const dispatch = useAppDispatch();
     const {items, status, error, next, previous, currentPage, pageSize, count, company, itemToPrint}= useSelector((state: RootState) => state.applicants);
     const [showEmployer, setShowEmployer] = useState(false);
@@ -137,18 +139,18 @@ export default function AdminApplicants() {
         <>
             <div className="row standar-div">
                 <div className="col">
-                    <h5><strong><BiArrowBack /> Applicants Listing</strong></h5>
+                    <h5><strong><BiArrowBack /> {t("applicantsListing")}</strong></h5>
                 </div>
                 <div className="col-2 border text-end me-2">
                     <button className="btn btn-success btn-sm" onClick={handleDownloadExcel}>
-                        Download Excel
+                        {t("downloadExcel")}
                     </button>
                 </div>
             </div>
 
             <div className="row standar-div mt-2">
                 <div className="col">
-                    <strong>Users List ({count} total)</strong>
+                    <strong>{t("usersList")} ({count} {t("total")})</strong>
                 </div>
                 {/* <div className="col-2 text-end">
                     <FaSearch className="text-primary" /> Search Users
@@ -156,7 +158,7 @@ export default function AdminApplicants() {
                 
                 <div className="col-1 text-end">
                     <span style={{cursor:"pointer"}} onClick={handleFilter}>
-                        <FaSliders className="text-primary"  /> Filter
+                        <FaSliders className="text-primary"  /> {t("filter")}
                     </span>
                     
                 </div>
@@ -167,12 +169,12 @@ export default function AdminApplicants() {
                         <table className="table table-hover">
                             <thead>
                                 <tr>
-                                    <th className="text-start p-2">Full Name</th>
-                                    <th className="text-start p-2">Hiring Stage</th>
-                                    <th className="text-start p-2">Joined</th>
-                                    <th className="text-start p-2">Job Role</th>
-                                    <th className="text-start p-2">Employer</th>
-                                    <th className="text-start p-2">Action</th>
+                                    <th className="text-start p-2">{t("fullName")}</th>
+                                    <th className="text-start p-2">{t("hiringStage")}</th>
+                                    <th className="text-start p-2">{t("joined")}</th>
+                                    <th className="text-start p-2">{t("jobRole")}</th>
+                                    <th className="text-start p-2">{t("employer")}</th>
+                                    <th className="text-start p-2">{t("action")}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -181,7 +183,7 @@ export default function AdminApplicants() {
                                         return (
                                             <tr key={index}>
                                                 <td className="text-start p-2 text-capitalize">{item.user.userDetails.firstName} {item.user.userDetails.lastName}</td>
-                                                <td className="text-start p-2"><span className={`badge bg-default border border-dark ${item?.status == 'approved'?'bg-success':'bg-danger'}`}>{item.status || 'pending'}</span></td>
+                                                <td className="text-start p-2"><span className={`badge bg-default border border-dark ${item?.status == 'approved'?'bg-success':'bg-danger'}`}>{item.status || t("pending")}</span></td>
                                                 <td className="text-start p-2"><FormattedDate date={item.created_at} /></td>
                                                 <td className="text-start p-2">{item.job_post.jobPostDetails?.title}</td>
                                                 <td className="text-start p-2">{item.job_post.employerDetails.userDetails_emp.company_information.name}</td>
@@ -198,10 +200,10 @@ export default function AdminApplicants() {
 
                                                         <ul className="dropdown-menu dropdown-menu-end">
                                                             <li>
-                                                                <button className="dropdown-item" onClick={() => handleViewEmployer(item)}>View Employer</button>
+                                                                <button className="dropdown-item" onClick={() => handleViewEmployer(item)}>{t("viewEmployer")}</button>
                                                             </li>
                                                             <li>
-                                                                <button className="dropdown-item" onClick={() => handleViewApplicant(item)}>View Applicant</button>
+                                                                <button className="dropdown-item" onClick={() => handleViewApplicant(item)}>{t("viewApplicant")}</button>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -219,7 +221,7 @@ export default function AdminApplicants() {
             {/* Pagination Controls */}
             <div className="d-flex justify-content-between align-items-center mt-3">
                 <div className="d-flex align-items-center">
-                    <label className="me-2">Items per page:</label>
+                    <label className="me-2">{t("itemsPerPage")}:</label>
                     <select 
                         className="form-select form-select-sm" 
                         style={{ width: 'auto' }}
@@ -233,7 +235,7 @@ export default function AdminApplicants() {
                         <option value={50}>50</option>
                     </select>
                     <span className="ms-3 text-muted">
-                        Showing {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, count)} of {count}
+                        {t("showing")} {((currentPage - 1) * pageSize) + 1} {t("to")} {Math.min(currentPage * pageSize, count)} {t("of")} {count}
                     </span>
                 </div>
 
@@ -245,7 +247,7 @@ export default function AdminApplicants() {
                                 onClick={() => handlePageChange(currentPage - 1)}
                                 disabled={!previous}
                             >
-                                Previous
+                                {t("previous")}
                             </button>
                         </li>
                         
@@ -269,7 +271,7 @@ export default function AdminApplicants() {
                                 onClick={() => handlePageChange(currentPage + 1)}
                                 disabled={!next}
                             >
-                                Next
+                                {t("next")}
                             </button>
                         </li>
                     </ul>

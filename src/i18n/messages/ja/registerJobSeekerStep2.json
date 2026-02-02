@@ -1,0 +1,68 @@
+{
+  "title": "個人情報",
+  "labels": {
+    "firstName": "名",
+    "midName": "ミドルネーム",
+    "lastName": "姓",
+    "nationality": "国籍",
+    "gender": "性別",
+    "currentPlaceResidence": "現住所",
+    "birthdate": "生年月日",
+    "visaStatus": "ビザステータス",
+    "highestEducation": "最終学歴",
+    "japaneseLevel": "日本語レベル（JLPT）",
+    "email": "メールアドレス",
+    "contactNo": "連絡先電話番号",
+    "facebook": "Facebookプロフィール",
+    "optional": "任意"
+  },
+  "placeholders": {
+    "firstName": "名を入力してください",
+    "midName": "ミドルネームを入力してください",
+    "lastName": "姓を入力してください",
+    "selectNationality": "国籍を選択してください",
+    "nationality": "国籍を入力してください",
+    "currentPlaceResidence": "現住所を入力してください",
+    "selectVisaStatus": "ビザステータスを選択してください",
+    "selectEducation": "最終学歴を選択してください",
+    "selectJapaneseLevel": "日本語レベルを選択してください",
+    "email": "メールアドレスを入力してください",
+    "contactNo": "連絡先電話番号を入力してください",
+    "facebook": "FacebookプロフィールURLを入力してください"
+  },
+  "options": {
+    "male": "男性",
+    "female": "女性",
+    "visaApplied": "申請中",
+    "visaPending": "保留中",
+    "visaReviewing": "審査中",
+    "visaIssued": "発給済み",
+    "visaDenied": "却下",
+    "elementary": "小学校",
+    "jrHighschool": "中学校",
+    "srHighschool": "高等学校",
+    "vocational": "専門学校",
+    "bachelorDegree": "学士号",
+    "masterDegree": "修士号",
+    "doctoralDegree": "博士号"
+  },
+  "errors": {
+    "nameTooShort": "名前は2文字以上で入力してください。",
+    "visaStatusRequired": "ビザステータスを選択してください。",
+    "nationalityRequired": "国籍を選択してください。",
+    "genderRequired": "性別を選択してください。",
+    "residenceTooShort": "現住所は2文字以上で入力してください。",
+    "birthdateRequired": "生年月日を入力してください。",
+    "age18Error": "18歳以上である必要があります。",
+    "age100Error": "年齢は100歳以下である必要があります。",
+    "invalidEmail": "有効なメールアドレスを入力してください。",
+    "contactNoTooShort": "連絡先電話番号は7桁以上で入力してください。",
+    "highestEducationRequired": "最終学歴を選択してください。",
+    "japaneseLevelRequired": "日本語レベルを選択してください。",
+    "invalidFacebookUrl": "有効なFacebookプロフィールURLを入力してください。",
+    "fillRequired": "必須項目をすべて入力してください。"
+  },
+  "buttons": {
+    "next": "次へ"
+  }
+}

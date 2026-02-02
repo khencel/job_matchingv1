@@ -1,0 +1,82 @@
+{
+  "commonButtons": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "remove": "Remove",
+    "submit": "Submit",
+    "apply": "Apply",
+    "search": "Search",
+    "filter": "Filter",
+    "reset": "Reset",
+    "download": "Download",
+    "upload": "Upload",
+    "view": "View",
+    "more": "More",
+    "less": "Less"
+  },
+  "commonLabels": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "date": "Date",
+    "time": "Time",
+    "status": "Status",
+    "action": "Action",
+    "description": "Description",
+    "category": "Category",
+    "type": "Type",
+    "price": "Price",
+    "salary": "Salary",
+    "location": "Location",
+    "company": "Company",
+    "jobTitle": "Job Title"
+  },
+  "commonMessages": {
+    "loading": "Loading...",
+    "noData": "No data available",
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Information",
+    "confirmDelete": "Are you sure you want to delete this?",
+    "saved": "Changes saved successfully",
+    "updated": "Updated successfully",
+    "created": "Created successfully",
+    "deleted": "Deleted successfully",
+    "required": "This field is required",
+    "invalid": "Invalid input"
+  },
+  "commonTableHeaders": {
+    "id": "ID",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "date": "Date",
+    "status": "Status",
+    "action": "Action",
+    "applicant": "Applicant",
+    "jobTitle": "Job Title",
+    "appliedDate": "Applied Date",
+    "salary": "Salary",
+    "location": "Location"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page",
+    "of": "of",
+    "showing": "Showing",
+    "entries": "entries"
+  },
+  "sorting": {
+    "sortBy": "Sort by",
+    "ascending": "Ascending",
+    "descending": "Descending",
+    "newest": "Newest",
+    "oldest": "Oldest"
+  }
+}

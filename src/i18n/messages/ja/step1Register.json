@@ -1,0 +1,26 @@
+{
+  "title": "アカウント情報",
+  "labels": {
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "confirmPassword": "パスワード確認",
+    "rememberMe": "次回から自動的にログインする"
+  },
+  "placeholders": {
+    "enterEmail": "メールアドレスを入力してください",
+    "enterPassword": "パスワードを入力してください",
+    "confirmYourPassword": "パスワードを確認してください"
+  },
+  "errors": {
+    "invalidEmail": "有効なメールアドレスを入力してください。",
+    "passwordTooShort": "パスワードは8文字以上で入力してください。",
+    "passwordMismatch": "パスワードが一致しません。"
+  },
+  "helpers": {
+    "passwordMinLength": "パスワードは8文字以上で入力してください。",
+    "accountConfirmNote": "次へ進むと、入力したアカウント情報が正しいことを確認したことになります。"
+  },
+  "buttons": {
+    "next": "次へ"
+  }
+}

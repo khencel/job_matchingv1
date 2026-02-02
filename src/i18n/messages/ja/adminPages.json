@@ -1,0 +1,56 @@
+{
+  "adminUsers": {
+    "title": "ユーザー管理",
+    "noUsers": "ユーザーが見つかりません",
+    "userName": "ユーザー名",
+    "email": "メール",
+    "userType": "ユーザータイプ",
+    "status": "ステータス",
+    "joinDate": "参加日",
+    "viewProfile": "プロフィールを表示",
+    "deactivate": "無効化",
+    "activate": "有効化",
+    "deleteUser": "ユーザーを削除",
+    "searchUsers": "ユーザーを検索"
+  },
+  "adminApplicants": {
+    "title": "申請者管理",
+    "totalApplicants": "申請者総数",
+    "pendingApproval": "承認待ち",
+    "approved": "承認済み",
+    "rejected": "却下",
+    "name": "名前",
+    "email": "メール",
+    "appliedPosition": "申請職位",
+    "applicationDate": "申請日",
+    "status": "ステータス",
+    "review": "確認",
+    "approve": "承認",
+    "reject": "却下"
+  },
+  "adminSettings": {
+    "title": "設定",
+    "systemSettings": "システム設定",
+    "emailSettings": "メール設定",
+    "notificationSettings": "通知設定",
+    "securitySettings": "セキュリティ設定",
+    "appearance": "外観",
+    "darkMode": "ダークモード",
+    "language": "言語",
+    "timezone": "タイムゾーン",
+    "saveSettings": "設定を保存",
+    "resetSettings": "設定をリセット"
+  },
+  "adminOverview": {
+    "title": "概要",
+    "totalUsers": "ユーザー総数",
+    "activeUsers": "アクティブユーザー",
+    "totalJobs": "求人総数",
+    "activeJobs": "アクティブな求人",
+    "totalApplications": "申請総数",
+    "pendingApprovals": "承認待ち",
+    "userGrowth": "ユーザー成長",
+    "jobPostingTrend": "求人投稿トレンド",
+    "recentActivity": "最近のアクティビティ"
+  }
+}

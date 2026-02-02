@@ -32,7 +32,7 @@ export default function Step1Register({
   goNextStepAction,
   checkEmail,
 }: Step1RegisterProps) {
-  const t = useTranslations("Step1Register");
+  const t = useTranslations("step1Register");
   const dispatch = useAppDispatch();
   const accountInfo = useAppSelector(selector);
 

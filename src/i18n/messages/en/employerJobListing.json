@@ -1,0 +1,13 @@
+{
+  "jobListing": "Job Listing",
+  "editJobPost": "Edit Job Post",
+  "role": "Role",
+  "datePosted": "Date Posted",
+  "salary": "Salary",
+  "jobType": "Job type",
+  "applicants": "Applicants",
+  "edit": "Edit",
+  "delete": "Delete",
+  "itemsPerPage": "Items per page",
+  "optionLoadingMessage": "Loading..."
+}

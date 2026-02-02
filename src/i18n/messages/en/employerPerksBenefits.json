@@ -1,0 +1,11 @@
+{
+  "perksBenefits": "Perks & Benefits",
+  "addPerksBenefits": "Add Perks & Benefits",
+  "editPerksBenefits": "Edit Perks & Benefits",
+  "name": "Name",
+  "description": "Description",
+  "createdAt": "Created At",
+  "itemsPerPage": "Items per page",
+  "loadingMessage": "Loading...",
+  "noData": "No data found"
+}

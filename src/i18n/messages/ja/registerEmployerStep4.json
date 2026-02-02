@@ -1,0 +1,18 @@
+{
+  "title": "利用規約",
+  "labels": {
+    "acceptTerms": "利用規約に同意する",
+    "acceptPrivacyPolicy": "プライバシーポリシーに同意する",
+    "acceptReceiveEmails": "メール通知を受け取る"
+  },
+  "helpers": {
+    "submitting": "送信中..."
+  },
+  "errors": {
+    "acceptTerms": "利用規約に同意する必要があります。",
+    "acceptPrivacy": "プライバシーポリシーに同意する必要があります。"
+  },
+  "buttons": {
+    "submit": "登録を送信"
+  }
+}

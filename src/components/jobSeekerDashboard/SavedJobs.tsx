@@ -1,6 +1,7 @@
 "use client"; // Required for client-side fetching
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   Card,
   Container,
@@ -25,6 +26,7 @@ interface SavedJob {
 
 const SavedJobs = () => {
   const router = useRouter();
+  const t = useTranslations("savedJobs");
   const [jobs, setJobs] = useState<SavedJob[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -46,7 +48,7 @@ const SavedJobs = () => {
         setJobs(response.data.data);
       } catch (err) {
         console.error(err);
-        setError("Failed to load saved jobs. Please try again later.");
+        setError(t("errorLoading"));
       } finally {
         setLoading(false);
       }
@@ -77,8 +79,8 @@ const SavedJobs = () => {
   if (jobs.length === 0) {
     return (
       <Container className="py-5 text-center text-muted">
-        <h4>No saved jobs yet.</h4>
-        <p>Jobs you bookmark will appear here.</p>
+        <h4>{t("noSavedJobs")}</h4>
+        <p>{t("savedJobsMessage")}</p>
       </Container>
     );
   }
@@ -86,7 +88,7 @@ const SavedJobs = () => {
   // 4. Data List
   return (
     <Container fluid className="py-2">
-      <h4 className="mb-4">Saved Jobs ({jobs.length})</h4>
+      <h4 className="mb-4">{t("title")} ({jobs.length})</h4>
 
       {jobs.map((job) => (
         <Card
@@ -130,7 +132,7 @@ const SavedJobs = () => {
             <div className="d-flex justify-content-between align-items-center mt-3 border-top pt-3">
               <span className="fw-bold text-success">{job.salaryRange}</span>
               <Button variant="outline-primary" size="sm" onClick={()=> router.push("/job-description")}>
-                Apply Now
+                {t("removeSaved")}
               </Button>
             </div>
           </Card.Body>

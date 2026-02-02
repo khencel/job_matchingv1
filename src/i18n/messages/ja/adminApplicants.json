@@ -1,0 +1,12 @@
+{
+  "applicantsListing": "応募者一覧",
+  "fullName": "氏名",
+  "hiringStage": "採用ステージ",
+  "joined": "参加日",
+  "jobRole": "職種",
+  "employer": "雇用主",
+  "action": "アクション",
+  "viewEmployer": "雇用主を表示",
+  "viewApplicant": "応募者を表示",
+  "itemsPerPage": "1ページあたりの項目数"
+}

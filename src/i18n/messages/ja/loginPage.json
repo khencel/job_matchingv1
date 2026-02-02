@@ -1,0 +1,19 @@
+{
+  "logoTitle": "プラットフォームへようこそ",
+  "logoSubtitle": "つながる。応募する。成長する。",
+  "title": "ログイン",
+  "subtitle": "おかえりなさい！アカウントにログインしてください",
+  "emailLabel": "メール",
+  "passwordLabel": "パスワード",
+  "signInButton": "ログイン",
+  "signingInButton": "ログイン中...",
+  "forgotPassword": "パスワードをお忘れですか？",
+  "toasts": {
+    "signInFailed": "ログインに失敗しました",
+    "fillAllFields": "すべてのフィールドに入力してください",
+    "verifyEmail": "メールアドレスを確認してください",
+    "signInSuccessful": "ログインに成功しました",
+    "welcomeBack": "おかえりなさい！",
+    "invalidCredentials": "メールまたはパスワードが無効です"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "title": "A new job change platform connecting foreign nationals and companies.",
+  "features": {
+    "0": {
+      "title": "Free job posting",
+      "description": "You can post job listings completely free of charge."
+    },
+    "1": {
+      "title": "Free introduction to registered support organizations",
+      "description": "Smooth acceptance of specified skilled workers."
+    }
+  },
+  "buttons": {
+    "forCompanies": "For companies",
+    "forJobSeekers": "For foreign job seekers"
+  }
+}

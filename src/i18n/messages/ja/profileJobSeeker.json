@@ -1,0 +1,16 @@
+{
+  "profileTitle": "マイプロフィール",
+  "personalInfo": "個人情報",
+  "editProfile": "プロフィールを編集",
+  "selectGender": "性別を選択",
+  "optionMale": "男性",
+  "optionFemale": "女性",
+  "optionOther": "その他",
+  "selectStatus": "ステータスを選択",
+  "selectLevel": "レベルを選択",
+  "selectEducation": "教育を選択",
+  "noResumeCreated": "まだ履歴書が作成されていません",
+  "workExperience": "職務経歴",
+  "education": "教育",
+  "skills": "スキル"
+}

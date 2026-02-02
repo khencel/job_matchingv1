@@ -1,0 +1,41 @@
+{
+  "employerDashboard": {
+    "greeting": "Hello",
+    "subtitle": "Here is your daily activities and application",
+    "statusActivity": "Status Activity",
+    "chart": "Application Chart",
+    "recentActivity": "Recent Activity",
+    "recentPostJob": "Recent Posted Jobs",
+    "dailyStats": "Daily Statistics",
+    "applicationCount": "Total Applications",
+    "postedJobs": "Posted Jobs"
+  },
+  "jobSeekerDashboard": {
+    "greeting": "Welcome",
+    "subtitle": "Your job search dashboard",
+    "appliedJobs": "Applied Jobs",
+    "savedJobs": "Saved Jobs",
+    "recommendedJobs": "Recommended For You",
+    "documents": "My Documents",
+    "profile": "My Profile",
+    "resumeBuilder": "Resume Builder"
+  },
+  "adminDashboard": {
+    "title": "Admin Overview",
+    "welcome": "Welcome to the admin overview page.",
+    "totalUsers": "Total Users",
+    "totalJobs": "Total Jobs",
+    "totalApplications": "Total Applications",
+    "pendingApprovals": "Pending Approvals",
+    "activeEmployers": "Active Employers",
+    "activeJobSeekers": "Active Job Seekers"
+  },
+  "supervisoryDashboard": {
+    "title": "Supervisory Overview",
+    "welcome": "Welcome to supervisory dashboard",
+    "registeredWorkers": "Registered Workers",
+    "placedWorkers": "Placed Workers",
+    "pendingCases": "Pending Cases",
+    "activeApplications": "Active Applications"
+  }
+}

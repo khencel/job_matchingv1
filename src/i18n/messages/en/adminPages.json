@@ -1,0 +1,56 @@
+{
+  "adminUsers": {
+    "title": "Users Management",
+    "noUsers": "No users found",
+    "userName": "Username",
+    "email": "Email",
+    "userType": "User Type",
+    "status": "Status",
+    "joinDate": "Join Date",
+    "viewProfile": "View Profile",
+    "deactivate": "Deactivate",
+    "activate": "Activate",
+    "deleteUser": "Delete User",
+    "searchUsers": "Search Users"
+  },
+  "adminApplicants": {
+    "title": "Applicants Management",
+    "totalApplicants": "Total Applicants",
+    "pendingApproval": "Pending Approval",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "name": "Name",
+    "email": "Email",
+    "appliedPosition": "Applied Position",
+    "applicationDate": "Application Date",
+    "status": "Status",
+    "review": "Review",
+    "approve": "Approve",
+    "reject": "Reject"
+  },
+  "adminSettings": {
+    "title": "Settings",
+    "systemSettings": "System Settings",
+    "emailSettings": "Email Settings",
+    "notificationSettings": "Notification Settings",
+    "securitySettings": "Security Settings",
+    "appearance": "Appearance",
+    "darkMode": "Dark Mode",
+    "language": "Language",
+    "timezone": "Timezone",
+    "saveSettings": "Save Settings",
+    "resetSettings": "Reset Settings"
+  },
+  "adminOverview": {
+    "title": "Overview",
+    "totalUsers": "Total Users",
+    "activeUsers": "Active Users",
+    "totalJobs": "Total Jobs",
+    "activeJobs": "Active Jobs",
+    "totalApplications": "Total Applications",
+    "pendingApprovals": "Pending Approvals",
+    "userGrowth": "User Growth",
+    "jobPostingTrend": "Job Posting Trend",
+    "recentActivity": "Recent Activity"
+  }
+}

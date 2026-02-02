@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useTranslations } from "next-intl";
 import {
   Edit2,
   Camera,
@@ -37,6 +38,7 @@ import { useRouter } from "next/navigation";
 const EditJobSeeker = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const t = useTranslations("profileJobSeeker");
   // Read-only source
   const email = useAppSelector((s) => s.authState.user?.email);
   const AuthUser = useAppSelector(
@@ -61,13 +63,13 @@ const EditJobSeeker = () => {
   const VISA_OPTIONS = ["APPLIED", "PENDING", "REVIEWING", "ISSUED", "DENIED"];
   const JAPANESE_LEVEL_OPTIONS = ["N5", "N4", "N3", "N2", "N1"];
   const EDUCATION_OPTIONS = [
-    { value: "elementary", label: "Elementary" },
-    { value: "jr-highschool", label: "Junior Highschool" },
-    { value: "sr-highschool", label: "Senior Highschool" },
-    { value: "vocational", label: "Vocational" },
-    { value: "bachelorDegree", label: "Bachelor's Degree" },
-    { value: "masterDegree", label: "Master's Degree" },
-    { value: "doctoralDegree", label: "Doctoral Degree" },
+    { value: "elementary", label: t("educationElementary") },
+    { value: "jr-highschool", label: t("educationJrHighschool") },
+    { value: "sr-highschool", label: t("educationSrHighschool") },
+    { value: "vocational", label: t("educationVocational") },
+    { value: "bachelorDegree", label: t("educationBachelor") },
+    { value: "masterDegree", label: t("educationMaster") },
+    { value: "doctoralDegree", label: t("educationDoctoral") },
   ];
 
   const resumeUrl = useMemo(() => {
@@ -115,7 +117,7 @@ const EditJobSeeker = () => {
           field as keyof typeof updateUser.jobSeekerData
         ];
       if (!value) {
-        newErrors[field] = "This field is required.";
+        newErrors[field] = t("fieldRequired");
       }
     });
 
@@ -123,7 +125,7 @@ const EditJobSeeker = () => {
       updateUser.jobSeekerData?.contactNo &&
       !isPhoneNumberValid(updateUser.jobSeekerData.contactNo)
     ) {
-      newErrors.contactNo = "Enter a valid phone number.";
+      newErrors.contactNo = t("invalidPhoneNumber");
     }
 
     if (Object.keys(newErrors).length) {
@@ -298,7 +300,7 @@ const EditJobSeeker = () => {
           <Card className="border-0 shadow-sm h-100">
             {/* ... Existing Personal Info Code ... */}
             <Card.Header className="bg-white border-0 pt-4 px-4 pb-0">
-              <h5 className="fw-bold mb-0">Personal Information</h5>
+              <h5 className="fw-bold mb-0">{t("personalInformation")}</h5>
             </Card.Header>
             <Card.Body className="p-4">
               <Row className="g-3">
@@ -481,7 +483,7 @@ const EditJobSeeker = () => {
               <Card.Body className="p-4">
                 <div className="mb-3">
                   <Form.Label className="text-muted small fw-semibold">
-                    Visa Status
+                    {t("visaStatus")}
                   </Form.Label>
                   {isEditMode ? (
                     <Form.Select

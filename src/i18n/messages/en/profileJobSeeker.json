@@ -1,0 +1,16 @@
+{
+  "profileTitle": "My Profile",
+  "personalInfo": "Personal Information",
+  "editProfile": "Edit Profile",
+  "selectGender": "Select Gender",
+  "optionMale": "Male",
+  "optionFemale": "Female",
+  "optionOther": "Other",
+  "selectStatus": "Select status",
+  "selectLevel": "Select level",
+  "selectEducation": "Select education",
+  "noResumeCreated": "No resume created yet",
+  "workExperience": "Work Experience",
+  "education": "Education",
+  "skills": "Skills"
+}

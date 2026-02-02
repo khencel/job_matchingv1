@@ -1,0 +1,10 @@
+{
+  "applicants": "応募者",
+  "fullName": "氏名",
+  "hiringStage": "採用ステージ",
+  "appliedDate": "応募日",
+  "jobRole": "職種",
+  "action": "アクション",
+  "seeApplication": "応募内容を確認",
+  "itemsPerPage": "1ページあたりの項目数"
+}

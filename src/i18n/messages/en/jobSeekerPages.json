@@ -1,0 +1,69 @@
+{
+  "appliedJobs": {
+    "title": "Applied Jobs",
+    "totalApplications": "Total Applications",
+    "loadingApplications": "Loading applications...",
+    "noApplications": "You haven't applied to any jobs yet",
+    "findJobs": "Find Jobs",
+    "roleAndCompany": "Role & Company",
+    "viewDetails": "View Details",
+    "cancelApplication": "Cancel Application",
+    "appliedOn": "Applied On",
+    "appliedDate": "Applied Date",
+    "status": "Status",
+    "applied": "Applied",
+    "jobTitle": "Job Title",
+    "company": "Company",
+    "salary": "Salary"
+  },
+  "savedJobs": {
+    "title": "Saved Jobs",
+    "noSavedJobs": "You haven't saved any jobs yet",
+    "applyNow": "Apply Now",
+    "removeSavedJob": "Remove from Saved",
+    "viewDetails": "View Details"
+  },
+  "documents": {
+    "title": "My Documents",
+    "noDocuments": "No documents uploaded",
+    "upload": "Upload Document",
+    "delete": "Delete",
+    "download": "Download",
+    "documentType": "Document Type",
+    "uploadDate": "Upload Date",
+    "resume": "Resume",
+    "certificate": "Certificate",
+    "coverLetter": "Cover Letter"
+  },
+  "profile": {
+    "title": "My Profile",
+    "editProfile": "Edit Profile",
+    "personalInfo": "Personal Information",
+    "workExperience": "Work Experience",
+    "education": "Education",
+    "skills": "Skills",
+    "languages": "Languages",
+    "about": "About Me",
+    "email": "Email",
+    "phone": "Phone",
+    "location": "Location",
+    "website": "Website",
+    "linkedin": "LinkedIn",
+    "saveChanges": "Save Changes"
+  },
+  "resumeBuilder": {
+    "title": "Resume Builder",
+    "startBuilding": "Start Building Your Resume",
+    "selectTemplate": "Select Template",
+    "addSection": "Add Section",
+    "personalDetails": "Personal Details",
+    "professionalSummary": "Professional Summary",
+    "workHistory": "Work History",
+    "education": "Education",
+    "skills": "Skills",
+    "languages": "Languages",
+    "preview": "Preview",
+    "downloadResume": "Download Resume",
+    "exportPDF": "Export as PDF"
+  }
+}

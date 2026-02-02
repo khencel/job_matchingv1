@@ -1,0 +1,16 @@
+{
+  "usersListing": "Users Listing",
+  "filterAll": "All",
+  "filterJobSeeker": "Job Seeker",
+  "filterEmployer": "Employer",
+  "filterSupervisory": "Supervisory",
+  "name": "Name",
+  "email": "Email",
+  "role": "Role",
+  "status": "Status",
+  "joined": "Joined",
+  "action": "Action",
+  "deactivate": "Deactivate",
+  "activate": "Activate",
+  "itemsPerPage": "Items per page"
+}
