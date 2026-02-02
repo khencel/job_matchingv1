@@ -1,0 +1,26 @@
+{
+  "title": "求人フィルター",
+  "clearFilters": "フィルターをクリア",
+  "jobType": {
+    "label": "雇用形態",
+    "fullTime": "正社員",
+    "partTime": "パートタイム",
+    "remote": "リモート",
+    "internship": "インターンシップ"
+  },
+  "workExperience": {
+    "label": "職務経験",
+    "freshGraduate": "新卒",
+    "oneToTwo": "1～2年",
+    "twoToFour": "2～4年",
+    "fivePlus": "5年以上"
+  },
+  "industry": {
+    "label": "業種"
+  },
+  "salary": {
+    "label": "給与",
+    "min": "最小",
+    "max": "最大"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "title": "Job Filter",
+  "clearFilters": "Clear Filters",
+  "jobType": {
+    "label": "Job Type",
+    "fullTime": "Full-time",
+    "partTime": "Part-time",
+    "remote": "Remote",
+    "internship": "Internship"
+  },
+  "workExperience": {
+    "label": "Work Experience",
+    "freshGraduate": "Fresh Graduate",
+    "oneToTwo": "1 to 2 years",
+    "twoToFour": "2 - 4 years",
+    "fivePlus": "5 years and above"
+  },
+  "industry": {
+    "label": "Industry"
+  },
+  "salary": {
+    "label": "Salary",
+    "min": "min",
+    "max": "max"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "jobSeeker": {
+    "profile": "マイプロフィール",
+    "appliedJobs": "応募済み求人",
+    "documents": "マイドキュメント",
+    "createResume": "履歴書を作成"
+  },
+  "employer": {
+    "overview": "概要",
+    "jobListing": "求人一覧",
+    "postJob": "求人を投稿",
+    "applicants": "応募者",
+    "perksBenefits": "福利厚生",
+    "profile": "企業プロフィール"
+  },
+  "admin": {
+    "overview": "概要",
+    "users": "ユーザー",
+    "applicants": "応募者",
+    "settings": "設定"
+  },
+  "supervisory": {
+    "overview": "概要",
+    "applicants": "応募者",
+    "profile": "組織プロフィール"
+  },
+  "logout": "ログアウト"
+}

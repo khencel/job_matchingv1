@@ -1,0 +1,28 @@
+{
+  "jobSeeker": {
+    "profile": "My Profile",
+    "appliedJobs": "Applied Jobs",
+    "documents": "My Documents",
+    "createResume": "Create Resume"
+  },
+  "employer": {
+    "overview": "Overview",
+    "jobListing": "Job Listing",
+    "postJob": "Post a Job",
+    "applicants": "Applicants",
+    "perksBenefits": "Perks & Benefits",
+    "profile": "Company Profile"
+  },
+  "admin": {
+    "overview": "Overview",
+    "users": "Users",
+    "applicants": "Applicants",
+    "settings": "Settings"
+  },
+  "supervisory": {
+    "overview": "Overview",
+    "applicants": "Applicants",
+    "profile": "Organization Profile"
+  },
+  "logout": "Logout"
+}

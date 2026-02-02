@@ -44,6 +44,9 @@ import adminUsers from "./adminUsers.json";
 import step1Register from "./step1Register.json";
 import registration from "./registration.json";
 import about from "./about.json";
+import jobCard from "./jobCard.json";
+import filterJobs from "./filterJobs.json";
+import dropdownNav from "./dropdownNav.json";
 
 export default {
   navbar,
@@ -92,4 +95,7 @@ export default {
   adminUsers,
   registration,
   about,
+  jobCard,
+  filterJobs,
+  dropdownNav,
 };

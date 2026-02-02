@@ -10,11 +10,13 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button, DropdownItem } from "react-bootstrap";
+import { useTranslations } from "next-intl";
 
 const DropdownNav = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const role = useAppSelector((s) => s.authState.user?.role);
+  const t = useTranslations("dropdownNav");
 
   const handleLogout = () => {
     try {
@@ -26,37 +28,119 @@ const DropdownNav = () => {
     }
   };
 
+  const getDropdownItems = () => {
+    if (role === "job_seeker") {
+      return [
+        {
+          label: t("jobSeeker.profile"),
+          icon: <UserCircle2Icon />,
+          href: "/job-seeker/profile",
+        },
+        {
+          label: t("jobSeeker.appliedJobs"),
+          icon: <FoldersIcon />,
+          href: "/job-seeker/applied-jobs",
+        },
+        {
+          label: t("jobSeeker.documents"),
+          icon: <FileUserIcon />,
+          href: "/job-seeker/documents",
+        },
+      ];
+    } else if (role === "employer") {
+      return [
+        {
+          label: t("employer.overview"),
+          icon: <LayersIcon />,
+          href: "/employer/overview",
+        },
+        {
+          label: t("employer.jobListing"),
+          icon: <FoldersIcon />,
+          href: "/employer/job_listing",
+        },
+        {
+          label: t("employer.postJob"),
+          icon: <FileUserIcon />,
+          href: "/employer/post_a_job",
+        },
+        {
+          label: t("employer.applicants"),
+          icon: <FileUserIcon />,
+          href: "/employer/applicants",
+        },
+        {
+          label: t("employer.perksBenefits"),
+          icon: <FileUserIcon />,
+          href: "/employer/perks_benefits",
+        },
+        {
+          label: t("employer.profile"),
+          icon: <UserCircle2Icon />,
+          href: "/employer/profile",
+        },
+      ];
+    } else if (role === "admin") {
+      return [
+        {
+          label: t("admin.overview"),
+          icon: <LayersIcon />,
+          href: "/admin/overview",
+        },
+        {
+          label: t("admin.users"),
+          icon: <FileUserIcon />,
+          href: "/admin/users",
+        },
+        {
+          label: t("admin.applicants"),
+          icon: <FileUserIcon />,
+          href: "/admin/applicants",
+        },
+        {
+          label: t("admin.settings"),
+          icon: <UserCircle2Icon />,
+          href: "/admin/settings",
+        },
+      ];
+    } else {
+      return [
+        {
+          label: t("supervisory.overview"),
+          icon: <LayersIcon />,
+          href: "/super-visory/overview",
+        },
+        {
+          label: t("supervisory.applicants"),
+          icon: <FileUserIcon />,
+          href: "/super-visory/applicants",
+        },
+        {
+          label: t("supervisory.profile"),
+          icon: <UserCircle2Icon />,
+          href: "/super-visory/profile",
+        },
+      ];
+    }
+  };
+
+  const items = getDropdownItems();
+
   return (
     <div>
       <div className="d-flex flex-column">
-        {role === "job_seeker" ? (
-          <>
-            {dropdownItems.jobSeeker.map((item, idx) => (
-              <div key={idx}>
-                <DropdownItem className="py-2" as={Link} href={item.href}>
-                  {item.icon}
-                  <span className="ms-2">{item.label}</span>
-                </DropdownItem>
-                <hr style={{ width: "100%", margin: "0" }} />
-              </div>
-            ))}
-          </>
-        ) : (
-          <>
-            {dropdownItems.superVisory.map((item, idx) => (
-              <div key={idx}>
-                <DropdownItem className="py-2" as={Link} href={item.href}>
-                  {item.icon}
-                  <span className="ms-2">{item.label}</span>
-                </DropdownItem>
-                <hr style={{ width: "100%" }} />
-              </div>
-            ))}
-          </>
-        )}
+        {items.map((item, idx) => (
+          <div key={idx}>
+            <DropdownItem className="py-2" as={Link} href={item.href}>
+              {item.icon}
+              <span className="ms-2">{item.label}</span>
+            </DropdownItem>
+            <hr style={{ width: "100%", margin: "0" }} />
+          </div>
+        ))}
         <DropdownItem as={Button} onClick={handleLogout} className="py-2">
           <LogOutIcon className="text-danger" />
-          <span className="ms-2 text-danger">Logout</span>
+          <span className="ms-2 text-danger">{t("logout")}</span>
         </DropdownItem>
       </div>
     </div>
@@ -64,40 +148,3 @@ const DropdownNav = () => {
 };
 
 export default DropdownNav;
-
-const dropdownItems = {
-  jobSeeker: [
-    {
-      label: "Profile",
-      icon: <UserCircle2Icon />,
-      href: "/job-seeker/profile",
-    },
-    {
-      label: "Application",
-      icon: <FoldersIcon />,
-      href: "/job-seeker/applied-jobs",
-    },
-    {
-      label: "Documents",
-      icon: <FileUserIcon />,
-      href: "/job-seeker/documents",
-    },
-  ],
-  superVisory: [
-    {
-      label: "Overview",
-      icon: <LayersIcon />,
-      href: "/super-visory/overview",
-    },
-    {
-      label: "Applicants",
-      icon: <FileUserIcon />,
-      href: "/super-visory/applicants",
-    },
-    {
-      label: "Profile",
-      icon: <UserCircle2Icon />,
-      href: "/super-visory/profile",
-    },
-  ],
-};

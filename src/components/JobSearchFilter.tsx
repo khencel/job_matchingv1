@@ -1,4 +1,9 @@
+"use client";
+import { useTranslations } from "next-intl";
+
 export default function JobSearchFiler() {
+  const t = useTranslations("jobSearchFilter");
+  
   return (
     <>
       <div className="job-search-filter d-flex justify-content-center p-3" style={{marginTop:"6%"}}>
@@ -12,7 +17,7 @@ export default function JobSearchFiler() {
                 <input
                   type="text"
                   className="form-control job-type"
-                  placeholder="Job Type"
+                  placeholder={t("placeholders.jobType")}
                 />
               </div>
             </div>
@@ -24,19 +29,19 @@ export default function JobSearchFiler() {
                 </span>
                 <select className="form-select" defaultValue="">
                   <option value="" disabled hidden>
-                    Select Region
+                    {t("labels.region")}
                   </option>
-                  <option value="test1">test1</option>
-                  <option value="test2">test2</option>
-                  <option value="test3">test3</option>
-                  <option value="test4">test4</option>
+                  <option value="test1">{t("regions.test1")}</option>
+                  <option value="test2">{t("regions.test2")}</option>
+                  <option value="test3">{t("regions.test3")}</option>
+                  <option value="test4">{t("regions.test4")}</option>
                 </select>
               </div>
             </div>
 
             <div className="col-md-2">
               <button className="btn btn-primary-custom w-100 rounded-4">
-                Search
+                {t("buttons.explore")}
               </button>
             </div>
           </div>
