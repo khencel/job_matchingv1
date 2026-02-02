@@ -2,7 +2,6 @@
 import {
   File,
   FileUserIcon,
-  FolderHeartIcon,
   FoldersIcon,
   MenuIcon,
   UserCircle,
@@ -25,7 +24,6 @@ export default function JobSeekerLayout({
     if (pathname.includes("/job-seeker/profile")) return "job-seeker-profile";
     if (pathname.includes("/applied-jobs")) return "applied-jobs";
     if (pathname.includes("/documents")) return "documents";
-    if (pathname.includes("/saved-jobs")) return "saved-jobs";
   };
 
   const handleCollapse = () => {
@@ -65,16 +63,6 @@ export default function JobSeekerLayout({
                 href="/job-seeker/applied-jobs"
               >
                 <FoldersIcon /> {!isCollapsed && <span>Applied Jobs</span>}
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                eventKey="saved-jobs"
-                className="sidebar-text"
-                href="/job-seeker/saved-jobs"
-              >
-                <FolderHeartIcon /> {!isCollapsed && <span>Saved Jobs</span>}
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>

@@ -41,7 +41,7 @@ const JobCard = ({ job, onClick, className }: JobCardProps) => {
     cardClasses.push(className);
   }
   console.log(job);
-  
+
   return (
     <article
       className={cardClasses.join(" ")}
@@ -49,15 +49,14 @@ const JobCard = ({ job, onClick, className }: JobCardProps) => {
       role={onClick ? "button" : undefined}
       tabIndex={onClick ? 0 : undefined}
     >
-      <img 
-          src={`http://127.0.0.1:8000/media/${job?.employer?.[0]?.avatar}`} 
-          className="card-img-top" 
-          alt="Person working on laptop"
-          style={{ height: '250px', objectFit: 'cover' }}
+      <img
+        src={`http://127.0.0.1:8000/media/user_${job?.user_id}/avatar.${[0]}`}
+        className="card-img-top"
+        alt="Person working on laptop"
+        style={{ height: "250px", objectFit: "cover" }}
       />
       <div className="card-body d-flex flex-column gap-3">
         <div className="d-flex flex-column gap-1">
-          
           <h2 className="h5 fw-semibold mb-0 text-truncate" title={job.title}>
             {job.title}
           </h2>
@@ -81,10 +80,9 @@ const JobCard = ({ job, onClick, className }: JobCardProps) => {
           className="text-muted mb-0 clamp-3 text-truncate"
           title={job.job_desc}
           dangerouslySetInnerHTML={{
-              __html: job.job_desc || "No description provided.",
+            __html: job.job_desc || "No description provided.",
           }}
         />
-        
       </div>
     </article>
   );

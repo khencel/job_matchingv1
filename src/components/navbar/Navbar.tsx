@@ -4,10 +4,8 @@ import React, { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppSelector } from "@/redux/hooks";
 import { Dropdown } from "react-bootstrap";
-import { showSuccessToast } from "@/app/(util)/toaster";
-import { logoutUser } from "@/redux/features/auth/auth_thunk";
 import DropdownNav from "@/components/navbar/DropdownNav";
 
 // Function to generate a color based on name
@@ -47,7 +45,6 @@ export default function Navbar() {
   const t = useTranslations("navbar");
 
   const router = useRouter();
-  const dispatch = useAppDispatch();
   const user = useAppSelector((s) => s.authState.user);
 
   const setLocale = useCallback(
@@ -62,16 +59,6 @@ export default function Navbar() {
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setLocale(e.target.value as "en" | "ja");
-  };
-
-  const handleLogout = () => {
-    try {
-      dispatch(logoutUser());
-    } catch (error) {
-      console.log("Force logout due to error:", error);
-      return;
-    }
-    showSuccessToast("Logout Successfully", "");
   };
 
   return (
@@ -104,24 +91,24 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link me-3" href="/#job_support_features">
+              <Link className="nav-link me-3" href="/#job_support_features">
                 Job Support Features
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link me-3" href="/#about_us">
+              <Link className="nav-link me-3" href="/#about_us">
                 About Us
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link me-3" href="/#q_and_a">
+              <Link className="nav-link me-3" href="/#q_and_a">
                 Q&A
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link me-3" href="/#contact_us">
+              <Link className="nav-link me-3" href="/#contact_us">
                 Contacts
-              </a>
+              </Link>
             </li>
             {user ? (
               <Dropdown>
@@ -147,7 +134,7 @@ export default function Navbar() {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <DropdownNav handleLogout={handleLogout} />
+                  <DropdownNav />
                 </Dropdown.Menu>
               </Dropdown>
             ) : (

@@ -19,7 +19,7 @@ import {
 } from "./jobServices";
 
 // Thunk to get job postings
-export const fetchJobPostings = createAsyncThunk<JobPosting>(
+export const fetchJobPostings = createAsyncThunk<JobPosting[]>(
   "applyJob/getJobPostings",
   async (_, { rejectWithValue }) => {
     try {

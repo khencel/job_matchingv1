@@ -19,6 +19,12 @@ const emptyLicense = { year: "", month: "", qualification: "" };
 
 const ResumeForm = () => {
   const dispatch = useAppDispatch();
+  const user = useAppSelector(
+    (s) => s.authState.user?.userDetails_job_seeker.jobSeekerData,
+  );
+  const userEmail = useAppSelector(
+    (s) => s.authState.user?.userDetails_job_seeker.accountInfo.email,
+  );
   const resumeData = useAppSelector((state) => state.resumeBuilder.data);
 
   const [preferenceInput, setPreferenceInput] = useState("");
@@ -78,15 +84,31 @@ const ResumeForm = () => {
     [],
   );
 
-  // 2. NEW: Trigger Validation on Mount
   useEffect(() => {
+    //  Prepare the data from User Auth
+    const incomingData = {
+      fullName: `${user.firstName.trim()} ${user.lastName.trim()}`,
+      email: userEmail,
+      phone: user.contactNo,
+      birthdate: user.birthdate,
+      address: user.currentPlaceResidence,
+    };
+
+    // Dispatch to Redux
+    dispatchUpdate(incomingData);
+
+    // (Merge existing Redux data with the new incoming data)
+    const nextState = { ...resumeData, ...incomingData };
+
+    // Validate this "Next State" immediately
     const initialErrors: Record<string, string> = {};
 
-    // Loop through all rules and check current Redux data
     Object.keys(validationRules).forEach((key) => {
-      // Get value from resumeData (safely cast to string for validation)
       const fieldKey = key as keyof ResumeData;
-      const rawValue = resumeData[fieldKey];
+
+      // We look at 'nextState' (the future), not 'resumeData' (the past)
+      const rawValue = nextState[fieldKey];
+
       const stringValue =
         rawValue === undefined || rawValue === null ? "" : String(rawValue);
 
@@ -96,7 +118,7 @@ const ResumeForm = () => {
       }
     });
 
-    // Set all errors at once
+    // 5. Set the errors
     setErrors(initialErrors);
 
     // Dependencies: empty array [] ensures this runs ONLY on mount
@@ -126,7 +148,6 @@ const ResumeForm = () => {
     dispatchUpdate({ [field]: parsedValue } as Partial<ResumeData>);
   };
 
-  // ... (Rest of your component functions: handleOtherContactChange, etc. remain the same) ...
   const handleOtherContactChange = (
     key: keyof NonNullable<ResumeData["otherContact"]>,
     value: string,
@@ -287,7 +308,7 @@ const ResumeForm = () => {
               <Form.Label>Name Phonetic</Form.Label>
               <Form.Control
                 name="namePhonetic"
-                value={resumeData.namePhonetic}
+                value={resumeData.namePhonetic || ""}
                 onChange={handleInputChange}
                 placeholder="e.g. ジェーンドウ"
               />
@@ -299,7 +320,7 @@ const ResumeForm = () => {
                   <Form.Control
                     type="date"
                     name="birthdate"
-                    value={resumeData.birthdate}
+                    value={resumeData.birthdate || ""}
                     onChange={handleInputChange}
                     isInvalid={Boolean(errors.birthdate)}
                   />
@@ -315,7 +336,7 @@ const ResumeForm = () => {
                     type="number"
                     name="age"
                     min={0}
-                    value={resumeData.age || 0}
+                    value={resumeData.age ?? 0}
                     onChange={handleInputChange}
                     isInvalid={Boolean(errors.age)}
                   />
@@ -331,7 +352,7 @@ const ResumeForm = () => {
                   <Form.Label>Gender</Form.Label>
                   <Form.Select
                     name="gender"
-                    value={resumeData.gender}
+                    value={resumeData.gender || ""}
                     onChange={handleInputChange}
                     isInvalid={Boolean(errors.gender)}
                   >
@@ -454,7 +475,7 @@ const ResumeForm = () => {
               <Form.Label>Address Phonetic</Form.Label>
               <Form.Control
                 name="addressPhonetic"
-                value={resumeData.addressPhonetic}
+                value={resumeData.addressPhonetic || ""}
                 onChange={handleInputChange}
               />
             </Form.Group>
@@ -464,7 +485,7 @@ const ResumeForm = () => {
                   <Form.Label>Postal Code</Form.Label>
                   <Form.Control
                     name="postalCode"
-                    value={resumeData.postalCode}
+                    value={resumeData.postalCode || ""}
                     onChange={handleInputChange}
                     placeholder="123-4567"
                     isInvalid={Boolean(errors.postalCode)}
@@ -780,7 +801,7 @@ const ResumeForm = () => {
                 as="textarea"
                 rows={3}
                 name="reasons"
-                value={resumeData.reasons}
+                value={resumeData.reasons || ""}
                 onChange={handleInputChange}
                 placeholder="Share your motivation or key points"
                 isInvalid={Boolean(errors.reasons)}

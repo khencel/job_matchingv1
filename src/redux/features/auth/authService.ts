@@ -17,8 +17,8 @@ export function verifyToken(token: string) {
   return apiClient.post("/auth/token/verify", { token });
 }
 // API call for logout
-export function logoutApi(token: string) {
-  return apiClient.post("/auth/logout", { token });
+export function logoutApi(formData: FormData) {
+  return apiClient.post("/auth/logout", formData);
 }
 // API call for fetching current user
 export function getCurrentUserApi() {
