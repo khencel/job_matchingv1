@@ -1,4 +1,5 @@
 "use client"
+import { useTranslations } from "next-intl";
 import Header from "../headerPostAJob"
 import MultiSelectDropdown from "@/components/MultipleSelect"
 import { useState, useEffect } from "react"
@@ -11,6 +12,7 @@ import Cookies from "js-cookie";
 
 
 export default function PostAJob(){
+    const t = useTranslations("postAJob");
     const [mounted, setMounted] = useState(false);
     const [input, setInput] = useState<string>("")
     const router = useRouter();
@@ -31,11 +33,11 @@ export default function PostAJob(){
         const title = basicInfo.title.trim();
         const employmentTypes = basicInfo.type_of_emp;
         if(!title){
-            showErrorToast("Job title is required."," Please provide a job title to proceed.");
+            showErrorToast(t("jobTitle"), t("requiredField"));
             return;
         }
         if(employmentTypes.length === 0){
-            showErrorToast("Employment type is required."," Please select at least one employment type to proceed.");
+            showErrorToast(t("employmentType"), t("requiredField"));
             return;
         }
 

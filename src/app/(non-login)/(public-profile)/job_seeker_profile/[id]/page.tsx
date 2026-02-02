@@ -1,9 +1,11 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation"; // <--- Hook to get ID from URL
 import axios from "axios";
 
 export default function PublicJobSeekerPage() {
+  const t = useTranslations("jobSeekerProfile");
   // Get the ID from the URL(e.g. / user_job_seeker / 1 -> id="1")
   const params = useParams();
   const userId = params?.id as string;
@@ -23,7 +25,7 @@ export default function PublicJobSeekerPage() {
         const response = await axios.get(`/api/profile/${userId}`);
         setProfile(response.data);
       } catch (err: any) {
-        setError(err.response?.data?.message || "Failed to load profile");
+        setError(err.response?.data?.message || t("failedToLoad"));
       } finally {
         setLoading(false);
       }

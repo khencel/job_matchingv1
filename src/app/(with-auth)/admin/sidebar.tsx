@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   FaUsers,
   FaEnvelope,
@@ -19,14 +20,15 @@ import { FaFileMedical } from "react-icons/fa6";
 
 
 const Sidebar = ({ children }: PropsWithChildren) => {
+  const t = useTranslations("sidebar");
   const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
   const menuItems = [
-    {label: "Overviews", icon:FiLayers, href: "/admin/overview"},
-    { label: "User Management", icon: FaUser, href: "/admin/users" },
+    {label: t("overview"), icon:FiLayers, href: "/admin/overview"},
+    { label: t("userManagement"), icon: FaUser, href: "/admin/users" },
     // { label: "Employer List", icon: FaClipboardList, href: "/admin/applicants" },
-    { label: "Applicants", icon: FaPlus, href: "/admin/applicants" },
-    { label: "Settings", icon: FaBuilding, href: "/admin/job_listing" },
+    { label: t("applicants"), icon: FaPlus, href: "/admin/applicants" },
+    { label: t("settings"), icon: FaBuilding, href: "/admin/job_listing" },
   ];
 
   return (

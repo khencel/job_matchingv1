@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { setField } from "@/redux/slices/employer/post_a_job/basicInfoSlice";
 import Header from "../headerPostAJob"
 import TextEditor from "./TextEditor";
@@ -9,6 +10,7 @@ import { setInitialData } from "@/redux/slices/employer/post_a_job/basicInfoSlic
 import { useRouter } from "next/navigation";
 
 export default function JobDescription(){
+    const t = useTranslations("postAJob");
 
     const basicInfo = useSelector((state: RootState) => state.basicInfo);
     const dispatch = useDispatch();
@@ -22,7 +24,7 @@ export default function JobDescription(){
         <>
             <Header/>
             <div className="emp-component-style mt-2">
-                <strong>Details</strong>
+                <strong>{t("jobDetails")}</strong>
                 <br />
                 <small>Add the description of the job, responsibilities. who you are and nice-to-have</small>
                 <hr />

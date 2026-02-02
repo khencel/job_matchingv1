@@ -1,0 +1,13 @@
+{
+  "postAJob": "求人を投稿する",
+  "jobInformation": "求人情報",
+  "jobDetails": "職務内容",
+  "jobTitle": "職務名",
+  "employmentType": "雇用形態",
+  "selectEmploymentType": "雇用形態を選択",
+  "requiredField": "このフィールドは必須です",
+  "next": "次へ",
+  "back": "戻る",
+  "cancel": "キャンセル",
+  "save": "保存"
+}

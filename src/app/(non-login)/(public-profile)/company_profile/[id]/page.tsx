@@ -9,8 +9,10 @@ import { getPublicProfile } from "@/redux/slices/publicProfileSlice";
 import Image from "next/image";
 import { fetchJobPostById } from "@/redux/slices/jobs/jobsThunk";
 import JobCard from "@/components/JobCard";
+import { useTranslations } from "next-intl";
 
 const CompanyProfilePage = () => {
+  const t = useTranslations("companyProfile");
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -52,12 +54,12 @@ const CompanyProfilePage = () => {
   const hasAvatar = Boolean(user?.avatar);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>{t("loading")}</div>;
   }
 
   if (!user || !company_information || !contact_person) {
     return (
-      <div className="text-center">No company profile data available.</div>
+      <div className="text-center">{t("noDataAvailable")}</div>
     );
   }
 
@@ -69,7 +71,7 @@ const CompanyProfilePage = () => {
             {user.banner && (
               <Image
                 src={user.banner}
-                alt="Company Banner"
+                alt={t("bannerAlt")}
                 fill
                 objectFit="cover"
                 className="banner-image"
@@ -85,7 +87,7 @@ const CompanyProfilePage = () => {
                 ) : (
                   <Image
                     src={user.avatar}
-                    alt="Company Avatar"
+                    alt={t("avatarAlt")}
                     fill
                     objectFit="cover"
                     className="avatar-image"
@@ -102,8 +104,8 @@ const CompanyProfilePage = () => {
             <Row className="mt-5">
               <Col lg={8} md={12} className="mb-4 mb-lg-0">
                 <div className="mb-4">
-                  <p className="section-label">Company Overview</p>
-                  <h2 className="section-title">About this company</h2>
+                  <p className="section-label">{t("sections.overview")}</p>
+                  <h2 className="section-title">{t("sections.aboutThisCompany")}</h2>
                   <p className="section-description">
                     {company_information.profile}
                   </p>
@@ -113,7 +115,7 @@ const CompanyProfilePage = () => {
                   <Col md={6} className="mb-3 mb-md-0">
                     <Card className="info-card">
                       <Card.Body>
-                        <p className="info-card-label">Founded</p>
+                        <p className="info-card-label">{t("infoLabels.founded")}</p>
                         <p className="info-card-value">
                           {company_information.founded}
                         </p>
@@ -123,7 +125,7 @@ const CompanyProfilePage = () => {
                   <Col md={6} className="mb-3 mb-md-0">
                     <Card className="info-card">
                       <Card.Body>
-                        <p className="info-card-label">Employees</p>
+                        <p className="info-card-label">{t("infoLabels.employees")}</p>
                         <p className="info-card-value">
                           {company_information.no_of_emp}
                         </p>
@@ -136,7 +138,7 @@ const CompanyProfilePage = () => {
                   <Col md={6} className="mb-3 mb-md-0">
                     <Card className="info-card">
                       <Card.Body>
-                        <p className="info-card-label">Phone</p>
+                        <p className="info-card-label">{t("infoLabels.phone")}</p>
                         <p className="info-card-value">
                           {company_information.phone}
                         </p>
@@ -146,7 +148,7 @@ const CompanyProfilePage = () => {
                   <Col md={6}>
                     <Card className="info-card">
                       <Card.Body>
-                        <p className="info-card-label">Fee</p>
+                        <p className="info-card-label">{t("infoLabels.fee")}</p>
                         <p className="info-card-value">
                           {company_information.fee}
                         </p>
@@ -157,7 +159,7 @@ const CompanyProfilePage = () => {
 
                 <Card className="detail-card">
                   <Card.Body>
-                    <h3 className="subsection-title">Appeal point</h3>
+                    <h3 className="subsection-title">{t("infoLabels.appealPoint")}</h3>
                     <p
                       style={{ fontSize: "14px", color: "#475569", margin: 0 }}
                     >
@@ -168,7 +170,7 @@ const CompanyProfilePage = () => {
 
                 <Card className="detail-card">
                   <Card.Body>
-                    <h3 className="subsection-title">Company Address</h3>
+                    <h3 className="subsection-title">{t("infoLabels.companyAddress")}</h3>
                     <p
                       style={{ fontSize: "14px", color: "#475569", margin: 0 }}
                     >
@@ -181,23 +183,23 @@ const CompanyProfilePage = () => {
               <Col lg={4}>
                 <Card className="detail-card">
                   <Card.Body>
-                    <h3 className="detail-card-title">Contact person</h3>
+                    <h3 className="detail-card-title">{t("infoLabels.contactPerson")}</h3>
                     <div className="detail-row">
-                      <p className="detail-label">Name</p>
+                      <p className="detail-label">{t("infoLabels.name")}</p>
                       <p className="detail-value name">{contact_person.name}</p>
                     </div>
                     <div className="detail-row">
-                      <p className="detail-label">Department</p>
+                      <p className="detail-label">{t("infoLabels.department")}</p>
                       <p className="detail-value">
                         {contact_person.department_name}
                       </p>
                     </div>
                     <div className="detail-row">
-                      <p className="detail-label">Email</p>
+                      <p className="detail-label">{t("infoLabels.email")}</p>
                       <p className="detail-value">{contact_person.email}</p>
                     </div>
                     <div className="detail-row">
-                      <p className="detail-label">Phone</p>
+                      <p className="detail-label">{t("infoLabels.phone")}</p>
                       <p className="detail-value">{contact_person.phone}</p>
                     </div>
                   </Card.Body>
@@ -205,7 +207,7 @@ const CompanyProfilePage = () => {
 
                 <Card className="detail-card">
                   <Card.Body>
-                    <h3 className="detail-card-title">Company industry</h3>
+                    <h3 className="detail-card-title">{t("infoLabels.companyIndustry")}</h3>
                     <div className="industry-container">
                       {company_information.company_industry.map(
                         (industry: string) => (
@@ -226,7 +228,7 @@ const CompanyProfilePage = () => {
 
                 <Card className="detail-card">
                   <Card.Body>
-                    <h3 className="detail-card-title">Branch offices</h3>
+                    <h3 className="detail-card-title">{t("infoLabels.branchOffices")}</h3>
                     <ul className="branch-list">
                       {company_information.branch_office.map(
                         (branch: string) => (
@@ -241,9 +243,9 @@ const CompanyProfilePage = () => {
 
                 <Card className="perks-card">
                   <Card.Body>
-                    <h3 className="detail-card-title">Perks & benefits</h3>
+                    <h3 className="detail-card-title">{t("infoLabels.perksAndBenefits")}</h3>
                     {!user.perks_benefits ? (
-                      <p className="perks-empty-message">No perks added yet.</p>
+                      <p className="perks-empty-message">{t("empty.noPerks")}</p>
                     ) : (
                       <ul className="branch-list">
                         {user.perks_benefits.map((perk) => (
@@ -264,14 +266,14 @@ const CompanyProfilePage = () => {
           <Card.Body className="p-5">
             <Row className="jobs-header">
               <Col md={8}>
-                <p className="section-label">Posted jobs</p>
-                <h2 className="section-title">Job listings</h2>
+                <p className="section-label">{t("sections.postedJobs")}</p>
+                <h2 className="section-title">{t("sections.jobListings")}</h2>
               </Col>
             </Row>
             <Row>
               <Col className="text-md-end">
                 <Badge pill className="px-3 py-2 mb-2">
-                  Total jobs: {jobs.length}
+                  {t("jobsBadge")} {jobs.length}
                 </Badge>
               </Col>
             </Row>
@@ -293,9 +295,9 @@ const CompanyProfilePage = () => {
               </Row>
             ) : (
               <div className="jobs-placeholder">
-                <p className="jobs-placeholder-title">No jobs listed yet.</p>
+                <p className="jobs-placeholder-title">{t("empty.noJobs")}</p>
                 <p className="jobs-placeholder-subtitle">
-                  Your posted jobs will appear here once created.
+                  {t("empty.noJobsSubtitle")}
                 </p>
               </div>
             )}

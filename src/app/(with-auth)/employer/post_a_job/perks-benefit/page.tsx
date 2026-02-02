@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Header from "../headerPostAJob"
 import type {RootState} from '@/redux/store'
 import { useSelector, useDispatch } from "react-redux"  
@@ -14,6 +15,7 @@ import { useRouter } from "next/navigation";
 
 
 export default function PerksBenefitPage() {
+  const t = useTranslations("postAJob");
   const basicInfo = useSelector((state: RootState) => state.basicInfo);
   const benefits = useSelector((state:RootState) => state.basicInfo.benefits)
   const dispatch = useDispatch<AppDispatch>();

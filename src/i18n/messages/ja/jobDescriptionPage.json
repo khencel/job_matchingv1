@@ -22,5 +22,9 @@
     "jobPostedOn": "投稿日",
     "jobType": "仕事の種類",
     "salary": "給料"
-  }
+  },
+  "jobNotFound": "求人が見つかりません。",
+  "visitProfile": "プロフィールを訪問",
+  "applied": "応募済み",
+  "moreJobs": "その他の求人"
 }

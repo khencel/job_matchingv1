@@ -22,5 +22,9 @@
     "jobPostedOn": "Job Posted on",
     "jobType": "Job Type",
     "salary": "Salary"
-  }
+  },
+  "jobNotFound": "Job not found.",
+  "visitProfile": "Visit Profile",
+  "applied": "Applied",
+  "moreJobs": "More Jobs"
 }

@@ -47,6 +47,27 @@ import about from "./about.json";
 import jobCard from "./jobCard.json";
 import filterJobs from "./filterJobs.json";
 import dropdownNav from "./dropdownNav.json";
+import companyProfile from "./companyProfile.json";
+import sidebar from "./sidebar.json";
+import chart from "./chart.json";
+import findJobs from "./findJobs.json";
+import recentActivity from "./recentActivity.json";
+import mainPage from "./mainPage.json";
+import registerPage from "./registerPage.json";
+import jobList from "./jobList.json";
+import postAJob from "./postAJob.json";
+import adminOverview from "./adminOverview.json";
+import jobSeekerProfile from "./jobSeekerProfile.json";
+import supervisoryOverview from "./supervisoryOverview.json";
+import supervisoryApplicants from "./supervisoryApplicants.json";
+import filterModal from "./filterModal.json";
+import viewEmployer from "./viewEmployer.json";
+import viewApplicant from "./viewApplicant.json";
+import headerPostAJob from "./headerPostAJob.json";
+import addSkill from "./addSkill.json";
+import textEditor from "./textEditor.json";
+import perksModal from "./perksModal.json";
+import editModal from "./editModal.json";
 
 export default {
   navbar,
@@ -98,4 +119,25 @@ export default {
   jobCard,
   filterJobs,
   dropdownNav,
+  companyProfile,
+  sidebar,
+  chart,
+  findJobs,
+  recentActivity,
+  mainPage,
+  registerPage,
+  jobList,
+  postAJob,
+  adminOverview,
+  jobSeekerProfile,
+  supervisoryOverview,
+  supervisoryApplicants,
+  filterModal,
+  viewEmployer,
+  viewApplicant,
+  headerPostAJob,
+  addSkill,
+  textEditor,
+  perksModal,
+  editModal,
 };

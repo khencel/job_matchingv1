@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Banner from "../../components/Banner";
 import Footer from "../../components/Footer";
 import JobPost from "../../components/JobPost";
@@ -17,6 +18,7 @@ import ContactUs from "./contactUs";
 
 
 export default function HomePage() {
+  const t = useTranslations("mainPage");
   const [hasAccess, setHasAccess] = useState(false);
 
   useEffect(() => {

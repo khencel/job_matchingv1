@@ -61,7 +61,7 @@ const JobDescriptionPage = () => {
   }
   // Empty/Not Found State
   if (!jobDetails) {
-    return <Container className="py-5 text-center">Job not found.</Container>;
+    return <Container className="py-5 text-center">{t("jobNotFound")}</Container>;
   }
 
   const handleClickApply = () => {
@@ -137,7 +137,7 @@ const JobDescriptionPage = () => {
               variant="outline-secondary"
               className="rounded-pill py-1"
             >
-              Visit Profile
+              {t("visitProfile")}
             </Button>
             <div
               style={{ borderRight: "1px solid #ccc", height: "36px" }}
@@ -157,7 +157,7 @@ const JobDescriptionPage = () => {
                   aria-hidden="true"
                 />
               ) : isApplied ? (
-                "Applied"
+                t("applied")
               ) : (
                 t("buttons.apply")
               )}
@@ -272,7 +272,7 @@ const JobDescriptionPage = () => {
         </>
       )}
       <hr />
-      <h3 className="fw-semibold text-dark ms-5 mt-5">More Jobs</h3>
+      <h3 className="fw-semibold text-dark ms-5 mt-5">{t("moreJobs")}</h3>
       <JobPost />
       <Footer />
     </div>

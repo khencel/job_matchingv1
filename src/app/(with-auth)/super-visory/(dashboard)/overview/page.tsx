@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import {
   Card,
   Col,
@@ -9,13 +10,14 @@ import {
 } from "react-bootstrap";
 
 export default function SuperVisoryOverviewPage() {
+  const t = useTranslations("supervisoryOverview");
   return (
     <Container fluid className="p-5">
       <Row>
         <Col md={3}>
           <Card className="text-white bg-primary bg-gradient border-0 shadow-md">
             <CardBody>
-              <CardTitle className="fs-6 mb-4">Total Trainees</CardTitle>
+              <CardTitle className="fs-6 mb-4">{t("totalTrainees")}</CardTitle>
               <CardSubtitle className="fs-1 fw-bolder">1000</CardSubtitle>
             </CardBody>
           </Card>
@@ -23,7 +25,7 @@ export default function SuperVisoryOverviewPage() {
         <Col md={3}>
           <Card className="text-white bg-primary bg-gradient border-0 shadow-md">
             <CardBody>
-              <CardTitle className="fs-6 mb-4">Pending Trainees</CardTitle>
+              <CardTitle className="fs-6 mb-4">{t("pendingTrainees")}</CardTitle>
               <CardSubtitle className="fs-1 fw-bolder">1000</CardSubtitle>
             </CardBody>
           </Card>

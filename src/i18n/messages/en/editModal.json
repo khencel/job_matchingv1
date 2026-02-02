@@ -1,0 +1,10 @@
+{
+  "editModal": "Edit Profile",
+  "companyName": "Company Name",
+  "description": "Description",
+  "phone": "Phone",
+  "email": "Email",
+  "address": "Address",
+  "save": "Save",
+  "cancel": "Cancel"
+}

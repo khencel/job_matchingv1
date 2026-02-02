@@ -1,0 +1,34 @@
+{
+  "loading": "読み込み中...",
+  "noDataAvailable": "利用可能な企業プロフィール データはありません。",
+  "bannerAlt": "企業バナー",
+  "avatarAlt": "企業アバター",
+  "sections": {
+    "overview": "企業概要",
+    "aboutThisCompany": "この企業について",
+    "postedJobs": "投稿された求人",
+    "jobListings": "求人一覧"
+  },
+  "infoLabels": {
+    "founded": "設立",
+    "employees": "従業員数",
+    "phone": "電話",
+    "fee": "手数料",
+    "appealPoint": "アピールポイント",
+    "companyAddress": "企業住所",
+    "contactPerson": "連絡先担当者",
+    "name": "名前",
+    "department": "部門",
+    "email": "メール",
+    "companyIndustry": "業種",
+    "branchOffices": "支店",
+    "perksAndBenefits": "福利厚生"
+  },
+  "empty": {
+    "noPerks": "福利厚生がまだ追加されていません。",
+    "noJobs": "まだ求人が掲載されていません。",
+    "noJobsSubtitle": "投稿された求人はここに表示されます。"
+  },
+  "jobsBadge": "求人総数:",
+  "visitProfile": "プロフィールを訪問"
+}

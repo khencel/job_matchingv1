@@ -1,0 +1,11 @@
+{
+  "viewApplicant": "申請者を表示",
+  "applicantName": "申請者名",
+  "email": "メール",
+  "phone": "電話",
+  "appliedDate": "応募日",
+  "status": "ステータス",
+  "resume": "履歴書",
+  "back": "戻る",
+  "close": "閉じる"
+}

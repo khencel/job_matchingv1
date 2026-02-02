@@ -1,8 +1,10 @@
+import { useTranslations } from "next-intl";
 import JobSearchFiler from "@/components/JobSearchFilter"
 import Filter from "./filter"
 import Card from "./card"
 
 export default function JobListing(){
+    const t = useTranslations("jobList");
     return (
         <div>
             <JobSearchFiler/>

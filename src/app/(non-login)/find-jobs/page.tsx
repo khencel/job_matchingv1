@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 import FilterJobs from "@/components/FilterJobs";
 import JobCard from "@/components/JobCard";
 import JobSearchFiler from "@/components/JobSearchFilter";
@@ -10,6 +11,7 @@ import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
 const FindJobPage = () => {
+  const t = useTranslations("findJobs");
   const router = useRouter();
   const [jobsLists, setJobsLists] = useState<JobPosting[]>([]);
 

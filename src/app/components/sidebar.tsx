@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   FaUsers,
   FaEnvelope,
@@ -19,17 +20,18 @@ import { FaFileMedical } from "react-icons/fa6";
 
 
 const Sidebar = ({ children }: PropsWithChildren) => {
+  const t = useTranslations("sidebar");
   const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
   const menuItems = [
-    {label: "Overview", icon:FiLayers, href: "/employer/overview"},
-    { label: "Employers Profile", icon: FaUser, href: "/employer/profile" },
-    { label: "Applicants", icon: FaClipboardList, href: "/employer/applicants" },
-    { label: "Post Job", icon: FaPlus, href: "/employer/post_a_job/job-information" },
-    { label: "Job Listings", icon: FaBuilding, href: "/employer/job_listing" },
+    {label: t("overview"), icon:FiLayers, href: "/employer/overview"},
+    { label: t("employersProfile"), icon: FaUser, href: "/employer/profile" },
+    { label: t("applicants"), icon: FaClipboardList, href: "/employer/applicants" },
+    { label: t("postJob"), icon: FaPlus, href: "/employer/post_a_job/job-information" },
+    { label: t("jobListings"), icon: FaBuilding, href: "/employer/job_listing" },
     // { label: "All Companies", icon: FaUsers, href: "/employer/companies" },
     // { label: "Messages", icon: FaEnvelope, href: "/employer/messages" },
-    { label: "Perks & Benefits", icon: FaFileMedical , href: "/employer/perks_benefits" },
+    { label: t("perksAndBenefits"), icon: FaFileMedical , href: "/employer/perks_benefits" },
     // { label: "Settings", icon: FaCog, href: "/employer/settings" },
   ];
 

@@ -1,0 +1,13 @@
+{
+  "postAJob": "Post A Job",
+  "jobInformation": "Job Information",
+  "jobDetails": "Job Details",
+  "jobTitle": "Job Title",
+  "employmentType": "Employment Type",
+  "selectEmploymentType": "Select employment type",
+  "requiredField": "This field is required",
+  "next": "Next",
+  "back": "Back",
+  "cancel": "Cancel",
+  "save": "Save"
+}

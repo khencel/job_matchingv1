@@ -1,0 +1,34 @@
+{
+  "loading": "Loading...",
+  "noDataAvailable": "No company profile data available.",
+  "bannerAlt": "Company Banner",
+  "avatarAlt": "Company Avatar",
+  "sections": {
+    "overview": "Company Overview",
+    "aboutThisCompany": "About this company",
+    "postedJobs": "Posted jobs",
+    "jobListings": "Job listings"
+  },
+  "infoLabels": {
+    "founded": "Founded",
+    "employees": "Employees",
+    "phone": "Phone",
+    "fee": "Fee",
+    "appealPoint": "Appeal point",
+    "companyAddress": "Company Address",
+    "contactPerson": "Contact person",
+    "name": "Name",
+    "department": "Department",
+    "email": "Email",
+    "companyIndustry": "Company industry",
+    "branchOffices": "Branch offices",
+    "perksAndBenefits": "Perks & benefits"
+  },
+  "empty": {
+    "noPerks": "No perks added yet.",
+    "noJobs": "No jobs listed yet.",
+    "noJobsSubtitle": "Your posted jobs will appear here once created."
+  },
+  "jobsBadge": "Total jobs:",
+  "visitProfile": "Visit Profile"
+}

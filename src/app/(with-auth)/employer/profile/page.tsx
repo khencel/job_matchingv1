@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl";
 import Header from "./header"
 import Body from "./body"
 import PerksBenefits from "./perks_benefits"
@@ -14,6 +15,7 @@ import Cookies from "js-cookie"
 
 
 export default function Profile(){
+    const t = useTranslations("employerProfile");
     const dispatch = useAppDispatch()
     const {profile,status,error} = useSelector((state:RootState) => state.profileSlice)
     

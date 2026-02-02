@@ -1,18 +1,20 @@
+import { useTranslations } from "next-intl";
 import { BiArrowBack } from "react-icons/bi";
 import { HiDotsHorizontal } from "react-icons/hi";
 
 export default function SuperVisoryApplicantsPage() {
+    const t = useTranslations("supervisoryApplicants");
     return (
         <>
             <div className="row standar-div">
                 <div className="col">
-                    <h5><strong><BiArrowBack /> Applicants</strong></h5>
+                    <h5><strong><BiArrowBack /> {t("applicants")}</strong></h5>
                 </div>
             </div>
 
             <div className="row standar-div mt-2">
                 <div className="col">
-                    <h4 className="text-primary text-center"><span><strong>Total Applicants: {2}</strong></span></h4>
+                    <h4 className="text-primary text-center"><span><strong>{t("totalApplicants")}: {2}</strong></span></h4>
                 </div>
             </div>
             <div className="row standar-div">
@@ -21,11 +23,11 @@ export default function SuperVisoryApplicantsPage() {
                             <table className="table">
                                 <thead>
                                     <tr>
-                                        <th>Full Name</th>
-                                        <th>Hiring Stage</th>
-                                        <th>Applied Date</th>
-                                        <th>Job Role</th>
-                                        <th>Action</th>
+                                        <th>{t("fullName")}</th>
+                                        <th>{t("hiringStage")}</th>
+                                        <th>{t("appliedDate")}</th>
+                                        <th>{t("jobRole")}</th>
+                                        <th>{t("action")}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

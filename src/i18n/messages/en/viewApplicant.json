@@ -1,0 +1,11 @@
+{
+  "viewApplicant": "View Applicant",
+  "applicantName": "Applicant Name",
+  "email": "Email",
+  "phone": "Phone",
+  "appliedDate": "Applied Date",
+  "status": "Status",
+  "resume": "Resume",
+  "back": "Back",
+  "close": "Close"
+}
