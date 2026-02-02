@@ -54,7 +54,7 @@ export default function JobSeekerLayout({
                 className="sidebar-text"
                 href="/job-seeker/profile"
               >
-                <UserCircle /> {!isCollapsed && <span>{t("profile")}</span>}
+                <UserCircle /> {!isCollapsed && <span>{t("sidebarProfile")}</span>}
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
@@ -64,7 +64,7 @@ export default function JobSeekerLayout({
                 className="sidebar-text"
                 href="/job-seeker/applied-jobs"
               >
-                <FoldersIcon /> {!isCollapsed && <span>{t("appliedJobs")}</span>}
+                <FoldersIcon /> {!isCollapsed && <span>{t("sidebarAppliedJobs")}</span>}
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
@@ -74,7 +74,7 @@ export default function JobSeekerLayout({
                 className="sidebar-text"
                 href="/job-seeker/documents"
               >
-                <FileUserIcon /> {!isCollapsed && <span>{t("documents")}</span>}
+                <FileUserIcon /> {!isCollapsed && <span>{t("sidebarDocuments")}</span>}
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
@@ -83,7 +83,7 @@ export default function JobSeekerLayout({
                 className="sidebar-text"
                 href="/job-seeker/resume-builder"
               >
-                <File /> {!isCollapsed && <span>{t("createResume")}</span>}
+                <File /> {!isCollapsed && <span>{t("sidebarCreateResume")}</span>}
               </Nav.Link>
             </Nav.Item>
           </Nav>
