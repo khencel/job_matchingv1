@@ -1,17 +1,29 @@
+"use client";
+import { useTranslations } from "next-intl";
+
 export default function ServiceContent() {
+  const t = useTranslations("serviceContent");
+  
+  // Convert features object to array
+  const featuresObject = t.raw("features") as Record<string, { title: string; description: string }>;
+  const features = Object.values(featuresObject);
+
   return (
     <div className="service-content container my-5 wow animate__animated animate__fadeInUp">
       <div className="row justify-content-center">
         <div className="col-md-5">
           <div>
-            <h2 className="mb-4 text-center primary-custom-color">A new job change platform connecting foreign nationals and companies.</h2>
+            <h2 className="mb-4 text-center primary-custom-color">{t("title")}</h2>
             <div className="row justify-content-center">
               <div className="col-md-10">
                 <ul>
-                  <li>Free job posting</li>
-                      (You can post job listings completely free of charge.)
-                  <li>Free introduction to registered support organizations</li>
-                      (Smooth acceptance of specified skilled workers.)
+                  {features.map((feature, index) => (
+                    <li key={index}>
+                      {feature.title}
+                      <br />
+                      ({feature.description})
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -22,10 +34,10 @@ export default function ServiceContent() {
             </div>
             <div className="col-md-7 d-flex flex-column justify-content-center gap-3">
               <button className="btn btn-primary-custom rounded-3 w-100">
-                For companies
+                {t("buttons.forCompanies")}
               </button>
               <button className="btn btn-primary-custom rounded-3 w-100">
-                For foreign job seekers
+                {t("buttons.forJobSeekers")}
               </button>
             </div>
           </div>

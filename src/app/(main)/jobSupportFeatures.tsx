@@ -1,128 +1,51 @@
+"use client";
+import { useTranslations } from "next-intl";
+
 export default function JobSupportFeatures() {
+  const t = useTranslations("jobSupportFeatures");
+  
+  // Convert object to array for mapping
+  const featuresObject = t.raw("features") as Record<string, { title: string; description: string }>;
+  const features = Object.values(featuresObject);
+
   return (
     <section className="py-5 bg-white" id="job_support_features">
       <div className="container wow animate__animated animate__fadeInUp">
         <div className="text-center mb-5">
           <span className="badge bg-primary mb-2">
-            Job Support Features
+            {t("badge")}
           </span>
           <h2 className="fw-bold mb-3">
-            Everything You Need to Succeed
+            {t("title")}
           </h2>
           <p className="text-muted fs-5">
-            Powerful tools designed to help employers and job seekers connect,
-            collaborate, and grow.
+            {t("subtitle")}
           </p>
         </div>
 
         <div className="row g-4">
-          {/* Feature 1 */}
-          <div className="col-md-6 col-lg-4">
-            <div className="card h-100 border-0 shadow-sm rounded-4">
-              <div className="card-body p-4 text-center">
-                <div className="mb-3">
-                  <i className="bi bi-search text-primary fs-1"></i>
-                </div>
-                <h5 className="fw-semibold mb-3">
-                  Smart Job Matching
-                </h5>
-                <p className="text-muted">
-                  Automatically match job seekers with the right opportunities
-                  based on skills, experience, and preferences.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Feature 2 */}
-          <div className="col-md-6 col-lg-4">
-            <div className="card h-100 border-0 shadow-sm rounded-4">
-              <div className="card-body p-4 text-center">
-                <div className="mb-3">
-                  <i className="bi bi-people-fill text-primary fs-1"></i>
-                </div>
-                <h5 className="fw-semibold mb-3">
-                  Employer & Seeker Profiles
-                </h5>
-                <p className="text-muted">
-                  Create detailed profiles to showcase skills, experience, and
-                  company culture.
-                </p>
-              </div>
-            </div>
-          </div>
-
-        {/* Feature 3 */}
-        <div className="col-md-6 col-lg-4">
-            <div className="card h-100 border-0 shadow-sm rounded-4">
+          {features.map((feature, index) => (
+            <div key={index} className="col-md-6 col-lg-4">
+              <div className="card h-100 border-0 shadow-sm rounded-4">
                 <div className="card-body p-4 text-center">
-                <div className="mb-3">
-                    <i className="bi bi-clipboard-check-fill text-primary fs-1"></i>
+                  <div className="mb-3">
+                    {index === 0 && <i className="bi bi-search text-primary fs-1"></i>}
+                    {index === 1 && <i className="bi bi-people-fill text-primary fs-1"></i>}
+                    {index === 2 && <i className="bi bi-clipboard-check-fill text-primary fs-1"></i>}
+                    {index === 3 && <i className="bi bi-graph-up-arrow text-primary fs-1"></i>}
+                    {index === 4 && <i className="bi bi-shield-lock-fill text-primary fs-1"></i>}
+                    {index === 5 && <i className="bi bi-lightning-fill text-primary fs-1"></i>}
+                  </div>
+                  <h5 className="fw-semibold mb-3">
+                    {feature.title}
+                  </h5>
+                  <p className="text-muted">
+                    {feature.description}
+                  </p>
                 </div>
-                <h5 className="fw-semibold mb-3">
-                    Application Tracking
-                </h5>
-                <p className="text-muted">
-                    Track job applications in real time with clear status updates from
-                    submission to hiring.
-                </p>
-                </div>
-            </div>
-        </div>
-
-          {/* Feature 4 */}
-          <div className="col-md-6 col-lg-4">
-            <div className="card h-100 border-0 shadow-sm rounded-4">
-              <div className="card-body p-4 text-center">
-                <div className="mb-3">
-                  <i className="bi bi-graph-up-arrow text-primary fs-1"></i>
-                </div>
-                <h5 className="fw-semibold mb-3">
-                  Career Insights
-                </h5>
-                <p className="text-muted">
-                  Get insights on job trends, salary ranges, and career growth
-                  opportunities.
-                </p>
               </div>
             </div>
-          </div>
-
-          {/* Feature 5 */}
-          <div className="col-md-6 col-lg-4">
-            <div className="card h-100 border-0 shadow-sm rounded-4">
-              <div className="card-body p-4 text-center">
-                <div className="mb-3">
-                  <i className="bi bi-shield-lock-fill text-primary fs-1"></i>
-                </div>
-                <h5 className="fw-semibold mb-3">
-                  Secure & Reliable
-                </h5>
-                <p className="text-muted">
-                  Your data is protected with industry-standard security and
-                  privacy measures.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Feature 6 */}
-          <div className="col-md-6 col-lg-4">
-            <div className="card h-100 border-0 shadow-sm rounded-4">
-              <div className="card-body p-4 text-center">
-                <div className="mb-3">
-                  <i className="bi bi-lightning-fill text-primary fs-1"></i>
-                </div>
-                <h5 className="fw-semibold mb-3">
-                  Fast & Easy Hiring
-                </h5>
-                <p className="text-muted">
-                  Streamline the hiring process with intuitive tools that save
-                  time and effort.
-                </p>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

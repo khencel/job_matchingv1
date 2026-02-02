@@ -1,14 +1,19 @@
+"use client";
+import { useTranslations } from "next-intl";
+
 export default function ContactUs() {
+  const t = useTranslations("contactUs");
+
   return (
     <section className="py-5 bg-white" id="contact_us">
       <div className="container wow animate__animated animate__fadeInUp">
         <div className="text-center mb-5">
-          <span className="badge bg-primary mb-2">Contact Us</span>
+          <span className="badge bg-primary mb-2">{t("badge")}</span>
           <h2 className="fw-bold mb-3">
-            Get in Touch with Job Support
+            {t("title")}
           </h2>
           <p className="text-muted fs-5">
-            Have questions or need assistance? We’re here to help.
+            {t("subtitle")}
           </p>
         </div>
 
@@ -17,27 +22,26 @@ export default function ContactUs() {
           <div className="col-lg-5">
             <div className="h-100 p-4 p-md-5 bg-light rounded-4 shadow-sm">
               <h5 className="fw-semibold mb-4">
-                Contact Information
+                {t("contactInfoTitle")}
               </h5>
 
               <ul className="list-unstyled text-muted">
                 <li className="mb-3 d-flex align-items-start">
                   <i className="bi bi-envelope-fill text-primary fs-5 me-3"></i>
-                  <span>support@jobsupport.com</span>
+                  <span>{t("email")}</span>
                 </li>
                 <li className="mb-3 d-flex align-items-start">
                   <i className="bi bi-telephone-fill text-primary fs-5 me-3"></i>
-                  <span>+63 900 123 4567</span>
+                  <span>{t("phone")}</span>
                 </li>
                 <li className="mb-3 d-flex align-items-start">
                   <i className="bi bi-geo-alt-fill text-primary fs-5 me-3"></i>
-                  <span>Philippines</span>
+                  <span>{t("location")}</span>
                 </li>
               </ul>
 
               <p className="text-muted mt-4">
-                Our support team is available Monday to Friday,
-                9:00 AM – 6:00 PM.
+                {t("availability")}
               </p>
             </div>
           </div>
@@ -46,7 +50,7 @@ export default function ContactUs() {
           <div className="col-lg-7">
             <div className="h-100 p-4 p-md-5 bg-white rounded-4 shadow-sm">
               <h5 className="fw-semibold mb-4">
-                Send Us a Message
+                {t("formTitle")}
               </h5>
 
               <form>
@@ -55,7 +59,7 @@ export default function ContactUs() {
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Full Name"
+                      placeholder={t("placeholders.fullName")}
                       required
                     />
                   </div>
@@ -64,7 +68,7 @@ export default function ContactUs() {
                     <input
                       type="email"
                       className="form-control"
-                      placeholder="Email Address"
+                      placeholder={t("placeholders.email")}
                       required
                     />
                   </div>
@@ -73,7 +77,7 @@ export default function ContactUs() {
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Subject"
+                      placeholder={t("placeholders.subject")}
                       required
                     />
                   </div>
@@ -82,7 +86,7 @@ export default function ContactUs() {
                     <textarea
                       className="form-control"
                       rows={5}
-                      placeholder="Your Message"
+                      placeholder={t("placeholders.message")}
                       required
                     ></textarea>
                   </div>
@@ -92,7 +96,7 @@ export default function ContactUs() {
                       type="submit"
                       className="btn btn-primary px-4 py-2"
                     >
-                      Send Message
+                      {t("buttons.send")}
                     </button>
                   </div>
                 </div>

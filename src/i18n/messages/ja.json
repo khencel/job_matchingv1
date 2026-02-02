@@ -464,6 +464,113 @@
       "submit": "登録を送信"
     }
   },
+  "contactUs": {
+    "badge": "お問い合わせ",
+    "title": "Job Supportにお問い合わせ",
+    "subtitle": "ご質問やサポートが必要ですか？お気軽にお問い合わせください。",
+    "contactInfoTitle": "連絡先情報",
+    "email": "support@jobsupport.com",
+    "phone": "+63 900 123 4567",
+    "location": "フィリピン",
+    "availability": "サポートチームは月曜日から金曜日の午前9:00～午後6:00までご対応しています。",
+    "formTitle": "メッセージを送信",
+    "placeholders": {
+      "fullName": "お名前",
+      "email": "メールアドレス",
+      "subject": "件名",
+      "message": "メッセージ"
+    },
+    "buttons": {
+      "send": "送信"
+    }
+  },
+  "jobSupportFeatures": {
+    "badge": "就職支援機能",
+    "title": "成功に必要なすべてを提供します",
+    "subtitle": "雇用主と求職者の接続、協力、成長を支援するために設計された強力なツール。",
+    "features": {
+      "0": {
+        "title": "スマートジョブマッチング",
+        "description": "スキル、経験、希望条件に基づいて求職者と適切な機会を自動的にマッチング。"
+      },
+      "1": {
+        "title": "雇用主と求職者のプロフィール",
+        "description": "スキル、経験、企業文化をアピールするための詳細なプロフィールを作成。"
+      },
+      "2": {
+        "title": "応募追跡",
+        "description": "応募から採用まで、リアルタイムで求人応募を追跡し、明確なステータス更新を取得。"
+      },
+      "3": {
+        "title": "キャリアインサイト",
+        "description": "就職トレンド、給与範囲、キャリア成長の機会について洞察を得る。"
+      },
+      "4": {
+        "title": "安全で信頼性が高い",
+        "description": "データは業界標準のセキュリティとプライバシー対策で保護されています。"
+      },
+      "5": {
+        "title": "迅速で簡単な採用",
+        "description": "時間と労力を節約する直感的なツールで採用プロセスを合理化。"
+      }
+    }
+  },
+  "qAndA": {
+    "badge": "Q&A",
+    "title": "よくある質問",
+    "subtitle": "Job Supportについてよくある質問への回答を確認してください。",
+    "questions": {
+      "0": {
+        "question": "Job Supportとは何ですか？",
+        "answer": "Job Supportは、雇用主、求職者、支援組織を繋ぎ、採用プロセスを速く、簡単に、より信頼性の高いものにするプロフェッショナルプラットフォームです。"
+      },
+      "1": {
+        "question": "Job Supportは無料で使用できますか？",
+        "answer": "Job Supportはニーズに応じて無料プランと有料プランの両方を提供しています。求職者は無料で開始でき、雇用主は高度な採用ツールを選択できます。"
+      },
+      "2": {
+        "question": "求人に応募するにはどうすればいいですか？",
+        "answer": "プロフィールを作成し、履歴書をアップロードして、求人情報を閲覧するだけです。数回クリックするだけでプラットフォーム経由で直接応募できます。"
+      },
+      "3": {
+        "question": "雇用主はどのようにして求人を掲載できますか？",
+        "answer": "雇用主は登録して企業プロフィールを作成し、雇用主ダッシュボード経由で簡単に求人情報を掲載できます。"
+      }
+    }
+  },
+  "serviceContent": {
+    "title": "外国人と企業をつなぐ新しい転職プラットフォーム。",
+    "features": {
+      "0": {
+        "title": "無料求人掲載",
+        "description": "完全無料で求人情報を掲載できます。"
+      },
+      "1": {
+        "title": "登録支援機関への無料紹介",
+        "description": "特定技能労働者の円滑な受け入れ。"
+      }
+    },
+    "buttons": {
+      "forCompanies": "企業向け",
+      "forJobSeekers": "外国人求職者向け"
+    }
+  },
+  "footer": {
+    "title": "あなたの",
+    "titleHighlight": "次のキャリア",
+    "titleEnd": "を探索しましょう",
+    "subtitle": "キャリアの次のステップを踏み出す準備はできていますか？JobLinkは、あなたのスキルと希望に合わせたエキサイティングな機会を発見するお手伝いをします",
+    "brandName": "JOBSearch",
+    "description": "当プラットフォームを通じて理想のキャリアを見つけた数千人の成功した求職者に参加しましょう。あなたの未来はここから始まります！",
+    "nav": {
+      "home": "ホーム",
+      "features": "就職支援機能",
+      "about": "私たちについて",
+      "qa": "Q&A",
+      "contact": "お問い合わせ"
+    },
+    "copyright": "© Copyright Jobsearch 2025. All rights reserved"
+  },
   "jobDescriptionPage": {
     "headings": {
       "description": "詳細",

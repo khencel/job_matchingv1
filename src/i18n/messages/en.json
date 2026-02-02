@@ -430,6 +430,113 @@
       "submit": "Submit Registration"
     }
   },
+  "contactUs": {
+    "badge": "Contact Us",
+    "title": "Get in Touch with Job Support",
+    "subtitle": "Have questions or need assistance? We're here to help.",
+    "contactInfoTitle": "Contact Information",
+    "email": "support@jobsupport.com",
+    "phone": "+63 900 123 4567",
+    "location": "Philippines",
+    "availability": "Our support team is available Monday to Friday, 9:00 AM – 6:00 PM.",
+    "formTitle": "Send Us a Message",
+    "placeholders": {
+      "fullName": "Full Name",
+      "email": "Email Address",
+      "subject": "Subject",
+      "message": "Your Message"
+    },
+    "buttons": {
+      "send": "Send Message"
+    }
+  },
+  "jobSupportFeatures": {
+    "badge": "Job Support Features",
+    "title": "Everything You Need to Succeed",
+    "subtitle": "Powerful tools designed to help employers and job seekers connect, collaborate, and grow.",
+    "features": {
+      "0": {
+        "title": "Smart Job Matching",
+        "description": "Automatically match job seekers with the right opportunities based on skills, experience, and preferences."
+      },
+      "1": {
+        "title": "Employer & Seeker Profiles",
+        "description": "Create detailed profiles to showcase skills, experience, and company culture."
+      },
+      "2": {
+        "title": "Application Tracking",
+        "description": "Track job applications in real time with clear status updates from submission to hiring."
+      },
+      "3": {
+        "title": "Career Insights",
+        "description": "Get insights on job trends, salary ranges, and career growth opportunities."
+      },
+      "4": {
+        "title": "Secure & Reliable",
+        "description": "Your data is protected with industry-standard security and privacy measures."
+      },
+      "5": {
+        "title": "Fast & Easy Hiring",
+        "description": "Streamline the hiring process with intuitive tools that save time and effort."
+      }
+    }
+  },
+  "qAndA": {
+    "badge": "Q&A",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find quick answers to common questions about Job Support.",
+    "questions": {
+      "0": {
+        "question": "What is Job Support?",
+        "answer": "Job Support is a professional platform that connects employers, job seekers, and support organizations to make the hiring process faster, easier, and more reliable."
+      },
+      "1": {
+        "question": "Is Job Support free to use?",
+        "answer": "Job Support offers both free and premium plans depending on your needs. Job seekers can start for free, while employers can choose advanced hiring tools."
+      },
+      "2": {
+        "question": "How do I apply for a job?",
+        "answer": "Simply create a profile, upload your resume, and browse job listings. You can apply directly through the platform in just a few clicks."
+      },
+      "3": {
+        "question": "How can employers post jobs?",
+        "answer": "Employers can register, create a company profile, and post job openings easily through the employer dashboard."
+      }
+    }
+  },
+  "serviceContent": {
+    "title": "A new job change platform connecting foreign nationals and companies.",
+    "features": {
+      "0": {
+        "title": "Free job posting",
+        "description": "You can post job listings completely free of charge."
+      },
+      "1": {
+        "title": "Free introduction to registered support organizations",
+        "description": "Smooth acceptance of specified skilled workers."
+      }
+    },
+    "buttons": {
+      "forCompanies": "For companies",
+      "forJobSeekers": "For foreign job seekers"
+    }
+  },
+  "footer": {
+    "title": "Explore Your",
+    "titleHighlight": "Next Career",
+    "titleEnd": "Move",
+    "subtitle": "Are you ready to take the next step in your career? JobLink helps you discover exciting opportunities tailored to your skills and aspirations",
+    "brandName": "JOBSearch",
+    "description": "Join thousands of successful job seekers who have found their dream careers through our platform. Your future begins here!",
+    "nav": {
+      "home": "Home",
+      "features": "Job Support Features",
+      "about": "About Us",
+      "qa": "Q&A",
+      "contact": "Contacts"
+    },
+    "copyright": "© Copyright Jobsearch 2025. All rights reserved"
+  },
   "jobDescriptionPage": {
     "headings": {
       "description": "Description",
