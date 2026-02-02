@@ -1,0 +1,11 @@
+{
+  "badge": "About Job Support",
+  "title": "Connecting Talent with Opportunity",
+  "platformName": "Job Support",
+  "description": "is a professional matching platform that connects employers, job seekers, and support organizations in one convenient space.",
+  "mission": "Our goal is to make the hiring process faster, simpler, and more reliable. Whether you're a company looking for the right talent or a job seeker aiming for the best opportunity, Job Support helps you find your perfect match efficiently.",
+  "buttons": {
+    "learnMore": "Learn More",
+    "contactUs": "Contact Us"
+  }
+}

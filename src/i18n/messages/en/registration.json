@@ -1,0 +1,12 @@
+{
+  "title": "Choose Your Role",
+  "jobSeeker": {
+    "description": "Looking for your dream job?"
+  },
+  "employer": {
+    "description": "Hire the best talent!"
+  },
+  "supervisory": {
+    "description": "Manage and supervise effectively"
+  }
+}

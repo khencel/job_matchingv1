@@ -42,6 +42,8 @@ import employerOverview from "./employerOverview.json";
 import adminApplicants from "./adminApplicants.json";
 import adminUsers from "./adminUsers.json";
 import step1Register from "./step1Register.json";
+import registration from "./registration.json";
+import about from "./about.json";
 
 export default {
   navbar,
@@ -88,4 +90,6 @@ export default {
   employerOverview,
   adminApplicants,
   adminUsers,
+  registration,
+  about,
 };

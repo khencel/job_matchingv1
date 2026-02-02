@@ -1,0 +1,12 @@
+{
+  "title": "あなたの役割を選択してください",
+  "jobSeeker": {
+    "description": "あなたの夢の仕事を探していますか？"
+  },
+  "employer": {
+    "description": "最高の人材を雇いましょう！"
+  },
+  "supervisory": {
+    "description": "効果的に管理・監督する"
+  }
+}

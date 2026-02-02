@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import RegistrationButton from "./RegisterButton";
 
 /**
@@ -5,13 +6,14 @@ import RegistrationButton from "./RegisterButton";
  * Responsive layout: stacks on mobile, 3 columns on desktop
  */
 export default function Registration() {
+  const t = useTranslations("registration");
   return (
     <div className="container py-5">
-      <h2 className="text-center mb-5 fw-bold">Choose Your Role</h2>
+      <h2 className="text-center mb-5 fw-bold">{t("title")}</h2>
       <div className="row g-4 justify-content-center">
         <div className="col-12 col-sm-6 col-lg-4">
           <div className="card shadow p-4 text-center h-100 ">
-            <p className="mb-3">Looking for your dream job?</p>
+            <p className="mb-3">{t("jobSeeker.description")}</p>
             <RegistrationButton
               id="jobSeeker"
               buttonTextKey="buttons.registerJobSeeker"
@@ -21,7 +23,7 @@ export default function Registration() {
 
         <div className="col-12 col-sm-6 col-lg-4">
           <div className="card shadow p-4 text-center h-100">
-            <p className="mb-3">Hire the best talent!</p>
+            <p className="mb-3">{t("employer.description")}</p>
             <RegistrationButton
               id="employer"
               buttonTextKey="buttons.registerEmployer"
@@ -31,7 +33,7 @@ export default function Registration() {
 
         <div className="col-12 col-sm-6 col-lg-4">
           <div className="card shadow p-4 text-center h-100">
-            <p className="mb-3">Manage and supervise effectively</p>
+            <p className="mb-3">{t("supervisory.description")}</p>
             <RegistrationButton
               id="superVisory"
               buttonTextKey="buttons.registerSupervisory"
