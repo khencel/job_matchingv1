@@ -7,10 +7,11 @@ import { createJobPost } from "@/redux/features/job_post/job_post_thunk";
 import type { AppDispatch } from '@/redux/store';
 import { FaPlus, FaXmark } from "react-icons/fa6";
 import AddBenefitsModal from "./add_benefits_modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { removeBenefit, setInitialData, resetForm } from "@/redux/slices/employer/post_a_job/basicInfoSlice";
 import { popup } from "@/helper/pop_up";
 import { useRouter } from "next/navigation";
+import { title } from "process";
 
 
 export default function PerksBenefitPage() {
@@ -24,6 +25,8 @@ export default function PerksBenefitPage() {
   const openModal = () => {
     setShowModal(true);
   }
+
+  const [jobData, setJobData] = useState<any>(null)
 
   const handleConfirm = () => {
       dispatch(setInitialData(basicInfo))
@@ -47,6 +50,17 @@ export default function PerksBenefitPage() {
     dispatch(resetForm());
   }
 
+  const data = jobData ? JSON.parse(jobData) : null;
+  console.log(data);
+  
+
+  useEffect(() => {
+      const initialData = localStorage.getItem('initialData');
+      setJobData(initialData)
+      console.log('LocalStorage initialData:', initialData);
+      
+  },[])
+
   return (
     <>
       <Header />
@@ -54,46 +68,88 @@ export default function PerksBenefitPage() {
       <div className="emp-component-style mt-2">  
           <strong>Basic Information</strong>
           <br />
-          <small>List out your top perks and benefits.</small>
+          <small>Your job post.</small>
           <hr />
           <div className="row mt-5">
               <div className="col-md-3">
-                  <strong>Perks and Benefits <span className="text-danger">*</span></strong>
+                  <strong>Information details</strong>
 
               </div>
               <div className="col">
-                  <button className="btn btn-default-custom mb-2" onClick={openModal}><FaPlus /> Add Benefit</button>
-                      
-                  
-                  <div>
-                      <div className="row">
-                        {benefits.map((benefit) => (
-                          <div className="col-md-4" key={benefit.id}>
-                            <div className="bg-white p-3 rounded-3 mb-2">
-                              <div className="w-100">
-                                <span className="primary-text">
-                                  <strong>{benefit.title}</strong>
-                                </span>
-                                <span
-                                  className="ms-2 float-end cursor-pointer"
-                                  onClick={() => dispatch(removeBenefit(benefit.id))}
-                                >
-                                  <FaXmark />
-                                </span>
-                              </div>
-                              <hr />
-                              <div>{benefit.description}</div>
-                            </div>
-                          </div>
-                        ))}
+                  <div className="row">
+                    <div className="col-3">
+                      <strong>Title:</strong>
+                    </div>
+                    <div className="col-9">
+                      {data?.title}
+                    </div>
 
-                        <AddBenefitsModal
-                          show={showModal}
-                          onHide={() => setShowModal(false)}
+                    <div className="col-3">
+                      <strong>Salary:</strong>
+                    </div>
+                    <div className="col-9">
+                      {data?.salary}
+                    </div>
+
+                    <div className="col-3">
+                      <strong>Job Type:</strong>
+                    </div>
+                    <div className="col-9">
+                      {
+                        data?.type_of_emp?.map((item:string, index:number) => {
+                            return (
+                              <span key={index}>
+                                  {item}{index < data.type_of_emp.length - 1 ? ', ' : ''}
+                              </span>
+                            )
+                        })
+                      }
+                    </div>
+
+                    <div className="col-3 mt-5">
+                      <strong>Job description:</strong>
+                    </div>
+                    <div className="col-9 mt-5">
+                      <p dangerouslySetInnerHTML={{
+                                __html: data?.job_desc
+                            }} 
                         />
-                      </div>
+                    </div>
+                    <hr />
+                    <div className="col-3">
+                      <strong>Responsibilities:</strong>
+                    </div>
+                    <div className="col-9">
+                      <p dangerouslySetInnerHTML={{
+                                __html: data?.responsibility
+                            }} 
+                        />
+                    </div>
+                    <hr />
+                    <div className="col-3">
+                      <strong>Requirements:</strong>
+                    </div>
+                    <div className="col-9">
+                      <p dangerouslySetInnerHTML={{
+                                __html: data?.who_you_are
+                            }} 
+                        />
+                    </div>
 
+
+                    <hr />
+                    <div className="col-3">
+                      <strong>Nice to Have:</strong>
+                    </div>
+                    <div className="col-9">
+                      <p dangerouslySetInnerHTML={{
+                                __html: data?.nice_to_have
+                            }} 
+                        />
+                    </div>
                   </div>
+
+                  
               </div>
           </div>
 

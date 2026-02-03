@@ -64,7 +64,7 @@ export default function HeaderPostAJob(){
                                     <div className="primary-text"><small>Step 3 of 3</small></div>
                                     <div>
                                         <small>
-                                            <strong>Perks & Benefit</strong>
+                                            <strong>Information</strong>
                                         </small>
                                     </div>
                                 </div>

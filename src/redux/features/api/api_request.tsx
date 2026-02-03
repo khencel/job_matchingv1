@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 export default function postAPI (data: any){
     const token = Cookies.get("access");
-    return axios.post(`${process.env.NEXT_PUBLIC_API_CONTENT_URL}job/create/`, data, {
+    return axios.post(`${process.env.NEXT_PUBLIC_API_CONTENT_URL}api/job/create/`, data, {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -11,7 +11,7 @@ export default function postAPI (data: any){
 }
 
 export async function fetchAPI (user_id:number){
-    return axios.get(`${process.env.NEXT_PUBLIC_API_CONTENT_URL}job/list/${user_id}`, {
+    return axios.get(`${process.env.NEXT_PUBLIC_API_CONTENT_URL}api/job/list/${user_id}`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }

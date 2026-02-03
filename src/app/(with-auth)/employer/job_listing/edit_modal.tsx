@@ -197,7 +197,7 @@ export default function Editmodal({handleShow, handleClose, data, currentPage}: 
                         </div>
                     </div>
 
-                    <div className="row mt-2">
+                    {/* <div className="row mt-2">
                         <div className="col">
                             <strong>Required Skills</strong>
                             <br />
@@ -212,7 +212,7 @@ export default function Editmodal({handleShow, handleClose, data, currentPage}: 
                             />
 
                         </div>
-                    </div>
+                    </div> */}
                     <hr />
                     <strong>Details</strong>
                         <br />

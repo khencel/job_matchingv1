@@ -116,7 +116,7 @@ export default function PostAJob(){
                     </div>
                 </div>
 
-                <div className="row mt-2">
+                {/* <div className="row mt-2">
                     <div className="col">
                         <strong>Required Skills</strong>
                         <br />
@@ -139,7 +139,7 @@ export default function PostAJob(){
                         </div>
 
                     </div>
-                </div>
+                </div> */}
 
                 <div className="row justify-content-end mt-5 mb-3">
                     <div className="col-md-3 text-end">

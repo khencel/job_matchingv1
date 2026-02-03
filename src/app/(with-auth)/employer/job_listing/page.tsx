@@ -15,6 +15,7 @@ import { popup } from "@/helper/pop_up";
 import Editmodal from "./edit_modal";
 import Cookies from "js-cookie";
 import { showSuccessToast } from "@/app/(util)/toaster";
+import { jobPostChangeStatus } from "@/redux/slices/employer/post_a_job/jobListingThunk";
 
 
 
@@ -30,13 +31,6 @@ export default function JobListing() {
     const handleClose = () => setShowModal(false);
 
     
-    useEffect(() => {
-        const userId = Number(Cookies.get("user_id"));
-        if (userId) {
-            dispatch(listJobPost({ userId, page: currentPage, pageSize }));
-        }
-    }, [dispatch, currentPage, pageSize]);
-
     const handlePageChange = (newPage: number) => {
         dispatch(setPage(newPage));
     };
@@ -81,27 +75,50 @@ export default function JobListing() {
         setShowModal(true);
     }
 
+    const handleChangeStatus = async (id:number) =>{
+        popup({
+        title: "Change Status",
+        text: "Update the status of this Job Post?",
+        icon:"warning",
+        onConfirm:async () => {
+                const userId = Number(Cookies.get("user_id"));
+                if (!userId) return;
+                await dispatch(jobPostChangeStatus(id)); 
+                dispatch(listJobPost({ userId, page: currentPage, pageSize }));
+                showSuccessToast("Update Status","Status has been updated")
+            }
+        })
+        
+    }
+
+    useEffect(() => {
+        const userId = Number(Cookies.get("user_id"));
+        if (userId) {
+            dispatch(listJobPost({ userId, page: currentPage, pageSize }));
+        }
+    }, [dispatch, currentPage, pageSize]);
+    
     return (
         <>
             <div className="row standar-div">
                 <div className="col">
                     <h5><strong><BiArrowBack /> Job Listing</strong></h5>
                 </div>
-                <div className="col text-end">
+                {/* <div className="col text-end">
                     <span>November - December 2025 <FaCalendarCheck className="text-primary" /></span>
-                </div>
+                </div> */}
             </div>
 
             <div className="row standar-div mt-2">
                 <div className="col">
                     <strong>Job List ({count} total)</strong>
                 </div>
-                <div className="col-2 text-end">
+                {/* <div className="col-2 text-end">
                     <FaSearch className="text-primary" /> Search Jobs
                 </div>
                 <div className="col-2 text-end">
                     <FaSliders className="text-primary" /> Filter
-                </div>
+                </div> */}
             </div>
 
             <div className="row standar-div">
@@ -119,6 +136,7 @@ export default function JobListing() {
                             <table className="table">
                                 <thead>
                                     <tr>
+                                        <th>Status</th>
                                         <th>Role</th>
                                         <th>Date Posted</th>
                                         <th>Salary</th>
@@ -130,6 +148,10 @@ export default function JobListing() {
                                 <tbody>
                                     {items.map((item: any) => (
                                         <tr key={item.id}>
+                                            <td className={item.is_active?"text-success":"text-danger"}>
+                                                {item.is_active?"Enable":"Disable"}
+                        
+                                            </td>
                                             <td>{item.title}</td>
                                             <td>{formatDate(item.created_at)}</td>
                                             <td>${item.salary.toLocaleString()}</td>
@@ -153,12 +175,21 @@ export default function JobListing() {
                                                     </button>
 
                                                     <ul className="dropdown-menu dropdown-menu-end">
-                                                    <li>
-                                                        <button className="dropdown-item" onClick={() => handleEdit(item)}>Edit</button>
-                                                    </li>
-                                                    <li>
-                                                        <button className="dropdown-item text-danger" onClick={() => handleDelete(item.id)}>Delete</button>
-                                                    </li>
+                                                        <li>
+                                                            <button className="dropdown-item" onClick={() => handleEdit(item)}>Edit</button>
+                                                        </li>
+                                                        <li>
+                                                            <button className="dropdown-item text-danger" onClick={() => handleDelete(item.id)}>Delete</button>
+                                                        </li>
+                                                        <li>
+                                                            <button 
+                                                                className={`dropdown-item ${item.is_active?'text-danger':'text-success'}`}
+                                                                onClick={() => handleChangeStatus(item.id)}
+                                                            >
+                                                                {item.is_active?"Disable":"Enable"}
+                                                                
+                                                            </button>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </td>

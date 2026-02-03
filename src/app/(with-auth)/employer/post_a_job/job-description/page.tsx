@@ -51,7 +51,7 @@ export default function JobDescription(){
 
                 <div className="row mt-2">
                     <div className="col">
-                        <strong>Who You Are <span className="text-danger">*</span></strong>
+                        <strong>Requirements: <span className="text-danger">*</span></strong>
                         <br />
                         <small>Add your preferred candidates qualifications.</small>
                     </div>

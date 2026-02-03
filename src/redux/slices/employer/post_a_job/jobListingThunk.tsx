@@ -15,3 +15,15 @@ export const showAllJobs = createAsyncThunk(
     }
         
 )
+
+export const jobPostChangeStatus = createAsyncThunk(
+    "job/jobPostChangeStatus",
+    async(post_id:number, {rejectWithValue}) => {
+        try {
+            const response = await standard_get_api(`/api/job/change-post-status/${post_id}`);
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+)
