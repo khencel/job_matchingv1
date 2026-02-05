@@ -41,3 +41,50 @@ export interface RegisterJobSeeker {
   isLoading: boolean;
   isError: boolean;
 }
+
+export interface JobSeekerApproachInterface {
+  // basic personal information
+  basicInfo: {
+    fullName: string;
+    nationality: string;
+    dateOfBirth: string;
+    japaneseLevel: "N5" | "N4" | "N3" | "N2" | "N1" | "any";
+    contactNumber: string;
+    email: string;
+    visaStatus:
+      | "student"
+      | "services"
+      | "dependent"
+      | "permanent"
+      | "ssw"
+      | "training"
+      | "notSure";
+  };
+  // job preferences
+  preferences: {
+    preferredArea: string;
+    preferredJobRole: string;
+    preferredEmployment:
+      | "full-time"
+      | "part-time"
+      | "contract"
+      | "shift"
+      | "dispatch";
+    expectedSalary: number | null;
+    futureGoals: string;
+  };
+  // current job details
+  currentJob: {
+    companyNameOrIndustry: string;
+    currentPrefecture: string;
+    jobDuties: string;
+    jobChangeDate: string;
+    reasonForLeaving: string;
+  };
+  // additional information
+  additionalInfo: {
+    skills: string[] | null;
+    dormPreference: "need" | "not-needed" | "flexible" | null;
+    notes: string;
+  };
+}
