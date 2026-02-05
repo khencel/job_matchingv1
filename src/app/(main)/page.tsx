@@ -16,6 +16,7 @@ import QASection from "./qAndA";
 import ContactUs from "./contactUs";
 
 
+
 export default function HomePage() {
   const [hasAccess, setHasAccess] = useState(false);
 
@@ -44,9 +45,9 @@ export default function HomePage() {
       {!hasAccess && <Registration />}
 
       <ServiceContent />
-      <hr className="mt-5 w-75 mx-auto" />
-      <JobPost />
-      <hr className="mt-5 w-75 mx-auto" />
+      {/* <hr className="mt-5 w-75 mx-auto" /> */}
+      {/* <JobPost /> */}
+      {/* <hr className="mt-5 w-75 mx-auto" /> */}
       <About />
       <JobSupportFeatures />
       <QASection />

@@ -1,13 +1,17 @@
+"user client"
+
 import RegistrationButton from "./RegisterButton";
+
 
 /**
  * Registration component displaying user type selection cards
  * Responsive layout: stacks on mobile, 3 columns on desktop
  */
 export default function Registration() {
+
   return (
     <div className="container py-5 register-div">
-      <h2 className="text-center mb-0 mb-sm-5 fw-bold regiter-choose">Choose Your Role</h2>
+      <h2 className="text-center mb-0 mb-sm-5 fw-bold regiter-choose">Free Registration</h2>
       <div className="row g-4 justify-content-center">
         <div className="col-12 col-sm-6 col-lg-4">
           <div className="card shadow p-4 text-center h-100 ">
@@ -22,6 +26,7 @@ export default function Registration() {
         <div className="col-12 col-sm-6 col-lg-4">
           <div className="card shadow p-4 text-center h-100">
             <p className="mb-3">Hire the best talent!</p>
+  
             <RegistrationButton
               id="employer"
               buttonTextKey="buttons.registerEmployer"
@@ -38,6 +43,11 @@ export default function Registration() {
             />
           </div>
         </div>
+      </div>
+
+      <div className="row mt-2 justify-content-center">
+        <div className="col-md-7 section-subtitle">A new career platform
+            <br/>connecting foreigners and companies.</div>
       </div>
     </div>
   );

@@ -91,7 +91,7 @@ export default function NavbarAuth() {
           {/* Logo on the left */}
           <a className="navbar-brand d-flex align-items-center" href="#">
             <img
-              src="/logo.png"
+              src="/img/logo.png"
               alt={t("logoAlt")}
               style={{ height: "80px", width: "auto", marginRight: "8px" }}
             />
@@ -128,11 +128,11 @@ export default function NavbarAuth() {
             </div>
 
             <ul className="navbar-nav mb-2 mb-lg-0 d-flex align-items-center">
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a className="nav-link" href="#">
                   {t("findJobs")}
                 </a>
-              </li>
+              </li> */}
 
               <li className="nav-item dropdown">
                 <a

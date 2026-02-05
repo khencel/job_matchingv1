@@ -2,6 +2,7 @@ import { RegisterJobSeekerStep2Data } from "./job-seeker";
 import { User } from "./user-register";
 
 export interface JobPosting {
+  employer: any;
   id: number;
   user_id: number;
   title: string;

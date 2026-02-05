@@ -3,6 +3,8 @@
 import { Card, Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { industries } from "./registration/employer/RegisterEmployerStep2";
+import { listCategory } from "./listGroupData";
+
 
 const FilterJobs = () => {
   return (
@@ -14,6 +16,24 @@ const FilterJobs = () => {
         </Button>
       </Card.Header>
       <Card.Body>
+        <Form.Group>
+          <Form.Label className="primary-text">Category</Form.Label>
+          <select name="" id="" className="form-control">
+            <option value=" " disabled hidden>Select Category</option>
+            {
+              listCategory.map((item:any, index:number)=>{
+                return (
+                  <option key={index} value={item.value}>{item.label}</option>
+                )
+              })
+            }
+          </select>
+          {/* {industries
+            .filter((type) => type !== "Other")
+            .map((type) => (
+              <Form.Check key={type} label={type} name={type} id={type} />
+            ))} */}
+        </Form.Group>
         {/* Filter for Job Types */}
         <Form.Group>
           <Form.Label className="primary-text">Job Type</Form.Label>
@@ -21,9 +41,8 @@ const FilterJobs = () => {
             <Form.Check key={type} label={type} id={type} />
           ))}
         </Form.Group>
-        <hr />
         {/* Filter for Work Experience */}
-        <Form.Group>
+        {/* <Form.Group>
           <Form.Label className="primary-text">Work Experience</Form.Label>
           {[
             "Fresh Graduate",
@@ -33,17 +52,10 @@ const FilterJobs = () => {
           ].map((xp) => (
             <Form.Check key={xp} label={xp} name={xp} id={xp} />
           ))}
-        </Form.Group>
+        </Form.Group> */}
         <hr />
         {/* Filter for Industry */}
-        <Form.Group>
-          <Form.Label className="primary-text">Work Experience</Form.Label>
-          {industries
-            .filter((type) => type !== "Other")
-            .map((type) => (
-              <Form.Check key={type} label={type} name={type} id={type} />
-            ))}
-        </Form.Group>
+        
         <hr />
         <Form.Group>
           <Form.Label className="primary-text">Salary</Form.Label>

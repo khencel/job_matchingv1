@@ -21,9 +21,13 @@ export async function fetchAPI (user_id:number){
 export async function standard_post_api(url: string, data: any){
     const token = Cookies.get("access");
     const baseUrl = process.env.NEXT_PUBLIC_API_CONTENT_URL
+    const isFormData = data instanceof FormData;
+    
+    
     return axios.post(baseUrl+url, data, {
         headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
+            ...(isFormData ? {} : { "Content-Type": "application/json" }),
         }
     });
 }

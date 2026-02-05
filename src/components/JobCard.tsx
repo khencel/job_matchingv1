@@ -40,7 +40,6 @@ const JobCard = ({ job, onClick, className }: JobCardProps) => {
   if (className) {
     cardClasses.push(className);
   }
-  console.log(job);
 
   return (
     <article
@@ -50,7 +49,7 @@ const JobCard = ({ job, onClick, className }: JobCardProps) => {
       tabIndex={onClick ? 0 : undefined}
     >
       <img
-        src={`http://127.0.0.1:8000/media/user_${job?.user_id}/avatar.${[0]}`}
+        src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}media/${job?.employer[0].avatar || 'placeholder.jpg'}`}
         className="card-img-top"
         alt="Person working on laptop"
         style={{ height: "250px", objectFit: "cover" }}

@@ -14,20 +14,21 @@ import {
 
 // Industry options for dropdown
 export const industries = [
-  "Technology",
+  "Tech & IT",
+  "Creative & Design",
+  "Business & Office",
+  "Sales & Marketing",
+  "Finance & Accounting",
+  "E-commerce & Retail",
+  "Education & Training",
   "Healthcare",
-  "Finance",
-  "Manufacturing",
-  "Retail",
-  "Education",
-  "Hospitality",
-  "Construction",
-  "Transportation",
-  "Real Estate",
-  "Agriculture",
-  "Entertainment",
-  "Telecommunications",
-  "Energy",
+  "Skilled Trades",
+  "Logistics & Transportation",
+  "Hospitality & Tourism",
+  "Customer Service & BPO",
+  "Construction & Engineering",
+  "Legal & Compliance",
+  "Others / General",
 ];
 
 // Japan regions for dropdown
