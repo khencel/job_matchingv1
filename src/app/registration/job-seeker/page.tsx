@@ -13,6 +13,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useRef, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 const ApproachJobSeekerPage = () => {
   const dispatch = useAppDispatch();
@@ -204,14 +205,22 @@ const ApproachJobSeekerPage = () => {
       await dispatch(approachJobSeekerThunk(formData)).unwrap();
 
       console.log("5. Thunk Success"); // Debug log
+      Swal.fire({
+        icon: "success",
+        title: "Application Submitted",
+        text: "Your application has been submitted successfully.",
+      });
       dispatch(resetApproachJobSeekerState());
     } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Submission Failed",
+        text: "There was an error submitting your application. Please try again later.",
+      });
       console.error("Error submitting form:", error);
       showErrorToast("Error", "Failed to submit application");
     } finally {
-      // 5. STOP LOADING
       setIsLoading(false);
-      setErrors({});
     }
   };
 
