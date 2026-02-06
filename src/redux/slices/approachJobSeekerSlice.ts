@@ -1,18 +1,41 @@
-import apiClient from "@/lib/axios";
+import { publicApi } from "@/lib/axios";
 import { JobSeekerApproachInterface } from "@/types/job-seeker";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { AxiosError } from "axios";
 
 export const approachJobSeekerThunk = createAsyncThunk(
   "approachJobSeeker/approachJobSeekerThunk",
   async (file: FormData, { rejectWithValue }) => {
     try {
-      const res = await apiClient.post(
-        "/api/jobApproach/send-file-to-email",
+      const res = await publicApi.post(
+        "/jobApproach/send-file-to-email",
         file,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
       );
       console.log(res.data);
     } catch (error) {
-      return rejectWithValue(error);
+      console.log(error);
+      // Handle Axios errors
+      if (error instanceof AxiosError) {
+        // Server responded with error status
+        if (error.response) {
+          const message =
+            error.response.data?.message || "Uploading Resume Failed";
+          return rejectWithValue(message);
+        }
+        // Network error (no response)
+        if (error.request) {
+          return rejectWithValue(
+            "Network error. Please check your connection.",
+          );
+        }
+      }
+      // Generic error fallback
+      return rejectWithValue("An unexpected error occurred. Please try again.");
     }
   },
 );
@@ -32,7 +55,7 @@ const initialState: ApproachJobSeekerState = {
       nationality: "",
       dateOfBirth: "",
       japaneseLevel: "any",
-      contactNumber: "",
+      phone: "",
       email: "",
       visaStatus: "notSure",
     },
@@ -40,7 +63,7 @@ const initialState: ApproachJobSeekerState = {
       preferredArea: "",
       preferredJobRole: "",
       preferredEmployment: "full-time",
-      expectedSalary: null,
+      expectedSalary: "",
       futureGoals: "",
     },
     currentJob: {
@@ -51,7 +74,7 @@ const initialState: ApproachJobSeekerState = {
       reasonForLeaving: "",
     },
     additionalInfo: {
-      skills: null,
+      skills: "",
       dormPreference: null,
       notes: "",
     },

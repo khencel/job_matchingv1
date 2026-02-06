@@ -49,7 +49,7 @@ export interface JobSeekerApproachInterface {
     nationality: string;
     dateOfBirth: string;
     japaneseLevel: "N5" | "N4" | "N3" | "N2" | "N1" | "any";
-    contactNumber: string;
+    phone: string;
     email: string;
     visaStatus:
       | "student"
@@ -70,7 +70,7 @@ export interface JobSeekerApproachInterface {
       | "contract"
       | "shift"
       | "dispatch";
-    expectedSalary: number | null;
+    expectedSalary: string;
     futureGoals: string;
   };
   // current job details
@@ -83,7 +83,7 @@ export interface JobSeekerApproachInterface {
   };
   // additional information
   additionalInfo: {
-    skills: string[] | null;
+    skills: string;
     dormPreference: "need" | "not-needed" | "flexible" | null;
     notes: string;
   };
