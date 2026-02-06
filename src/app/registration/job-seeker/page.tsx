@@ -14,6 +14,7 @@ import jsPDF from "jspdf";
 import { useRef, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
+import Footer from '@/components/Footer';
 
 const ApproachJobSeekerPage = () => {
   const dispatch = useAppDispatch();
@@ -237,7 +238,7 @@ const ApproachJobSeekerPage = () => {
           <div className="spinner-custom">Processing... Please wait</div>
         </div>
       )}
-      <Container fluid className="p-5" id="convertPDF">
+      <Container fluid className="p-5 mt-5" id="convertPDF">
         <Container
           fluid
           ref={formRef}
@@ -659,12 +660,13 @@ const ApproachJobSeekerPage = () => {
                 type="submit"
                 disabled={isLoading}
               >
-                Submit (demo)
+                Submit
               </button>
             </div>
           </Form>
         </Container>
       </Container>
+      <Footer />
     </>
   );
 };
