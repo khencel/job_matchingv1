@@ -39,7 +39,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm" style={{ zIndex: 1050 }}>
+    <nav className={`navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top`} style={{ zIndex: 1050 }}>
       <div className="container d-flex align-items-center">
 
         {/* LOGO */}

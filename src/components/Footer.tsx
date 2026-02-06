@@ -47,6 +47,9 @@ export default function Footer() {
               <li className="nav-item">
                 <a className="nav-link text-dark" href="#">Contacts</a>
               </li>
+              <li className="nav-item">
+                <a className="nav-link text-dark" href="#">Company & Legal Notice</a>
+              </li>
             </ul>
           </div>
         </div>

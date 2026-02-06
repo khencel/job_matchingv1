@@ -2,6 +2,7 @@
 
 import Footer from "@/components/Footer";
 import Navbar from "@/components/navbar/Navbar";
+import NavbarAuth from "@/app/components/NavbarAuth";
 import Image from "next/image";
 import {
   Button,
@@ -36,7 +37,8 @@ const JobDescriptionPage = () => {
   );
   const applyStatus = useAppSelector((state) => state.jobSlice.applyStatus);
   const user = useAppSelector((state) => state.authState.user);
-
+  console.log(jobDetails);
+  
   // Fetch data when the ID changes
   useEffect(() => {
     if (id) {
@@ -108,15 +110,15 @@ const JobDescriptionPage = () => {
     <div>
       <Navbar />
       {/* Title */}
-      <div className="w-100 py-5 bg-body-secondary">
-        <CardBody className="d-flex w-75 bg-body p-3 m-auto justify-content-between align-items-center">
+      <div className="w-100 py-5 job-desc-apply" style={{backgroundImage:`url(http://127.0.0.1:8000/media/${jobDetails?.employer[0]?.banner})`}}>
+        <CardBody className="d-flex w-75 bg-body p-3 m-auto justify-content-between align-items-center rounded-4">
           <div className="d-flex justify-content-center align-items-center gap-3">
-            <Image
-              width={75}
-              src={"/globe.svg"}
-              height={75}
+            <img
+              width={120}
+              src={`http://127.0.0.1:8000/media/${jobDetails?.employer[0]?.avatar}`}
+              
               alt="Company Logo"
-            ></Image>
+            ></img>
             <div className="d-flex flex-column gap-2">
               <CardTitle className="fw-bold text-dark">
                 {jobDetails.title}

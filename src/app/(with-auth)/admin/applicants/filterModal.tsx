@@ -14,7 +14,8 @@ interface FilterModalProps {
                         gender?: string,
                         visa?:string,
                         firstName?:string,
-                        lastName?:string
+                        lastName?:string,
+                        startAge?: number
                     }
     ) => void
 }
@@ -25,6 +26,7 @@ export default function FilterModal({handleShow, handleClose, companyList, onApp
     const [selectedVisa, setSelectedVisa] = useState('');
     const [firstName, setFirstname] = useState('');
     const [lastName, setLastname] = useState('');
+    const [startAge, setStartAge] = useState<number>(0);
 
     const handleApply = () => {
         onApplyFilter({ 
@@ -32,7 +34,8 @@ export default function FilterModal({handleShow, handleClose, companyList, onApp
                         gender: selectedGender, 
                         visa: selectedVisa,
                         firstName: firstName,
-                        lastName:lastName
+                        lastName:lastName,
+                        startAge:startAge
                     });
         handleClose();
     }
@@ -119,6 +122,33 @@ export default function FilterModal({handleShow, handleClose, companyList, onApp
                                 <option value="DENIED">Denied</option>
                             </select>
                         </div>
+                    </div>
+
+                    <div className="row mt-3">
+                        <div className="col">
+                            <strong>Start age above:</strong>
+                            <br />
+                            <input type="number" value={startAge} onChange={(e) => setStartAge(Number(e.target.value))} className='form-control' placeholder='Ex. 18/20/30' />
+                            
+                        </div>
+
+                        {/* <div className="col">
+                            <strong>Visa Status:</strong>
+                            <br />
+                            <select name="" id=""
+                                className='form-control'
+                                value={selectedVisa}
+                                onChange={(e) => setSelectedVisa(e.target.value)}
+                            >
+                                <option value="" disabled hidden>Select Status</option>
+                                <option value="">None</option>
+                                <option value="APPLIED">Applied</option>
+                                <option value="PENDING">Pending</option>
+                                <option value="REVIEWING">Under Review</option>
+                                <option value="ISSUED">Issued</option>
+                                <option value="DENIED">Denied</option>
+                            </select>
+                        </div> */}
                     </div>
                 </Modal.Body>
                 <Modal.Footer>

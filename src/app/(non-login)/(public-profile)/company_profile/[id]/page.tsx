@@ -104,8 +104,12 @@ const CompanyProfilePage = () => {
                 <div className="mb-4">
                   <p className="section-label">Company Overview</p>
                   <h2 className="section-title">About this company</h2>
-                  <p className="section-description">
-                    {company_information.profile}
+                  <p className="section-description" 
+                    dangerouslySetInnerHTML={{
+                                __html: company_information.profile
+                            }}
+                  >
+                   
                   </p>
                 </div>
 

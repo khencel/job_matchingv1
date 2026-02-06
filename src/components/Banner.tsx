@@ -1,8 +1,23 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { JobPosting } from "@/types/applyJob";
+import { useEffect, useState } from "react";
+import { getJobPostings } from "@/redux/slices/jobs/jobServices";
+import { useRouter } from "next/navigation";
 
 export default function Banner() {
+  const [jobPostings, setJobPostings] = useState<JobPosting[]>([]);
   const t = useTranslations("banner");
+  const router = useRouter();
+  useEffect(() => {
+    async function fetchJobDetails() {
+      const res = await getJobPostings();
+      setJobPostings(res.data);
+      console.log(res.data);
+      
+    }
+    fetchJobDetails();
+  }, []);
 
   return (
     <section className="top-jobs" id="latest">
@@ -48,33 +63,47 @@ export default function Banner() {
                 <div data-i18n="jobs_title">New updates from companies</div>
               </div>
             </div>
-            <div className="jobs-panel-sub" data-i18n="jobs_sub">View All</div>
+            <div className="jobs-panel-sub" style={{cursor:"pointer"}} onClick={() => router.push("/find-jobs")} data-i18n="jobs_sub">View All</div>
           </div>
 
           <div className="job-grid-2x2">
-            <article className="job-card">
-              <div className="job-img">
-                <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=70" alt="企業イメージ" />
-                <span className="job-badge">NEW</span>
-              </div>
-              <div className="job-body">
-                <div className="job-top">
-                  <div className="job-company" data-i18n="job1_company">Sample Co., Ltd.</div>
-                  <div className="job-date" data-i18n="job1_date">Updated: 2/2</div>
+            {jobPostings.slice(0, 4).map((job) => (
+              <article className="job-card" key={job.id}>
+                <div className="job-img">
+                  <img 
+                        src={
+                          job?.employer?.[0]?.avatar
+                            ? `http://127.0.0.1:8000/media/${job.employer[0].avatar}`
+                            : "http://127.0.0.1:8000/media/placeholder.jpg"
+                        }
+                        alt="企業イメージ" 
+                  />
+                  <span className="job-badge">NEW</span>
                 </div>
-                <div className="job-title" data-i18n="job1_title">Hotel Front Desk (SSW)</div>
-                <div className="job-meta">
-                  <span className="meta-pill" data-i18n="job1_meta1">📍 Tokyo</span>
-                  <span className="meta-pill" data-i18n="job1_meta2">💼 Full-time</span>
-                  <span className="meta-pill" data-i18n="job1_meta3">🗣 Japanese N3+</span>
+                <div className="job-body">
+                  <div className="job-top">
+                    <div className="job-company" data-i18n="job1_company">{job?.employer?.[0]?.userDetails_emp?.company_information?.name}</div>
+                    <div className="job-date" data-i18n="job1_date">Updated: 2/2</div>
+                  </div>
+                  <div className="job-title" data-i18n="job1_title">{job.title}</div>
+                  <div className="job-meta">
+                    <span className="meta-pill" data-i18n="job1_meta1">📍 Tokyo</span>
+                    {job.type_of_emp?.map((type, index) => (
+                      <span key={index} className="meta-pill">
+                        💼 {type}
+                      </span>
+                    ))}
+    
+                    <span className="meta-pill" data-i18n="job1_meta3">💰 {job.salary}</span>
+                  </div>
+                  <div className="job-cta">
+                    <button className="job-btn" onClick={() => router.push(`job-description/${job.id}`)} type="button" data-i18n="btn_detail">View details</button>
+                  </div>
                 </div>
-                <div className="job-cta">
-                  <button className="job-btn" type="button" data-i18n="btn_detail">View details</button>
-                </div>
-              </div>
-            </article>
+              </article>
+            ))}
 
-            <article className="job-card">
+            {/* <article className="job-card">
               <div className="job-img">
                 <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=900&q=70" alt="企業イメージ" />
                 <span className="job-badge">NEW</span>
@@ -138,7 +167,7 @@ export default function Banner() {
                   <button className="job-btn" type="button"  data-i18n="btn_detail">View details</button>
                 </div>
               </div>
-            </article>
+            </article> */}
           </div>
         </div>
 

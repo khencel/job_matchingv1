@@ -1,3 +1,4 @@
+import { JSX } from "react/jsx-runtime";
 import { RegisterJobSeekerStep2Data } from "./job-seeker";
 import { User } from "./user-register";
 
@@ -8,6 +9,7 @@ export interface JobPosting {
   title: string;
   salary: number;
   type_of_emp: {
+    map(arg0: (type: any, index: any) => JSX.Element): import("react").ReactNode;
     type: string[];
   };
   category: {

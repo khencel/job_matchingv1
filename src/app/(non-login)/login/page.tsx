@@ -64,7 +64,7 @@ export default function Login() {
       {/* Left Side */}
       <div className="left-side d-flex flex-column align-items-center justify-content-center position-relative text-center">
         <img
-          src="/logo.png"
+          src="/img/logo.png"
           alt="Logo"
           className={`logo ${fadeIn ? "animate-logo" : ""}`}
         />

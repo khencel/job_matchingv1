@@ -9,7 +9,8 @@ interface ListApplicantsParams {
   company?: string;
   visa?:string;
   firstName?: string;
-  lastName?: string
+  lastName?: string;
+  startAge?: number;
 }
 
 
@@ -36,7 +37,8 @@ export const fetchApplicants = createAsyncThunk(
       company,
       visa,
       firstName,
-      lastName
+      lastName,
+      startAge
     }: ListApplicantsParams,
     { rejectWithValue }
   ) => {
@@ -48,7 +50,8 @@ export const fetchApplicants = createAsyncThunk(
         company,
         visa,
         firstName,
-        lastName
+        lastName,
+        startAge
       });
 
       const response = await standard_get_api(`/api/apply/?${query}`);
@@ -68,7 +71,8 @@ export const fetchApplicantsNoPagination = createAsyncThunk(
       company,
       visa,
       firstName,
-      lastName
+      lastName,
+      startAge
     }: ListApplicantsParams,
     { rejectWithValue }
   ) => {
@@ -78,7 +82,8 @@ export const fetchApplicantsNoPagination = createAsyncThunk(
         company,
         visa,
         firstName,
-        lastName
+        lastName,
+        startAge
       });
 
       const response = await standard_get_api(`/api/apply/?${query}`);

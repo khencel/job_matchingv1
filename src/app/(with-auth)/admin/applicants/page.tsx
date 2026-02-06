@@ -5,7 +5,7 @@ import { FaCalendarCheck, FaSliders } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useAppDispatch } from "@/redux/hooks";
-import { fetchApplicants, fetchAllCompany, fetchApplicantsNoPagination } from "@/redux/slices/applicants/applicantThunk";
+import { fetchApplicants, fetchAllCompany, fetchApplicantsNoPagination, updateStatus } from "@/redux/slices/applicants/applicantThunk";
 import type { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -125,13 +125,38 @@ export default function AdminApplicants() {
         saveAs(blob, "Filtered_Applicants.xlsx");
     };
 
+    const handleUpdateStatus = (id: number, status: string) => {
+        popup({
+            title: "Change Status",
+            text: `Are you sure you want to change the status of this data?`,
+            icon: "warning",
+            onConfirm() {
+            const payloadstatus = {
+                id,
+                status,
+            };
+
+            dispatch(updateStatus(payloadstatus))
+                .unwrap() 
+                .then(() => {
+                showSuccessToast("Change status", "Status of this record has been changed!");
+               
+                dispatch(fetchApplicants({ page: currentPage, pageSize, ...currentFilter }));
+                dispatch(fetchApplicantsNoPagination(currentFilter));
+                })
+                .catch((err) => {
+                console.error(err);
+                });
+            },
+        });
+    };
+
+
     
     useEffect(() => {
         dispatch(fetchApplicants({page: currentPage, pageSize, ...currentFilter}));
         dispatch(fetchAllCompany())
-        dispatch(fetchApplicantsNoPagination(currentFilter))
-
-        
+        dispatch(fetchApplicantsNoPagination(currentFilter)) 
     }, [dispatch,currentPage, pageSize, currentFilter]);
     return (
         <>
@@ -170,6 +195,7 @@ export default function AdminApplicants() {
                                     <th className="text-start p-2">Full Name</th>
                                     <th className="text-start p-2">Hiring Stage</th>
                                     <th className="text-start p-2">Joined</th>
+                                    <th className="text-start p-2">Age</th>
                                     <th className="text-start p-2">Job Role</th>
                                     <th className="text-start p-2">Employer</th>
                                     <th className="text-start p-2">Action</th>
@@ -178,11 +204,39 @@ export default function AdminApplicants() {
                             <tbody>
                                 {
                                     items.map((item: any, index: number) => {
+                                        let text_color = ""
+                                        if(item.status == null || item.status == "Pending"){
+                                            text_color = "text-primary"
+                                        }
+
+                                        if(item.status == "Processing"){
+                                            text_color = "text-warning"
+                                        }
+
+                                        if(item.status == "Completed"){
+                                            text_color = "text-success"
+                                        }
+
+                                        if(item.status == "Rejected"){
+                                            text_color = "text-danger"
+                                        }
                                         return (
                                             <tr key={index}>
                                                 <td className="text-start p-2 text-capitalize">{item.user.userDetails.firstName} {item.user.userDetails.lastName}</td>
-                                                <td className="text-start p-2"><span className={`badge bg-default border border-dark ${item?.status == 'approved'?'bg-success':'bg-danger'}`}>{item.status || 'pending'}</span></td>
+                                                <td className="text-start p-2">
+                                                    <select
+                                                        className={`badge form-control ${text_color}`}
+                                                        value={item.status || "Pending"} // default to "Pending" if null
+                                                        onChange={(e) => handleUpdateStatus(item.id, e.target.value)}
+                                                    >
+                                                        <option className="text-dark"  value="Pending">Pending</option>
+                                                        <option className="text-dark"  value="Processing">Processing</option>
+                                                        <option className="text-dark"  value="Completed">Completed</option>
+                                                        <option className="text-dark"  value="Rejected">Rejected</option>
+                                                    </select>
+                                                </td>
                                                 <td className="text-start p-2"><FormattedDate date={item.created_at} /></td>
+                                                <td className="text-start p-2">{item.user.userDetails.age}</td>
                                                 <td className="text-start p-2">{item.job_post.jobPostDetails?.title}</td>
                                                 <td className="text-start p-2">{item.job_post.employerDetails.userDetails_emp.company_information.name}</td>
                                                 <td className="text-start p-2">
