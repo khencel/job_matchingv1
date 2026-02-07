@@ -6,7 +6,6 @@ import {
   Col,
   Card,
   Button,
-  Table,
   Badge,
   Form,
 } from "react-bootstrap";
@@ -15,9 +14,7 @@ import Swal from "sweetalert2";
 import apiClient from "@/lib/axios";
 import {
   CloudUploadIcon,
-  FileIcon,
   FilesIcon,
-  FileX2Icon,
   PlusCircleIcon,
   Trash2Icon,
   UploadIcon,
@@ -25,6 +22,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import PreviewFile from "@/components/PreviewFile";
 import { fetchCurrentUser } from "@/redux/features/auth/auth_thunk";
+import DisplayDocuments from "../../../../../components/DisplayDocuments";
 
 const DocumentsPage = () => {
   const dispatch = useAppDispatch();
@@ -72,18 +70,9 @@ const DocumentsPage = () => {
     setUploadedFiles(null);
   };
 
-  const handleFileClick = (file: string) => {
-    setPreviewFile(file);
-  };
-
   const fileName = (doc: string) => {
     const name = doc.split(`user_${user_id}/`).pop();
     return name?.split(".").shift();
-  };
-
-  const fileType = (doc: string) => {
-    const parts = doc.split(`user_${user_id}/`).pop();
-    return parts?.split(".").pop()?.toUpperCase();
   };
 
   // Placeholder handler for file upload
@@ -133,7 +122,7 @@ const DocumentsPage = () => {
     }
     console.log("Files selected:", uploadedFiles);
   };
-
+  if (!user_id) return;
   return (
     <Tab.Pane eventKey="documents">
       <PreviewFile
@@ -144,7 +133,7 @@ const DocumentsPage = () => {
       <Container fluid className="py-4">
         <Row className="mb-4">
           <Col>
-            <Card className="shadow-sm border-0">
+            <Card className="shadow-sm rounded-4 border-light-subtle">
               <Card.Body className="p-4">
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <div>
@@ -164,7 +153,7 @@ const DocumentsPage = () => {
 
         <Row className="mb-4">
           <Col>
-            <Card className="shadow-sm border-0">
+            <Card className="shadow-sm rounded-4 border-light-subtle">
               <Card.Body className="p-4">
                 {uploadedFiles && uploadedFiles.length > 0 && (
                   <div className="mb-4">
@@ -266,61 +255,11 @@ const DocumentsPage = () => {
 
         <Row>
           <Col>
-            <Card className="shadow-sm border-0">
-              <Card.Header className="bg-white py-3">
-                <h5 className="mb-0 fw-bold">Uploaded Documents</h5>
-              </Card.Header>
-              <Card.Body className="p-0">
-                {documents.length === 0 ? (
-                  <div className="text-center py-5">
-                    <FileX2Icon size={50} className="text-muted mb-3" />
-                    <p className="text-muted mb-0">No documents uploaded yet</p>
-                  </div>
-                ) : (
-                  <Table responsive hover className="mb-0">
-                    <thead className="bg-light">
-                      <tr>
-                        <th className="border-0 py-3">File Name</th>
-                        <th className="border-0 py-3">File Type</th>
-                        <th className="border-0 py-3 text-end">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {documents.map((doc, idx) => (
-                        <tr key={idx}>
-                          <td
-                            className="align-middle py-3"
-                            onClick={() => handleFileClick(doc.documents)}
-                            style={{ cursor: "pointer" }}
-                          >
-                            <div className="d-flex align-items-center">
-                              <div className="me-3">
-                                <FileIcon className="text-primary" />
-                              </div>
-                              <div>
-                                <div className="fw-semibold">
-                                  {fileName(doc.documents)}
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="d-flex align-items-center">
-                              <Badge bg="dark">{fileType(doc.documents)}</Badge>
-                            </div>
-                          </td>
-                          <td className="align-middle py-3 text-end">
-                            <Button variant="outline-danger" size="sm">
-                              <Trash2Icon />
-                            </Button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
-                )}
-              </Card.Body>
-            </Card>
+            <DisplayDocuments
+              isPublic={false}
+              documents={documents}
+              user_id={user_id.toString()}
+            />
           </Col>
         </Row>
       </Container>

@@ -1,9 +1,10 @@
 import axios, { AxiosError } from "axios";
 import Cookies from "js-cookie";
 
-
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api/",
+  baseURL:
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}api/` ||
+    "http://localhost:8000/api/",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -11,7 +12,9 @@ const apiClient = axios.create({
 });
 
 export const publicApi = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api/",
+  baseURL:
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}api/` ||
+    "http://localhost:8000/api/",
   withCredentials: false,
   headers: {
     "Content-Type": "application/json",
@@ -21,7 +24,7 @@ export const publicApi = axios.create({
 // Flag to prevent multiple refresh requests
 let isRefreshing = false;
 let failedQueue: Array<{
-  resolve: (value: any) => void; 
+  resolve: (value: any) => void;
   reject: (reason?: any) => void;
 }> = [];
 

@@ -486,5 +486,68 @@
       "jobType": "雇用形態",
       "salary": "給与"
     }
+  },
+  "jobSeekerProfile": {
+    "loading": "読み込み中...",
+    "noDataAvailable": "データがありません",
+    "avatarAlt": "求職者のアバター",
+    "sections": {
+      "overview": "概要",
+      "personalInformation": "個人情報"
+    },
+    "infoLabels": {
+      "fullName": "氏名",
+      "gender": "性別",
+      "birthdate": "生年月日",
+      "nationality": "国籍",
+      "phone": "電話番号",
+      "facebook": "Facebook",
+      "contactInformation": "連絡先情報",
+      "currentResidence": "現在の居住地",
+      "professionalInformation": "職業情報",
+      "education": "最終学歴",
+      "japaneseLevel": "日本語レベル",
+      "visaStatus": "ビザステータス"
+    },
+    "education": {
+      "highSchool": "高校卒業",
+      "associateDegree": "短期大学卒業",
+      "bachelorDegree": "学士",
+      "masterDegree": "修士",
+      "doctorate": "博士"
+    }
+  },
+  "companyProfile": {
+    "loading": "読み込み中...",
+    "noDataAvailable": "データがありません",
+    "bannerAlt": "会社バナー",
+    "avatarAlt": "会社ロゴ",
+    "sections": {
+      "overview": "概要",
+      "aboutThisCompany": "会社について",
+      "postedJobs": "掲載求人",
+      "jobListings": "求人一覧"
+    },
+    "infoLabels": {
+      "founded": "設立年",
+      "employees": "従業員数",
+      "phone": "電話番号",
+      "fee": "料金",
+      "appealPoint": "アピールポイント",
+      "companyAddress": "会社住所",
+      "contactPerson": "担当者",
+      "name": "名前",
+      "department": "部署",
+      "email": "メール",
+      "companyIndustry": "業種",
+      "branchOffices": "支店",
+      "perksAndBenefits": "福利厚生"
+    },
+    "jobsBadge": "求人数:",
+    "empty": {
+      "noJobs": "まだ求人がありません",
+      "noJobsSubtitle": "この会社はまだ求人を掲載していません。後でもう一度確認してください！",
+      "noPerks": "福利厚生の記載がありません"
+    }
   }
 }
