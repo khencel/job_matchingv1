@@ -40,10 +40,7 @@ export default function HomePage() {
       <JobSearchFiler/>
       <Banner />
       <hr className="mt-5 w-75 mx-auto" />
-
-      
       {!hasAccess && <Registration />}
-
       <ServiceContent />
       {/* <hr className="mt-5 w-75 mx-auto" /> */}
       {/* <JobPost /> */}

@@ -239,11 +239,18 @@ const ApproachJobSeekerPage = () => {
           <div className="spinner-custom">Processing... Please wait</div>
         </div>
       )}
-      <Container fluid className="p-5 mt-5" id="convertPDF">
+      <Container
+        fluid
+        className="p-5"
+        id="convertPDF"
+        style={{
+          background: "linear-gradient(180deg, rgba(47,120,255,.06), #fff)",
+        }}
+      >
         <Container
           fluid
           ref={formRef}
-          className="p-5 bg-white mt-5 shadow-lg rounded-5"
+          className="p-5 bg-white shadow-lg rounded-5"
         >
           <div>
             <h1 className="h1-custom">

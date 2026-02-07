@@ -1,23 +1,46 @@
 export default function JobSearchFiler() {
   return (
     <>
-      <div className="job-search-filter d-flex justify-content-center p-1" style={{marginTop:"7%"}}>
+      <div className="job-search-filter d-flex justify-content-center p-1">
         <div className="container rounded">
           <div className="row g-2 p-1">
-
             <div className="col-md-5">
               <div className="field">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M9 7V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1" stroke="#0f172a" strokeWidth={"1.8"} strokeLinecap="round" />
-                  <path d="M4.5 9.5h15v9.5a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2V9.5z" stroke="#0f172a" strokeWidth="1.8" strokeLinejoin="round"/>
-                  <path d="M4.5 12.5h15" stroke="#0f172a" strokeWidth="1.8" strokeLinecap="round" opacity=".45"/>
+                  <path
+                    d="M9 7V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1"
+                    stroke="#0f172a"
+                    strokeWidth={"1.8"}
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M4.5 9.5h15v9.5a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2V9.5z"
+                    stroke="#0f172a"
+                    strokeWidth="1.8"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M4.5 12.5h15"
+                    stroke="#0f172a"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    opacity=".45"
+                  />
                 </svg>
 
-                <select name="ssw_field" aria-label="特定技能 分野" id="sswField">
-                  <option value="" data-i18n="ssw_placeholder">特定技能（分野）を選択</option>
+                <select
+                  name="ssw_field"
+                  aria-label="特定技能 分野"
+                  id="sswField"
+                >
+                  <option value="" data-i18n="ssw_placeholder">
+                    特定技能（分野）を選択
+                  </option>
                   <option data-i18n="ssw_care">介護</option>
                   <option data-i18n="ssw_building">ビルクリーニング</option>
-                  <option data-i18n="ssw_manufacturing">素形材・産業機械・電気電子情報関連製造業</option>
+                  <option data-i18n="ssw_manufacturing">
+                    素形材・産業機械・電気電子情報関連製造業
+                  </option>
                   <option data-i18n="ssw_construction">建設</option>
                   <option data-i18n="ssw_shipbuilding">造船・舶用工業</option>
                   <option data-i18n="ssw_auto_repair">自動車整備</option>
@@ -39,12 +62,23 @@ export default function JobSearchFiler() {
             <div className="col-md-5">
               <div className="field">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M12 21s7-4.4 7-11a7 7 0 1 0-14 0c0 6.6 7 11 7 11z" stroke="#0f172a" strokeWidth="1.8" strokeLinejoin="round"/>
-                  <path d="M12 12.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" stroke="#0f172a" strokeWidth="1.8"/>
+                  <path
+                    d="M12 21s7-4.4 7-11a7 7 0 1 0-14 0c0 6.6 7 11 7 11z"
+                    stroke="#0f172a"
+                    strokeWidth="1.8"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M12 12.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z"
+                    stroke="#0f172a"
+                    strokeWidth="1.8"
+                  />
                 </svg>
 
                 <select name="prefecture" aria-label="都道府県" id="prefecture">
-                  <option value="" data-i18n="pref_placeholder">都道府県を選択</option>
+                  <option value="" data-i18n="pref_placeholder">
+                    都道府県を選択
+                  </option>
                   <option data-i18n="pref_hokkaido">北海道</option>
                   <option data-i18n="pref_aomori">青森県</option>
                   <option data-i18n="pref_iwate">岩手県</option>

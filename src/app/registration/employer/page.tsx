@@ -3,12 +3,10 @@
 import "../../../../public/css/employer/registration.css";
 import { useAppDispatch } from "@/redux/hooks";
 import { useSelector } from "react-redux";
-import type { RootState, AppDispatch } from "@/redux/store";
+import type { RootState } from "@/redux/store";
 import {
   updateField,
   validateForm,
-  clearForm,
-  clearErrors,
 } from "@/redux/slices/employer/registration/employerRegistrationSlice";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/Footer";
@@ -17,104 +15,100 @@ import { useStore } from "react-redux";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useEffect, useState } from "react";
-import { showErrorToast } from "@/app/(util)/toaster"
-import { popup } from "@/helper/pop_up"
+import { showErrorToast } from "@/app/(util)/toaster";
+import { popup } from "@/helper/pop_up";
 
+export default function RegistrationEmployer() {
+  const store = useStore();
+  const dispatch = useAppDispatch();
+  const { form, errors } = useSelector(
+    (state: RootState) => state.employerRegistration,
+  );
+  const [isLoading, setIsLoading] = useState(false);
 
-export default function RegistrationEmployer(){
-    const store = useStore();
-    const dispatch = useAppDispatch();
-    const { form, errors } = useSelector((state: RootState) => state.employerRegistration);
-    const [isLoading, setIsLoading] = useState(false);
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
+    dispatch(
+      updateField({
+        name: name as any,
+        value: type === "checkbox" ? value : value,
+        type,
+        checked: type === "checkbox" ? checked : undefined,
+      }),
+    );
+  };
 
-    
-    const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-    ) => {
-        const { name, value, type } = e.target;
-        const checked = (e.target as HTMLInputElement).checked;
-        dispatch(
-            updateField({
-            name: name as any,
-            value: type === "checkbox" ? value : value,
-            type,
-            checked: type === "checkbox" ? checked : undefined,
-            })
-        );
-    };
+  const handleSubmit = async () => {
+    dispatch(validateForm());
+    const currentErrors = (store.getState() as RootState).employerRegistration
+      .errors;
+    if (Object.keys(currentErrors).length !== 0) {
+      showErrorToast("Invalid Input", "Some field are required!");
+      console.log("Validation failed", currentErrors);
+      return;
+    }
 
+    popup({
+      title: "Are you sure?",
+      text: "This form will be sent to GNI via email.",
+      icon: "warning",
+      onConfirm: async () => {
+        try {
+          setIsLoading(true);
 
-    const handleSubmit = async () => {
-        dispatch(validateForm());
-        const currentErrors = (store.getState() as RootState).employerRegistration.errors;
-        if (Object.keys(currentErrors).length !== 0) {
-            showErrorToast("Invalid Input","Some field are required!")
-            console.log("Validation failed", currentErrors);
-            return; 
+          const pdfBlob = await generatePDFBlob();
+          if (!pdfBlob) {
+            console.error("PDF generation failed");
+            return;
+          }
+
+          const formDataToSend = new FormData();
+          formDataToSend.append(
+            "pdf_file",
+            pdfBlob,
+            `company-registration-${Date.now()}.pdf`,
+          );
+          await dispatch(createJobApproach(formDataToSend));
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setIsLoading(false);
         }
+      },
+    });
+  };
 
-        popup({
-            title:"Are you sure?",
-            text:"This form will be sent to GNI via email.",
-            icon:"warning",
-            onConfirm: async () => {
-                try {
-            
-                    setIsLoading(true); 
+  const generatePDFBlob = async (): Promise<Blob | null> => {
+    const element = document.getElementById("convertPDF");
+    if (!element) return null;
 
-                    const pdfBlob = await generatePDFBlob();
-                    if (!pdfBlob) {
-                        console.error("PDF generation failed");
-                        return;
-                    }
+    const buttons = document.getElementById("pdfButtons");
+    if (buttons) buttons.style.display = "none";
 
-                    const formDataToSend = new FormData();
-                    formDataToSend.append("pdf_file", pdfBlob, `company-registration-${Date.now()}.pdf`);
-                    await dispatch(createJobApproach(formDataToSend)); 
+    const canvas = await html2canvas(element, { scale: 1.5 });
+    const imgData = canvas.toDataURL("image/png");
 
-                } catch (error) {
-                    console.error(error);
-                } finally {
-                    setIsLoading(false); 
-                }
-            },
-        })
+    const pdf = new jsPDF("p", "mm", "a4");
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-        
-    };
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
 
+    if (buttons) buttons.style.display = "block";
 
-    const generatePDFBlob = async (): Promise<Blob | null> => {
-        const element = document.getElementById("convertPDF");
-        if (!element) return null;
+    return pdf.output("blob");
+  };
 
-
-        const buttons = document.getElementById("pdfButtons");
-        if (buttons) buttons.style.display = "none";
-
-        const canvas = await html2canvas(element, { scale: 1.5 }); 
-        const imgData = canvas.toDataURL("image/png");
-
-        const pdf = new jsPDF("p", "mm", "a4");
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-
-        if (buttons) buttons.style.display = "block";
-
-        return pdf.output("blob"); 
-    };
-
-
-    useEffect(() => {
-        if (Object.keys(errors).length === 0) {
-            console.log("READY TO SUBMIT", form);
-            
-        }
-    }, [errors]);
-
-
+  useEffect(() => {
+    if (Object.keys(errors).length === 0) {
+      console.log("READY TO SUBMIT", form);
+    }
+  }, [errors]);
 
   return (
     <>
@@ -128,8 +122,6 @@ export default function RegistrationEmployer(){
         id="convertPDF"
         className=" p-5"
         style={{
-          marginTop: "6%",
-
           background: "linear-gradient(180deg, rgba(47,120,255,.06), #fff)",
         }}
       >
@@ -314,7 +306,6 @@ export default function RegistrationEmployer(){
               </div>
             </div>
 
-
             <div className="section-title-reg" data-i18n="sec2">
               2) Hiring needs (Required)
             </div>
@@ -414,7 +405,7 @@ export default function RegistrationEmployer(){
                     Technical Intern Training
                   </option>
                   <option data-i18n="visa_gijinkoku">
-                    Engineer/Specialist in Humanities/Int'l Services
+                    Engineer/Specialist in Humanities/Int{"'"}l Services
                   </option>
                   <option data-i18n="visa_student">Student part-time</option>
                   <option data-i18n="visa_unknown">Not sure (consult)</option>
