@@ -1,5 +1,6 @@
 "use client";
 
+import "../../../../public/css/employer/registration.css";
 import { showErrorToast } from "@/app/(util)/toaster";
 import Navbar from "@/components/navbar/Navbar";
 import { isEmailValid } from "@/helper/validations";
@@ -14,7 +15,7 @@ import jsPDF from "jspdf";
 import { useRef, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
-import Footer from '@/components/Footer';
+import Footer from "@/components/Footer";
 
 const ApproachJobSeekerPage = () => {
   const dispatch = useAppDispatch();
@@ -242,26 +243,26 @@ const ApproachJobSeekerPage = () => {
         <Container
           fluid
           ref={formRef}
-          className="p-4 bg-white mt-5 shadow-lg rounded-5"
+          className="p-5 bg-white mt-5 shadow-lg rounded-5"
         >
           <div>
-            <h2 className="fs-2 fw-bold">
+            <h1 className="h1-custom">
               For Job Seekers | Direct Approach (Consultation / Urgent Support)
-            </h2>
-            <p className="small text-muted">
+            </h1>
+            <p className="lead">
               This form is for people looking for a job. Please enter your
               preferences, current job details, and your future goals
               (consultation only is OK).
             </p>
           </div>
           <Form className="d-flex flex-column gap-4" onSubmit={handleSubmit}>
-            <p className="fs-6 fw-bold">1) Basic Information</p>
+            <p className="section-title-reg">1) Basic Information</p>
             <Row className="g-3">
               <Col md={6}>
-                <Form.Group controlId="approach-fullName">
-                  <Form.Label className="fw-bold small">
-                    Full Name (Required)
-                  </Form.Label>
+                <Form.Group className="field-reg" controlId="approach-fullName">
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
+                    Full Name (Required) <span className="text-danger">*</span>
+                  </label>
                   <Form.Control
                     className="py-2"
                     placeholder="e.g. Juan Dela Cruz"
@@ -277,8 +278,13 @@ const ApproachJobSeekerPage = () => {
                 </Form.Group>
               </Col>
               <Col md={6}>
-                <Form.Group controlId="approach-nationality">
-                  <Form.Label className="fw-bold small">Nationality</Form.Label>
+                <Form.Group
+                  className="field-reg"
+                  controlId="approach-nationality"
+                >
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
+                    Nationality
+                  </label>
                   <Form.Control
                     className="py-2"
                     type="text"
@@ -292,10 +298,14 @@ const ApproachJobSeekerPage = () => {
             </Row>
             <Row className="g-3">
               <Col md={6}>
-                <Form.Group controlId="approach-dateOfBirth">
-                  <Form.Label className="fw-bold small">
+                <Form.Group
+                  className="field-reg"
+                  controlId="approach-dateOfBirth"
+                >
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
                     Date of birth (Required)
-                  </Form.Label>
+                    <span className="text-danger">*</span>
+                  </label>
                   <Form.Control
                     type="date"
                     name="dateOfBirth"
@@ -309,10 +319,10 @@ const ApproachJobSeekerPage = () => {
                 </Form.Group>
               </Col>
               <Col md={6}>
-                <Form.Group controlId="approach-phone">
-                  <Form.Label className="fw-bold small">
-                    Phone (Required)
-                  </Form.Label>
+                <Form.Group className="field-reg" controlId="approach-phone">
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
+                    Phone (Required) <span className="text-danger">*</span>
+                  </label>
                   <Form.Control
                     type="text"
                     placeholder="e.g. +81-90-xxxx-xxxx"
@@ -327,10 +337,10 @@ const ApproachJobSeekerPage = () => {
                 </Form.Group>
               </Col>
               <Col md={6}>
-                <Form.Group controlId="approach-email">
-                  <Form.Label className="fw-bold small">
-                    Email (Required)
-                  </Form.Label>
+                <Form.Group className="field-reg" controlId="approach-email">
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
+                    Email (Required) <span className="text-danger">*</span>
+                  </label>
                   <Form.Control
                     type="email"
                     placeholder="example@email.com"
@@ -345,10 +355,13 @@ const ApproachJobSeekerPage = () => {
                 </Form.Group>
               </Col>
               <Col md={6}>
-                <Form.Group controlId="approach-japaneseLevel">
-                  <Form.Label className="fw-bold small">
+                <Form.Group
+                  className="field-reg"
+                  controlId="approach-japaneseLevel"
+                >
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
                     Japanese level
-                  </Form.Label>
+                  </label>
                   <Form.Select
                     name="japaneseLevel"
                     value={data.basicInfo.japaneseLevel}
@@ -367,10 +380,13 @@ const ApproachJobSeekerPage = () => {
                 </Form.Group>
               </Col>
               <Col md={6}>
-                <Form.Group controlId="approach-visaStatus">
-                  <Form.Label className="fw-bold small">
+                <Form.Group
+                  className="field-reg"
+                  controlId="approach-visaStatus"
+                >
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
                     Visa status (if known)
-                  </Form.Label>
+                  </label>
                   <Form.Select
                     name="visaStatus"
                     value={data.basicInfo.visaStatus}
@@ -391,13 +407,20 @@ const ApproachJobSeekerPage = () => {
               </Col>
             </Row>
             <hr />
-            <p className="fs-6 fw-bold">2) Job Preferences (Required)</p>
+            <p className="section-title-reg">
+              2) Job Preferences (Required)
+              <span className="text-danger">*</span>
+            </p>
             <Row className="g-3">
               <Col md={6}>
-                <Form.Group controlId="approach-preferredArea">
-                  <Form.Label className="fw-bold small">
-                    Preferred area (Required)
-                  </Form.Label>
+                <Form.Group
+                  className="field-reg"
+                  controlId="approach-preferredArea"
+                >
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
+                    Preferred area (Required){" "}
+                    <span className="text-danger">*</span>
+                  </label>
                   <Form.Control
                     className="py-2"
                     type="text"
@@ -413,10 +436,14 @@ const ApproachJobSeekerPage = () => {
                 </Form.Group>
               </Col>
               <Col md={6}>
-                <Form.Group controlId="approach-preferredJobRole">
-                  <Form.Label className="fw-bold small">
+                <Form.Group
+                  className="field-reg"
+                  controlId="approach-preferredJobRole"
+                >
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
                     Preferred job/role (Required)
-                  </Form.Label>
+                    <span className="text-danger">*</span>
+                  </label>
                   <Form.Control
                     className="py-2"
                     type="text"
@@ -434,10 +461,13 @@ const ApproachJobSeekerPage = () => {
             </Row>
             <Row className="g-3">
               <Col md={6}>
-                <Form.Group controlId="approach-preferredEmployment">
-                  <Form.Label className="fw-bold small">
+                <Form.Group
+                  className="field-reg"
+                  controlId="approach-preferredEmployment"
+                >
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
                     Preferred employment type
-                  </Form.Label>
+                  </label>
                   <Form.Select
                     className="py-2"
                     name="preferredEmployment"
@@ -454,10 +484,13 @@ const ApproachJobSeekerPage = () => {
                 </Form.Group>
               </Col>
               <Col md={6}>
-                <Form.Group controlId="approach-desiredSalary">
-                  <Form.Label className="fw-bold small">
+                <Form.Group
+                  className="field-reg"
+                  controlId="approach-desiredSalary"
+                >
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
                     Desired salary (approx.)
-                  </Form.Label>
+                  </label>
                   <Form.Control
                     className="py-2"
                     type="text"
@@ -471,10 +504,14 @@ const ApproachJobSeekerPage = () => {
             </Row>
             <Row className="g-3">
               <Col>
-                <Form.Group controlId="approach-futureGoals">
-                  <Form.Label className="fw-bold small">
-                    Your future goals (Required)
-                  </Form.Label>
+                <Form.Group
+                  className="field-reg"
+                  controlId="approach-futureGoals"
+                >
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
+                    Your future goals (Required){" "}
+                    <span className="text-danger">*</span>
+                  </label>
                   <Form.Control
                     as="textarea"
                     rows={4}
@@ -495,13 +532,20 @@ const ApproachJobSeekerPage = () => {
               </Col>
             </Row>
             <hr />
-            <p className="fs-6 fw-bold">3) Current Job (Required)</p>
+            <p className="section-title-reg">
+              3) Current Job (Required)<span className="text-danger">*</span>
+            </p>
+
             <Row className="g-3">
               <Col md={6}>
-                <Form.Group controlId="approach-currentWorkplace">
-                  <Form.Label className="fw-bold small">
+                <Form.Group
+                  className="field-reg"
+                  controlId="approach-currentWorkplace"
+                >
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
                     Current workplace (company or industry) (Required)
-                  </Form.Label>
+                    <span className="text-danger">*</span>
+                  </label>
                   <Form.Control
                     className="py-2"
                     type="text"
@@ -517,10 +561,13 @@ const ApproachJobSeekerPage = () => {
                 </Form.Group>
               </Col>
               <Col md={6}>
-                <Form.Group controlId="approach-currentPrefecture">
-                  <Form.Label className="fw-bold small">
+                <Form.Group
+                  className="field-reg"
+                  controlId="approach-currentPrefecture"
+                >
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
                     Current prefecture
-                  </Form.Label>
+                  </label>
                   <Form.Control
                     className="py-2"
                     type="text"
@@ -534,10 +581,14 @@ const ApproachJobSeekerPage = () => {
             </Row>
             <Row className="g-3">
               <Col>
-                <Form.Group controlId="approach-jobDuties">
-                  <Form.Label className="fw-bold small">
+                <Form.Group
+                  className="field-reg"
+                  controlId="approach-jobDuties"
+                >
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
                     Job duties (Required)
-                  </Form.Label>
+                    <span className="text-danger">*</span>
+                  </label>
                   <Form.Control
                     as="textarea"
                     rows={4}
@@ -555,10 +606,13 @@ const ApproachJobSeekerPage = () => {
             </Row>
             <Row className="g-3">
               <Col md={6}>
-                <Form.Group controlId="approach-jobChangeDate">
-                  <Form.Label className="fw-bold small">
+                <Form.Group
+                  className="field-reg"
+                  controlId="approach-jobChangeDate"
+                >
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
                     When do you want to change jobs?
-                  </Form.Label>
+                  </label>
                   <Form.Control
                     className="py-2"
                     type="text"
@@ -571,9 +625,9 @@ const ApproachJobSeekerPage = () => {
               </Col>
               <Col md={6}>
                 <Form.Group controlId="approach-reasonForLeaving">
-                  <Form.Label className="fw-bold small">
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
                     Reason (optional)
-                  </Form.Label>
+                  </label>
                   <Form.Control
                     className="py-2"
                     type="text"
@@ -586,13 +640,13 @@ const ApproachJobSeekerPage = () => {
               </Col>
             </Row>
             <hr />
-            <p className="fs-6 fw-bold">4) Additional Info (Optional)</p>
+            <p className="section-title-reg">4) Additional Info (Optional)</p>
             <Row className="g-3">
               <Col md={6}>
                 <Form.Group controlId="approach-skills">
-                  <Form.Label className="fw-bold small">
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
                     Skills / certificates
-                  </Form.Label>
+                  </label>
                   <Form.Control
                     className="py-2"
                     type="text"
@@ -605,9 +659,9 @@ const ApproachJobSeekerPage = () => {
               </Col>
               <Col md={6}>
                 <Form.Group controlId="approach-dormPreference">
-                  <Form.Label className="fw-bold small">
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
                     Dorm preference
-                  </Form.Label>
+                  </label>
                   <Form.Select
                     className="py-2"
                     name="dormPreference"
@@ -625,9 +679,9 @@ const ApproachJobSeekerPage = () => {
             <Row className="g-3">
               <Col>
                 <Form.Group controlId="approach-notes">
-                  <Form.Label className="fw-bold small">
+                  <label style={{ fontWeight: 900, fontSize: "13px" }}>
                     Other notes (optional)
-                  </Form.Label>
+                  </label>
                   <Form.Control
                     as="textarea"
                     rows={4}
@@ -649,14 +703,14 @@ const ApproachJobSeekerPage = () => {
                 </small>
               )}
               <button
-                className="btn btn-outline-primary fw-bold"
+                className="btn btn-default-custom me-1"
                 type="button"
                 onClick={handleClear}
               >
                 Clear
               </button>
               <button
-                className="btn btn-primary fw-bold"
+                className="btn btn-primary-custom"
                 type="submit"
                 disabled={isLoading}
               >
