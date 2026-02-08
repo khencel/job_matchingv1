@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <section id="about" className="about">
+    <section id="about_us" className="about">
       <div className="container">
         <div className="about-card">
           <div className="pill" data-i18n="about_pill">About JOBSAPO</div>

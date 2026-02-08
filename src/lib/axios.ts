@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 const apiClient = axios.create({
   baseURL:
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}api/` ||
+    `${process.env.NEXT_PUBLIC_API_CONTENT_URL}api/` ||
     "http://localhost:8000/api/",
   withCredentials: true,
   headers: {
@@ -13,7 +13,7 @@ const apiClient = axios.create({
 
 export const publicApi = axios.create({
   baseURL:
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}api/` ||
+    `${process.env.NEXT_PUBLIC_API_CONTENT_URL}api/` ||
     "http://localhost:8000/api/",
   withCredentials: false,
   headers: {

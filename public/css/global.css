@@ -264,7 +264,7 @@
 /* mobile  */
 @media (max-width: 480px) {
   .job-search-filter{
-    margin-top: 28% !important;
+    margin-top: 0% !important;
   }
 
   .banner-title{

@@ -87,11 +87,11 @@ const SideBarNavItems: SideBarNavItem[] = [
     icon: <UserCircle2Icon />,
     label: "Profile",
   },
-  {
-    eventKey: "applicants",
-    href: "/super-visory/applicants",
-    icon: <FileUserIcon />,
-    label: "Applicants",
-  },
+  // {
+  //   eventKey: "applicants",
+  //   href: "/super-visory/applicants",
+  //   icon: <FileUserIcon />,
+  //   label: "Applicants",
+  // },
   
 ];
