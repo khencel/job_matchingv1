@@ -14,7 +14,7 @@ import {
   Col,
   Spinner,
 } from "react-bootstrap";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { applyToJob, fetchJobDetails } from "@/redux/slices/jobs/jobsThunk";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -24,6 +24,7 @@ import Swal from "sweetalert2";
 
 const JobDescriptionPage = () => {
   const t = useTranslations("jobDescriptionPage");
+  const locale = useLocale();
   const router = useRouter();
   // All the data will be fetched from the database
   // 1. Get the ID from the URL (e.g., /job-description/5 -> id = "5")
@@ -63,15 +64,19 @@ const JobDescriptionPage = () => {
   }
   // Empty/Not Found State
   if (!jobDetails) {
-    return <Container className="py-5 text-center">Job not found.</Container>;
+    return (
+      <Container className="py-5 text-center">
+        {t("empty.notFound")}
+      </Container>
+    );
   }
 
   const handleClickApply = () => {
     if (!user) {
       Swal.fire({
         icon: "error",
-        title: "Not Logged In",
-        text: "Please log in to apply for jobs.",
+        title: t("alerts.notLoggedIn.title"),
+        text: t("alerts.notLoggedIn.text"),
       });
       router.push("/login");
       return;
@@ -80,8 +85,8 @@ const JobDescriptionPage = () => {
     if (!user.resume) {
       Swal.fire({
         icon: "warning",
-        title: "Resume Required",
-        text: "Please upload your resume before applying for jobs.",
+        title: t("alerts.resumeRequired.title"),
+        text: t("alerts.resumeRequired.text"),
       });
       return;
     }
@@ -96,8 +101,8 @@ const JobDescriptionPage = () => {
       );
       Swal.fire({
         icon: "success",
-        title: "Application Sent",
-        text: "Your application has been sent successfully!",
+        title: t("alerts.applicationSent.title"),
+        text: t("alerts.applicationSent.text"),
       });
     } catch (error) {
       console.log("Error applying", error);
@@ -117,7 +122,7 @@ const JobDescriptionPage = () => {
               width={120}
               src={`http://127.0.0.1:8000/media/${jobDetails?.employer[0]?.avatar}`}
               
-              alt="Company Logo"
+              alt={t("companyLogoAlt")}
             ></img>
             <div className="d-flex flex-column gap-2">
               <CardTitle className="fw-bold text-dark">
@@ -139,7 +144,7 @@ const JobDescriptionPage = () => {
               variant="outline-secondary"
               className="rounded-pill py-1"
             >
-              Visit Profile
+              {t("buttons.visitProfile")}
             </Button>
             <div
               style={{ borderRight: "1px solid #ccc", height: "36px" }}
@@ -159,7 +164,7 @@ const JobDescriptionPage = () => {
                   aria-hidden="true"
                 />
               ) : isApplied ? (
-                "Applied"
+                t("buttons.applied")
               ) : (
                 t("buttons.apply")
               )}
@@ -229,7 +234,8 @@ const JobDescriptionPage = () => {
                 </Col>
                 <Col>
                   <p className="fw-medium text-end">
-                    $ {jobDetails.salary.toLocaleString()}
+                    ${" "}
+                    {new Intl.NumberFormat(locale).format(jobDetails.salary)}
                   </p>
                 </Col>
               </Row>
@@ -274,7 +280,9 @@ const JobDescriptionPage = () => {
         </>
       )}
       <hr />
-      <h3 className="fw-semibold text-dark ms-5 mt-5">More Jobs</h3>
+      <h3 className="fw-semibold text-dark ms-5 mt-5">
+        {t("headings.relatedJobs")}
+      </h3>
       <JobPost />
       <Footer />
     </div>

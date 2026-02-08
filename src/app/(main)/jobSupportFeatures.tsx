@@ -1,17 +1,19 @@
+import { useTranslations } from "next-intl";
+
 export default function JobSupportFeatures() {
+  const t = useTranslations("jobSupportFeatures");
   return (
     <section className="py-5 bg-white" id="job_support_features">
       <div className="container wow animate__animated animate__fadeInUp">
         <div className="text-center mb-5">
           <span className="badge bg-primary mb-2">
-            Job Support Features
+            {t("badge")}
           </span>
           <h2 className="fw-bold mb-3">
-            Everything You Need to Succeed
+            {t("title")}
           </h2>
           <p className="text-muted fs-5">
-            Powerful tools designed to help employers and job seekers connect,
-            collaborate, and grow.
+            {t("subtitle")}
           </p>
         </div>
 
@@ -24,11 +26,10 @@ export default function JobSupportFeatures() {
                   <i className="bi bi-search text-primary fs-1"></i>
                 </div>
                 <h5 className="fw-semibold mb-3">
-                  Smart Job Matching
+                  {t("features.matching.title")}
                 </h5>
                 <p className="text-muted">
-                  Automatically match job seekers with the right opportunities
-                  based on skills, experience, and preferences.
+                  {t("features.matching.body")}
                 </p>
               </div>
             </div>
@@ -42,11 +43,10 @@ export default function JobSupportFeatures() {
                   <i className="bi bi-people-fill text-primary fs-1"></i>
                 </div>
                 <h5 className="fw-semibold mb-3">
-                  Employer & Seeker Profiles
+                  {t("features.profiles.title")}
                 </h5>
                 <p className="text-muted">
-                  Create detailed profiles to showcase skills, experience, and
-                  company culture.
+                  {t("features.profiles.body")}
                 </p>
               </div>
             </div>
@@ -60,11 +60,10 @@ export default function JobSupportFeatures() {
                     <i className="bi bi-clipboard-check-fill text-primary fs-1"></i>
                 </div>
                 <h5 className="fw-semibold mb-3">
-                    Application Tracking
+                  {t("features.tracking.title")}
                 </h5>
                 <p className="text-muted">
-                    Track job applications in real time with clear status updates from
-                    submission to hiring.
+                  {t("features.tracking.body")}
                 </p>
                 </div>
             </div>
@@ -78,11 +77,10 @@ export default function JobSupportFeatures() {
                   <i className="bi bi-graph-up-arrow text-primary fs-1"></i>
                 </div>
                 <h5 className="fw-semibold mb-3">
-                  Career Insights
+                  {t("features.insights.title")}
                 </h5>
                 <p className="text-muted">
-                  Get insights on job trends, salary ranges, and career growth
-                  opportunities.
+                  {t("features.insights.body")}
                 </p>
               </div>
             </div>
@@ -96,11 +94,10 @@ export default function JobSupportFeatures() {
                   <i className="bi bi-shield-lock-fill text-primary fs-1"></i>
                 </div>
                 <h5 className="fw-semibold mb-3">
-                  Secure & Reliable
+                  {t("features.secure.title")}
                 </h5>
                 <p className="text-muted">
-                  Your data is protected with industry-standard security and
-                  privacy measures.
+                  {t("features.secure.body")}
                 </p>
               </div>
             </div>
@@ -114,11 +111,10 @@ export default function JobSupportFeatures() {
                   <i className="bi bi-lightning-fill text-primary fs-1"></i>
                 </div>
                 <h5 className="fw-semibold mb-3">
-                  Fast & Easy Hiring
+                  {t("features.fast.title")}
                 </h5>
                 <p className="text-muted">
-                  Streamline the hiring process with intuitive tools that save
-                  time and effort.
+                  {t("features.fast.body")}
                 </p>
               </div>
             </div>

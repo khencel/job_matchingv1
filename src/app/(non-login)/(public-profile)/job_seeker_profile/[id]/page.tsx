@@ -1,5 +1,5 @@
 "use client";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -12,6 +12,7 @@ import DisplayResume from "@/components/DisplayResume";
 
 export default function PublicJobSeekerPage() {
   const t = useTranslations("jobSeekerProfile");
+  const locale = useLocale();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, user } = useAppSelector((s) => s.publicProfile);
@@ -61,7 +62,7 @@ export default function PublicJobSeekerPage() {
   const formatDate = (dateString: string) => {
     if (!dateString) return "-";
     const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
+    return date.toLocaleDateString(locale, {
       year: "numeric",
       month: "long",
       day: "numeric",

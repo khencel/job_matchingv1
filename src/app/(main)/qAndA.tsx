@@ -1,14 +1,17 @@
+import { useTranslations } from "next-intl";
+
 export default function QASection() {
+  const t = useTranslations("qAndA");
   return (
     <section className="py-5 bg-light" id="q_and_a">
       <div className="container wow animate__animated animate__fadeInUp">
         <div className="text-center mb-5">
-          <span className="badge bg-primary mb-2">Q&amp;A</span>
+          <span className="badge bg-primary mb-2">{t("badge")}</span>
           <h2 className="fw-bold mb-3">
-            Frequently Asked Questions
+            {t("title")}
           </h2>
           <p className="text-muted fs-5">
-            Find quick answers to common questions about Job Support.
+            {t("subtitle")}
           </p>
         </div>
 
@@ -25,7 +28,7 @@ export default function QASection() {
                     data-bs-toggle="collapse"
                     data-bs-target="#qaOne"
                   >
-                    What is Job Support?
+                    {t("items.q1.question")}
                   </button>
                 </h2>
                 <div
@@ -34,9 +37,7 @@ export default function QASection() {
                   data-bs-parent="#qaAccordion"
                 >
                   <div className="accordion-body text-muted">
-                    Job Support is a professional platform that connects
-                    employers, job seekers, and support organizations to make
-                    the hiring process faster, easier, and more reliable.
+                    {t("items.q1.answer")}
                   </div>
                 </div>
               </div>
@@ -50,7 +51,7 @@ export default function QASection() {
                     data-bs-toggle="collapse"
                     data-bs-target="#qaTwo"
                   >
-                    Is Job Support free to use?
+                    {t("items.q2.question")}
                   </button>
                 </h2>
                 <div
@@ -59,9 +60,7 @@ export default function QASection() {
                   data-bs-parent="#qaAccordion"
                 >
                   <div className="accordion-body text-muted">
-                    Job Support offers both free and premium plans depending on
-                    your needs. Job seekers can start for free, while employers
-                    can choose advanced hiring tools.
+                    {t("items.q2.answer")}
                   </div>
                 </div>
               </div>
@@ -75,7 +74,7 @@ export default function QASection() {
                     data-bs-toggle="collapse"
                     data-bs-target="#qaThree"
                   >
-                    How do I apply for a job?
+                    {t("items.q3.question")}
                   </button>
                 </h2>
                 <div
@@ -84,9 +83,7 @@ export default function QASection() {
                   data-bs-parent="#qaAccordion"
                 >
                   <div className="accordion-body text-muted">
-                    Simply create a profile, upload your resume, and browse job
-                    listings. You can apply directly through the platform in
-                    just a few clicks.
+                    {t("items.q3.answer")}
                   </div>
                 </div>
               </div>
@@ -100,7 +97,7 @@ export default function QASection() {
                     data-bs-toggle="collapse"
                     data-bs-target="#qaFour"
                   >
-                    How can employers post jobs?
+                    {t("items.q4.question")}
                   </button>
                 </h2>
                 <div
@@ -109,8 +106,7 @@ export default function QASection() {
                   data-bs-parent="#qaAccordion"
                 >
                   <div className="accordion-body text-muted">
-                    Employers can register, create a company profile, and post
-                    job openings easily through the employer dashboard.
+                    {t("items.q4.answer")}
                   </div>
                 </div>
               </div>

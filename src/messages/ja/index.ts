@@ -82,7 +82,7 @@ import registerSupervisoryStep2 from "./app/(with-auth)/super-visory/registerSup
 import registerSupervisoryStep3 from "./app/(with-auth)/super-visory/registerSupervisoryStep3.json";
 import registerSupervisoryStep4 from "./app/(with-auth)/super-visory/registerSupervisoryStep4.json";
 import jobDescriptionPage from "./app/(non-login)/job-description/jobDescriptionPage.json";
-import jobSeekerProfile from "./components/jobSeeker/jobSeekerProfile.json";
+import jobSeekerProfile from "./app/(non-login)/(public-profile)/job_seeker_profile/jobSeekerProfile.json";
 import companyProfile from "./app/(non-login)/(public-profile)/company_profile/companyProfile.json";
 import notFoundPage from "./app/notFoundPage.json";
 
