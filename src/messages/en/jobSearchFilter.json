@@ -1,17 +1,77 @@
 {
-  "placeholders": {
-    "jobType": "Job Type"
+  "ssw": {
+    "ariaLabel": "SSW field",
+    "placeholder": "Select SSW field",
+    "care": "Caregiving",
+    "building": "Building Cleaning",
+    "manufacturing": "Manufacturing (Industrial machinery, electronics, etc.)",
+    "construction": "Construction",
+    "shipbuilding": "Shipbuilding and Marine Industry",
+    "autoRepair": "Automobile Repair",
+    "aviation": "Aviation",
+    "lodging": "Lodging",
+    "agriculture": "Agriculture",
+    "fishery": "Fishery",
+    "foodMfg": "Food Manufacturing",
+    "restaurant": "Food Service",
+    "waste": "Industrial Waste Management",
+    "railway": "Railway",
+    "transport": "Automobile Transport",
+    "forestry": "Forestry",
+    "wood": "Wood Industry"
   },
-  "labels": {
-    "region": "Region"
+  "prefecture": {
+    "ariaLabel": "Prefecture",
+    "placeholder": "Select prefecture",
+    "hokkaido": "Hokkaido",
+    "aomori": "Aomori",
+    "iwate": "Iwate",
+    "miyagi": "Miyagi",
+    "akita": "Akita",
+    "yamagata": "Yamagata",
+    "fukushima": "Fukushima",
+    "ibaraki": "Ibaraki",
+    "tochigi": "Tochigi",
+    "gunma": "Gunma",
+    "saitama": "Saitama",
+    "chiba": "Chiba",
+    "tokyo": "Tokyo",
+    "kanagawa": "Kanagawa",
+    "niigata": "Niigata",
+    "toyama": "Toyama",
+    "ishikawa": "Ishikawa",
+    "fukui": "Fukui",
+    "yamanashi": "Yamanashi",
+    "nagano": "Nagano",
+    "gifu": "Gifu",
+    "shizuoka": "Shizuoka",
+    "aichi": "Aichi",
+    "mie": "Mie",
+    "shiga": "Shiga",
+    "kyoto": "Kyoto",
+    "osaka": "Osaka",
+    "hyogo": "Hyogo",
+    "nara": "Nara",
+    "wakayama": "Wakayama",
+    "tottori": "Tottori",
+    "shimane": "Shimane",
+    "okayama": "Okayama",
+    "hiroshima": "Hiroshima",
+    "yamaguchi": "Yamaguchi",
+    "tokushima": "Tokushima",
+    "kagawa": "Kagawa",
+    "ehime": "Ehime",
+    "kochi": "Kochi",
+    "fukuoka": "Fukuoka",
+    "saga": "Saga",
+    "nagasaki": "Nagasaki",
+    "kumamoto": "Kumamoto",
+    "oita": "Oita",
+    "miyazaki": "Miyazaki",
+    "kagoshima": "Kagoshima",
+    "okinawa": "Okinawa"
   },
-  "regions": {
-    "test1": "Test1",
-    "test2": "Test2",
-    "test3": "Test3",
-    "test4": "Test4"
-  },
-  "buttons": {
-    "explore": "Explore"
+  "button": {
+    "search": "Search"
   }
 }

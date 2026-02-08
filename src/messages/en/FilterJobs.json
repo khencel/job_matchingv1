@@ -1,0 +1,16 @@
+{
+  "title": "Job Filter",
+  "clearFilters": "Clear Filters",
+  "category": "Category",
+  "selectCategory": "Select Category",
+  "jobType": "Job Type",
+  "jobTypes": {
+    "fullTime": "Full-time",
+    "partTime": "Part-time",
+    "remote": "Remote",
+    "internship": "Internship"
+  },
+  "salary": "Salary",
+  "min": "min",
+  "max": "max"
+}

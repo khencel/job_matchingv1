@@ -1,0 +1,44 @@
+{
+  "confirm": {
+    "title": "プロフィールを更新しますか？",
+    "text": "プロフィールを更新します",
+    "confirmText": "はい、更新します"
+  },
+  "toast": {
+    "title": "更新成功",
+    "success": "プロフィールを更新しました"
+  },
+  "title": "プロフィール編集",
+  "logoBanner": "ロゴ・バナー画像",
+  "uploadLogo": "ロゴをアップロード",
+  "noLogo": "ロゴがありません",
+  "noFile": "ファイルなし",
+  "replace": "置き換え",
+  "bannerImage": "バナー画像",
+  "noBanner": "バナーがありません",
+  "companyName": "会社名",
+  "companyProfile": "会社プロフィール",
+  "companyFounded": "設立日",
+  "employees": "従業員数",
+  "region": "地域",
+  "industry": "業種",
+  "selectIndustry": "業種を選択",
+  "close": "閉じる",
+  "saveChanges": "変更を保存",
+  "industryOptions": [
+    "テクノロジー",
+    "医療",
+    "金融",
+    "製造",
+    "小売",
+    "教育",
+    "ホスピタリティ",
+    "建設",
+    "交通",
+    "不動産",
+    "農業",
+    "エンタメ",
+    "通信",
+    "エネルギー"
+  ]
+}

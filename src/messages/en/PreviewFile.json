@@ -1,0 +1,11 @@
+{
+  "defaultTitle": "File Preview",
+  "loading": "Loading...",
+  "closeTitle": "Close preview",
+  "errorImage": "Failed to load image",
+  "errorPdf": "Failed to load PDF",
+  "errorVideo": "Failed to load video",
+  "documentPreviewUnavailable": "Document preview is not available. Please download the file to view it.",
+  "documentLabel": "{type} Document",
+  "unsupported": "File preview not supported for this file type"
+}

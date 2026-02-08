@@ -1,0 +1,29 @@
+{
+  "title": "Perks & Benefits",
+  "dateRange": "November - December 2025",
+  "listTitle": "Perks & Benefits ({count}) total",
+  "addButton": "Perks & Benefits",
+  "table": {
+    "index": "#",
+    "name": "Name",
+    "description": "Description",
+    "createdAt": "Created At"
+  },
+  "state": {
+    "loading": "Loading...",
+    "empty": "No data found"
+  },
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "confirm": {
+    "title": "Delete Perks & Benefits?",
+    "text": "Are you sure you want to delete this Perks & Benefits?",
+    "confirmText": "yes, Create it!"
+  },
+  "toast": {
+    "title": "Delete Item",
+    "success": "Perks & Benefits deleted successfully"
+  }
+}

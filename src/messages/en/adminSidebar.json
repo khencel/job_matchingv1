@@ -1,0 +1,9 @@
+{
+  "title": "Admin Dashboard",
+  "menu": {
+    "overview": "Overviews",
+    "userManagement": "User Management",
+    "applicants": "Applicants",
+    "settings": "Settings"
+  }
+}

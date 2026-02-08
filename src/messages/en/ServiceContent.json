@@ -1,0 +1,23 @@
+{
+  "approach": {
+    "kicker": "New intake: Direct approach",
+    "title": "Approach job seekers and employers directly",
+    "sub": "*For companies considering interviewing overseas candidates",
+    "companyChip": "For companies",
+    "companyList": {
+      "item1": "Companies considering hiring foreign talent for the first time",
+      "item2": "Companies urgently looking for candidates"
+    },
+    "companyNoteLine1": "*If you need fast introductions, we will propose suitable candidates.",
+    "companyNoteLine2": "*We also support the overall process for first-time hiring.",
+    "companyButton": "For companies",
+    "jobSeekerChip": "For job seekers",
+    "jobSeekerList": {
+      "item1": "If you need to change jobs urgently",
+      "item2": "If you want career consultation"
+    },
+    "jobSeekerNoteLine1": "*If urgent, we will search and introduce opportunities on your behalf.",
+    "jobSeekerNoteLine2": "*For consultation as well, start here.",
+    "jobSeekerButton": "For job seeker"
+  }
+}

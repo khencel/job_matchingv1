@@ -1,0 +1,19 @@
+{
+  "categories": {
+    "tech_IT": "テック・IT",
+    "creative_design": "クリエイティブ・デザイン",
+    "business_office": "ビジネス・オフィス",
+    "sales_marketing": "営業・マーケティング",
+    "finance_accounting": "金融・会計",
+    "ecommerce": "EC・小売",
+    "education": "教育・研修",
+    "healthcare": "医療・ヘルスケア",
+    "trade": "技能職",
+    "logistic": "物流・交通",
+    "hospital_tourism": "ホスピタリティ・観光",
+    "customer_service": "カスタマーサービス・BPO",
+    "construction": "建設・エンジニアリング",
+    "legal": "法務・コンプライアンス",
+    "other": "その他・一般"
+  }
+}

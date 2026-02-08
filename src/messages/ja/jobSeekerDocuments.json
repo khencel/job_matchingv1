@@ -1,0 +1,26 @@
+{
+  "alerts": {
+    "noFilesTitle": "ファイルが選択されていません",
+    "noFilesText": "アップロードするファイルを選択してください。",
+    "uploadSuccessTitle": "アップロード成功",
+    "uploadSuccessText": "書類のアップロードが完了しました。",
+    "uploadFailedTitle": "アップロード失敗",
+    "uploadFailedText": "書類のアップロード中にエラーが発生しました。もう一度お試しください。"
+  },
+  "header": {
+    "title": "書類",
+    "subtitle": "書類をアップロード・管理できます",
+    "count": "{count} 件"
+  },
+  "preview": {
+    "title": "プレビュー"
+  },
+  "upload": {
+    "title": "書類をアップロード",
+    "subtitle": "複数のファイルを一度にアップロードできます。対応形式: PDF, DOC, DOCX, JPG, PNG",
+    "chooseMore": "さらにファイルを選択",
+    "chooseFiles": "ファイルを選択",
+    "uploadFiles": "アップロード",
+    "clear": "クリア"
+  }
+}

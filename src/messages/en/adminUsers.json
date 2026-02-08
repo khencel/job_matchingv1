@@ -1,0 +1,43 @@
+{
+  "title": "Users Listing",
+  "dateRange": "November - December 2025",
+  "listTitle": "Users List ({count} total)",
+  "search": "Search Users",
+  "filter": "Filter",
+  "filters": {
+    "all": "All",
+    "jobSeeker": "Job Seeker",
+    "employer": "Employer",
+    "supervisory": "Supervisory"
+  },
+  "table": {
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "status": "Status",
+    "joined": "Joined",
+    "action": "Action"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Not active"
+  },
+  "actions": {
+    "activate": "Activate",
+    "deactivate": "Deactivate"
+  },
+  "pagination": {
+    "itemsPerPage": "Items per page:",
+    "showing": "Showing {start} to {end} of {count}",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "confirm": {
+    "title": "Change Status",
+    "text": "Are you sure you want to change the status?"
+  },
+  "toast": {
+    "title": "Update Status",
+    "success": "User status updated successfully"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "labels": {
+    "previewAlt": "Preview",
+    "userAlt": "User Avatar",
+    "noLocation": "No Location",
+    "saveChanges": "Save Changes",
+    "cancelEdit": "Cancel Edit",
+    "editProfile": "Edit Profile",
+    "personalInformation": "Personal Information",
+    "firstName": "First Name",
+    "middleName": "Middle Name",
+    "lastName": "Last Name",
+    "birthdate": "Birthdate",
+    "gender": "Gender",
+    "selectGender": "Select Gender",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "nationality": "Nationality",
+    "currentResidence": "Current Residence",
+    "currentResidencePlaceholder": "City, Country",
+    "professionalStatus": "Professional Status",
+    "visaStatus": "Visa Status",
+    "selectStatus": "Select status",
+    "japaneseLevel": "Japanese Level",
+    "selectLevel": "Select level",
+    "highestEducation": "Highest Education",
+    "selectEducation": "Select education",
+    "socialLinks": "Social Links",
+    "facebook": "Facebook",
+    "facebookPlaceholder": "Profile URL or Username",
+    "notLinked": "Not linked",
+    "notAvailable": "N/A"
+  },
+  "errors": {
+    "required": "This field is required.",
+    "invalidPhone": "Enter a valid phone number."
+  }
+}

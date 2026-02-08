@@ -1,0 +1,23 @@
+{
+  "title": "特典・福利厚生を追加",
+  "company": "会社:",
+  "selectCompany": "会社を選択",
+  "none": "なし",
+  "firstName": "名:",
+  "lastName": "姓:",
+  "gender": "性別:",
+  "selectGender": "性別を選択",
+  "male": "男性",
+  "female": "女性",
+  "visaStatus": "ビザ状況:",
+  "selectStatus": "ステータスを選択",
+  "applied": "申請済み",
+  "pending": "保留中",
+  "reviewing": "審査中",
+  "issued": "発行済み",
+  "denied": "却下",
+  "startAgeAbove": "開始年齢:",
+  "startAgePlaceholder": "例: 18/20/30",
+  "close": "閉じる",
+  "applyFilter": "フィルターを適用"
+}

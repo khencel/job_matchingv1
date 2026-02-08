@@ -1,0 +1,11 @@
+{
+  "defaultTitle": "ファイルプレビュー",
+  "loading": "読み込み中...",
+  "closeTitle": "プレビューを閉じる",
+  "errorImage": "画像の読み込みに失敗しました",
+  "errorPdf": "PDFの読み込みに失敗しました",
+  "errorVideo": "動画の読み込みに失敗しました",
+  "documentPreviewUnavailable": "ドキュメントのプレビューは利用できません。ファイルをダウンロードしてご確認ください。",
+  "documentLabel": "{type} ドキュメント",
+  "unsupported": "このファイル形式のプレビューはサポートされていません"
+}

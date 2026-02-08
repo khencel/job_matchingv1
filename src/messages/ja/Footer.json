@@ -1,0 +1,20 @@
+{
+  "titleStart": "次のキャリアへ",
+  "titleEmphasis": "一歩",
+  "titleEnd": "踏み出そう",
+  "subtitle": "次のキャリアの一歩を踏み出す準備はできていますか？JobLinkは、あなたのスキルや希望に合った仕事探しをサポートします。",
+  "brand": {
+    "nameStart": "JOB",
+    "nameEmphasis": "Search"
+  },
+  "brandDescription": "多くの求職者が私たちのプラットフォームで理想の仕事に出会っています。あなたの未来はここから始まります。",
+  "nav": {
+    "home": "ホーム",
+    "features": "就職支援の機能",
+    "about": "私たちについて",
+    "qa": "Q&A",
+    "contact": "お問い合わせ",
+    "legal": "会社情報・法的通知"
+  },
+  "copyright": "Copyright Jobsearch 2025. All rights reserved"
+}

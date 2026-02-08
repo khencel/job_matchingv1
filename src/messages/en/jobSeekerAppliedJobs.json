@@ -1,0 +1,16 @@
+{
+  "title": "My Applications",
+  "totalApplications": "Total Applications:",
+  "loading": "Loading applications...",
+  "empty": "You haven't applied to any jobs yet.",
+  "findJobs": "Find Jobs",
+  "table": {
+    "roleCompany": "Role & Company",
+    "dateApplied": "Date Applied",
+    "status": "Status",
+    "appliedOn": "Applied On:"
+  },
+  "status": {
+    "applied": "Applied"
+  }
+}

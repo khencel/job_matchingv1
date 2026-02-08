@@ -1,0 +1,39 @@
+{
+  "confirm": {
+    "title": "よろしいですか？",
+    "text": "この求人を更新しますか？"
+  },
+  "toast": {
+    "title": "成功",
+    "success": "求人を更新しました"
+  },
+  "title": "求人を編集",
+  "basicInfo": "基本情報",
+  "basicInfoNote": "この情報は公開されます。",
+  "jobTitle": "職種名",
+  "jobTitleNote": "職種名は1つのポジションを説明する必要があります。",
+  "jobTitlePlaceholder": "例: ソフトウェアエンジニア",
+  "minCharacters": "80文字以上",
+  "salary": "給与",
+  "salaryNote": "想定する給与レンジを記入してください。",
+  "salaryPlaceholder": "想定給与",
+  "employmentType": "雇用形態",
+  "employmentTypes": {
+    "fullTime": "フルタイム",
+    "partTime": "パートタイム",
+    "remote": "リモート",
+    "internship": "インターン"
+  },
+  "categories": "カテゴリー",
+  "categoriesNote": "複数の職種カテゴリーを選択できます",
+  "details": "詳細",
+  "detailsNote": "仕事内容、責任、求める人物像、歓迎条件を追加してください",
+  "jobDescription": "仕事内容",
+  "jobDescriptionNote": "仕事内容は1つのポジションを説明する必要があります。",
+  "responsibility": "責任",
+  "responsibilityNote": "ポジションの主な責任を記載してください。",
+  "whoYouAre": "求める人物像",
+  "whoYouAreNote": "希望する候補者の要件を追加してください。",
+  "niceToHave": "歓迎条件",
+  "niceToHaveNote": "歓迎スキルや資格を追加して応募者層を広げましょう。"
+}

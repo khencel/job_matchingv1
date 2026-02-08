@@ -1,0 +1,14 @@
+{
+  "defaultCompanyName": "Employer Details",
+  "aboutCompany": "About Company",
+  "companyProfile": "Company Profile",
+  "jobPostsTitle": "Job Posts by this Employer",
+  "position": "Position:",
+  "salary": "Salary:",
+  "employmentType": "Type of Employment:",
+  "jobDescription": "Job Description",
+  "responsibility": "Responsibility",
+  "niceToHave": "Nice to Have",
+  "whoYouAre": "Who you are",
+  "close": "Close"
+}

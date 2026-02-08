@@ -1,0 +1,16 @@
+{
+  "jobType": "雇用形態",
+  "clearAll": "すべてクリア",
+  "types": {
+    "fullTime": "フルタイム",
+    "partTime": "パートタイム",
+    "contractTemp": "契約・派遣",
+    "casualVacation": "カジュアル・短期"
+  },
+  "workSetup": "勤務形態",
+  "setups": {
+    "onSite": "出社",
+    "hybrid": "ハイブリッド",
+    "remote": "リモート"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "confirm": {
+    "title": "Update Profile?",
+    "text": "Profile will be updated",
+    "confirmText": "yes, Update it!"
+  },
+  "toast": {
+    "title": "Update successful",
+    "success": "Profile has been updated successfully"
+  },
+  "title": "Edit Profile",
+  "logoBanner": "Logo & Banner Image",
+  "uploadLogo": "Upload Logo",
+  "noLogo": "No logo uploaded",
+  "noFile": "No file",
+  "replace": "Replace",
+  "bannerImage": "Banner Image",
+  "noBanner": "No banner uploaded",
+  "companyName": "Company Name",
+  "companyProfile": "Company Profile",
+  "companyFounded": "Company Founded",
+  "employees": "No. of Employees",
+  "region": "Region",
+  "industry": "Industry",
+  "selectIndustry": "Select industry",
+  "close": "Close",
+  "saveChanges": "Save Changes",
+  "industryOptions": [
+    "Technology",
+    "Healthcare",
+    "Finance",
+    "Manufacturing",
+    "Retail",
+    "Education",
+    "Hospitality",
+    "Construction",
+    "Transportation",
+    "Real Estate",
+    "Agriculture",
+    "Entertainment",
+    "Telecommunications",
+    "Energy"
+  ]
+}

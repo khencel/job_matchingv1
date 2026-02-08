@@ -1,0 +1,16 @@
+{
+  "confirm": {
+    "title": "Update Perks & Benefits?",
+    "text": "Are you sure?",
+    "confirmText": "Yes"
+  },
+  "toast": {
+    "title": "Update Item",
+    "success": "Perks & Benefits updated successfully"
+  },
+  "title": "Edit Perks & Benefits",
+  "namePlaceholder": "Name",
+  "descriptionPlaceholder": "Description",
+  "close": "Close",
+  "save": "Save"
+}
