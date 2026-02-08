@@ -3,6 +3,7 @@ import { RegisterJobSeekerStep2Data } from "./job-seeker";
 import { User } from "./user-register";
 
 export interface JobPosting {
+  region: ReactNode;
   employer: any;
   id: number;
   user_id: number;

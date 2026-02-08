@@ -18,8 +18,10 @@ const FilterJobs = () => {
       <Card.Body>
         <Form.Group>
           <Form.Label className="primary-text">Category</Form.Label>
-          <select name="" id="" className="form-control">
-            <option value=" " disabled hidden>Select Category</option>
+          <select name="" id="" className="form-control" defaultValue="">
+            <option value="" disabled hidden>
+              Select Category
+            </option>
             {
               listCategory.map((item:any, index:number)=>{
                 return (
@@ -28,33 +30,15 @@ const FilterJobs = () => {
               })
             }
           </select>
-          {/* {industries
-            .filter((type) => type !== "Other")
-            .map((type) => (
-              <Form.Check key={type} label={type} name={type} id={type} />
-            ))} */}
+       
         </Form.Group>
-        {/* Filter for Job Types */}
+      
         <Form.Group>
           <Form.Label className="primary-text">Job Type</Form.Label>
           {["Full-time", "Part-time", "Remote", "Internship"].map((type) => (
             <Form.Check key={type} label={type} id={type} />
           ))}
         </Form.Group>
-        {/* Filter for Work Experience */}
-        {/* <Form.Group>
-          <Form.Label className="primary-text">Work Experience</Form.Label>
-          {[
-            "Fresh Graduate",
-            "1 to 2 years",
-            "2 - 4 years",
-            "5 years and above",
-          ].map((xp) => (
-            <Form.Check key={xp} label={xp} name={xp} id={xp} />
-          ))}
-        </Form.Group> */}
-        <hr />
-        {/* Filter for Industry */}
         
         <hr />
         <Form.Group>

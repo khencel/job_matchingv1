@@ -20,6 +20,7 @@ export interface PostBasicInfoState {
     nice_to_have?: string;
     status?: "idle" | "loading" | "succeeded" | "failed";
     benefits: Benefit[];
+    region?: string;
 }
 
 const initialState: PostBasicInfoState = {
@@ -33,7 +34,8 @@ const initialState: PostBasicInfoState = {
     who_you_are: "",
     nice_to_have: "",
     status: "idle",
-    benefits:[]
+    benefits:[],
+    region: ""
 };
 
 export interface UpdateJobPostPayload {
@@ -47,6 +49,7 @@ export interface UpdateJobPostPayload {
   who_you_are?: string;
   nice_to_have?: string;
   skill: string[];
+  region?: string;
 }
 
 

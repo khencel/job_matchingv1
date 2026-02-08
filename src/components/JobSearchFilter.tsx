@@ -1,4 +1,28 @@
+import { regionList, listCategory } from "./listGroupData";
+import type { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
+import { setFilterField, setFieldClear } from "@/redux/slices/filterJobPost/filterJobPostSlice";
+import { useAppDispatch } from "@/redux/hooks";
+import { useEffect } from "react";
+import { filterJobPostV1 } from "@/redux/slices/filterJobPost/filterJobPostThunk";
+import { useRouter } from "next/navigation";
+
+
 export default function JobSearchFiler() {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const {category, region } = useSelector((state: RootState) => state.jobSearchFilterSlice);
+
+
+  const handleApplyFilter = () => {
+    const payload = {
+      category,
+      region,
+    };
+    dispatch(filterJobPostV1(payload));
+    router.push("/find-jobs");
+  };
   return (
     <>
       <div className="job-search-filter d-flex justify-content-center p-1">
@@ -32,29 +56,19 @@ export default function JobSearchFiler() {
                   name="ssw_field"
                   aria-label="特定技能 分野"
                   id="sswField"
+                  value={category}
+                  onChange={(e) => dispatch(setFilterField({ category: e.target.value }))}
                 >
                   <option value="" data-i18n="ssw_placeholder">
-                    特定技能（分野）を選択
+                    Select Category
                   </option>
-                  <option data-i18n="ssw_care">介護</option>
-                  <option data-i18n="ssw_building">ビルクリーニング</option>
-                  <option data-i18n="ssw_manufacturing">
-                    素形材・産業機械・電気電子情報関連製造業
-                  </option>
-                  <option data-i18n="ssw_construction">建設</option>
-                  <option data-i18n="ssw_shipbuilding">造船・舶用工業</option>
-                  <option data-i18n="ssw_auto_repair">自動車整備</option>
-                  <option data-i18n="ssw_aviation">航空</option>
-                  <option data-i18n="ssw_lodging">宿泊</option>
-                  <option data-i18n="ssw_agriculture">農業</option>
-                  <option data-i18n="ssw_fishery">漁業</option>
-                  <option data-i18n="ssw_food_mfg">飲食料品製造業</option>
-                  <option data-i18n="ssw_restaurant">外食業</option>
-                  <option data-i18n="ssw_waste">産業廃棄物処理</option>
-                  <option data-i18n="ssw_railway">鉄道</option>
-                  <option data-i18n="ssw_transport">自動車運送業</option>
-                  <option data-i18n="ssw_forestry">林業</option>
-                  <option data-i18n="ssw_wood">木材産業</option>
+                  {
+                    listCategory.map((item:any, index:number)=>{
+                      return (
+                        <option key={index} value={item.value}>{item.label}</option>
+                      )
+                    })
+                  }
                 </select>
               </div>
             </div>
@@ -75,63 +89,23 @@ export default function JobSearchFiler() {
                   />
                 </svg>
 
-                <select name="prefecture" aria-label="都道府県" id="prefecture">
+                <select name="prefecture" value={region} onChange={(e) => dispatch(setFilterField({ region: e.target.value }))} aria-label="都道府県" id="prefecture">
                   <option value="" data-i18n="pref_placeholder">
-                    都道府県を選択
+                    Select Prefecture
                   </option>
-                  <option data-i18n="pref_hokkaido">北海道</option>
-                  <option data-i18n="pref_aomori">青森県</option>
-                  <option data-i18n="pref_iwate">岩手県</option>
-                  <option data-i18n="pref_miyagi">宮城県</option>
-                  <option data-i18n="pref_akita">秋田県</option>
-                  <option data-i18n="pref_yamagata">山形県</option>
-                  <option data-i18n="pref_fukushima">福島県</option>
-                  <option data-i18n="pref_ibaraki">茨城県</option>
-                  <option data-i18n="pref_tochigi">栃木県</option>
-                  <option data-i18n="pref_gunma">群馬県</option>
-                  <option data-i18n="pref_saitama">埼玉県</option>
-                  <option data-i18n="pref_chiba">千葉県</option>
-                  <option data-i18n="pref_tokyo">東京都</option>
-                  <option data-i18n="pref_kanagawa">神奈川県</option>
-                  <option data-i18n="pref_niigata">新潟県</option>
-                  <option data-i18n="pref_toyama">富山県</option>
-                  <option data-i18n="pref_ishikawa">石川県</option>
-                  <option data-i18n="pref_fukui">福井県</option>
-                  <option data-i18n="pref_yamanashi">山梨県</option>
-                  <option data-i18n="pref_nagano">長野県</option>
-                  <option data-i18n="pref_gifu">岐阜県</option>
-                  <option data-i18n="pref_shizuoka">静岡県</option>
-                  <option data-i18n="pref_aichi">愛知県</option>
-                  <option data-i18n="pref_mie">三重県</option>
-                  <option data-i18n="pref_shiga">滋賀県</option>
-                  <option data-i18n="pref_kyoto">京都府</option>
-                  <option data-i18n="pref_osaka">大阪府</option>
-                  <option data-i18n="pref_hyogo">兵庫県</option>
-                  <option data-i18n="pref_nara">奈良県</option>
-                  <option data-i18n="pref_wakayama">和歌山県</option>
-                  <option data-i18n="pref_tottori">鳥取県</option>
-                  <option data-i18n="pref_shimane">島根県</option>
-                  <option data-i18n="pref_okayama">岡山県</option>
-                  <option data-i18n="pref_hiroshima">広島県</option>
-                  <option data-i18n="pref_yamaguchi">山口県</option>
-                  <option data-i18n="pref_tokushima">徳島県</option>
-                  <option data-i18n="pref_kagawa">香川県</option>
-                  <option data-i18n="pref_ehime">愛媛県</option>
-                  <option data-i18n="pref_kochi">高知県</option>
-                  <option data-i18n="pref_fukuoka">福岡県</option>
-                  <option data-i18n="pref_saga">佐賀県</option>
-                  <option data-i18n="pref_nagasaki">長崎県</option>
-                  <option data-i18n="pref_kumamoto">熊本県</option>
-                  <option data-i18n="pref_oita">大分県</option>
-                  <option data-i18n="pref_miyazaki">宮崎県</option>
-                  <option data-i18n="pref_kagoshima">鹿児島県</option>
-                  <option data-i18n="pref_okinawa">沖縄県</option>
+                  {
+                    regionList.map((item:any, index:number)=>{
+                      return (
+                        <option key={index} value={item.value}>{item.label}</option>
+                      )
+                    })
+                  }
                 </select>
               </div>
             </div>
 
             <div className="col-md-2 filter-search">
-              <button className="btn btn-primary-custom w-100 h-100 border rounded-4">
+              <button onClick={handleApplyFilter} className="btn btn-primary-custom w-100 h-100 border rounded-4">
                 Search
               </button>
             </div>

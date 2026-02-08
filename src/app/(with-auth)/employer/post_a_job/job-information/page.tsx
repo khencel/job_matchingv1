@@ -8,6 +8,7 @@ import { setField, addSkill, removeSkill, setInitialData } from "@/redux/slices/
 import {showErrorToast } from "@/app/(util)/toaster";
 import { useRouter } from "next/navigation"
 import Cookies from "js-cookie";
+import { regionList } from "@/components/listGroupData"
 
 
 export default function PostAJob(){
@@ -102,6 +103,25 @@ export default function PostAJob(){
                         <input type="checkbox" value={"Remote"} checked={basicInfo.type_of_emp.includes("Remote")} onChange={handleCheckBox} /> Remote
                         <br />
                         <input type="checkbox" value={"Internship"} checked={basicInfo.type_of_emp.includes("Internship")} onChange={handleCheckBox} /> Internship
+                    </div>
+                </div>
+
+                <div className="row mt-2">
+                    <div className="col">
+                        <strong>Prefecture <span className="text-danger">*</span></strong>
+                    </div>
+                    <div className="col">
+                        <select name="" value={basicInfo.region || ""} onChange={(e) => dispatch(setField({ region: e.target.value }))}
+                         className="form-control" id="">
+                            <option disabled hidden value="">Select Prefecture</option>
+                            {
+                                regionList.map((item:any,index:number) => {
+                                    return(
+                                        <option key={item.value} value={item.value}>{item.label}</option>
+                                    )
+                                })
+                            }
+                        </select>
                     </div>
                 </div>
 

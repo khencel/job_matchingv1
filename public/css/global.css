@@ -464,12 +464,12 @@
     .job-img{
       position:relative;
       height:118px;
-      background:#eef5ff;
+      /* background:#eef5ff; */
     }
     .job-img img{
       width:100%;
       height:100%;
-      object-fit:cover;
+      object-fit:contain;
     }
     .job-badge{
       position:absolute;
@@ -527,7 +527,7 @@
       color:#fff;
       font-weight:1000;
       cursor:pointer;
-      box-shadow:0 16px 28px rgba(47,120,255,.18);
+      /* box-shadow:0 16px 28px rgba(47,120,255,.18); */
     }
     .job-btn:active{transform:translateY(1px)}
 
@@ -810,6 +810,8 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+
 
 
 
