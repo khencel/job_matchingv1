@@ -1,0 +1,11 @@
+{
+  "title": "雇用主ダッシュボード",
+  "items": {
+    "overview": "概要",
+    "profile": "企業プロフィール",
+    "applicants": "応募者",
+    "postJob": "求人を投稿",
+    "jobListings": "求人一覧",
+    "perks": "特典・福利厚生"
+  }
+}

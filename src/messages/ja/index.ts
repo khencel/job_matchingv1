@@ -22,7 +22,7 @@ import jobSupportFeatures from "./app/(main)/jobSupportFeatures.json";
 import contactUs from "./app/(main)/contactUs.json";
 import qAndA from "./app/(main)/qAndA.json";
 import login from "./app/(non-login)/login.json";
-import register from "./components/registration/Register.json";
+import register from "./app/(non-login)/register/register.json";
 import findJobs from "./app/(non-login)/find-jobs/find-jobs.json";
 import adminSidebar from "./app/(with-auth)/admin/adminSidebar.json";
 import adminOverview from "./app/(with-auth)/admin/overview/adminOverview.json";
@@ -75,6 +75,7 @@ import registerEmployerStep2 from "./components/registration/employer/registerEm
 import registerEmployerStep3 from "./components/registration/employer/registerEmployerStep3.json";
 import registerEmployerStep4 from "./components/registration/employer/registerEmployerStep4.json";
 import registerEmployerPage from "./app/(non-login)/register/employer/registerEmployerPage.json";
+import registrationEmployer from "./app/registration/employer/registrationEmployer.json";
 import registerSuperVisoryStep1 from "./app/(with-auth)/super-visory/registerSuperVisoryStep1.json";
 import registerJobSeekerStep2 from "./components/registration/jobSeeker/registerJobSeekerStep2.json";
 import registerJobSeekerStep3 from "./components/registration/jobSeeker/registerJobSeekerStep3.json";
@@ -84,6 +85,8 @@ import registerSupervisoryStep4 from "./app/(with-auth)/super-visory/registerSup
 import jobDescriptionPage from "./app/(non-login)/job-description/jobDescriptionPage.json";
 import jobSeekerProfile from "./app/(non-login)/(public-profile)/job_seeker_profile/jobSeekerProfile.json";
 import companyProfile from "./app/(non-login)/(public-profile)/company_profile/companyProfile.json";
+import employerSidebar from "./app/components/employerSidebar.json";
+import changePasswordModal from "./app/components/changePasswordModal.json";
 import notFoundPage from "./app/notFoundPage.json";
 
 const messages = {
@@ -164,6 +167,7 @@ const messages = {
   registerEmployerStep3,
   registerEmployerStep4,
   registerEmployerPage,
+  registrationEmployer,
   registerSuperVisoryStep1,
   registerJobSeekerStep2,
   registerJobSeekerStep3,
@@ -173,6 +177,8 @@ const messages = {
   jobDescriptionPage,
   jobSeekerProfile,
   companyProfile,
+  employerSidebar,
+  changePasswordModal,
   notFoundPage,
 };
 
