@@ -74,6 +74,7 @@ import registerEmployerStep1 from "./registerEmployerStep1.json";
 import registerEmployerStep2 from "./registerEmployerStep2.json";
 import registerEmployerStep3 from "./registerEmployerStep3.json";
 import registerEmployerStep4 from "./registerEmployerStep4.json";
+import registerEmployerPage from "./registerEmployerPage.json";
 import registerSuperVisoryStep1 from "./registerSuperVisoryStep1.json";
 import registerJobSeekerStep2 from "./registerJobSeekerStep2.json";
 import registerJobSeekerStep3 from "./registerJobSeekerStep3.json";
@@ -83,6 +84,7 @@ import registerSupervisoryStep4 from "./registerSupervisoryStep4.json";
 import jobDescriptionPage from "./jobDescriptionPage.json";
 import jobSeekerProfile from "./jobSeekerProfile.json";
 import companyProfile from "./companyProfile.json";
+import notFoundPage from "./notFoundPage.json";
 
 const messages = {
   ...common,
@@ -161,6 +163,7 @@ const messages = {
   registerEmployerStep2,
   registerEmployerStep3,
   registerEmployerStep4,
+  registerEmployerPage,
   registerSuperVisoryStep1,
   registerJobSeekerStep2,
   registerJobSeekerStep3,
@@ -170,6 +173,7 @@ const messages = {
   jobDescriptionPage,
   jobSeekerProfile,
   companyProfile,
+  notFoundPage,
 };
 
 export default messages;
