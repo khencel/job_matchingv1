@@ -22,6 +22,9 @@
     "invalidEmail": "有効なメールアドレスを入力してください。",
     "fillRequired": "必須項目を入力してください。"
   },
+  "toast": {
+    "successTitle": "会社情報を送信しました"
+  },
   "buttons": {
     "next": "次へ"
   }

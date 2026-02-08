@@ -1,8 +1,12 @@
+"use client";
+
 import FormattedDate from "@/components/date_format";
 import EditModalProfile from "./editModal";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 export default function Header({data}:{data:any}){
+    const t = useTranslations("employerProfileHeader");
 
     const [showModal, setShowModal] = useState(false);
     
@@ -28,7 +32,7 @@ export default function Header({data}:{data:any}){
                             </div>
                             <div className="col-9">
                                 <div className="">
-                                    <strong className="text-white"><h2>Employer Profile</h2></strong>
+                                    <strong className="text-white"><h2>{t("title")}</h2></strong>
                                     <br />
                                     <span className="text-primary">{companyInfo.name}</span>
                                     <br />
@@ -37,22 +41,22 @@ export default function Header({data}:{data:any}){
                                 </div>
                                 <div className="row">
                                     <div className="col">
-                                        <small className="text-style">Founded</small>
+                                        <small className="text-style">{t("founded")}</small>
                                         <br />
                                         <strong className="info-style"><FormattedDate date={companyInfo.founded}/></strong>
                                     </div>
                                     <div className="col">
-                                        <small className="text-style">Employees</small>
+                                        <small className="text-style">{t("employees")}</small>
                                         <br />
                                         <strong className="info-style">{companyInfo.no_of_emp}</strong>
                                     </div>
                                     <div className="col">
-                                        <small className="text-style">Location</small>
+                                        <small className="text-style">{t("location")}</small>
                                         <br />
                                         <strong className="info-style">{companyInfo.region}</strong>
                                     </div>
                                     <div className="col">
-                                        <small className="text-style">Industry</small>
+                                        <small className="text-style">{t("industry")}</small>
                                         <br />
                                         <strong className="info-style">{companyInfo.company_industry.join(', ')}</strong>
                                     </div>
@@ -61,7 +65,7 @@ export default function Header({data}:{data:any}){
                         </div>
                     </div>
                     <div className="col-md-2 d-flex align-items-center">
-                        <button className="btn btn-primary-custom rounded-3" onClick={handleEditModal}>Edit Profile</button>
+                        <button className="btn btn-primary-custom rounded-3" onClick={handleEditModal}>{t("editProfile")}</button>
                     </div>
                 </div>
             </div>

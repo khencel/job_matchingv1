@@ -106,20 +106,17 @@ export default function RegisterEmployerStep4({
     try {
       const res = await dispatch(registerThunk(fullFormData)).unwrap();
       Swal.fire({
-        title: "Verify Your Email",
-        text: `We've sent a verification email to your registered email
-                  address. Click the verification link to activate
-                  your account.`,
+        title: t("verify.title"),
+        text: t("verify.text"),
         icon: "success",
-        footer: `If you don't see the email, please check your spam or junk
-                  folder.`,
+        footer: t("verify.footer"),
       });
       closeModal();
       console.log("Employer Registered:", res.userDetails_emp);
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Employer Registration Failed",
+        title: t("errors.submitFailed"),
         toast: true,
         position: "top",
         showConfirmButton: false,

@@ -10,7 +10,13 @@
   },
   "errors": {
     "acceptTerms": "You must accept Terms of Use to proceed.",
-    "acceptPrivacy": "You must accept Privacy Policy to proceed."
+    "acceptPrivacy": "You must accept Privacy Policy to proceed.",
+    "submitFailed": "Employer Registration Failed"
+  },
+  "verify": {
+    "title": "Verify Your Email",
+    "text": "We've sent a verification email to your registered email address. Click the verification link to activate your account.",
+    "footer": "If you don't see the email, please check your spam or junk folder."
   },
   "buttons": {
     "submit": "Submit Registration"

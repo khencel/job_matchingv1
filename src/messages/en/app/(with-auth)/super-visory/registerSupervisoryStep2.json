@@ -38,6 +38,9 @@
     "invalidCity": "City must be at least 2 characters.",
     "invalidStreet": "Street address must be at least 2 characters."
   },
+  "toast": {
+    "successTitle": "Company Information Submitted"
+  },
   "buttons": {
     "next": "Next"
   }

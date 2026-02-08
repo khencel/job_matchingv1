@@ -62,6 +62,9 @@
     "invalidFacebookUrl": "Please enter a valid Facebook profile URL.",
     "fillRequired": "Please fill in all required fields."
   },
+  "toast": {
+    "successTitle": "Personal Information Submitted"
+  },
   "buttons": {
     "next": "Next"
   }

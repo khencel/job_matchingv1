@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
@@ -11,6 +14,7 @@ interface AddBenefitsModalProps {
 }
 
 export default function AddBenefitsModal({ show, onHide }: AddBenefitsModalProps) {
+    const t = useTranslations("employerPostJobAddBenefitModal");
     const dispatch = useDispatch();
 
     const [title, setTitle] = useState("");
@@ -34,19 +38,19 @@ export default function AddBenefitsModal({ show, onHide }: AddBenefitsModalProps
     return (
         <Modal show={show} onHide={onHide} centered backdrop="static" keyboard={false}>
         <Modal.Header closeButton>
-            <Modal.Title>Add Benefit</Modal.Title>
+            <Modal.Title>{t("title")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <div className="row">
                 <div className="col">
-                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="form-control mb-2" placeholder="Title here..." />
-                    <textarea name="" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description here..." className="form-control" id=""></textarea>
+                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="form-control mb-2" placeholder={t("titlePlaceholder")} />
+                    <textarea name="" value={description} onChange={(e) => setDescription(e.target.value)} placeholder={t("descriptionPlaceholder")} className="form-control" id=""></textarea>
                 </div>
             </div>
         </Modal.Body>
         <Modal.Footer>
             <Button className="btn-primary-custom rounded-3" onClick={handleAddBenefit}>
-            Save
+            {t("save")}
             </Button>
         </Modal.Footer>
         </Modal>

@@ -190,7 +190,7 @@ const RegisterJobSeekerStep2 = () => {
     setError({});
     Swal.fire({
       icon: "success",
-      title: "Personal Information Submitted",
+      title: t("toast.successTitle"),
       toast: true,
       position: "top",
       showConfirmButton: false,

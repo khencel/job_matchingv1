@@ -21,6 +21,15 @@
     "passwordTooShort": "Password must be at least 8 characters long.",
     "passwordMismatch": "Passwords do not match."
   },
+  "toast": {
+    "successTitle": "Account Information Submitted"
+  },
+  "aria": {
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "showConfirmPassword": "Show confirm password",
+    "hideConfirmPassword": "Hide confirm password"
+  },
   "buttons": {
     "next": "Next"
   }

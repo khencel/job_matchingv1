@@ -17,7 +17,9 @@
     "selectedIndustries": "選択した業界:",
     "prInfo": "PR情報",
     "appealPoints": "アピールポイント",
-    "fee": "料金"
+    "fee": "料金",
+    "companyFoundedYear": "設立年",
+    "companyProfile": "会社プロフィール"
   },
   "placeholders": {
     "enterCompanyName": "会社名を入力",
@@ -27,7 +29,9 @@
     "selectRegion": "地域を選択",
     "enterNumEmployees": "従業員数を入力",
     "enterAppealPoints": "アピールポイントを入力",
-    "enterFee": "料金を入力"
+    "enterFee": "料金を入力",
+    "companyFoundedYear": "設立年を入力（1000より大きい値）",
+    "companyProfile": "会社の概要を入力"
   },
   "errors": {
     "invalidCompanyName": "有効な会社名を入力してください",
@@ -39,7 +43,12 @@
     "invalidCurrentBranch": "最低2文字である必要があります",
     "invalidBranchName": "支店名は最低2文字である必要があります。",
     "fillRequired": "必須項目を入力してください。",
-    "addAtLeastOneBranch": "少なくとも1つの支店を追加してください。"
+    "addAtLeastOneBranch": "少なくとも1つの支店を追加してください。",
+    "invalidFoundedYear": "設立年を入力してください",
+    "invalidCompanyProfile": "会社の概要を入力してください"
+  },
+  "toast": {
+    "successTitle": "会社情報を送信しました"
   },
   "buttons": {
     "next": "次へ",

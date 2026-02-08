@@ -38,6 +38,9 @@
     "invalidCity": "市区町村は2文字以上で入力してください。",
     "invalidStreet": "番地は2文字以上で入力してください。"
   },
+  "toast": {
+    "successTitle": "会社情報を送信しました"
+  },
   "buttons": {
     "next": "次へ"
   }

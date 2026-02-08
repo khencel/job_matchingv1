@@ -17,7 +17,9 @@
     "selectedIndustries": "Selected Industries:",
     "prInfo": "PR Information",
     "appealPoints": "Appeal Points",
-    "fee": "Fee"
+    "fee": "Fee",
+    "companyFoundedYear": "Company Founded Year",
+    "companyProfile": "Company Profile"
   },
   "placeholders": {
     "enterCompanyName": "Enter company name",
@@ -27,7 +29,9 @@
     "selectRegion": "Select Region",
     "enterNumEmployees": "Enter number of employees",
     "enterAppealPoints": "Enter appeal points",
-    "enterFee": "Enter fee amount"
+    "enterFee": "Enter fee amount",
+    "companyFoundedYear": "Enter Company Founded Year (Greater than 1000)",
+    "companyProfile": "Enter Company Biography"
   },
   "errors": {
     "invalidCompanyName": "Enter a valid Company Name",
@@ -39,7 +43,12 @@
     "invalidCurrentBranch": "At least minimum of 2 characters",
     "invalidBranchName": "Branch name must be at least 2 characters long.",
     "fillRequired": "Please fill in all required fields.",
-    "addAtLeastOneBranch": "Please add at least one branch office."
+    "addAtLeastOneBranch": "Please add at least one branch office.",
+    "invalidFoundedYear": "Please enter founded date",
+    "invalidCompanyProfile": "Please enter company biography"
+  },
+  "toast": {
+    "successTitle": "Company Information Submitted"
   },
   "buttons": {
     "next": "Next",

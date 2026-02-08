@@ -62,6 +62,9 @@
     "invalidFacebookUrl": "有効なフェイスブックプロフィールURLを入力してください。",
     "fillRequired": "すべての必須フィールドを記入してください。"
   },
+  "toast": {
+    "successTitle": "個人情報を送信しました"
+  },
   "buttons": {
     "next": "次へ"
   }

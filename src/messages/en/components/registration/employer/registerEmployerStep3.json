@@ -22,6 +22,9 @@
     "invalidEmail": "Please enter a valid email address.",
     "fillRequired": "Please fill in all required fields."
   },
+  "toast": {
+    "successTitle": "Company Information Submitted"
+  },
   "buttons": {
     "next": "Next"
   }

@@ -1,14 +1,18 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { GoDotFill } from "react-icons/go";
 import { FaRegCircleCheck, FaUserGroup } from "react-icons/fa6";
 import { FaRegTimesCircle } from "react-icons/fa";
 
 export default function RecentPostJob(){
+    const t = useTranslations("employerOverviewRecentPostJob");
     return (
         <div className="">
             <div className="row">
                 <div className="col">
-                    <span className="float-start"><strong>Recent Posted Jobs</strong></span>
-                    <span className="float-end">View all</span>
+                    <span className="float-start"><strong>{t("title")}</strong></span>
+                    <span className="float-end">{t("viewAll")}</span>
                 </div>
             </div>
             <div className="row">
@@ -16,10 +20,10 @@ export default function RecentPostJob(){
                     <table className="table table-hover">
                         <thead className="table-light thead_style_recent_jobs">
                             <tr>
-                                <th>JOBS</th>
-                                <th>STATUS</th>
-                                <th>APPLICATIONS</th>
-                                <th>ACTIONS</th>
+                                <th>{t("table.jobs")}</th>
+                                <th>{t("table.status")}</th>
+                                <th>{t("table.applications")}</th>
+                                <th>{t("table.actions")}</th>
                             </tr>
                         </thead>
                         <tbody className="table-group-divider">
@@ -28,17 +32,19 @@ export default function RecentPostJob(){
                                     <div className="text_rencent_jobs">
                                         <strong>UI/UX Designer</strong>
                                         <br />
-                                        <small>Full Time <GoDotFill /> 27 days ago</small>
+                                        <small>
+                                            {t("jobType.fullTime")} <GoDotFill /> {t("daysAgo", { days: 27 })}
+                                        </small>
                                     </div>
                                 </td>
                                 <td>
-                                    <span className="status_text"><FaRegCircleCheck /> Active</span>
+                                    <span className="status_text"><FaRegCircleCheck /> {t("status.active")}</span>
                                 </td>
                                 <td>
-                                    <span className="applicants_text"><FaUserGroup /> 798 Applications</span>
+                                    <span className="applicants_text"><FaUserGroup /> {t("applications", { count: 798 })}</span>
                                 </td>
                                 <td>
-                                    <button className="btn btn-primary-custom rounded-3">View Applications</button>
+                                    <button className="btn btn-primary-custom rounded-3">{t("viewApplications")}</button>
                                 </td>
                             </tr>
 
@@ -47,17 +53,19 @@ export default function RecentPostJob(){
                                     <div className="text_rencent_jobs">
                                         <strong>Senior UX Designer</strong>
                                         <br />
-                                        <small>Intership <GoDotFill /> 8 days ago</small>
+                                        <small>
+                                            {t("jobType.internship")} <GoDotFill /> {t("daysAgo", { days: 8 })}
+                                        </small>
                                     </div>
                                 </td>
                                 <td>
-                                    <span className="status_text"><FaRegCircleCheck /> Active</span>
+                                    <span className="status_text"><FaRegCircleCheck /> {t("status.active")}</span>
                                 </td>
                                 <td>
-                                    <span className="applicants_text"><FaUserGroup /> 307 Applications</span>
+                                    <span className="applicants_text"><FaUserGroup /> {t("applications", { count: 307 })}</span>
                                 </td>
                                 <td>
-                                    <button className="btn btn-primary-custom rounded-3">View Applications</button>
+                                    <button className="btn btn-primary-custom rounded-3">{t("viewApplications")}</button>
                                 </td>
                             </tr>
 
@@ -66,17 +74,19 @@ export default function RecentPostJob(){
                                     <div className="text_rencent_jobs">
                                         <strong>Technical Support Specialist</strong>
                                         <br />
-                                        <small>Part Time <GoDotFill /> 4 days ago</small>
+                                        <small>
+                                            {t("jobType.partTime")} <GoDotFill /> {t("daysAgo", { days: 4 })}
+                                        </small>
                                     </div>
                                 </td>
                                 <td>
-                                    <span className="status_text"><FaRegCircleCheck /> Active</span>
+                                    <span className="status_text"><FaRegCircleCheck /> {t("status.active")}</span>
                                 </td>
                                 <td>
-                                    <span className="applicants_text"><FaUserGroup /> 109 Applications</span>
+                                    <span className="applicants_text"><FaUserGroup /> {t("applications", { count: 109 })}</span>
                                 </td>
                                 <td>
-                                    <button className="btn btn-primary-custom rounded-3">View Applications</button>
+                                    <button className="btn btn-primary-custom rounded-3">{t("viewApplications")}</button>
                                 </td>
                             </tr>
 
@@ -85,17 +95,19 @@ export default function RecentPostJob(){
                                     <div className="text_rencent_jobs">
                                         <strong>Junior Graphic Designer</strong>
                                         <br />
-                                        <small>Full Time <GoDotFill /> 24 days ago</small>
+                                        <small>
+                                            {t("jobType.fullTime")} <GoDotFill /> {t("daysAgo", { days: 24 })}
+                                        </small>
                                     </div>
                                 </td>
                                 <td>
-                                    <span className="status_text"><FaRegCircleCheck /> Active</span>
+                                    <span className="status_text"><FaRegCircleCheck /> {t("status.active")}</span>
                                 </td>
                                 <td>
-                                    <span className="applicants_text"><FaUserGroup /> 200 Applications</span>
+                                    <span className="applicants_text"><FaUserGroup /> {t("applications", { count: 200 })}</span>
                                 </td>
                                 <td>
-                                    <button className="btn btn-primary-custom rounded-3">View Applications</button>
+                                    <button className="btn btn-primary-custom rounded-3">{t("viewApplications")}</button>
                                 </td>
                             </tr>
 
@@ -104,18 +116,20 @@ export default function RecentPostJob(){
                                     <div className="text_rencent_jobs">
                                         <strong>Fron End Developer</strong>
                                         <br />
-                                        <small>Full Time <GoDotFill /> Dec 7, 2025</small>
+                                        <small>
+                                            {t("jobType.fullTime")} <GoDotFill /> {t("dateText", { date: "Dec 7, 2025" })}
+                                        </small>
                                     </div>
                                 </td>
                                 <td>
                                     {/* <span className="status_text"><FaRegCircleCheck /> Active</span> */}
-                                    <span className="status_text_expired"><FaRegTimesCircle /> Expired</span>
+                                    <span className="status_text_expired"><FaRegTimesCircle /> {t("status.expired")}</span>
                                 </td>
                                 <td>
-                                    <span className="applicants_text"><FaUserGroup /> 70 Applications</span>
+                                    <span className="applicants_text"><FaUserGroup /> {t("applications", { count: 70 })}</span>
                                 </td>
                                 <td>
-                                    <button className="btn btn-primary-custom rounded-3">View Applications</button>
+                                    <button className="btn btn-primary-custom rounded-3">{t("viewApplications")}</button>
                                 </td>
                             </tr>
                         </tbody>
