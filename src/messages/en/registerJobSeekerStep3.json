@@ -1,0 +1,18 @@
+{
+  "title": "Terms and Conditions",
+  "labels": {
+    "acceptTerms": "I accept the Terms and Conditions",
+    "acceptPrivacyPolicy": "I accept the Privacy Policy",
+    "acceptReceiveEmails": "I agree to receive promotional emails (optional)"
+  },
+  "helpers": {
+    "submitting": "Submitting..."
+  },
+  "errors": {
+    "acceptT&C": "You must accept the Terms and Conditions to proceed.",
+    "acceptPrivacyPolicy": "You must accept the Privacy Policy to proceed."
+  },
+  "buttons": {
+    "submit": "Submit Registration"
+  }
+}

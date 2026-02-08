@@ -1,0 +1,49 @@
+{
+  "title": "管理組織情報",
+  "labels": {
+    "basicInfo": "基本情報",
+    "companyName": "会社名",
+    "companyAddress": "会社住所",
+    "phoneNumber": "電話番号",
+    "companyIndustry": "業種",
+    "industry": "業界",
+    "regions": "地域",
+    "region": "地域",
+    "orgInfo": "組織情報",
+    "numEmployees": "従業員数",
+    "branchOffices": "支店",
+    "branchOfficePlaceholder": "支店所在地を入力",
+    "branchOfficesList": "支店一覧:",
+    "selectedIndustries": "選択した業界:",
+    "prInfo": "PR情報",
+    "appealPoints": "アピールポイント",
+    "fee": "料金"
+  },
+  "placeholders": {
+    "enterCompanyName": "会社名を入力",
+    "enterCompanyAddress": "会社住所を入力",
+    "enterPhoneNumber": "電話番号を入力",
+    "selectIndustry": "業界を選択",
+    "selectRegion": "地域を選択",
+    "enterNumEmployees": "従業員数を入力",
+    "enterAppealPoints": "アピールポイントを入力",
+    "enterFee": "料金を入力"
+  },
+  "errors": {
+    "invalidCompanyName": "有効な会社名を入力してください",
+    "invalidCompanyAddress": "有効な会社住所を入力してください",
+    "invalidPhoneNumber": "有効な電話番号を入力してください",
+    "invalidIndustry": "業界を選択してください",
+    "invalidNumOfEmployees": "従業員は1名以上必要です。",
+    "invalidRegion": "地域を選択してください",
+    "invalidCurrentBranch": "最低2文字である必要があります",
+    "invalidBranchName": "支店名は最低2文字である必要があります。",
+    "fillRequired": "必須項目を入力してください。",
+    "addAtLeastOneBranch": "少なくとも1つの支店を追加してください。"
+  },
+  "buttons": {
+    "next": "次へ",
+    "add": "追加",
+    "remove": "削除"
+  }
+}

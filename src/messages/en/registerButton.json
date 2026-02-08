@@ -1,0 +1,7 @@
+{
+  "buttons": {
+    "registerJobSeeker": "Register as Job Seeker",
+    "registerEmployer": "Register as Employer",
+    "registerSupervisory": "Register as Super Visory"
+  }
+}

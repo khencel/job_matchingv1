@@ -1,0 +1,17 @@
+{
+  "placeholders": {
+    "jobType": "職種"
+  },
+  "labels": {
+    "region": "地域"
+  },
+  "regions": {
+    "test1": "テスト1",
+    "test2": "テスト2",
+    "test3": "テスト3",
+    "test4": "テスト4"
+  },
+  "buttons": {
+    "explore": "検索"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "title": "個人情報",
+  "labels": {
+    "firstName": "名",
+    "midName": "ミドルネーム",
+    "lastName": "姓",
+    "nationality": "国籍",
+    "gender": "性別",
+    "currentPlaceResidence": "現住所",
+    "birthdate": "生年月日",
+    "visaStatus": "ビザステータス",
+    "highestEducation": "最終学歴",
+    "japaneseLevel": "日本語レベル（JLPT）",
+    "email": "メールアドレス",
+    "contactNo": "連絡先番号",
+    "facebook": "フェイスブックプロフィール",
+    "optional": "オプション"
+  },
+  "placeholders": {
+    "firstName": "名を入力してください",
+    "midName": "ミドルネームを入力してください",
+    "lastName": "姓を入力してください",
+    "selectNationality": "国籍を選択",
+    "nationality": "国籍を入力してください",
+    "currentPlaceResidence": "現在の住所を入力",
+    "selectVisaStatus": "ビザステータスを選択",
+    "selectEducation": "最終学歴を選択",
+    "selectJapaneseLevel": "日本語レベルを選択",
+    "email": "メールアドレスを入力",
+    "contactNo": "連絡先番号を入力",
+    "facebook": "フェイスブックプロフィールURLを入力"
+  },
+  "options": {
+    "male": "男性",
+    "female": "女性",
+    "visaApplied": "申請済み",
+    "visaPending": "保留中",
+    "visaReviewing": "審査中",
+    "visaIssued": "発行済み",
+    "visaDenied": "拒否",
+    "elementary": "小学校",
+    "jrHighschool": "中学校",
+    "srHighschool": "高等学校",
+    "vocational": "職業訓練校",
+    "bachelorDegree": "学士号",
+    "masterDegree": "修士号",
+    "doctoralDegree": "博士号"
+  },
+  "errors": {
+    "nameTooShort": "名前は最低2文字です。",
+    "visaStatusRequired": "ビザステータスを選択してください。",
+    "nationalityRequired": "国籍を選択してください。",
+    "genderRequired": "性別を選択してください。",
+    "residenceTooShort": "現住所は最低2文字です。",
+    "birthdateRequired": "生年月日を入力してください。",
+    "age18Error": "18歳以上である必要があります。",
+    "age100Error": "100歳以下である必要があります。",
+    "invalidEmail": "有効なメールアドレスを入力してください。",
+    "contactNoTooShort": "連絡先番号は最低7桁です。",
+    "highestEducationRequired": "最終学歴を選択してください。",
+    "japaneseLevelRequired": "日本語レベルを選択してください。",
+    "invalidFacebookUrl": "有効なフェイスブックプロフィールURLを入力してください。",
+    "fillRequired": "すべての必須フィールドを記入してください。"
+  },
+  "buttons": {
+    "next": "次へ"
+  }
+}

@@ -4,8 +4,8 @@
 // Loads message catalogs based on the current locale and exposes translations to the app.
 import { NextIntlClientProvider } from "next-intl";
 import type { AbstractIntlMessages } from "next-intl";
-import en from "./messages/en.json";
-import ja from "./messages/ja.json";
+import en from "../messages/en";
+import ja from "../messages/ja";
 
 export type SupportedLocale = "en" | "ja";
 

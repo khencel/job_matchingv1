@@ -10,11 +10,50 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button, DropdownItem } from "react-bootstrap";
+import { useTranslations } from "next-intl";
 
 const DropdownNav = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const role = useAppSelector((s) => s.authState.user?.role);
+  const tAuth = useTranslations("auth");
+
+  const dropdownItems = {
+    jobSeeker: [
+      {
+        label: tAuth("menu.profile"),
+        icon: <UserCircle2Icon />,
+        href: "/job-seeker/profile",
+      },
+      {
+        label: tAuth("menu.application"),
+        icon: <FoldersIcon />,
+        href: "/job-seeker/applied-jobs",
+      },
+      {
+        label: tAuth("menu.documents"),
+        icon: <FileUserIcon />,
+        href: "/job-seeker/documents",
+      },
+    ],
+    superVisory: [
+      {
+        label: tAuth("menu.overview"),
+        icon: <LayersIcon />,
+        href: "/super-visory/overview",
+      },
+      {
+        label: tAuth("menu.applicants"),
+        icon: <FileUserIcon />,
+        href: "/super-visory/applicants",
+      },
+      {
+        label: tAuth("menu.profile"),
+        icon: <UserCircle2Icon />,
+        href: "/super-visory/profile",
+      },
+    ],
+  };
 
   const handleLogout = () => {
     try {
@@ -56,7 +95,7 @@ const DropdownNav = () => {
         )}
         <DropdownItem as={Button} onClick={handleLogout} className="py-2">
           <LogOutIcon className="text-danger" />
-          <span className="ms-2 text-danger">Logout</span>
+          <span className="ms-2 text-danger">{tAuth("logout")}</span>
         </DropdownItem>
       </div>
     </div>
@@ -64,40 +103,3 @@ const DropdownNav = () => {
 };
 
 export default DropdownNav;
-
-const dropdownItems = {
-  jobSeeker: [
-    {
-      label: "Profile",
-      icon: <UserCircle2Icon />,
-      href: "/job-seeker/profile",
-    },
-    {
-      label: "Application",
-      icon: <FoldersIcon />,
-      href: "/job-seeker/applied-jobs",
-    },
-    {
-      label: "Documents",
-      icon: <FileUserIcon />,
-      href: "/job-seeker/documents",
-    },
-  ],
-  superVisory: [
-    {
-      label: "Overview",
-      icon: <LayersIcon />,
-      href: "/super-visory/overview",
-    },
-    {
-      label: "Applicants",
-      icon: <FileUserIcon />,
-      href: "/super-visory/applicants",
-    },
-    {
-      label: "Profile",
-      icon: <UserCircle2Icon />,
-      href: "/super-visory/profile",
-    },
-  ],
-};
