@@ -15,12 +15,11 @@ export default function ContactUs() {
         <div className="container">
           <div className="contact-center">
             <span className="contact-pill" data-i18n="contact_pill">
-              Contact Us
+              {t("pill")}
             </span>
-            <h2 data-i18n="contact_title">Contact</h2>
+            <h2 data-i18n="contact_title">{t("title")}</h2>
             <p className="contact-desc" data-i18n="contact_desc">
-              If you have questions or need support, feel free to contact us.
-              <br />
+              {t("description")}
             </p>
 
             <button
@@ -28,11 +27,11 @@ export default function ContactUs() {
               data-i18n="contact_btn"
               onClick={handleShow}
             >
-              Go to contact form
+              {t("button")}
             </button>
 
             <p className="contact-note" data-i18n="contact_note">
-              *Click to move to the inquiry page.
+              {t("note")}
             </p>
           </div>
         </div>
