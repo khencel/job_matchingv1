@@ -1,4 +1,7 @@
 
+"use client";
+
+import { useTranslations } from "next-intl";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { AddButton } from '@/components/Button';
@@ -17,14 +20,15 @@ interface AddModalProps {
 }
 
 export default function AddModal({handleShow, handleClose}: AddModalProps){
+    const t = useTranslations("employerPerksAddModal");
     const dispatch = useAppDispatch();
     const stateInfo = useSelector((state: RootState) => state.perksAndBenefitsSlice)
 
     const handleSave = () => {
         popup({
-            title: "Add Perks & Benefits?",
-            text: "Are you sure you want to add this Perks & Benefits?",
-            confirmText: 'yes, Create it!',
+            title: t("confirm.title"),
+            text: t("confirm.text"),
+            confirmText: t("confirm.confirmText"),
             icon:"warning",
             onConfirm: () => {
                     dispatch(addPerksBenefits(stateInfo))
@@ -38,14 +42,14 @@ export default function AddModal({handleShow, handleClose}: AddModalProps){
         <>
             <Modal show={handleShow} onHide={handleClose}>
                 <Modal.Header closeButton>
-                <Modal.Title>Add Perks & Benefits</Modal.Title>
+                <Modal.Title>{t("title")}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="row">
                         <div className="col">
                             <input 
                                 className="form-control" 
-                                placeholder="Name" 
+                                placeholder={t("namePlaceholder")} 
                                 type="text"
                                 value={stateInfo.name || ""}
                                 onChange={(value) => dispatch(setField({name: value.target.value}))}
@@ -56,7 +60,7 @@ export default function AddModal({handleShow, handleClose}: AddModalProps){
                         <div className="col">
                             <textarea 
                                 className="form-control" 
-                                placeholder="Description" 
+                                placeholder={t("descriptionPlaceholder")} 
                                 rows={5}
                                 value={stateInfo.description || ""}
                                 onChange={(value) => dispatch(setField({description: value.target.value}))}
@@ -66,9 +70,9 @@ export default function AddModal({handleShow, handleClose}: AddModalProps){
                 </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    {t("close")}
                 </Button>
-                    <AddButton onClick={handleSave} label="Save" className='btn btn-primary-custom rounded-3' icon={null} /> 
+                    <AddButton onClick={handleSave} label={t("save")} className='btn btn-primary-custom rounded-3' icon={null} /> 
                 </Modal.Footer>
             </Modal>
         </>

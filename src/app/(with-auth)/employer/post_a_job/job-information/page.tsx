@@ -1,4 +1,5 @@
 "use client"
+import { useTranslations } from "next-intl";
 import Header from "../headerPostAJob"
 import MultiSelectDropdown from "@/components/MultipleSelect"
 import { useState, useEffect } from "react"
@@ -12,6 +13,7 @@ import { regionList } from "@/components/listGroupData"
 
 
 export default function PostAJob(){
+    const t = useTranslations("employerPostJobInformation");
     const [mounted, setMounted] = useState(false);
     const [input, setInput] = useState<string>("")
     const router = useRouter();
@@ -32,11 +34,11 @@ export default function PostAJob(){
         const title = basicInfo.title.trim();
         const employmentTypes = basicInfo.type_of_emp;
         if(!title){
-            showErrorToast("Job title is required."," Please provide a job title to proceed.");
+            showErrorToast(t("errors.titleRequiredTitle"), t("errors.titleRequiredText"));
             return;
         }
         if(employmentTypes.length === 0){
-            showErrorToast("Employment type is required."," Please select at least one employment type to proceed.");
+            showErrorToast(t("errors.employmentRequiredTitle"), t("errors.employmentRequiredText"));
             return;
         }
 
@@ -64,45 +66,45 @@ export default function PostAJob(){
     return(
         <>  <Header/>
             <div className="emp-component-style mt-2">
-                <strong>Basic Information</strong>
+                <strong>{t("basicInfo")}</strong>
                 <br />
-                <small>This Information will be displayed publicly.</small>
+                <small>{t("basicInfoNote")}</small>
                 <hr />
                 <div className="row mt-5">
                     <div className="col">
-                        <strong>Job Title <span className="text-danger">*</span></strong>
+                        <strong>{t("jobTitle")} <span className="text-danger">*</span></strong>
                         <br />
-                        <small>Job title must be describe one position.</small>
+                        <small>{t("jobTitleNote")}</small>
                     </div>
                     <div className="col">
-                        <textarea name="" value={basicInfo.title} onChange={(e)=>dispatch(setField({title: e.target.value}))} placeholder="e.g Software Engineer" className="form-control" id=""></textarea>
-                        <small>At least 80 characters</small>
-                    </div>
-                </div>
-
-                <div className="row mt-2">
-                    <div className="col">
-                        <strong>Salary</strong>
-                        <br />
-                        <small>Please specify the estimated salary range for the role.</small>
-                    </div>
-                    <div className="col">
-                        <input type="number" value={basicInfo.salary ?? ""} onChange={(e)=>dispatch(setField({salary: e.target.valueAsNumber}))} className="form-control" placeholder="Estimate salary" />
+                        <textarea name="" value={basicInfo.title} onChange={(e)=>dispatch(setField({title: e.target.value}))} placeholder={t("jobTitlePlaceholder")} className="form-control" id=""></textarea>
+                        <small>{t("minCharacters")}</small>
                     </div>
                 </div>
 
                 <div className="row mt-2">
                     <div className="col">
-                        <strong>Type of Employment <span className="text-danger">*</span></strong>
+                        <strong>{t("salary")}</strong>
+                        <br />
+                        <small>{t("salaryNote")}</small>
                     </div>
                     <div className="col">
-                        <input type="checkbox" value="Full-Time" checked={basicInfo.type_of_emp.includes("Full-Time")} onChange={handleCheckBox} /> Full-Time
+                        <input type="number" value={basicInfo.salary ?? ""} onChange={(e)=>dispatch(setField({salary: e.target.valueAsNumber}))} className="form-control" placeholder={t("salaryPlaceholder")} />
+                    </div>
+                </div>
+
+                <div className="row mt-2">
+                    <div className="col">
+                        <strong>{t("employmentType")} <span className="text-danger">*</span></strong>
+                    </div>
+                    <div className="col">
+                        <input type="checkbox" value="Full-Time" checked={basicInfo.type_of_emp.includes("Full-Time")} onChange={handleCheckBox} /> {t("employmentTypes.fullTime")}
                         <br />
-                        <input type="checkbox" value={"Part-Time"} checked={basicInfo.type_of_emp.includes("Part-Time")} onChange={handleCheckBox} /> Part-Time
+                        <input type="checkbox" value={"Part-Time"} checked={basicInfo.type_of_emp.includes("Part-Time")} onChange={handleCheckBox} /> {t("employmentTypes.partTime")}
                         <br />
-                        <input type="checkbox" value={"Remote"} checked={basicInfo.type_of_emp.includes("Remote")} onChange={handleCheckBox} /> Remote
+                        <input type="checkbox" value={"Remote"} checked={basicInfo.type_of_emp.includes("Remote")} onChange={handleCheckBox} /> {t("employmentTypes.remote")}
                         <br />
-                        <input type="checkbox" value={"Internship"} checked={basicInfo.type_of_emp.includes("Internship")} onChange={handleCheckBox} /> Internship
+                        <input type="checkbox" value={"Internship"} checked={basicInfo.type_of_emp.includes("Internship")} onChange={handleCheckBox} /> {t("employmentTypes.internship")}
                     </div>
                 </div>
 
@@ -127,9 +129,9 @@ export default function PostAJob(){
 
                 <div className="row mt-2">
                     <div className="col">
-                        <strong>Categories</strong>
+                        <strong>{t("categories")}</strong>
                         <br />
-                        <small>You can select multiple job categories</small>
+                        <small>{t("categoriesNote")}</small>
                     </div>
                     <div className="col">
                         <MultiSelectDropdown value={basicInfo.category} onChange={(selectedOptions:any) => dispatch(setField({ category: selectedOptions }))}    />
@@ -167,7 +169,7 @@ export default function PostAJob(){
                                 className="btn btn-primary-custom rounded-3"
                                 onClick={handleNext}
                             >
-                                Next
+                                {t("next")}
                             </button>
                     </div>
                 </div>

@@ -1,0 +1,22 @@
+{
+  "logoAlt": "ロゴ",
+  "welcomeTitle": "プラットフォームへようこそ",
+  "welcomeSubtitle": "つながる。応募する。成長する。",
+  "formTitle": "サインイン",
+  "formSubtitle": "おかえりなさい。アカウントにログインしてください。",
+  "emailPlaceholder": "メールアドレス",
+  "passwordPlaceholder": "パスワード",
+  "emailLabel": "メールアドレス",
+  "passwordLabel": "パスワード",
+  "signIn": "サインイン",
+  "signingIn": "サインイン中...",
+  "forgotPassword": "パスワードをお忘れですか？",
+  "toasts": {
+    "signInFailed": "サインインに失敗しました",
+    "fillAllFields": "すべての項目を入力してください",
+    "verifyEmail": "メールアドレスを確認してください",
+    "signInSuccess": "サインイン成功",
+    "welcomeBack": "おかえりなさい！",
+    "invalidCredentials": "メールアドレスまたはパスワードが正しくありません"
+  }
+}

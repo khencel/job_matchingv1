@@ -17,8 +17,11 @@ import jsPDF from "jspdf";
 import { useEffect, useState } from "react";
 import { showErrorToast } from "@/app/(util)/toaster";
 import { popup } from "@/helper/pop_up";
+import { useTranslations } from "next-intl";
 
 export default function RegistrationEmployer() {
+  const t = useTranslations("registrationEmployer");
+  const tPrefecture = useTranslations("jobSearchFilter");
   const store = useStore();
   const dispatch = useAppDispatch();
   const { form, errors } = useSelector(
@@ -48,14 +51,17 @@ export default function RegistrationEmployer() {
     const currentErrors = (store.getState() as RootState).employerRegistration
       .errors;
     if (Object.keys(currentErrors).length !== 0) {
-      showErrorToast("Invalid Input", "Some field are required!");
+      showErrorToast(
+        t("alerts.invalidInput.title"),
+        t("alerts.invalidInput.text"),
+      );
       console.log("Validation failed", currentErrors);
       return;
     }
 
     popup({
-      title: "Are you sure?",
-      text: "This form will be sent to GNI via email.",
+      title: t("popup.confirmTitle"),
+      text: t("popup.confirmText"),
       icon: "warning",
       onConfirm: async () => {
         try {
@@ -115,7 +121,7 @@ export default function RegistrationEmployer() {
       <Navbar />
       {isLoading && (
         <div className="loading-overlay">
-          <div className="spinner-custom">Processing... Please wait</div>
+          <div className="spinner-custom">{t("loadingOverlay")}</div>
         </div>
       )}
       <div
@@ -127,28 +133,22 @@ export default function RegistrationEmployer() {
       >
         <div className="container p-5 bg-white rounded-5 shadow">
           <div className="card-registration ">
-            <h1 data-i18n="title" className="h1-custom">
-              For Companies | Direct Approach (Overseas &amp; Domestic Hiring)
-            </h1>
-            <p className="lead" data-i18n="lead">
-              This form is for companies considering hiring foreign talent.
+            <h1 className="h1-custom">{t("title")}</h1>
+            <p className="lead">
+              {t("lead.line1")}
               <br />
-              You can consult about both overseas new hiring and hiring
-              candidates already in Japan.
+              {t("lead.line2")}
             </p>
 
-            <div className="section-title-reg" data-i18n="sec1">
-              1) Company information
-            </div>
+            <div className="section-title-reg">{t("sections.companyInfo")}</div>
             <div className="grid-reg">
               <div className="field-reg">
-                <label data-i18n="company_name_label">
-                  Company name (Required) <span className="text-danger">*</span>
+                <label>
+                  {t("labels.companyName")} <span className="text-danger">*</span>
                 </label>
                 <input
                   name="company_name"
-                  data-ph="company_name_ph"
-                  placeholder="e.g., ABC Co., Ltd."
+                  placeholder={t("placeholders.companyName")}
                   value={form.company_name}
                   onChange={handleChange}
                 />
@@ -158,64 +158,69 @@ export default function RegistrationEmployer() {
               </div>
 
               <div className="field-reg">
-                <label data-i18n="company_pref_label">
-                  Prefecture (Required) <span className="text-danger">*</span>
+                <label>
+                  {t("labels.companyPrefecture")}{" "}
+                  <span className="text-danger">*</span>
                 </label>
                 <select
                   name="company_pref"
                   value={form.company_pref}
                   onChange={handleChange}
                 >
-                  <option value="" data-i18n="select_ph">
-                    Please select
-                  </option>
-                  <option>北海道</option>
-                  <option>青森県</option>
-                  <option>岩手県</option>
-                  <option>宮城県</option>
-                  <option>秋田県</option>
-                  <option>山形県</option>
-                  <option>福島県</option>
-                  <option>茨城県</option>
-                  <option>栃木県</option>
-                  <option>群馬県</option>
-                  <option>埼玉県</option>
-                  <option>千葉県</option>
-                  <option>東京都</option>
-                  <option>神奈川県</option>
-                  <option>新潟県</option>
-                  <option>富山県</option>
-                  <option>石川県</option>
-                  <option>福井県</option>
-                  <option>山梨県</option>
-                  <option>長野県</option>
-                  <option>岐阜県</option>
-                  <option>静岡県</option>
-                  <option>愛知県</option>
-                  <option>三重県</option>
-                  <option>滋賀県</option>
-                  <option>京都府</option>
-                  <option>大阪府</option>
-                  <option>兵庫県</option>
-                  <option>奈良県</option>
-                  <option>和歌山県</option>
-                  <option>鳥取県</option>
-                  <option>島根県</option>
-                  <option>岡山県</option>
-                  <option>広島県</option>
-                  <option>山口県</option>
-                  <option>徳島県</option>
-                  <option>香川県</option>
-                  <option>愛媛県</option>
-                  <option>高知県</option>
-                  <option>福岡県</option>
-                  <option>佐賀県</option>
-                  <option>長崎県</option>
-                  <option>熊本県</option>
-                  <option>大分県</option>
-                  <option>宮崎県</option>
-                  <option>鹿児島県</option>
-                  <option>沖縄県</option>
+                  <option value="">{t("options.selectPlaceholder")}</option>
+                  {[
+                    "hokkaido",
+                    "aomori",
+                    "iwate",
+                    "miyagi",
+                    "akita",
+                    "yamagata",
+                    "fukushima",
+                    "ibaraki",
+                    "tochigi",
+                    "gunma",
+                    "saitama",
+                    "chiba",
+                    "tokyo",
+                    "kanagawa",
+                    "niigata",
+                    "toyama",
+                    "ishikawa",
+                    "fukui",
+                    "yamanashi",
+                    "nagano",
+                    "gifu",
+                    "shizuoka",
+                    "aichi",
+                    "mie",
+                    "shiga",
+                    "kyoto",
+                    "osaka",
+                    "hyogo",
+                    "nara",
+                    "wakayama",
+                    "tottori",
+                    "shimane",
+                    "okayama",
+                    "hiroshima",
+                    "yamaguchi",
+                    "tokushima",
+                    "kagawa",
+                    "ehime",
+                    "kochi",
+                    "fukuoka",
+                    "saga",
+                    "nagasaki",
+                    "kumamoto",
+                    "oita",
+                    "miyazaki",
+                    "kagoshima",
+                    "okinawa",
+                  ].map((prefecture) => (
+                    <option key={prefecture}>
+                      {tPrefecture(`prefecture.${prefecture}`)}
+                    </option>
+                  ))}
                 </select>
                 {errors.company_pref && (
                   <small className="text-danger">{errors.company_pref}</small>
@@ -223,14 +228,13 @@ export default function RegistrationEmployer() {
               </div>
 
               <div className="field-reg">
-                <label data-i18n="contact_name_label">
-                  Contact person (Required){" "}
+                <label>
+                  {t("labels.contactName")}{" "}
                   <span className="text-danger">*</span>
                 </label>
                 <input
                   name="contact_name"
-                  data-ph="contact_name_ph"
-                  placeholder="e.g., Taro Yamada"
+                  placeholder={t("placeholders.contactName")}
                   value={form.contact_name}
                   onChange={handleChange}
                 />
@@ -240,24 +244,22 @@ export default function RegistrationEmployer() {
               </div>
 
               <div className="field-reg">
-                <label data-i18n="contact_title_label">Job title</label>
+                <label>{t("labels.contactTitle")}</label>
                 <input
                   name="job_title"
                   value={form.job_title}
                   onChange={handleChange}
-                  data-ph="contact_title_ph"
-                  placeholder="e.g., HR Manager / Recruiter"
+                  placeholder={t("placeholders.contactTitle")}
                 />
               </div>
 
               <div className="field-reg">
-                <label data-i18n="phone_label">
-                  Phone (Required) <span className="text-danger">*</span>
+                <label>
+                  {t("labels.phone")} <span className="text-danger">*</span>
                 </label>
                 <input
                   name="phone"
-                  data-ph="phone_ph"
-                  placeholder="e.g., +81-90-xxxx-xxxx"
+                  placeholder={t("placeholders.phone")}
                   value={form.phone}
                   onChange={handleChange}
                 />
@@ -267,14 +269,13 @@ export default function RegistrationEmployer() {
               </div>
 
               <div className="field-reg">
-                <label data-i18n="email_label">
-                  Email (Required) <span className="text-danger">*</span>
+                <label>
+                  {t("labels.email")} <span className="text-danger">*</span>
                 </label>
                 <input
                   type="email"
                   name="email"
-                  data-ph="email_ph"
-                  placeholder="example@company.com"
+                  placeholder={t("placeholders.email")}
                   value={form.email}
                   onChange={handleChange}
                 />
@@ -284,35 +285,33 @@ export default function RegistrationEmployer() {
               </div>
 
               <div className="field-reg">
-                <label data-i18n="company_url_label">Company website</label>
+                <label>{t("labels.companyUrl")}</label>
                 <input
                   name="company_url"
                   value={form.company_url}
                   onChange={handleChange}
-                  data-ph="company_url_ph"
-                  placeholder="https://..."
+                  placeholder={t("placeholders.companyUrl")}
                 />
               </div>
 
               <div className="field-reg">
-                <label data-i18n="industry_label">Industry</label>
+                <label>{t("labels.industry")}</label>
                 <input
                   name="industry"
                   value={form.industry}
                   onChange={handleChange}
-                  data-ph="industry_ph"
-                  placeholder="e.g., Hospitality / Manufacturing / Care / Restaurant"
+                  placeholder={t("placeholders.industry")}
                 />
               </div>
             </div>
 
-            <div className="section-title-reg" data-i18n="sec2">
-              2) Hiring needs (Required)
+            <div className="section-title-reg">
+              {t("sections.hiringNeeds")}
             </div>
 
             <div className="field-reg">
-              <label data-i18n="needs_label">
-                What you need (Required) <span className="text-danger">*</span>
+              <label>
+                {t("labels.needs")} <span className="text-danger">*</span>
               </label>
               <div className="pillrow">
                 <label className="pill">
@@ -323,9 +322,7 @@ export default function RegistrationEmployer() {
                     checked={form.needs.includes("overseas_new")}
                     onChange={handleChange}
                   />
-                  <span data-i18n="needs_overseas">
-                    Overseas new hiring (Interview → guaranteed acceptance)
-                  </span>
+                  <span>{t("needs.overseas")}</span>
                 </label>
                 <label className="pill">
                   <input
@@ -335,9 +332,7 @@ export default function RegistrationEmployer() {
                     checked={form.needs.includes("domestic_change")}
                     onChange={handleChange}
                   />
-                  <span data-i18n="needs_domestic">
-                    Hire candidates already in Japan (job change)
-                  </span>
+                  <span>{t("needs.domestic")}</span>
                 </label>
                 <label className="pill">
                   <input
@@ -347,7 +342,7 @@ export default function RegistrationEmployer() {
                     checked={form.needs.includes("both")}
                     onChange={handleChange}
                   />
-                  <span data-i18n="needs_both">Considering both</span>
+                  <span>{t("needs.both")}</span>
                 </label>
                 <label className="pill">
                   <input
@@ -357,29 +352,24 @@ export default function RegistrationEmployer() {
                     checked={form.needs.includes("consult")}
                     onChange={handleChange}
                   />
-                  <span data-i18n="needs_consult">Consultation first</span>
+                  <span>{t("needs.consult")}</span>
                 </label>
                 {errors.needs && (
                   <small className="text-danger">{errors.needs}</small>
                 )}
               </div>
 
-              <div className="hint" data-i18n="needs_hint">
-                *If you select overseas hiring, please also describe readiness
-                (housing, start timing, etc.).
-              </div>
+              <div className="hint">{t("hints.needs")}</div>
             </div>
 
             <div className="grid-reg" style={{ marginTop: "12px" }}>
               <div className="field-reg">
-                <label data-i18n="job_type_label">
-                  Target job/role (Required){" "}
-                  <span className="text-danger">*</span>
+                <label>
+                  {t("labels.role")} <span className="text-danger">*</span>
                 </label>
                 <input
                   name="role"
-                  data-ph="job_type_ph"
-                  placeholder="e.g., Care / Hotel front desk / Food factory line"
+                  placeholder={t("placeholders.role")}
                   value={form.role}
                   onChange={handleChange}
                 />
@@ -389,47 +379,37 @@ export default function RegistrationEmployer() {
               </div>
 
               <div className="field-reg">
-                <label data-i18n="visa_label">Visa / program (planned)</label>
+                <label>{t("labels.visa")}</label>
                 <select
                   name="visa_type"
                   value={form.visa_type}
                   onChange={handleChange}
                 >
-                  <option value="" data-i18n="select_ph">
-                    Please select
-                  </option>
-                  <option data-i18n="visa_ssw">
-                    Specified Skilled Worker (SSW)
-                  </option>
-                  <option data-i18n="visa_titp">
-                    Technical Intern Training
-                  </option>
-                  <option data-i18n="visa_gijinkoku">
-                    Engineer/Specialist in Humanities/Int{"'"}l Services
-                  </option>
-                  <option data-i18n="visa_student">Student part-time</option>
-                  <option data-i18n="visa_unknown">Not sure (consult)</option>
+                  <option value="">{t("options.selectPlaceholder")}</option>
+                  <option>{t("options.visa.ssw")}</option>
+                  <option>{t("options.visa.titp")}</option>
+                  <option>{t("options.visa.gijinkoku")}</option>
+                  <option>{t("options.visa.student")}</option>
+                  <option>{t("options.visa.unknown")}</option>
                 </select>
               </div>
 
               <div className="field-reg">
-                <label data-i18n="headcount_label">
-                  Headcount (Required) <span className="text-danger">*</span>
+                <label>
+                  {t("labels.headcount")} <span className="text-danger">*</span>
                 </label>
                 <select
                   name="head_count"
                   value={form.head_count}
                   onChange={handleChange}
                 >
-                  <option value="" data-i18n="select_ph">
-                    Please select
-                  </option>
-                  <option data-i18n="hc_1">1</option>
-                  <option data-i18n="hc_2">2</option>
-                  <option data-i18n="hc_3">3</option>
-                  <option data-i18n="hc_4_5">4–5</option>
-                  <option data-i18n="hc_6_10">6–10</option>
-                  <option data-i18n="hc_10p">10+</option>
+                  <option value="">{t("options.selectPlaceholder")}</option>
+                  <option>{t("options.headcount.one")}</option>
+                  <option>{t("options.headcount.two")}</option>
+                  <option>{t("options.headcount.three")}</option>
+                  <option>{t("options.headcount.fourFive")}</option>
+                  <option>{t("options.headcount.sixTen")}</option>
+                  <option>{t("options.headcount.tenPlus")}</option>
                 </select>
                 {errors.head_count && (
                   <small className="text-danger">{errors.head_count}</small>
@@ -437,13 +417,12 @@ export default function RegistrationEmployer() {
               </div>
 
               <div className="field-reg">
-                <label data-i18n="start_label">Preferred start timing</label>
+                <label>{t("labels.startTiming")}</label>
                 <input
                   name="start_timing"
                   value={form.start_timing}
                   onChange={handleChange}
-                  data-ph="start_ph"
-                  placeholder="e.g., Early March / April / ASAP"
+                  placeholder={t("placeholders.startTiming")}
                 />
               </div>
             </div>
@@ -451,255 +430,196 @@ export default function RegistrationEmployer() {
             {/* <!-- ✅追加：希望国籍 --> */}
             <div className="grid-reg" style={{ marginTop: "12px" }}>
               <div className="field-reg">
-                <label data-i18n="preferred_nationality_label">
-                  Preferred nationality
-                </label>
+                <label>{t("labels.preferredNationality")}</label>
                 <input
                   name="preferred_nationality"
                   value={form.preferred_nationality}
                   onChange={handleChange}
-                  data-ph="preferred_nationality_ph"
-                  placeholder="e.g., Philippines / Vietnam / Myanmar / No preference"
+                  placeholder={t("placeholders.preferredNationality")}
                 />
-                <div className="hint" data-i18n="preferred_nationality_hint">
-                  *Multiple allowed. If none, write “No preference”.
-                </div>
+                <div className="hint">{t("hints.preferredNationality")}</div>
               </div>
 
               <div className="field-reg">
-                <label data-i18n="work_city_label">
-                  Work location (city/area)
-                </label>
+                <label>{t("labels.workCity")}</label>
                 <input
                   name="work_city"
                   value={form.work_city}
                   onChange={handleChange}
-                  data-ph="work_city_ph"
-                  placeholder="e.g., Nagoya / Osaka city"
+                  placeholder={t("placeholders.workCity")}
                 />
               </div>
             </div>
 
             <div className="grid-reg" style={{ marginTop: "12px" }}>
               <div className="field-reg">
-                <label data-i18n="employment_label">Employment type</label>
+                <label>{t("labels.employmentType")}</label>
                 <select
                   name="employment_type"
                   value={form.employment_type}
                   onChange={handleChange}
                 >
-                  <option value="" data-i18n="select_ph">
-                    Please select
-                  </option>
-                  <option data-i18n="emp_full">Full-time</option>
-                  <option data-i18n="emp_contract">Contract</option>
-                  <option data-i18n="emp_dispatch">Dispatch</option>
-                  <option data-i18n="emp_part">Part-time</option>
-                  <option data-i18n="emp_shift">Shift</option>
+                  <option value="">{t("options.selectPlaceholder")}</option>
+                  <option>{t("options.employment.fullTime")}</option>
+                  <option>{t("options.employment.contract")}</option>
+                  <option>{t("options.employment.dispatch")}</option>
+                  <option>{t("options.employment.partTime")}</option>
+                  <option>{t("options.employment.shift")}</option>
                 </select>
               </div>
 
               <div className="field-reg">
-                <label data-i18n="salary_label">
-                  Salary range (monthly/hourly)
-                </label>
+                <label>{t("labels.salaryRange")}</label>
                 <input
                   name="salary"
                   value={form.salary}
                   onChange={handleChange}
-                  data-ph="salary_ph"
-                  placeholder="e.g., JPY 220,000+/month or JPY 1,200+/hour"
+                  placeholder={t("placeholders.salaryRange")}
                 />
               </div>
 
               <div className="field-reg">
-                <label data-i18n="jp_level_label">
-                  Required Japanese level
-                </label>
+                <label>{t("labels.jpLevel")}</label>
                 <select
                   name="jp_level"
                   value={form.jp_level}
                   onChange={handleChange}
                 >
-                  <option value="" data-i18n="select_ph">
-                    Please select
-                  </option>
-                  <option>N5〜</option>
-                  <option>N4〜</option>
-                  <option>N3〜</option>
-                  <option>N2〜</option>
-                  <option>N1〜</option>
-                  <option data-i18n="jp_any">Any</option>
+                  <option value="">{t("options.selectPlaceholder")}</option>
+                  <option>{t("options.jpLevel.n5")}</option>
+                  <option>{t("options.jpLevel.n4")}</option>
+                  <option>{t("options.jpLevel.n3")}</option>
+                  <option>{t("options.jpLevel.n2")}</option>
+                  <option>{t("options.jpLevel.n1")}</option>
+                  <option>{t("options.jpLevel.any")}</option>
                 </select>
               </div>
 
               <div className="field-reg">
-                <label data-i18n="experience_label">
-                  Experience requirement
-                </label>
+                <label>{t("labels.experienceRequirement")}</label>
                 <select
                   name="experience_need"
                   value={form.experience_need}
                   onChange={handleChange}
                 >
-                  <option value="" data-i18n="select_ph">
-                    Please select
-                  </option>
-                  <option data-i18n="exp_required">Required</option>
-                  <option data-i18n="exp_preferred">Preferred</option>
-                  <option data-i18n="exp_ok">No experience OK</option>
-                  <option data-i18n="exp_consult">Consult</option>
+                  <option value="">{t("options.selectPlaceholder")}</option>
+                  <option>{t("options.experience.required")}</option>
+                  <option>{t("options.experience.preferred")}</option>
+                  <option>{t("options.experience.ok")}</option>
+                  <option>{t("options.experience.consult")}</option>
                 </select>
               </div>
             </div>
 
             <div className="divider"></div>
 
-            <div className="section-title-reg" data-i18n="sec3">
-              3) Readiness &amp; conditions
-            </div>
+            <div className="section-title-reg">{t("sections.readiness")}</div>
             <div className="grid-reg">
               <div className="field-reg">
-                <label data-i18n="housing_label">Housing / dorm</label>
+                <label>{t("labels.housing")}</label>
                 <select
                   name="housing"
                   value={form.housing}
                   onChange={handleChange}
                 >
-                  <option value="" data-i18n="select_ph">
-                    Please select
-                  </option>
-                  <option data-i18n="house_dorm">Dorm available</option>
-                  <option data-i18n="house_company">Company housing</option>
-                  <option data-i18n="house_allowance">Housing allowance</option>
-                  <option data-i18n="house_none">None (consult)</option>
+                  <option value="">{t("options.selectPlaceholder")}</option>
+                  <option>{t("options.housing.dorm")}</option>
+                  <option>{t("options.housing.company")}</option>
+                  <option>{t("options.housing.allowance")}</option>
+                  <option>{t("options.housing.none")}</option>
                 </select>
               </div>
 
               <div className="field-reg">
-                <label data-i18n="shuttle_label">Shuttle</label>
+                <label>{t("labels.shuttle")}</label>
                 <select
                   name="shuttle"
                   value={form.shuttle}
                   onChange={handleChange}
                 >
-                  <option value="" data-i18n="select_ph">
-                    Please select
-                  </option>
-                  <option data-i18n="yes">Yes</option>
-                  <option data-i18n="no">No</option>
-                  <option data-i18n="consult">Consult</option>
+                  <option value="">{t("options.selectPlaceholder")}</option>
+                  <option>{t("options.yesNo.yes")}</option>
+                  <option>{t("options.yesNo.no")}</option>
+                  <option>{t("options.yesNo.consult")}</option>
                 </select>
               </div>
 
               <div className="field-reg">
-                <label data-i18n="interview_label">
-                  Interview method (for overseas hiring)
-                </label>
+                <label>{t("labels.interviewMethod")}</label>
                 <select
                   name="interview_method"
                   value={form.interview_method}
                   onChange={handleChange}
                 >
-                  <option value="" data-i18n="select_ph">
-                    Please select
-                  </option>
-                  <option data-i18n="interview_online">Online</option>
-                  <option data-i18n="interview_local">
-                    On-site (via agency)
-                  </option>
-                  <option data-i18n="either">Either</option>
+                  <option value="">{t("options.selectPlaceholder")}</option>
+                  <option>{t("options.interview.online")}</option>
+                  <option>{t("options.interview.local")}</option>
+                  <option>{t("options.interview.either")}</option>
                 </select>
               </div>
 
               <div className="field-reg">
-                <label data-i18n="accept_confirm_label">
-                  Acceptance confirmation (overseas hiring)
-                </label>
+                <label>{t("labels.acceptConfirm")}</label>
                 <select
                   name="accept_confirm"
                   value={form.accept_confirm}
                   onChange={handleChange}
                 >
-                  <option value="" data-i18n="select_ph">
-                    Please select
-                  </option>
-                  <option data-i18n="accept_yes">
-                    Guaranteed (approved / slots available)
-                  </option>
-                  <option data-i18n="accept_maybe">
-                    Likely (depends on conditions)
-                  </option>
-                  <option data-i18n="accept_consult">
-                    Considering (consult)
-                  </option>
+                  <option value="">{t("options.selectPlaceholder")}</option>
+                  <option>{t("options.accept.yes")}</option>
+                  <option>{t("options.accept.maybe")}</option>
+                  <option>{t("options.accept.consult")}</option>
                 </select>
-                <div className="hint" data-i18n="accept_hint">
-                  *This relates to “Overseas new hiring (guaranteed
-                  acceptance)”.
-                </div>
+                <div className="hint">{t("hints.acceptConfirm")}</div>
               </div>
             </div>
 
             <div className="field-reg" style={{ marginTop: "12px" }}>
-              <label data-i18n="requirements_label">
-                Candidate profile / must-have conditions
-              </label>
+              <label>{t("labels.requirements")}</label>
               <textarea
                 name="requirements"
                 value={form.requirements}
                 onChange={handleChange}
-                data-ph="requirements_ph"
-                placeholder="e.g., experience, certificates, shifts, constraints, etc."
+                placeholder={t("placeholders.requirements")}
               ></textarea>
             </div>
 
             <div className="divider"></div>
 
-            <div className="section-title-reg" data-i18n="sec4">
-              4) Contact preference &amp; notes
-            </div>
+            <div className="section-title-reg">{t("sections.contact")}</div>
             <div className="grid-reg">
               <div className="field-reg">
-                <label data-i18n="contact_method_label">
-                  Preferred contact method
-                </label>
+                <label>{t("labels.contactMethod")}</label>
                 <select
                   name="contact_method"
                   value={form.contact_method}
                   onChange={handleChange}
                 >
-                  <option value="" data-i18n="select_ph">
-                    Please select
-                  </option>
-                  <option data-i18n="cm_phone">Phone</option>
-                  <option data-i18n="cm_email">Email</option>
-                  <option data-i18n="cm_online">Online meeting</option>
+                  <option value="">{t("options.selectPlaceholder")}</option>
+                  <option>{t("options.contactMethod.phone")}</option>
+                  <option>{t("options.contactMethod.email")}</option>
+                  <option>{t("options.contactMethod.online")}</option>
                 </select>
               </div>
 
               <div className="field-reg">
-                <label data-i18n="contact_time_label">
-                  Preferred contact time
-                </label>
+                <label>{t("labels.contactTime")}</label>
                 <input
                   name="contact_time"
                   value={form.contact_time}
                   onChange={handleChange}
-                  data-ph="contact_time_ph"
-                  placeholder="e.g., Weekdays 10:00–17:00"
+                  placeholder={t("placeholders.contactTime")}
                 />
               </div>
             </div>
 
             <div className="field-reg" style={{ marginTop: "12px" }}>
-              <label data-i18n="message_label">Message (optional)</label>
+              <label>{t("labels.message")}</label>
               <textarea
                 name="message"
                 value={form.message}
                 onChange={handleChange}
-                data-ph="message_ph"
-                placeholder="e.g., Need 3 people urgently. Dorm available. Prefer online interviews."
+                placeholder={t("placeholders.message")}
               ></textarea>
             </div>
 
@@ -707,12 +627,11 @@ export default function RegistrationEmployer() {
               <button
                 className="btn btn-default-custom me-1"
                 type="button"
-                data-i18n="clear"
               >
-                Clear
+                {t("buttons.clear")}
               </button>
               <button className="btn btn-primary-custom" onClick={handleSubmit}>
-                Submit
+                {t("buttons.submit")}
               </button>
             </div>
           </div>

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Modal, Button, Spinner } from "react-bootstrap";
 import { InfoIcon, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface PreviewFileProps {
   filePath: string | null;
@@ -11,9 +12,10 @@ interface PreviewFileProps {
 
 const PreviewFile = ({
   filePath,
-  fileName = "File Preview",
+  fileName,
   onClose,
 }: PreviewFileProps) => {
+  const t = useTranslations("previewFile");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [fileType, setFileType] = useState<string>("");
@@ -35,6 +37,7 @@ const PreviewFile = ({
   }, [filePath]);
 
   if (!filePath) return null;
+  const resolvedFileName = fileName || t("defaultTitle");
 
   const getFileType = (path: string) => {
     const ext = path.split(".").pop()?.toLowerCase() || "";
@@ -63,7 +66,7 @@ const PreviewFile = ({
       return (
         <div className="d-flex align-items-center justify-content-center h-100">
           <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
+            <span className="visually-hidden">{t("loading")}</span>
           </Spinner>
         </div>
       );
@@ -75,10 +78,10 @@ const PreviewFile = ({
           <div className="d-flex align-items-center justify-content-center h-100">
             <img
               src={fullFilePath}
-              alt={fileName}
+              alt={resolvedFileName}
               className="mw-100 mh-100"
               style={{ maxHeight: "80vh", objectFit: "contain" }}
-              onError={() => setError("Failed to load image")}
+              onError={() => setError(t("errorImage"))}
             />
           </div>
         );
@@ -90,7 +93,7 @@ const PreviewFile = ({
               src={fullFilePath}
               className="w-100 h-100"
               style={{ border: "none", minHeight: "600px" }}
-              onError={() => setError("Failed to load PDF")}
+              onError={() => setError(t("errorPdf"))}
             />
           </div>
         );
@@ -103,7 +106,7 @@ const PreviewFile = ({
               controls
               className="mw-100 mh-100"
               style={{ maxHeight: "80vh" }}
-              onError={() => setError("Failed to load video")}
+              onError={() => setError(t("errorVideo"))}
             />
           </div>
         );
@@ -113,8 +116,7 @@ const PreviewFile = ({
           <div className="p-4 h-100 bg-light overflow-auto">
             <div className="alert alert-info mb-4">
               <p className="mb-0">
-                Document preview is not available. Please download the file to
-                view it.
+                {t("documentPreviewUnavailable")}
               </p>
             </div>
             <div className="text-center py-5">
@@ -129,7 +131,9 @@ const PreviewFile = ({
                 <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0 2A.5.5 0 0 1 5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z" />
                 <path d="M4 0a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V0zm5.5 0v1H6a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-3.5V0z" />
               </svg>
-              <p className="text-muted">{fileType.toUpperCase()} Document</p>
+              <p className="text-muted">
+                {t("documentLabel", { type: fileType.toUpperCase() })}
+              </p>
             </div>
           </div>
         );
@@ -148,7 +152,7 @@ const PreviewFile = ({
               <path d="M4 0a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V0zm5.5 0v1H6a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-3.5V0z" />
             </svg>
             <p className="text-muted mt-3">
-              File preview not supported for this file type
+              {t("unsupported")}
             </p>
           </div>
         );
@@ -165,13 +169,15 @@ const PreviewFile = ({
       className="preview-modal"
     >
       <Modal.Header className="bg-light border-bottom d-flex justify-content-between align-items-center">
-        <Modal.Title className="text-truncate fw-bold">{fileName}</Modal.Title>
+        <Modal.Title className="text-truncate fw-bold">
+          {resolvedFileName}
+        </Modal.Title>
         <div className="d-flex gap-2">
           <Button
             variant="outline-danger"
             size="sm"
             onClick={onClose}
-            title="Close preview"
+            title={t("closeTitle")}
           >
             <X size={18} />
           </Button>

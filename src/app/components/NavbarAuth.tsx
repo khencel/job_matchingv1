@@ -12,7 +12,8 @@ import ChangePassword from "./changePasswordModal";
 
 export default function NavbarAuth() {
   const locale = useLocale();
-  const t = useTranslations("navbar");
+  const tNavbar = useTranslations("navbar");
+  const tAuth = useTranslations("auth");
   const router = useRouter();
 
   const access = useAppSelector((s) => s.authState.access);
@@ -28,7 +29,7 @@ export default function NavbarAuth() {
       return;
     } finally {
       router.push("/");
-      showSuccessToast("Logout Successfully", "");
+      showSuccessToast(tAuth("logoutSuccess"), "");
     }
   };
 
@@ -92,7 +93,7 @@ export default function NavbarAuth() {
           <a className="navbar-brand d-flex align-items-center" href="#">
             <img
               src="/img/logo.png"
-              alt={t("logoAlt")}
+              alt={tNavbar("logoAlt")}
               style={{ height: "80px", width: "auto", marginRight: "8px" }}
             />
           </a>
@@ -119,11 +120,11 @@ export default function NavbarAuth() {
                 className="form-select form-select-sm"
                 value={locale}
                 onChange={handleLanguageChange}
-                aria-label="Language selector"
+                 aria-label={tNavbar("languageSelectorLabel")}
                 style={{ width: "auto", minWidth: "140px" }}
               >
-                <option value="en">🇺🇸 English</option>
-                <option value="ja">🇯🇵 日本語</option>
+                 <option value="en">🇺🇸 {tNavbar("english")}</option>
+                 <option value="ja">🇯🇵 {tNavbar("japanese")}</option>
               </select>
             </div>
 
@@ -167,12 +168,12 @@ export default function NavbarAuth() {
                 >
                   <li>
                     <button className="dropdown-item" onClick={()=> handleChangePassword()}>
-                      Change Password
+                      {tAuth("changePassword")}
                     </button>
                   </li>
                   <li>
                     <a className="dropdown-item" href="#">
-                      {t("profile")}
+                      {tAuth("menu.profile")}
                     </a>
                   </li>
                   <li>
@@ -180,7 +181,7 @@ export default function NavbarAuth() {
                   </li>
                   <li>
                     <Button className="dropdown-item" onClick={handleLogout}>
-                      {t("logout")}
+                      {tAuth("logout")}
                     </Button>
                   </li>
                 </ul>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import { listCategory } from "./listGroupData";
+import { useTranslations } from "next-intl";
 
 
 // const options = [
@@ -12,11 +13,17 @@ import { listCategory } from "./listGroupData";
 
 const MultiSelectDropdown = ({ value, onChange }) => {
   const [selectedOptions, setSelectedOptions] = useState(value || []);
+  const t = useTranslations("listGroupData");
+
+  const options = listCategory.map((item) => ({
+    ...item,
+    label: t(`categories.${item.value}`),
+  }));
 
   return (
     <div>
       <Select
-        options={listCategory}
+        options={options}
         isMulti
         value={value}          
         onChange={onChange}   

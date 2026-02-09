@@ -1,0 +1,10 @@
+{
+  "title": "最近のアクティビティ",
+  "items": {
+    "item1": "KhennethがWeb Developerに応募しました",
+    "item2": "RusselをUI designerとして採用しました",
+    "item3": "McAndrewがWeb Developerに応募しました",
+    "item4": "McAndrewがFull Stack Developerに応募しました"
+  },
+  "viewAll": "すべてのアクティビティを見る"
+}

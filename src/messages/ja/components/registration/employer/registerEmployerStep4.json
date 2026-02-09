@@ -1,0 +1,24 @@
+{
+  "title": "利用規約",
+  "labels": {
+    "acceptTerms": "利用規約に同意する。",
+    "acceptPrivacyPolicy": "プライバシーポリシーに同意する。",
+    "acceptReceiveEmails": "メールで通知を受け取る。"
+  },
+  "helpers": {
+    "submitting": "送信中..."
+  },
+  "errors": {
+      "acceptTerms": "利用規約に同意する必要があります。",
+      "acceptPrivacy": "プライバシーポリシーに同意する必要があります。",
+      "submitFailed": "雇用者の登録に失敗しました"
+  },
+    "verify": {
+      "title": "メール認証を完了してください",
+      "text": "登録済みのメールアドレスに確認メールを送信しました。リンクをクリックしてアカウントを有効化してください。",
+      "footer": "メールが見つからない場合は、迷惑メールフォルダもご確認ください。"
+    },
+  "buttons": {
+    "submit": "登録を送信"
+  }
+}

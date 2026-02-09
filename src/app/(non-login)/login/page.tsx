@@ -8,8 +8,10 @@ import {
   showErrorToast,
   showWarningToast,
 } from "@/app/(util)/toaster";
+import { useTranslations } from "next-intl";
 
 export default function Login() {
+  const t = useTranslations("login");
   const dispatch = useAppDispatch();
   const router = useRouter();
   const loading = useAppSelector((s) => s.authState.loading);
@@ -24,7 +26,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     if (!email.trim() || !password.trim()) {
-      showErrorToast("Sign in failed", "Please fill in all fields");
+      showErrorToast(t("toasts.signInFailed"), t("toasts.fillAllFields"));
       return;
     }
     try {
@@ -33,7 +35,7 @@ export default function Login() {
       const role = res.user.role;
 
       if (!verified_email) {
-        showWarningToast("Sign in failed", "Please verify your email");
+        showWarningToast(t("toasts.signInFailed"), t("toasts.verifyEmail"));
         return;
       }
 
@@ -52,10 +54,10 @@ export default function Login() {
           break;
       }
 
-      showSuccessToast("Sign in successful", "Welcome back!");
+      showSuccessToast(t("toasts.signInSuccess"), t("toasts.welcomeBack"));
     } catch (error) {
       console.log(error);
-      showErrorToast("Sign in failed", "Invalid email or password");
+      showErrorToast(t("toasts.signInFailed"), t("toasts.invalidCredentials"));
     }
   };
 
@@ -65,11 +67,11 @@ export default function Login() {
       <div className="left-side d-flex flex-column align-items-center justify-content-center position-relative text-center">
         <img
           src="/img/logo.png"
-          alt="Logo"
+          alt={t("logoAlt")}
           className={`logo ${fadeIn ? "animate-logo" : ""}`}
         />
-        <h2 className="logo-text mt-3">Welcome to Our Platform</h2>
-        <p className="text-muted mb-0">Connect. Apply. Grow.</p>
+        <h2 className="logo-text mt-3">{t("welcomeTitle")}</h2>
+        <p className="text-muted mb-0">{t("welcomeSubtitle")}</p>
 
         {/* Animated shapes */}
         <div className="animated-shape shape1"></div>
@@ -84,9 +86,9 @@ export default function Login() {
         }`}
       >
         <div className="form-container p-4 shadow-lg rounded-4 w-100">
-          <h3 className="fw-bold mb-2 text-center">Sign In</h3>
+          <h3 className="fw-bold mb-2 text-center">{t("formTitle")}</h3>
           <p className="text-muted text-center mb-4">
-            Welcome back! Please login to your account
+            {t("formSubtitle")}
           </p>
 
           <div className="form-floating mb-3">
@@ -94,12 +96,12 @@ export default function Login() {
               type="email"
               className="form-control input-focus"
               id="floatingEmail"
-              placeholder="Email"
+              placeholder={t("emailPlaceholder")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleLogin()}
             />
-            <label htmlFor="floatingEmail">Email</label>
+            <label htmlFor="floatingEmail">{t("emailLabel")}</label>
           </div>
 
           <div className="form-floating mb-4">
@@ -107,12 +109,12 @@ export default function Login() {
               type="password"
               className="form-control input-focus"
               id="floatingPassword"
-              placeholder="Password"
+              placeholder={t("passwordPlaceholder")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleLogin()}
             />
-            <label htmlFor="floatingPassword">Password</label>
+            <label htmlFor="floatingPassword">{t("passwordLabel")}</label>
           </div>
 
           <button
@@ -120,11 +122,13 @@ export default function Login() {
             onClick={handleLogin}
             disabled={loading}
           >
-            {loading ? "Signing In..." : "Sign In"}
+            {loading ? t("signingIn") : t("signIn")}
           </button>
 
           <div className="text-center">
-            <span className="text-primary cursor-pointer">Forgot Password?</span>
+            <span className="text-primary cursor-pointer">
+              {t("forgotPassword")}
+            </span>
           </div>
         </div>
       </div>

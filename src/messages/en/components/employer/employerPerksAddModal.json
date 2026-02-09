@@ -1,0 +1,12 @@
+{
+  "confirm": {
+    "title": "Add Perks & Benefits?",
+    "text": "Are you sure you want to add this Perks & Benefits?",
+    "confirmText": "yes, Create it!"
+  },
+  "title": "Add Perks & Benefits",
+  "namePlaceholder": "Name",
+  "descriptionPlaceholder": "Description",
+  "close": "Close",
+  "save": "Save"
+}

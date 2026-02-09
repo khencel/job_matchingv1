@@ -1,0 +1,8 @@
+{
+  "title": "アップロード済み書類",
+  "empty": "書類がまだアップロードされていません",
+  "fileName": "ファイル名",
+  "fileType": "ファイル形式",
+  "actions": "操作",
+  "documentFallback": "書類"
+}

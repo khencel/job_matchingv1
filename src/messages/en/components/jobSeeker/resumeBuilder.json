@@ -1,0 +1,16 @@
+{
+  "toast": {
+    "successTitle": "Success",
+    "successMessage": "Resume saved."
+  },
+  "validation": {
+    "incomplete": "Complete details before saving the resume.\n(Name, Photo, Contact Info, Address, Reasons)"
+  },
+  "actions": {
+    "saveTitle": "Save Resume",
+    "save": "Save Resume",
+    "saving": "Saving...",
+    "printTitle": "Print Resume",
+    "print": "Print Resume"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "confirm": {
+    "title": "求人を作成しますか？",
+    "text": "求人が作成されました",
+    "confirmText": "はい、作成します"
+  },
+  "basicInfo": "基本情報",
+  "basicInfoNote": "あなたの求人情報です。",
+  "infoDetails": "情報の詳細",
+  "labels": {
+    "title": "職種:",
+    "salary": "給与:",
+    "jobType": "雇用形態:",
+    "jobDescription": "仕事内容:",
+    "responsibilities": "責任:",
+    "requirements": "応募要件:",
+    "niceToHave": "歓迎条件:"
+  },
+  "confirmButton": "確認"
+}

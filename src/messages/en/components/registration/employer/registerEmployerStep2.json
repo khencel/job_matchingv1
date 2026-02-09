@@ -1,0 +1,58 @@
+{
+  "title": "Management Organization Information",
+  "labels": {
+    "basicInfo": "Basic Information",
+    "companyName": "Company Name",
+    "companyAddress": "Company Address",
+    "phoneNumber": "Phone Number",
+    "companyIndustry": "Company Industry",
+    "industry": "Industry",
+    "regions": "Regions",
+    "region": "Region",
+    "orgInfo": "Organizational Information",
+    "numEmployees": "Number of Employees",
+    "branchOffices": "Branch Offices",
+    "branchOfficePlaceholder": "Enter branch office location",
+    "branchOfficesList": "Branch Offices:",
+    "selectedIndustries": "Selected Industries:",
+    "prInfo": "PR Information",
+    "appealPoints": "Appeal Points",
+    "fee": "Fee",
+    "companyFoundedYear": "Company Founded Year",
+    "companyProfile": "Company Profile"
+  },
+  "placeholders": {
+    "enterCompanyName": "Enter company name",
+    "enterCompanyAddress": "Enter company address",
+    "enterPhoneNumber": "Enter phone number",
+    "selectIndustry": "Select Industry",
+    "selectRegion": "Select Region",
+    "enterNumEmployees": "Enter number of employees",
+    "enterAppealPoints": "Enter appeal points",
+    "enterFee": "Enter fee amount",
+    "companyFoundedYear": "Enter Company Founded Year (Greater than 1000)",
+    "companyProfile": "Enter Company Biography"
+  },
+  "errors": {
+    "invalidCompanyName": "Enter a valid Company Name",
+    "invalidCompanyAddress": "Enter a valid Company Address",
+    "invalidPhoneNumber": "Enter a valid Phone Number",
+    "invalidIndustry": "Select Industry",
+    "invalidNumOfEmployees": "Need at least 1 employee.",
+    "invalidRegion": "Select Region",
+    "invalidCurrentBranch": "At least minimum of 2 characters",
+    "invalidBranchName": "Branch name must be at least 2 characters long.",
+    "fillRequired": "Please fill in all required fields.",
+    "addAtLeastOneBranch": "Please add at least one branch office.",
+    "invalidFoundedYear": "Please enter founded date",
+    "invalidCompanyProfile": "Please enter company biography"
+  },
+  "toast": {
+    "successTitle": "Company Information Submitted"
+  },
+  "buttons": {
+    "next": "Next",
+    "add": "Add",
+    "remove": "Remove"
+  }
+}

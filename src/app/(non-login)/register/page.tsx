@@ -1,3 +1,6 @@
-export  default function Register() {
-  return <h1>Register</h1>
+import { useTranslations } from "next-intl";
+
+export default function Register() {
+  const t = useTranslations("register");
+  return <h1>{t("title")}</h1>;
 }

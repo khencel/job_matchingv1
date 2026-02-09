@@ -1,0 +1,37 @@
+{
+  "profile": {
+    "sampleName": "サンプルユーザー",
+    "sampleLocation": "東京, 日本",
+    "editProfile": "プロフィールを編集"
+  },
+  "about": {
+    "title": "自己紹介",
+    "paragraph1": "私は継続的な学習と成長に情熱を持つ、目標志向の人間です。品質の高い仕事、協働、そして新しい課題への適応を大切にしています。スキルを活かし、経験を積み、どの組織にも前向きに貢献したいと考えています。",
+    "paragraph2": "私は継続的な学習と成長に情熱を持つ、目標志向の人間です。品質の高い仕事、協働、そして新しい課題への適応を大切にしています。スキルを活かし、経験を積み、どの組織にも前向きに貢献したいと考えています。"
+  },
+  "experiences": {
+    "title": "職務経験",
+    "company": "Jollibee",
+    "roleLine": "フルタイム - 6月19日 - 現在",
+    "location": "東京, 日本",
+    "description": "Jollibeeで高い回転率の環境において、注文や問い合わせ対応を正確かつ迅速に行いました。"
+  },
+  "skills": {
+    "title": "スキル",
+    "item": "San Sebastian College Recoletos de Cavite"
+  },
+  "details": {
+    "title": "追加情報",
+    "email": "メール",
+    "phone": "電話",
+    "languages": "言語",
+    "sampleEmail": "sampleEmail@gmail.com",
+    "samplePhone": "+63 12121212121",
+    "sampleLanguages": "英語、日本語"
+  },
+  "testimonials": {
+    "title": "推薦文",
+    "itemTitle": "サンプル推薦文",
+    "quote": "Jollibeeで高い回転率の環境において、注文や問い合わせ対応を正確かつ迅速に行いました。"
+  }
+}

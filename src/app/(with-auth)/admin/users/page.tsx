@@ -12,9 +12,10 @@ import { useEffect, useState } from "react";
 import { fetchUsers, updateStatus, updateIsActive } from "@/redux/slices/applicants/userThunk";
 import { popup } from "@/helper/pop_up";
 import { showSuccessToast } from "@/app/(util)/toaster";
+import { useTranslations } from "next-intl";
 
 export default function AdminUsers() {
-    
+    const t = useTranslations("adminUsers");
     const {items, status, error, next, previous, currentPage, pageSize, count}= useSelector((state: RootState) => state.getAllUserByFilter);
     const dispatch = useAppDispatch();
     const [filter, setFilter] = useState<{ role: string }>({ role: "all" });
@@ -35,8 +36,8 @@ export default function AdminUsers() {
 
     const verifyChangeStatus = (id:number) => {
         popup({
-            title:"Change Status",
-            text:"Are you sure, Your want to change the status?",
+            title: t("confirm.title"),
+            text: t("confirm.text"),
             icon:"warning",
             onConfirm: () => {
                 handleIsActive(id)
@@ -54,7 +55,7 @@ export default function AdminUsers() {
                 filter
             }));
 
-            showSuccessToast("Update Status","User status updated successfully");
+            showSuccessToast(t("toast.title"), t("toast.success"));
         } catch (err) {
             console.error(err);
         }
@@ -73,19 +74,19 @@ export default function AdminUsers() {
     <>
         <div className="row standar-div">
             <div className="col">
-                <h5><strong><BiArrowBack /> Users Listing</strong></h5>
+                <h5><strong><BiArrowBack /> {t("title")}</strong></h5>
             </div>
             <div className="col text-end">
-                <span>November - December 2025 <FaCalendarCheck className="text-primary" /></span>
+                <span>{t("dateRange")} <FaCalendarCheck className="text-primary" /></span>
             </div>
         </div>
 
         <div className="row standar-div mt-2">
             <div className="col">
-                <strong>Users List ({count} total)</strong>
+                <strong>{t("listTitle", { count })}</strong>
             </div>
             <div className="col-2 text-end">
-                <FaSearch className="text-primary" /> Search Users
+                <FaSearch className="text-primary" /> {t("search")}
             </div>
             <div className="col-2 text-end">
                 <button
@@ -94,21 +95,21 @@ export default function AdminUsers() {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
             >
-            <FaSliders className="me-1" /> Filter
+            <FaSliders className="me-1" /> {t("filter")}
         </button>
 
         <ul className="dropdown-menu dropdown-menu-end">
             <li>
-                <button className="dropdown-item" onClick={() => handleFilter("all")}>All</button>
+                <button className="dropdown-item" onClick={() => handleFilter("all")}>{t("filters.all")}</button>
             </li>
             <li>
-                <button className="dropdown-item" onClick={() => handleFilter("job_seeker")}>Job Seeker</button>
+                <button className="dropdown-item" onClick={() => handleFilter("job_seeker")}>{t("filters.jobSeeker")}</button>
             </li>
             <li>
-                <button className="dropdown-item" onClick={() => handleFilter("employer")}>Employer</button>
+                <button className="dropdown-item" onClick={() => handleFilter("employer")}>{t("filters.employer")}</button>
             </li>
             <li>
-                <button className="dropdown-item" onClick={() => handleFilter("supervisory")}>Supervisory</button>
+                <button className="dropdown-item" onClick={() => handleFilter("supervisory")}>{t("filters.supervisory")}</button>
             </li>
         </ul>
             </div>
@@ -119,12 +120,12 @@ export default function AdminUsers() {
                     <table className="table table-hover">
                         <thead>
                             <tr>
-                                <th className="text-start p-2">Name</th>
-                                <th className="text-start p-2">Email</th>
-                                <th className="text-start p-2">Role</th>
-                                <th className="text-start p-2">Status</th>
-                                <th className="text-start p-2">Joined</th>
-                                <th className="text-start p-2">Action</th>
+                                <th className="text-start p-2">{t("table.name")}</th>
+                                <th className="text-start p-2">{t("table.email")}</th>
+                                <th className="text-start p-2">{t("table.role")}</th>
+                                <th className="text-start p-2">{t("table.status")}</th>
+                                <th className="text-start p-2">{t("table.joined")}</th>
+                                <th className="text-start p-2">{t("table.action")}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -149,7 +150,7 @@ export default function AdminUsers() {
                                             <td className="text-start p-2">{item.role}</td>
                                             <td className={`text-start p-2`}>
                                                 <span className={`badge p-2 ${item.is_active?'bg-success':'bg-danger'}`}>
-                                                    {item.is_active?"Active":"Not active"}
+                                                    {item.is_active? t("status.active") : t("status.inactive")}
                                                 </span>
                                                 
                                             </td>
@@ -173,11 +174,11 @@ export default function AdminUsers() {
                                                                     {
                                                                         item.is_active === true?
                                                                             <li>
-                                                                                <button className="dropdown-item" onClick={() => verifyChangeStatus(item.id)}>Deactivate</button>
+                                                                                <button className="dropdown-item" onClick={() => verifyChangeStatus(item.id)}>{t("actions.deactivate")}</button>
                                                                             </li>
                                                                             :
                                                                             <li>
-                                                                                <button className="dropdown-item" onClick={() => verifyChangeStatus(item.id)}>Activate</button>
+                                                                                <button className="dropdown-item" onClick={() => verifyChangeStatus(item.id)}>{t("actions.activate")}</button>
                                                                             </li>
                                                                     }
                                                                 </ul>
@@ -197,7 +198,7 @@ export default function AdminUsers() {
 
         <div className="d-flex justify-content-between align-items-center mt-3">
         <div className="d-flex align-items-center">
-            <label className="me-2">Items per page:</label>
+            <label className="me-2">{t("pagination.itemsPerPage")}</label>
             <select 
                 className="form-select form-select-sm" 
                 style={{ width: 'auto' }}
@@ -210,7 +211,11 @@ export default function AdminUsers() {
                 <option value={50}>50</option>
             </select>
             <span className="ms-3 text-muted">
-                Showing {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, count)} of {count}
+                                {t("pagination.showing", {
+                                    start: (currentPage - 1) * pageSize + 1,
+                                    end: Math.min(currentPage * pageSize, count),
+                                    count,
+                                })}
             </span>
         </div>
 
@@ -222,7 +227,7 @@ export default function AdminUsers() {
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={!previous}
                     >
-                        Previous
+                        {t("pagination.previous")}
                     </button>
                 </li>
                 
@@ -246,7 +251,7 @@ export default function AdminUsers() {
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={!next}
                     >
-                        Next
+                        {t("pagination.next")}
                     </button>
                 </li>
             </ul>

@@ -1,0 +1,19 @@
+{
+  "categories": {
+    "tech_IT": "Tech & IT",
+    "creative_design": "Creative & Design",
+    "business_office": "Business & Office",
+    "sales_marketing": "Sales & Marketing",
+    "finance_accounting": "Finance & Accounting",
+    "ecommerce": "E-commerce & Retail",
+    "education": "Education & Training",
+    "healthcare": "Healthcare",
+    "trade": "Skilled Trades",
+    "logistic": "Logistics & Transportation",
+    "hospital_tourism": "Hospitality & Tourism",
+    "customer_service": "Customer Service & BPO",
+    "construction": "Construction & Engineering",
+    "legal": "Legal & Compliance",
+    "other": "Others / General"
+  }
+}

@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 interface AddSkillProps {
@@ -7,6 +10,7 @@ interface AddSkillProps {
 }
 
 export default function AddSkill({ skills, onAddSkill, onRemoveSkill }: AddSkillProps){
+    const t = useTranslations("employerAddSkill");
     const [input, setInput] = useState("");
 
     const handleAddSkill = () => {
@@ -19,9 +23,15 @@ export default function AddSkill({ skills, onAddSkill, onRemoveSkill }: AddSkill
 
     return (
         <>
-            <input type="text" className="form-control" value={input} onChange={(e)=>setInput(e.target.value)} placeholder="Enter skill" />
+            <input
+                type="text"
+                className="form-control"
+                value={input}
+                onChange={(e)=>setInput(e.target.value)}
+                placeholder={t("placeholder")}
+            />
             <button className="btn-light border-0 p-0 mt-2" onClick={handleAddSkill}>
-                <span className="primary-text"><strong>+ Add Skills</strong></span>
+                <span className="primary-text"><strong>{t("addSkills")}</strong></span>
             </button>
             <div className="mt-2">
                 {skills.map((skill, index) => (

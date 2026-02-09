@@ -1,0 +1,16 @@
+{
+  "title": "求人フィルター",
+  "clearFilters": "フィルターをクリア",
+  "category": "カテゴリー",
+  "selectCategory": "カテゴリーを選択",
+  "jobType": "雇用形態",
+  "jobTypes": {
+    "fullTime": "フルタイム",
+    "partTime": "パートタイム",
+    "remote": "リモート",
+    "internship": "インターン"
+  },
+  "salary": "給与",
+  "min": "最小",
+  "max": "最大"
+}

@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -10,6 +12,7 @@ import { popup } from "@/helper/pop_up";
 import { showSuccessToast } from "@/app/(util)/toaster";
 import Cookies from "js-cookie";
 import MultipleSelect from "@/components/MultipleSelectStandard";
+import { useTranslations } from "next-intl";
 
 
 interface EditModalProps {
@@ -18,24 +21,8 @@ interface EditModalProps {
     companyProfile?: any;
 }
 
-export const industries = [
-  "Technology",
-  "Healthcare",
-  "Finance",
-  "Manufacturing",
-  "Retail",
-  "Education",
-  "Hospitality",
-  "Construction",
-  "Transportation",
-  "Real Estate",
-  "Agriculture",
-  "Entertainment",
-  "Telecommunications",
-  "Energy",
-];
-
 export default function EditModalProfile({ handleShow, handleClose, companyProfile }: EditModalProps) {
+        const t = useTranslations("employerProfileEditModal");
     const dispatch = useAppDispatch();
     
     const logoInputRef = useRef<HTMLInputElement>(null);
@@ -51,7 +38,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
         { label: string; value: string }[]
     >([]);
 
-    const industryOptions = industries.map(item => ({
+    const industryOptions = (t.raw("industryOptions") as string[]).map((item) => ({
         label: item,
         value: item,
     }));
@@ -91,9 +78,9 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
 
     const saveChanges = () => {
         popup({
-            title: "Update Profile?",
-            text: "Profile will be updated",
-            confirmText: 'yes, Update it!',
+            title: t("confirm.title"),
+            text: t("confirm.text"),
+            confirmText: t("confirm.confirmText"),
             icon:"warning",
             onConfirm: () => {
                 handleSave()
@@ -138,7 +125,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
             .then(() => {
                 const user_id = Number(Cookies.get("user_id"));
                 dispatch(getProfile(user_id));
-                showSuccessToast("Update successful", "Profile has been updated successfully")
+                showSuccessToast(t("toast.title"), t("toast.success"))
                 handleClose();
             })
             .catch((err) => {
@@ -187,16 +174,16 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                 onHide={handleClose}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit Profile</Modal.Title>
+                    <Modal.Title>{t("title")}</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-                    <strong className="standar-text">Logo & Banner Image</strong>
+                    <strong className="standar-text">{t("logoBanner")}</strong>
 
                     <div className="row mt-3">
                         {/* LOGO */}
                         <div className="col-md-3 border p-2">
-                            <small>Upload Logo</small>
+                            <small>{t("uploadLogo")}</small>
                             <div className="edit-logo-profile my-2">
                                 {logoPreview ? (
                                     <img
@@ -206,18 +193,18 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                     />
                                 ) : (
                                     <div className="text-muted small text-center">
-                                        No logo uploaded
+                                        {t("noLogo")}
                                     </div>
                                 )}
                             </div>
                             <small>
-                                {logoFile ? formatFileSize(logoFile.size) : "No file"}{" "}
+                                {logoFile ? formatFileSize(logoFile.size) : t("noFile")}{" "}
                                 <span
                                     className="text-primary"
                                     style={{ cursor: "pointer" }}
                                     onClick={handleReplaceLogo}
                                 >
-                                    Replace
+                                    {t("replace")}
                                 </span>
                             </small>
                             <input
@@ -231,7 +218,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
 
                         {/* BANNER */}
                         <div className="col-md-9 border p-2">
-                            <small>Banner Image</small>
+                            <small>{t("bannerImage")}</small>
                             <div className="edit-banner-profile my-2">
                                 {bannerPreview ? (
                                     <img
@@ -241,18 +228,18 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                     />
                                 ) : (
                                     <div className="text-muted small text-center">
-                                        No banner uploaded
+                                        {t("noBanner")}
                                     </div>
                                 )}
                             </div>
                             <small>
-                                {bannerFile ? formatFileSize(bannerFile.size) : "No file"}{" "}
+                                {bannerFile ? formatFileSize(bannerFile.size) : t("noFile")}{" "}
                                 <span
                                     className="text-primary"
                                     style={{ cursor: "pointer" }}
                                     onClick={handleReplaceBanner}
                                 >
-                                    Replace
+                                    {t("replace")}
                                 </span>
                             </small>
                             <input
@@ -268,7 +255,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                     <div className="row mt-2">
                         <div className="col">
                             <div>
-                                Company Name
+                                {t("companyName")}
                                 <br />
                                 <input 
                                     className="form-control" 
@@ -278,14 +265,14 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                 />
                             </div>
                             <div className="mt-2">
-                                Company Profile
+                                {t("companyProfile")}
                                 <br />
                                 <TextEditor value={companyProfileText} onChange={(value) => setCompanyProfileText(value)} />
                             </div>
                             <div className="mt-2">
                                 <div className="row">
                                     <div className="col">
-                                        Company Founded
+                                        {t("companyFounded")}
                                         <br />
                                         <input 
                                             className="form-control" 
@@ -295,7 +282,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                         />
                                     </div>
                                     <div className="col">
-                                        No. of Employees
+                                        {t("employees")}
                                         <br />
                                         <input 
                                             className="form-control" 
@@ -305,7 +292,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                         />
                                     </div>
                                     <div className="col">
-                                        Region
+                                        {t("region")}
                                         <br />
                                         <input 
                                             className="form-control" 
@@ -315,13 +302,13 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                         />
                                     </div>
                                     <div className="col">
-                                        Industry
+                                        {t("industry")}
                                         <br />
                                         <MultipleSelect
                                             data={industryOptions}
                                             value={industry}
                                             onChange={setIndustry}
-                                            placeholder="Select industry"
+                                            placeholder={t("selectIndustry")}
                                         />
                                     </div>
                                 </div>
@@ -334,10 +321,10 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
 
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Close
+                        {t("close")}
                     </Button>
                     <Button className="btn-primary-custom rounded-3" onClick={saveChanges}>
-                        Save Changes
+                        {t("saveChanges")}
                     </Button>
                 </Modal.Footer>
             </Modal>

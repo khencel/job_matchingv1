@@ -1,0 +1,36 @@
+{
+  "alts": {
+    "preview": "プレビュー",
+    "user": "ユーザー"
+  },
+  "fallback": {
+    "na": "該当なし"
+  },
+  "buttons": {
+    "cancel": "キャンセル",
+    "saveChanges": "変更を保存",
+    "editProfile": "プロフィールを編集"
+  },
+  "sections": {
+    "companyInformation": "会社情報",
+    "headquartersAddress": "本社所在地",
+    "contactPerson": "担当者"
+  },
+  "labels": {
+    "companyName": "会社名",
+    "companyNamePhonetic": "会社名（フリガナ）",
+    "industry": "業種",
+    "capital": "資本金",
+    "yearFounded": "設立年",
+    "representativeName": "代表者名",
+    "employees": "従業員数",
+    "prefecture": "都道府県",
+    "city": "市区町村",
+    "street": "番地",
+    "businessDescription": "事業内容",
+    "fullName": "氏名",
+    "department": "部署",
+    "phoneNumber": "電話番号",
+    "email": "メール"
+  }
+}

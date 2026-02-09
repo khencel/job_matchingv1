@@ -1,8 +1,11 @@
+import { useTranslations } from "next-intl";
+
 export default function NotFound() {
+  const t = useTranslations("notFoundPage");
   return (
     <main>
-      <h1>Page not found</h1>
-      <p>Your gateway to finding the perfect job match.</p>
+      <h1>{t("title")}</h1>
+      <p>{t("description")}</p>
     </main>
   );
 }

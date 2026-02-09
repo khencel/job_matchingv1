@@ -1,0 +1,73 @@
+{
+  "title": "Resume Details",
+  "subtitle": "Update fields to see the preview refresh instantly.",
+  "sections": {
+    "basicInfo": "Basic Information",
+    "contactAddress": "Contact & Address",
+    "education": "Education",
+    "workHistory": "Work History",
+    "licenses": "Licenses / Qualifications",
+    "preferences": "Preferences",
+    "motivation": "Motivation / Reasons"
+  },
+  "labels": {
+    "fullName": "Full Name",
+    "namePhonetic": "Name Phonetic",
+    "birthdate": "Birthdate",
+    "age": "Age",
+    "gender": "Gender",
+    "profilePhoto": "Profile Photo",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "addressPhonetic": "Address Phonetic",
+    "postalCode": "Postal Code",
+    "altPhone": "Alt. Phone",
+    "altEmail": "Alt. Email",
+    "altPhonetic": "Alt. Phonetic",
+    "altAddress": "Alt. Address",
+    "year": "Year",
+    "month": "Month",
+    "details": "Details",
+    "qualification": "Qualification"
+  },
+  "placeholders": {
+    "fullName": "e.g. Jane Doe",
+    "namePhonetic": "e.g. ジェーンドウ",
+    "postalCode": "123-4567",
+    "photoEmpty": "No photo",
+    "preference": "Add preference",
+    "motivation": "Share your motivation or key points"
+  },
+  "genderOptions": {
+    "select": "Select...",
+    "female": "Female",
+    "male": "Male",
+    "nonBinary": "Non-binary",
+    "preferNot": "Prefer not to say"
+  },
+  "photo": {
+    "changeImage": "Change Image",
+    "uploadImage": "Upload Image",
+    "remove": "Remove",
+    "hint": "PNG or JPG, up to 2MB."
+  },
+  "errors": {
+    "fullNameRequired": "Full name is required.",
+    "genderRequired": "Gender is required.",
+    "emailInvalid": "Please provide a valid email.",
+    "phoneShort": "Phone number is too short.",
+    "addressRequired": "Address is required.",
+    "birthdateRequired": "Birthdate is required.",
+    "ageRequired": "Age is required.",
+    "postalCodeRequired": "Postal code is required.",
+    "reasonsRequired": "Motivation is required.",
+    "photoRequired": "Photo is required.",
+    "imageType": "Please upload a valid image file.",
+    "imageSize": "Image must be under {max}MB."
+  },
+  "actions": {
+    "add": "Add",
+    "removeEntry": "Remove entry"
+  }
+}

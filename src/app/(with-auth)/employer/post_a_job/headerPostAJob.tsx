@@ -1,13 +1,17 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { BiArrowBack } from "react-icons/bi";
 import { FaBriefcase, FaFileInvoice, FaGift} from "react-icons/fa6";
 
 export default function HeaderPostAJob(){
+    const t = useTranslations("employerPostJobHeader");
     return(
         <>
             <div className="emp-component-style">
                 <div className="row">
                     <div className="col ">
-                        <h5><strong><BiArrowBack /> Post a Job</strong></h5>
+                        <h5><strong><BiArrowBack /> {t("title")}</strong></h5>
                     </div>
                 </div>
                 <div className="row">
@@ -21,10 +25,10 @@ export default function HeaderPostAJob(){
                                 </div>
 
                                 <div className="col">
-                                    <div className="primary-text"><small>Step 1 of 3</small></div>
+                                    <div className="primary-text"><small>{t("step1")}</small></div>
                                     <div>
                                         <small>
-                                            <strong>Job Information</strong>
+                                            <strong>{t("step1Title")}</strong>
                                         </small>
                                     </div>
                                 </div>
@@ -41,10 +45,10 @@ export default function HeaderPostAJob(){
                                 </div>
 
                                 <div className="col">
-                                    <div className="primary-text"><small>Step 2 of 3</small></div>
+                                    <div className="primary-text"><small>{t("step2")}</small></div>
                                     <div>
                                         <small>
-                                            <strong>Job Description</strong>
+                                            <strong>{t("step2Title")}</strong>
                                         </small>
                                     </div>
                                 </div>
@@ -61,10 +65,10 @@ export default function HeaderPostAJob(){
                                 </div>
 
                                 <div className="col">
-                                    <div className="primary-text"><small>Step 3 of 3</small></div>
+                                    <div className="primary-text"><small>{t("step3")}</small></div>
                                     <div>
                                         <small>
-                                            <strong>Information</strong>
+                                            <strong>{t("step3Title")}</strong>
                                         </small>
                                     </div>
                                 </div>

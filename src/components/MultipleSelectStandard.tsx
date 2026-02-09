@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Select from "react-select";
+import { useTranslations } from "next-intl";
 
 interface SelectOption {
     label: string;
@@ -19,9 +20,10 @@ export default function MultipleSelect({
     data,
     value,
     onChange,
-    placeholder = "Select options",
+    placeholder,
     isDisabled = false,
 }:MultipleSelectProps){
+    const t = useTranslations("multipleSelectStandard");
     return(
         <>
             <Select
@@ -29,7 +31,7 @@ export default function MultipleSelect({
                 isMulti
                 value={value}
                 onChange={(selected) => onChange(selected as SelectOption[])}
-                placeholder={placeholder}
+                placeholder={placeholder || t("placeholder")}
                 isDisabled={isDisabled}
                 classNamePrefix="react-select"
             />

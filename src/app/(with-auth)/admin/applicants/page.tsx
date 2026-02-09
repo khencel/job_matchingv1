@@ -18,6 +18,7 @@ import ViewApplicant from "./viewApplicant";
 import { popup } from "@/helper/pop_up";
 import { showSuccessToast } from "@/app/(util)/toaster";
 import FilterModal from "./filterModal";
+import { useTranslations } from "next-intl";
 
 import * as XLSX from "xlsx-js-style";
 import { saveAs } from 'file-saver';
@@ -25,6 +26,7 @@ import { saveAs } from 'file-saver';
 
 
 export default function AdminApplicants() {
+    const t = useTranslations("adminApplicants");
     const dispatch = useAppDispatch();
     const {items, status, error, next, previous, currentPage, pageSize, count, company, itemToPrint}= useSelector((state: RootState) => state.applicants);
     const [showEmployer, setShowEmployer] = useState(false);
@@ -127,8 +129,8 @@ export default function AdminApplicants() {
 
     const handleUpdateStatus = (id: number, status: string) => {
         popup({
-            title: "Change Status",
-            text: `Are you sure you want to change the status of this data?`,
+            title: t("confirm.title"),
+            text: t("confirm.text"),
             icon: "warning",
             onConfirm() {
             const payloadstatus = {
@@ -139,7 +141,7 @@ export default function AdminApplicants() {
             dispatch(updateStatus(payloadstatus))
                 .unwrap() 
                 .then(() => {
-                showSuccessToast("Change status", "Status of this record has been changed!");
+                showSuccessToast(t("toast.title"), t("toast.success"));
                
                 dispatch(fetchApplicants({ page: currentPage, pageSize, ...currentFilter }));
                 dispatch(fetchApplicantsNoPagination(currentFilter));
@@ -162,18 +164,18 @@ export default function AdminApplicants() {
         <>
             <div className="row standar-div">
                 <div className="col">
-                    <h5><strong><BiArrowBack /> Applicants Listing</strong></h5>
+                    <h5><strong><BiArrowBack /> {t("title")}</strong></h5>
                 </div>
                 <div className="col-2 border text-end me-2">
                     <button className="btn btn-success btn-sm" onClick={handleDownloadExcel}>
-                        Download Excel
+                        {t("downloadExcel")}
                     </button>
                 </div>
             </div>
 
             <div className="row standar-div mt-2">
                 <div className="col">
-                    <strong>Users List ({count} total)</strong>
+                    <strong>{t("listTitle", { count })}</strong>
                 </div>
                 {/* <div className="col-2 text-end">
                     <FaSearch className="text-primary" /> Search Users
@@ -181,7 +183,7 @@ export default function AdminApplicants() {
                 
                 <div className="col-1 text-end">
                     <span style={{cursor:"pointer"}} onClick={handleFilter}>
-                        <FaSliders className="text-primary"  /> Filter
+                        <FaSliders className="text-primary"  /> {t("filter")}
                     </span>
                     
                 </div>
@@ -192,13 +194,13 @@ export default function AdminApplicants() {
                         <table className="table table-hover">
                             <thead>
                                 <tr>
-                                    <th className="text-start p-2">Full Name</th>
-                                    <th className="text-start p-2">Hiring Stage</th>
-                                    <th className="text-start p-2">Joined</th>
-                                    <th className="text-start p-2">Age</th>
-                                    <th className="text-start p-2">Job Role</th>
-                                    <th className="text-start p-2">Employer</th>
-                                    <th className="text-start p-2">Action</th>
+                                    <th className="text-start p-2">{t("table.fullName")}</th>
+                                    <th className="text-start p-2">{t("table.hiringStage")}</th>
+                                    <th className="text-start p-2">{t("table.joined")}</th>
+                                    <th className="text-start p-2">{t("table.age")}</th>
+                                    <th className="text-start p-2">{t("table.jobRole")}</th>
+                                    <th className="text-start p-2">{t("table.employer")}</th>
+                                    <th className="text-start p-2">{t("table.action")}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -229,10 +231,10 @@ export default function AdminApplicants() {
                                                         value={item.status || "Pending"} // default to "Pending" if null
                                                         onChange={(e) => handleUpdateStatus(item.id, e.target.value)}
                                                     >
-                                                        <option className="text-dark"  value="Pending">Pending</option>
-                                                        <option className="text-dark"  value="Processing">Processing</option>
-                                                        <option className="text-dark"  value="Completed">Completed</option>
-                                                        <option className="text-dark"  value="Rejected">Rejected</option>
+                                                        <option className="text-dark"  value="Pending">{t("stages.pending")}</option>
+                                                        <option className="text-dark"  value="Processing">{t("stages.processing")}</option>
+                                                        <option className="text-dark"  value="Completed">{t("stages.completed")}</option>
+                                                        <option className="text-dark"  value="Rejected">{t("stages.rejected")}</option>
                                                     </select>
                                                 </td>
                                                 <td className="text-start p-2"><FormattedDate date={item.created_at} /></td>
@@ -252,10 +254,10 @@ export default function AdminApplicants() {
 
                                                         <ul className="dropdown-menu dropdown-menu-end">
                                                             <li>
-                                                                <button className="dropdown-item" onClick={() => handleViewEmployer(item)}>View Employer</button>
+                                                                <button className="dropdown-item" onClick={() => handleViewEmployer(item)}>{t("actions.viewEmployer")}</button>
                                                             </li>
                                                             <li>
-                                                                <button className="dropdown-item" onClick={() => handleViewApplicant(item)}>View Applicant</button>
+                                                                <button className="dropdown-item" onClick={() => handleViewApplicant(item)}>{t("actions.viewApplicant")}</button>
                                                             </li>
                                                         </ul>
                                                     </div>

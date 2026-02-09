@@ -1,0 +1,13 @@
+{
+  "details": "詳細",
+  "detailsNote": "仕事内容、責任、求める人物像、歓迎条件を追加してください",
+  "jobDescription": "仕事内容",
+  "jobDescriptionNote": "仕事内容は1つのポジションを説明する必要があります。",
+  "responsibility": "責任",
+  "responsibilityNote": "ポジションの主な責任を記載してください。",
+  "requirements": "応募要件:",
+  "requirementsNote": "希望する候補者の要件を追加してください。",
+  "niceToHave": "歓迎条件",
+  "niceToHaveNote": "歓迎スキルや資格を追加して応募者層を広げましょう。",
+  "next": "次へ"
+}

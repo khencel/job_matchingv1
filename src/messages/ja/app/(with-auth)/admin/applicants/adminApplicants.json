@@ -1,0 +1,33 @@
+{
+  "title": "応募者一覧",
+  "downloadExcel": "Excelをダウンロード",
+  "listTitle": "応募者一覧（合計 {count} 件）",
+  "filter": "フィルター",
+  "table": {
+    "fullName": "氏名",
+    "hiringStage": "選考状況",
+    "joined": "登録日",
+    "age": "年齢",
+    "jobRole": "職種",
+    "employer": "雇用主",
+    "action": "操作"
+  },
+  "stages": {
+    "pending": "保留",
+    "processing": "進行中",
+    "completed": "完了",
+    "rejected": "却下"
+  },
+  "actions": {
+    "viewEmployer": "雇用主を見る",
+    "viewApplicant": "応募者を見る"
+  },
+  "confirm": {
+    "title": "ステータス変更",
+    "text": "このデータのステータスを変更してもよろしいですか？"
+  },
+  "toast": {
+    "title": "ステータス変更",
+    "success": "ステータスを更新しました"
+  }
+}

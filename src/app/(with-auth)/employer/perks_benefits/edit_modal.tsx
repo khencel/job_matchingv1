@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { AddButton } from '@/components/Button';
@@ -27,6 +30,7 @@ interface UpdatePerksPayload {
 
 
 export default function EditModal({showModalEdit, closeModalEdit, data}: EditModalProps){
+    const t = useTranslations("employerPerksEditModal");
     const dispatch = useAppDispatch();
 
     const [form, setForm] = useState<UpdatePerksPayload>({
@@ -57,12 +61,12 @@ export default function EditModal({showModalEdit, closeModalEdit, data}: EditMod
 
     const handleUpdate = () => {
         popup({
-            title: "Update Perks & Benefits?",
-            text: "Are you sure?",
-            confirmText: "Yes",
+            title: t("confirm.title"),
+            text: t("confirm.text"),
+            confirmText: t("confirm.confirmText"),
             icon: "warning",
             onConfirm: () => {
-                showSuccessToast('Update Item','Perks & Benefits updated successfully')
+                showSuccessToast(t("toast.title"), t("toast.success"))
                 dispatch(updatePerksBenefits(form));
                 closeModalEdit();
             },
@@ -75,14 +79,14 @@ export default function EditModal({showModalEdit, closeModalEdit, data}: EditMod
         <>
             <Modal show={showModalEdit} onHide={closeModalEdit}>
                 <Modal.Header closeButton>
-                <Modal.Title>Edit Perks & Benefits</Modal.Title>
+                <Modal.Title>{t("title")}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="row">
                         <div className="col">
                             <input 
                                 className="form-control" 
-                                placeholder="Name" 
+                                placeholder={t("namePlaceholder")} 
                                 type="text"
                                 name="name"
                                 value={form.name}
@@ -94,7 +98,7 @@ export default function EditModal({showModalEdit, closeModalEdit, data}: EditMod
                         <div className="col">
                             <textarea 
                                 className="form-control" 
-                                placeholder="Description" 
+                                placeholder={t("descriptionPlaceholder")} 
                                 rows={5}
                                 name="description"
                                 value={form.description}
@@ -105,9 +109,9 @@ export default function EditModal({showModalEdit, closeModalEdit, data}: EditMod
                 </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={closeModalEdit}>
-                    Close
+                    {t("close")}
                 </Button>
-                    <AddButton label="Save" className='btn btn-primary-custom rounded-3' onClick={handleUpdate} icon={<FaSave />} /> 
+                    <AddButton label={t("save")} className='btn btn-primary-custom rounded-3' onClick={handleUpdate} icon={<FaSave />} /> 
                 </Modal.Footer>
             </Modal>
         </>

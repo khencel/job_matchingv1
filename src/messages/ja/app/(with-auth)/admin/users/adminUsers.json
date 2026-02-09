@@ -1,0 +1,43 @@
+{
+  "title": "ユーザー一覧",
+  "dateRange": "2025年11月〜12月",
+  "listTitle": "ユーザー一覧（合計 {count} 件）",
+  "search": "ユーザー検索",
+  "filter": "フィルター",
+  "filters": {
+    "all": "すべて",
+    "jobSeeker": "求職者",
+    "employer": "雇用主",
+    "supervisory": "監督者"
+  },
+  "table": {
+    "name": "氏名",
+    "email": "メールアドレス",
+    "role": "役割",
+    "status": "ステータス",
+    "joined": "登録日",
+    "action": "操作"
+  },
+  "status": {
+    "active": "有効",
+    "inactive": "無効"
+  },
+  "actions": {
+    "activate": "有効化",
+    "deactivate": "無効化"
+  },
+  "pagination": {
+    "itemsPerPage": "表示件数:",
+    "showing": "{start}〜{end}件 / 全{count}件",
+    "previous": "前へ",
+    "next": "次へ"
+  },
+  "confirm": {
+    "title": "ステータス変更",
+    "text": "ステータスを変更してもよろしいですか？"
+  },
+  "toast": {
+    "title": "ステータス更新",
+    "success": "ユーザーのステータスを更新しました"
+  }
+}

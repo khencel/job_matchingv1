@@ -1,0 +1,8 @@
+{
+  "companyImageAlt": "Company image",
+  "badgeNew": "NEW",
+  "updatedLabel": "Updated: {date}",
+  "metaLocation": "📍 {location}",
+  "metaSalary": "💰 {salary}",
+  "viewDetails": "View details"
+}

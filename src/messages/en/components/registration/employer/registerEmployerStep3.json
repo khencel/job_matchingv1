@@ -1,0 +1,31 @@
+{
+  "title": "Contact Person",
+  "labels": {
+    "name": "Name",
+    "departmentName": "Department Name",
+    "phoneNumber": "Phone Number",
+    "emailAddress": "Email Address"
+  },
+  "placeholders": {
+    "enterFullName": "Enter full name",
+    "enterDeptName": "Enter department name",
+    "enterPhoneNumber": "Enter phone number",
+    "enterEmailAddress": "Enter email address"
+  },
+  "helpers": {
+    "contactInfoNote": "This information will be used by the platform administrators to contact your company if needed. It will not be displayed on job listings."
+  },
+  "errors": {
+    "invalidName": "Minimum of 3 characters",
+    "invalidDepartmentName": "Enter a valid Department Name",
+    "invalidPhoneNumber": "Enter a valid Phone Number",
+    "invalidEmail": "Please enter a valid email address.",
+    "fillRequired": "Please fill in all required fields."
+  },
+  "toast": {
+    "successTitle": "Company Information Submitted"
+  },
+  "buttons": {
+    "next": "Next"
+  }
+}

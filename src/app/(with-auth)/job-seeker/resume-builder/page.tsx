@@ -3,6 +3,7 @@ import { FormEvent, useMemo, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { useTranslations } from "next-intl";
 
 // Components
 import { ResumeTemplate } from "@/app/(with-auth)/job-seeker/resume-builder/ResumeTemplate";
@@ -16,6 +17,7 @@ import { Button, Spinner, Row, Col } from "react-bootstrap";
 import { showSuccessToast } from "@/app/(util)/toaster";
 
 const ResumeBuilderPage = () => {
+  const t = useTranslations("resumeBuilder");
   const dispatch = useAppDispatch();
 
   // SELECTORS
@@ -88,7 +90,7 @@ const ResumeBuilderPage = () => {
         }),
       ).unwrap();
 
-      showSuccessToast("Success", "Resume saved.");
+      showSuccessToast(t("toast.successTitle"), t("toast.successMessage"));
     } catch (err) {
       console.error("Failed to generate or save PDF:", err);
     }
@@ -119,26 +121,30 @@ const ResumeBuilderPage = () => {
           >
             {isResumeValid ? null : (
               <small className="text-danger">
-                Complete details before saving the resume. <br />
-                (Name, Photo, Contact Info, Address, Reasons)
+                {t("validation.incomplete").split("\n").map((line, index) => (
+                  <span key={index}>
+                    {line}
+                    {index < t("validation.incomplete").split("\n").length - 1 ? <br /> : null}
+                  </span>
+                ))}
               </small>
             )}
             <Button
               variant="success"
               onClick={handleSaveResume}
               className="d-flex gap-2 align-items-center shadow-sm"
-              title="Save Resume"
+              title={t("actions.saveTitle")}
               disabled={!isResumeValid || isLoading}
             >
               {isLoading ? (
                 <>
                   <Spinner as="span" animation="border" size="sm" />
-                  Saving...
+                  {t("actions.saving")}
                 </>
               ) : (
                 <>
                   <SaveIcon size={18} />
-                  Save Resume
+                  {t("actions.save")}
                 </>
               )}
             </Button>
@@ -146,10 +152,10 @@ const ResumeBuilderPage = () => {
               variant="primary"
               onClick={() => handlePrint()}
               className="d-flex gap-2 align-items-center shadow-sm"
-              title="Print Resume"
+              title={t("actions.printTitle")}
             >
               <DownloadIcon size={18} />
-              Print Resume
+              {t("actions.print")}
             </Button>
           </div>
           {/* The Actual Resume Template */}

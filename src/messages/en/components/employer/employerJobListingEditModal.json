@@ -1,0 +1,39 @@
+{
+  "confirm": {
+    "title": "Are you sure?",
+    "text": "Do you want to update this job post?"
+  },
+  "toast": {
+    "title": "Success",
+    "success": "Job post updated successfully"
+  },
+  "title": "Edit Job Post",
+  "basicInfo": "Basic Information",
+  "basicInfoNote": "This Information will be displayed publicly.",
+  "jobTitle": "Job Title",
+  "jobTitleNote": "Job title must be describe one position.",
+  "jobTitlePlaceholder": "e.g Software Engineer",
+  "minCharacters": "At least 80 characters",
+  "salary": "Salary",
+  "salaryNote": "Please specify the estimated salary range for the role.",
+  "salaryPlaceholder": "Estimate salary",
+  "employmentType": "Type of Employment",
+  "employmentTypes": {
+    "fullTime": "Full-Time",
+    "partTime": "Part-Time",
+    "remote": "Remote",
+    "internship": "Internship"
+  },
+  "categories": "Categories",
+  "categoriesNote": "You can select multiple job categories",
+  "details": "Details",
+  "detailsNote": "Add the description of the job, responsibilities. who you are and nice-to-have",
+  "jobDescription": "Job Description",
+  "jobDescriptionNote": "Job description must be describe one position.",
+  "responsibility": "Responsibility",
+  "responsibilityNote": "Outline the core responsibilities of the position.",
+  "whoYouAre": "Who You Are",
+  "whoYouAreNote": "Add your preferred candidates qualifications.",
+  "niceToHave": "Nice-To-Have",
+  "niceToHaveNote": "Add nice-to-have skills and qualifications for the role to encourage a more diverse set of candidates to apply."
+}

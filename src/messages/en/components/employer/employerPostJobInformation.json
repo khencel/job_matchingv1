@@ -1,0 +1,27 @@
+{
+  "errors": {
+    "titleRequiredTitle": "Job title is required.",
+    "titleRequiredText": "Please provide a job title to proceed.",
+    "employmentRequiredTitle": "Employment type is required.",
+    "employmentRequiredText": "Please select at least one employment type to proceed."
+  },
+  "basicInfo": "Basic Information",
+  "basicInfoNote": "This Information will be displayed publicly.",
+  "jobTitle": "Job Title",
+  "jobTitleNote": "Job title must be describe one position.",
+  "jobTitlePlaceholder": "e.g Software Engineer",
+  "minCharacters": "At least 80 characters",
+  "salary": "Salary",
+  "salaryNote": "Please specify the estimated salary range for the role.",
+  "salaryPlaceholder": "Estimate salary",
+  "employmentType": "Type of Employment",
+  "employmentTypes": {
+    "fullTime": "Full-Time",
+    "partTime": "Part-Time",
+    "remote": "Remote",
+    "internship": "Internship"
+  },
+  "categories": "Categories",
+  "categoriesNote": "You can select multiple job categories",
+  "next": "Next"
+}

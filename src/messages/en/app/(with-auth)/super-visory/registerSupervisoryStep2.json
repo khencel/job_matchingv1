@@ -1,0 +1,47 @@
+{
+  "title": "Company Information",
+  "labels": {
+    "basicInfo": "Basic Information",
+    "companyName": "Company Name",
+    "companyNamePhonetic": "Company Name (Phonetic)",
+    "representativeName": "Representative Name",
+    "headquartersAddress": "Headquarters Address",
+    "prefecture": "Prefecture",
+    "city": "City/Ward",
+    "street": "Street/Building",
+    "companyDetails": "Company Details",
+    "numberOfEmployees": "Number of Employees",
+    "industry": "Industry",
+    "yearFounded": "Year Founded",
+    "capital": "Capital",
+    "businessDescription": "Business Description"
+  },
+  "placeholders": {
+    "enterCompanyName": "Enter company name",
+    "enterCompanyNamePhonetic": "Enter phonetic company name",
+    "enterRepresentativeName": "Enter representative name",
+    "selectPrefecture": "Select prefecture",
+    "enterCity": "Enter city/ward",
+    "enterStreet": "Enter street/building",
+    "enterNumberOfEmployees": "Enter number of employees",
+    "selectIndustry": "Select industry",
+    "enterYearFounded": "Enter year founded",
+    "enterCapital": "Enter capital",
+    "enterBusinessDescription": "Describe your business"
+  },
+  "errors": {
+    "tooShortCompanyName": "Name must be at least 2 characters long.",
+    "tooShortRepName": "Name must be at least 2 characters long.",
+    "fillRequired": "Please fill in all required fields.",
+    "invalidNumOfEmployees": "Need at least 1 employee.",
+    "invalidYearFounded": "Please enter a valid year.",
+    "invalidCity": "City must be at least 2 characters.",
+    "invalidStreet": "Street address must be at least 2 characters."
+  },
+  "toast": {
+    "successTitle": "Company Information Submitted"
+  },
+  "buttons": {
+    "next": "Next"
+  }
+}
