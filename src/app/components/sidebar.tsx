@@ -22,7 +22,7 @@ const Sidebar = ({ children }: PropsWithChildren) => {
   const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
   const menuItems = [
-    {label: "Overview", icon:FiLayers, href: "/employer/overview"},
+    // {label: "Overview", icon:FiLayers, href: "/employer/overview"},
     { label: "Employers Profile", icon: FaUser, href: "/employer/profile" },
     { label: "Applicants", icon: FaClipboardList, href: "/employer/applicants" },
     { label: "Post Job", icon: FaPlus, href: "/employer/post_a_job/job-information" },

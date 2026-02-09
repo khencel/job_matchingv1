@@ -1,11 +1,6 @@
 "use client"
 
 import { BiArrowBack } from "react-icons/bi";
-import { FaCalendarCheck } from "react-icons/fa6";
-import { FaSearch } from "react-icons/fa";
-import { HiDotsHorizontal } from "react-icons/hi";
-import { AddButton } from "@/components/Button";
-import { FaPlus } from "react-icons/fa6";
 import type { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "@/redux/hooks";
@@ -30,7 +25,7 @@ export default function Applicants(){
 
     useEffect(() => {
         dispatch(fetchJobSeekerApplicant({page: currentPage, pageSize: pageSize}));
-    }, [dispatch]);
+    }, [dispatch,currentPage,pageSize]);
 
     return (
             <>
@@ -56,7 +51,7 @@ export default function Applicants(){
                                             <th>Hiring Stage</th>
                                             <th>Applied Date</th>
                                             <th>Job Role</th>
-                                            <th>Action</th>
+                                            {/* <th>Action</th> */}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -65,13 +60,13 @@ export default function Applicants(){
                                                     let name = item?.user?.userDetails?.firstName + " " + item?.user?.userDetails?.lastName
                                                     let job_role = item?.job_post?.jobPostDetails?.title
                                                     let avatar = item?.user?.avatar
-                                                    let default_avatar = "/media/avatar/avatardefault.png"
+                                                    let default_avatar = "/media/placeholder.jpg"
                                                     return (
                                                         <tr key={item.id}> 
                                                             <td>
                                                                 <div className="row">
                                                                     <div className="col-2">
-                                                                        <div className="applicant_avatar" style={{backgroundImage:`url(http://127.0.0.1:8000${avatar?avatar:default_avatar})`}}>
+                                                                        <div className="applicant_avatar" style={{backgroundImage:`url(${process.env.NEXT_PUBLIC_API_CONTENT_URL}${avatar?avatar:default_avatar})`}}>
 
                                                                         </div>
                                                                     </div>
@@ -85,9 +80,9 @@ export default function Applicants(){
                                                             </td>
                                                             <td><span className="text-primary"><FormattedDate date={item.created_at} /></span></td>
                                                             <td><span className="text-primary">{job_role}</span></td>
-                                                            <td>
+                                                            {/* <td>
                                                                 <button className="btn btn-primary-custom rounded-3">See Application</button>
-                                                            </td>
+                                                            </td> */}
                                                         </tr>
                                                     )
                                                 })

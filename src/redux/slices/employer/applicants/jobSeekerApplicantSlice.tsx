@@ -48,7 +48,7 @@ const jobSeekerApplicant = createSlice({
                 state.next = action.payload.next;
                 state.previous = action.payload.previous;
                 state.count = action.payload.count;
-                state.currentPage = 1;
+                
             })
             .addCase(fetchJobSeekerApplicant.rejected, (state, action) => {
                 state.status = 'failed';

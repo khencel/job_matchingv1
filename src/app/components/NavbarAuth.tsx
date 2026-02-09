@@ -93,7 +93,7 @@ export default function NavbarAuth() {
             <img
               src="/img/logo.png"
               alt={t("logoAlt")}
-              style={{ height: "80px", width: "auto", marginRight: "8px" }}
+              style={{ height: "70px", width: "auto", objectFit: "contain"}}
             />
           </a>
 

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 
 
 export default function Footer() {
@@ -48,7 +50,7 @@ export default function Footer() {
                 <a className="nav-link text-dark" href="#">Contacts</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-dark" href="#">Company & Legal Notice</a>
+                <Link className="nav-link text-dark" href="/legal-notice">Company & Legal Notice</Link>
               </li>
             </ul>
           </div>

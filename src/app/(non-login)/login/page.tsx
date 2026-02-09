@@ -39,7 +39,7 @@ export default function Login() {
 
       switch (role) {
         case "employer":
-          router.push("/employer/overview");
+          router.push("/employer/profile");
           break;
         case "job_seeker":
           router.push("/");
@@ -64,8 +64,10 @@ export default function Login() {
       {/* Left Side */}
       <div className="left-side d-flex flex-column align-items-center justify-content-center position-relative text-center">
         <img
+          onClick={() => router.push("/")}
           src="/img/logo.png"
           alt="Logo"
+          style={{width:"40%"}}
           className={`logo ${fadeIn ? "animate-logo" : ""}`}
         />
         <h2 className="logo-text mt-3">Welcome to Our Platform</h2>
