@@ -1,12 +1,11 @@
+"use client";
 import { regionList, listCategory } from "./listGroupData";
 import type { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import {
   setFilterField,
-  setFieldClear,
 } from "@/redux/slices/filterJobPost/filterJobPostSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { useEffect } from "react";
 import { filterJobPostV1 } from "@/redux/slices/filterJobPost/filterJobPostThunk";
 import { useRouter } from "next/navigation";
 
