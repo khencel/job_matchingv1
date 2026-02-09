@@ -48,6 +48,7 @@ export interface JobPostDetails {
   nice_to_have: string;
   benefits: string[];
   employer: Array<{
+    banner: string;
     avatar: string;
     userDetails_emp: RegisterEmployerData;
   }>;

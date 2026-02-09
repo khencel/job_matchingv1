@@ -1,3 +1,4 @@
+"use client";
 import { regionList, listCategory } from "./listGroupData";
 import type { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
