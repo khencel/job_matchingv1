@@ -35,5 +35,7 @@
   "whoYouAre": "Who You Are",
   "whoYouAreNote": "Add your preferred candidates qualifications.",
   "niceToHave": "Nice-To-Have",
-  "niceToHaveNote": "Add nice-to-have skills and qualifications for the role to encourage a more diverse set of candidates to apply."
+  "niceToHaveNote": "Add nice-to-have skills and qualifications for the role to encourage a more diverse set of candidates to apply.",
+  "close": "Close",
+  "saveChanges": "Save Changes"
 }

@@ -39,6 +39,7 @@ import superVisoryProfile from "./app/(with-auth)/super-visory/(dashboard)/super
 import jobSeekerDashboardLayout from "./components/jobSeeker/jobSeekerDashboardLayout.json";
 import jobSeekerProfileDashboard from "./components/jobSeeker/jobSeekerProfileDashboard.json";
 import jobSeekerAppliedJobs from "./components/jobSeeker/jobSeekerAppliedJobs.json";
+import jobSeekerProfileComponent from "./components/jobSeeker/jobSeekerProfile.json";
 import jobSeekerDocuments from "./components/jobSeeker/jobSeekerDocuments.json";
 import resumeBuilder from "./components/jobSeeker/resumeBuilder.json";
 import resumeForm from "./components/jobSeeker/resumeForm.json";
@@ -68,6 +69,7 @@ import employerPostJobHeader from "./components/employer/employerPostJobHeader.j
 import employerApplicants from "./components/employer/employerApplicants.json";
 import employerAddSkill from "./components/employer/employerAddSkill.json";
 import registerButton from "./components/registration/RegisterButton.json";
+import Register from "./components/registration/Register.json";
 import registrationModal from "./components/registration/registrationModal.json";
 import forgotPasswordPage from "./app/(non-login)/forgot-password/forgotPasswordPage.json";
 import Step1Register from "./components/registration/Step1Register.json";
@@ -133,6 +135,7 @@ const messages = {
   jobSeekerDashboardLayout,
   jobSeekerProfileDashboard,
   jobSeekerAppliedJobs,
+  jobSeekerProfileComponent,
   jobSeekerDocuments,
   resumeBuilder,
   resumeForm,
@@ -162,6 +165,7 @@ const messages = {
   employerApplicants,
   employerAddSkill,
   registerButton,
+  Register,
   registrationModal,
   forgotPasswordPage,
   Step1Register,
