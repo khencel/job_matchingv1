@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import Cookies from "js-cookie";
 
 const apiClient = axios.create({
-  baseURL: "",
+  baseURL: "api/",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -10,7 +10,7 @@ const apiClient = axios.create({
 });
 
 export const publicApi = axios.create({
-  baseURL: "",
+  baseURL: "api/",
   withCredentials: false,
   headers: {
     "Content-Type": "application/json",
