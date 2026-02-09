@@ -55,6 +55,13 @@ const FindJobPage = () => {
     dispatch(filterJobPostV1(payload));
   }, [dispatch, category, region, salary_start, salary_end, type_of_emp]);
 
+  const formatJobDate = (dateValue?: string | null) => {
+    if (!dateValue) return "-";
+    const date = new Date(dateValue);
+    if (Number.isNaN(date.getTime())) return "-";
+    return date.toLocaleDateString();
+  };
+
   return (
     <div>
       <Navbar />
@@ -231,7 +238,11 @@ const FindJobPage = () => {
                           }
                         </div>
                         <div className="job-date" data-i18n="job1_date">
-                          Updated: 2/2
+                          {t("updatedLabel", {
+                            date: formatJobDate(
+                              job.updated_at ?? job.created_at,
+                            ),
+                          })}
                         </div>
                       </div>
                       <div className="job-title" data-i18n="job1_title">
@@ -242,7 +253,7 @@ const FindJobPage = () => {
                           className="meta-pill text-capitalize"
                           data-i18n="job1_meta1"
                         >
-                          📍 {job.region}
+                          {t("metaLocation", { location: job.region })}
                         </span>
                         {job.type_of_emp?.map((type: any, index: number) => (
                           <span key={index} className="meta-pill">
@@ -251,7 +262,7 @@ const FindJobPage = () => {
                         ))}
 
                         <span className="meta-pill" data-i18n="job1_meta3">
-                          💰 {job.salary}
+                          {t("metaSalary", { salary: job.salary })}
                         </span>
                       </div>
                       <div className="job-cta">

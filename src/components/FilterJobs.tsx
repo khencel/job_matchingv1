@@ -2,7 +2,6 @@
 
 import { Card, Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
-import { industries } from "./registration/employer/RegisterEmployerStep2";
 import { listCategory } from "./listGroupData";
 import { useTranslations } from "next-intl";
 
@@ -21,7 +20,7 @@ const FilterJobs = () => {
         <Form.Group>
           <Form.Label className="primary-text">{t("category")}</Form.Label>
           <select name="" id="" className="form-control" defaultValue="">
-            <option value=" " disabled hidden>
+            <option value="" disabled hidden>
               {t("selectCategory")}
             </option>
             {listCategory.map((item: any, index: number) => {

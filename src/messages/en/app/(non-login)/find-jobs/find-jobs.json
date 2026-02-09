@@ -1,6 +1,25 @@
 {
   "companyImageAlt": "Company image",
   "badgeNew": "NEW",
+  "filters": {
+    "title": "Job Filter",
+    "clear": "Clear Filters",
+    "prefecture": "Prefecture",
+    "selectPrefecture": "Select Prefecture",
+    "category": "Category",
+    "selectCategory": "Select Category",
+    "none": "None",
+    "jobType": "Job Type",
+    "salary": "Salary",
+    "salaryMin": "min",
+    "salaryMax": "max"
+  },
+  "jobTypes": {
+    "fullTime": "Full-Time",
+    "partTime": "Part-Time",
+    "remote": "Remote",
+    "internship": "Internship"
+  },
   "updatedLabel": "Updated: {date}",
   "metaLocation": "📍 {location}",
   "metaSalary": "💰 {salary}",
