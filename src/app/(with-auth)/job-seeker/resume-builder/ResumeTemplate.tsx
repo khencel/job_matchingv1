@@ -15,6 +15,14 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
     const cellStyle =
       "p-2 border-end border-dark d-flex align-items-center justify-content-center";
 
+    const dateNow = () => {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+      return `${year}/${month}/${day}`;
+    };
+
     return (
       <div
         ref={ref}
@@ -39,8 +47,8 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
               <div className="text-center fw-bold fs-4">{t("title")}</div>
             </Col>
             <Col xs={4} className="p-2 border-start border-dark text-end">
-              <span className="small text-muted me-2">{t("date")}</span>
-              <strong>{data.createdAt || ""}</strong>
+              <span className="small text-muted me-2">{`${t("date")}`}</span>
+              <strong>{dateNow()}</strong>
             </Col>
           </Row>
 
@@ -75,7 +83,9 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
               {/* Birthdate with age + Gender */}
               <Row className="g-0" style={{ minHeight: "60px" }}>
                 <Col xs={12} className="d-flex align-items-center px-3">
-                  <span className="small text-muted me-2">{t("birthdate")}</span>
+                  <span className="small text-muted me-2">
+                    {t("birthdate")}
+                  </span>
                   <strong className="me-3">{data.birthdate}</strong>
                   <span className="small text-muted me-2">{t("age")}</span>
                   <strong className="me-3">
@@ -104,7 +114,9 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
                 />
               ) : (
                 <div className="text-muted small">
-                  <div className="fw-bold text-center mb-1">{t("photoPlaceholderTitle")}</div>
+                  <div className="fw-bold text-center mb-1">
+                    {t("photoPlaceholderTitle")}
+                  </div>
                   <ol className="m-0 ps-3">
                     <li>{t("photoRules.rule1")}</li>
                     <li>{t("photoRules.rule2")}</li>
@@ -119,23 +131,33 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
           <Row className="g-0 border-start border-end border-bottom border-dark">
             <Col xs={6} className="p-2 border-end border-dark">
               <div className="d-flex align-items-center gap-3">
-                <span className="small text-muted">{t("address.phonetic")}</span>
+                <span className="small text-muted">
+                  {t("address.phonetic")}
+                </span>
                 <strong>{data.addressPhonetic}</strong>
               </div>
               <div className="mt-1">
-                <span className="small text-muted me-2">{t("address.phone")}</span>
+                <span className="small text-muted me-2">
+                  {t("address.phone")}
+                </span>
                 <strong>{data.phone}</strong>
               </div>
             </Col>
             <Col xs={6} className="p-2">
               <div className="text-break">
-                <span className="small text-muted me-2">{t("address.current")}</span>
+                <span className="small text-muted me-2">
+                  {t("address.current")}
+                </span>
                 <strong>{data.address}</strong>
               </div>
               <div className="mt-1 d-flex align-items-center flex-wrap">
-                <span className="small text-muted me-2">{t("address.postal")}</span>
+                <span className="small text-muted me-2">
+                  {t("address.postal")}
+                </span>
                 <strong className="me-3">{data.postalCode || ""}</strong>
-                <span className="small text-muted me-2">{t("address.email")}</span>
+                <span className="small text-muted me-2">
+                  {t("address.email")}
+                </span>
                 <strong className="text-break">{data.email}</strong>
               </div>
             </Col>
@@ -149,24 +171,28 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
                 <strong>{data.otherContact?.phonetic || ""}</strong>
               </div>
               <div className="mt-1">
-                <span className="small text-muted me-2">{t("address.phone")}</span>
+                <span className="small text-muted me-2">
+                  {t("address.phone")}
+                </span>
                 <strong>{data.otherContact?.phone || ""}</strong>
               </div>
             </Col>
             <Col xs={6} className="p-2">
               <div className="text-break">
-                <span className="small text-muted me-2">{t("address.other")}</span>
+                <span className="small text-muted me-2">
+                  {t("address.other")}
+                </span>
                 <strong>{data.otherContact?.address || ""}</strong>
               </div>
               <div className="mt-1 d-flex align-items-center flex-wrap">
-                <span className="small text-muted me-2">{t("address.email")}</span>
+                <span className="small text-muted me-2">
+                  {t("address.email")}
+                </span>
                 <strong className="text-break">
                   {data.otherContact?.email || ""}
                 </strong>
               </div>
-              <div className="small text-muted mt-1">
-                {t("address.note")}
-              </div>
+              <div className="small text-muted mt-1">{t("address.note")}</div>
             </Col>
           </Row>
 
@@ -292,9 +318,7 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
               {data.reasons && data.reasons.trim() ? (
                 <div>{data.reasons}</div>
               ) : (
-                <div className="text-muted">
-                  {t("motivation.placeholder")}
-                </div>
+                <div className="text-muted">{t("motivation.placeholder")}</div>
               )}
             </Col>
           </Row>

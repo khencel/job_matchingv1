@@ -15,6 +15,7 @@ import { saveResume } from "@/redux/slices/resumeSlice";
 import { DownloadIcon, SaveIcon } from "lucide-react";
 import { Button, Spinner, Row, Col } from "react-bootstrap";
 import { showSuccessToast } from "@/app/(util)/toaster";
+import Swal from "sweetalert2";
 
 const ResumeBuilderPage = () => {
   const t = useTranslations("resumeBuilder");
@@ -90,8 +91,17 @@ const ResumeBuilderPage = () => {
         }),
       ).unwrap();
 
-      showSuccessToast(t("toast.successTitle"), t("toast.successMessage"));
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Resume created successfully.",
+      });
     } catch (err) {
+      Swal.fire({
+        icon: "error",
+        title: "Error Submit",
+        text: "Error creating resume. Please try again later.",
+      });
       console.error("Failed to generate or save PDF:", err);
     }
   };
@@ -104,16 +114,17 @@ const ResumeBuilderPage = () => {
   });
 
   return (
-    <div
-      className="d-flex flex-grow-1 overflow-hidden"
-      style={{ height: "100vh" }}
-    >
-      <Row className="g-4 flex-grow-1 w-100 h-100 p-4 overflow-hidden">
-        <Col md={5} className="h-100">
+    <div className="d-flex flex-grow-1" style={{ height: "100vh" }}>
+      <Row className="g-4 flex-grow-1 w-100 h-100 p-4">
+        <Col lg={4} md={12}>
           <ResumeForm />
         </Col>
 
-        <Col lg={7} className="d-flex flex-column align-items-center h-100">
+        <Col
+          lg={8}
+          md={12}
+          className="d-flex flex-column align-items-center h-100"
+        >
           {/* Toolbar / Action Buttons */}
           <div
             className="w-100 d-flex justify-content-end align-items-center gap-2 mb-3"
@@ -121,12 +132,17 @@ const ResumeBuilderPage = () => {
           >
             {isResumeValid ? null : (
               <small className="text-danger">
-                {t("validation.incomplete").split("\n").map((line, index) => (
-                  <span key={index}>
-                    {line}
-                    {index < t("validation.incomplete").split("\n").length - 1 ? <br /> : null}
-                  </span>
-                ))}
+                {t("validation.incomplete")
+                  .split("\n")
+                  .map((line, index) => (
+                    <span key={index}>
+                      {line}
+                      {index <
+                      t("validation.incomplete").split("\n").length - 1 ? (
+                        <br />
+                      ) : null}
+                    </span>
+                  ))}
               </small>
             )}
             <Button
