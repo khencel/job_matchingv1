@@ -120,11 +120,11 @@ export default function NavbarAuth() {
                 className="form-select form-select-sm"
                 value={locale}
                 onChange={handleLanguageChange}
-                aria-label="Language selector"
+                 aria-label={tNavbar("languageSelectorLabel")}
                 style={{ width: "auto", minWidth: "140px" }}
               >
-                <option value="en">🇺🇸 English</option>
-                <option value="ja">🇯🇵 日本語</option>
+                 <option value="en">🇺🇸 {tNavbar("english")}</option>
+                 <option value="ja">🇯🇵 {tNavbar("japanese")}</option>
               </select>
             </div>
 

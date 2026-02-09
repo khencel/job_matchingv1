@@ -1,0 +1,102 @@
+{
+  "title": "求職者向け | 直接アプローチ（相談 / 緊急サポート）",
+  "lead": "仕事を探している方のためのフォームです。希望条件、現在の仕事内容、将来の目標（相談のみでも可）をご入力ください。",
+  "sections": {
+    "basicInfo": "1) 基本情報",
+    "jobPreferences": "2) 希望条件（必須）",
+    "currentJob": "3) 現在の仕事（必須）",
+    "additionalInfo": "4) 追加情報（任意）"
+  },
+  "labels": {
+    "fullNameRequired": "氏名（必須）",
+    "nationality": "国籍",
+    "dateOfBirthRequired": "生年月日（必須）",
+    "phoneRequired": "電話番号（必須）",
+    "emailRequired": "メール（必須）",
+    "japaneseLevel": "日本語レベル",
+    "visaStatus": "在留資格（分かる場合）",
+    "preferredAreaRequired": "希望エリア（必須）",
+    "preferredJobRoleRequired": "希望職種・業種（必須）",
+    "preferredEmployment": "希望雇用形態",
+    "desiredSalary": "希望給与（目安）",
+    "futureGoalsRequired": "将来の希望（必須）",
+    "currentWorkplaceRequired": "現在の勤務先（会社名または業種）（必須）",
+    "currentPrefecture": "現在の都道府県",
+    "jobDutiesRequired": "業務内容（必須）",
+    "jobChangeDate": "転職希望時期",
+    "reasonForLeaving": "理由（任意）",
+    "skills": "スキル / 資格",
+    "dormPreference": "寮の希望",
+    "notes": "その他（任意）"
+  },
+  "placeholders": {
+    "fullName": "例: 山田 太郎",
+    "nationality": "例: フィリピン / 日本",
+    "phone": "例: +81-90-xxxx-xxxx",
+    "email": "example@email.com",
+    "preferredArea": "例: 愛知（名古屋）/ 東京 / 全国",
+    "preferredJobRole": "例: 介護 / 製造 / レストラン / ホテル",
+    "desiredSalary": "例: 月給22万円以上 または 時給1,200円以上",
+    "futureGoals": "例: 寮希望、残業少なめ、長期で安定した会社",
+    "currentWorkplace": "例: 食品工場 / レストラン / ホテル",
+    "currentPrefecture": "例: 愛知",
+    "jobDuties": "例: 食品ライン作業（検品/梱包/清掃）/ 調理補助 など",
+    "jobChangeDate": "例: できるだけ早く / 1か月以内 / 3月から",
+    "reasonForLeaving": "例: 給与、休み、仕事内容、人間関係、通勤",
+    "skills": "例: 介護研修、フォークリフト、調理経験",
+    "notes": "例: 契約終了時期、面接可能時間、日本語レベル など"
+  },
+  "options": {
+    "select": "選択してください",
+    "japaneseLevelNone": "資格なし（会話可能）",
+    "visaSsw": "特定技能（SSW）",
+    "visaTraining": "技能実習",
+    "visaServices": "技術・人文知識・国際業務",
+    "visaStudent": "留学",
+    "visaDependent": "家族滞在",
+    "visaPermanent": "永住 / 定住",
+    "visaNotSure": "未定（相談）",
+    "employmentFull": "正社員",
+    "employmentContract": "契約社員",
+    "employmentDispatch": "派遣",
+    "employmentPart": "パート / アルバイト",
+    "employmentShift": "シフト",
+    "dormNeed": "寮が必要",
+    "dormPrefer": "寮希望",
+    "dormNo": "不要"
+  },
+  "hints": {
+    "futureGoals": "※住居、休日、残業、勤務地、仕事内容、スキルアップなど、重視したい点をご記入ください。"
+  },
+  "errors": {
+    "fullNameRequired": "氏名は必須です。",
+    "dateOfBirthRequired": "生年月日は必須です。",
+    "phoneRequired": "電話番号は必須です。",
+    "phoneInvalid": "有効な電話番号を入力してください。",
+    "emailRequired": "メールは必須です。",
+    "emailInvalid": "有効なメールアドレスを入力してください。",
+    "preferredAreaRequired": "希望エリアは必須です。",
+    "preferredJobRoleRequired": "希望職種・業種は必須です。",
+    "futureGoalsRequired": "将来の希望は必須です。",
+    "currentWorkplaceRequired": "現在の勤務先は必須です。",
+    "jobDutiesRequired": "業務内容は必須です。"
+  },
+  "actions": {
+    "clear": "クリア",
+    "submit": "送信"
+  },
+  "status": {
+    "processing": "処理中... お待ちください",
+    "requiredFields": "必須項目を入力してから送信してください。"
+  },
+  "alerts": {
+    "successTitle": "送信完了",
+    "successText": "応募が送信されました。",
+    "errorTitle": "送信失敗",
+    "errorText": "応募の送信中にエラーが発生しました。しばらくしてから再度お試しください。"
+  },
+  "toasts": {
+    "errorTitle": "エラー",
+    "submitFailed": "応募の送信に失敗しました"
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "title": "For Job Seekers | Direct Approach (Consultation / Urgent Support)",
+  "lead": "This form is for people looking for a job. Please enter your preferences, current job details, and your future goals (consultation only is OK).",
+  "sections": {
+    "basicInfo": "1) Basic Information",
+    "jobPreferences": "2) Job Preferences (Required)",
+    "currentJob": "3) Current Job (Required)",
+    "additionalInfo": "4) Additional Info (Optional)"
+  },
+  "labels": {
+    "fullNameRequired": "Full Name (Required)",
+    "nationality": "Nationality",
+    "dateOfBirthRequired": "Date of birth (Required)",
+    "phoneRequired": "Phone (Required)",
+    "emailRequired": "Email (Required)",
+    "japaneseLevel": "Japanese level",
+    "visaStatus": "Visa status (if known)",
+    "preferredAreaRequired": "Preferred area (Required)",
+    "preferredJobRoleRequired": "Preferred job/role (Required)",
+    "preferredEmployment": "Preferred employment type",
+    "desiredSalary": "Desired salary (approx.)",
+    "futureGoalsRequired": "Your future goals (Required)",
+    "currentWorkplaceRequired": "Current workplace (company or industry) (Required)",
+    "currentPrefecture": "Current prefecture",
+    "jobDutiesRequired": "Job duties (Required)",
+    "jobChangeDate": "When do you want to change jobs?",
+    "reasonForLeaving": "Reason (optional)",
+    "skills": "Skills / certificates",
+    "dormPreference": "Dorm preference",
+    "notes": "Other notes (optional)"
+  },
+  "placeholders": {
+    "fullName": "e.g. Juan Dela Cruz",
+    "nationality": "e.g. Philippines / Japan",
+    "phone": "e.g. +81-90-xxxx-xxxx",
+    "email": "example@email.com",
+    "preferredArea": "e.g., Aichi (Nagoya) / Tokyo / Anywhere",
+    "preferredJobRole": "e.g., Care / Manufacturing / Restaurant / Hospitality",
+    "desiredSalary": "e.g., JPY 220,000+/month or JPY 1,200+/hour",
+    "futureGoals": "e.g., Prefer dorm housing. Less overtime. Want a stable long-term company.",
+    "currentWorkplace": "e.g., Food factory / Restaurant / Hotel",
+    "currentPrefecture": "e.g., Aichi",
+    "jobDuties": "e.g., Food line work (inspection/packing/cleaning) / Kitchen prep, etc.",
+    "jobChangeDate": "e.g., ASAP / within 1 month / from March",
+    "reasonForLeaving": "e.g., salary, days off, duties, people, commute",
+    "skills": "e.g., Care training, forklift, cooking experience",
+    "notes": "e.g., Contract end date, available interview time, Japanese level, etc."
+  },
+  "options": {
+    "select": "Please select",
+    "japaneseLevelNone": "No certificate (conversational)",
+    "visaSsw": "Specified Skill Worker (SSW)",
+    "visaTraining": "Technical Intern Training",
+    "visaServices": "Engineer/Specialist in Humanities/Int'l Services",
+    "visaStudent": "Student",
+    "visaDependent": "Dependent",
+    "visaPermanent": "Permanent/Long-term",
+    "visaNotSure": "Not sure (consult)",
+    "employmentFull": "Full-time",
+    "employmentContract": "Contract",
+    "employmentDispatch": "Dispatch",
+    "employmentPart": "Part-time",
+    "employmentShift": "Shift",
+    "dormNeed": "Need dorm",
+    "dormPrefer": "Dorm preferred",
+    "dormNo": "Not needed"
+  },
+  "hints": {
+    "futureGoals": "*Write what matters most (housing, days off, overtime, location, duties, skill-up, etc.)."
+  },
+  "errors": {
+    "fullNameRequired": "Full name is required.",
+    "dateOfBirthRequired": "Date of birth is required.",
+    "phoneRequired": "Phone number is required.",
+    "phoneInvalid": "Enter a valid phone number.",
+    "emailRequired": "Email is required.",
+    "emailInvalid": "Enter a valid email address.",
+    "preferredAreaRequired": "Preferred area is required.",
+    "preferredJobRoleRequired": "Preferred job/role is required.",
+    "futureGoalsRequired": "Future goals are required.",
+    "currentWorkplaceRequired": "Current workplace is required.",
+    "jobDutiesRequired": "Job duties are required."
+  },
+  "actions": {
+    "clear": "Clear",
+    "submit": "Submit"
+  },
+  "status": {
+    "processing": "Processing... Please wait",
+    "requiredFields": "Complete the required fields before submitting."
+  },
+  "alerts": {
+    "successTitle": "Application Submitted",
+    "successText": "Your application has been submitted successfully.",
+    "errorTitle": "Submission Failed",
+    "errorText": "There was an error submitting your application. Please try again later."
+  },
+  "toasts": {
+    "errorTitle": "Error",
+    "submitFailed": "Failed to submit application"
+  }
+}

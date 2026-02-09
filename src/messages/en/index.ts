@@ -35,6 +35,7 @@ import adminSettings from "./app/(with-auth)/admin/settings/adminSettings.json";
 import superVisoryDashboardLayout from "./app/(with-auth)/super-visory/(dashboard)/superVisoryDashboardLayout.json";
 import superVisoryOverview from "./app/(with-auth)/super-visory/superVisoryOverview.json";
 import superVisoryApplicants from "./app/(with-auth)/super-visory/superVisoryApplicants.json";
+import superVisoryProfile from "./app/(with-auth)/super-visory/(dashboard)/superVisoryProfile.json";
 import jobSeekerDashboardLayout from "./components/jobSeeker/jobSeekerDashboardLayout.json";
 import jobSeekerProfileDashboard from "./components/jobSeeker/jobSeekerProfileDashboard.json";
 import jobSeekerAppliedJobs from "./components/jobSeeker/jobSeekerAppliedJobs.json";
@@ -76,6 +77,7 @@ import registerEmployerStep3 from "./components/registration/employer/registerEm
 import registerEmployerStep4 from "./components/registration/employer/registerEmployerStep4.json";
 import registerEmployerPage from "./app/(non-login)/register/employer/registerEmployerPage.json";
 import registrationEmployer from "./app/registration/employer/registrationEmployer.json";
+import registrationJobSeeker from "./app/registration/job-seeker/registrationJobSeeker.json";
 import registerSuperVisoryStep1 from "./app/(with-auth)/super-visory/registerSuperVisoryStep1.json";
 import registerJobSeekerStep2 from "./components/registration/jobSeeker/registerJobSeekerStep2.json";
 import registerJobSeekerStep3 from "./components/registration/jobSeeker/registerJobSeekerStep3.json";
@@ -127,6 +129,7 @@ const messages = {
   superVisoryDashboardLayout,
   superVisoryOverview,
   superVisoryApplicants,
+  superVisoryProfile,
   jobSeekerDashboardLayout,
   jobSeekerProfileDashboard,
   jobSeekerAppliedJobs,
@@ -168,6 +171,7 @@ const messages = {
   registerEmployerStep4,
   registerEmployerPage,
   registrationEmployer,
+  registrationJobSeeker,
   registerSuperVisoryStep1,
   registerJobSeekerStep2,
   registerJobSeekerStep3,

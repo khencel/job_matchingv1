@@ -601,7 +601,6 @@ const JobSeekerProfilePage = () => {
                         onChange={(e) =>
                           handleInputChange("facebook", e.target.value)
                         }
-                        placeholder="Profile URL or Username"
                         placeholder={t("labels.facebookPlaceholder")}
                       />
                     ) : (

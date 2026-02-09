@@ -1,0 +1,36 @@
+{
+  "alts": {
+    "preview": "Preview",
+    "user": "User"
+  },
+  "fallback": {
+    "na": "N/A"
+  },
+  "buttons": {
+    "cancel": "Cancel",
+    "saveChanges": "Save Changes",
+    "editProfile": "Edit Profile"
+  },
+  "sections": {
+    "companyInformation": "Company Information",
+    "headquartersAddress": "HEADQUARTERS ADDRESS",
+    "contactPerson": "Contact Person"
+  },
+  "labels": {
+    "companyName": "Company Name",
+    "companyNamePhonetic": "Phonetic Name",
+    "industry": "Industry",
+    "capital": "Capital",
+    "yearFounded": "Year Founded",
+    "representativeName": "Representative Name",
+    "employees": "Employees",
+    "prefecture": "Prefecture",
+    "city": "City",
+    "street": "Street",
+    "businessDescription": "Business Description",
+    "fullName": "Full Name",
+    "department": "Department",
+    "phoneNumber": "Phone Number",
+    "email": "Email"
+  }
+}

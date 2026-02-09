@@ -10,5 +10,7 @@
   "contact": "Contact",
   "aboutUs": "About Us",
   "logoAlt": "Logo",
-  "japanese": "Japanese"
+  "japanese": "Japanese",
+  "english": "English",
+  "languageSelectorLabel": "Language selector"
 }
