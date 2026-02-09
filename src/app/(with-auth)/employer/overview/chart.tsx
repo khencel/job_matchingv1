@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import {
   Chart as ChartJS,
   LineElement,
@@ -21,6 +22,7 @@ ChartJS.register(
 );
 
 export default function ApplicantsChart() {
+  const t = useTranslations("employerOverviewChart");
   const data = {
     labels: ["October", "November", "December"],
     datasets: [
@@ -80,9 +82,9 @@ export default function ApplicantsChart() {
     >
       {/* Header */}
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <h6 className="mb-0 fw-bold">Applicants</h6>
+        <h6 className="mb-0 fw-bold">{t("title")}</h6>
         <small className="text-muted">
-          Last 2 months ⌄
+          {t("range")} ⌄
         </small>
       </div>
 

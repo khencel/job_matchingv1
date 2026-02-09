@@ -7,6 +7,7 @@ import { FiLayers } from "react-icons/fi";
 import { BsGenderAmbiguous } from "react-icons/bs";
 import { GiGraduateCap } from "react-icons/gi";
 import { BsFillTelephoneFill } from "react-icons/bs";
+import { useTranslations } from 'next-intl';
 
 interface ViewApplicantProps {
     handleShow: boolean;
@@ -15,14 +16,14 @@ interface ViewApplicantProps {
 }
 
 export default function ViewApplicant({handleShow, handleClose, data}: ViewApplicantProps){
-    
+    const t = useTranslations("adminApplicantsViewApplicant");
     const userdata = data?.user?.userDetails;
 
     const handleDownloadResume = (data: any) => {
         const baseUrl = "http://127.0.0.1:8000";
         const filePath = data?.user?.resume?.resume;
 
-        if (!filePath) return alert("Walang resume na ma-download.");
+        if (!filePath) return alert(t("noResumeAlert"));
 
         const fileUrl = `${baseUrl}${filePath}`;
 
@@ -36,7 +37,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
             size="xl"
         >
             <Modal.Header closeButton>
-            <Modal.Title>Applicant Details</Modal.Title>
+            <Modal.Title>{t("title")}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div className="row">
@@ -47,7 +48,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                     </div>
                     <div className="col-10 p-3">
                         <h5><strong className='text-capitalize'>{userdata?.firstName} {userdata?.lastName}</strong></h5>
-                        <small>Software Engineer</small>
+                        <small>{t("roleSample")}</small>
                     </div>
                 </div>
                 <div className="row">
@@ -55,17 +56,17 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                         
                         <div className="row mt-5">
                             <div className="col">
-                                <strong>BIOGRAPHY</strong>
+                                <strong>{t("biography")}</strong>
                                 <br />
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore cum velit excepturi modi impedit nam distinctio voluptates totam at quidem, nulla temporibus aperiam, exercitationem obcaecati labore molestiae corporis tempora? Nam!
+                                {t("placeholders.biography")}
                             </div>
                         </div>
 
                         <div className="row mt-5">
                             <div className="col">
-                                <strong>Cover Letter</strong>
+                                <strong>{t("coverLetter")}</strong>
                                 <br />
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore cum velit excepturi modi impedit nam distinctio voluptates totam at quidem, nulla temporibus aperiam, exercitationem obcaecati labore molestiae corporis tempora? Nam!
+                                {t("placeholders.coverLetter")}
                             </div>
                         </div>
                     </div>
@@ -76,7 +77,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                     <FaBirthdayCake className='text-primary' />
                                     <small>
                                         <br />
-                                        DATE OF BIRTH
+                                        {t("dateOfBirth")}
                                         <br />
                                         <strong><FormattedDate date={userdata?.birthdate} /></strong>
                                     </small>
@@ -86,7 +87,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                     <FaFileAlt  className='text-primary' />
                                     <small>
                                         <br />
-                                        VISA STATUS
+                                        {t("visaStatus")}
                                         <br />
                                         <strong>{userdata?.visaStatus}</strong>
                                     </small>
@@ -96,7 +97,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                     <FiLayers  className='text-primary' />
                                     <small>
                                         <br />
-                                        JAPANESE LANGUAGE LEVEL
+                                        {t("japaneseLevel")}
                                         <br />
                                         <strong>{userdata?.japaneseLevel}</strong>
                                     </small>
@@ -107,7 +108,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                     <FaMapMarkedAlt   className='text-primary' />
                                     <small>
                                         <br />
-                                        NATIONALITY
+                                        {t("nationality")}
                                         <br />
                                         <strong>{userdata?.nationality}</strong>
                                     </small>
@@ -117,7 +118,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                     <BsGenderAmbiguous  className='text-primary' />
                                     <small>
                                         <br />
-                                        GENDER
+                                        {t("gender")}
                                         <br />
                                         <strong>{userdata?.gender}</strong>
                                     </small>
@@ -127,7 +128,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                     <GiGraduateCap  className='text-primary' />
                                     <small>
                                         <br />
-                                        VOCATIONAL MAJOR
+                                        {t("major")}
                                         <br />
                                         <strong>{userdata?.highestEducation}</strong>
                                     </small>
@@ -136,7 +137,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                         </div>
                         <div className="row mt-4">
                             <div className="col p-3 border download-border-applicant rounded-3">
-                                Download My Resume
+                                {t("downloadResume")}
                                 <br />
                                 <div className='row mt-3'>
                                     <div className="col-2 text-center">
@@ -144,10 +145,10 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                     </div>
                                     <div className="col-6">
                                         <small>
-                                            Custom Resume
+                                            {t("resumeName")}
                                             <br />
                                             <strong>
-                                                PDF
+                                                {t("resumeType")}
                                             </strong>
                                         </small>
                                     </div>
@@ -162,7 +163,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
 
                         <div className="row mt-4">
                             <div className="col p-3 border download-border-applicant rounded-3">
-                                Contact Information
+                                {t("contactInfo")}
                                 <br />
                                 <div className='row mt-3'>
                                     <div className="col-2 text-center">
@@ -170,7 +171,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                     </div>
                                     <div className="col-9">
                                         <small>
-                                            Location
+                                            {t("location")}
                                             <br />
                                             <strong>
                                                 {userdata?.currentPlaceResidence}
@@ -184,7 +185,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                     </div>
                                     <div className="col-9">
                                         <small>
-                                            TELEPHONE
+                                            {t("telephone")}
                                             <br />
                                             <strong>
                                                 {userdata?.contactNo}
@@ -198,10 +199,10 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                     </div>
                                     <div className="col-9">
                                         <small>
-                                            EMAIL ADDRESS
+                                            {t("email")}
                                             <br />
                                             <strong>
-                                                {data?.user?.email || "No email"}
+                                                {data?.user?.email || t("noEmail")}
                                             </strong>
                                         </small>
                                     </div>
@@ -212,10 +213,10 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                     </div>
                                     <div className="col-9">
                                         <small>
-                                            FACEBOOK
+                                            {t("facebook")}
                                             <br />
                                             <strong>
-                                                {userdata?.facebook || "No facebook"}
+                                                {userdata?.facebook || t("noFacebook")}
                                             </strong>
                                         </small>
                                     </div>
@@ -228,7 +229,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
             </Modal.Body>
             <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
-                Close
+                {t("close")}
             </Button>
                
             </Modal.Footer>

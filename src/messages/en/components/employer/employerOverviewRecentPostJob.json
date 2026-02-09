@@ -1,0 +1,31 @@
+{
+  "title": "Recent Posted Jobs",
+  "viewAll": "View all",
+  "table": {
+    "jobs": "JOBS",
+    "status": "STATUS",
+    "applications": "APPLICATIONS",
+    "actions": "ACTIONS"
+  },
+  "status": {
+    "active": "Active",
+    "expired": "Expired"
+  },
+  "applications": "{count} Applications",
+  "viewApplications": "View Applications",
+  "jobType": {
+    "fullTime": "Full Time",
+    "internship": "Intership",
+    "partTime": "Part Time"
+  },
+  "samples": {
+    "uiUxDesigner": "UI/UX Designer",
+    "seniorUxDesigner": "Senior UX Designer",
+    "technicalSupportSpecialist": "Technical Support Specialist",
+    "juniorGraphicDesigner": "Junior Graphic Designer",
+    "frontEndDeveloper": "Front End Developer",
+    "frontEndDate": "Dec 7, 2025"
+  },
+  "daysAgo": "{days} days ago",
+  "dateText": "{date}"
+}

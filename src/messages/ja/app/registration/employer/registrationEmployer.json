@@ -1,0 +1,150 @@
+{
+  "title": "企業向け｜ダイレクトアプローチ（海外・国内採用）",
+  "lead": {
+    "line1": "海外人材の採用をご検討の企業様向けのフォームです。",
+    "line2": "海外新規採用・国内在留人材の採用のいずれもご相談いただけます。"
+  },
+  "sections": {
+    "companyInfo": "1) 会社情報",
+    "hiringNeeds": "2) 採用ニーズ（必須）",
+    "readiness": "3) 受け入れ準備・条件",
+    "contact": "4) 連絡希望・備考"
+  },
+  "labels": {
+    "companyName": "会社名（必須）",
+    "companyPrefecture": "都道府県（必須）",
+    "contactName": "ご担当者名（必須）",
+    "contactTitle": "役職",
+    "phone": "電話番号（必須）",
+    "email": "メールアドレス（必須）",
+    "companyUrl": "会社Webサイト",
+    "industry": "業種",
+    "needs": "希望内容（必須）",
+    "role": "対象職種／役割（必須）",
+    "visa": "想定ビザ・在留資格",
+    "headcount": "採用人数（必須）",
+    "startTiming": "希望開始時期",
+    "preferredNationality": "希望国籍",
+    "workCity": "勤務地（市区町村）",
+    "employmentType": "雇用形態",
+    "salaryRange": "給与帯（月給／時給）",
+    "jpLevel": "必要な日本語レベル",
+    "experienceRequirement": "経験条件",
+    "housing": "住居・寮",
+    "shuttle": "送迎",
+    "interviewMethod": "面接方法（海外採用）",
+    "acceptConfirm": "内定確約の有無（海外採用）",
+    "requirements": "候補者要件・必須条件",
+    "contactMethod": "連絡方法の希望",
+    "contactTime": "連絡可能時間",
+    "message": "メッセージ（任意）"
+  },
+  "placeholders": {
+    "companyName": "例）ABC株式会社",
+    "contactName": "例）山田 太郎",
+    "contactTitle": "例）人事部長／採用担当",
+    "phone": "例）+81-90-xxxx-xxxx",
+    "email": "example@company.com",
+    "companyUrl": "https://...",
+    "industry": "例）宿泊／製造／介護／飲食",
+    "role": "例）介護／ホテルフロント／食品工場ライン",
+    "startTiming": "例）3月上旬／4月／できるだけ早く",
+    "preferredNationality": "例）フィリピン／ベトナム／ミャンマー／希望なし",
+    "workCity": "例）名古屋／大阪市内",
+    "salaryRange": "例）月給22万円以上／時給1,200円以上",
+    "requirements": "例）経験、資格、勤務シフト、制約事項など",
+    "contactTime": "例）平日10:00〜17:00",
+    "message": "例）急募3名。寮あり。面接はオンライン希望。"
+  },
+  "needs": {
+    "overseas": "海外新規採用（面接 → 内定確約）",
+    "domestic": "国内在留者の採用（転職）",
+    "both": "両方検討",
+    "consult": "まずは相談"
+  },
+  "hints": {
+    "needs": "※海外採用を選択した場合は、受け入れ準備（住居、開始時期など）もご記入ください。",
+    "preferredNationality": "※複数可。希望がない場合は「希望なし」とご記入ください。",
+    "acceptConfirm": "※「海外新規採用（内定確約）」に関する項目です。"
+  },
+  "options": {
+    "selectPlaceholder": "選択してください",
+    "visa": {
+      "ssw": "特定技能",
+      "titp": "技能実習",
+      "gijinkoku": "技術・人文知識・国際業務",
+      "student": "留学生アルバイト",
+      "unknown": "未定（相談）"
+    },
+    "headcount": {
+      "one": "1",
+      "two": "2",
+      "three": "3",
+      "fourFive": "4〜5",
+      "sixTen": "6〜10",
+      "tenPlus": "10+"
+    },
+    "employment": {
+      "fullTime": "正社員",
+      "contract": "契約社員",
+      "dispatch": "派遣",
+      "partTime": "パート・アルバイト",
+      "shift": "シフト"
+    },
+    "jpLevel": {
+      "n5": "N5〜",
+      "n4": "N4〜",
+      "n3": "N3〜",
+      "n2": "N2〜",
+      "n1": "N1〜",
+      "any": "不問"
+    },
+    "experience": {
+      "required": "必須",
+      "preferred": "歓迎",
+      "ok": "未経験可",
+      "consult": "相談"
+    },
+    "housing": {
+      "dorm": "寮あり",
+      "company": "社宅あり",
+      "allowance": "住宅手当あり",
+      "none": "なし（相談）"
+    },
+    "yesNo": {
+      "yes": "あり",
+      "no": "なし",
+      "consult": "相談"
+    },
+    "interview": {
+      "online": "オンライン",
+      "local": "現地面接（エージェント経由）",
+      "either": "どちらでも可"
+    },
+    "accept": {
+      "yes": "確定（承認済み／枠あり）",
+      "maybe": "可能性あり（条件次第）",
+      "consult": "検討中（相談）"
+    },
+    "contactMethod": {
+      "phone": "電話",
+      "email": "メール",
+      "online": "オンラインミーティング"
+    }
+  },
+  "buttons": {
+    "clear": "クリア",
+    "submit": "送信"
+  },
+  "alerts": {
+    "invalidInput": {
+      "title": "入力エラー",
+      "text": "必須項目を入力してください。"
+    }
+  },
+  "popup": {
+    "confirmTitle": "送信してよろしいですか？",
+    "confirmText": "このフォームはGNIにメールで送信されます。"
+  },
+  "loadingOverlay": "処理中です。しばらくお待ちください。"
+}

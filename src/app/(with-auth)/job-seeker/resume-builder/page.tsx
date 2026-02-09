@@ -14,9 +14,12 @@ import { saveResume } from "@/redux/slices/resumeSlice";
 import { DownloadIcon, SaveIcon } from "lucide-react";
 import { Button, Spinner, Row, Col } from "react-bootstrap";
 import { showSuccessToast } from "@/app/(util)/toaster";
+import { useTranslations } from "next-intl";
 
 const ResumeBuilderPage = () => {
+  const t = useTranslations("resumeBuilder");
   const dispatch = useAppDispatch();
+  const incompleteLines = t("validation.incomplete").split("\n");
 
   // SELECTORS
   const { data: resumeData, isLoading } = useAppSelector(
@@ -88,7 +91,7 @@ const ResumeBuilderPage = () => {
         }),
       ).unwrap();
 
-      showSuccessToast("Success", "Resume saved.");
+      showSuccessToast(t("toast.successTitle"), t("toast.successMessage"));
     } catch (err) {
       console.error("Failed to generate or save PDF:", err);
     }
@@ -98,7 +101,7 @@ const ResumeBuilderPage = () => {
   const templateRef = useRef<HTMLDivElement>(null);
   const handlePrint = useReactToPrint({
     contentRef: templateRef,
-    documentTitle: `Resume-Drafts`,
+    documentTitle: t("documentTitle"),
   });
 
   return (
@@ -106,7 +109,7 @@ const ResumeBuilderPage = () => {
       className="d-flex flex-grow-1 overflow-hidden"
       style={{ height: "100vh" }}
     >
-      <Row className="g-4 flex-grow-1 w-100 h-100 p-4 overflow-hidden">
+      <Row className="g-4 flex-grow-1 w-100 h-100 p-4">
         <Col md={5} className="h-100">
           <ResumeForm />
         </Col>
@@ -119,26 +122,30 @@ const ResumeBuilderPage = () => {
           >
             {isResumeValid ? null : (
               <small className="text-danger">
-                Complete details before saving the resume. <br />
-                (Name, Photo, Contact Info, Address, Reasons)
+                {incompleteLines.map((line, index) => (
+                  <span key={`${line}-${index}`}>
+                    {line}
+                    {index < incompleteLines.length - 1 ? <br /> : null}
+                  </span>
+                ))}
               </small>
             )}
             <Button
               variant="success"
               onClick={handleSaveResume}
               className="d-flex gap-2 align-items-center shadow-sm"
-              title="Save Resume"
+              title={t("actions.saveTitle")}
               disabled={!isResumeValid || isLoading}
             >
               {isLoading ? (
                 <>
                   <Spinner as="span" animation="border" size="sm" />
-                  Saving...
+                  {t("actions.saving")}
                 </>
               ) : (
                 <>
                   <SaveIcon size={18} />
-                  Save Resume
+                  {t("actions.save")}
                 </>
               )}
             </Button>
@@ -146,10 +153,10 @@ const ResumeBuilderPage = () => {
               variant="primary"
               onClick={() => handlePrint()}
               className="d-flex gap-2 align-items-center shadow-sm"
-              title="Print Resume"
+              title={t("actions.printTitle")}
             >
               <DownloadIcon size={18} />
-              Print Resume
+              {t("actions.print")}
             </Button>
           </div>
           {/* The Actual Resume Template */}

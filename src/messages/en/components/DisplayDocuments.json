@@ -1,0 +1,8 @@
+{
+  "title": "Uploaded Documents",
+  "empty": "No documents uploaded yet",
+  "fileName": "File Name",
+  "fileType": "File Type",
+  "actions": "Actions",
+  "documentFallback": "Document"
+}

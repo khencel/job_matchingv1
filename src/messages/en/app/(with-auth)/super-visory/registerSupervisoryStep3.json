@@ -1,0 +1,32 @@
+{
+  "title": "Contact Person Information",
+  "labels": {
+    "name": "Name",
+    "department": "Department",
+    "phoneNumber": "Phone Number",
+    "email": "Email Address"
+  },
+  "placeholders": {
+    "enterName": "Enter full name",
+    "enterDepartment": "Enter department",
+    "enterPhoneNumber": "Enter phone number",
+    "enterEmail": "Enter email address"
+  },
+  "helpers": {
+    "contactInfoNote": "This information will be used for communication from the platform administrators."
+  },
+  "errors": {
+    "fillRequired": "Please fill in all required fields.",
+    "invalidEmail": "Please enter a valid email address.",
+    "invalidName": "Name must be between 2 and 100 characters.",
+    "invalidDepartmentName": "Department name must be between 2 and 100 characters.",
+    "invalidPhoneNumber": "Phone number must be 7-15 digits."
+  },
+  "messages": {
+    "success": "Success!",
+    "contactPersonSaved": "Contact person information saved successfully."
+  },
+  "buttons": {
+    "next": "Next"
+  }
+}

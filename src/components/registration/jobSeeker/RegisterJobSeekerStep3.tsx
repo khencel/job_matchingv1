@@ -95,13 +95,10 @@ export default function RegisterJobSeekerStep3({
       // Final submit thunk (simulated API)
       const res = await dispatch(registerThunk(fullFormData)).unwrap();
       Swal.fire({
-        title: "Verify Your Email",
-        text: `We've sent a verification email to your registered email
-            address. Click the verification link to activate
-            your account.`,
+        title: t("verify.title"),
+        text: t("verify.text"),
         icon: "success",
-        footer: `If you don't see the email, please check your spam or junk
-            folder.`,
+        footer: t("verify.footer"),
       });
       console.log("Job Seeker Registered:", res.userDetails_job_seeker);
       closeModal();

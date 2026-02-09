@@ -1,0 +1,22 @@
+{
+  "logoAlt": "Logo",
+  "welcomeTitle": "Welcome to Our Platform",
+  "welcomeSubtitle": "Connect. Apply. Grow.",
+  "formTitle": "Sign In",
+  "formSubtitle": "Welcome back! Please login to your account",
+  "emailPlaceholder": "Email",
+  "passwordPlaceholder": "Password",
+  "emailLabel": "Email",
+  "passwordLabel": "Password",
+  "signIn": "Sign In",
+  "signingIn": "Signing In...",
+  "forgotPassword": "Forgot Password?",
+  "toasts": {
+    "signInFailed": "Sign in failed",
+    "fillAllFields": "Please fill in all fields",
+    "verifyEmail": "Please verify your email",
+    "signInSuccess": "Sign in successful",
+    "welcomeBack": "Welcome back!",
+    "invalidCredentials": "Invalid email or password"
+  }
+}

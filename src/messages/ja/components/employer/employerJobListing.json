@@ -1,0 +1,42 @@
+{
+  "title": "求人一覧",
+  "listTitle": "求人一覧（合計 {count} 件）",
+  "table": {
+    "status": "ステータス",
+    "role": "職種",
+    "datePosted": "掲載日",
+    "salary": "給与",
+    "jobType": "雇用形態",
+    "applicants": "応募者"
+  },
+  "status": {
+    "enabled": "有効",
+    "disabled": "無効"
+  },
+  "actions": {
+    "edit": "編集",
+    "delete": "削除",
+    "enable": "有効化",
+    "disable": "無効化"
+  },
+  "confirm": {
+    "deleteTitle": "求人を削除しますか？",
+    "deleteText": "求人が削除されます",
+    "deleteConfirm": "はい、削除します",
+    "statusTitle": "ステータス変更",
+    "statusText": "この求人のステータスを更新しますか？"
+  },
+  "toast": {
+    "deleteTitle": "成功",
+    "deleteSuccess": "求人を削除しました",
+    "statusTitle": "ステータス更新",
+    "statusSuccess": "ステータスを更新しました"
+  },
+  "pagination": {
+    "itemsPerPage": "表示件数:",
+    "showing": "{start}〜{end}件 / 全{count}件",
+    "previous": "前へ",
+    "next": "次へ"
+  },
+  "loading": "読み込み中..."
+}

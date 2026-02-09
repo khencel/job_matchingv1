@@ -1,0 +1,31 @@
+{
+  "title": "担当者",
+  "labels": {
+    "name": "氏名",
+    "departmentName": "部署名",
+    "phoneNumber": "電話番号",
+    "emailAddress": "メールアドレス"
+  },
+  "placeholders": {
+    "enterFullName": "氏名を入力",
+    "enterDeptName": "部署名を入力",
+    "enterPhoneNumber": "電話番号を入力",
+    "enterEmailAddress": "メールアドレスを入力"
+  },
+  "helpers": {
+    "contactInfoNote": "この情報は必要に応じて管理者が会社へ連絡するために使用されます。求人には表示されません。"
+  },
+  "errors": {
+    "invalidName": "3文字以上である必要があります",
+    "invalidDepartmentName": "有効な部署名を入力してください",
+    "invalidPhoneNumber": "有効な電話番号を入力してください",
+    "invalidEmail": "有効なメールアドレスを入力してください。",
+    "fillRequired": "必須項目を入力してください。"
+  },
+  "toast": {
+    "successTitle": "会社情報を送信しました"
+  },
+  "buttons": {
+    "next": "次へ"
+  }
+}

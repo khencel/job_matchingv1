@@ -1,0 +1,23 @@
+{
+  "approach": {
+    "kicker": "新規受付：ダイレクトアプローチ",
+    "title": "求職者・企業へ直接アプローチ",
+    "sub": "※海外人材の面接を検討している企業向け",
+    "companyChip": "企業向け",
+    "companyList": {
+      "item1": "外国人材の採用が初めての企業",
+      "item2": "急募で候補者を探している企業"
+    },
+    "companyNoteLine1": "※短期間でのご紹介が必要な場合は、適切な候補者をご提案します。",
+    "companyNoteLine2": "※初めての採用プロセスも総合的にサポートします。",
+    "companyButton": "企業向け",
+    "jobSeekerChip": "求職者向け",
+    "jobSeekerList": {
+      "item1": "すぐに転職したい方",
+      "item2": "キャリア相談をしたい方"
+    },
+    "jobSeekerNoteLine1": "※急ぎの場合は、ご希望に沿った求人を探してご紹介します。",
+    "jobSeekerNoteLine2": "※相談のみでもこちらから始められます。",
+    "jobSeekerButton": "求職者向け"
+  }
+}

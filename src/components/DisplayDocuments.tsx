@@ -2,6 +2,7 @@ import { FileIcon, FileX2Icon, Trash2Icon } from "lucide-react";
 import { useState } from "react";
 import { Badge, Button, Card, Table } from "react-bootstrap";
 import PreviewFile from "./PreviewFile";
+import { useTranslations } from "next-intl";
 
 interface DisplayDocumentsProps {
   isPublic: boolean;
@@ -16,6 +17,7 @@ const DisplayDocuments = ({
   documents,
   user_id,
 }: DisplayDocumentsProps) => {
+  const t = useTranslations("displayDocuments");
   const [previewFile, setPreviewFile] = useState<string | null>(null);
 
   const handleFileClick = (file: string) => {
@@ -35,26 +37,29 @@ const DisplayDocuments = ({
     <Card className="shadow-sm rounded-4 border-light-subtle">
       <PreviewFile
         filePath={previewFile}
-        fileName={fileName(previewFile || "Document") || "Document"}
+        fileName={
+          fileName(previewFile || t("documentFallback")) ||
+          t("documentFallback")
+        }
         onClose={() => setPreviewFile(null)}
       />
       <Card.Header className="py-4 ps-4 bg-transparent">
-        <h5 className="mb-0 fw-bold">Uploaded Documents</h5>
+        <h5 className="mb-0 fw-bold">{t("title")}</h5>
       </Card.Header>
       <Card.Body>
         {documents.length === 0 ? (
           <div className="text-center py-5">
             <FileX2Icon size={50} className="text-muted mb-3" />
-            <p className="text-muted mb-0">No documents uploaded yet</p>
+            <p className="text-muted mb-0">{t("empty")}</p>
           </div>
         ) : (
           <Table responsive hover>
             <thead className="bg-light">
               <tr>
-                <th className="border-0 py-3">File Name</th>
-                <th className="border-0 py-3">File Type</th>
+                <th className="border-0 py-3">{t("fileName")}</th>
+                <th className="border-0 py-3">{t("fileType")}</th>
                 {!isPublic && (
-                  <th className="border-0 py-3 text-end">Actions</th>
+                  <th className="border-0 py-3 text-end">{t("actions")}</th>
                 )}
               </tr>
             </thead>

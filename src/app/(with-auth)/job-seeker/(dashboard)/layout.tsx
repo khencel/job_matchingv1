@@ -10,12 +10,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { Button, Nav, Tab } from "react-bootstrap";
+import { useTranslations } from "next-intl";
 
 export default function JobSeekerLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const t = useTranslations("jobSeekerDashboardLayout");
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
   const pathname = usePathname();
 
@@ -39,7 +41,7 @@ export default function JobSeekerLayout({
         {/* Sidebar */}
         <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
           <div className="sidebar-header">
-            <h3 className="sidebar-title">{!isCollapsed && "JOB SEEKER"}</h3>
+            <h3 className="sidebar-title">{!isCollapsed && t("title")}</h3>
             <Button onClick={handleCollapse} className="toggle-btn">
               <MenuIcon className="icon" />
             </Button>
@@ -52,7 +54,7 @@ export default function JobSeekerLayout({
                 className="sidebar-text"
                 href="/job-seeker/profile"
               >
-                <UserCircle /> {!isCollapsed && <span>Profile</span>}
+                <UserCircle /> {!isCollapsed && <span>{t("nav.profile")}</span>}
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
@@ -62,7 +64,7 @@ export default function JobSeekerLayout({
                 className="sidebar-text"
                 href="/job-seeker/applied-jobs"
               >
-                <FoldersIcon /> {!isCollapsed && <span>Applied Jobs</span>}
+                <FoldersIcon /> {!isCollapsed && <span>{t("nav.appliedJobs")}</span>}
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
@@ -72,7 +74,7 @@ export default function JobSeekerLayout({
                 className="sidebar-text"
                 href="/job-seeker/documents"
               >
-                <FileUserIcon /> {!isCollapsed && <span>Documents</span>}
+                <FileUserIcon /> {!isCollapsed && <span>{t("nav.documents")}</span>}
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
@@ -81,7 +83,7 @@ export default function JobSeekerLayout({
                 className="sidebar-text"
                 href="/job-seeker/resume-builder"
               >
-                <File /> {!isCollapsed && <span>Create Resume</span>}
+                <File /> {!isCollapsed && <span>{t("nav.createResume")}</span>}
               </Nav.Link>
             </Nav.Item>
           </Nav>

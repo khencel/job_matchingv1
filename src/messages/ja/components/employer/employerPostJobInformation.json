@@ -1,0 +1,29 @@
+{
+  "errors": {
+    "titleRequiredTitle": "職種名は必須です。",
+    "titleRequiredText": "次へ進むには職種名を入力してください。",
+    "employmentRequiredTitle": "雇用形態は必須です。",
+    "employmentRequiredText": "少なくとも1つの雇用形態を選択してください。"
+  },
+  "basicInfo": "基本情報",
+  "basicInfoNote": "この情報は公開されます。",
+  "jobTitle": "職種名",
+  "jobTitleNote": "職種名は1つのポジションを説明する必要があります。",
+  "jobTitlePlaceholder": "例: ソフトウェアエンジニア",
+  "minCharacters": "80文字以上",
+  "salary": "給与",
+  "salaryNote": "想定する給与レンジを記入してください。",
+  "salaryPlaceholder": "想定給与",
+  "employmentType": "雇用形態",
+  "employmentTypes": {
+    "fullTime": "フルタイム",
+    "partTime": "パートタイム",
+    "remote": "リモート",
+    "internship": "インターン"
+  },
+  "prefecture": "都道府県",
+  "prefectureSelect": "都道府県を選択",
+  "categories": "カテゴリー",
+  "categoriesNote": "複数の職種カテゴリーを選択できます",
+  "next": "次へ"
+}

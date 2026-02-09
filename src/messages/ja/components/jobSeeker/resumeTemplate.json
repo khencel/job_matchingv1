@@ -1,0 +1,44 @@
+{
+  "title": "履歴書",
+  "date": "日付:",
+  "phonetic": "フリガナ:",
+  "fullName": "氏名:",
+  "birthdate": "生年月日:",
+  "age": "年齢:",
+  "gender": "性別:",
+  "photoAlt": "履歴書の写真",
+  "photoPlaceholderTitle": "写真",
+  "photoRules": {
+    "rule1": "縦36〜40mm × 横24〜30mm",
+    "rule2": "上半身・正面",
+    "rule3": "裏面にのり付け"
+  },
+  "address": {
+    "phonetic": "住所（フリガナ）:",
+    "phone": "電話番号:",
+    "current": "現住所:",
+    "postal": "郵便番号:",
+    "email": "メール:",
+    "other": "別連絡先住所:",
+    "note": "現在の住所以外で連絡を希望する場合のみ記入してください。"
+  },
+  "educationWork": {
+    "year": "年",
+    "month": "月",
+    "title": "学歴・職歴",
+    "emptyEducation": "学歴の記載がありません",
+    "emptyWork": "職歴の記載がありません"
+  },
+  "licenses": {
+    "title": "資格・免許",
+    "empty": "資格・免許の記載がありません"
+  },
+  "motivation": {
+    "title": "志望動機・自己PRなど",
+    "placeholder": "（志望動機や自己PRなどを記入してください）"
+  },
+  "preferences": {
+    "title": "希望条件",
+    "placeholder": "（給与、職種、勤務時間、勤務地などの希望を記入してください）"
+  }
+}

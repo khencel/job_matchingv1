@@ -1,0 +1,20 @@
+{
+  "confirm": {
+    "title": "Create job post?",
+    "text": "Job post successfully created",
+    "confirmText": "yes, create"
+  },
+  "basicInfo": "Basic Information",
+  "basicInfoNote": "Your job post.",
+  "infoDetails": "Information details",
+  "labels": {
+    "title": "Title:",
+    "salary": "Salary:",
+    "jobType": "Job Type:",
+    "jobDescription": "Job description:",
+    "responsibilities": "Responsibilities:",
+    "requirements": "Requirements:",
+    "niceToHave": "Nice to Have:"
+  },
+  "confirmButton": "Confirm"
+}

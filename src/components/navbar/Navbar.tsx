@@ -61,7 +61,11 @@ export default function Navbar() {
       <div className="container d-flex align-items-center">
         {/* LOGO */}
         <Link className="navbar-brand" href="/">
-          <img src="/img/logo.png" style={{ maxWidth: "200px" }} alt="Logo" />
+          <img
+            src="/img/logo.png"
+            style={{ maxWidth: "200px" }}
+            alt={t("logoAlt")}
+          />
         </Link>
 
         {/* TOGGLER */}
@@ -87,22 +91,22 @@ export default function Navbar() {
             </li>
             <li className="nav-item">
               <Link className="nav-link" href="/#job_support_features">
-                Features
+                {t("features")}
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" href="/#about_us">
-                About Us
+                {t("aboutUs")}
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" href="/#q_and_a">
-                Q&A
+                {t("qa")}
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" href="/#contact_us">
-                Contacts
+                {t("contact")}
               </Link>
             </li>
             <li className="nav-item">
@@ -146,9 +150,10 @@ export default function Navbar() {
               value={locale}
               onChange={handleLanguageChange}
               style={{ minWidth: "120px" }}
+              aria-label={t("languageSelectorLabel")}
             >
-              <option value="en">🇺🇸 English</option>
-              <option value="ja">🇯🇵 日本語</option>
+              <option value="en">🇺🇸 {t("english")}</option>
+              <option value="ja">🇯🇵 {t("japanese")}</option>
             </select>
           </div>
         </div>

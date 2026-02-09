@@ -251,7 +251,7 @@ export default function RegisterEmployerStep2() {
     setIsSubmitted(false);
     Swal.fire({
       icon: "success",
-      title: "Company Information Submitted",
+      title: t("toast.successTitle"),
       toast: true,
       position: "top",
       showConfirmButton: false,
@@ -575,12 +575,12 @@ export default function RegisterEmployerStep2() {
 
         {/* Founded Date */}
         <Form.Group className="mb-3" controlId="founded">
-          <Form.Label>Company Founded Year</Form.Label>
+          <Form.Label>{t("labels.companyFoundedYear")}</Form.Label>
           <Form.Control
             required
             type="number"
             name="founded"
-            placeholder={"Enter Company Founded Year (Greater than 1000)"}
+            placeholder={t("placeholders.companyFoundedYear")}
             value={data.founded}
             onChange={handleChange}
             onFocus={(e) => e.target.select()}
@@ -589,19 +589,19 @@ export default function RegisterEmployerStep2() {
             }
           />
           <Form.Control.Feedback type="invalid">
-            {"Please enter founded date"}
+            {t("errors.invalidFoundedYear")}
           </Form.Control.Feedback>
         </Form.Group>
 
         {/* Company Profile */}
         <Form.Group className="mb-3" controlId="profile">
-          <Form.Label>Company Profile</Form.Label>
+          <Form.Label>{t("labels.companyProfile")}</Form.Label>
           <Form.Control
             required
             type="text"
             as="textarea"
             name="profile"
-            placeholder={"Enter Company Biography"}
+            placeholder={t("placeholders.companyProfile")}
             value={data.profile}
             onChange={handleChange}
             onFocus={(e) => e.target.select()}
@@ -611,7 +611,7 @@ export default function RegisterEmployerStep2() {
             }
           />
           <Form.Control.Feedback type="invalid">
-            {"Please enter company biography"}
+            {t("errors.invalidCompanyProfile")}
           </Form.Control.Feedback>
         </Form.Group>
       </div>

@@ -1,19 +1,21 @@
+"use client";
 import { regionList, listCategory } from "./listGroupData";
 import type { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
-import { setFilterField, setFieldClear } from "@/redux/slices/filterJobPost/filterJobPostSlice";
+import { setFilterField } from "@/redux/slices/filterJobPost/filterJobPostSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { useEffect } from "react";
 import { filterJobPostV1 } from "@/redux/slices/filterJobPost/filterJobPostThunk";
 import { useRouter } from "next/navigation";
 
+import { useTranslations } from "next-intl";
 
 export default function JobSearchFiler() {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const {category, region } = useSelector((state: RootState) => state.jobSearchFilterSlice);
-
+  const { category, region } = useSelector(
+    (state: RootState) => state.jobSearchFilterSlice,
+  );
 
   const handleApplyFilter = () => {
     const payload = {
@@ -23,6 +25,8 @@ export default function JobSearchFiler() {
     dispatch(filterJobPostV1(payload));
     router.push("/find-jobs");
   };
+  const t = useTranslations("jobSearchFilter");
+  const tListGroup = useTranslations("listGroupData");
   return (
     <>
       <div className="job-search-filter d-flex justify-content-center p-1">
@@ -54,21 +58,23 @@ export default function JobSearchFiler() {
 
                 <select
                   name="ssw_field"
-                  aria-label="特定技能 分野"
+                  aria-label={t("ssw.ariaLabel")}
                   id="sswField"
                   value={category}
-                  onChange={(e) => dispatch(setFilterField({ category: e.target.value }))}
+                  onChange={(e) =>
+                    dispatch(setFilterField({ category: e.target.value }))
+                  }
                 >
                   <option value="" data-i18n="ssw_placeholder">
-                    Select Category
+                    {t("ssw.placeholder")}
                   </option>
-                  {
-                    listCategory.map((item:any, index:number)=>{
-                      return (
-                        <option key={index} value={item.value}>{item.label}</option>
-                      )
-                    })
-                  }
+                  {listCategory.map((item, index) => {
+                    return (
+                      <option key={index} value={item.value}>
+                        {tListGroup(`categories.${item.value}`)}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>
@@ -89,24 +95,35 @@ export default function JobSearchFiler() {
                   />
                 </svg>
 
-                <select name="prefecture" value={region} onChange={(e) => dispatch(setFilterField({ region: e.target.value }))} aria-label="都道府県" id="prefecture">
-                  <option value="" data-i18n="pref_placeholder">
-                    Select Prefecture
-                  </option>
-                  {
-                    regionList.map((item:any, index:number)=>{
-                      return (
-                        <option key={index} value={item.value}>{item.label}</option>
-                      )
-                    })
+                <select
+                  name="prefecture"
+                  value={region}
+                  onChange={(e) =>
+                    dispatch(setFilterField({ region: e.target.value }))
                   }
+                  aria-label={t("prefecture.ariaLabel")}
+                  id="prefecture"
+                >
+                  <option value="" data-i18n="pref_placeholder">
+                    {t("prefecture.placeholder")}
+                  </option>
+                  {regionList.map((item: any, index: number) => {
+                    return (
+                      <option key={index} value={item.value}>
+                        {tListGroup(`prefecture.${item.value}`)}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>
 
             <div className="col-md-2 filter-search">
-              <button onClick={handleApplyFilter} className="btn btn-primary-custom w-100 h-100 border rounded-4">
-                Search
+              <button
+                onClick={handleApplyFilter}
+                className="btn btn-primary-custom w-100 h-100 border rounded-4"
+              >
+                {t("button.search")}
               </button>
             </div>
           </div>

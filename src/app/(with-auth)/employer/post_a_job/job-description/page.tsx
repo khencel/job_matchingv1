@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { setField } from "@/redux/slices/employer/post_a_job/basicInfoSlice";
 import Header from "../headerPostAJob"
 import TextEditor from "./TextEditor";
@@ -9,6 +10,8 @@ import { setInitialData } from "@/redux/slices/employer/post_a_job/basicInfoSlic
 import { useRouter } from "next/navigation";
 
 export default function JobDescription(){
+
+    const t = useTranslations("employerPostJobDescription");
 
     const basicInfo = useSelector((state: RootState) => state.basicInfo);
     const dispatch = useDispatch();
@@ -22,16 +25,16 @@ export default function JobDescription(){
         <>
             <Header/>
             <div className="emp-component-style mt-2">
-                <strong>Details</strong>
+                <strong>{t("details")}</strong>
                 <br />
-                <small>Add the description of the job, responsibilities. who you are and nice-to-have</small>
+                <small>{t("detailsNote")}</small>
                 <hr />
 
                 <div className="row mt-5">
                     <div className="col">
-                        <strong>Job Description <span className="text-danger">*</span></strong>
+                        <strong>{t("jobDescription")} <span className="text-danger">*</span></strong>
                         <br />
-                        <small>Job description must be describe one position.</small>
+                        <small>{t("jobDescriptionNote")}</small>
                     </div>
                     <div className="col">
                         <TextEditor value={basicInfo.job_desc || ""} onChange={(value) => dispatch(setField({ job_desc: value }))} />
@@ -40,9 +43,9 @@ export default function JobDescription(){
 
                 <div className="row mt-2">
                     <div className="col">
-                        <strong>Responsibility <span className="text-danger">*</span></strong>
+                        <strong>{t("responsibility")} <span className="text-danger">*</span></strong>
                         <br />
-                        <small>Outline the core responsibilities of the position.</small>
+                        <small>{t("responsibilityNote")}</small>
                     </div>
                     <div className="col">
                         <TextEditor value={basicInfo.responsibility || ""} onChange={(value) => dispatch(setField({ responsibility: value }))} />
@@ -51,9 +54,9 @@ export default function JobDescription(){
 
                 <div className="row mt-2">
                     <div className="col">
-                        <strong>Requirements: <span className="text-danger">*</span></strong>
+                        <strong>{t("requirements")} <span className="text-danger">*</span></strong>
                         <br />
-                        <small>Add your preferred candidates qualifications.</small>
+                        <small>{t("requirementsNote")}</small>
                     </div>
                     <div className="col">
                         <TextEditor value={basicInfo.who_you_are || ""} onChange={(value) => dispatch(setField({ who_you_are: value }))} />
@@ -62,9 +65,9 @@ export default function JobDescription(){
 
                 <div className="row mt-2">
                     <div className="col">
-                        <strong>Nice-To-Have <span className="text-danger">*</span></strong>
+                        <strong>{t("niceToHave")} <span className="text-danger">*</span></strong>
                         <br />
-                        <small>Add nice-to-have skills and qualifications for the role to encourage a more diverse set of candidates to apply.</small>
+                        <small>{t("niceToHaveNote")}</small>
                     </div>
                     <div className="col">
                         <TextEditor value={basicInfo.nice_to_have || ""} onChange={(value) => dispatch(setField({ nice_to_have: value }))} />
@@ -73,7 +76,7 @@ export default function JobDescription(){
 
                 <div className="row justify-content-end mt-5 mb-3">
                     <div className="col-md-3 text-end">
-                            <button onClick={handleNextDescription} className="btn btn-primary-custom rounded-3">Next</button>
+                            <button onClick={handleNextDescription} className="btn btn-primary-custom rounded-3">{t("next")}</button>
                     </div>
                 </div>
             </div>

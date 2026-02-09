@@ -1,18 +1,20 @@
 import { BiArrowBack } from "react-icons/bi";
 import { HiDotsHorizontal } from "react-icons/hi";
+import { useTranslations } from "next-intl";
 
 export default function SuperVisoryApplicantsPage() {
+    const t = useTranslations("superVisoryApplicants");
     return (
         <>
             <div className="row standar-div">
                 <div className="col">
-                    <h5><strong><BiArrowBack /> Applicants</strong></h5>
+                    <h5><strong><BiArrowBack /> {t("title")}</strong></h5>
                 </div>
             </div>
 
             <div className="row standar-div mt-2">
                 <div className="col">
-                    <h4 className="text-primary text-center"><span><strong>Total Applicants: {2}</strong></span></h4>
+                    <h4 className="text-primary text-center"><span><strong>{t("totalApplicants", { count: 2 })}</strong></span></h4>
                 </div>
             </div>
             <div className="row standar-div">
@@ -21,11 +23,11 @@ export default function SuperVisoryApplicantsPage() {
                             <table className="table">
                                 <thead>
                                     <tr>
-                                        <th>Full Name</th>
-                                        <th>Hiring Stage</th>
-                                        <th>Applied Date</th>
-                                        <th>Job Role</th>
-                                        <th>Action</th>
+                                        <th>{t("table.fullName")}</th>
+                                        <th>{t("table.hiringStage")}</th>
+                                        <th>{t("table.appliedDate")}</th>
+                                        <th>{t("table.jobRole")}</th>
+                                        <th>{t("table.action")}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -34,15 +36,15 @@ export default function SuperVisoryApplicantsPage() {
                                         <td>
                                             <div className="row">
                                                 <div className="col-10 pt-1">
-                                                    <span className="text-primary text-capitalize">test</span>
+                                                    <span className="text-primary text-capitalize">{t("samples.name")}</span>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <span className="badge border border-dark text-black p-2 rounded-4">Pending</span>
+                                            <span className="badge border border-dark text-black p-2 rounded-4">{t("status.pending")}</span>
                                         </td>
-                                        <td><span className="text-primary">test</span></td>
-                                        <td><span className="text-primary">test</span></td>
+                                        <td><span className="text-primary">{t("samples.appliedDate")}</span></td>
+                                        <td><span className="text-primary">{t("samples.jobRole")}</span></td>
                                         <td className="text-start p-2">
                                             <div className="dropdown">
                                                 <button
@@ -56,10 +58,10 @@ export default function SuperVisoryApplicantsPage() {
 
                                                 <ul className="dropdown-menu dropdown-menu-end">
                                                     <li>
-                                                        <button className="dropdown-item" >Update Date</button>
+                                                        <button className="dropdown-item" >{t("actions.updateDate")}</button>
                                                     </li>
                                                     <li>
-                                                        <button className="dropdown-item" >Delete Data</button>
+                                                        <button className="dropdown-item" >{t("actions.deleteData")}</button>
                                                     </li>
                                                 </ul>
                                             </div>

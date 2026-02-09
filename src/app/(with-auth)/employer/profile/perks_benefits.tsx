@@ -1,11 +1,16 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 export default function PerksBenefits({data}:{data:any}){
+    const t = useTranslations("employerPerksBenefits");
     return(
         <>
             <div className="py-4">
                 <div className="row">
                     <div className="col">
-                        <h3><strong>Perks & Benefits</strong></h3>
-                        <small>This job comes with several perks and benefits.</small>
+                        <h3><strong>{t("title")}</strong></h3>
+                        <small>{t("subtitle")}</small>
                         <br />
                         <div className="row">
                             

@@ -1,0 +1,23 @@
+{
+  "title": "Add Perks & Benefits",
+  "company": "Company:",
+  "selectCompany": "Select Company",
+  "none": "None",
+  "firstName": "First Name:",
+  "lastName": "Last Name:",
+  "gender": "Gender:",
+  "selectGender": "Select Gender",
+  "male": "Male",
+  "female": "Female",
+  "visaStatus": "Visa Status:",
+  "selectStatus": "Select Status",
+  "applied": "Applied",
+  "pending": "Pending",
+  "reviewing": "Under Review",
+  "issued": "Issued",
+  "denied": "Denied",
+  "startAgeAbove": "Start age above:",
+  "startAgePlaceholder": "Ex. 18/20/30",
+  "close": "Close",
+  "applyFilter": "Apply Filter"
+}

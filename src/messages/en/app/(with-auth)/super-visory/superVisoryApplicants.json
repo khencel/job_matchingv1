@@ -1,0 +1,23 @@
+{
+  "title": "Applicants",
+  "totalApplicants": "Total Applicants: {count}",
+  "table": {
+    "fullName": "Full Name",
+    "hiringStage": "Hiring Stage",
+    "appliedDate": "Applied Date",
+    "jobRole": "Job Role",
+    "action": "Action"
+  },
+  "status": {
+    "pending": "Pending"
+  },
+  "actions": {
+    "updateDate": "Update Date",
+    "deleteData": "Delete Data"
+  },
+  "samples": {
+    "name": "Sample Applicant",
+    "appliedDate": "Feb 1, 2026",
+    "jobRole": "Warehouse Associate"
+  }
+}

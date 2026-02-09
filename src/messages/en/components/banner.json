@@ -1,0 +1,24 @@
+{
+  "hero": {
+    "pill": "Browse jobs",
+    "title": "Connecting foreigners in Japan with hiring companies — JOBSAPO.",
+    "descriptionLine1": "A matching service that connects employers, job seekers, and workplaces.",
+    "descriptionLine2": "Find jobs that fit your needs and take the next step.",
+    "ctaSearch": "Search Jobs",
+    "ctaRegister": "Free Registration"
+  },
+  "jobsPanel": {
+    "ariaLabel": "Latest job listings",
+    "latest": "Latest",
+    "title": "New updates from companies",
+    "viewAll": "View All",
+    "badgeNew": "NEW",
+    "companyImageAlt": "Company image",
+    "updatedLabel": "Updated: {date}",
+    "dateUnavailable": "Date unavailable",
+    "metaLocation": "📍 {location}",
+    "locationUnavailable": "Location unavailable",
+    "metaSalary": "💰 {salary}",
+    "viewDetails": "View details"
+  }
+}

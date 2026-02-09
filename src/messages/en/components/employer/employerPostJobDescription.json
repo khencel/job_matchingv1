@@ -1,0 +1,13 @@
+{
+  "details": "Details",
+  "detailsNote": "Add the description of the job, responsibilities. who you are and nice-to-have",
+  "jobDescription": "Job Description",
+  "jobDescriptionNote": "Job description must be describe one position.",
+  "responsibility": "Responsibility",
+  "responsibilityNote": "Outline the core responsibilities of the position.",
+  "requirements": "Requirements:",
+  "requirementsNote": "Add your preferred candidates qualifications.",
+  "niceToHave": "Nice-To-Have",
+  "niceToHaveNote": "Add nice-to-have skills and qualifications for the role to encourage a more diverse set of candidates to apply.",
+  "next": "Next"
+}

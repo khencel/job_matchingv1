@@ -23,8 +23,10 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import PreviewFile from "@/components/PreviewFile";
 import { fetchCurrentUser } from "@/redux/features/auth/auth_thunk";
 import DisplayDocuments from "../../../../../components/DisplayDocuments";
+import { useTranslations } from "next-intl";
 
 const DocumentsPage = () => {
+  const t = useTranslations("jobSeekerDocuments");
   const dispatch = useAppDispatch();
   const user_id = useAppSelector((s) => s.authState.user?.id);
   const documents = useAppSelector((s) => s.authState.user?.documents || []);
@@ -80,8 +82,8 @@ const DocumentsPage = () => {
     if (!uploadedFiles || uploadedFiles.length === 0) {
       Swal.fire({
         icon: "warning",
-        title: "No Files Selected",
-        text: "Please select files to upload.",
+        title: t("alerts.noFilesTitle"),
+        text: t("alerts.noFilesText"),
       });
       return;
     }
@@ -106,8 +108,8 @@ const DocumentsPage = () => {
       });
       Swal.fire({
         icon: "success",
-        title: "Upload Successful",
-        text: "Your documents have been uploaded successfully.",
+        title: t("alerts.uploadSuccessTitle"),
+        text: t("alerts.uploadSuccessText"),
       });
       console.log("Uploaded Files", res);
       setUploadedFiles(null);
@@ -115,8 +117,8 @@ const DocumentsPage = () => {
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Upload Failed",
-        text: "There was an error uploading your documents. Please try again.",
+        title: t("alerts.uploadFailedTitle"),
+        text: t("alerts.uploadFailedText"),
       });
       console.log("Error uploading documents", error);
     }
@@ -137,13 +139,11 @@ const DocumentsPage = () => {
               <Card.Body className="p-4">
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <div>
-                    <h4 className="mb-1 fw-bold">My Documents</h4>
-                    <p className="text-muted mb-0">
-                      Upload and manage your documents
-                    </p>
+                    <h4 className="mb-1 fw-bold">{t("header.title")}</h4>
+                    <p className="text-muted mb-0">{t("header.subtitle")}</p>
                   </div>
                   <Badge bg="primary" className="px-3 py-2">
-                    {documents.length} Documents
+                    {t("header.count", { count: documents.length })}
                   </Badge>
                 </div>
               </Card.Body>
@@ -157,7 +157,7 @@ const DocumentsPage = () => {
               <Card.Body className="p-4">
                 {uploadedFiles && uploadedFiles.length > 0 && (
                   <div className="mb-4">
-                    <h6 className="fw-bold mb-3">Preview Files</h6>
+                    <h6 className="fw-bold mb-3">{t("preview.title")}</h6>
                     <div className="border rounded p-3 bg-light">
                       {Array.from(uploadedFiles).map((file, index) => (
                         <div
@@ -194,10 +194,9 @@ const DocumentsPage = () => {
                       <div className="mb-4">
                         <CloudUploadIcon size={80} className="text-primary" />
                       </div>
-                      <h5 className="mb-3">Upload Your Documents</h5>
+                      <h5 className="mb-3">{t("upload.title")}</h5>
                       <p className="text-muted mb-4">
-                        Select multiple files to upload at once. Supported
-                        formats: PDF, DOC, DOCX, JPG, PNG
+                        {t("upload.subtitle")}
                       </p>
                     </>
                   ) : null}
@@ -212,8 +211,8 @@ const DocumentsPage = () => {
                       >
                         <PlusCircleIcon className="me-1" />
                         {uploadedFiles && uploadedFiles.length > 0
-                          ? "Choose More Files"
-                          : "Choose Files"}
+                          ? t("upload.chooseMore")
+                          : t("upload.chooseFiles")}
                       </Button>
                       {uploadedFiles && uploadedFiles.length > 0 && (
                         <div className="d-flex gap-2 justify-content-center">
@@ -225,7 +224,7 @@ const DocumentsPage = () => {
                             onClick={handleFileUpload}
                           >
                             <UploadIcon className="me-1" />
-                            Upload Files
+                            {t("upload.uploadFiles")}
                           </Button>
                           <Button
                             variant="outline-dark"
@@ -234,7 +233,7 @@ const DocumentsPage = () => {
                             className="px-3"
                             onClick={handleClearAllFiles}
                           >
-                            Clear
+                            {t("upload.clear")}
                           </Button>
                         </div>
                       )}

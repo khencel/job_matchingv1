@@ -1,0 +1,23 @@
+{
+  "title": "Terms and Conditions",
+  "labels": {
+    "acceptTerms": "I accept the Terms and Conditions",
+    "acceptPrivacyPolicy": "I accept the Privacy Policy",
+    "acceptReceiveEmails": "I agree to receive promotional emails (optional)"
+  },
+  "helpers": {
+    "submitting": "Submitting..."
+  },
+  "errors": {
+    "acceptT&C": "You must accept the Terms and Conditions to proceed.",
+    "acceptPrivacyPolicy": "You must accept the Privacy Policy to proceed."
+  },
+  "verify": {
+    "title": "Verify Your Email",
+    "text": "We've sent a verification email to your registered email address. Click the verification link to activate your account.",
+    "footer": "If you don't see the email, please check your spam or junk folder."
+  },
+  "buttons": {
+    "submit": "Submit Registration"
+  }
+}

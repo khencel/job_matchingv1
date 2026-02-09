@@ -1,0 +1,39 @@
+{
+  "title": "Applicants Listing",
+  "downloadExcel": "Download Excel",
+  "listTitle": "Applicants List ({count} total)",
+  "filter": "Filter",
+  "table": {
+    "fullName": "Full Name",
+    "hiringStage": "Hiring Stage",
+    "joined": "Joined",
+    "age": "Age",
+    "jobRole": "Job Role",
+    "employer": "Employer",
+    "action": "Action"
+  },
+  "stages": {
+    "pending": "Pending",
+    "processing": "Processing",
+    "completed": "Completed",
+    "rejected": "Rejected"
+  },
+  "actions": {
+    "viewEmployer": "View Employer",
+    "viewApplicant": "View Applicant"
+  },
+  "pagination": {
+    "itemsPerPage": "Items per page:",
+    "showing": "Showing {start} to {end} of {total}",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "confirm": {
+    "title": "Change Status",
+    "text": "Are you sure you want to change the status of this data?"
+  },
+  "toast": {
+    "title": "Change status",
+    "success": "Status of this record has been changed!"
+  }
+}

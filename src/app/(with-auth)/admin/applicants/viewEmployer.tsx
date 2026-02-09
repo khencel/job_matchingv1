@@ -1,5 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useTranslations } from 'next-intl';
 
 
 interface ViewEmployerProps {
@@ -10,9 +11,10 @@ interface ViewEmployerProps {
 
 
 export default function ViewEmployer({showModalEdit, closeModalEdit, data}: ViewEmployerProps) {
+    const t = useTranslations("adminApplicantsViewEmployer");
     data = data || {};
     
-    const company_name = data?.job_post?.employerDetails?.userDetails_emp?.company_information?.name || 'Employer Details';
+    const company_name = data?.job_post?.employerDetails?.userDetails_emp?.company_information?.name || t("defaultCompanyName");
     const logo = data?.job_post?.employerDetails?.avatar || '';
     const profile = data?.job_post?.employerDetails?.userDetails_emp?.company_information?.profile || '';
 
@@ -38,13 +40,13 @@ export default function ViewEmployer({showModalEdit, closeModalEdit, data}: View
             <Modal.Body>
                 <div className="row">
                     <div className="col-md-6">
-                        <strong>About Company</strong> 
+                        <strong>{t("aboutCompany")}</strong> 
                         <br />
                         <div className='mb-5 text-center'>
                             <img src={`http://127.0.0.1:8000${logo}`} style={{width:"50%"}}  alt="" />
                         </div>
                         <div>
-                            Company Profile
+                            {t("companyProfile")}
                             <br />
                             <small dangerouslySetInnerHTML={{
                                 __html: profile,
@@ -54,14 +56,14 @@ export default function ViewEmployer({showModalEdit, closeModalEdit, data}: View
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <strong>Job Posts by this Employer</strong>
+                        <strong>{t("jobPostsTitle")}</strong>
                         <br />
                         <br />
                         <div>
                             <div className='mb-4'>
                                 <div className="row">
                                     <div className="col-4 ">
-                                        Position:
+                                        {t("position")}
                                     </div>
                                     <div className="col-8 ">
                                         {title}
@@ -69,7 +71,7 @@ export default function ViewEmployer({showModalEdit, closeModalEdit, data}: View
                                 </div>
                                 <div className="row">
                                     <div className="col-4 ">
-                                        Salary:
+                                        {t("salary")}
                                     </div>
                                     <div className="col-8 ">
                                         {salary}
@@ -77,7 +79,7 @@ export default function ViewEmployer({showModalEdit, closeModalEdit, data}: View
                                 </div>
                                 <div className="row">
                                     <div className="col-4 ">
-                                        Type of Employment:
+                                        {t("employmentType")}
                                     </div>
                                     <div className="col-8 ">
                                         {
@@ -94,7 +96,7 @@ export default function ViewEmployer({showModalEdit, closeModalEdit, data}: View
                             </div>
 
                             <div>
-                                Job Description
+                                {t("jobDescription")}
                                 <br />
                                 <small>
                                     <span dangerouslySetInnerHTML={{
@@ -104,7 +106,7 @@ export default function ViewEmployer({showModalEdit, closeModalEdit, data}: View
                             </div>
 
                             <div>
-                                Responsibility
+                                {t("responsibility")}
                                 <br />
                                 <small>
                                     <span dangerouslySetInnerHTML={{
@@ -114,7 +116,7 @@ export default function ViewEmployer({showModalEdit, closeModalEdit, data}: View
                             </div>
 
                             <div>
-                                Nice to Have
+                                {t("niceToHave")}
                                 <br />
                                 <small>
                                     <span dangerouslySetInnerHTML={{
@@ -124,7 +126,7 @@ export default function ViewEmployer({showModalEdit, closeModalEdit, data}: View
                             </div>
 
                             <div>
-                                Who you are
+                                {t("whoYouAre")}
                                 <br />
                                 <small>
                                     <span dangerouslySetInnerHTML={{
@@ -138,7 +140,7 @@ export default function ViewEmployer({showModalEdit, closeModalEdit, data}: View
             </Modal.Body>
             <Modal.Footer>
             <Button variant="secondary" onClick={closeModalEdit}>
-                Close
+                {t("close")}
             </Button>
             </Modal.Footer>
         </Modal>

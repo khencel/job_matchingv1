@@ -1,5 +1,5 @@
 "use client";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { JobPosting } from "@/types/applyJob";
 import { useEffect, useState } from "react";
 import { getJobPostings } from "@/redux/slices/jobs/jobServices";
@@ -8,7 +8,14 @@ import { useRouter } from "next/navigation";
 export default function Banner() {
   const [jobPostings, setJobPostings] = useState<JobPosting[]>([]);
   const t = useTranslations("banner");
+  const locale = useLocale();
   const router = useRouter();
+  const formatUpdatedDate = (isoDate?: string) => {
+    if (!isoDate) return t("jobsPanel.dateUnavailable");
+    const parsed = new Date(isoDate);
+    if (Number.isNaN(parsed.getTime())) return t("jobsPanel.dateUnavailable");
+    return parsed.toLocaleDateString(locale);
+  };
   useEffect(() => {
     async function fetchJobDetails() {
       const res = await getJobPostings();
@@ -26,29 +33,34 @@ export default function Banner() {
 
        
         <div className="catch-card">
-          <span className="catch-pill" data-i18n="hero_pill">Browse jobs</span>
-          <h1 className="catch-title" data-i18n="hero_title">Connecting foreigners in Japan with hiring companies — JOBSAPO.</h1>
+          <span className="catch-pill" data-i18n="hero_pill">
+            {t("hero.pill")}
+          </span>
+          <h1 className="catch-title" data-i18n="hero_title">
+            {t("hero.title")}
+          </h1>
           <p className="catch-desc" data-i18n="hero_desc">
-            A matching service that connects employers, job seekers, and workplaces.<br/>
-            Find jobs that fit your needs and take the next step.
+            {t("hero.descriptionLine1")}
+            <br />
+            {t("hero.descriptionLine2")}
           </p>
 
           <div className="catch-actions">
             <button className="primary-cta"
             
               data-i18n="hero_cta_search">
-              Search Jobs
+              {t("hero.ctaSearch")}
             </button>
             <button className="ghost-cta"
                
                data-i18n="hero_cta_register">
-              Free Registration
+              {t("hero.ctaRegister")}
             </button>
           </div>
         </div>
 
       
-        <div className="jobs-panel" aria-label="最新求人一覧">
+        <div className="jobs-panel" aria-label={t("jobsPanel.ariaLabel")}>
           <div className="jobs-panel-head">
             <div className="jobs-panel-title">
               <span className="jobs-panel-ico" aria-hidden="true">
@@ -59,45 +71,73 @@ export default function Banner() {
                 </svg>
               </span>
               <div className="">
-                <div className="jobs-panel-sub" data-i18n="jobs_sub">Latest</div>
-                <div data-i18n="jobs_title">New updates from companies</div>
+                <div className="jobs-panel-sub" data-i18n="jobs_sub">
+                  {t("jobsPanel.latest")}
+                </div>
+                <div data-i18n="jobs_title">{t("jobsPanel.title")}</div>
               </div>
             </div>
-            <div className="jobs-panel-sub" style={{cursor:"pointer"}} onClick={() => router.push("/find-jobs")} data-i18n="jobs_sub">View All</div>
+            <div
+              className="jobs-panel-sub"
+              style={{ cursor: "pointer" }}
+              onClick={() => router.push("/find-jobs")}
+              data-i18n="jobs_sub"
+            >
+              {t("jobsPanel.viewAll")}
+            </div>
           </div>
 
           <div className="job-grid-2x2">
             {jobPostings.slice(0, 4).map((job) => (
               <article className="job-card" key={job.id}>
                 <div className="job-img">
-                  <img 
+                  <img
                         src={
                           job?.employer?.[0]?.avatar
                             ? `http://127.0.0.1:8000/media/${job.employer[0].avatar}`
                             : "http://127.0.0.1:8000/media/placeholder.jpg"
                         }
-                        alt="企業イメージ" 
+                        alt={t("jobsPanel.companyImageAlt")}
                   />
-                  <span className="job-badge">NEW</span>
+                  <span className="job-badge">{t("jobsPanel.badgeNew")}</span>
                 </div>
                 <div className="job-body">
                   <div className="job-top">
                     <div className="job-company" data-i18n="job1_company">{job?.employer?.[0]?.userDetails_emp?.company_information?.name}</div>
-                    <div className="job-date" data-i18n="job1_date">Updated: 2/2</div>
+                    <div className="job-date" data-i18n="job1_date">
+                      {t("jobsPanel.updatedLabel", {
+                        date: formatUpdatedDate(job.created_at),
+                      })}
+                    </div>
                   </div>
                   <div className="job-title" data-i18n="job1_title">{job.title}</div>
                   <div className="job-meta">
-                    <span className="meta-pill" data-i18n="job1_meta1">📍 Tokyo</span>
+                    <span className="meta-pill" data-i18n="job1_meta1">
+                      {t("jobsPanel.metaLocation", {
+                        location: job.region
+                          ? String(job.region)
+                          : t("jobsPanel.locationUnavailable"),
+                      })}
+                    </span>
                     {job.type_of_emp?.map((type, index) => (
                       <span key={index} className="meta-pill">
                         💼 {type}
                       </span>
                     ))}
     
-                    <span className="meta-pill" data-i18n="job1_meta3">💰 {job.salary}</span>
+                    <span className="meta-pill" data-i18n="job1_meta3">
+                      {t("jobsPanel.metaSalary", { salary: job.salary })}
+                    </span>
                   </div>
                   <div className="job-cta">
-                    <button className="job-btn" onClick={() => router.push(`job-description/${job.id}`)} type="button" data-i18n="btn_detail">View details</button>
+                    <button
+                      className="job-btn"
+                      onClick={() => router.push(`job-description/${job.id}`)}
+                      type="button"
+                      data-i18n="btn_detail"
+                    >
+                      {t("jobsPanel.viewDetails")}
+                    </button>
                   </div>
                 </div>
               </article>

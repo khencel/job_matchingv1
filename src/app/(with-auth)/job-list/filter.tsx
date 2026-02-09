@@ -1,37 +1,42 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 export default function Filter(){
+    const t = useTranslations("jobListFilter");
     return (
         <>
             <div className="p-3 border filter-cont">
                 <div>
                     <div className="w-100 d-flex justify-content-between align-items-center">
-                        <span className="primary-text fw-bold">Job Type</span>
-                        <span className="text-danger"><small>Clear All</small></span>
+                        <span className="primary-text fw-bold">{t("jobType")}</span>
+                        <span className="text-danger"><small>{t("clearAll")}</small></span>
                     </div>
                     <div className="mt-2">
-                        <input type="checkbox" /> <span>Full Time</span>
+                        <input type="checkbox" /> <span>{t("types.fullTime")}</span>
                     </div>
                     <div>
-                        <input type="checkbox" /> <span>Part Time</span>
+                        <input type="checkbox" /> <span>{t("types.partTime")}</span>
                     </div>
                     <div>
-                        <input type="checkbox" /> <span>Contract/Temp</span>
+                        <input type="checkbox" /> <span>{t("types.contractTemp")}</span>
                     </div>
                     <div>
-                        <input type="checkbox" /> <span>Casual/Vacation</span>
+                        <input type="checkbox" /> <span>{t("types.casualVacation")}</span>
                     </div>
                 </div>
                 <div className="mt-4">
                     <div>
-                        <span className="primary-text fw-bold">Work Setup</span>
+                        <span className="primary-text fw-bold">{t("workSetup")}</span>
                     </div>
                     <div className="mt-2">
-                        <input type="checkbox" /> <span>On-site</span>
+                        <input type="checkbox" /> <span>{t("setups.onSite")}</span>
                     </div>
                     <div className="mt-2">
-                        <input type="checkbox" /> <span>Hybrid</span>
+                        <input type="checkbox" /> <span>{t("setups.hybrid")}</span>
                     </div>
                     <div className="mt-2">
-                        <input type="checkbox" /> <span>Remote</span>
+                        <input type="checkbox" /> <span>{t("setups.remote")}</span>
                     </div>
                 </div>
             </div>

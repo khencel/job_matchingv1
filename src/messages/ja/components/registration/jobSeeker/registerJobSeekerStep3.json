@@ -1,0 +1,23 @@
+{
+  "title": "利用規約",
+  "labels": {
+    "acceptTerms": "利用規約に同意します",
+    "acceptPrivacyPolicy": "プライバシーポリシーに同意します",
+    "acceptReceiveEmails": "プロモーションメールの受信に同意します（任意）"
+  },
+  "helpers": {
+    "submitting": "送信中..."
+  },
+  "errors": {
+    "acceptT&C": "利用規約に同意する必要があります。",
+    "acceptPrivacyPolicy": "プライバシーポリシーに同意する必要があります。"
+  },
+  "verify": {
+    "title": "メール認証を完了してください",
+    "text": "登録済みのメールアドレスに確認メールを送信しました。リンクをクリックしてアカウントを有効化してください。",
+    "footer": "メールが見つからない場合は、迷惑メールフォルダもご確認ください。"
+  },
+  "buttons": {
+    "submit": "登録を送信"
+  }
+}

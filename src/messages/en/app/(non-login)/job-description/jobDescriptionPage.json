@@ -1,0 +1,46 @@
+{
+  "headings": {
+    "description": "Description",
+    "responsibilities": "Responsibilities",
+    "whoYouAre": "Who You Are",
+    "niceToHaves": "Nice-To-Haves",
+    "aboutThisRole": "About this role",
+    "categories": "Categories",
+    "requiredSkills": "Required Skills",
+    "perksAndBenefits": "Perks & Benefits",
+    "fullHealthcare": "Full Healthcare",
+    "jobSupport": "Job Support",
+    "relatedJobs": "Related Jobs"
+  },
+  "buttons": {
+    "apply": "Apply",
+    "applied": "Applied",
+    "visitProfile": "Visit Profile",
+    "showAllJobs": "Show all jobs",
+    "readMoreAboutUs": "Read more about us"
+  },
+  "companyLogoAlt": "Company Logo",
+  "labels": {
+    "applyBefore": "Apply Before",
+    "jobPostedOn": "Job Posted on",
+    "jobType": "Job Type",
+    "salary": "Salary"
+  },
+  "empty": {
+    "notFound": "Job not found."
+  },
+  "alerts": {
+    "notLoggedIn": {
+      "title": "Not Logged In",
+      "text": "Please log in to apply for jobs."
+    },
+    "resumeRequired": {
+      "title": "Resume Required",
+      "text": "Please upload your resume before applying for jobs."
+    },
+    "applicationSent": {
+      "title": "Application Sent",
+      "text": "Your application has been sent successfully!"
+    }
+  }
+}

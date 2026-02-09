@@ -1,0 +1,27 @@
+{
+  "filters": {
+    "title": "Job Filter",
+    "clear": "Clear Filters",
+    "prefecture": "Prefecture",
+    "selectPrefecture": "Select prefecture",
+    "none": "None",
+    "category": "Category",
+    "selectCategory": "Select category",
+    "jobType": "Job Type",
+    "salary": "Salary",
+    "salaryMin": "min",
+    "salaryMax": "max"
+  },
+  "jobTypes": {
+    "fullTime": "Full-Time",
+    "partTime": "Part-Time",
+    "remote": "Remote",
+    "internship": "Internship"
+  },
+  "companyImageAlt": "Company image",
+  "badgeNew": "NEW",
+  "updatedLabel": "Updated: {date}",
+  "metaLocation": "📍 {location}",
+  "metaSalary": "💰 {salary}",
+  "viewDetails": "View details"
+}

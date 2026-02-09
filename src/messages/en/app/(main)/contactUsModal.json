@@ -1,0 +1,35 @@
+{
+  "title": "Contact Us",
+  "description": "Please fill in the form below and submit.<br/>Our team will contact you after reviewing your inquiry.",
+  "labels": {
+    "company": "Company Name (Required)",
+    "name": "Name / Contact Person (Required)",
+    "email": "Email Address (Required)",
+    "phone": "Phone Number (Required)",
+    "subject": "Subject",
+    "message": "Inquiry Details (Required)"
+  },
+  "placeholders": {
+    "company": "e.g., ABC Co., Ltd.",
+    "name": "e.g., Taro Yamada",
+    "email": "example@company.com",
+    "phone": "e.g., +81-90-xxxx-xxxx",
+    "subject": "e.g., About job posting",
+    "message": "e.g., Please tell me about your services and pricing."
+  },
+  "errors": {
+    "companyRequired": "Company name field is required",
+    "nameRequired": "Name field is required",
+    "emailRequired": "Email field is required",
+    "emailInvalid": "Invalid email",
+    "phoneRequired": "Phone field is required",
+    "messageRequired": "Message field is required"
+  },
+  "actions": {
+    "clear": "Clear",
+    "send": "Send Message"
+  },
+  "status": {
+    "processing": "Processing... Please wait"
+  }
+}

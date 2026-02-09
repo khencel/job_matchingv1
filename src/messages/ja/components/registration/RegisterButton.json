@@ -1,0 +1,7 @@
+{
+  "buttons": {
+    "registerJobSeeker": "求職者として登録",
+    "registerEmployer": "雇用主として登録",
+    "registerSupervisory": "監督者として登録"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "title": "Applicants",
+  "totalApplicants": "Total Applicants: {count}",
+  "table": {
+    "fullName": "Full Name",
+    "hiringStage": "Hiring Stage",
+    "appliedDate": "Applied Date",
+    "jobRole": "Job Role",
+    "action": "Action"
+  },
+  "status": {
+    "pending": "Pending"
+  },
+  "seeApplication": "See Application",
+  "pagination": {
+    "itemsPerPage": "Items per page:",
+    "showing": "Showing {start} to {end} of {count}",
+    "previous": "Previous",
+    "next": "Next"
+  }
+}

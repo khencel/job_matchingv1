@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Header from "../headerPostAJob"
 import type {RootState} from '@/redux/store'
 import { useSelector, useDispatch } from "react-redux"  
@@ -15,6 +16,7 @@ import { title } from "process";
 
 
 export default function PerksBenefitPage() {
+  const t = useTranslations("employerPostJobPerksBenefit");
   const basicInfo = useSelector((state: RootState) => state.basicInfo);
   const benefits = useSelector((state:RootState) => state.basicInfo.benefits)
   const dispatch = useDispatch<AppDispatch>();
@@ -31,9 +33,9 @@ export default function PerksBenefitPage() {
   const handleConfirm = () => {
       dispatch(setInitialData(basicInfo))
       popup({
-        title: "Create job post?",
-        text: "Job post successfully created",
-        confirmText: 'yes, create',
+        title: t("confirm.title"),
+        text: t("confirm.text"),
+        confirmText: t("confirm.confirmText"),
         icon:"warning",
         onConfirm: () => {
           handleSubmit()
@@ -66,33 +68,33 @@ export default function PerksBenefitPage() {
       <Header />
 
       <div className="emp-component-style mt-2">  
-          <strong>Basic Information</strong>
+          <strong>{t("basicInfo")}</strong>
           <br />
-          <small>Your job post.</small>
+          <small>{t("basicInfoNote")}</small>
           <hr />
           <div className="row mt-5">
               <div className="col-md-3">
-                  <strong>Information details</strong>
+              <strong>{t("infoDetails")}</strong>
 
               </div>
               <div className="col">
                   <div className="row">
                     <div className="col-3">
-                      <strong>Title:</strong>
+                      <strong>{t("labels.title")}</strong>
                     </div>
                     <div className="col-9">
                       {data?.title}
                     </div>
 
                     <div className="col-3">
-                      <strong>Salary:</strong>
+                      <strong>{t("labels.salary")}</strong>
                     </div>
                     <div className="col-9">
                       {data?.salary}
                     </div>
 
                     <div className="col-3">
-                      <strong>Job Type:</strong>
+                      <strong>{t("labels.jobType")}</strong>
                     </div>
                     <div className="col-9">
                       {
@@ -107,7 +109,7 @@ export default function PerksBenefitPage() {
                     </div>
 
                     <div className="col-3 mt-5">
-                      <strong>Job description:</strong>
+                      <strong>{t("labels.jobDescription")}</strong>
                     </div>
                     <div className="col-9 mt-5">
                       <p dangerouslySetInnerHTML={{
@@ -117,7 +119,7 @@ export default function PerksBenefitPage() {
                     </div>
                     <hr />
                     <div className="col-3">
-                      <strong>Responsibilities:</strong>
+                      <strong>{t("labels.responsibilities")}</strong>
                     </div>
                     <div className="col-9">
                       <p dangerouslySetInnerHTML={{
@@ -127,7 +129,7 @@ export default function PerksBenefitPage() {
                     </div>
                     <hr />
                     <div className="col-3">
-                      <strong>Requirements:</strong>
+                      <strong>{t("labels.requirements")}</strong>
                     </div>
                     <div className="col-9">
                       <p dangerouslySetInnerHTML={{
@@ -139,7 +141,7 @@ export default function PerksBenefitPage() {
 
                     <hr />
                     <div className="col-3">
-                      <strong>Nice to Have:</strong>
+                      <strong>{t("labels.niceToHave")}</strong>
                     </div>
                     <div className="col-9">
                       <p dangerouslySetInnerHTML={{
@@ -159,7 +161,7 @@ export default function PerksBenefitPage() {
                             className="btn btn-primary-custom rounded-3"
                             onClick={handleConfirm}
                         >
-                            Confirm
+                          {t("confirmButton")}
                         </button>
                 </div>
             </div>

@@ -1,0 +1,24 @@
+{
+  "hero": {
+    "pill": "求人を探す",
+    "title": "日本で働く外国人と採用企業をつなぐ — JOBSAPO.",
+    "descriptionLine1": "雇用主・求職者・職場をつなぐマッチングサービス。",
+    "descriptionLine2": "あなたに合う仕事を見つけて、次の一歩へ。",
+    "ctaSearch": "求人検索",
+    "ctaRegister": "無料登録"
+  },
+  "jobsPanel": {
+    "ariaLabel": "最新求人一覧",
+    "latest": "最新",
+    "title": "企業からの最新情報",
+    "viewAll": "すべて見る",
+    "badgeNew": "NEW",
+    "companyImageAlt": "企業イメージ",
+    "updatedLabel": "更新: {date}",
+    "dateUnavailable": "日付不明",
+    "metaLocation": "📍 {location}",
+    "locationUnavailable": "場所不明",
+    "metaSalary": "💰 {salary}",
+    "viewDetails": "詳細を見る"
+  }
+}

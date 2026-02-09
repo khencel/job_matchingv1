@@ -1,0 +1,73 @@
+{
+  "title": "履歴書の詳細",
+  "subtitle": "項目を更新するとプレビューが即座に反映されます。",
+  "sections": {
+    "basicInfo": "基本情報",
+    "contactAddress": "連絡先・住所",
+    "education": "学歴",
+    "workHistory": "職歴",
+    "licenses": "資格",
+    "preferences": "希望条件",
+    "motivation": "志望動機"
+  },
+  "labels": {
+    "fullName": "氏名",
+    "namePhonetic": "氏名（フリガナ）",
+    "birthdate": "生年月日",
+    "age": "年齢",
+    "gender": "性別",
+    "profilePhoto": "プロフィール写真",
+    "email": "メールアドレス",
+    "phone": "電話番号",
+    "address": "住所",
+    "addressPhonetic": "住所（フリガナ）",
+    "postalCode": "郵便番号",
+    "altPhone": "別の電話番号",
+    "altEmail": "別のメールアドレス",
+    "altPhonetic": "別のフリガナ",
+    "altAddress": "別の住所",
+    "year": "年",
+    "month": "月",
+    "details": "詳細",
+    "qualification": "資格名"
+  },
+  "placeholders": {
+    "fullName": "例: 山田 太郎",
+    "namePhonetic": "例: ヤマダ タロウ",
+    "postalCode": "123-4567",
+    "photoEmpty": "写真なし",
+    "preference": "希望条件を追加",
+    "motivation": "志望動機や要点を入力"
+  },
+  "genderOptions": {
+    "select": "選択してください",
+    "female": "女性",
+    "male": "男性",
+    "nonBinary": "ノンバイナリー",
+    "preferNot": "回答しない"
+  },
+  "photo": {
+    "changeImage": "画像を変更",
+    "uploadImage": "画像をアップロード",
+    "remove": "削除",
+    "hint": "PNGまたはJPG、最大2MB。"
+  },
+  "errors": {
+    "fullNameRequired": "氏名は必須です。",
+    "genderRequired": "性別は必須です。",
+    "emailInvalid": "有効なメールアドレスを入力してください。",
+    "phoneShort": "電話番号が短すぎます。",
+    "addressRequired": "住所は必須です。",
+    "birthdateRequired": "生年月日は必須です。",
+    "ageRequired": "年齢は必須です。",
+    "postalCodeRequired": "郵便番号は必須です。",
+    "reasonsRequired": "志望動機は必須です。",
+    "photoRequired": "写真は必須です。",
+    "imageType": "有効な画像ファイルをアップロードしてください。",
+    "imageSize": "画像は{max}MB以下である必要があります。"
+  },
+  "actions": {
+    "add": "追加",
+    "removeEntry": "削除"
+  }
+}

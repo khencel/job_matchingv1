@@ -1,4 +1,5 @@
 import { JobPosting } from "@/types/applyJob";
+import { useLocale, useTranslations } from "next-intl";
 
 interface JobCardProps {
   job: JobPosting;
@@ -6,23 +7,26 @@ interface JobCardProps {
   className?: string;
 }
 
-const formatSalary = (value: number) =>
-  new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "PHP",
-    maximumFractionDigits: 0,
-  }).format(value);
-
-const formatPostedDate = (isoDate: string) => {
-  const parsed = new Date(isoDate);
-  if (Number.isNaN(parsed.getTime())) {
-    return "Posted date unavailable";
-  }
-  return `Posted on ${parsed.toLocaleDateString("en-US")}`;
-};
-
 const JobCard = ({ job, onClick, className }: JobCardProps) => {
-  const employmentType = job.type_of_emp?.type?.join(", ") || "Not specified";
+  const t = useTranslations("jobCard");
+  const locale = useLocale();
+
+  const formatSalary = (value: number) =>
+    new Intl.NumberFormat(locale, {
+      style: "currency",
+      currency: "PHP",
+      maximumFractionDigits: 0,
+    }).format(value);
+
+  const formatPostedDate = (isoDate: string) => {
+    const parsed = new Date(isoDate);
+    if (Number.isNaN(parsed.getTime())) {
+      return t("postedUnavailable");
+    }
+    return t("postedOn", { date: parsed.toLocaleDateString(locale) });
+  };
+
+  const employmentType = job.type_of_emp?.type?.join(", ") || t("notSpecified");
   const cardClasses = [
     "card",
     "rounded-4",
@@ -51,7 +55,7 @@ const JobCard = ({ job, onClick, className }: JobCardProps) => {
       <img
         src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}media/${job?.employer[0].avatar || 'placeholder.jpg'}`}
         className="card-img-top"
-        alt="Person working on laptop"
+        alt={t("imageAlt")}
         style={{ height: "250px", objectFit: "cover" }}
       />
       <div className="card-body d-flex flex-column gap-3">
@@ -66,11 +70,13 @@ const JobCard = ({ job, onClick, className }: JobCardProps) => {
 
         <ul className="list-unstyled mb-0 small text-secondary d-flex flex-column gap-1">
           <li>
-            <strong className="text-dark">Employment Type:</strong>{" "}
+            <strong className="text-dark">
+              {t("employmentTypeLabel")}:
+            </strong>{" "}
             {employmentType}
           </li>
           <li>
-            <strong className="text-dark">Salary:</strong>{" "}
+            <strong className="text-dark">{t("salaryLabel")}:</strong>{" "}
             {formatSalary(job.salary)}
           </li>
         </ul>
@@ -79,7 +85,7 @@ const JobCard = ({ job, onClick, className }: JobCardProps) => {
           className="text-muted mb-0 clamp-3 text-truncate"
           title={job.job_desc}
           dangerouslySetInnerHTML={{
-            __html: job.job_desc || "No description provided.",
+            __html: job.job_desc || t("noDescription"),
           }}
         />
       </div>

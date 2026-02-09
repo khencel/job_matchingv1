@@ -1,0 +1,35 @@
+{
+  "title": "お問い合わせ",
+  "description": "下記フォームにご記入のうえ送信してください。<br/>内容を確認後、担当者よりご連絡いたします。",
+  "labels": {
+    "company": "会社名（必須）",
+    "name": "ご担当者名（必須）",
+    "email": "メールアドレス（必須）",
+    "phone": "電話番号（必須）",
+    "subject": "件名",
+    "message": "お問い合わせ内容（必須）"
+  },
+  "placeholders": {
+    "company": "例: ABC株式会社",
+    "name": "例: 山田 太郎",
+    "email": "example@company.com",
+    "phone": "例: +81-90-xxxx-xxxx",
+    "subject": "例: 求人掲載について",
+    "message": "例: サービス内容や料金について教えてください。"
+  },
+  "errors": {
+    "companyRequired": "会社名は必須です。",
+    "nameRequired": "氏名は必須です。",
+    "emailRequired": "メールは必須です。",
+    "emailInvalid": "有効なメールアドレスを入力してください。",
+    "phoneRequired": "電話番号は必須です。",
+    "messageRequired": "お問い合わせ内容は必須です。"
+  },
+  "actions": {
+    "clear": "クリア",
+    "send": "送信"
+  },
+  "status": {
+    "processing": "処理中... お待ちください"
+  }
+}

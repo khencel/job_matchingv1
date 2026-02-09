@@ -1,0 +1,10 @@
+{
+  "title": "Recent Activity",
+  "items": {
+    "item1": "Khenneth applied for Web Developer",
+    "item2": "You hired Russel for UI designer",
+    "item3": "McAndrew applied for Web Developer",
+    "item4": "McAndrew applied for Full Stack Developer"
+  },
+  "viewAll": "View All Activity"
+}

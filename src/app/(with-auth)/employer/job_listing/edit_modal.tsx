@@ -1,4 +1,6 @@
+"use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -23,6 +25,7 @@ interface EditModalProps {
 
 
 export default function Editmodal({handleShow, handleClose, data, currentPage}: EditModalProps){
+    const t = useTranslations("employerJobListingEditModal");
 
     const basicInfo = useSelector((state: RootState) => state.basicInfo);
 
@@ -43,8 +46,8 @@ export default function Editmodal({handleShow, handleClose, data, currentPage}: 
 
     const handleUpdate = async () => {
         popup({
-            title: 'Are you sure?',
-            text: 'Do you want to update this job post?',
+            title: t("confirm.title"),
+            text: t("confirm.text"),
             icon: 'warning',
             onConfirm: () => {
                 updatePostJob()
@@ -90,7 +93,7 @@ export default function Editmodal({handleShow, handleClose, data, currentPage}: 
                 skill: skillFromRedux || []
             });
         }
-        showSuccessToast('Success', 'Job post updated successfully')
+        showSuccessToast(t("toast.title"), t("toast.success"))
         handleClose();
     };
 
@@ -123,58 +126,63 @@ export default function Editmodal({handleShow, handleClose, data, currentPage}: 
       aria-labelledby="contained-modal-title-vcenter"
       centered show={handleShow} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Edit Job Post</Modal.Title>
+                <Modal.Title>{t("title")}</Modal.Title>
             </Modal.Header>
             <Modal.Body className='p-0'>
                 <div className="emp-component-style mt-2">
-                    <strong>Basic Information</strong>
+                    <strong>{t("basicInfo")}</strong>
                     <br />
-                    <small>This Information will be displayed publicly.</small>
+                    <small>{t("basicInfoNote")}</small>
                     <hr />
                     <div className="row mt-5">
                         <div className="col">
-                            <strong>Job Title <span className="text-danger">*</span></strong>
+                            <strong>{t("jobTitle")} <span className="text-danger">*</span></strong>
                             <br />
-                            <small>Job title must be describe one position.</small>
+                            <small>{t("jobTitleNote")}</small>
                         </div>
                         <div className="col">
-                            <textarea name="" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value})} placeholder="e.g Software Engineer" className="form-control" id=""></textarea>
-                            <small>At least 80 characters</small>
+                            <textarea name="" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value})} placeholder={t("jobTitlePlaceholder")} className="form-control" id=""></textarea>
+                            <small>{t("minCharacters")}</small>
                         </div>
                     </div>
 
                     <div className="row mt-2">
                         <div className="col">
-                            <strong>Salary</strong>
+                            <strong>{t("salary")}</strong>
                             <br />
-                            <small>Please specify the estimated salary range for the role.</small>
+                            <small>{t("salaryNote")}</small>
                         </div>
                         <div className="col">
-                            <input type="number" value={formData.salary} onChange={(e) => setFormData({ ...formData, salary: e.target.value})} className="form-control" placeholder="Estimate salary" />
+                            <input type="number" value={formData.salary} onChange={(e) => setFormData({ ...formData, salary: e.target.value})} className="form-control" placeholder={t("salaryPlaceholder")} />
                         </div>
                     </div>
 
                     <div className="row mt-2">
                         <div className="col">
-                            <strong>Type of Employment <span className="text-danger">*</span></strong>
+                            <strong>{t("employmentType")} <span className="text-danger">*</span></strong>
                         </div>
                         <div className="col">
-                            {["Full-Time", "Part-Time", "Remote", "Internship"].map(type => (
-                                <div key={type}>
+                            {[
+                                { value: "Full-Time", label: t("employmentTypes.fullTime") },
+                                { value: "Part-Time", label: t("employmentTypes.partTime") },
+                                { value: "Remote", label: t("employmentTypes.remote") },
+                                { value: "Internship", label: t("employmentTypes.internship") },
+                            ].map(({ value, label }) => (
+                                <div key={value}>
                                     <input
                                         type="checkbox"
-                                        checked={formData.type_of_emp.includes(type)}
+                                        checked={formData.type_of_emp.includes(value)}
                                         onChange={(e) => {
                                             const updated = e.target.checked
-                                            ? [...formData.type_of_emp, type]
-                                            : formData.type_of_emp.filter(t => t !== type);
+                                            ? [...formData.type_of_emp, value]
+                                            : formData.type_of_emp.filter(t => t !== value);
 
                                             setFormData({ ...formData, type_of_emp: updated });
                                             dispatch(setField({ type_of_emp: updated }));
                                         }}
                                         />
 
-                                    {" "}{type}
+                                    {" "}{label}
                                 </div>
                             ))}
                            
@@ -183,9 +191,9 @@ export default function Editmodal({handleShow, handleClose, data, currentPage}: 
 
                     <div className="row mt-2">
                         <div className="col">
-                            <strong>Categories</strong>
+                            <strong>{t("categories")}</strong>
                             <br />
-                            <small>You can select multiple job categories</small>
+                            <small>{t("categoriesNote")}</small>
                         </div>
                         <div className="col">
                             <MultiSelectDropdown
@@ -214,16 +222,16 @@ export default function Editmodal({handleShow, handleClose, data, currentPage}: 
                         </div>
                     </div> */}
                     <hr />
-                    <strong>Details</strong>
+                    <strong>{t("details")}</strong>
                         <br />
-                        <small>Add the description of the job, responsibilities. who you are and nice-to-have</small>
+                        <small>{t("detailsNote")}</small>
                         <hr />
         
                         <div className="row mt-5">
                             <div className="col">
-                                <strong>Job Description <span className="text-danger">*</span></strong>
+                                <strong>{t("jobDescription")} <span className="text-danger">*</span></strong>
                                 <br />
-                                <small>Job description must be describe one position.</small>
+                                <small>{t("jobDescriptionNote")}</small>
                             </div>
                             <div className="col">
                                 <TextEditor value={formData.job_desc} onChange={(value) => setFormData({ ...formData, job_desc: value})} />
@@ -232,9 +240,9 @@ export default function Editmodal({handleShow, handleClose, data, currentPage}: 
         
                         <div className="row mt-2">
                             <div className="col">
-                                <strong>Responsibility <span className="text-danger">*</span></strong>
+                                <strong>{t("responsibility")} <span className="text-danger">*</span></strong>
                                 <br />
-                                <small>Outline the core responsibilities of the position.</small>
+                                <small>{t("responsibilityNote")}</small>
                             </div>
                             <div className="col">
                                 <TextEditor value={formData.responsibilities} onChange={(value) => setFormData({ ...formData, responsibilities: value})}  />
@@ -243,9 +251,9 @@ export default function Editmodal({handleShow, handleClose, data, currentPage}: 
         
                         <div className="row mt-2">
                             <div className="col">
-                                <strong>Who You Are <span className="text-danger">*</span></strong>
+                                <strong>{t("whoYouAre")} <span className="text-danger">*</span></strong>
                                 <br />
-                                <small>Add your preferred candidates qualifications.</small>
+                                <small>{t("whoYouAreNote")}</small>
                             </div>
                             <div className="col">
                                 <TextEditor value={formData.who_you_are} onChange={(value) => setFormData({ ...formData, who_you_are: value})}  />
@@ -254,9 +262,9 @@ export default function Editmodal({handleShow, handleClose, data, currentPage}: 
         
                         <div className="row mt-2">
                             <div className="col">
-                                <strong>Nice-To-Have <span className="text-danger">*</span></strong>
+                                <strong>{t("niceToHave")} <span className="text-danger">*</span></strong>
                                 <br />
-                                <small>Add nice-to-have skills and qualifications for the role to encourage a more diverse set of candidates to apply.</small>
+                                <small>{t("niceToHaveNote")}</small>
                             </div>
                             <div className="col">
                                 <TextEditor value={formData.nice_to_have} onChange={(value) => setFormData({ ...formData, nice_to_have: value})} />
@@ -266,10 +274,10 @@ export default function Editmodal({handleShow, handleClose, data, currentPage}: 
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    {t("close")}
                 </Button>
                 <Button variant="primary" onClick={handleUpdate}>
-                    Save Changes
+                    {t("saveChanges")}
                 </Button>
             </Modal.Footer>
         </Modal>

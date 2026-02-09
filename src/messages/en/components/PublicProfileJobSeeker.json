@@ -1,0 +1,37 @@
+{
+  "profile": {
+    "sampleName": "Sample User",
+    "sampleLocation": "Tokyo, Japan",
+    "editProfile": "Edit Profile"
+  },
+  "about": {
+    "title": "About Me",
+    "paragraph1": "I’m a dedicated and goal-oriented individual who’s passionate about continuous learning and growth. I take pride in delivering quality work, collaborating with others, and adapting to new challenges. I’m eager to apply my skills, gain experience, and contribute positively to any organization I join.",
+    "paragraph2": "I’m a dedicated and goal-oriented individual who’s passionate about continuous learning and growth. I take pride in delivering quality work, collaborating with others, and adapting to new challenges. I’m eager to apply my skills, gain experience, and contribute positively to any organization I join."
+  },
+  "experiences": {
+    "title": "Experiences",
+    "company": "Jollibee",
+    "roleLine": "Full Time - June 19 - Present",
+    "location": "Tokyo, Japan",
+    "description": "Assisted customers with orders and inquiries while maintaining fast and accurate service in a high-volume environment at Jollibee."
+  },
+  "skills": {
+    "title": "Skills",
+    "item": "San Sebastian College Recoletos de Cavite"
+  },
+  "details": {
+    "title": "Additional Details",
+    "email": "Email",
+    "phone": "Phone",
+    "languages": "Languages",
+    "sampleEmail": "sampleEmail@gmail.com",
+    "samplePhone": "+63 12121212121",
+    "sampleLanguages": "English, Japanese"
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "itemTitle": "Sample Testimonials",
+    "quote": "Assisted customers with orders and inquiries while maintaining fast and accurate service in a high-volume environment at Jollibee."
+  }
+}

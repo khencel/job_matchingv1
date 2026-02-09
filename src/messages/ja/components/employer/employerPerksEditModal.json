@@ -1,0 +1,16 @@
+{
+  "confirm": {
+    "title": "福利厚生を更新しますか？",
+    "text": "よろしいですか？",
+    "confirmText": "はい"
+  },
+  "toast": {
+    "title": "更新完了",
+    "success": "福利厚生を更新しました"
+  },
+  "title": "福利厚生を編集",
+  "namePlaceholder": "名称",
+  "descriptionPlaceholder": "説明",
+  "close": "閉じる",
+  "save": "保存"
+}

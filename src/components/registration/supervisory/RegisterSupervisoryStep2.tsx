@@ -173,7 +173,7 @@ export default function RegisterSupervisoryStep2() {
     setError({});
     Swal.fire({
       icon: "success",
-      title: "Company Information Submitted",
+      title: t("toast.successTitle"),
       toast: true,
       position: "top",
       showConfirmButton: false,

@@ -1,0 +1,12 @@
+{
+  "confirm": {
+    "title": "福利厚生を追加しますか？",
+    "text": "この福利厚生を追加してもよろしいですか？",
+    "confirmText": "はい、作成します"
+  },
+  "title": "福利厚生を追加",
+  "namePlaceholder": "名称",
+  "descriptionPlaceholder": "説明",
+  "close": "閉じる",
+  "save": "保存"
+}

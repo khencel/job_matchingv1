@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 import { contactUsEmailSend } from '@/redux/features/contactUsThunk';
 import { useAppDispatch } from '@/redux/hooks';
+import { useTranslations } from 'next-intl';
 
 interface ContactUsModalPropd{
     showModal: boolean;
@@ -12,6 +13,7 @@ interface ContactUsModalPropd{
 
 export default function ContactUsmodal({showModal, handleClose}: ContactUsModalPropd) {
     const dispatch = useAppDispatch();
+    const t = useTranslations('contactUsModal');
     const [isLoading, setIsLoading] = useState(false);
     const [form, setForm] = useState({
         company: '',
@@ -26,15 +28,15 @@ export default function ContactUsmodal({showModal, handleClose}: ContactUsModalP
     
     const validateForm = () => {
         const errors: { [key: string]: string } = {};
-        if (!form.company.trim()) errors.company = "Company name field is required";
-        if (!form.name.trim()) errors.name = "Name field is required";
+        if (!form.company.trim()) errors.company = t('errors.companyRequired');
+        if (!form.name.trim()) errors.name = t('errors.nameRequired');
         if (!form.email.trim()) {
-            errors.email = "Email field is required";
+            errors.email = t('errors.emailRequired');
         } else if (!/\S+@\S+\.\S+/.test(form.email)) {
-            errors.email = "Invalid Email";
+            errors.email = t('errors.emailInvalid');
         }
-        if (!form.phone.trim()) errors.phone = "Phone field is required";
-        if (!form.message.trim()) errors.message = "Message field is required";
+        if (!form.phone.trim()) errors.phone = t('errors.phoneRequired');
+        if (!form.message.trim()) errors.message = t('errors.messageRequired');
 
         setFormErrors(errors);
 
@@ -174,7 +176,7 @@ export default function ContactUsmodal({showModal, handleClose}: ContactUsModalP
             </style>
             {isLoading && (
                 <div className="loading-overlay">
-                <div className="spinner-custom">Processing... Please wait</div>
+                <div className="spinner-custom">{t('status.processing')}</div>
                 </div>
             )}
             <Modal size='lg' show={showModal} onHide={handleClose}>
@@ -183,15 +185,17 @@ export default function ContactUsmodal({showModal, handleClose}: ContactUsModalP
                 </Modal.Header>
                 <Modal.Body>
                     <section className="card-contact">
-                        <span className='h1-contact' data-i18n="title">Contact Us</span>
-                        <p className="desc-contact" data-i18n="desc">Please fill in the form below and submit.<br/>Our team will contact you after reviewing your inquiry.</p>
+                        <span className='h1-contact' data-i18n="title">{t('title')}</span>
+                        <p className="desc-contact" data-i18n="desc">
+                            {t.rich('description', { br: () => <br /> })}
+                        </p>
 
                     
                         <form onSubmit={handleSubmit}>
                         <div className="form-grid-contact">
                             <div className="field-contact">
-                                <label data-i18n="company">Company Name (Required)</label>
-                                <input  name="company" value={form.company} onChange={handleChange} data-ph="company_ph" placeholder="e.g., ABC Co., Ltd." />
+                                <label data-i18n="company">{t('labels.company')}</label>
+                                <input  name="company" value={form.company} onChange={handleChange} data-ph="company_ph" placeholder={t('placeholders.company')} />
                                 {formErrors.company && (
                                     <span style={{ color: "red", fontSize: "12px" }}>{formErrors.company}</span>
                                 )}
@@ -199,40 +203,40 @@ export default function ContactUsmodal({showModal, handleClose}: ContactUsModalP
                             
 
                             <div className="field-contact">
-                                <label data-i18n="name">Name / Contact Person (Required)</label>
-                                <input  name="name" value={form.name} onChange={handleChange} data-ph="name_ph" placeholder="e.g., Taro Yamada" />
+                                <label data-i18n="name">{t('labels.name')}</label>
+                                <input  name="name" value={form.name} onChange={handleChange} data-ph="name_ph" placeholder={t('placeholders.name')} />
                                 {formErrors.name && (
                                     <span style={{ color: "red", fontSize: "12px" }}>{formErrors.name}</span>
                                 )}
                             </div>
 
                             <div className="field-contact">
-                                <label data-i18n="email">Email Address (Required)</label>
-                                <input  type="email" value={form.email} onChange={handleChange} name="email" data-ph="email_ph" placeholder="example@company.com" />
+                                <label data-i18n="email">{t('labels.email')}</label>
+                                <input  type="email" value={form.email} onChange={handleChange} name="email" data-ph="email_ph" placeholder={t('placeholders.email')} />
                                 {formErrors.email && (
                                     <span style={{ color: "red", fontSize: "12px" }}>{formErrors.email}</span>
                                 )}
                             </div>
 
                             <div className="field-contact">
-                                <label data-i18n="phone">Phone Number (Required)</label>
-                                <input  name="phone" value={form.phone} onChange={handleChange} data-ph="phone_ph" placeholder="e.g., +81-90-xxxx-xxxx" />
+                                <label data-i18n="phone">{t('labels.phone')}</label>
+                                <input  name="phone" value={form.phone} onChange={handleChange} data-ph="phone_ph" placeholder={t('placeholders.phone')} />
                                 {formErrors.phone && (
                                     <span style={{ color: "red", fontSize: "12px" }}>{formErrors.phone}</span>
                                 )}
                             </div>
 
                             <div className="field-contact full">
-                                <label data-i18n="subject">Subject</label>
-                                <input name="subject" value={form.subject} onChange={handleChange} data-ph="subject_ph" placeholder="e.g., About job posting" />
+                                <label data-i18n="subject">{t('labels.subject')}</label>
+                                <input name="subject" value={form.subject} onChange={handleChange} data-ph="subject_ph" placeholder={t('placeholders.subject')} />
                                 {formErrors.subject && (
                                     <span style={{ color: "red", fontSize: "12px" }}>{formErrors.subject}</span>
                                 )}
                             </div>
 
                             <div className="field-contact full">
-                                <label data-i18n="message">Inquiry Details (Required)</label>
-                                <textarea className='textarea-contact' name="message" value={form.message} onChange={handleChange} data-ph="message_ph" placeholder="e.g., Please tell me about your services and pricing."></textarea>
+                                <label data-i18n="message">{t('labels.message')}</label>
+                                <textarea className='textarea-contact' name="message" value={form.message} onChange={handleChange} data-ph="message_ph" placeholder={t('placeholders.message')}></textarea>
                                 {formErrors.message && (
                                     <span style={{ color: "red", fontSize: "12px" }}>{formErrors.message}</span>
                                 )}
@@ -240,8 +244,8 @@ export default function ContactUsmodal({showModal, handleClose}: ContactUsModalP
                         </div>
 
                         <div className="actions">
-                            <button type="button" className="btn" onClick={handleClear} data-i18n="clear">Clear</button>
-                            <button type="submit" className="btn-contact primary" data-i18n="send">Send Message</button>
+                            <button type="button" className="btn" onClick={handleClear} data-i18n="clear">{t('actions.clear')}</button>
+                            <button type="submit" className="btn-contact primary" data-i18n="send">{t('actions.send')}</button>
                         </div>
                         </form>
                     </section>
