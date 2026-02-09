@@ -21,7 +21,15 @@ import { filterJobPostV1 } from "@/redux/slices/filterJobPost/filterJobPostThunk
 const FindJobPage = () => {
   const router = useRouter();
   const t = useTranslations("findJobs");
+  const tListGroup = useTranslations("listGroupData");
   const dispatch = useAppDispatch();
+
+  const jobTypeOptions = [
+    { value: "Full-Time", label: t("jobTypes.fullTime") },
+    { value: "Part-Time", label: t("jobTypes.partTime") },
+    { value: "Remote", label: t("jobTypes.remote") },
+    { value: "Internship", label: t("jobTypes.internship") },
+  ];
 
   const {
     items,
@@ -56,18 +64,22 @@ const FindJobPage = () => {
           <div className="col-md-3 border">
             <Card className="p-2  overflow-auto">
               <Card.Header className="d-flex justify-content-between bg-body">
-                <Card.Title className="p-0 my-auto">Job Filter</Card.Title>
+                <Card.Title className="p-0 my-auto">
+                  {t("filters.title")}
+                </Card.Title>
                 <Button
                   variant="link"
                   onClick={() => dispatch(setFieldClear())}
                   className="p-0 text-danger"
                 >
-                  Clear Filters
+                  {t("filters.clear")}
                 </Button>
               </Card.Header>
               <Card.Body>
                 <Form.Group>
-                  <Form.Label className="primary-text">Prefecture</Form.Label>
+                  <Form.Label className="primary-text">
+                    {t("filters.prefecture")}
+                  </Form.Label>
                   <select
                     name=""
                     id=""
@@ -78,13 +90,13 @@ const FindJobPage = () => {
                     className="form-control"
                   >
                     <option value="" disabled hidden>
-                      Select prefecture
+                      {t("filters.selectPrefecture")}
                     </option>
-                    <option value="">None</option>
+                    <option value="">{t("filters.none")}</option>
                     {regionList.map((item: any, index: number) => {
                       return (
                         <option key={index} value={item.value}>
-                          {item.label}
+                          {tListGroup(`prefecture.${item.value}`)}
                         </option>
                       );
                     })}
@@ -92,7 +104,9 @@ const FindJobPage = () => {
                 </Form.Group>
 
                 <Form.Group>
-                  <Form.Label className="primary-text">Category</Form.Label>
+                  <Form.Label className="primary-text">
+                    {t("filters.category")}
+                  </Form.Label>
                   <select
                     name=""
                     value={category ?? ""}
@@ -103,13 +117,13 @@ const FindJobPage = () => {
                     className="form-control"
                   >
                     <option value="" disabled hidden>
-                      Select Category
+                      {t("filters.selectCategory")}
                     </option>
-                    <option value="">None</option>
+                    <option value="">{t("filters.none")}</option>
                     {listCategory.map((item: any, index: number) => {
                       return (
                         <option key={index} value={item.value}>
-                          {item.label}
+                          {tListGroup(`categories.${item.value}`)}
                         </option>
                       );
                     })}
@@ -117,42 +131,44 @@ const FindJobPage = () => {
                 </Form.Group>
 
                 <Form.Group>
-                  <Form.Label className="primary-text">Job Type</Form.Label>
-                  {["Full-Time", "Part-Time", "Remote", "Internship"].map(
-                    (type) => (
-                      <Form.Check
-                        type="checkbox"
-                        key={type}
-                        label={type}
-                        value={type}
-                        id={type}
-                        onChange={(e) => {
-                          const { checked, value } = e.target;
-                          if (checked) {
-                            dispatch(
-                              setFilterField({
-                                type_of_emp: [...type_of_emp, value],
-                              }),
-                            );
-                          } else {
-                            dispatch(
-                              setFilterField({
-                                type_of_emp: type_of_emp.filter(
-                                  (item) => item !== value,
-                                ),
-                              }),
-                            );
-                          }
-                        }}
-                        checked={type_of_emp.includes(type)}
-                      />
-                    ),
-                  )}
+                  <Form.Label className="primary-text">
+                    {t("filters.jobType")}
+                  </Form.Label>
+                  {jobTypeOptions.map((type) => (
+                    <Form.Check
+                      type="checkbox"
+                      key={type.value}
+                      label={type.label}
+                      value={type.value}
+                      id={type.value}
+                      onChange={(e) => {
+                        const { checked, value } = e.target;
+                        if (checked) {
+                          dispatch(
+                            setFilterField({
+                              type_of_emp: [...type_of_emp, value],
+                            }),
+                          );
+                        } else {
+                          dispatch(
+                            setFilterField({
+                              type_of_emp: type_of_emp.filter(
+                                (item) => item !== value,
+                              ),
+                            }),
+                          );
+                        }
+                      }}
+                      checked={type_of_emp.includes(type.value)}
+                    />
+                  ))}
                 </Form.Group>
 
                 <hr />
                 <Form.Group>
-                  <Form.Label className="primary-text">Salary</Form.Label>
+                  <Form.Label className="primary-text">
+                    {t("filters.salary")}
+                  </Form.Label>
                   <div className="d-flex justify-content-between">
                     <Form.Control
                       type="number"
@@ -164,7 +180,7 @@ const FindJobPage = () => {
                           }),
                         )
                       }
-                      placeholder="min"
+                      placeholder={t("filters.salaryMin")}
                     ></Form.Control>
                     <p className="text-center mx-auto w-25 fw-bold">-</p>
                     <Form.Control
@@ -177,7 +193,7 @@ const FindJobPage = () => {
                           }),
                         )
                       }
-                      placeholder="max"
+                      placeholder={t("filters.salaryMax")}
                     ></Form.Control>
                   </div>
                 </Form.Group>

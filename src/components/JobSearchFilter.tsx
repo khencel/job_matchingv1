@@ -28,6 +28,7 @@ export default function JobSearchFiler() {
     router.push("/find-jobs");
   };
   const t = useTranslations("jobSearchFilter");
+  const tListGroup = useTranslations("listGroupData");
   return (
     <>
       <div className="job-search-filter d-flex justify-content-center p-1">
@@ -67,12 +68,12 @@ export default function JobSearchFiler() {
                   }
                 >
                   <option value="" data-i18n="ssw_placeholder">
-                    Select Category
+                    {t("ssw.placeholder")}
                   </option>
                   {listCategory.map((item: any, index: number) => {
                     return (
                       <option key={index} value={item.value}>
-                        {item.label}
+                        {tListGroup(`categories.${item.value}`)}
                       </option>
                     );
                   })}
@@ -102,16 +103,16 @@ export default function JobSearchFiler() {
                   onChange={(e) =>
                     dispatch(setFilterField({ region: e.target.value }))
                   }
-                  aria-label="都道府県"
+                  aria-label={t("prefecture.ariaLabel")}
                   id="prefecture"
                 >
                   <option value="" data-i18n="pref_placeholder">
-                    Select Prefecture
+                    {t("prefecture.placeholder")}
                   </option>
                   {regionList.map((item: any, index: number) => {
                     return (
                       <option key={index} value={item.value}>
-                        {item.label}
+                        {tListGroup(`prefecture.${item.value}`)}
                       </option>
                     );
                   })}
