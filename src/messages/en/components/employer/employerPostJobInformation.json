@@ -23,5 +23,7 @@
   },
   "categories": "Categories",
   "categoriesNote": "You can select multiple job categories",
+  "prefecture": "Prefecture",
+  "prefectureSelect": "Select Prefecture",
   "next": "Next"
 }

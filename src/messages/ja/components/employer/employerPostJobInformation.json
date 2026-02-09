@@ -23,5 +23,7 @@
   },
   "categories": "カテゴリー",
   "categoriesNote": "複数の職種カテゴリーを選択できます",
+  "prefecture": "都道府県",
+  "prefectureSelect": "都道府県を選択",
   "next": "次へ"
 }
