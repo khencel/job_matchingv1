@@ -88,7 +88,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                             <hr />
                             <strong><h4>Documents</h4></strong>
                             {
-                                data?.user?.documents.map((item:any, index:number) => {
+                                data?.user?.documents?.map((item:any, index:number) => {
                                     let name = item.documents.split('/')
                                     return (
                                         <div className="row mt-4" key={index}>
