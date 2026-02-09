@@ -10,8 +10,12 @@ import ja from "../messages/ja";
 export type SupportedLocale = "en" | "ja";
 
 // Map locales to loaded messages (extend when adding new locales)
-// Use AbstractIntlMessages to allow nested message objects
-const MESSAGES: Record<SupportedLocale, AbstractIntlMessages> = {
+// Allow string arrays for select options in local message catalogs.
+type AppIntlMessages = {
+  [key: string]: string | AppIntlMessages | string[];
+};
+
+const MESSAGES: Record<SupportedLocale, AppIntlMessages> = {
   en,
   ja,
 };
@@ -26,7 +30,7 @@ export default function NextIntlProvider({
   return (
     <NextIntlClientProvider 
       locale={locale} 
-      messages={MESSAGES[locale]}
+      messages={MESSAGES[locale] as AbstractIntlMessages}
       timeZone="Asia/Tokyo"
     >
       {children}
