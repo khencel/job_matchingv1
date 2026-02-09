@@ -72,7 +72,7 @@ const JobSeekerProfilePage = () => {
     { value: "masterDegree", label: "Master's Degree" },
     { value: "doctoralDegree", label: "Doctoral Degree" },
   ];
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_API_CONTENT_URL;
 
   const resumeUrl = useMemo(() => {
     return `${baseUrl}media/${existingResume}?${dateNow}`;
