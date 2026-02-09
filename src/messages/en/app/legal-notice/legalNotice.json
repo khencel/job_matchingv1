@@ -1,0 +1,117 @@
+{
+  "title": "Legal Notice",
+  "intro": {
+    "title": "Company Information & Legal Notice (Detailed)",
+    "body": "This page summarizes the operator details, nature of the service, and data handling practices of JOBSAPO in accordance with relevant Japanese laws and common compliance requirements for job-matching platforms."
+  },
+  "companyProfile": {
+    "title": "Company Profile",
+    "companyName": "Company Name: Global Network Innovation Co., Ltd.",
+    "serviceName": "Service Name: JOBSAPO",
+    "address": "Address: Fukaya Building 5-A, 4-22-10 Koto, Sumida-ku, Tokyo 130-0014, Japan",
+    "representative": "Representative: Nobuaki Kawamichi",
+    "business": "Business: Human Resources Services / IT Services"
+  },
+  "nature": {
+    "title": "Nature of the Service",
+    "items": {
+      "provides": {
+        "title": "What JOBSAPO Provides",
+        "body": "JOBSAPO is a web platform that provides job and candidate information and matching opportunities between employers and job seekers."
+      },
+      "notParty": {
+        "title": "Not a Party to Employment Contracts",
+        "body": "The Company is not a party to employment contracts between employers and job seekers. Employment conditions and hiring decisions are determined by employers, and users act at their own responsibility."
+      },
+      "fees": {
+        "title": "Placement Fees (Current Status)",
+        "body": "At present, the Company does not charge or receive any placement fees or success-based commissions from employers or job seekers through JOBSAPO.<br /><br />In the future, if JOBSAPO is operated as a licensed paid employment placement service, additional disclosures such as license number, fee table, and complaint handling may be added after obtaining the required license."
+      },
+      "limitation": {
+        "title": "Limitation of Liability",
+        "points": {
+          "item1": "False, misleading, or illegal job postings are prohibited.",
+          "item2": "Discriminatory expressions that may violate laws and regulations are not allowed.",
+          "item3": "The Company may review, request corrections, or remove listings when necessary."
+        }
+      }
+    }
+  },
+  "compliance": {
+    "title": "Compliance & Prohibited Conduct",
+    "lead": "Users must not engage in the following:",
+    "items": {
+      "item1": "Posting or registering false or inaccurate information",
+      "item2": "Posting content that may violate Japanese laws (employment-related, immigration-related, etc.)",
+      "item3": "Acts against public order and morals, or involvement with antisocial forces",
+      "item4": "Infringing third-party rights (copyright, trademark, privacy, etc.)",
+      "item5": "Unauthorized access, excessive load, scraping, or any disruption to the service"
+    }
+  },
+  "personalInfo": {
+    "title": "Personal Information Handling",
+    "sections": {
+      "data": {
+        "title": "Data We Collect",
+        "items": {
+          "item1": "Name and contact details (phone, email, etc.)",
+          "item2": "Address, education, work history, qualifications, desired job/location",
+          "item3": "Nationality and date of birth; optional immigration-related self-declared information",
+          "item4": "Device data, access logs, IP address, cookies and identifiers"
+        }
+      },
+      "purposes": {
+        "title": "Purposes of Use",
+        "items": {
+          "item1": "Job matching and communications",
+          "item2": "User management, identity verification, fraud prevention",
+          "item3": "Inquiry handling and important notices",
+          "item4": "Service improvement and usage analytics"
+        }
+      },
+      "sharing": {
+        "title": "Sharing with Third Parties",
+        "body": "We may share necessary user data with employers and related parties for matching purposes. We do not provide personal data to third parties without consent unless required by law."
+      },
+      "retention": {
+        "title": "Retention",
+        "body": "We retain personal data only for the period necessary to achieve the purposes of use or as required by law."
+      },
+      "requests": {
+        "title": "Requests by Users",
+        "body": "Users may request access, correction, deletion, or suspension of use of their personal data in accordance with applicable laws."
+      }
+    }
+  },
+  "security": {
+    "title": "Security Measures",
+    "lead": "We implement reasonable security measures to protect personal data, including:",
+    "items": {
+      "item1": "Access control and least-privilege management",
+      "item2": "Encrypted communications (e.g., HTTPS)",
+      "item3": "Logging, monitoring, and anti-unauthorized access measures",
+      "item4": "Vendor oversight for outsourced processing (including cloud services)"
+    }
+  },
+  "cookies": {
+    "title": "Cookies",
+    "body": "We may use cookies and similar technologies to improve usability and analyze usage. Users can disable cookies in browser settings, but some functions may not work properly."
+  },
+  "disclaimer": {
+    "title": "Disclaimer & Limitation of Liability",
+    "items": {
+      "warranty": {
+        "title": "No Warranty",
+        "body": "We do not guarantee the accuracy, completeness, legality, or timeliness of information provided on this service."
+      },
+      "damages": {
+        "title": "Disputes and Damages",
+        "body": "We are not liable for any disputes or damages arising from the use of this service, including hiring cancellations, mismatched conditions, or labor-related issues."
+      },
+      "suspension": {
+        "title": "Service Suspension",
+        "body": "We may suspend or interrupt the service due to maintenance, system failures, disasters, or other unavoidable reasons."
+      }
+    }
+  }
+}

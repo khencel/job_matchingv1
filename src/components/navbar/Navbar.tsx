@@ -150,9 +150,10 @@ export default function Navbar() {
               value={locale}
               onChange={handleLanguageChange}
               style={{ minWidth: "120px" }}
+              aria-label={t("languageSelectorLabel")}
             >
-              <option value="en">🇺🇸 English</option>
-              <option value="ja">🇯🇵 日本語</option>
+              <option value="en">🇺🇸 {t("english")}</option>
+              <option value="ja">🇯🇵 {t("japanese")}</option>
             </select>
           </div>
         </div>

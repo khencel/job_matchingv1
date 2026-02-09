@@ -21,6 +21,8 @@
     "remote": "Remote",
     "internship": "Internship"
   },
+  "prefecture": "Prefecture",
+  "prefectureSelect": "Select prefecture",
   "categories": "Categories",
   "categoriesNote": "You can select multiple job categories",
   "next": "Next"

@@ -15,7 +15,9 @@
     "badgeNew": "NEW",
     "companyImageAlt": "Company image",
     "updatedLabel": "Updated: {date}",
+    "dateUnavailable": "Date unavailable",
     "metaLocation": "📍 {location}",
+    "locationUnavailable": "Location unavailable",
     "metaSalary": "💰 {salary}",
     "viewDetails": "View details"
   }

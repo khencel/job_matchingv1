@@ -1,4 +1,23 @@
 {
+  "filters": {
+    "title": "求人フィルター",
+    "clear": "フィルターをクリア",
+    "prefecture": "都道府県",
+    "selectPrefecture": "都道府県を選択",
+    "none": "なし",
+    "category": "カテゴリー",
+    "selectCategory": "カテゴリーを選択",
+    "jobType": "雇用形態",
+    "salary": "給与",
+    "salaryMin": "最小",
+    "salaryMax": "最大"
+  },
+  "jobTypes": {
+    "fullTime": "正社員",
+    "partTime": "パート / アルバイト",
+    "remote": "リモート",
+    "internship": "インターン"
+  },
   "companyImageAlt": "企業イメージ",
   "badgeNew": "NEW",
   "updatedLabel": "更新: {date}",

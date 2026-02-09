@@ -18,6 +18,14 @@
     "internship": "インターン",
     "partTime": "パートタイム"
   },
+  "samples": {
+    "uiUxDesigner": "UI/UXデザイナー",
+    "seniorUxDesigner": "シニアUXデザイナー",
+    "technicalSupportSpecialist": "テクニカルサポート",
+    "juniorGraphicDesigner": "ジュニアグラフィックデザイナー",
+    "frontEndDeveloper": "フロントエンドエンジニア",
+    "frontEndDate": "2025/12/7"
+  },
   "daysAgo": "{days} 日前",
   "dateText": "{date}"
 }

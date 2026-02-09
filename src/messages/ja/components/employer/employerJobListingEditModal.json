@@ -35,5 +35,7 @@
   "whoYouAre": "求める人物像",
   "whoYouAreNote": "希望する候補者の要件を追加してください。",
   "niceToHave": "歓迎条件",
-  "niceToHaveNote": "歓迎スキルや資格を追加して応募者層を広げましょう。"
+  "niceToHaveNote": "歓迎スキルや資格を追加して応募者層を広げましょう。",
+  "close": "閉じる",
+  "saveChanges": "変更を保存"
 }

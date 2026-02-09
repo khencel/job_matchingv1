@@ -14,5 +14,10 @@
   "actions": {
     "updateDate": "日付を更新",
     "deleteData": "データを削除"
+  },
+  "samples": {
+    "name": "サンプル応募者",
+    "appliedDate": "2026/2/1",
+    "jobRole": "倉庫作業"
   }
 }

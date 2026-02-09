@@ -21,6 +21,8 @@
     "remote": "リモート",
     "internship": "インターン"
   },
+  "prefecture": "都道府県",
+  "prefectureSelect": "都道府県を選択",
   "categories": "カテゴリー",
   "categoriesNote": "複数の職種カテゴリーを選択できます",
   "next": "次へ"

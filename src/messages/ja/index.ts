@@ -20,6 +20,7 @@ import listGroupData from "./components/listGroupData.json";
 import dateFormat from "./components/date_format.json";
 import jobSupportFeatures from "./app/(main)/jobSupportFeatures.json";
 import contactUs from "./app/(main)/contactUs.json";
+import contactUsModal from "./app/(main)/contactUsModal.json";
 import qAndA from "./app/(main)/qAndA.json";
 import login from "./app/(non-login)/login.json";
 import register from "./app/(non-login)/register/register.json";
@@ -78,6 +79,7 @@ import registerEmployerStep4 from "./components/registration/employer/registerEm
 import registerEmployerPage from "./app/(non-login)/register/employer/registerEmployerPage.json";
 import registrationEmployer from "./app/registration/employer/registrationEmployer.json";
 import registrationJobSeeker from "./app/registration/job-seeker/registrationJobSeeker.json";
+import legalNotice from "./app/legal-notice/legalNotice.json";
 import registerSuperVisoryStep1 from "./app/(with-auth)/super-visory/registerSuperVisoryStep1.json";
 import registerJobSeekerStep2 from "./components/registration/jobSeeker/registerJobSeekerStep2.json";
 import registerJobSeekerStep3 from "./components/registration/jobSeeker/registerJobSeekerStep3.json";
@@ -114,6 +116,7 @@ const messages = {
   dateFormat,
   jobSupportFeatures,
   contactUs,
+  contactUsModal,
   qAndA,
   login,
   register,
@@ -172,6 +175,7 @@ const messages = {
   registerEmployerPage,
   registrationEmployer,
   registrationJobSeeker,
+  legalNotice,
   registerSuperVisoryStep1,
   registerJobSeekerStep2,
   registerJobSeekerStep3,

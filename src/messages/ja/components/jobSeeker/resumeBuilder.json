@@ -3,6 +3,7 @@
     "successTitle": "成功",
     "successMessage": "履歴書を保存しました。"
   },
+  "documentTitle": "履歴書の下書き",
   "validation": {
     "incomplete": "履歴書を保存する前に必要な項目を入力してください。\n(氏名、写真、連絡先、住所、志望動機)"
   },

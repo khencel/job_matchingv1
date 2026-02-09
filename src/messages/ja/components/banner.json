@@ -15,7 +15,9 @@
     "badgeNew": "NEW",
     "companyImageAlt": "企業イメージ",
     "updatedLabel": "更新: {date}",
+    "dateUnavailable": "日付不明",
     "metaLocation": "📍 {location}",
+    "locationUnavailable": "場所不明",
     "metaSalary": "💰 {salary}",
     "viewDetails": "詳細を見る"
   }

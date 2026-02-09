@@ -22,6 +22,12 @@
     "viewEmployer": "View Employer",
     "viewApplicant": "View Applicant"
   },
+  "pagination": {
+    "itemsPerPage": "Items per page:",
+    "showing": "Showing {start} to {end} of {total}",
+    "previous": "Previous",
+    "next": "Next"
+  },
   "confirm": {
     "title": "Change Status",
     "text": "Are you sure you want to change the status of this data?"

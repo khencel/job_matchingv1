@@ -14,5 +14,10 @@
   "actions": {
     "updateDate": "Update Date",
     "deleteData": "Delete Data"
+  },
+  "samples": {
+    "name": "Sample Applicant",
+    "appliedDate": "Feb 1, 2026",
+    "jobRole": "Warehouse Associate"
   }
 }

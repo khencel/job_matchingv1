@@ -18,6 +18,14 @@
     "internship": "Intership",
     "partTime": "Part Time"
   },
+  "samples": {
+    "uiUxDesigner": "UI/UX Designer",
+    "seniorUxDesigner": "Senior UX Designer",
+    "technicalSupportSpecialist": "Technical Support Specialist",
+    "juniorGraphicDesigner": "Junior Graphic Designer",
+    "frontEndDeveloper": "Front End Developer",
+    "frontEndDate": "Dec 7, 2025"
+  },
   "daysAgo": "{days} days ago",
   "dateText": "{date}"
 }

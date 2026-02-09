@@ -13,8 +13,6 @@ import {
   User,
   Mail,
   Phone,
-  FileText,
-  UploadCloud,
 } from "lucide-react";
 import Image from "next/image";
 import { useState, useRef, useEffect, useMemo } from "react";
@@ -33,14 +31,12 @@ import { setJobSeekerField } from "@/redux/slices/updateProfile/updateProfileSli
 import { FaFacebook } from "react-icons/fa";
 import { isPhoneNumberValid } from "@/helper/validations";
 import { RegisterJobSeekerData } from "@/types/job-seeker";
-import { useRouter } from "next/navigation";
 import DisplayResume from "@/components/DisplayResume";
 import { useTranslations } from "next-intl";
 
 const JobSeekerProfilePage = () => {
   const t = useTranslations("jobSeekerProfileDashboard");
   const dispatch = useAppDispatch();
-  const router = useRouter();
   // Read-only source
   const email = useAppSelector((s) => s.authState.user?.email);
   const AuthUser = useAppSelector(
@@ -72,12 +68,12 @@ const JobSeekerProfilePage = () => {
     { value: "masterDegree", label: "Master's Degree" },
     { value: "doctoralDegree", label: "Doctoral Degree" },
   ];
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_API_CONTENT_URL;
 
   const resumeUrl = useMemo(() => {
     return `${baseUrl}media/${existingResume}?${dateNow}`;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [existingResume, dateNow]);
+  }, [existingResume, dateNow]); 
 
   useEffect(() => {
     dispatch(fetchCurrentUser());

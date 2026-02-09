@@ -22,6 +22,12 @@
     "viewEmployer": "雇用主を見る",
     "viewApplicant": "応募者を見る"
   },
+  "pagination": {
+    "itemsPerPage": "表示件数:",
+    "showing": "{start}件目から{end}件目まで / 全{total}件",
+    "previous": "前へ",
+    "next": "次へ"
+  },
   "confirm": {
     "title": "ステータス変更",
     "text": "このデータのステータスを変更してもよろしいですか？"

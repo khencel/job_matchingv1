@@ -3,7 +3,6 @@ import { FormEvent, useMemo, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { useTranslations } from "next-intl";
 
 // Components
 import { ResumeTemplate } from "@/app/(with-auth)/job-seeker/resume-builder/ResumeTemplate";
@@ -15,10 +14,12 @@ import { saveResume } from "@/redux/slices/resumeSlice";
 import { DownloadIcon, SaveIcon } from "lucide-react";
 import { Button, Spinner, Row, Col } from "react-bootstrap";
 import { showSuccessToast } from "@/app/(util)/toaster";
+import { useTranslations } from "next-intl";
 
 const ResumeBuilderPage = () => {
   const t = useTranslations("resumeBuilder");
   const dispatch = useAppDispatch();
+  const incompleteLines = t("validation.incomplete").split("\n");
 
   // SELECTORS
   const { data: resumeData, isLoading } = useAppSelector(
@@ -100,7 +101,7 @@ const ResumeBuilderPage = () => {
   const templateRef = useRef<HTMLDivElement>(null);
   const handlePrint = useReactToPrint({
     contentRef: templateRef,
-    documentTitle: `Resume-Drafts`,
+    documentTitle: t("documentTitle"),
   });
 
   return (
@@ -108,7 +109,7 @@ const ResumeBuilderPage = () => {
       className="d-flex flex-grow-1 overflow-hidden"
       style={{ height: "100vh" }}
     >
-      <Row className="g-4 flex-grow-1 w-100 h-100 p-4 overflow-hidden">
+      <Row className="g-4 flex-grow-1 w-100 h-100 p-4">
         <Col md={5} className="h-100">
           <ResumeForm />
         </Col>
@@ -121,10 +122,10 @@ const ResumeBuilderPage = () => {
           >
             {isResumeValid ? null : (
               <small className="text-danger">
-                {t("validation.incomplete").split("\n").map((line, index) => (
-                  <span key={index}>
+                {incompleteLines.map((line, index) => (
+                  <span key={`${line}-${index}`}>
                     {line}
-                    {index < t("validation.incomplete").split("\n").length - 1 ? <br /> : null}
+                    {index < incompleteLines.length - 1 ? <br /> : null}
                   </span>
                 ))}
               </small>

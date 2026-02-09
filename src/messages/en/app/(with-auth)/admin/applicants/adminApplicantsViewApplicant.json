@@ -3,6 +3,10 @@
   "roleSample": "Software Engineer",
   "biography": "BIOGRAPHY",
   "coverLetter": "Cover Letter",
+  "placeholders": {
+    "biography": "No biography provided.",
+    "coverLetter": "No cover letter provided."
+  },
   "dateOfBirth": "DATE OF BIRTH",
   "visaStatus": "VISA STATUS",
   "japaneseLevel": "JAPANESE LANGUAGE LEVEL",

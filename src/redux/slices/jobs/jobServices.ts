@@ -1,8 +1,7 @@
-import apiClient from "@/lib/axios";
+import apiClient, { publicApi } from "@/lib/axios";
 
-
-export const getJobPostings = async (filters: any) => {
-  return await apiClient.post("/job/list",filters);
+export const getJobPostings = async () => {
+  return await publicApi.get("/job/list");
 };
 
 // job postings per id/users

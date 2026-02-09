@@ -30,7 +30,7 @@ export default function RecentPostJob(){
                             <tr>
                                 <td>
                                     <div className="text_rencent_jobs">
-                                        <strong>UI/UX Designer</strong>
+                                        <strong>{t("samples.uiUxDesigner")}</strong>
                                         <br />
                                         <small>
                                             {t("jobType.fullTime")} <GoDotFill /> {t("daysAgo", { days: 27 })}
@@ -51,7 +51,7 @@ export default function RecentPostJob(){
                             <tr>
                                 <td>
                                     <div className="text_rencent_jobs">
-                                        <strong>Senior UX Designer</strong>
+                                        <strong>{t("samples.seniorUxDesigner")}</strong>
                                         <br />
                                         <small>
                                             {t("jobType.internship")} <GoDotFill /> {t("daysAgo", { days: 8 })}
@@ -72,7 +72,7 @@ export default function RecentPostJob(){
                             <tr>
                                 <td>
                                     <div className="text_rencent_jobs">
-                                        <strong>Technical Support Specialist</strong>
+                                        <strong>{t("samples.technicalSupportSpecialist")}</strong>
                                         <br />
                                         <small>
                                             {t("jobType.partTime")} <GoDotFill /> {t("daysAgo", { days: 4 })}
@@ -93,7 +93,7 @@ export default function RecentPostJob(){
                             <tr>
                                 <td>
                                     <div className="text_rencent_jobs">
-                                        <strong>Junior Graphic Designer</strong>
+                                        <strong>{t("samples.juniorGraphicDesigner")}</strong>
                                         <br />
                                         <small>
                                             {t("jobType.fullTime")} <GoDotFill /> {t("daysAgo", { days: 24 })}
@@ -114,10 +114,10 @@ export default function RecentPostJob(){
                             <tr>
                                 <td>
                                     <div className="text_rencent_jobs">
-                                        <strong>Fron End Developer</strong>
+                                        <strong>{t("samples.frontEndDeveloper")}</strong>
                                         <br />
                                         <small>
-                                            {t("jobType.fullTime")} <GoDotFill /> {t("dateText", { date: "Dec 7, 2025" })}
+                                            {t("jobType.fullTime")} <GoDotFill /> {t("dateText", { date: t("samples.frontEndDate") })}
                                         </small>
                                     </div>
                                 </td>

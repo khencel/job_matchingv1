@@ -58,7 +58,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                             <div className="col">
                                 <strong>{t("biography")}</strong>
                                 <br />
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore cum velit excepturi modi impedit nam distinctio voluptates totam at quidem, nulla temporibus aperiam, exercitationem obcaecati labore molestiae corporis tempora? Nam!
+                                {t("placeholders.biography")}
                             </div>
                         </div>
 
@@ -66,7 +66,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                             <div className="col">
                                 <strong>{t("coverLetter")}</strong>
                                 <br />
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore cum velit excepturi modi impedit nam distinctio voluptates totam at quidem, nulla temporibus aperiam, exercitationem obcaecati labore molestiae corporis tempora? Nam!
+                                {t("placeholders.coverLetter")}
                             </div>
                         </div>
                     </div>

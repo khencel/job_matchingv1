@@ -36,15 +36,15 @@ export default function SuperVisoryApplicantsPage() {
                                         <td>
                                             <div className="row">
                                                 <div className="col-10 pt-1">
-                                                    <span className="text-primary text-capitalize">test</span>
+                                                    <span className="text-primary text-capitalize">{t("samples.name")}</span>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <span className="badge border border-dark text-black p-2 rounded-4">{t("status.pending")}</span>
                                         </td>
-                                        <td><span className="text-primary">test</span></td>
-                                        <td><span className="text-primary">test</span></td>
+                                        <td><span className="text-primary">{t("samples.appliedDate")}</span></td>
+                                        <td><span className="text-primary">{t("samples.jobRole")}</span></td>
                                         <td className="text-start p-2">
                                             <div className="dropdown">
                                                 <button

@@ -1,5 +1,5 @@
 "use client";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { JobPosting } from "@/types/applyJob";
 import { useEffect, useState } from "react";
 import { getJobPostings } from "@/redux/slices/jobs/jobServices";
@@ -8,7 +8,14 @@ import { useRouter } from "next/navigation";
 export default function Banner() {
   const [jobPostings, setJobPostings] = useState<JobPosting[]>([]);
   const t = useTranslations("banner");
+  const locale = useLocale();
   const router = useRouter();
+  const formatUpdatedDate = (isoDate?: string) => {
+    if (!isoDate) return t("jobsPanel.dateUnavailable");
+    const parsed = new Date(isoDate);
+    if (Number.isNaN(parsed.getTime())) return t("jobsPanel.dateUnavailable");
+    return parsed.toLocaleDateString(locale);
+  };
   useEffect(() => {
     async function fetchJobDetails() {
       const res = await getJobPostings();
@@ -98,13 +105,19 @@ export default function Banner() {
                   <div className="job-top">
                     <div className="job-company" data-i18n="job1_company">{job?.employer?.[0]?.userDetails_emp?.company_information?.name}</div>
                     <div className="job-date" data-i18n="job1_date">
-                      {t("jobsPanel.updatedLabel", { date: "2/2" })}
+                      {t("jobsPanel.updatedLabel", {
+                        date: formatUpdatedDate(job.created_at),
+                      })}
                     </div>
                   </div>
                   <div className="job-title" data-i18n="job1_title">{job.title}</div>
                   <div className="job-meta">
                     <span className="meta-pill" data-i18n="job1_meta1">
-                      {t("jobsPanel.metaLocation", { location: "Tokyo" })}
+                      {t("jobsPanel.metaLocation", {
+                        location: job.region
+                          ? String(job.region)
+                          : t("jobsPanel.locationUnavailable"),
+                      })}
                     </span>
                     {job.type_of_emp?.map((type, index) => (
                       <span key={index} className="meta-pill">

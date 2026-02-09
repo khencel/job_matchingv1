@@ -275,7 +275,7 @@ export default function AdminApplicants() {
             {/* Pagination Controls */}
             <div className="d-flex justify-content-between align-items-center mt-3">
                 <div className="d-flex align-items-center">
-                    <label className="me-2">Items per page:</label>
+                    <label className="me-2">{t("pagination.itemsPerPage")}</label>
                     <select 
                         className="form-select form-select-sm" 
                         style={{ width: 'auto' }}
@@ -289,7 +289,11 @@ export default function AdminApplicants() {
                         <option value={50}>50</option>
                     </select>
                     <span className="ms-3 text-muted">
-                        Showing {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, count)} of {count}
+                        {t("pagination.showing", {
+                            start: (currentPage - 1) * pageSize + 1,
+                            end: Math.min(currentPage * pageSize, count),
+                            total: count,
+                        })}
                     </span>
                 </div>
 
@@ -301,7 +305,7 @@ export default function AdminApplicants() {
                                 onClick={() => handlePageChange(currentPage - 1)}
                                 disabled={!previous}
                             >
-                                Previous
+                                {t("pagination.previous")}
                             </button>
                         </li>
                         
@@ -325,7 +329,7 @@ export default function AdminApplicants() {
                                 onClick={() => handlePageChange(currentPage + 1)}
                                 disabled={!next}
                             >
-                                Next
+                                {t("pagination.next")}
                             </button>
                         </li>
                     </ul>

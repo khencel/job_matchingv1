@@ -3,6 +3,10 @@
   "roleSample": "ソフトウェアエンジニア",
   "biography": "自己紹介",
   "coverLetter": "カバーレター",
+  "placeholders": {
+    "biography": "自己紹介は未入力です。",
+    "coverLetter": "カバーレターは未入力です。"
+  },
   "dateOfBirth": "生年月日",
   "visaStatus": "ビザ状況",
   "japaneseLevel": "日本語レベル",
