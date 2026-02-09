@@ -18,7 +18,7 @@ export default function NavbarAuth() {
 
   const access = useAppSelector((s) => s.authState.access);
   const user = useAppSelector((s) => s.authState.user);
-  const [changePassOpenModal, setChangePassOpenModal] = useState(false)
+  const [changePassOpenModal, setChangePassOpenModal] = useState(false);
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
@@ -79,10 +79,9 @@ export default function NavbarAuth() {
     return colors[Math.abs(hash) % colors.length];
   };
 
-
   const handleChangePassword = () => {
-      setChangePassOpenModal(true)
-  }
+    setChangePassOpenModal(true);
+  };
   const handleClose = () => setChangePassOpenModal(false);
 
   return (
@@ -93,8 +92,8 @@ export default function NavbarAuth() {
           <a className="navbar-brand d-flex align-items-center" href="#">
             <img
               src="/img/logo.png"
-              alt={t("logoAlt")}
-              style={{ height: "70px", width: "auto", objectFit: "contain"}}
+              alt={tNavbar("logoAlt")}
+              style={{ height: "70px", width: "auto", objectFit: "contain" }}
             />
           </a>
 
@@ -120,11 +119,11 @@ export default function NavbarAuth() {
                 className="form-select form-select-sm"
                 value={locale}
                 onChange={handleLanguageChange}
-                 aria-label={tNavbar("languageSelectorLabel")}
+                aria-label={tNavbar("languageSelectorLabel")}
                 style={{ width: "auto", minWidth: "140px" }}
               >
-                 <option value="en">🇺🇸 {tNavbar("english")}</option>
-                 <option value="ja">🇯🇵 {tNavbar("japanese")}</option>
+                <option value="en">🇺🇸 {tNavbar("english")}</option>
+                <option value="ja">🇯🇵 {tNavbar("japanese")}</option>
               </select>
             </div>
 
@@ -167,7 +166,10 @@ export default function NavbarAuth() {
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <button className="dropdown-item" onClick={()=> handleChangePassword()}>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => handleChangePassword()}
+                    >
                       {tAuth("changePassword")}
                     </button>
                   </li>
@@ -190,8 +192,10 @@ export default function NavbarAuth() {
           </div>
         </div>
       </nav>
-      <ChangePassword handleShow={changePassOpenModal} handleClose={handleClose} />
+      <ChangePassword
+        handleShow={changePassOpenModal}
+        handleClose={handleClose}
+      />
     </>
-    
   );
 }
