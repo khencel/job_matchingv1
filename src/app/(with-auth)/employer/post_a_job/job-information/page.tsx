@@ -3,175 +3,254 @@ import Header from "../headerPostAJob"
 import MultiSelectDropdown from "@/components/MultipleSelect"
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import type {RootState} from '@/redux/store'
+import type { RootState } from '@/redux/store'
 import { setField, addSkill, removeSkill, setInitialData } from "@/redux/slices/employer/post_a_job/basicInfoSlice"
-import {showErrorToast } from "@/app/(util)/toaster";
+import { showErrorToast } from "@/app/(util)/toaster";
 import { useRouter } from "next/navigation"
 import Cookies from "js-cookie";
 import { regionList } from "@/components/listGroupData"
 
+export default function PostAJob() {
+  const [mounted, setMounted] = useState(false);
+  const [input, setInput] = useState<string>("")
+  const router = useRouter();
 
-export default function PostAJob(){
-    const [mounted, setMounted] = useState(false);
-    const [input, setInput] = useState<string>("")
-    const router = useRouter();
+  const dispatch = useDispatch();
+  const basicInfo = useSelector((state: RootState) => state.basicInfo);
 
-    const dispatch = useDispatch();
+  const handleAddSkill = () => {
+    const value = input.trim();
+    if (value) {
+      dispatch(addSkill(value));
+      setInput("");
+    }
+  }
 
-    const basicInfo = useSelector((state: RootState) => state.basicInfo);
+  const handleNext = () => {
+    const title = basicInfo.title.trim();
+    const employmentTypes = basicInfo.type_of_emp;
 
-    const handleAddSkill = () => {
-        const value = input.trim();
-        if(value){
-            dispatch(addSkill(value));
-            setInput("");
-        }
+    if (!title) {
+      showErrorToast("Job title is required.", " Please provide a job title to proceed.");
+      return;
+    }
+    if (employmentTypes.length === 0) {
+      showErrorToast("Employment type is required.", " Please select at least one employment type to proceed.");
+      return;
     }
 
-    const handleNext = () => {
-        const title = basicInfo.title.trim();
-        const employmentTypes = basicInfo.type_of_emp;
-        if(!title){
-            showErrorToast("Job title is required."," Please provide a job title to proceed.");
-            return;
-        }
-        if(employmentTypes.length === 0){
-            showErrorToast("Employment type is required."," Please select at least one employment type to proceed.");
-            return;
-        }
+    router.push("/employer/post_a_job/job-description");
+    console.log(dispatch(setInitialData(basicInfo)));
+  }
 
-        router.push("/employer/post_a_job/job-description");
-        console.log(dispatch(setInitialData(basicInfo)));
+  const handleCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    let updatedTypes = [...basicInfo.type_of_emp];
+    if (e.target.checked) {
+      updatedTypes.push(value);
+    } else {
+      updatedTypes = updatedTypes.filter(type => type !== value);
     }
+    dispatch(setField({ type_of_emp: updatedTypes }));
+  }
 
-    const handleCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        let updatedTypes = [...basicInfo.type_of_emp];
-        if (e.target.checked) {
-            updatedTypes.push(value);
-        } else {
-            updatedTypes = updatedTypes.filter(type => type !== value);
-        }
-        dispatch(setField({ type_of_emp: updatedTypes }));
-    }
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-    useEffect(() => {
-        setMounted(true);
-    }, []);
+  if (!mounted) return null;
 
-    if (!mounted) return null;
+  return (
+    <>
+      <Header />
 
-    return(
-        <>  <Header/>
-            <div className="emp-component-style mt-2">
-                <strong>Basic Information</strong>
-                <br />
-                <small>This Information will be displayed publicly.</small>
-                <hr />
-                <div className="row mt-5">
-                    <div className="col">
-                        <strong>Job Title <span className="text-danger">*</span></strong>
-                        <br />
-                        <small>Job title must be describe one position.</small>
-                    </div>
-                    <div className="col">
-                        <textarea name="" value={basicInfo.title} onChange={(e)=>dispatch(setField({title: e.target.value}))} placeholder="e.g Software Engineer" className="form-control" id=""></textarea>
-                        <small>At least 80 characters</small>
-                    </div>
-                </div>
+      <div className="container-fluid px-0">
+        <div className="emp-component-style mt-3">
+          {/* Header */}
+          <div className="d-flex flex-column gap-1 mb-3">
+            <div className="d-flex align-items-center justify-content-between flex-wrap">
+              <div>
+                <h5 className="mb-0">Basic Information</h5>
+                <small className="text-muted">
+                  This information will be displayed publicly.
+                </small>
+              </div>
 
-                <div className="row mt-2">
-                    <div className="col">
-                        <strong>Salary</strong>
-                        <br />
-                        <small>Please specify the estimated salary range for the role.</small>
-                    </div>
-                    <div className="col">
-                        <input type="number" value={basicInfo.salary ?? ""} onChange={(e)=>dispatch(setField({salary: e.target.valueAsNumber}))} className="form-control" placeholder="Estimate salary" />
-                    </div>
-                </div>
-
-                <div className="row mt-2">
-                    <div className="col">
-                        <strong>Type of Employment <span className="text-danger">*</span></strong>
-                    </div>
-                    <div className="col">
-                        <input type="checkbox" value="Full-Time" checked={basicInfo.type_of_emp.includes("Full-Time")} onChange={handleCheckBox} /> Full-Time
-                        <br />
-                        <input type="checkbox" value={"Part-Time"} checked={basicInfo.type_of_emp.includes("Part-Time")} onChange={handleCheckBox} /> Part-Time
-                        <br />
-                        <input type="checkbox" value={"Remote"} checked={basicInfo.type_of_emp.includes("Remote")} onChange={handleCheckBox} /> Remote
-                        <br />
-                        <input type="checkbox" value={"Internship"} checked={basicInfo.type_of_emp.includes("Internship")} onChange={handleCheckBox} /> Internship
-                    </div>
-                </div>
-
-                <div className="row mt-2">
-                    <div className="col">
-                        <strong>Prefecture <span className="text-danger">*</span></strong>
-                    </div>
-                    <div className="col">
-                        <select name="" value={basicInfo.region || ""} onChange={(e) => dispatch(setField({ region: e.target.value }))}
-                         className="form-control" id="">
-                            <option disabled hidden value="">Select Prefecture</option>
-                            {
-                                regionList.map((item:any,index:number) => {
-                                    return(
-                                        <option key={item.value} value={item.value}>{item.label}</option>
-                                    )
-                                })
-                            }
-                        </select>
-                    </div>
-                </div>
-
-                <div className="row mt-2">
-                    <div className="col">
-                        <strong>Categories</strong>
-                        <br />
-                        <small>You can select multiple job categories</small>
-                    </div>
-                    <div className="col">
-                        <MultiSelectDropdown value={basicInfo.category} onChange={(selectedOptions:any) => dispatch(setField({ category: selectedOptions }))}    />
-                    </div>
-                </div>
-
-                {/* <div className="row mt-2">
-                    <div className="col">
-                        <strong>Required Skills</strong>
-                        <br />
-                        <small>Add required skills for the job</small>
-                    </div>
-                    <div className="col">
-                        <input type="text" className="form-control" value={input} onChange={(e)=>setInput(e.target.value)} placeholder="Enter skill" />
-                        <button 
-                            className="btn-light border-0 p-0 mt-2"
-                            onClick={handleAddSkill}>
-                            <span className="primary-text"><strong>+ Add Skills</strong></span>
-                        </button>
-                        <div className="mt-2">
-                            {basicInfo.skill.map((skill, index) => (
-                                <span key={index} className="badge primary-bg me-2">
-                                    {skill}
-                                    <span className="badge clickable bg-danger p-2 ms-1" onClick={() =>dispatch(removeSkill(skill))}>X</span>
-                                </span>
-                            ))}
-                        </div>
-
-                    </div>
-                </div> */}
-
-                <div className="row justify-content-end mt-5 mb-3">
-                    <div className="col-md-3 text-end">
-                            <button 
-                                className="btn btn-primary-custom rounded-3"
-                                onClick={handleNext}
-                            >
-                                Next
-                            </button>
-                    </div>
-                </div>
+              <span className="badge bg-light text-dark border rounded-pill px-3 py-2">
+                Step 1
+              </span>
             </div>
-        </>
-    )
+            <hr className="my-3" />
+          </div>
+
+          {/* Card wrapper */}
+          <div className="card border-0 shadow-sm rounded-4">
+            <div className="card-body p-4 p-md-5">
+
+              {/* Job title */}
+              <div className="row g-3 align-items-start mb-4">
+                <div className="col-12 col-md-4">
+                  <label className="form-label fw-semibold mb-1">
+                    Job Title <span className="text-danger">*</span>
+                  </label>
+                  <div className="text-muted small">
+                    Job title must describe one position.
+                  </div>
+                </div>
+                <div className="col-12 col-md-8">
+                  <textarea
+                    value={basicInfo.title}
+                    onChange={(e) => dispatch(setField({ title: e.target.value }))}
+                    placeholder="e.g. Software Engineer"
+                    className="form-control rounded-3"
+                    rows={3}
+                  />
+                  <div className="d-flex justify-content-between mt-2">
+                    <small className="text-muted">At least 80 characters</small>
+                    <small className="text-muted">{basicInfo.title?.length ?? 0}/80</small>
+                  </div>
+                </div>
+              </div>
+
+              {/* Salary */}
+              <div className="row g-3 align-items-center mb-4">
+                <div className="col-12 col-md-4">
+                  <label className="form-label fw-semibold mb-1">Salary</label>
+                  <div className="text-muted small">
+                    Please specify the estimated salary range for the role.
+                  </div>
+                </div>
+                <div className="col-12 col-md-8">
+                  <div className="input-group">
+                    <span className="input-group-text bg-white border rounded-start-3">¥</span>
+                    <input
+                      type="number"
+                      value={basicInfo.salary ?? ""}
+                      onChange={(e) => dispatch(setField({ salary: e.target.valueAsNumber }))}
+                      className="form-control rounded-end-3"
+                      placeholder="Estimate salary"
+                    />
+                  </div>
+                  <small className="text-muted d-block mt-2">
+                    Tip: You can leave this blank if negotiable.
+                  </small>
+                </div>
+              </div>
+
+              {/* Type of employment */}
+              <div className="row g-3 align-items-start mb-4">
+                <div className="col-12 col-md-4">
+                  <label className="form-label fw-semibold mb-1">
+                    Type of Employment <span className="text-danger">*</span>
+                  </label>
+                  <div className="text-muted small">
+                    Select one or more employment types.
+                  </div>
+                </div>
+                <div className="col-12 col-md-8">
+                  <div className="d-flex flex-wrap gap-2">
+                    {[
+                      { label: "Full-Time", value: "Full-Time" },
+                      { label: "Part-Time", value: "Part-Time" },
+                      { label: "Remote", value: "Remote" },
+                      { label: "Internship", value: "Internship" },
+                    ].map((item) => {
+                      const checked = basicInfo.type_of_emp.includes(item.value);
+                      return (
+                        <label
+                          key={item.value}
+                          className={`px-3 py-2 border rounded-pill d-flex align-items-center gap-2 clickable ${
+                            checked ? "bg-light" : "bg-white"
+                          }`}
+                          style={{ cursor: "pointer", userSelect: "none" }}
+                        >
+                          <input
+                            type="checkbox"
+                            value={item.value}
+                            checked={checked}
+                            onChange={handleCheckBox}
+                            className="form-check-input m-0"
+                          />
+                          <span className="small fw-semibold">{item.label}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+
+                  {basicInfo.type_of_emp.length > 0 && (
+                    <div className="mt-2 text-muted small">
+                      Selected: <strong>{basicInfo.type_of_emp.join(", ")}</strong>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Prefecture */}
+              <div className="row g-3 align-items-center mb-4">
+                <div className="col-12 col-md-4">
+                  <label className="form-label fw-semibold mb-1">
+                    Prefecture <span className="text-danger">*</span>
+                  </label>
+                  <div className="text-muted small">
+                    Choose the location/prefecture for this job.
+                  </div>
+                </div>
+                <div className="col-12 col-md-8">
+                  <select
+                    value={basicInfo.region || ""}
+                    onChange={(e) => dispatch(setField({ region: e.target.value }))}
+                    className="form-select rounded-3"
+                  >
+                    <option disabled hidden value="">Select Prefecture</option>
+                    {regionList.map((item: any, index: number) => (
+                      <option key={item.value} value={item.value}>{item.label}</option>
+                    ))}
+                  </select>
+                  <small className="text-muted d-block mt-2">
+                    This helps job seekers filter positions by area.
+                  </small>
+                </div>
+              </div>
+
+              {/* Categories */}
+              <div className="row g-3 align-items-start mb-2">
+                <div className="col-12 col-md-4">
+                  <label className="form-label fw-semibold mb-1">Categories</label>
+                  <div className="text-muted small">
+                    You can select multiple job categories.
+                  </div>
+                </div>
+                <div className="col-12 col-md-8">
+                  <div className="p-3 border rounded-3 bg-white">
+                    <MultiSelectDropdown
+                      value={basicInfo.category}
+                      onChange={(selectedOptions: any) =>
+                        dispatch(setField({ category: selectedOptions }))
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* ACTIONS */}
+              <div className="d-flex flex-column flex-md-row justify-content-end gap-2 mt-5">
+                <button
+                  className="btn btn-primary-custom rounded-3 px-4 py-2"
+                  onClick={handleNext}
+                >
+                  Next
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+          {/* Helper note */}
+          <div className="text-muted small mt-3">
+            Fields marked with <span className="text-danger">*</span> are required.
+          </div>
+        </div>
+      </div>
+    </>
+  )
 }

@@ -55,104 +55,132 @@ export default function Navbar() {
   };
 
   return (
-    <nav
-      className={`navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top`}
-    >
-      <div className="container d-flex align-items-center">
+    <nav className="navbar navbar-expand-lg bg-white border-bottom sticky-top">
+      <div className="container py-2">
         {/* LOGO */}
-        <Link className="navbar-brand" href="/">
-          <img src="/img/logo.png" style={{ maxWidth: "200px" }} alt="Logo" />
+        <Link className="navbar-brand d-flex align-items-center gap-2" href="/">
+          <img src="/img/logo.png" style={{ maxWidth: "180px", height: "auto" }} alt="Logo" />
         </Link>
 
         {/* TOGGLER */}
         <button
-          className="navbar-toggler ms-auto"
+          className="navbar-toggler ms-auto border-0 shadow-none"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          style={{ borderRadius: 12 }}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
 
         {/* NAV ITEMS */}
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mx-auto mb-2 mb-lg-0 d-flex flex-column flex-lg-row gap-2 gap-lg-3 text-center">
+          <ul className="navbar-nav mx-auto mb-3 mb-lg-0 d-flex flex-column flex-lg-row align-items-center gap-1 gap-lg-3 text-center">
             <li className="nav-item">
-              <Link className="nav-link" href="/">
+              <Link className="nav-link nav-link-modern px-3 py-2 rounded-pill" href="/">
                 {t("home")}
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="/#job_support_features">
+              <Link className="nav-link nav-link-modern px-3 py-2 rounded-pill" href="/#job_support_features">
                 Features
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="/#about_us">
+              <Link className="nav-link nav-link-modern px-3 py-2 rounded-pill" href="/#about_us">
                 About Us
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="/#q_and_a">
-                Q&A
+              <Link className="nav-link nav-link-modern px-3 py-2 rounded-pill" href="/#q_and_a">
+                Q&amp;A
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="/#contact_us">
+              <Link className="nav-link nav-link-modern px-3 py-2 rounded-pill" href="/#contact_us">
                 Contacts
               </Link>
             </li>
+
+            {/* AUTH / PROFILE */}
             <li className="nav-item">
               {user ? (
-                <Dropdown>
+                <Dropdown align="end">
                   <Dropdown.Toggle
                     variant="primary"
                     id="dropdown-profile"
                     className="p-0 bg-transparent border-0 dropdown-toggle-no-caret"
+                    style={{ boxShadow: "none" }}
                   >
                     <div
-                      className="rounded-circle d-flex align-items-center justify-content-center"
+                      className="d-flex align-items-center justify-content-center"
                       style={{
-                        width: "32px",
-                        height: "32px",
+                        width: 36,
+                        height: 36,
+                        borderRadius: 999,
                         backgroundColor: getAvatarColor(user?.email),
                         color: "white",
-                        fontWeight: 600,
-                        fontSize: "14px",
+                        fontWeight: 700,
+                        fontSize: 13,
+                        border: "2px solid rgba(0,0,0,.08)",
                       }}
+                      title={user.email}
                     >
                       {getInitials(user.email)}
                     </div>
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
+
+                  <Dropdown.Menu className="shadow-sm border-0 rounded-4 p-2" style={{ minWidth: 220 }}>
                     <DropdownNav />
                   </Dropdown.Menu>
                 </Dropdown>
               ) : (
-                <Link className="nav-link" href="/login">
+                <Link className="nav-link nav-link-modern px-3 py-2 rounded-pill" href="/login">
                   {t("signIn")}
                 </Link>
               )}
             </li>
           </ul>
 
-          {/* RIGHT SIDE: USER + LANGUAGE */}
-          <div className="d-flex align-items-center gap-2 ms-lg-3 mt-2 mt-lg-0">
-            <select
-              className="form-select form-select-sm"
-              value={locale}
-              onChange={handleLanguageChange}
-              style={{ minWidth: "120px" }}
-            >
-              <option value="en">🇺🇸 English</option>
-              <option value="ja">🇯🇵 日本語</option>
-            </select>
+          {/* RIGHT SIDE: LANGUAGE */}
+          <div className="d-flex align-items-center justify-content-center justify-content-lg-end gap-2 ms-lg-3 pb-2 pb-lg-0">
+            <div className="d-flex align-items-center gap-2 px-2 py-1 border rounded-pill bg-light">
+              <span className="small text-muted" style={{ lineHeight: 1 }}>
+                Lang
+              </span>
+              <select
+                className="form-select form-select-sm border-0 bg-transparent shadow-none"
+                value={locale}
+                onChange={handleLanguageChange}
+                style={{ minWidth: 130, cursor: "pointer" }}
+              >
+                <option value="en">🇺🇸 English</option>
+                <option value="ja">🇯🇵 日本語</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Optional small CSS helpers */}
+      <style jsx global>{`
+        .nav-link-modern {
+          color: #0f172a !important;
+          font-weight: 600;
+          transition: background 0.15s ease, transform 0.15s ease;
+        }
+          
+        .nav-link-modern:hover {
+          background: rgba(15, 23, 42, 0.06);
+          transform: translateY(-1px);
+        }
+        .dropdown-toggle-no-caret::after {
+          display: none !important;
+        }
+      `}</style>
     </nav>
   );
 }

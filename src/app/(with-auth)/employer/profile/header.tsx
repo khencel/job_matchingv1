@@ -1,71 +1,157 @@
 import FormattedDate from "@/components/date_format";
 import EditModalProfile from "./editModal";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
-export default function Header({data}:{data:any}){
+export default function Header({ data }: { data: any }) {
+  const [showModal, setShowModal] = useState(false);
 
-    const [showModal, setShowModal] = useState(false);
-    
-    const handleEditModal = () => setShowModal(true);
-    const handleClose = () => setShowModal(false);
-    const companyInfo = data.userDetails_emp?.company_information || {};
+  const handleEditModal = () => setShowModal(true);
+  const handleClose = () => setShowModal(false);
 
-    console.log(companyInfo.company_industry);
-    
-    return(
-        <>
-            <div className="" style={{
-                                        backgroundImage: `linear-gradient(rgba(162, 162, 162, 0.4), rgba(255, 255, 255, 0.85)), url(${data.banner})`,
-                                        backgroundSize: "cover",
-                                        backgroundRepeat: "no-repeat",
-                                        backgroundPosition: "center",
-                                    }}>
-                <div className="row">
-                    <div className="col-md-10">
-                        <div className="row">
-                            <div className="col-3 d-flex justify-content-center align-items-center">
-                                <img src={data.avatar || 'http://127.0.0.1:8000/media/avatar/default_logo.png'} style={{width:'150px'}} alt="" />
-                            </div>
-                            <div className="col-9">
-                                <div className="">
-                                    <strong className="text-white"><h2>Employer Profile</h2></strong>
-                                    <br />
-                                    <span className="text-primary">{companyInfo.name}</span>
-                                    <br />
-                                    <span className="text-primary">{data.email}</span>
-                                    <br />
-                                </div>
-                                <div className="row">
-                                    <div className="col">
-                                        <small className="text-style">Founded</small>
-                                        <br />
-                                        <strong className="info-style"><FormattedDate date={companyInfo.founded}/></strong>
-                                    </div>
-                                    <div className="col">
-                                        <small className="text-style">Employees</small>
-                                        <br />
-                                        <strong className="info-style">{companyInfo.no_of_emp}</strong>
-                                    </div>
-                                    <div className="col">
-                                        <small className="text-style">Location</small>
-                                        <br />
-                                        <strong className="info-style">{companyInfo.region}</strong>
-                                    </div>
-                                    <div className="col">
-                                        <small className="text-style">Industry</small>
-                                        <br />
-                                        <strong className="info-style">{companyInfo.company_industry.join(', ')}</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-2 d-flex align-items-center">
-                        <button className="btn btn-primary-custom rounded-3" onClick={handleEditModal}>Edit Profile</button>
-                    </div>
+  const companyInfo = data.userDetails_emp?.company_information || {};
+
+  console.log(companyInfo.company_industry);
+
+  // ✅ design-safe display only (no functional removal)
+  const industryText = useMemo(() => {
+    const v = companyInfo?.company_industry;
+    if (!v) return "—";
+    if (Array.isArray(v)) return v.join(", ");
+    return String(v);
+  }, [companyInfo?.company_industry]);
+
+  return (
+    <>
+      <div
+        className="position-relative overflow-hidden rounded-4 shadow-sm"
+        style={{
+          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.55), rgba(255, 255, 255, 0.92)), url(${data.banner})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* subtle top gradient strip */}
+        <div
+          className="position-absolute top-0 start-0 w-100"
+          style={{
+            height: 6,
+            background:
+              "linear-gradient(90deg, rgba(59,130,246,1), rgba(99,102,241,1), rgba(16,185,129,1))",
+            opacity: 0.9,
+          }}
+        />
+
+        <div className="p-4 p-md-5">
+          <div className="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3">
+            {/* Left: Avatar + Title */}
+            <div className="d-flex align-items-center gap-3">
+              <div
+                className="bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center"
+                style={{
+                  width: 92,
+                  height: 92,
+                  border: "4px solid rgba(255,255,255,0.9)",
+                }}
+              >
+                <img
+                  src={
+                    data.avatar ||
+                    `${process.env.NEXT_PUBLIC_API_CONTENT_URL}media/placeholder.jpg`
+                  }
+                  alt=""
+                  style={{
+                    width: 84,
+                    height: 84,
+                    objectFit: "cover",
+                    borderRadius: "50%",
+                  }}
+                />
+              </div>
+
+              <div>
+                <div className="d-flex align-items-center gap-2 flex-wrap">
+                  <h2 className="m-0 fw-bold text-white">Employer Profile</h2>
+                  <span
+                    className="badge rounded-pill"
+                    style={{
+                      backgroundColor: "rgba(59,130,246,0.15)",
+                      color: "#0b5ed7",
+                      border: "1px solid rgba(59,130,246,0.25)",
+                      backdropFilter: "blur(6px)",
+                    }}
+                  >
+                    {companyInfo?.region || "No location"}
+                  </span>
                 </div>
+
+                <div className="mt-2">
+                  <div className="fw-semibold" style={{ color: "#0b5ed7" }}>
+                    {companyInfo?.name || "—"}
+                  </div>
+                  <div className="small text-muted">{data.email || "—"}</div>
+                </div>
+              </div>
             </div>
-            <EditModalProfile handleShow={showModal} handleClose={handleClose} companyProfile={data} />
-        </>
-    )
+
+            {/* Right: Action */}
+            <div className="d-flex gap-2">
+              <button
+                className="btn btn-primary-custom rounded-3 px-4 shadow-sm"
+                onClick={handleEditModal}
+              >
+                Edit Profile
+              </button>
+            </div>
+          </div>
+
+          {/* Stats Card */}
+          <div
+            className="mt-4 rounded-4 p-3 p-md-4"
+            style={{
+              backgroundColor: "rgba(255,255,255,0.78)",
+              border: "1px solid rgba(226,232,240,0.9)",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            <div className="row g-3">
+              <div className="col-6 col-lg-3">
+                <div className="small text-muted">Founded</div>
+                <div className="fw-semibold text-dark">
+                  <FormattedDate date={companyInfo.founded} />
+                </div>
+              </div>
+
+              <div className="col-6 col-lg-3">
+                <div className="small text-muted">Employees</div>
+                <div className="fw-semibold text-dark">
+                  {companyInfo.no_of_emp || "—"}
+                </div>
+              </div>
+
+              <div className="col-6 col-lg-3">
+                <div className="small text-muted">Location</div>
+                <div className="fw-semibold text-dark">
+                  {companyInfo.region || "—"}
+                </div>
+              </div>
+
+              <div className="col-6 col-lg-3">
+                <div className="small text-muted">Industry</div>
+                <div className="fw-semibold text-dark text-truncate">
+                  {industryText}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <EditModalProfile
+        handleShow={showModal}
+        handleClose={handleClose}
+        companyProfile={data}
+      />
+    </>
+  );
 }

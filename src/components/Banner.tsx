@@ -73,8 +73,8 @@ export default function Banner() {
                   <img 
                         src={
                           job?.employer?.[0]?.avatar
-                            ? `http://127.0.0.1:8000/media/${job.employer[0].avatar}`
-                            : "http://127.0.0.1:8000/media/placeholder.jpg"
+                            ? `${process.env.NEXT_PUBLIC_API_CONTENT_URL}media/${job.employer[0].avatar}`
+                            : `${process.env.NEXT_PUBLIC_API_CONTENT_URL}media/placeholder.jpg`
                         }
                         alt="企業イメージ" 
                   />

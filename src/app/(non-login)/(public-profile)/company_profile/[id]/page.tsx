@@ -52,20 +52,31 @@ const CompanyProfilePage = () => {
   const hasAvatar = Boolean(user?.avatar);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <Container className="py-5 d-flex justify-content-center">
+        <div className="text-muted">Loading...</div>
+      </Container>
+    );
   }
 
   if (!user || !company_information || !contact_person) {
     return (
-      <div className="text-center">No company profile data available.</div>
+      <Container className="py-5 text-center">
+        <div className="text-muted">No company profile data available.</div>
+      </Container>
     );
   }
 
   return (
     <div className="company-profile-wrapper">
       <Container className="mt-4 mb-5">
-        <Card className="company-profile-card">
-          <div className={`banner ${user.banner ? "" : "banner-gradient"}`}>
+        {/* HERO CARD */}
+        <Card className="company-profile-card border-0 shadow-sm rounded-4 overflow-hidden">
+          {/* Banner */}
+          <div
+            className={`banner position-relative ${user.banner ? "" : "banner-gradient"}`}
+            style={{ height: 260 }}
+          >
             {user.banner && (
               <Image
                 src={user.banner}
@@ -76,59 +87,127 @@ const CompanyProfilePage = () => {
                 unoptimized
               />
             )}
+
+            {/* overlay for readability */}
+            <div
+              className="position-absolute top-0 start-0 w-100 h-100"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.15) 55%, rgba(0,0,0,0) 100%)",
+              }}
+            />
           </div>
-          <Card.Body className="company-profile-body">
-            <div className="avatar-header-container">
-              <div className={`avatar ${hasAvatar ? "with-image" : ""}`}>
-                {!user.avatar ? (
-                  company_information.name.slice(0, 1).toUpperCase()
-                ) : (
-                  <Image
-                    src={user.avatar}
-                    alt="Company Avatar"
-                    fill
-                    objectFit="cover"
-                    className="avatar-image"
-                    unoptimized
-                  />
-                )}
+
+          <Card.Body className="company-profile-body p-4 p-md-5">
+            {/* Header row */}
+            <div className="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3">
+              <div className="d-flex align-items-center gap-3">
+                {/* Avatar */}
+                <div
+                  className={`avatar ${hasAvatar ? "with-image" : ""} border bg-white shadow-sm`}
+                  style={{
+                    width: 88,
+                    height: 88,
+                    borderRadius: 20,
+                    overflow: "hidden",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: 800,
+                    fontSize: 28,
+                  }}
+                >
+                  {!user.avatar ? (
+                    company_information.name.slice(0, 1).toUpperCase()
+                  ) : (
+                    <Image
+                      src={user.avatar}
+                      alt="Company Avatar"
+                      fill
+                      objectFit="cover"
+                      className="avatar-image"
+                      unoptimized
+                    />
+                  )}
+                </div>
+
+                {/* Company name */}
+                <div>
+                  <h1 className="company-name mb-1" style={{ fontSize: "1.6rem" }}>
+                    {company_information.name}
+                  </h1>
+                  <div className="d-flex flex-wrap align-items-center gap-2">
+                    <span className="text-muted small">{company_information.region}</span>
+
+                    {company_information.company_industry?.length ? (
+                      <Badge bg="light" text="dark" className="border rounded-pill px-3 py-2">
+                        {company_information.company_industry.length} industries
+                      </Badge>
+                    ) : null}
+
+                    {jobs ? (
+                      <Badge bg="light" text="dark" className="border rounded-pill px-3 py-2">
+                        {jobs.length} jobs
+                      </Badge>
+                    ) : null}
+                  </div>
+                </div>
               </div>
-              <div className="">
-                <h1 className="company-name">{company_information.name}</h1>
-                <p className="company-region">{company_information.region}</p>
+
+              {/* Quick chips */}
+              <div className="d-flex flex-wrap gap-2">
+                {company_information.founded ? (
+                  <Badge bg="primary-subtle" text="dark" className="border rounded-pill px-3 py-2">
+                    Founded: {company_information.founded}
+                  </Badge>
+                ) : null}
+
+                {company_information.no_of_emp ? (
+                  <Badge bg="primary-subtle" text="dark" className="border rounded-pill px-3 py-2">
+                    Employees: {company_information.no_of_emp}
+                  </Badge>
+                ) : null}
               </div>
             </div>
 
-            <Row className="mt-5">
-              <Col lg={8} md={12} className="mb-4 mb-lg-0">
-                <div className="mb-4">
-                  <p className="section-label">Company Overview</p>
-                  <h2 className="section-title">About this company</h2>
-                  <p className="section-description" 
-                    dangerouslySetInnerHTML={{
-                                __html: company_information.profile
-                            }}
-                  >
-                   
-                  </p>
-                </div>
+            <hr className="my-4" />
 
-                <Row className="mb-4">
-                  <Col md={6} className="mb-3 mb-md-0">
-                    <Card className="info-card">
-                      <Card.Body>
-                        <p className="info-card-label">Founded</p>
-                        <p className="info-card-value">
+            {/* Main Content */}
+            <Row className="g-4">
+              {/* LEFT */}
+              <Col lg={8} md={12}>
+                <Card className="border-0 shadow-sm rounded-4 mb-4">
+                  <Card.Body className="p-4">
+                    <p className="section-label mb-1">Company Overview</p>
+                    <h2 className="section-title mb-3">About this company</h2>
+
+                    <div
+                      className="section-description text-muted"
+                      style={{ lineHeight: 1.85 }}
+                      dangerouslySetInnerHTML={{
+                        __html: company_information.profile,
+                      }}
+                    />
+                  </Card.Body>
+                </Card>
+
+                <Row className="g-3 mb-3">
+                  <Col md={6}>
+                    <Card className="info-card border-0 shadow-sm rounded-4 h-100">
+                      <Card.Body className="p-4">
+                        <p className="info-card-label text-muted mb-1">Founded</p>
+                        <p className="info-card-value fw-semibold mb-0">
                           {company_information.founded}
                         </p>
                       </Card.Body>
                     </Card>
                   </Col>
-                  <Col md={6} className="mb-3 mb-md-0">
-                    <Card className="info-card">
-                      <Card.Body>
-                        <p className="info-card-label">Employees</p>
-                        <p className="info-card-value">
+
+                  <Col md={6}>
+                    <Card className="info-card border-0 shadow-sm rounded-4 h-100">
+                      <Card.Body className="p-4">
+                        <p className="info-card-label text-muted mb-1">Employees</p>
+                        <p className="info-card-value fw-semibold mb-0">
                           {company_information.no_of_emp}
                         </p>
                       </Card.Body>
@@ -136,22 +215,23 @@ const CompanyProfilePage = () => {
                   </Col>
                 </Row>
 
-                <Row className="mb-4">
-                  <Col md={6} className="mb-3 mb-md-0">
-                    <Card className="info-card">
-                      <Card.Body>
-                        <p className="info-card-label">Phone</p>
-                        <p className="info-card-value">
+                <Row className="g-3 mb-4">
+                  <Col md={6}>
+                    <Card className="info-card border-0 shadow-sm rounded-4 h-100">
+                      <Card.Body className="p-4">
+                        <p className="info-card-label text-muted mb-1">Phone</p>
+                        <p className="info-card-value fw-semibold mb-0">
                           {company_information.phone}
                         </p>
                       </Card.Body>
                     </Card>
                   </Col>
+
                   <Col md={6}>
-                    <Card className="info-card">
-                      <Card.Body>
-                        <p className="info-card-label">Fee</p>
-                        <p className="info-card-value">
+                    <Card className="info-card border-0 shadow-sm rounded-4 h-100">
+                      <Card.Body className="p-4">
+                        <p className="info-card-label text-muted mb-1">Fee</p>
+                        <p className="info-card-value fw-semibold mb-0">
                           {company_information.fee}
                         </p>
                       </Card.Body>
@@ -159,146 +239,162 @@ const CompanyProfilePage = () => {
                   </Col>
                 </Row>
 
-                <Card className="detail-card">
-                  <Card.Body>
-                    <h3 className="subsection-title">Appeal point</h3>
-                    <p
-                      style={{ fontSize: "14px", color: "#475569", margin: 0 }}
-                    >
+                <Card className="detail-card border-0 shadow-sm rounded-4 mb-3">
+                  <Card.Body className="p-4">
+                    <h3 className="subsection-title mb-2">Appeal point</h3>
+                    <p className="text-muted mb-0" style={{ fontSize: 14, lineHeight: 1.8 }}>
                       {company_information.appeal_point}
                     </p>
                   </Card.Body>
                 </Card>
 
-                <Card className="detail-card">
-                  <Card.Body>
-                    <h3 className="subsection-title">Company Address</h3>
-                    <p
-                      style={{ fontSize: "14px", color: "#475569", margin: 0 }}
-                    >
+                <Card className="detail-card border-0 shadow-sm rounded-4">
+                  <Card.Body className="p-4">
+                    <h3 className="subsection-title mb-2">Company Address</h3>
+                    <p className="text-muted mb-0" style={{ fontSize: 14, lineHeight: 1.8 }}>
                       {company_information.address}
                     </p>
                   </Card.Body>
                 </Card>
               </Col>
 
+              {/* RIGHT (Sticky Sidebar) */}
               <Col lg={4}>
-                <Card className="detail-card">
-                  <Card.Body>
-                    <h3 className="detail-card-title">Contact person</h3>
-                    <div className="detail-row">
-                      <p className="detail-label">Name</p>
-                      <p className="detail-value name">{contact_person.name}</p>
-                    </div>
-                    <div className="detail-row">
-                      <p className="detail-label">Department</p>
-                      <p className="detail-value">
-                        {contact_person.department_name}
-                      </p>
-                    </div>
-                    <div className="detail-row">
-                      <p className="detail-label">Email</p>
-                      <p className="detail-value">{contact_person.email}</p>
-                    </div>
-                    <div className="detail-row">
-                      <p className="detail-label">Phone</p>
-                      <p className="detail-value">{contact_person.phone}</p>
-                    </div>
-                  </Card.Body>
-                </Card>
+                <div className="position-sticky" style={{ top: 90 }}>
+                  <Card className="detail-card border-0 shadow-sm rounded-4 mb-3">
+                    <Card.Body className="p-4">
+                      <h3 className="detail-card-title mb-3">Contact person</h3>
 
-                <Card className="detail-card">
-                  <Card.Body>
-                    <h3 className="detail-card-title">Company industry</h3>
-                    <div className="industry-container">
-                      {company_information.company_industry.map(
-                        (industry: string) => (
+                      <div className="detail-row d-flex justify-content-between gap-3 py-2 border-bottom">
+                        <p className="detail-label text-muted mb-0">Name</p>
+                        <p className="detail-value fw-semibold mb-0">{contact_person.name}</p>
+                      </div>
+
+                      <div className="detail-row d-flex justify-content-between gap-3 py-2 border-bottom">
+                        <p className="detail-label text-muted mb-0">Department</p>
+                        <p className="detail-value mb-0">{contact_person.department_name}</p>
+                      </div>
+
+                      <div className="detail-row d-flex justify-content-between gap-3 py-2 border-bottom">
+                        <p className="detail-label text-muted mb-0">Email</p>
+                        <p className="detail-value mb-0">{contact_person.email}</p>
+                      </div>
+
+                      <div className="detail-row d-flex justify-content-between gap-3 py-2">
+                        <p className="detail-label text-muted mb-0">Phone</p>
+                        <p className="detail-value mb-0">{contact_person.phone}</p>
+                      </div>
+                    </Card.Body>
+                  </Card>
+
+                  <Card className="detail-card border-0 shadow-sm rounded-4 mb-3">
+                    <Card.Body className="p-4">
+                      <h3 className="detail-card-title mb-3">Company industry</h3>
+                      <div className="industry-container d-flex flex-wrap gap-2">
+                        {company_information.company_industry.map((industry: any, idx: number) => (
                           <Badge
                             pill
                             bg="primary-subtle"
                             text="dark"
-                            className="py-2 px-3"
-                            key={industry}
+                            className="py-2 px-3 border"
+                            key={typeof industry === "string" ? `${industry}-${idx}` : `industry-${idx}`}
                           >
-                            {industry}
+                            {typeof industry === "string"
+                              ? industry
+                              : industry?.label ?? industry?.name ?? "Industry"}
                           </Badge>
-                        ),
-                      )}
-                    </div>
-                  </Card.Body>
-                </Card>
+                        ))}
+                      </div>
+                    </Card.Body>
+                  </Card>
 
-                <Card className="detail-card">
-                  <Card.Body>
-                    <h3 className="detail-card-title">Branch offices</h3>
-                    <ul className="branch-list">
-                      {company_information.branch_office.map(
-                        (branch: string) => (
-                          <li key={branch} className="branch-item">
-                            {branch}
-                          </li>
-                        ),
-                      )}
-                    </ul>
-                  </Card.Body>
-                </Card>
-
-                <Card className="perks-card">
-                  <Card.Body>
-                    <h3 className="detail-card-title">Perks & benefits</h3>
-                    {!user.perks_benefits ? (
-                      <p className="perks-empty-message">No perks added yet.</p>
-                    ) : (
-                      <ul className="branch-list">
-                        {user.perks_benefits.map((perk) => (
-                          <li key={perk} className="perk-item">
-                            {perk}
+                  <Card className="detail-card border-0 shadow-sm rounded-4 mb-3">
+                    <Card.Body className="p-4">
+                      <h3 className="detail-card-title mb-3">Branch offices</h3>
+                      <ul className="branch-list mb-0 ps-3">
+                        {company_information.branch_office.map((branch: any, idx: number) => (
+                          <li
+                            key={typeof branch === "string" ? `${branch}-${idx}` : `branch-${idx}`}
+                            className="branch-item text-muted"
+                            style={{ lineHeight: 1.9 }}
+                          >
+                            {typeof branch === "string"
+                              ? branch
+                              : branch?.name ?? branch?.label ?? "Branch"}
                           </li>
                         ))}
                       </ul>
-                    )}
-                  </Card.Body>
-                </Card>
+                    </Card.Body>
+                  </Card>
+
+                  <Card className="perks-card border-0 shadow-sm rounded-4">
+                    <Card.Body className="p-4">
+                      <h3 className="detail-card-title mb-3">Perks & benefits</h3>
+                      {!user.perks_benefits ? (
+                        <p className="perks-empty-message text-muted mb-0">
+                          No perks added yet.
+                        </p>
+                      ) : (
+                        <ul className="branch-list mb-0 ps-3">
+                          {user.perks_benefits.map((perk: any, idx: number) => (
+                            <li
+                              key={typeof perk === "string" ? `${perk}-${idx}` : `perk-${idx}`}
+                              className="perk-item text-muted"
+                              style={{ lineHeight: 1.9 }}
+                            >
+                              {typeof perk === "string"
+                                ? perk
+                                : perk?.title ?? perk?.name ?? "Perk"}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </Card.Body>
+                  </Card>
+                </div>
               </Col>
             </Row>
           </Card.Body>
         </Card>
 
-        <Card className="jobs-section">
-          <Card.Body className="p-5">
-            <Row className="jobs-header">
+        {/* JOBS SECTION */}
+        <Card className="jobs-section border-0 shadow-sm rounded-4 mt-4">
+          <Card.Body className="p-4 p-md-5">
+            <Row className="align-items-center g-2 mb-3">
               <Col md={8}>
-                <p className="section-label">Posted jobs</p>
-                <h2 className="section-title">Job listings</h2>
+                <p className="section-label mb-1">Posted jobs</p>
+                <h2 className="section-title mb-0">Job listings</h2>
               </Col>
-            </Row>
-            <Row>
-              <Col className="text-md-end">
-                <Badge pill className="px-3 py-2 mb-2">
+              <Col md={4} className="text-md-end">
+                <Badge pill bg="light" text="dark" className="border px-3 py-2">
                   Total jobs: {jobs.length}
                 </Badge>
               </Col>
             </Row>
 
             {jobs ? (
-              <Row>
+              <Row className="g-3">
                 {jobs.map((job) => (
                   <Col
                     key={job.id}
                     lg={3}
                     md={4}
-                    s={6}
+                    sm={6}
                     xs={12}
-                    className="mb-4"
+                    className="mb-1"
                   >
-                    <JobCard job={job} />
+                    <div className="h-100">
+                      <JobCard job={job} />
+                    </div>
                   </Col>
                 ))}
               </Row>
             ) : (
-              <div className="jobs-placeholder">
-                <p className="jobs-placeholder-title">No jobs listed yet.</p>
-                <p className="jobs-placeholder-subtitle">
+              <div className="jobs-placeholder text-center py-5">
+                <p className="jobs-placeholder-title fw-semibold mb-1">
+                  No jobs listed yet.
+                </p>
+                <p className="jobs-placeholder-subtitle text-muted mb-0">
                   Your posted jobs will appear here once created.
                 </p>
               </div>

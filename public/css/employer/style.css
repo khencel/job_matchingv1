@@ -103,3 +103,16 @@
 .download-border-applicant{
   border-color: #a7c1de !important;
 }
+
+.emp-component-style .card {
+  border-radius: 1rem;
+}
+
+.emp-component-style .form-control,
+.emp-component-style .form-select {
+  padding: 0.75rem 0.9rem;
+}
+
+.clickable:hover {
+  filter: brightness(0.98);
+}

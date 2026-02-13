@@ -13,6 +13,8 @@ import {
   Row,
   Col,
   Spinner,
+  Card,
+  Badge,
 } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import { applyToJob, fetchJobDetails } from "@/redux/slices/jobs/jobsThunk";
@@ -25,21 +27,17 @@ import Swal from "sweetalert2";
 const JobDescriptionPage = () => {
   const t = useTranslations("jobDescriptionPage");
   const router = useRouter();
-  // All the data will be fetched from the database
-  // 1. Get the ID from the URL (e.g., /job-description/5 -> id = "5")
+
   const params = useParams();
   const id = params.id;
 
   const dispatch = useAppDispatch();
-  // Get job details from the Redux store
-  const { jobDetails, loading, error } = useAppSelector(
-    (state) => state.jobPost,
-  );
+  const { jobDetails, loading, error } = useAppSelector((state) => state.jobPost);
   const applyStatus = useAppSelector((state) => state.jobSlice.applyStatus);
   const user = useAppSelector((state) => state.authState.user);
+
   console.log(jobDetails);
-  
-  // Fetch data when the ID changes
+
   useEffect(() => {
     if (id) {
       // @ts-expect-error : id is string, but our thunk expects a number
@@ -47,21 +45,18 @@ const JobDescriptionPage = () => {
     }
   }, [id, dispatch]);
 
-  // Loading State
   if (loading) {
     return (
-      <Container className="m-auto">
+      <Container className="py-5 d-flex justify-content-center align-items-center">
         <Spinner animation="grow" variant="primary" />
       </Container>
     );
   }
-  // Error State
+
   if (error) {
-    return (
-      <Container className="py-5 text-danger text-center">{error}</Container>
-    );
+    return <Container className="py-5 text-danger text-center">{error}</Container>;
   }
-  // Empty/Not Found State
+
   if (!jobDetails) {
     return <Container className="py-5 text-center">Job not found.</Container>;
   }
@@ -106,176 +101,275 @@ const JobDescriptionPage = () => {
 
   const isApplied = false; // Placeholder: Replace with actual logic to check if the user has applied
 
+  const bannerUrl = jobDetails?.employer?.[0]?.banner
+    ? `${process.env.NEXT_PUBLIC_API_CONTENT_URL}media/${jobDetails.employer[0].banner}`
+    : "";
+
+  const avatarUrl = jobDetails?.employer?.[0]?.avatar
+    ? `${process.env.NEXT_PUBLIC_API_CONTENT_URL}media/${jobDetails.employer[0].avatar}`
+    : "";
+
   return (
     <div>
       <Navbar />
-      {/* Title */}
-      <div className="w-100 py-5 job-desc-apply" style={{backgroundImage:`url(http://127.0.0.1:8000/media/${jobDetails?.employer[0]?.banner})`}}>
-        <CardBody className="d-flex w-75 bg-body p-3 m-auto justify-content-between align-items-center rounded-4">
-          <div className="d-flex justify-content-center align-items-center gap-3">
-            <img
-              width={120}
-              src={`http://127.0.0.1:8000/media/${jobDetails?.employer[0]?.avatar}`}
-              
-              alt="Company Logo"
-            ></img>
-            <div className="d-flex flex-column gap-2">
-              <CardTitle className="fw-bold text-dark">
-                {jobDetails.title}
-              </CardTitle>
-              <CardSubtitle className="fw-normal text-dark small">
-                {
-                  jobDetails.employer[0].userDetails_emp.company_information
-                    .name
-                }
-              </CardSubtitle>
-            </div>
-          </div>
-          <div className="d-flex justify-content-center align-items-center gap-2">
-            <Button
-              onClick={() =>
-                router.push(`/company_profile/${jobDetails.user_id}`)
-              }
-              variant="outline-secondary"
-              className="rounded-pill py-1"
-            >
-              Visit Profile
-            </Button>
-            <div
-              style={{ borderRight: "1px solid #ccc", height: "36px" }}
-              className="mx-3"
-            ></div>
-            <Button
-              className="btn-primary-custom"
-              onClick={handleClickApply}
-              disabled={applyStatus === "loading" || isApplied}
-            >
-              {applyStatus === "loading" ? (
-                <Spinner
-                  as="span"
-                  animation="border"
-                  size="sm"
-                  role="status"
-                  aria-hidden="true"
-                />
-              ) : isApplied ? (
-                "Applied"
-              ) : (
-                t("buttons.apply")
-              )}
-            </Button>
-          </div>
-        </CardBody>
+
+      {/* HERO */}
+      <div
+        className="w-100 position-relative"
+        style={{
+          minHeight: "260px",
+          backgroundImage: bannerUrl ? `url(${bannerUrl})` : "none",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* overlay */}
+        <div
+          className="position-absolute top-0 start-0 w-100 h-100"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.0) 100%)",
+          }}
+        />
+
+        {/* header card */}
+        <Container className="position-relative" style={{ paddingTop: "32px", paddingBottom: "28px" }}>
+          <Card className="border-0 shadow-sm rounded-4 overflow-hidden">
+            <CardBody className="p-3 p-md-4">
+              <div className="d-flex flex-column flex-md-row gap-3 justify-content-between align-items-start align-items-md-center">
+                <div className="d-flex align-items-center gap-3">
+                  <div
+                    className="rounded-4 border bg-white d-flex align-items-center justify-content-center overflow-hidden"
+                    style={{ width: 84, height: 84 }}
+                  >
+                    {/* keep <img> since that's what you use; design only */}
+                    <img
+                      width={84}
+                      height={84}
+                      src={avatarUrl}
+                      alt="Company Logo"
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                  </div>
+
+                  <div className="d-flex flex-column">
+                    <CardTitle className="fw-bold text-dark mb-1" style={{ fontSize: "1.25rem" }}>
+                      {jobDetails.title}
+                    </CardTitle>
+
+                    <CardSubtitle className="fw-normal text-muted small mb-2">
+                      {jobDetails.employer[0].userDetails_emp.company_information.name}
+                    </CardSubtitle>
+
+                    <div className="d-flex flex-wrap gap-2">
+                      <Badge bg="light" text="dark" className="border rounded-pill px-3 py-2">
+                        {jobDetails.type_of_emp.type}
+                      </Badge>
+                      <Badge bg="light" text="dark" className="border rounded-pill px-3 py-2">
+                        $ {jobDetails.salary.toLocaleString()}
+                      </Badge>
+                      <Badge bg="light" text="dark" className="border rounded-pill px-3 py-2">
+                        {jobDetails.category.category}
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="d-flex align-items-center gap-2 flex-wrap">
+                  <Button
+                    onClick={() => router.push(`/company_profile/${jobDetails.user_id}`)}
+                    variant="outline-secondary"
+                    className="rounded-pill px-3"
+                  >
+                    Visit Profile
+                  </Button>
+
+                  <Button
+                    className="btn-primary-custom rounded-pill px-4"
+                    onClick={handleClickApply}
+                    disabled={applyStatus === "loading" || isApplied}
+                  >
+                    {applyStatus === "loading" ? (
+                      <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                      />
+                    ) : isApplied ? (
+                      "Applied"
+                    ) : (
+                      t("buttons.apply")
+                    )}
+                  </Button>
+                </div>
+              </div>
+            </CardBody>
+          </Card>
+        </Container>
       </div>
 
-      {/* Main Grid */}
-      <Container fluid>
-        {/* Main > Row 1: Job Description */}
-        <Row>
-          {/* Main > Row 1 > Column 1 */}
-          <Col md={8} className="p-5">
-            <div className="d-flex flex-column gap-3">
-              <div>
-                <h4>{t("headings.description")}</h4>
-                <p dangerouslySetInnerHTML={{
-                                        __html: jobDetails.job_desc
-                                    }}/>
-              </div>
-              <div>
-                <h4>{t("headings.responsibilities")}</h4>
-                <span dangerouslySetInnerHTML={{
-                                        __html: jobDetails.responsibility
-                                    }} />
-                
-              </div>
-              <div>
-                <h4>{t("headings.whoYouAre")}</h4>
-                <span dangerouslySetInnerHTML={{
-                                        __html: jobDetails.who_you_are
-                                    }} />
-              </div>
-              <div>
-                <h4>{t("headings.niceToHaves")}</h4>
-                <span dangerouslySetInnerHTML={{
-                                        __html: jobDetails.nice_to_have
-                                    }} />
-              
-              </div>
-            </div>
+      {/* CONTENT */}
+      <Container className="py-4 py-md-5">
+        <Row className="g-4">
+          {/* LEFT */}
+          <Col md={8}>
+            <Card className="border-0 shadow-sm rounded-4">
+              <CardBody className="p-4 p-md-5">
+                <div className="d-flex flex-column gap-4">
+                  <section>
+                    <h4 className="mb-3">{t("headings.description")}</h4>
+                    <div
+                      className="text-muted"
+                      style={{ lineHeight: 1.8 }}
+                      dangerouslySetInnerHTML={{ __html: jobDetails.job_desc }}
+                    />
+                  </section>
+
+                  <hr className="my-0" />
+
+                  <section>
+                    <h4 className="mb-3">{t("headings.responsibilities")}</h4>
+                    <div
+                      className="text-muted"
+                      style={{ lineHeight: 1.8 }}
+                      dangerouslySetInnerHTML={{ __html: jobDetails.responsibility }}
+                    />
+                  </section>
+
+                  <hr className="my-0" />
+
+                  <section>
+                    <h4 className="mb-3">{t("headings.whoYouAre")}</h4>
+                    <div
+                      className="text-muted"
+                      style={{ lineHeight: 1.8 }}
+                      dangerouslySetInnerHTML={{ __html: jobDetails.who_you_are }}
+                    />
+                  </section>
+
+                  <hr className="my-0" />
+
+                  <section>
+                    <h4 className="mb-3">{t("headings.niceToHaves")}</h4>
+                    <div
+                      className="text-muted"
+                      style={{ lineHeight: 1.8 }}
+                      dangerouslySetInnerHTML={{ __html: jobDetails.nice_to_have }}
+                    />
+                  </section>
+                </div>
+              </CardBody>
+            </Card>
           </Col>
-          {/* Main > Row 1 > Column 2 */}
-          <Col className="p-5">
-            {/* About Grid */}
-            <Container>
-              <h4 className="mb-4">{t("headings.aboutThisRole")}</h4>
-              <Row>
-                <Col>
-                  <p className="fw-light">{t("labels.jobPostedOn")}</p>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <p className="fw-light">{t("labels.jobType")}</p>
-                </Col>
-                <Col>
-                  <p className="fw-medium text-end">
-                    {jobDetails.type_of_emp.type}
-                  </p>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <p className="fw-light">{t("labels.salary")}</p>
-                </Col>
-                <Col>
-                  <p className="fw-medium text-end">
-                    $ {jobDetails.salary.toLocaleString()}
-                  </p>
-                </Col>
-              </Row>
-            </Container>
-            <hr />
-            <div>
-              <h4>{t("headings.categories")}</h4>
-              <p>{jobDetails.category.category}</p>
+
+          {/* RIGHT (sticky summary) */}
+          <Col md={4}>
+            <div className="position-sticky" style={{ top: "90px" }}>
+              <Card className="border-0 shadow-sm rounded-4 mb-4">
+                <CardBody className="p-4">
+                  <h5 className="mb-3">{t("headings.aboutThisRole")}</h5>
+
+                  <div className="d-flex justify-content-between py-2">
+                    <span className="text-muted">{t("labels.jobPostedOn")}</span>
+                    <span className="fw-semibold text-end">
+                      {/* you can replace with actual date if you have it */}
+                      —
+                    </span>
+                  </div>
+
+                  <div className="d-flex justify-content-between py-2 border-top">
+                    <span className="text-muted">{t("labels.jobType")}</span>
+                    <span className="fw-semibold text-end">{jobDetails.type_of_emp.type}</span>
+                  </div>
+
+                  <div className="d-flex justify-content-between py-2 border-top">
+                    <span className="text-muted">{t("labels.salary")}</span>
+                    <span className="fw-semibold text-end">$ {jobDetails.salary.toLocaleString()}</span>
+                  </div>
+
+                  <div className="mt-3 pt-3 border-top">
+                    <h6 className="mb-2">{t("headings.categories")}</h6>
+                    <Badge bg="light" text="dark" className="border rounded-pill px-3 py-2">
+                      {jobDetails.category.category}
+                    </Badge>
+                  </div>
+                </CardBody>
+              </Card>
+
+              {/* CTA mini-card */}
+              <Card className="border-0 shadow-sm rounded-4">
+                <CardBody className="p-4">
+                  <div className="d-flex flex-column gap-2">
+                    <div className="fw-semibold text-dark">Ready to apply?</div>
+                    <div className="text-muted small">
+                      Make sure your profile and resume are updated before submitting.
+                    </div>
+
+                    <Button
+                      className="btn-primary-custom rounded-pill mt-2"
+                      onClick={handleClickApply}
+                      disabled={applyStatus === "loading" || isApplied}
+                    >
+                      {applyStatus === "loading" ? (
+                        <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                      ) : isApplied ? (
+                        "Applied"
+                      ) : (
+                        t("buttons.apply")
+                      )}
+                    </Button>
+
+                    <Button
+                      variant="outline-secondary"
+                      className="rounded-pill"
+                      onClick={() => router.push(`/company_profile/${jobDetails.user_id}`)}
+                    >
+                      Visit Company Profile
+                    </Button>
+                  </div>
+                </CardBody>
+              </Card>
             </div>
-            <hr />
-            {/* <div>
-              <h4>{t("headings.requiredSkills")}</h4>
-              <p>{jobDetails.skill.skill}</p>
-            </div> */}
           </Col>
         </Row>
-        {/* Main Row 2 */}
-        <Row></Row>
+
+        {/* Perks & Benefits */}
+        {jobDetails.benefits.length < 1 ? null : (
+          <>
+            <hr className="my-5" />
+            <Card className="border-0 shadow-sm rounded-4">
+              <CardBody className="p-4 p-md-5">
+                <h4 className="mb-4">{t("headings.perksAndBenefits")}</h4>
+
+                <Row className="g-3">
+                  {jobDetails.benefits.map((item, idx) => (
+                    <Col key={idx} md={6} lg={4}>
+                      <div className="p-3 border rounded-4 h-100 bg-white">
+                        <div className="fw-semibold text-dark mb-1">{item}</div>
+                        <div className="text-muted small">
+                          {/* placeholder description UI only; replace if you store descriptions */}
+                          Company-provided benefit to support your work and well-being.
+                        </div>
+                      </div>
+                    </Col>
+                  ))}
+                </Row>
+              </CardBody>
+            </Card>
+          </>
+        )}
+
+        <hr className="my-5" />
+
+        {/* More Jobs */}
+        <div className="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+          <h3 className="fw-semibold text-dark mb-0">More Jobs</h3>
+        </div>
+        <JobPost />
       </Container>
 
-      {/* Perks & Benefits Grid */}
-      {jobDetails.benefits.length < 1 ? (
-        <></>
-      ) : (
-        <>
-          <hr />
-          {jobDetails.benefits.map((item, idx) => {
-            <Container
-              key={idx}
-              fluid
-              className="d-flex flex-column gap-5 px-5 py-3"
-            >
-              <h4>{t("headings.perksAndBenefits")}</h4>
-              {/* Row 1 */}
-              <Row>
-                <Col md={3}>
-                  <h5>{item}</h5>
-                </Col>
-              </Row>
-            </Container>;
-          })}
-        </>
-      )}
-      <hr />
-      <h3 className="fw-semibold text-dark ms-5 mt-5">More Jobs</h3>
-      <JobPost />
       <Footer />
     </div>
   );

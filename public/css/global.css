@@ -811,6 +811,39 @@
   background-size: cover;
 }
 
+.job-desc-apply {
+  position: relative;
+}
+
+.job-desc-apply img {
+  border-radius: 16px;
+}
+
+.btn-primary-custom {
+  border-radius: 999px;
+}
+
+.company-profile-wrapper .section-title { letter-spacing: -0.02em; }
+.company-profile-wrapper .section-label { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #64748b; }
+.company-profile-wrapper .subsection-title { font-size: 16px; font-weight: 700; }
+.company-profile-wrapper .detail-card-title { font-size: 16px; font-weight: 700; }
+
+.company-profile-wrapper .info-card,
+.company-profile-wrapper .detail-card,
+.company-profile-wrapper .perks-card,
+.company-profile-wrapper .jobs-section {
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+
+.company-profile-wrapper .info-card:hover,
+.company-profile-wrapper .detail-card:hover,
+.company-profile-wrapper .perks-card:hover {
+  transform: translateY(-1px);
+}
+
+
+
+
 
 
 

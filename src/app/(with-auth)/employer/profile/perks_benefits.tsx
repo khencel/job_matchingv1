@@ -1,30 +1,64 @@
-export default function PerksBenefits({data}:{data:any}){
-    return(
-        <>
-            <div className="py-4">
-                <div className="row">
-                    <div className="col">
-                        <h3><strong>Perks & Benefits</strong></h3>
-                        <small>This job comes with several perks and benefits.</small>
-                        <br />
-                        <div className="row">
-                            
-                            {data.map((item:any,index:number) => {
-                                return(
-                                    <div className="col-md-3" key={index}>
-                                        <div className=" p-2">
-                                            <strong>{item.name}</strong>
-                                            <p>
-                                                <small>{item.description}</small>
-                                            </p>
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                </div>
+export default function PerksBenefits({ data }: { data: any }) {
+  return (
+    <>
+      <div className="py-5">
+        <div className="container">
+
+          {/* Header */}
+          <div className="mb-4">
+            <div className="d-flex align-items-center">
+              <div
+                style={{
+                  width: 4,
+                  height: 26,
+                  background: "linear-gradient(180deg, #6366f1, #3b82f6)",
+                  borderRadius: 4,
+                  marginRight: 10,
+                }}
+              />
+              <h3 className="mb-0 fw-bold">Perks & Benefits</h3>
             </div>
-        </>
-    )
+            <small className="text-muted">
+              This job comes with several perks and benefits.
+            </small>
+          </div>
+
+          {/* Perks Grid */}
+          <div className="row g-4">
+            {data?.map((item: any, index: number) => {
+              return (
+                <div className="col-12 col-md-6 col-lg-3" key={index}>
+                  <div
+                    className="h-100 p-4 rounded-4 border shadow-sm"
+                    style={{
+                      backgroundColor: "#ffffff",
+                      transition: "all 0.25s ease",
+                      cursor: "default",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.transform = "translateY(-5px)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.transform = "translateY(0)")
+                    }
+                  >
+                    <div className="fw-semibold mb-2 text-dark">
+                      {item.name}
+                    </div>
+                    <div
+                      className="small text-secondary"
+                      style={{ fontSize: "14px", lineHeight: "1.6" }}
+                    >
+                      {item.description}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+      </div>
+    </>
+  );
 }
