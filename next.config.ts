@@ -2,21 +2,21 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  trailingSlash: true, // Ensure URLs end with a slash for consistency
-  async rewrites() {
-    return [
-      {
-        // Proxy API requests to the backend server
-        source: "/api/:path*",
-        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/:path*`, // HTTP is okay here
-      },
-      {
-        // Proxy media requests to the backend server
-        source: "/media/:path*",
-        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}:path*`, // HTTP is okay here
-      },
-    ];
-  },
+  // trailingSlash: true, // Ensure URLs end with a slash for consistency
+  // async rewrites() {
+  //   return [
+  //     {
+  //       // Proxy API requests to the backend server
+  //       source: "/api/:path*",
+  //       destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}:path*`, // HTTP is okay here
+  //     },
+  //     {
+  //       // Proxy media requests to the backend server
+  //       source: "/media/:path*",
+  //       destination: `${process.env.NEXT_PUBLIC_API_CONTENT_URL}:path*`, // HTTP is okay here
+  //     },
+  //   ];
+  // },
   reactCompiler: true,
   images: {
     remotePatterns: [
