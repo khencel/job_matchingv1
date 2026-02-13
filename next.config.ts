@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: `${process.env.NEXT_PUBLIC_API_CONTENT_URL}/:path*`, // HTTP is okay here
+        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/:path*`, // HTTP is okay here
       },
     ];
   },
