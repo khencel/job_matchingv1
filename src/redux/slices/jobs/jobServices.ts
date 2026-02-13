@@ -1,7 +1,7 @@
 import apiClient from "@/lib/axios";
 
 
-export const getJobPostings = async (filters: any) => {
+export const getJobPostings = async (filters?: any) => {
   return await apiClient.post("/job/list",filters);
 };
 
