@@ -1,19 +1,19 @@
+"use client";
 import { regionList, listCategory } from "./listGroupData";
 import type { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
-import { setFilterField, setFieldClear } from "@/redux/slices/filterJobPost/filterJobPostSlice";
+import { setFilterField } from "@/redux/slices/filterJobPost/filterJobPostSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { useEffect } from "react";
 import { filterJobPostV1 } from "@/redux/slices/filterJobPost/filterJobPostThunk";
 import { useRouter } from "next/navigation";
-
 
 export default function JobSearchFiler() {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const {category, region } = useSelector((state: RootState) => state.jobSearchFilterSlice);
-
+  const { category, region } = useSelector(
+    (state: RootState) => state.jobSearchFilterSlice,
+  );
 
   const handleApplyFilter = () => {
     const payload = {
@@ -57,18 +57,20 @@ export default function JobSearchFiler() {
                   aria-label="特定技能 分野"
                   id="sswField"
                   value={category}
-                  onChange={(e) => dispatch(setFilterField({ category: e.target.value }))}
+                  onChange={(e) =>
+                    dispatch(setFilterField({ category: e.target.value }))
+                  }
                 >
                   <option value="" data-i18n="ssw_placeholder">
                     Select Category
                   </option>
-                  {
-                    listCategory.map((item:any, index:number)=>{
-                      return (
-                        <option key={index} value={item.value}>{item.label}</option>
-                      )
-                    })
-                  }
+                  {listCategory.map((item: any, index: number) => {
+                    return (
+                      <option key={index} value={item.value}>
+                        {item.label}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>
@@ -89,23 +91,34 @@ export default function JobSearchFiler() {
                   />
                 </svg>
 
-                <select name="prefecture" value={region} onChange={(e) => dispatch(setFilterField({ region: e.target.value }))} aria-label="都道府県" id="prefecture">
+                <select
+                  name="prefecture"
+                  value={region}
+                  onChange={(e) =>
+                    dispatch(setFilterField({ region: e.target.value }))
+                  }
+                  aria-label="都道府県"
+                  id="prefecture"
+                >
                   <option value="" data-i18n="pref_placeholder">
                     Select Prefecture
                   </option>
-                  {
-                    regionList.map((item:any, index:number)=>{
-                      return (
-                        <option key={index} value={item.value}>{item.label}</option>
-                      )
-                    })
-                  }
+                  {regionList.map((item: any, index: number) => {
+                    return (
+                      <option key={index} value={item.value}>
+                        {item.label}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>
 
             <div className="col-md-2 filter-search">
-              <button onClick={handleApplyFilter} className="btn btn-primary-custom w-100 h-100 border rounded-4">
+              <button
+                onClick={handleApplyFilter}
+                className="btn btn-primary-custom w-100 h-100 border rounded-4"
+              >
                 Search
               </button>
             </div>
