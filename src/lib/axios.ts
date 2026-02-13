@@ -2,7 +2,8 @@ import axios, { AxiosError } from "axios";
 import Cookies from "js-cookie";
 
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api/",
+  baseURL: "/api",
+  // baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api/", // --> Use API proxy for development
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -10,7 +11,8 @@ const apiClient = axios.create({
 });
 
 export const publicApi = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api/",
+  baseURL: "/api",
+  // baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api/", // --> Use API proxy for development
   withCredentials: false,
   headers: {
     "Content-Type": "application/json",
