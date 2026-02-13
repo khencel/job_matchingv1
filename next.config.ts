@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
       {
         // Proxy API requests to the backend server
         source: "/api/:path*",
-        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/:path*`, // HTTP is okay here
+        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}:path*`, // HTTP is okay here
       },
       {
         // Proxy media requests to the backend server
