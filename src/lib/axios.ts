@@ -2,9 +2,8 @@ import axios, { AxiosError } from "axios";
 import Cookies from "js-cookie";
 
 const apiClient = axios.create({
-  baseURL:
-    `${process.env.NEXT_PUBLIC_API_CONTENT_URL}api/` ||
-    "http://localhost:8000/api/",
+  baseURL: "/api",
+  // `${process.env.NEXT_PUBLIC_API_BASE_URL}` || "http://localhost:8000/api/", // --> For development, we can use the proxy setup in next.config.ts
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -12,9 +11,8 @@ const apiClient = axios.create({
 });
 
 export const publicApi = axios.create({
-  baseURL:
-    `${process.env.NEXT_PUBLIC_API_CONTENT_URL}api/` ||
-    "http://localhost:8000/api/",
+  baseURL: "/api",
+  // `${process.env.NEXT_PUBLIC_API_BASE_URL}` || "http://localhost:8000/api/", // --> For development, we can use the proxy setup in next.config.ts
   withCredentials: false,
   headers: {
     "Content-Type": "application/json",
