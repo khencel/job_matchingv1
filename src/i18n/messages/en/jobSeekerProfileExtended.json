@@ -1,4 +1,6 @@
 {
+  "avatarAlt": "User Avatar",
+  "previewAlt": "Preview",
   "buttons": {
     "saveChanges": "Save Changes",
     "cancelEdit": "Cancel Edit",
@@ -6,7 +8,12 @@
   },
   "fallback": {
     "noLocation": "No Location",
-    "notLinked": "Not linked"
+    "notLinked": "Not linked",
+    "notAvailable": "N/A"
+  },
+  "errors": {
+    "required": "This field is required.",
+    "invalidPhone": "Enter a valid phone number."
   },
   "sections": {
     "personalInformation": {
@@ -37,11 +44,25 @@
       "fields": {
         "visaStatus": {
           "label": "Visa Status",
-          "placeholder": "Select status"
+          "placeholder": "Select status",
+          "options": {
+            "APPLIED": "Applied",
+            "PENDING": "Pending",
+            "REVIEWING": "Reviewing",
+            "ISSUED": "Issued",
+            "DENIED": "Denied"
+          }
         },
         "japaneseLevel": {
           "label": "Japanese Level",
-          "placeholder": "Select level"
+          "placeholder": "Select level",
+          "options": {
+            "N5": "N5",
+            "N4": "N4",
+            "N3": "N3",
+            "N2": "N2",
+            "N1": "N1"
+          }
         },
         "highestEducation": {
           "label": "Highest Education",

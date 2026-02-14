@@ -35,8 +35,10 @@ import { isPhoneNumberValid } from "@/helper/validations";
 import { RegisterJobSeekerData } from "@/types/job-seeker";
 import { useRouter } from "next/navigation";
 import DisplayResume from "@/components/DisplayResume";
+import { useTranslations } from "next-intl";
 
 const JobSeekerProfilePage = () => {
+  const t = useTranslations("jobSeekerProfileExtended");
   const dispatch = useAppDispatch();
   const router = useRouter();
   // Read-only source
@@ -59,16 +61,49 @@ const JobSeekerProfilePage = () => {
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const VISA_OPTIONS = ["APPLIED", "PENDING", "REVIEWING", "ISSUED", "DENIED"];
-  const JAPANESE_LEVEL_OPTIONS = ["N5", "N4", "N3", "N2", "N1"];
+  const VISA_OPTIONS = [
+    { value: "APPLIED", label: t("sections.professionalStatus.fields.visaStatus.options.APPLIED") },
+    { value: "PENDING", label: t("sections.professionalStatus.fields.visaStatus.options.PENDING") },
+    { value: "REVIEWING", label: t("sections.professionalStatus.fields.visaStatus.options.REVIEWING") },
+    { value: "ISSUED", label: t("sections.professionalStatus.fields.visaStatus.options.ISSUED") },
+    { value: "DENIED", label: t("sections.professionalStatus.fields.visaStatus.options.DENIED") },
+  ];
+  const JAPANESE_LEVEL_OPTIONS = [
+    { value: "N5", label: t("sections.professionalStatus.fields.japaneseLevel.options.N5") },
+    { value: "N4", label: t("sections.professionalStatus.fields.japaneseLevel.options.N4") },
+    { value: "N3", label: t("sections.professionalStatus.fields.japaneseLevel.options.N3") },
+    { value: "N2", label: t("sections.professionalStatus.fields.japaneseLevel.options.N2") },
+    { value: "N1", label: t("sections.professionalStatus.fields.japaneseLevel.options.N1") },
+  ];
   const EDUCATION_OPTIONS = [
-    { value: "elementary", label: "Elementary" },
-    { value: "jr-highschool", label: "Junior Highschool" },
-    { value: "sr-highschool", label: "Senior Highschool" },
-    { value: "vocational", label: "Vocational" },
-    { value: "bachelorDegree", label: "Bachelor's Degree" },
-    { value: "masterDegree", label: "Master's Degree" },
-    { value: "doctoralDegree", label: "Doctoral Degree" },
+    {
+      value: "elementary",
+      label: t("sections.professionalStatus.fields.highestEducation.options.elementary"),
+    },
+    {
+      value: "jr-highschool",
+      label: t("sections.professionalStatus.fields.highestEducation.options.jrHighschool"),
+    },
+    {
+      value: "sr-highschool",
+      label: t("sections.professionalStatus.fields.highestEducation.options.srHighschool"),
+    },
+    {
+      value: "vocational",
+      label: t("sections.professionalStatus.fields.highestEducation.options.vocational"),
+    },
+    {
+      value: "bachelorDegree",
+      label: t("sections.professionalStatus.fields.highestEducation.options.bachelorDegree"),
+    },
+    {
+      value: "masterDegree",
+      label: t("sections.professionalStatus.fields.highestEducation.options.masterDegree"),
+    },
+    {
+      value: "doctoralDegree",
+      label: t("sections.professionalStatus.fields.highestEducation.options.doctoralDegree"),
+    },
   ];
   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -119,7 +154,7 @@ const JobSeekerProfilePage = () => {
           field as keyof typeof updateUser.jobSeekerData
         ];
       if (!value) {
-        newErrors[field] = "This field is required.";
+        newErrors[field] = t("errors.required");
       }
     });
 
@@ -127,7 +162,7 @@ const JobSeekerProfilePage = () => {
       updateUser.jobSeekerData?.contactNo &&
       !isPhoneNumberValid(updateUser.jobSeekerData.contactNo)
     ) {
-      newErrors.contactNo = "Enter a valid phone number.";
+      newErrors.contactNo = t("errors.invalidPhone");
     }
 
     if (Object.keys(newErrors).length) {
@@ -160,14 +195,59 @@ const JobSeekerProfilePage = () => {
     }
   };
 
-  // Safe Access Helper
+  // Safe Access Helpers
+  const getRawValue = (field: string) => {
+    if (isEditMode && updateUser?.jobSeekerData) {
+      // @ts-expect-ignore
+      return updateUser.jobSeekerData[field] || "";
+    }
+    // @ts-expect-ignore
+    return AuthUser?.jobSeekerData?.[field] || "";
+  };
+
   const getValue = (field: string) => {
     if (isEditMode && updateUser?.jobSeekerData) {
       // @ts-expect-ignore
       return updateUser.jobSeekerData[field] || "";
     }
     // @ts-expect-ignore
-    return AuthUser?.jobSeekerData?.[field] || "N/A";
+    return AuthUser?.jobSeekerData?.[field] || t("fallback.notAvailable");
+  };
+
+  const visaStatusLabels: Record<string, string> = {
+    APPLIED: t("sections.professionalStatus.fields.visaStatus.options.APPLIED"),
+    PENDING: t("sections.professionalStatus.fields.visaStatus.options.PENDING"),
+    REVIEWING: t("sections.professionalStatus.fields.visaStatus.options.REVIEWING"),
+    ISSUED: t("sections.professionalStatus.fields.visaStatus.options.ISSUED"),
+    DENIED: t("sections.professionalStatus.fields.visaStatus.options.DENIED"),
+  };
+
+  const japaneseLevelLabels: Record<string, string> = {
+    N5: t("sections.professionalStatus.fields.japaneseLevel.options.N5"),
+    N4: t("sections.professionalStatus.fields.japaneseLevel.options.N4"),
+    N3: t("sections.professionalStatus.fields.japaneseLevel.options.N3"),
+    N2: t("sections.professionalStatus.fields.japaneseLevel.options.N2"),
+    N1: t("sections.professionalStatus.fields.japaneseLevel.options.N1"),
+  };
+
+  const educationLabels: Record<string, string> = {
+    elementary: t("sections.professionalStatus.fields.highestEducation.options.elementary"),
+    "jr-highschool": t(
+      "sections.professionalStatus.fields.highestEducation.options.jrHighschool",
+    ),
+    "sr-highschool": t(
+      "sections.professionalStatus.fields.highestEducation.options.srHighschool",
+    ),
+    vocational: t("sections.professionalStatus.fields.highestEducation.options.vocational"),
+    bachelorDegree: t(
+      "sections.professionalStatus.fields.highestEducation.options.bachelorDegree",
+    ),
+    masterDegree: t(
+      "sections.professionalStatus.fields.highestEducation.options.masterDegree",
+    ),
+    doctoralDegree: t(
+      "sections.professionalStatus.fields.highestEducation.options.doctoralDegree",
+    ),
   };
 
   return (
@@ -191,14 +271,14 @@ const JobSeekerProfilePage = () => {
                   {photoPreview ? (
                     <Image
                       src={photoPreview}
-                      alt="Preview"
+                      alt={t("previewAlt")}
                       fill
                       style={{ objectFit: "cover" }}
                     />
                   ) : avatar ? (
                     <Image
                       src={`${baseUrl}${avatar}`}
-                      alt="User Avatar"
+                      alt={t("avatarAlt")}
                       fill
                       style={{ objectFit: "cover" }}
                       unoptimized
@@ -252,7 +332,9 @@ const JobSeekerProfilePage = () => {
                         className="small text-truncate"
                         style={{ maxWidth: "200px" }}
                       >
-                        {getValue("currentPlaceResidence") || "No Location"}
+                        {getRawValue("currentPlaceResidence")
+                          ? getRawValue("currentPlaceResidence")
+                          : t("fallback.noLocation")}
                       </span>
                     </div>
                   </div>
@@ -267,7 +349,7 @@ const JobSeekerProfilePage = () => {
                         onClick={handleSaveProfile}
                         size="sm"
                       >
-                        <Save size={16} /> Save Changes
+                        <Save size={16} /> {t("buttons.saveChanges")}
                       </Button>
                       <Button
                         variant="outline-danger"
@@ -275,7 +357,7 @@ const JobSeekerProfilePage = () => {
                         onClick={handleEditToggle}
                         size="sm"
                       >
-                        <X size={16} /> Cancel Edit
+                        <X size={16} /> {t("buttons.cancelEdit")}
                       </Button>
                     </>
                   ) : (
@@ -285,7 +367,7 @@ const JobSeekerProfilePage = () => {
                       onClick={handleEditToggle}
                       size="sm"
                     >
-                      <Edit2 size={16} /> Edit Profile
+                        <Edit2 size={16} /> {t("buttons.editProfile")}
                     </Button>
                   )}
                 </div>
@@ -302,14 +384,16 @@ const JobSeekerProfilePage = () => {
           <Card className="border-0 shadow-sm h-100">
             {/* ... Existing Personal Info ... */}
             <Card.Header className="bg-white border-0 pt-4 px-4 pb-0">
-              <h5 className="fw-bold mb-0">Personal Information</h5>
+              <h5 className="fw-bold mb-0">
+                {t("sections.personalInformation.title")}
+              </h5>
             </Card.Header>
             <Card.Body className="p-4">
               <Row className="g-3">
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      First Name
+                      {t("sections.personalInformation.fields.firstName")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -330,7 +414,7 @@ const JobSeekerProfilePage = () => {
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Middle Name
+                      {t("sections.personalInformation.fields.middleName")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -347,7 +431,7 @@ const JobSeekerProfilePage = () => {
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Last Name
+                      {t("sections.personalInformation.fields.lastName")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -369,7 +453,7 @@ const JobSeekerProfilePage = () => {
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Birthdate
+                      {t("sections.personalInformation.fields.birthdate")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -391,7 +475,7 @@ const JobSeekerProfilePage = () => {
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Gender
+                      {t("sections.personalInformation.fields.gender.label")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Select
@@ -401,10 +485,18 @@ const JobSeekerProfilePage = () => {
                         }
                         isInvalid={!!errors.gender}
                       >
-                        <option value="">Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
+                        <option value="">
+                          {t("sections.personalInformation.fields.gender.placeholder")}
+                        </option>
+                        <option value="male">
+                          {t("sections.personalInformation.fields.gender.options.male")}
+                        </option>
+                        <option value="female">
+                          {t("sections.personalInformation.fields.gender.options.female")}
+                        </option>
+                        <option value="other">
+                          {t("sections.personalInformation.fields.gender.options.other")}
+                        </option>
                       </Form.Select>
                     ) : (
                       <p className="fw-medium text-capitalize">
@@ -419,7 +511,7 @@ const JobSeekerProfilePage = () => {
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Nationality
+                      {t("sections.personalInformation.fields.nationality")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -443,7 +535,7 @@ const JobSeekerProfilePage = () => {
                 <Col md={12}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Current Residence
+                      {t("sections.personalInformation.fields.currentResidence.label")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -454,7 +546,9 @@ const JobSeekerProfilePage = () => {
                             e.target.value,
                           )
                         }
-                        placeholder="City, Country"
+                        placeholder={
+                          t("sections.personalInformation.fields.currentResidence.placeholder")
+                        }
                         isInvalid={!!errors.currentPlaceResidence}
                       />
                     ) : (
@@ -479,13 +573,14 @@ const JobSeekerProfilePage = () => {
             <Card className="border-0 shadow-sm">
               <Card.Header className="bg-white border-0 pt-4 px-4 pb-0">
                 <h6 className="fw-bold mb-0 d-flex align-items-center gap-2">
-                  <Briefcase size={18} /> Professional Status
+                  <Briefcase size={18} />
+                  {t("sections.professionalStatus.title")}
                 </h6>
               </Card.Header>
               <Card.Body className="p-4">
                 <div className="mb-3">
                   <Form.Label className="text-muted small fw-semibold">
-                    Visa Status
+                    {t("sections.professionalStatus.fields.visaStatus.label")}
                   </Form.Label>
                   {isEditMode ? (
                     <Form.Select
@@ -495,23 +590,22 @@ const JobSeekerProfilePage = () => {
                       }
                       isInvalid={!!errors.visaStatus}
                     >
-                      <option value="">Select status</option>
+                      <option value="">
+                        {t("sections.professionalStatus.fields.visaStatus.placeholder")}
+                      </option>
                       {VISA_OPTIONS.map((status) => (
-                        <option key={status} value={status}>
-                          {status}
+                        <option key={status.value} value={status.value}>
+                          {status.label}
                         </option>
                       ))}
                     </Form.Select>
                   ) : (
                     <div>
                       <Badge
-                        bg={
-                          getValue("visaStatus") === "DENIED"
-                            ? "danger"
-                            : "success"
-                        }
+                        bg={getRawValue("visaStatus") === "DENIED" ? "danger" : "success"}
                       >
-                        {getValue("visaStatus")}
+                        {visaStatusLabels[getRawValue("visaStatus")] ||
+                          getValue("visaStatus")}
                       </Badge>
                     </div>
                   )}
@@ -522,7 +616,7 @@ const JobSeekerProfilePage = () => {
 
                 <div className="mb-3">
                   <Form.Label className="text-muted small fw-semibold">
-                    Japanese Level
+                    {t("sections.professionalStatus.fields.japaneseLevel.label")}
                   </Form.Label>
                   {isEditMode ? (
                     <Form.Select
@@ -532,15 +626,20 @@ const JobSeekerProfilePage = () => {
                       }
                       isInvalid={!!errors.japaneseLevel}
                     >
-                      <option value="">Select level</option>
+                      <option value="">
+                        {t("sections.professionalStatus.fields.japaneseLevel.placeholder")}
+                      </option>
                       {JAPANESE_LEVEL_OPTIONS.map((level) => (
-                        <option key={level} value={level}>
-                          {level}
+                        <option key={level.value} value={level.value}>
+                          {level.label}
                         </option>
                       ))}
                     </Form.Select>
                   ) : (
-                    <p className="fw-medium">{getValue("japaneseLevel")}</p>
+                    <p className="fw-medium">
+                      {japaneseLevelLabels[getRawValue("japaneseLevel")] ||
+                        getValue("japaneseLevel")}
+                    </p>
                   )}
                   <Form.Control.Feedback type="invalid">
                     {errors.japaneseLevel}
@@ -549,7 +648,7 @@ const JobSeekerProfilePage = () => {
 
                 <div>
                   <Form.Label className="text-muted small fw-semibold">
-                    Highest Education
+                    {t("sections.professionalStatus.fields.highestEducation.label")}
                   </Form.Label>
                   {isEditMode ? (
                     <Form.Select
@@ -559,7 +658,9 @@ const JobSeekerProfilePage = () => {
                       }
                       isInvalid={!!errors.highestEducation}
                     >
-                      <option value="">Select education</option>
+                      <option value="">
+                        {t("sections.professionalStatus.fields.highestEducation.placeholder")}
+                      </option>
                       {EDUCATION_OPTIONS.map((option) => (
                         <option key={option.value} value={option.value}>
                           {option.label}
@@ -569,7 +670,8 @@ const JobSeekerProfilePage = () => {
                   ) : (
                     <p className="fw-medium d-flex align-items-center gap-2">
                       <GraduationCap size={16} className="text-muted" />
-                      {getValue("highestEducation")}
+                      {educationLabels[getRawValue("highestEducation")] ||
+                        getValue("highestEducation")}
                     </p>
                   )}
                   <Form.Control.Feedback type="invalid">
@@ -583,13 +685,13 @@ const JobSeekerProfilePage = () => {
             <Card className="border-0 shadow-sm">
               <Card.Header className="bg-white border-0 pt-4 px-4 pb-0">
                 <h6 className="fw-bold mb-0 d-flex align-items-center gap-2">
-                  <Globe size={18} /> Social Links
+                  <Globe size={18} /> {t("sections.socialLinks.title")}
                 </h6>
               </Card.Header>
               <Card.Body className="p-4">
                 <Form.Group>
                   <Form.Label className="text-muted small fw-semibold">
-                    Facebook
+                    {t("sections.socialLinks.fields.facebook.label")}
                   </Form.Label>
                   <div className="d-flex align-items-center gap-2">
                     <FaFacebook size={18} className="text-primary" />
@@ -599,7 +701,9 @@ const JobSeekerProfilePage = () => {
                         onChange={(e) =>
                           handleInputChange("facebook", e.target.value)
                         }
-                        placeholder="Profile URL or Username"
+                        placeholder={
+                          t("sections.socialLinks.fields.facebook.placeholder")
+                        }
                       />
                     ) : (
                       <a
@@ -607,7 +711,9 @@ const JobSeekerProfilePage = () => {
                         className="text-decoration-none text-truncate d-block"
                         style={{ maxWidth: "200px" }}
                       >
-                        {getValue("facebook") || "Not linked"}
+                        {getRawValue("facebook")
+                          ? getRawValue("facebook")
+                          : t("fallback.notLinked")}
                       </a>
                     )}
                   </div>

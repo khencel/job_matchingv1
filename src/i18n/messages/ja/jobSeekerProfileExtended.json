@@ -1,4 +1,6 @@
 {
+  "avatarAlt": "ユーザーアバター",
+  "previewAlt": "プレビュー",
   "buttons": {
     "saveChanges": "変更を保存",
     "cancelEdit": "編集をキャンセル",
@@ -6,7 +8,12 @@
   },
   "fallback": {
     "noLocation": "場所なし",
-    "notLinked": "リンクされていません"
+    "notLinked": "リンクされていません",
+    "notAvailable": "該当なし"
+  },
+  "errors": {
+    "required": "この項目は必須です。",
+    "invalidPhone": "有効な電話番号を入力してください。"
   },
   "sections": {
     "personalInformation": {
@@ -37,11 +44,25 @@
       "fields": {
         "visaStatus": {
           "label": "ビザステータス",
-          "placeholder": "ステータスを選択"
+          "placeholder": "ステータスを選択",
+          "options": {
+            "APPLIED": "申請中",
+            "PENDING": "保留中",
+            "REVIEWING": "審査中",
+            "ISSUED": "発行済み",
+            "DENIED": "却下"
+          }
         },
         "japaneseLevel": {
           "label": "日本語レベル",
-          "placeholder": "レベルを選択"
+          "placeholder": "レベルを選択",
+          "options": {
+            "N5": "N5",
+            "N4": "N4",
+            "N3": "N3",
+            "N2": "N2",
+            "N1": "N1"
+          }
         },
         "highestEducation": {
           "label": "最終学歴",
