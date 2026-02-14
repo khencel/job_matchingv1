@@ -1,0 +1,19 @@
+{
+  "title": "Applicants",
+  "totalApplicants": "Total Applicants: {count}",
+  "table": {
+    "fullName": "Full Name",
+    "hiringStage": "Hiring Stage",
+    "appliedDate": "Applied Date",
+    "jobRole": "Job Role",
+    "action": "Action"
+  },
+  "stages": {
+    "pending": "Pending",
+    "test": "test"
+  },
+  "buttons": {
+    "updateDate": "Update Date",
+    "deleteData": "Delete Data"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "buttons": {
+    "cancel": "Cancel",
+    "saveChanges": "Save Changes",
+    "editProfile": "Edit Profile"
+  },
+  "sections": {
+    "companyInformation": {
+      "title": "Company Information",
+      "fields": {
+        "companyName": "Company Name",
+        "phoneticName": "Phonetic Name",
+        "industry": "Industry",
+        "capital": "Capital",
+        "yearFounded": "Year Founded",
+        "representativeName": "Representative Name",
+        "employees": "Employees"
+      }
+    },
+    "headquartersAddress": {
+      "title": "HEADQUARTERS ADDRESS",
+      "fields": {
+        "prefecture": "Prefecture",
+        "city": "City",
+        "street": "Street"
+      }
+    },
+    "businessDescription": {
+      "title": "Business Description"
+    },
+    "contactPerson": {
+      "title": "Contact Person",
+      "fields": {
+        "fullName": "Full Name",
+        "department": "Department",
+        "phoneNumber": "Phone Number",
+        "email": "Email"
+      }
+    }
+  }
+}

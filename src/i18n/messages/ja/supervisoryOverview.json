@@ -1,0 +1,20 @@
+{
+  "stats": {
+    "totalTrainees": {
+      "label": "総研修生数",
+      "value": "1000"
+    },
+    "pendingTrainees": {
+      "label": "保留中の研修生",
+      "value": "1000"
+    },
+    "ongoingTrainees": {
+      "label": "進行中の研修生",
+      "value": "1000"
+    },
+    "finishedTrainees": {
+      "label": "完了した研修生",
+      "value": "1000"
+    }
+  }
+}

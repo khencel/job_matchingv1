@@ -1,0 +1,71 @@
+{
+  "buttons": {
+    "saveChanges": "Save Changes",
+    "cancelEdit": "Cancel Edit",
+    "editProfile": "Edit Profile"
+  },
+  "fallback": {
+    "noLocation": "No Location",
+    "notLinked": "Not linked"
+  },
+  "sections": {
+    "personalInformation": {
+      "title": "Personal Information",
+      "fields": {
+        "firstName": "First Name",
+        "middleName": "Middle Name",
+        "lastName": "Last Name",
+        "birthdate": "Birthdate",
+        "gender": {
+          "label": "Gender",
+          "placeholder": "Select Gender",
+          "options": {
+            "male": "Male",
+            "female": "Female",
+            "other": "Other"
+          }
+        },
+        "nationality": "Nationality",
+        "currentResidence": {
+          "label": "Current Residence",
+          "placeholder": "City, Country"
+        }
+      }
+    },
+    "professionalStatus": {
+      "title": "Professional Status",
+      "fields": {
+        "visaStatus": {
+          "label": "Visa Status",
+          "placeholder": "Select status"
+        },
+        "japaneseLevel": {
+          "label": "Japanese Level",
+          "placeholder": "Select level"
+        },
+        "highestEducation": {
+          "label": "Highest Education",
+          "placeholder": "Select education",
+          "options": {
+            "elementary": "Elementary",
+            "jrHighschool": "Junior Highschool",
+            "srHighschool": "Senior Highschool",
+            "vocational": "Vocational",
+            "bachelorDegree": "Bachelor's Degree",
+            "masterDegree": "Master's Degree",
+            "doctoralDegree": "Doctoral Degree"
+          }
+        }
+      }
+    },
+    "socialLinks": {
+      "title": "Social Links",
+      "fields": {
+        "facebook": {
+          "label": "Facebook",
+          "placeholder": "Profile URL or Username"
+        }
+      }
+    }
+  }
+}

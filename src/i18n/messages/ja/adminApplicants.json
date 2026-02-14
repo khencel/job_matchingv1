@@ -1,0 +1,31 @@
+{
+  "title": "応募者一覧",
+  "downloadButton": "Excelをダウンロード",
+  "listTitle": "ユーザーリスト（合計{count}名）",
+  "filterButton": "フィルター",
+  "table": {
+    "fullName": "氏名",
+    "hiringStage": "採用段階",
+    "joined": "登録日",
+    "age": "年齢",
+    "jobRole": "職種",
+    "employer": "雇用主",
+    "action": "操作"
+  },
+  "stages": {
+    "pending": "保留中",
+    "processing": "処理中",
+    "completed": "完了",
+    "rejected": "却下"
+  },
+  "buttons": {
+    "viewEmployer": "雇用主を見る",
+    "viewApplicant": "応募者を見る"
+  },
+  "pagination": {
+    "itemsPerPage": "ページあたりの項目数：",
+    "showing": "{start}から{end}を表示（合計{total}件）",
+    "previous": "前へ",
+    "next": "次へ"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "states": {
+    "loading": "Loading...",
+    "noData": "No company profile data available."
+  },
+  "stats": {
+    "industries": "{count} industries",
+    "jobs": "{count} jobs",
+    "founded": "Founded: {year}",
+    "employees": "Employees: {count}"
+  },
+  "sections": {
+    "overview": {
+      "title": "Company Overview",
+      "subtitle": "About this company"
+    },
+    "details": {
+      "founded": "Founded",
+      "employees": "Employees",
+      "phone": "Phone",
+      "fee": "Fee",
+      "appealPoint": "Appeal point",
+      "companyAddress": "Company Address",
+      "contactPerson": "Contact person",
+      "name": "Name",
+      "department": "Department",
+      "email": "Email",
+      "companyIndustry": "Company industry",
+      "branchOffices": "Branch offices",
+      "perksAndBenefits": "Perks & benefits",
+      "noPerks": "No perks added yet."
+    },
+    "jobs": {
+      "title": "Posted jobs",
+      "subtitle": "Job listings",
+      "totalJobs": "Total jobs: {count}",
+      "noJobs": "No jobs listed yet.",
+      "noJobsSubtitle": "Your posted jobs will appear here once created."
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "heading": "Legal Notice",
+  "subheading": "Company Information & Legal Notice (Detailed)",
+  "companyInfo": {
+    "companyName": "Company Name:Global Network Innovation Co., Ltd.",
+    "serviceName": "Service Name :JOBSAPO"
+  },
+  "sections": {
+    "whatWeProvide": {
+      "title": "What JOBSAPO Provides",
+      "description": "JOBSAPO is a web platform that provides job and candidate information and matching opportunities between employers and job seekers."
+    },
+    "notPartyToContracts": {
+      "title": "Not a Party to Employment Contracts"
+    },
+    "placementFees": {
+      "title": "Placement Fees (Current Status)"
+    },
+    "limitationOfLiability": {
+      "title": "Limitation of Liability"
+    },
+    "compliance": {
+      "title": "Compliance & Prohibited Conduct"
+    },
+    "security": {
+      "title": "Security Measures"
+    },
+    "cookies": {
+      "title": "Cookies"
+    },
+    "disclaimer": {
+      "title": "Disclaimer & Limitation of Liability"
+    }
+  }
+}

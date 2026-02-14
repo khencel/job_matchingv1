@@ -1,0 +1,20 @@
+{
+  "stats": {
+    "totalTrainees": {
+      "label": "Total Trainees",
+      "value": "1000"
+    },
+    "pendingTrainees": {
+      "label": "Pending Trainees",
+      "value": "1000"
+    },
+    "ongoingTrainees": {
+      "label": "Ongoing Trainees",
+      "value": "1000"
+    },
+    "finishedTrainees": {
+      "label": "Finished Trainees",
+      "value": "1000"
+    }
+  }
+}

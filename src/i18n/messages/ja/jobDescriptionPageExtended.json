@@ -1,0 +1,28 @@
+{
+  "alerts": {
+    "notLoggedIn": {
+      "title": "ログインしていません",
+      "message": "求人に応募するにはログインしてください。"
+    },
+    "resumeRequired": {
+      "title": "履歴書が必要です",
+      "message": "求人に応募する前に履歴書をアップロードしてください。"
+    },
+    "applicationSent": {
+      "title": "応募を送信しました",
+      "message": "応募が正常に送信されました！"
+    }
+  },
+  "companyLogo": "会社ロゴ",
+  "buttons": {
+    "visitProfile": "プロフィールを見る",
+    "applied": "応募済み",
+    "visitCompanyProfile": "会社プロフィールを見る"
+  },
+  "applySection": {
+    "heading": "応募準備はできましたか？",
+    "subtitle": "送信する前にプロフィールと履歴書が更新されていることを確認してください。"
+  },
+  "perksDescription": "あなたの仕事と幸福をサポートする会社提供の福利厚生。",
+  "moreJobs": "その他の求人"
+}

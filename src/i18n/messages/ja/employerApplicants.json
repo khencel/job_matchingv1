@@ -1,0 +1,19 @@
+{
+  "title": "応募者",
+  "totalApplicants": "総応募者数：{count}",
+  "table": {
+    "fullName": "氏名",
+    "hiringStage": "採用段階",
+    "appliedDate": "応募日",
+    "jobRole": "職種"
+  },
+  "stages": {
+    "pending": "保留中"
+  },
+  "pagination": {
+    "itemsPerPage": "ページあたりの項目数：",
+    "showing": "{start}から{end}を表示（合計{total}件）",
+    "previous": "前へ",
+    "next": "次へ"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "title": "福利厚生を追加",
+  "fields": {
+    "company": {
+      "label": "会社：",
+      "placeholder": "会社を選択"
+    },
+    "firstName": {
+      "label": "名："
+    },
+    "lastName": {
+      "label": "姓："
+    },
+    "gender": {
+      "label": "性別：",
+      "placeholder": "性別を選択",
+      "options": {
+        "male": "男性",
+        "female": "女性"
+      }
+    },
+    "visaStatus": {
+      "label": "ビザステータス：",
+      "placeholder": "ステータスを選択",
+      "options": {
+        "applied": "申請済み",
+        "pending": "保留中",
+        "underReview": "審査中",
+        "issued": "発行済み",
+        "denied": "却下"
+      }
+    },
+    "startAge": {
+      "label": "開始年齢以上：",
+      "placeholder": "例：18/20/30"
+    }
+  },
+  "buttons": {
+    "close": "閉じる",
+    "applyFilter": "フィルターを適用"
+  }
+}

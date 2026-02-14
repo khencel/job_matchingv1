@@ -1,0 +1,28 @@
+{
+  "alerts": {
+    "notLoggedIn": {
+      "title": "Not Logged In",
+      "message": "Please log in to apply for jobs."
+    },
+    "resumeRequired": {
+      "title": "Resume Required",
+      "message": "Please upload your resume before applying for jobs."
+    },
+    "applicationSent": {
+      "title": "Application Sent",
+      "message": "Your application has been sent successfully!"
+    }
+  },
+  "companyLogo": "Company Logo",
+  "buttons": {
+    "visitProfile": "Visit Profile",
+    "applied": "Applied",
+    "visitCompanyProfile": "Visit Company Profile"
+  },
+  "applySection": {
+    "heading": "Ready to apply?",
+    "subtitle": "Make sure your profile and resume are updated before submitting."
+  },
+  "perksDescription": "Company-provided benefit to support your work and well-being.",
+  "moreJobs": "More Jobs"
+}

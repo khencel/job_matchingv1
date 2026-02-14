@@ -1,0 +1,18 @@
+{
+  "title": "応募履歴",
+  "totalApplications": "総応募数：",
+  "states": {
+    "loading": "応募を読み込み中...",
+    "empty": "まだ求人に応募していません。",
+    "findJobs": "求人を探す"
+  },
+  "table": {
+    "roleAndCompany": "役職と会社",
+    "dateApplied": "応募日",
+    "status": "ステータス"
+  },
+  "appliedOn": "応募日：",
+  "status": {
+    "applied": "応募済み"
+  }
+}

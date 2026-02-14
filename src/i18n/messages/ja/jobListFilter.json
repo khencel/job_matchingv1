@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "jobType": {
+      "title": "雇用形態",
+      "clearAll": "すべてクリア",
+      "options": {
+        "fullTime": "フルタイム",
+        "partTime": "パートタイム",
+        "contractTemp": "契約/派遣",
+        "casualVacation": "カジュアル/休暇"
+      }
+    },
+    "workSetup": {
+      "title": "勤務形態",
+      "options": {
+        "onSite": "オンサイト",
+        "hybrid": "ハイブリッド",
+        "remote": "リモート"
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "title": "Applicants Listing",
+  "downloadButton": "Download Excel",
+  "listTitle": "Users List ({count} total)",
+  "filterButton": "Filter",
+  "table": {
+    "fullName": "Full Name",
+    "hiringStage": "Hiring Stage",
+    "joined": "Joined",
+    "age": "Age",
+    "jobRole": "Job Role",
+    "employer": "Employer",
+    "action": "Action"
+  },
+  "stages": {
+    "pending": "Pending",
+    "processing": "Processing",
+    "completed": "Completed",
+    "rejected": "Rejected"
+  },
+  "buttons": {
+    "viewEmployer": "View Employer",
+    "viewApplicant": "View Applicant"
+  },
+  "pagination": {
+    "itemsPerPage": "Items per page:",
+    "showing": "Showing {start} to {end} of {total}",
+    "previous": "Previous",
+    "next": "Next"
+  }
+}

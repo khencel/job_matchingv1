@@ -1,0 +1,35 @@
+{
+  "heading": "法的通知",
+  "subheading": "会社情報および法的通知（詳細）",
+  "companyInfo": {
+    "companyName": "会社名：グローバルネットワークイノベーション株式会社",
+    "serviceName": "サービス名：JOBSAPO"
+  },
+  "sections": {
+    "whatWeProvide": {
+      "title": "JOBSAPOが提供するもの",
+      "description": "JOBSAPOは、雇用主と求職者の間で求人情報と候補者情報、マッチング機会を提供するWebプラットフォームです。"
+    },
+    "notPartyToContracts": {
+      "title": "雇用契約の当事者ではありません"
+    },
+    "placementFees": {
+      "title": "配置手数料（現状）"
+    },
+    "limitationOfLiability": {
+      "title": "責任の制限"
+    },
+    "compliance": {
+      "title": "コンプライアンスと禁止行為"
+    },
+    "security": {
+      "title": "セキュリティ対策"
+    },
+    "cookies": {
+      "title": "クッキー"
+    },
+    "disclaimer": {
+      "title": "免責事項および責任の制限"
+    }
+  }
+}

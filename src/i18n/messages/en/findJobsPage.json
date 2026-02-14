@@ -1,0 +1,51 @@
+{
+  "pageTitle": "Job Filter",
+  "pageSubtitle": "Refine results quickly",
+  "filters": {
+    "clearButton": "Clear",
+    "prefecture": {
+      "label": "Prefecture",
+      "placeholder": "Select prefecture",
+      "none": "None"
+    },
+    "category": {
+      "label": "Category",
+      "placeholder": "Select Category"
+    },
+    "jobType": {
+      "label": "Job Type",
+      "options": {
+        "fullTime": "Full-Time",
+        "partTime": "Part-Time",
+        "remote": "Remote",
+        "internship": "Internship"
+      },
+      "selected": "Selected: {types}"
+    },
+    "salary": {
+      "label": "Salary",
+      "min": "Min",
+      "max": "Max",
+      "helper": "Leave blank to show all ranges."
+    },
+    "results": "Results:"
+  },
+  "resultsSection": {
+    "heading": "Job Results",
+    "subheading": "Browse jobs that match your filters.",
+    "jobsCount": "{count} jobs"
+  },
+  "states": {
+    "loading": "Loading jobs...",
+    "loadingShort": "Loading",
+    "error": "Error",
+    "updated": "Updated",
+    "noJobs": "No jobs found",
+    "noJobsSubtitle": "Try adjusting your filters."
+  },
+  "jobCard": {
+    "newBadge": "NEW",
+    "updated": "Updated: 2/2",
+    "viewDetails": "View details"
+  }
+}

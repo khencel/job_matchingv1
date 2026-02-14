@@ -1,0 +1,43 @@
+{
+  "overview": {
+    "title": "管理者概要",
+    "description": "管理者概要ページへようこそ。"
+  },
+  "users": {
+    "title": "ユーザー一覧",
+    "period": "2025年11月 - 12月",
+    "listTitle": "ユーザーリスト（合計{count}名）",
+    "searchPlaceholder": "ユーザーを検索",
+    "filterButton": "フィルター",
+    "filters": {
+      "all": "すべて",
+      "jobSeeker": "求職者",
+      "employer": "雇用主",
+      "supervisory": "監督者"
+    },
+    "table": {
+      "name": "名前",
+      "email": "メールアドレス",
+      "role": "役割",
+      "status": "ステータス",
+      "joined": "登録日",
+      "action": "操作"
+    },
+    "status": {
+      "active": "有効",
+      "notActive": "無効",
+      "activate": "有効化",
+      "deactivate": "無効化"
+    },
+    "modal": {
+      "title": "ステータスを変更",
+      "message": "ステータスを変更してもよろしいですか？"
+    },
+    "pagination": {
+      "itemsPerPage": "ページあたりの項目数：",
+      "showing": "{start}から{end}を表示（合計{total}件）",
+      "previous": "前へ",
+      "next": "次へ"
+    }
+  }
+}

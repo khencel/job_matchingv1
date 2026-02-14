@@ -1,0 +1,44 @@
+{
+  "title": "Job Listing",
+  "listTitle": "Job List ({count} total)",
+  "states": {
+    "loading": "Loading..."
+  },
+  "table": {
+    "status": "Status",
+    "role": "Role",
+    "datePosted": "Date Posted",
+    "salary": "Salary",
+    "jobType": "Job type",
+    "applicants": "Applicants"
+  },
+  "statusToggle": {
+    "enable": "Enable",
+    "disable": "Disable"
+  },
+  "buttons": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "modals": {
+    "deleteJob": {
+      "title": "Delete job post?",
+      "message": "Job post will be deleted",
+      "confirmButton": "yes, Delete it!",
+      "successTitle": "Success",
+      "successMessage": "Job post deleted successfully"
+    },
+    "changeStatus": {
+      "title": "Change Status",
+      "message": "Update the status of this Job Post?",
+      "successTitle": "Update Status",
+      "successMessage": "Status has been updated"
+    }
+  },
+  "pagination": {
+    "itemsPerPage": "Items per page:",
+    "showing": "Showing {start} to {end} of {total}",
+    "previous": "Previous",
+    "next": "Next"
+  }
+}

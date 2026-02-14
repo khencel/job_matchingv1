@@ -1,0 +1,41 @@
+{
+  "buttons": {
+    "cancel": "キャンセル",
+    "saveChanges": "変更を保存",
+    "editProfile": "プロフィールを編集"
+  },
+  "sections": {
+    "companyInformation": {
+      "title": "会社情報",
+      "fields": {
+        "companyName": "会社名",
+        "phoneticName": "会社名（ふりがな）",
+        "industry": "業種",
+        "capital": "資本金",
+        "yearFounded": "設立年",
+        "representativeName": "代表者名",
+        "employees": "従業員数"
+      }
+    },
+    "headquartersAddress": {
+      "title": "本社住所",
+      "fields": {
+        "prefecture": "都道府県",
+        "city": "市区町村",
+        "street": "番地"
+      }
+    },
+    "businessDescription": {
+      "title": "事業内容"
+    },
+    "contactPerson": {
+      "title": "担当者",
+      "fields": {
+        "fullName": "氏名",
+        "department": "部署",
+        "phoneNumber": "電話番号",
+        "email": "メールアドレス"
+      }
+    }
+  }
+}

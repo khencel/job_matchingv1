@@ -37,6 +37,29 @@ import adminSidebar from "./adminSidebar.json";
 import jobSeekerDashboard from "./jobSeekerDashboard.json";
 import employerSidebar from "./employerSidebar.json";
 
+// App folder translations
+import notFound from "./notFound.json";
+import metadata from "./metadata.json";
+import legalNotice from "./legalNotice.json";
+import findJobsPage from "./findJobsPage.json";
+import jobDescriptionPageExtended from "./jobDescriptionPageExtended.json";
+import companyProfilePage from "./companyProfilePage.json";
+import adminUsers from "./adminUsers.json";
+import adminApplicants from "./adminApplicants.json";
+import adminApplicantsFilter from "./adminApplicantsFilter.json";
+import supervisoryOverview from "./supervisoryOverview.json";
+import supervisoryApplicants from "./supervisoryApplicants.json";
+import supervisoryProfile from "./supervisoryProfile.json";
+import jobSeekerAppliedJobs from "./jobSeekerAppliedJobs.json";
+import jobSeekerDocuments from "./jobSeekerDocuments.json";
+import jobSeekerProfileExtended from "./jobSeekerProfileExtended.json";
+import jobSeekerResumeBuilder from "./jobSeekerResumeBuilder.json";
+import employerOverview from "./employerOverview.json";
+import employerJobListing from "./employerJobListing.json";
+import employerApplicants from "./employerApplicants.json";
+import changePasswordModal from "./changePasswordModal.json";
+import jobListFilter from "./jobListFilter.json";
+
 export default {
   // Spread common/auth translations into root
   ...auth,
@@ -72,4 +95,27 @@ export default {
   adminSidebar,
   jobSeekerDashboard,
   employerSidebar,
+
+  // App folder namespaces
+  notFound,
+  metadata,
+  legalNotice,
+  findJobsPage,
+  jobDescriptionPageExtended,
+  companyProfilePage,
+  adminUsers,
+  adminApplicants,
+  adminApplicantsFilter,
+  supervisoryOverview,
+  supervisoryApplicants,
+  supervisoryProfile,
+  jobSeekerAppliedJobs,
+  jobSeekerDocuments,
+  jobSeekerProfileExtended,
+  jobSeekerResumeBuilder,
+  employerOverview,
+  employerJobListing,
+  employerApplicants,
+  changePasswordModal,
+  jobListFilter,
 };

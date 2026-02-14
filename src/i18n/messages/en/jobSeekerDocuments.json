@@ -1,0 +1,28 @@
+{
+  "title": "My Documents",
+  "subtitle": "Upload and manage your documents",
+  "documentsCount": "{count} Documents",
+  "previewFiles": "Preview Files",
+  "upload": {
+    "title": "Upload Your Documents",
+    "subtitle": "Select multiple files to upload at once. Supported formats: PDF, DOC, DOCX, JPG, PNG",
+    "chooseFilesButton": "Choose Files",
+    "chooseMoreButton": "Choose More Files",
+    "uploadButton": "Upload Files",
+    "clearButton": "Clear"
+  },
+  "alerts": {
+    "noFiles": {
+      "title": "No Files Selected",
+      "message": "Please select files to upload."
+    },
+    "uploadSuccess": {
+      "title": "Upload Successful",
+      "message": "Your documents have been uploaded successfully."
+    },
+    "uploadFailed": {
+      "title": "Upload Failed",
+      "message": "There was an error uploading your documents. Please try again."
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "title": "応募者",
+  "totalApplicants": "総応募者数：{count}",
+  "table": {
+    "fullName": "氏名",
+    "hiringStage": "採用段階",
+    "appliedDate": "応募日",
+    "jobRole": "職種",
+    "action": "操作"
+  },
+  "stages": {
+    "pending": "保留中",
+    "test": "テスト"
+  },
+  "buttons": {
+    "updateDate": "日付を更新",
+    "deleteData": "データを削除"
+  }
+}

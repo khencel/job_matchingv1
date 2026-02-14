@@ -1,0 +1,43 @@
+{
+  "overview": {
+    "title": "Admin Overview",
+    "description": "Welcome to the admin overview page."
+  },
+  "users": {
+    "title": "Users Listing",
+    "period": "November - December 2025",
+    "listTitle": "Users List ({count} total)",
+    "searchPlaceholder": "Search Users",
+    "filterButton": "Filter",
+    "filters": {
+      "all": "All",
+      "jobSeeker": "Job Seeker",
+      "employer": "Employer",
+      "supervisory": "Supervisory"
+    },
+    "table": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "joined": "Joined",
+      "action": "Action"
+    },
+    "status": {
+      "active": "Active",
+      "notActive": "Not active",
+      "activate": "Activate",
+      "deactivate": "Deactivate"
+    },
+    "modal": {
+      "title": "Change Status",
+      "message": "Are you sure, Your want to change the status?"
+    },
+    "pagination": {
+      "itemsPerPage": "Items per page:",
+      "showing": "Showing {start} to {end} of {total}",
+      "previous": "Previous",
+      "next": "Next"
+    }
+  }
+}

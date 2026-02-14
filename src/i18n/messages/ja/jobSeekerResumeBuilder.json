@@ -1,0 +1,8 @@
+{
+  "validationMessage": "履歴書を保存する前に詳細を完了してください。（名前、写真、連絡先情報、住所、理由）",
+  "buttons": {
+    "saving": "保存中...",
+    "saveResume": "履歴書を保存",
+    "printResume": "履歴書を印刷"
+  }
+}

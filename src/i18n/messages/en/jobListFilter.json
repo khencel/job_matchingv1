@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "jobType": {
+      "title": "Job Type",
+      "clearAll": "Clear All",
+      "options": {
+        "fullTime": "Full Time",
+        "partTime": "Part Time",
+        "contractTemp": "Contract/Temp",
+        "casualVacation": "Casual/Vacation"
+      }
+    },
+    "workSetup": {
+      "title": "Work Setup",
+      "options": {
+        "onSite": "On-site",
+        "hybrid": "Hybrid",
+        "remote": "Remote"
+      }
+    }
+  }
+}

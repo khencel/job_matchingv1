@@ -1,0 +1,8 @@
+{
+  "validationMessage": "Complete details before saving the resume. (Name, Photo, Contact Info, Address, Reasons)",
+  "buttons": {
+    "saving": "Saving...",
+    "saveResume": "Save Resume",
+    "printResume": "Print Resume"
+  }
+}
