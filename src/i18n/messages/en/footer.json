@@ -6,6 +6,10 @@
   },
   "tagline": "Are you ready to take the next step in your career? JobLink helps you discover exciting opportunities tailored to your skills and aspirations",
   "description": "Join thousands of successful job seekers who have found their dream careers through our platform. Your future begins here!",
+  "brand": {
+    "primary": "JOB",
+    "secondary": "Search"
+  },
   "links": {
     "home": "Home",
     "features": "Job Support Features",

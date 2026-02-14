@@ -1,3 +1,5 @@
+"use client";
+
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { AddButton } from '@/components/Button';
@@ -6,6 +8,7 @@ import { useAppDispatch } from '@/redux/hooks';
 import { changePassword } from '@/redux/slices/applicants/userThunk';
 import { popup } from '@/helper/pop_up';
 import { showSuccessToast } from '../(util)/toaster';
+import { useTranslations } from "next-intl";
 
 interface ChangePasswordProps {
     handleShow: boolean;
@@ -16,6 +19,7 @@ export default function ChangePassword({
     handleShow,
     handleClose,
 }: ChangePasswordProps) {
+    const t = useTranslations("changePasswordModal");
     const dispatch = useAppDispatch()
     const [form, setForm] = useState({
         currentPassword: "",
@@ -43,12 +47,12 @@ export default function ChangePassword({
         const { currentPassword, newPassword, confirmPassword } = form;
 
         if (!currentPassword || !newPassword || !confirmPassword) {
-            setForm({ ...form, error: "All fields are required" });
+            setForm({ ...form, error: t("validation.allFieldsRequired") });
             return;
         }
 
         if (newPassword !== confirmPassword) {
-            setForm({ ...form, error: "New password does not match" });
+            setForm({ ...form, error: t("validation.passwordMismatch") });
             return;
         }
 
@@ -57,8 +61,8 @@ export default function ChangePassword({
         try {
 
             popup({
-                title:"Change Password",
-                text:"Are you sure, you want to change your password?",
+                title: t("modal.title"),
+                text: t("modal.confirmMessage"),
                 icon:"warning",
                 onConfirm: async () => { 
                     const res = await dispatch(
@@ -71,7 +75,7 @@ export default function ChangePassword({
                         setForm({ ...form, error: res.message });
                         return
                     }
-                    showSuccessToast("Change Password","Password has been change!")
+                    showSuccessToast(t("modal.successTitle"), t("modal.successMessage"))
                     resetForm()
                     handleClose();
                 },
@@ -87,7 +91,7 @@ export default function ChangePassword({
     return (
         <Modal show={handleShow} onHide={handleClose} centered>
             <Modal.Header closeButton>
-                <Modal.Title>Change Password</Modal.Title>
+                <Modal.Title>{t("modal.title")}</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
@@ -102,7 +106,7 @@ export default function ChangePassword({
                         name="currentPassword"
                         type="password"
                         className="form-control"
-                        placeholder="Current Password"
+                        placeholder={t("fields.currentPassword")}
                         value={form.currentPassword}
                         onChange={handleChange}
                     />
@@ -113,7 +117,7 @@ export default function ChangePassword({
                         name="newPassword"
                         type="password"
                         className="form-control"
-                        placeholder="New Password"
+                        placeholder={t("fields.newPassword")}
                         value={form.newPassword}
                         onChange={handleChange}
                     />
@@ -124,7 +128,7 @@ export default function ChangePassword({
                         name="confirmPassword"
                         type="password"
                         className="form-control"
-                        placeholder="Confirm New Password"
+                        placeholder={t("fields.confirmNewPassword")}
                         value={form.confirmPassword}
                         onChange={handleChange}
                     />
@@ -133,10 +137,10 @@ export default function ChangePassword({
 
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Cancel
+                    {t("buttons.cancel")}
                 </Button>
                 <AddButton
-                    label="Change Password"
+                    label={t("buttons.changePassword")}
                     className="btn btn-primary-custom rounded-3"
                     icon={null}
                     onClick={handleSubmit}

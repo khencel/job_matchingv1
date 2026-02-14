@@ -11,11 +11,20 @@
   "contact": "Contacts",
   "logoAlt": "Logo",
   "logout": "Log Out",
+  "logoutSuccess": {
+    "title": "Logout Successfully",
+    "message": ""
+  },
   "profile": "My Profile",
   "changePassword": "Change Password",
   "application": "Application",
   "documents": "Documents",
   "overview": "Overview",
   "applicants": "Applicants",
-  "japanese": "日本語"
+  "japanese": "日本語",
+  "language": {
+    "selectorAria": "Language selector",
+    "english": "🇺🇸 English",
+    "japanese": "🇯🇵 日本語"
+  }
 }

@@ -1,35 +1,119 @@
 {
   "heading": "法的通知",
   "subheading": "会社情報および法的通知（詳細）",
-  "companyInfo": {
-    "companyName": "会社名：グローバルネットワークイノベーション株式会社",
-    "serviceName": "サービス名：JOBSAPO"
+  "intro": "本ページは、JOBSAPOの運営者情報、サービスの性質、データ取扱い方針を、日本の関連法令および求人マッチングプラットフォームの一般的なコンプライアンス要件に基づいてまとめたものです。",
+  "companyProfile": {
+    "title": "会社概要",
+    "companyNameLabel": "会社名：",
+    "companyNameValue": "グローバルネットワークイノベーション株式会社",
+    "serviceNameLabel": "サービス名：",
+    "serviceNameValue": "JOBSAPO",
+    "addressLabel": "所在地：",
+    "addressValue": "東京都墨田区江東橋4-22-10 深谷ビル5-A 130-0014",
+    "representativeLabel": "代表者：",
+    "representativeValue": "川道 伸明",
+    "businessLabel": "事業内容：",
+    "businessValue": "人材サービス / ITサービス"
   },
-  "sections": {
-    "whatWeProvide": {
-      "title": "JOBSAPOが提供するもの",
-      "description": "JOBSAPOは、雇用主と求職者の間で求人情報と候補者情報、マッチング機会を提供するWebプラットフォームです。"
+  "serviceNature": {
+    "title": "サービスの性質",
+    "items": {
+      "whatWeProvide": {
+        "title": "JOBSAPOが提供するもの",
+        "description": "JOBSAPOは、雇用主と求職者の間で求人情報と候補者情報、マッチング機会を提供するWebプラットフォームです。"
+      },
+      "notPartyToContracts": {
+        "title": "雇用契約の当事者ではありません",
+        "description": "当社は雇用主と求職者の間の雇用契約の当事者ではありません。雇用条件や採用判断は雇用主が決定し、利用者は自己責任で行動します。"
+      },
+      "placementFees": {
+        "title": "紹介手数料（現状）",
+        "description": "現時点では、当社はJOBSAPOを通じて雇用主・求職者から紹介手数料や成果報酬を徴収していません。",
+        "note": "将来、JOBSAPOが有料職業紹介事業として運営される場合、許可番号、手数料表、苦情対応などの追加開示を行う可能性があります。"
+      },
+      "limitationOfLiability": {
+        "title": "責任の制限",
+        "bullets": [
+          "虚偽、誤解を招く、または違法な求人情報の掲載は禁止されています。",
+          "法令に抵触する差別的表現は認められません。",
+          "当社は必要に応じて掲載内容の確認、修正依頼、削除を行う場合があります。"
+        ]
+      }
+    }
+  },
+  "compliance": {
+    "title": "コンプライアンスと禁止行為",
+    "intro": "利用者は次の行為を行ってはなりません：",
+    "bullets": [
+      "虚偽または不正確な情報の登録・掲載",
+      "日本の法令に抵触する可能性のある内容の掲載（雇用・入管等）",
+      "公序良俗に反する行為、反社会的勢力への関与",
+      "第三者の権利侵害（著作権・商標・プライバシー等）",
+      "不正アクセス、過剰負荷、スクレイピング、その他サービス妨害行為"
+    ]
+  },
+  "personalInfo": {
+    "title": "個人情報の取扱い",
+    "dataWeCollect": {
+      "title": "取得する情報",
+      "bullets": [
+        "氏名・連絡先（電話、メール等）",
+        "住所、学歴、職歴、資格、希望職種・勤務地",
+        "国籍・生年月日（任意の入管関連申告を含む）",
+        "端末情報、アクセスログ、IPアドレス、Cookie等"
+      ]
     },
-    "notPartyToContracts": {
-      "title": "雇用契約の当事者ではありません"
+    "purposesOfUse": {
+      "title": "利用目的",
+      "bullets": [
+        "求人マッチングおよび連絡",
+        "ユーザー管理、本人確認、不正防止",
+        "お問い合わせ対応および重要なお知らせ",
+        "サービス改善および利用状況分析"
+      ]
     },
-    "placementFees": {
-      "title": "配置手数料（現状）"
+    "sharing": {
+      "title": "第三者提供",
+      "description": "マッチングのため必要な範囲で、雇用主や関連当事者に情報を共有する場合があります。法令に基づく場合を除き、本人の同意なく第三者へ提供しません。"
     },
-    "limitationOfLiability": {
-      "title": "責任の制限"
+    "retention": {
+      "title": "保存期間",
+      "description": "個人情報は利用目的の達成に必要な期間、または法令で定められた期間のみ保管します。"
     },
-    "compliance": {
-      "title": "コンプライアンスと禁止行為"
-    },
-    "security": {
-      "title": "セキュリティ対策"
-    },
-    "cookies": {
-      "title": "クッキー"
-    },
-    "disclaimer": {
-      "title": "免責事項および責任の制限"
+    "requests": {
+      "title": "本人からの請求",
+      "description": "利用者は、法令に基づき個人情報の開示・訂正・削除・利用停止等を請求できます。"
+    }
+  },
+  "security": {
+    "title": "セキュリティ対策",
+    "intro": "当社は個人情報保護のため、合理的な安全管理措置を講じています。例：",
+    "bullets": [
+      "アクセス制御と最小権限管理",
+      "暗号化通信（例：HTTPS）",
+      "ログ取得・監視・不正アクセス対策",
+      "外部委託先（クラウド等）に対する監督"
+    ]
+  },
+  "cookies": {
+    "title": "Cookie",
+    "description": "利便性向上と利用状況分析のためCookie等を使用する場合があります。ブラウザ設定で無効化できますが、一部機能が正常に動作しない場合があります。"
+  },
+  "disclaimer": {
+    "title": "免責事項および責任の制限",
+    "items": {
+      "noWarranty": {
+        "title": "保証の否認",
+        "description": "当サービス上の情報の正確性・完全性・適法性・最新性について保証しません。"
+      },
+      "disputesDamages": {
+        "title": "紛争・損害",
+        "description": "採用の取消し、条件の不一致、労務問題等を含むいかなる紛争・損害についても責任を負いません。"
+      },
+      "serviceSuspension": {
+        "title": "サービスの停止",
+        "description": "保守、障害、災害等の不可抗力により、サービスを一時停止または中断する場合があります。"
+      }
     }
   }
 }

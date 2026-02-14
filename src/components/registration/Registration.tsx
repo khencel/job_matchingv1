@@ -1,6 +1,7 @@
-"user client"
+"use client";
 
 import RegistrationButton from "./RegisterButton";
+import { useTranslations } from "next-intl";
 
 
 /**
@@ -8,14 +9,17 @@ import RegistrationButton from "./RegisterButton";
  * Responsive layout: stacks on mobile, 3 columns on desktop
  */
 export default function Registration() {
+  const t = useTranslations("registration");
 
   return (
     <div className="container py-5 register-div">
-      <h2 className="text-center mb-0 mb-sm-5 fw-bold regiter-choose">Free Registration</h2>
+      <h2 className="text-center mb-0 mb-sm-5 fw-bold regiter-choose">
+        {t("heading")}
+      </h2>
       <div className="row g-4 justify-content-center">
         <div className="col-12 col-sm-6 col-lg-4">
           <div className="card shadow p-4 text-center h-100 ">
-            <p className="mb-3">Looking for your dream job?</p>
+            <p className="mb-3">{t("cards.jobSeeker.description")}</p>
             <RegistrationButton
               id="jobSeeker"
               buttonTextKey="buttons.registerJobSeeker"
@@ -25,7 +29,7 @@ export default function Registration() {
 
         <div className="col-12 col-sm-6 col-lg-4">
           <div className="card shadow p-4 text-center h-100">
-            <p className="mb-3">Hire the best talent!</p>
+            <p className="mb-3">{t("cards.employer.description")}</p>
   
             <RegistrationButton
               id="employer"
@@ -36,7 +40,7 @@ export default function Registration() {
 
         <div className="col-12 col-sm-6 col-lg-4">
           <div className="card shadow p-4 text-center h-100">
-            <p className="mb-3">Manage and supervise effectively</p>
+            <p className="mb-3">{t("cards.supervisory.description")}</p>
             <RegistrationButton
               id="superVisory"
               buttonTextKey="buttons.registerSupervisory"
@@ -46,8 +50,9 @@ export default function Registration() {
       </div>
 
       <div className="row mt-2 justify-content-center">
-        <div className="col-md-7 section-subtitle">A new career platform
-            <br/>connecting foreigners and companies.</div>
+        <div className="col-md-7 section-subtitle">
+          {t("subtitle")}
+        </div>
       </div>
     </div>
   );

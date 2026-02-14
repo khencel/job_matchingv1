@@ -1,68 +1,54 @@
+"use client";
+
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "../../components/Footer";
+import { useTranslations } from "next-intl";
 
 export default function LegalNotice() {
+    const t = useTranslations("legalNotice");
     return (
         <>
             <Navbar />
             <div>
                 <div className="legal-notice-container shadow rounded-5 mt-3 mb-3" style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", fontFamily: "Arial, sans-serif" }}>
-                    <h3 style={{ textAlign: "center", marginBottom: "1.5rem" }}>Legal Notice</h3>
+                    <h3 style={{ textAlign: "center", marginBottom: "1.5rem" }}>{t("heading")}</h3>
                     <section>
-                        <strong><h3>Company Information & Legal Notice (Detailed)</h3></strong>
-                        <p>
-                            This 
-                            page summarizes the operator details, nature of the service, and data handling practices of 
-                            JOBSAPO in accordance with relevant Japanese laws and common compliance requirements for 
-                            job-matching platforms. 
-                        </p>
+                        <strong><h3>{t("subheading")}</h3></strong>
+                        <p>{t("intro")}</p>
                     </section>
 
                     <section>
-                        <strong>Company Profile</strong>
+                        <strong>{t("companyProfile.title")}</strong>
                         <br />
-                        Company Name:Global Network Innovation Co., Ltd. 
+                        {t("companyProfile.companyNameLabel")} {t("companyProfile.companyNameValue")}
                         <br />
-                        Service Name :JOBSAPO 
+                        {t("companyProfile.serviceNameLabel")} {t("companyProfile.serviceNameValue")}
                         <br />
-                        Address :Fukaya Building 5-A, 4-22-10 Koto, Sumida-ku, Tokyo 130-0014, Japan
+                        {t("companyProfile.addressLabel")} {t("companyProfile.addressValue")}
                         <br />
-                        Representative :Nobuaki Kawamichi 
+                        {t("companyProfile.representativeLabel")} {t("companyProfile.representativeValue")}
                         <br />
-                        Business :Human Resources Services / IT Services 
+                        {t("companyProfile.businessLabel")} {t("companyProfile.businessValue")}
                     </section>
 
 
 
                     <br />
-                    <strong>Nature of the Service </strong>
+                    <strong>{t("serviceNature.title")}</strong>
                     <section style={{ marginBottom: "1.5rem" }}>
                         <ol>
-                            <li>What JOBSAPO Provides</li>
-                            <p>
-                                JOBSAPO is a web platform that provides job and candidate information and matching 
-                                opportunities between employers and job seekers.
-                            </p>
-                            <li>Not a Party to Employment Contracts</li>
-                            <p>
-                                The Company is not a party to employment contracts between employers and job seekers. 
-                                Employment conditions and hiring decisions are determined by employers, and users act at their own responsibility. 
-                            </p>
-                            <li>
-                                Placement Fees (Current Status)
-                            </li>
-                            <p>
-                                At present, the Company does not charge or receive any placement fees or success-based 
-                                commissions from employers or job seekers through JOBSAPO. 
-                                <br />
-                                <br />
-                                In the future, if JOBSAPO is operated as a licensed paid employment placement service, additional disclosures such as license number, fee table, and complaint handling may be added after obtaining the required license.
-                            </p>
-                            <li>Limitation of Liability</li>
+                            <li>{t("serviceNature.items.whatWeProvide.title")}</li>
+                            <p>{t("serviceNature.items.whatWeProvide.description")}</p>
+                            <li>{t("serviceNature.items.notPartyToContracts.title")}</li>
+                            <p>{t("serviceNature.items.notPartyToContracts.description")}</p>
+                            <li>{t("serviceNature.items.placementFees.title")}</li>
+                            <p>{t("serviceNature.items.placementFees.description")}</p>
+                            <p>{t("serviceNature.items.placementFees.note")}</p>
+                            <li>{t("serviceNature.items.limitationOfLiability.title")}</li>
                             <ul>
-                                <li>False, misleading, or illegal job postings are prohibited.</li>
-                                <li>Discriminatory expressions that may violate laws and regulations are not allowed. </li>
-                                <li>The Company may review, request corrections, or remove listings when necessary.</li>
+                                <li>{t("serviceNature.items.limitationOfLiability.bullets.0")}</li>
+                                <li>{t("serviceNature.items.limitationOfLiability.bullets.1")}</li>
+                                <li>{t("serviceNature.items.limitationOfLiability.bullets.2")}</li>
                             </ul>
                         </ol>
                     
@@ -70,104 +56,82 @@ export default function LegalNotice() {
 
 
                     <section style={{ marginBottom: "1.5rem" }}>
-                        <strong>Compliance & Prohibited Conduct </strong>
+                        <strong>{t("compliance.title")}</strong>
                         <br />
                         <br />
-                        Users must not engage in the following:
+                        {t("compliance.intro")}
                         <ul>
-                            <li>Posting or registering false or inaccurate information </li>
-                            <li>Posting content that may violate Japanese laws (employment-related, immigration-related, etc.) </li>
-                            <li>Acts against public order and morals, or involvement with antisocial forces</li>
-                            <li>Infringing third-party rights (copyright, trademark, privacy, etc.) </li>
-                            <li>Unauthorized access, excessive load, scraping, or any disruption to the service</li>
+                            <li>{t("compliance.bullets.0")}</li>
+                            <li>{t("compliance.bullets.1")}</li>
+                            <li>{t("compliance.bullets.2")}</li>
+                            <li>{t("compliance.bullets.3")}</li>
+                            <li>{t("compliance.bullets.4")}</li>
                         </ul>
                         
                     </section>
 
 
                     <section style={{ marginBottom: "1.5rem" }}>
-                        <strong>Personal Information Handling </strong>
+                        <strong>{t("personalInfo.title")}</strong>
                         <br />
                         <br />
                         <ol>
-                            <li>Data We Collect</li>
+                            <li>{t("personalInfo.dataWeCollect.title")}</li>
                             <ul>
-                                <li>Name and contact details (phone, email, etc.)</li>
-                                <li>Address, education, work history, qualifications, desired job/location</li>
-                                <li>Nationality and date of birth; optional immigration-related self-declared information</li>
-                                <li>Device data, access logs, IP address, cookies and identifiers</li>
+                                <li>{t("personalInfo.dataWeCollect.bullets.0")}</li>
+                                <li>{t("personalInfo.dataWeCollect.bullets.1")}</li>
+                                <li>{t("personalInfo.dataWeCollect.bullets.2")}</li>
+                                <li>{t("personalInfo.dataWeCollect.bullets.3")}</li>
                             </ul>
-                            <li>Purposes of Use</li>
+                            <li>{t("personalInfo.purposesOfUse.title")}</li>
                             <ul>
-                                <li>Job matching and communications</li>
-                                <li>User management, identity verification, fraud prevention </li>
-                                <li>Inquiry handling and important notices</li>
-                                <li>Service improvement and usage analytics</li>
+                                <li>{t("personalInfo.purposesOfUse.bullets.0")}</li>
+                                <li>{t("personalInfo.purposesOfUse.bullets.1")}</li>
+                                <li>{t("personalInfo.purposesOfUse.bullets.2")}</li>
+                                <li>{t("personalInfo.purposesOfUse.bullets.3")}</li>
                             </ul>
-                            <li>Sharing with Third Parties</li>
-                            <p>
-                                We may share necessary user data with employers and related parties for matching purposes. 
-                                We do not provide personal data to third parties without consent unless required by law. 
-                            </p>
-                            <li>Retention</li>
-                            <p>
-                                We retain personal data only for the period necessary to achieve the purposes of use or as 
-                                required by law.
-                            </p>
-                            <li>Requests by Users</li>
-                            <p>
-                                Users may request access, correction, deletion, or suspension of use of their personal data in accordance with applicable laws. 
-                            </p>
+                            <li>{t("personalInfo.sharing.title")}</li>
+                            <p>{t("personalInfo.sharing.description")}</p>
+                            <li>{t("personalInfo.retention.title")}</li>
+                            <p>{t("personalInfo.retention.description")}</p>
+                            <li>{t("personalInfo.requests.title")}</li>
+                            <p>{t("personalInfo.requests.description")}</p>
                         </ol>
                         
                     </section>
 
 
                     <section style={{ marginBottom: "1.5rem" }}>
-                        <strong>Security Measures</strong>
+                        <strong>{t("security.title")}</strong>
                         <br />
                         <br />
-                        We implement reasonable security measures to protect personal data, including:
+                        {t("security.intro")}
                         <ul>
-                            <li>Access control and least-privilege management</li>
-                            <li>Encrypted communications (e.g., HTTPS)</li>
-                            <li>Logging, monitoring, and anti-unauthorized access measures</li>
-                            <li>Vendor oversight for outsourced processing (including cloud services)</li>
+                            <li>{t("security.bullets.0")}</li>
+                            <li>{t("security.bullets.1")}</li>
+                            <li>{t("security.bullets.2")}</li>
+                            <li>{t("security.bullets.3")}</li>
                         </ul>
                     </section>
 
                     <section style={{ marginBottom: "1.5rem" }}>
-                        <strong>Cookies</strong>
+                        <strong>{t("cookies.title")}</strong>
                         <br />
                         <br />
-                        <p>
-                            We may use cookies and similar technologies to improve usability and analyze usage. Users 
-                            can disable cookies in browser settings, but some functions may not work properly. 
-                        </p>
+                        <p>{t("cookies.description")}</p>
                     </section>
 
                     <section style={{ marginBottom: "1.5rem" }}>
-                        <strong>Disclaimer & Limitation of Liability </strong>
+                        <strong>{t("disclaimer.title")}</strong>
                         <br />
                         <br />
                         <ol>
-                            <li>No Warranty </li>
-                            <p>
-                                We do not guarantee the accuracy, completeness, legality, or timeliness of information 
-                                provided on this service.
-                            </p>
-                            <li>Disputes and Damages</li>
-                            <p>
-                                We are not liable for any disputes or damages arising from the use of this service, including 
-                                hiring cancellations, mismatched conditions, or labor-related issues.
-                            </p>
-                            <li>
-                                Service Suspension 
-                            </li>
-                            <p>
-                                We may suspend or interrupt the service due to maintenance, system failures, disasters, or 
-        other unavoidable reasons. 
-                            </p>
+                            <li>{t("disclaimer.items.noWarranty.title")}</li>
+                            <p>{t("disclaimer.items.noWarranty.description")}</p>
+                            <li>{t("disclaimer.items.disputesDamages.title")}</li>
+                            <p>{t("disclaimer.items.disputesDamages.description")}</p>
+                            <li>{t("disclaimer.items.serviceSuspension.title")}</li>
+                            <p>{t("disclaimer.items.serviceSuspension.description")}</p>
                         </ol>
                     </section>
 

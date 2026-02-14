@@ -25,7 +25,9 @@ export default function Footer() {
           {/* Left: Logo + Description */}
           <div className="col-md-6 mb-3 mb-md-0">
             <div className="d-flex flex-column">
-              <h5 className="fw-bold text-primary">JOB<span className="text-dark">Search</span></h5>
+              <h5 className="fw-bold text-primary">
+                {t("brand.primary")}<span className="text-dark">{t("brand.secondary")}</span>
+              </h5>
               <p className="small">
                 {t('description')}
               </p>

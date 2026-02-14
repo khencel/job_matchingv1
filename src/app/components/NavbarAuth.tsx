@@ -28,7 +28,7 @@ export default function NavbarAuth() {
       return;
     } finally {
       router.push("/");
-      showSuccessToast("Logout Successfully", "");
+      showSuccessToast(t("logoutSuccess.title"), t("logoutSuccess.message"));
     }
   };
 
@@ -119,11 +119,11 @@ export default function NavbarAuth() {
                 className="form-select form-select-sm"
                 value={locale}
                 onChange={handleLanguageChange}
-                aria-label="Language selector"
+                aria-label={t("language.selectorAria")}
                 style={{ width: "auto", minWidth: "140px" }}
               >
-                <option value="en">🇺🇸 English</option>
-                <option value="ja">🇯🇵 日本語</option>
+                <option value="en">{t("language.english")}</option>
+                <option value="ja">{t("language.japanese")}</option>
               </select>
             </div>
 
@@ -167,7 +167,7 @@ export default function NavbarAuth() {
                 >
                   <li>
                     <button className="dropdown-item" onClick={()=> handleChangePassword()}>
-                      Change Password
+                      {t("changePassword")}
                     </button>
                   </li>
                   <li>

@@ -11,11 +11,20 @@
   "contact": "お問い合わせ",
   "logoAlt": "ロゴ",
   "logout": "ログアウト",
+  "logoutSuccess": {
+    "title": "ログアウトしました",
+    "message": ""
+  },
   "profile": "マイプロフィール",
   "changePassword": "パスワード変更",
   "application": "応募",
   "documents": "書類",
   "overview": "概要",
   "applicants": "応募者",
-  "japanese": "日本語"
+  "japanese": "日本語",
+  "language": {
+    "selectorAria": "言語を選択",
+    "english": "🇺🇸 英語",
+    "japanese": "🇯🇵 日本語"
+  }
 }
