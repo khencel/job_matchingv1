@@ -1,15 +1,22 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 export default function About() {
+  const t = useTranslations("about");
   return (
     <section id="about_us" className="about">
       <div className="container">
         <div className="about-card">
-          <div className="pill" data-i18n="about_pill">About JOBSAPO</div>
-          <h2 data-i18n="about_title">Connecting people and opportunities</h2>
-          <p data-i18n="about_body">
-            A new matching platform connecting foreign talent, host companies, and support<br/>
-            JOBSAPO connects foreign workers who want to work in Japan with hiring companies and supervising/support organizations.<br/>
-            We help create an environment where people can work with confidence—and companies can hire with confidence.<br/>
-            
+          <div className="pill">{t("pill")}</div>
+          <h2>{t("title")}</h2>
+          <p>
+            {t("body.line1")}
+            <br />
+            {t("body.line2")}
+            <br />
+            {t("body.line3")}
+            <br />
           </p>
         </div>
       </div>

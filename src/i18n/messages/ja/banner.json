@@ -3,5 +3,29 @@
   "subtitle": "求職者・仕事・職場環境をつなぐマッチングサービス",
   "buttons": {
     "findJob": "仕事を探す"
+  },
+  "hero": {
+    "pill": "求人を探す",
+    "title": "日本で働きたい外国人と採用企業をつなぐ — JOBSAPO。",
+    "description": {
+      "line1": "雇用主・求職者・職場環境をつなぐマッチングサービス。",
+      "line2": "あなたに合った仕事を見つけて次の一歩を踏み出しましょう。"
+    },
+    "cta": {
+      "searchJobs": "求人を探す",
+      "freeRegistration": "無料登録"
+    }
+  },
+  "jobsPanel": {
+    "latest": "最新",
+    "title": "企業からの最新情報",
+    "viewAll": "すべて見る"
+  },
+  "job": {
+    "updated": "更新: {date}",
+    "updatedFallback": "2/2",
+    "location": "📍 {location}",
+    "locationFallback": "東京",
+    "viewDetails": "詳細を見る"
   }
 }

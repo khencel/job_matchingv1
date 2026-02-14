@@ -1,6 +1,9 @@
+"use client";
+
 import { FileText, FileX, UploadCloud } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button, Card } from "react-bootstrap";
+import { useTranslations } from "next-intl";
 
 interface ResumeViewerProps {
   existingResume: string | undefined | null;
@@ -13,12 +16,13 @@ const DisplayResume = ({
   isPublic,
   resumeUrl,
 }: ResumeViewerProps) => {
+  const t = useTranslations("displayResume");
   const router = useRouter();
   return (
     <Card className="border-light-subtle rounded-4 shadow-sm">
       <Card.Header className="bg-transparent border-0 pt-4 px-4 pb-0 d-flex justify-content-between align-items-center">
         <h5 className="fw-bold mb-0 d-flex align-items-center gap-2">
-          <FileText size={20} /> Resume
+          <FileText size={20} /> {t("title")}
         </h5>
       </Card.Header>
       <Card.Body className="p-4">
@@ -32,7 +36,7 @@ const DisplayResume = ({
               src={resumeUrl}
               width="100%"
               height="100%"
-              title="Resume Preview"
+              title={t("previewTitle")}
               style={{ border: "none" }}
             />
           </div>
@@ -44,7 +48,7 @@ const DisplayResume = ({
             <div className="bg-white p-3 rounded-circle shadow-sm mb-3">
               <FileX size={32} className="text-primary" />
             </div>
-            <h6 className="fw-bold mb-1">No resume created.</h6>
+            <h6 className="fw-bold mb-1">{t("empty.publicTitle")}</h6>
           </div>
         ) : (
           <div
@@ -54,19 +58,18 @@ const DisplayResume = ({
             <div className="bg-white p-3 rounded-circle shadow-sm mb-3">
               <UploadCloud size={32} className="text-primary" />
             </div>
-            <h6 className="fw-bold mb-1">No resume created yet</h6>
+            <h6 className="fw-bold mb-1">{t("empty.privateTitle")}</h6>
             <p
               className="text-muted small mb-3 text-center"
               style={{ maxWidth: "400px" }}
             >
-              Create your resume to increase your chances of getting hired.
-              Employers are more likely to view profiles with resumes.
+              {t("empty.privateDescription")}
             </p>
             <Button
               variant="primary"
               onClick={() => router.push("/job-seeker/resume-builder")}
             >
-              Create Resume
+              {t("empty.createButton")}
             </Button>
           </div>
         )}

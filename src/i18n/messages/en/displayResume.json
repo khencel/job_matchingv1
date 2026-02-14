@@ -1,0 +1,10 @@
+{
+  "title": "Resume",
+  "previewTitle": "Resume Preview",
+  "empty": {
+    "publicTitle": "No resume created.",
+    "privateTitle": "No resume created yet",
+    "privateDescription": "Create your resume to increase your chances of getting hired. Employers are more likely to view profiles with resumes.",
+    "createButton": "Create Resume"
+  }
+}

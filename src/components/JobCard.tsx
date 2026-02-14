@@ -1,4 +1,5 @@
 import { JobPosting } from "@/types/applyJob";
+import { useTranslations } from "next-intl";
 
 interface JobCardProps {
   job: JobPosting;
@@ -13,16 +14,17 @@ const formatSalary = (value: number) =>
     maximumFractionDigits: 0,
   }).format(value);
 
-const formatPostedDate = (isoDate: string) => {
+const formatPostedDate = (isoDate: string, label: string, fallback: string) => {
   const parsed = new Date(isoDate);
   if (Number.isNaN(parsed.getTime())) {
-    return "Posted date unavailable";
+    return fallback;
   }
-  return `Posted on ${parsed.toLocaleDateString("en-US")}`;
+  return `${label} ${parsed.toLocaleDateString("en-US")}`;
 };
 
 const JobCard = ({ job, onClick, className }: JobCardProps) => {
-  const employmentType = job.type_of_emp?.type?.join(", ") || "Not specified";
+  const t = useTranslations("jobCard");
+  const employmentType = job.type_of_emp?.type?.join(", ") || t("fallback.notSpecified");
   const cardClasses = [
     "card",
     "rounded-4",
@@ -60,17 +62,21 @@ const JobCard = ({ job, onClick, className }: JobCardProps) => {
             {job.title}
           </h2>
           <span className="text-muted small">
-            {formatPostedDate(job.created_at)}
+            {formatPostedDate(
+              job.created_at,
+              t("labels.postedOn"),
+              t("fallback.dateUnavailable"),
+            )}
           </span>
         </div>
 
         <ul className="list-unstyled mb-0 small text-secondary d-flex flex-column gap-1">
           <li>
-            <strong className="text-dark">Employment Type:</strong>{" "}
+            <strong className="text-dark">{t("labels.employmentType")}</strong>{" "}
             {employmentType}
           </li>
           <li>
-            <strong className="text-dark">Salary:</strong>{" "}
+            <strong className="text-dark">{t("labels.salary")}</strong>{" "}
             {formatSalary(job.salary)}
           </li>
         </ul>
@@ -79,7 +85,7 @@ const JobCard = ({ job, onClick, className }: JobCardProps) => {
           className="text-muted mb-0 clamp-3 text-truncate"
           title={job.job_desc}
           dangerouslySetInnerHTML={{
-            __html: job.job_desc || "No description provided.",
+            __html: job.job_desc || t("fallback.noDescription"),
           }}
         />
       </div>

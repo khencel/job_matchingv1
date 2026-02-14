@@ -1,0 +1,12 @@
+{
+  "title": "Uploaded Documents",
+  "emptyState": "No documents uploaded yet",
+  "table": {
+    "fileName": "File Name",
+    "fileType": "File Type",
+    "actions": "Actions"
+  },
+  "fallback": {
+    "fileName": "Document"
+  }
+}

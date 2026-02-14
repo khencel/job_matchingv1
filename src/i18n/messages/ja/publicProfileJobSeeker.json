@@ -1,0 +1,41 @@
+{
+  "header": {
+    "sampleName": "サンプルユーザー",
+    "sampleLocation": "東京都, 日本"
+  },
+  "buttons": {
+    "editProfile": "プロフィールを編集"
+  },
+  "sections": {
+    "aboutMe": "自己紹介",
+    "experiences": "職歴",
+    "skills": "スキル",
+    "testimonials": "推薦コメント"
+  },
+  "aboutMeText": {
+    "line1": "私は継続的な学びと成長に情熱を持つ、目標志向の人間です。品質の高い成果を出し、協力し合い、新しい課題にも柔軟に対応することを大切にしています。スキルを生かし、経験を積み、組織に貢献したいと考えています。",
+    "line2": "私は継続的な学びと成長に情熱を持つ、目標志向の人間です。品質の高い成果を出し、協力し合い、新しい課題にも柔軟に対応することを大切にしています。スキルを生かし、経験を積み、組織に貢献したいと考えています。"
+  },
+  "experience": {
+    "company": "Jollibee",
+    "rolePeriod": "フルタイム - 6月19日 - 現在",
+    "location": "東京都, 日本",
+    "description": "Jollibeeの高稼働な環境で、注文対応や問い合わせ対応を迅速かつ正確に行いました。"
+  },
+  "skills": {
+    "sample": "サン・セバスチャン・カレッジ・レコレトス・デ・カビテ"
+  },
+  "side": {
+    "additionalDetails": "追加情報",
+    "email": "メール",
+    "emailValue": "sampleEmail@gmail.com",
+    "phone": "電話",
+    "phoneValue": "+63 12121212121",
+    "languages": "言語",
+    "languagesValue": "英語, 日本語"
+  },
+  "testimonials": {
+    "sampleTitle": "サンプル推薦コメント",
+    "sampleQuote": "\"Jollibeeの高稼働な環境で、注文対応や問い合わせ対応を迅速かつ正確に行いました。\""
+  }
+}

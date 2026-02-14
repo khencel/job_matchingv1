@@ -3,5 +3,29 @@
   "subtitle": "Matching service to connect job seekers, jobs and the workplace environment.",
   "buttons": {
     "findJob": "Find a Job"
+  },
+  "hero": {
+    "pill": "Browse jobs",
+    "title": "Connecting foreigners in Japan with hiring companies — JOBSAPO.",
+    "description": {
+      "line1": "A matching service that connects employers, job seekers, and workplaces.",
+      "line2": "Find jobs that fit your needs and take the next step."
+    },
+    "cta": {
+      "searchJobs": "Search Jobs",
+      "freeRegistration": "Free Registration"
+    }
+  },
+  "jobsPanel": {
+    "latest": "Latest",
+    "title": "New updates from companies",
+    "viewAll": "View All"
+  },
+  "job": {
+    "updated": "Updated: {date}",
+    "updatedFallback": "2/2",
+    "location": "📍 {location}",
+    "locationFallback": "Tokyo",
+    "viewDetails": "View details"
   }
 }

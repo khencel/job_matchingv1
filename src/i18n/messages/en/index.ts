@@ -7,6 +7,8 @@ import auth from "./auth.json";
 import navbar from "./navbar.json";
 import banner from "./banner.json";
 import bannerExtended from "./bannerExtended.json";
+import about from "./about.json";
+import contactUs from "./contactUs.json";
 import jobSearchFilter from "./jobSearchFilter.json";
 import jobSearchFilterExtended from "./jobSearchFilterExtended.json";
 import registerButton from "./registerButton.json";
@@ -27,6 +29,10 @@ import verifyEmailModal from "./verifyEmailModal.json";
 import filterJobs from "./filterJobs.json";
 import jobCard from "./jobCard.json";
 import loginPage from "./loginPage.json";
+import displayDocuments from "./displayDocuments.json";
+import displayResume from "./displayResume.json";
+import previewFile from "./previewFile.json";
+import publicProfileJobSeeker from "./publicProfileJobSeeker.json";
 import jobSupportFeatures from "./jobSupportFeatures.json";
 import qAndA from "./qAndA.json";
 import contactUsModal from "./contactUsModal.json";
@@ -36,7 +42,9 @@ import employerProfileBody from "./employerProfileBody.json";
 import addSkill from "./addSkill.json";
 import adminSidebar from "./adminSidebar.json";
 import jobSeekerDashboard from "./jobSeekerDashboard.json";
+import jobSeekerLayout from "./jobSeekerLayout.json";
 import employerSidebar from "./employerSidebar.json";
+import spinner from "./spinner.json";
 
 // App folder translations
 import notFound from "./notFound.json";
@@ -78,6 +86,8 @@ export default {
   navbar,
   banner,
   bannerExtended,
+  about,
+  contactUs,
   jobSearchFilter,
   jobSearchFilterExtended,
   registerButton,
@@ -96,6 +106,10 @@ export default {
   filterJobs,
   jobCard,
   loginPage,
+  displayDocuments,
+  displayResume,
+  previewFile,
+  publicProfileJobSeeker,
   jobSupportFeatures,
   qAndA,
   contactUsModal,
@@ -105,7 +119,9 @@ export default {
   addSkill,
   adminSidebar,
   jobSeekerDashboard,
+  jobSeekerLayout,
   employerSidebar,
+  spinner,
 
   // App folder namespaces
   notFound,

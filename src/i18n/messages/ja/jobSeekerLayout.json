@@ -1,0 +1,9 @@
+{
+  "title": "求職者",
+  "items": {
+    "profile": "プロフィール",
+    "appliedJobs": "応募済み求人",
+    "documents": "書類",
+    "createResume": "履歴書を作成"
+  }
+}

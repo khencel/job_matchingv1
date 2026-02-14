@@ -1,0 +1,9 @@
+{
+  "title": "JOB SEEKER",
+  "items": {
+    "profile": "Profile",
+    "appliedJobs": "Applied Jobs",
+    "documents": "Documents",
+    "createResume": "Create Resume"
+  }
+}

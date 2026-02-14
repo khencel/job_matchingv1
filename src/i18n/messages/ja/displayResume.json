@@ -1,0 +1,10 @@
+{
+  "title": "履歴書",
+  "previewTitle": "履歴書プレビュー",
+  "empty": {
+    "publicTitle": "履歴書が作成されていません。",
+    "privateTitle": "まだ履歴書が作成されていません",
+    "privateDescription": "履歴書を作成して採用される可能性を高めましょう。履歴書があるプロフィールは閲覧されやすくなります。",
+    "createButton": "履歴書を作成"
+  }
+}

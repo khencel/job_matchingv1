@@ -1,0 +1,12 @@
+{
+  "title": "アップロード済み書類",
+  "emptyState": "まだ書類がアップロードされていません",
+  "table": {
+    "fileName": "ファイル名",
+    "fileType": "ファイル種別",
+    "actions": "操作"
+  },
+  "fallback": {
+    "fileName": "ドキュメント"
+  }
+}
