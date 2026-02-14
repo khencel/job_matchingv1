@@ -1,8 +1,12 @@
+"use client";
+
 import FormattedDate from "@/components/date_format";
 import EditModalProfile from "./editModal";
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function Header({ data }: { data: any }) {
+  const t = useTranslations("employerProfileHeader");
   const [showModal, setShowModal] = useState(false);
 
   const handleEditModal = () => setShowModal(true);
@@ -15,10 +19,10 @@ export default function Header({ data }: { data: any }) {
   // ✅ design-safe display only (no functional removal)
   const industryText = useMemo(() => {
     const v = companyInfo?.company_industry;
-    if (!v) return "—";
+    if (!v) return t("fallback.notSpecified");
     if (Array.isArray(v)) return v.join(", ");
     return String(v);
-  }, [companyInfo?.company_industry]);
+  }, [companyInfo?.company_industry, t]);
 
   return (
     <>
@@ -71,7 +75,7 @@ export default function Header({ data }: { data: any }) {
 
               <div>
                 <div className="d-flex align-items-center gap-2 flex-wrap">
-                  <h2 className="m-0 fw-bold text-white">Employer Profile</h2>
+                  <h2 className="m-0 fw-bold text-white">{t("heading")}</h2>
                   <span
                     className="badge rounded-pill"
                     style={{
@@ -81,15 +85,15 @@ export default function Header({ data }: { data: any }) {
                       backdropFilter: "blur(6px)",
                     }}
                   >
-                    {companyInfo?.region || "No location"}
+                    {companyInfo?.region || t("fallback.noLocation")}
                   </span>
                 </div>
 
                 <div className="mt-2">
                   <div className="fw-semibold" style={{ color: "#0b5ed7" }}>
-                    {companyInfo?.name || "—"}
+                    {companyInfo?.name || t("fallback.notSpecified")}
                   </div>
-                  <div className="small text-muted">{data.email || "—"}</div>
+                  <div className="small text-muted">{data.email || t("fallback.notSpecified")}</div>
                 </div>
               </div>
             </div>
@@ -100,7 +104,7 @@ export default function Header({ data }: { data: any }) {
                 className="btn btn-primary-custom rounded-3 px-4 shadow-sm"
                 onClick={handleEditModal}
               >
-                Edit Profile
+                {t("buttons.editProfile")}
               </button>
             </div>
           </div>
@@ -116,28 +120,28 @@ export default function Header({ data }: { data: any }) {
           >
             <div className="row g-3">
               <div className="col-6 col-lg-3">
-                <div className="small text-muted">Founded</div>
+                <div className="small text-muted">{t("stats.founded")}</div>
                 <div className="fw-semibold text-dark">
                   <FormattedDate date={companyInfo.founded} />
                 </div>
               </div>
 
               <div className="col-6 col-lg-3">
-                <div className="small text-muted">Employees</div>
+                <div className="small text-muted">{t("stats.employees")}</div>
                 <div className="fw-semibold text-dark">
-                  {companyInfo.no_of_emp || "—"}
+                  {companyInfo.no_of_emp || t("fallback.notSpecified")}
                 </div>
               </div>
 
               <div className="col-6 col-lg-3">
-                <div className="small text-muted">Location</div>
+                <div className="small text-muted">{t("stats.location")}</div>
                 <div className="fw-semibold text-dark">
-                  {companyInfo.region || "—"}
+                  {companyInfo.region || t("fallback.notSpecified")}
                 </div>
               </div>
 
               <div className="col-6 col-lg-3">
-                <div className="small text-muted">Industry</div>
+                <div className="small text-muted">{t("stats.industry")}</div>
                 <div className="fw-semibold text-dark text-truncate">
                   {industryText}
                 </div>

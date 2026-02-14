@@ -1,0 +1,14 @@
+{
+  "companyProfile": {
+    "title": "Company Profile",
+    "empty": "No company profile available."
+  },
+  "contact": {
+    "title": "Contact",
+    "labels": {
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "fallback": "—"
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "loading": "処理中... お待ちください",
+  "title": "企業向け | 直接アプローチ（海外・国内採用）",
+  "lead": {
+    "line1": "本フォームは外国人材の採用を検討している企業向けです。",
+    "line2": "海外からの新規採用、国内在住者の採用の両方についてご相談いただけます。"
+  },
+  "sections": {
+    "companyInfo": "1) 会社情報",
+    "hiringNeeds": "2) 採用ニーズ（必須）",
+    "readiness": "3) 受入れ準備・条件",
+    "contact": "4) 連絡希望・備考"
+  },
+  "labels": {
+    "companyName": "会社名（必須）",
+    "prefecture": "都道府県（必須）",
+    "contactName": "担当者名（必須）",
+    "contactTitle": "役職",
+    "phone": "電話番号（必須）",
+    "email": "メールアドレス（必須）",
+    "companyUrl": "会社Webサイト",
+    "industry": "業種",
+    "needs": "必要な採用（必須）",
+    "role": "対象職種（必須）",
+    "visa": "在留資格 / プログラム（予定）",
+    "headcount": "人数（必須）",
+    "startTiming": "希望入社時期",
+    "preferredNationality": "希望国籍",
+    "workCity": "勤務地（市区町村 / エリア）",
+    "employmentType": "雇用形態",
+    "salary": "給与レンジ（月給/時給）",
+    "jpLevel": "必要な日本語レベル",
+    "experience": "経験要件",
+    "housing": "住居 / 寮",
+    "shuttle": "送迎",
+    "interviewMethod": "面接方法（海外採用）",
+    "acceptConfirm": "内定確約（海外採用）",
+    "requirements": "人物像 / 必須条件",
+    "contactMethod": "希望連絡方法",
+    "contactTime": "希望連絡時間",
+    "message": "メッセージ（任意）"
+  },
+  "placeholders": {
+    "companyName": "例：ABC株式会社",
+    "contactName": "例：山田太郎",
+    "jobTitle": "例：人事マネージャー / 採用担当",
+    "phone": "例：090-xxxx-xxxx",
+    "email": "example@company.com",
+    "companyUrl": "https://...",
+    "industry": "例：宿泊 / 製造 / 介護 / 外食",
+    "role": "例：介護 / ホテルフロント / 食品工場ライン",
+    "startTiming": "例：3月上旬 / 4月 / ASAP",
+    "preferredNationality": "例：フィリピン / ベトナム / ミャンマー / 希望なし",
+    "workCity": "例：名古屋 / 大阪市",
+    "salary": "例：月給22万円以上 / 時給1200円以上",
+    "requirements": "例：経験、資格、シフト、制約など",
+    "contactTime": "例：平日10:00-17:00",
+    "message": "例：急募で3名必要。寮あり。オンライン面接希望。"
+  },
+  "selectPlaceholder": "選択してください",
+  "needsOptions": {
+    "overseasNew": "海外新規採用（面接→内定確約）",
+    "domesticChange": "国内在住者の採用（転職）",
+    "both": "両方検討",
+    "consult": "まずは相談"
+  },
+  "needsHint": "※海外採用を選択した場合、受入れ準備（住居、開始時期など）もご記載ください。",
+  "visaOptions": {
+    "ssw": "特定技能",
+    "titp": "技能実習",
+    "gijinkoku": "技術・人文知識・国際業務",
+    "student": "留学生アルバイト",
+    "unknown": "未定（相談）"
+  },
+  "headcountOptions": {
+    "one": "1",
+    "two": "2",
+    "three": "3",
+    "fourFive": "4-5",
+    "sixTen": "6-10",
+    "tenPlus": "10+"
+  },
+  "preferredNationalityHint": "※複数可。特にない場合は「希望なし」と記載してください。",
+  "employmentOptions": {
+    "fullTime": "正社員",
+    "contract": "契約社員",
+    "dispatch": "派遣",
+    "partTime": "パート",
+    "shift": "シフト"
+  },
+  "jpLevelOptions": {
+    "n5": "N5〜",
+    "n4": "N4〜",
+    "n3": "N3〜",
+    "n2": "N2〜",
+    "n1": "N1〜",
+    "any": "不問"
+  },
+  "experienceOptions": {
+    "required": "必須",
+    "preferred": "あれば尚可",
+    "ok": "未経験可",
+    "consult": "相談"
+  },
+  "housingOptions": {
+    "dorm": "寮あり",
+    "company": "社宅",
+    "allowance": "住宅手当",
+    "none": "なし（相談）"
+  },
+  "yesNoOptions": {
+    "yes": "はい",
+    "no": "いいえ",
+    "consult": "相談"
+  },
+  "interviewOptions": {
+    "online": "オンライン",
+    "local": "現地（エージェント経由）",
+    "either": "どちらでも"
+  },
+  "acceptOptions": {
+    "yes": "確約（承認済み / 枠あり）",
+    "maybe": "可能性あり（条件次第）",
+    "consult": "検討中（相談）"
+  },
+  "acceptHint": "※「海外新規採用（面接→内定確約）」に関する項目です。",
+  "contactMethodOptions": {
+    "phone": "電話",
+    "email": "メール",
+    "online": "オンライン面談"
+  },
+  "buttons": {
+    "clear": "クリア",
+    "submit": "送信"
+  },
+  "toasts": {
+    "invalidTitle": "入力エラー",
+    "invalidMessage": "必須項目を入力してください。"
+  },
+  "confirm": {
+    "title": "よろしいですか？",
+    "message": "このフォームはGNIにメール送信されます。"
+  },
+  "prefectures": {
+    "hokkaido": "北海道",
+    "aomori": "青森県",
+    "iwate": "岩手県",
+    "miyagi": "宮城県",
+    "akita": "秋田県",
+    "yamagata": "山形県",
+    "fukushima": "福島県",
+    "ibaraki": "茨城県",
+    "tochigi": "栃木県",
+    "gunma": "群馬県",
+    "saitama": "埼玉県",
+    "chiba": "千葉県",
+    "tokyo": "東京都",
+    "kanagawa": "神奈川県",
+    "niigata": "新潟県",
+    "toyama": "富山県",
+    "ishikawa": "石川県",
+    "fukui": "福井県",
+    "yamanashi": "山梨県",
+    "nagano": "長野県",
+    "gifu": "岐阜県",
+    "shizuoka": "静岡県",
+    "aichi": "愛知県",
+    "mie": "三重県",
+    "shiga": "滋賀県",
+    "kyoto": "京都府",
+    "osaka": "大阪府",
+    "hyogo": "兵庫県",
+    "nara": "奈良県",
+    "wakayama": "和歌山県",
+    "tottori": "鳥取県",
+    "shimane": "島根県",
+    "okayama": "岡山県",
+    "hiroshima": "広島県",
+    "yamaguchi": "山口県",
+    "tokushima": "徳島県",
+    "kagawa": "香川県",
+    "ehime": "愛媛県",
+    "kochi": "高知県",
+    "fukuoka": "福岡県",
+    "saga": "佐賀県",
+    "nagasaki": "長崎県",
+    "kumamoto": "熊本県",
+    "oita": "大分県",
+    "miyazaki": "宮崎県",
+    "kagoshima": "鹿児島県",
+    "okinawa": "沖縄県"
+  }
+}

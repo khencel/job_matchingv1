@@ -1,0 +1,193 @@
+{
+  "loading": "Processing... Please wait",
+  "title": "For Companies | Direct Approach (Overseas & Domestic Hiring)",
+  "lead": {
+    "line1": "This form is for companies considering hiring foreign talent.",
+    "line2": "You can consult about both overseas new hiring and hiring candidates already in Japan."
+  },
+  "sections": {
+    "companyInfo": "1) Company information",
+    "hiringNeeds": "2) Hiring needs (Required)",
+    "readiness": "3) Readiness & conditions",
+    "contact": "4) Contact preference & notes"
+  },
+  "labels": {
+    "companyName": "Company name (Required)",
+    "prefecture": "Prefecture (Required)",
+    "contactName": "Contact person (Required)",
+    "contactTitle": "Job title",
+    "phone": "Phone (Required)",
+    "email": "Email (Required)",
+    "companyUrl": "Company website",
+    "industry": "Industry",
+    "needs": "What you need (Required)",
+    "role": "Target job/role (Required)",
+    "visa": "Visa / program (planned)",
+    "headcount": "Headcount (Required)",
+    "startTiming": "Preferred start timing",
+    "preferredNationality": "Preferred nationality",
+    "workCity": "Work location (city/area)",
+    "employmentType": "Employment type",
+    "salary": "Salary range (monthly/hourly)",
+    "jpLevel": "Required Japanese level",
+    "experience": "Experience requirement",
+    "housing": "Housing / dorm",
+    "shuttle": "Shuttle",
+    "interviewMethod": "Interview method (for overseas hiring)",
+    "acceptConfirm": "Acceptance confirmation (overseas hiring)",
+    "requirements": "Candidate profile / must-have conditions",
+    "contactMethod": "Preferred contact method",
+    "contactTime": "Preferred contact time",
+    "message": "Message (optional)"
+  },
+  "placeholders": {
+    "companyName": "e.g., ABC Co., Ltd.",
+    "contactName": "e.g., Taro Yamada",
+    "jobTitle": "e.g., HR Manager / Recruiter",
+    "phone": "e.g., +81-90-xxxx-xxxx",
+    "email": "example@company.com",
+    "companyUrl": "https://...",
+    "industry": "e.g., Hospitality / Manufacturing / Care / Restaurant",
+    "role": "e.g., Care / Hotel front desk / Food factory line",
+    "startTiming": "e.g., Early March / April / ASAP",
+    "preferredNationality": "e.g., Philippines / Vietnam / Myanmar / No preference",
+    "workCity": "e.g., Nagoya / Osaka city",
+    "salary": "e.g., JPY 220,000+/month or JPY 1,200+/hour",
+    "requirements": "e.g., experience, certificates, shifts, constraints, etc.",
+    "contactTime": "e.g., Weekdays 10:00-17:00",
+    "message": "e.g., Need 3 people urgently. Dorm available. Prefer online interviews."
+  },
+  "selectPlaceholder": "Please select",
+  "needsOptions": {
+    "overseasNew": "Overseas new hiring (Interview -> guaranteed acceptance)",
+    "domesticChange": "Hire candidates already in Japan (job change)",
+    "both": "Considering both",
+    "consult": "Consultation first"
+  },
+  "needsHint": "*If you select overseas hiring, please also describe readiness (housing, start timing, etc.).",
+  "visaOptions": {
+    "ssw": "Specified Skilled Worker (SSW)",
+    "titp": "Technical Intern Training",
+    "gijinkoku": "Engineer/Specialist in Humanities/Intl Services",
+    "student": "Student part-time",
+    "unknown": "Not sure (consult)"
+  },
+  "headcountOptions": {
+    "one": "1",
+    "two": "2",
+    "three": "3",
+    "fourFive": "4-5",
+    "sixTen": "6-10",
+    "tenPlus": "10+"
+  },
+  "preferredNationalityHint": "*Multiple allowed. If none, write \"No preference\".",
+  "employmentOptions": {
+    "fullTime": "Full-time",
+    "contract": "Contract",
+    "dispatch": "Dispatch",
+    "partTime": "Part-time",
+    "shift": "Shift"
+  },
+  "jpLevelOptions": {
+    "n5": "N5~",
+    "n4": "N4~",
+    "n3": "N3~",
+    "n2": "N2~",
+    "n1": "N1~",
+    "any": "Any"
+  },
+  "experienceOptions": {
+    "required": "Required",
+    "preferred": "Preferred",
+    "ok": "No experience OK",
+    "consult": "Consult"
+  },
+  "housingOptions": {
+    "dorm": "Dorm available",
+    "company": "Company housing",
+    "allowance": "Housing allowance",
+    "none": "None (consult)"
+  },
+  "yesNoOptions": {
+    "yes": "Yes",
+    "no": "No",
+    "consult": "Consult"
+  },
+  "interviewOptions": {
+    "online": "Online",
+    "local": "On-site (via agency)",
+    "either": "Either"
+  },
+  "acceptOptions": {
+    "yes": "Guaranteed (approved / slots available)",
+    "maybe": "Likely (depends on conditions)",
+    "consult": "Considering (consult)"
+  },
+  "acceptHint": "*This relates to overseas new hiring (guaranteed acceptance).",
+  "contactMethodOptions": {
+    "phone": "Phone",
+    "email": "Email",
+    "online": "Online meeting"
+  },
+  "buttons": {
+    "clear": "Clear",
+    "submit": "Submit"
+  },
+  "toasts": {
+    "invalidTitle": "Invalid Input",
+    "invalidMessage": "Some field are required!"
+  },
+  "confirm": {
+    "title": "Are you sure?",
+    "message": "This form will be sent to GNI via email."
+  },
+  "prefectures": {
+    "hokkaido": "Hokkaido",
+    "aomori": "Aomori",
+    "iwate": "Iwate",
+    "miyagi": "Miyagi",
+    "akita": "Akita",
+    "yamagata": "Yamagata",
+    "fukushima": "Fukushima",
+    "ibaraki": "Ibaraki",
+    "tochigi": "Tochigi",
+    "gunma": "Gunma",
+    "saitama": "Saitama",
+    "chiba": "Chiba",
+    "tokyo": "Tokyo",
+    "kanagawa": "Kanagawa",
+    "niigata": "Niigata",
+    "toyama": "Toyama",
+    "ishikawa": "Ishikawa",
+    "fukui": "Fukui",
+    "yamanashi": "Yamanashi",
+    "nagano": "Nagano",
+    "gifu": "Gifu",
+    "shizuoka": "Shizuoka",
+    "aichi": "Aichi",
+    "mie": "Mie",
+    "shiga": "Shiga",
+    "kyoto": "Kyoto",
+    "osaka": "Osaka",
+    "hyogo": "Hyogo",
+    "nara": "Nara",
+    "wakayama": "Wakayama",
+    "tottori": "Tottori",
+    "shimane": "Shimane",
+    "okayama": "Okayama",
+    "hiroshima": "Hiroshima",
+    "yamaguchi": "Yamaguchi",
+    "tokushima": "Tokushima",
+    "kagawa": "Kagawa",
+    "ehime": "Ehime",
+    "kochi": "Kochi",
+    "fukuoka": "Fukuoka",
+    "saga": "Saga",
+    "nagasaki": "Nagasaki",
+    "kumamoto": "Kumamoto",
+    "oita": "Oita",
+    "miyazaki": "Miyazaki",
+    "kagoshima": "Kagoshima",
+    "okinawa": "Okinawa"
+  }
+}

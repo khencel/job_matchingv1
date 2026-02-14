@@ -1,4 +1,58 @@
 {
   "greeting": "Hello",
-  "subtitle": "Here is your daily activities and application"
+  "subtitle": "Here is your daily activities and application",
+  "statusActivity": {
+    "totalUsers": "Total Users",
+    "activeJobs": "Active Jobs",
+    "interviews": "Interviews",
+    "companies": "Companies"
+  },
+  "recentActivity": {
+    "title": "Recent Activity",
+    "items": {
+      "applied": "{name} applied for {role}",
+      "hired": "You hired {name} for {role}"
+    },
+    "viewAll": "View All Activity"
+  },
+  "recentPostJobs": {
+    "title": "Recent Posted Jobs",
+    "viewAll": "View all",
+    "table": {
+      "jobs": "JOBS",
+      "status": "STATUS",
+      "applications": "APPLICATIONS",
+      "actions": "ACTIONS"
+    },
+    "status": {
+      "active": "Active",
+      "expired": "Expired"
+    },
+    "buttons": {
+      "viewApplications": "View Applications"
+    },
+    "jobTypes": {
+      "fullTime": "Full Time",
+      "partTime": "Part Time",
+      "internship": "Internship"
+    },
+    "time": {
+      "daysAgo": "{count} days ago",
+      "date": "{date}"
+    },
+    "applicationsCount": "{count} Applications"
+  },
+  "chart": {
+    "title": "Applicants",
+    "period": "Last 2 months",
+    "series": {
+      "applicantsA": "Applicants A",
+      "applicantsB": "Applicants B"
+    },
+    "months": {
+      "october": "October",
+      "november": "November",
+      "december": "December"
+    }
+  }
 }

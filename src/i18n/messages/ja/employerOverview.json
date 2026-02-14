@@ -1,4 +1,61 @@
 {
   "greeting": "こんにちは",
   "subtitle": "ここにあなたの日々の活動と応募があります"
+{
+  "greeting": "こんにちは",
+  "subtitle": "日々の活動と応募状況を確認できます",
+  "statusActivity": {
+    "totalUsers": "総ユーザー数",
+    "activeJobs": "公開中の求人",
+    "interviews": "面接",
+    "companies": "企業"
+  },
+  "recentActivity": {
+    "title": "最近のアクティビティ",
+    "items": {
+      "applied": "{name}が{role}に応募しました",
+      "hired": "{name}を{role}として採用しました"
+    },
+    "viewAll": "すべてのアクティビティを見る"
+  },
+  "recentPostJobs": {
+    "title": "最近掲載した求人",
+    "viewAll": "すべて表示",
+    "table": {
+      "jobs": "求人",
+      "status": "ステータス",
+      "applications": "応募",
+      "actions": "操作"
+    },
+    "status": {
+      "active": "公開中",
+      "expired": "期限切れ"
+    },
+    "buttons": {
+      "viewApplications": "応募を見る"
+    },
+    "jobTypes": {
+      "fullTime": "フルタイム",
+      "partTime": "パートタイム",
+      "internship": "インターン"
+    },
+    "time": {
+      "daysAgo": "{count}日前",
+      "date": "{date}"
+    },
+    "applicationsCount": "応募 {count}件"
+  },
+  "chart": {
+    "title": "応募者",
+    "period": "直近2か月",
+    "series": {
+      "applicantsA": "応募者A",
+      "applicantsB": "応募者B"
+    },
+    "months": {
+      "october": "10月",
+      "november": "11月",
+      "december": "12月"
+    }
+  }
 }

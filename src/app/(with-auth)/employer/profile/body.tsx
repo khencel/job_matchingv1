@@ -1,4 +1,9 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 export default function Body({ data }: { data: any }) {
+  const t = useTranslations("employerProfileBody");
   const companyInfo = data.userDetails_emp?.company_information || {};
 
   return (
@@ -20,14 +25,14 @@ export default function Body({ data }: { data: any }) {
                     marginRight: 10,
                   }}
                 />
-                <h3 className="mb-0 fw-bold">Company Profile</h3>
+                <h3 className="mb-0 fw-bold">{t("companyProfile.title")}</h3>
               </div>
 
               <div
                 className="lh-lg text-secondary"
                 style={{ fontSize: "15px" }}
                 dangerouslySetInnerHTML={{
-                  __html: companyInfo.profile || "No company profile available.",
+                  __html: companyInfo.profile || t("companyProfile.empty"),
                 }}
               />
             </div>
@@ -47,21 +52,21 @@ export default function Body({ data }: { data: any }) {
                     marginRight: 10,
                   }}
                 />
-                <h3 className="mb-0 fw-bold">Contact</h3>
+                <h3 className="mb-0 fw-bold">{t("contact.title")}</h3>
               </div>
 
               <div className="row gy-3">
                 <div className="col-md-6">
-                  <div className="text-muted small">Email</div>
+                  <div className="text-muted small">{t("contact.labels.email")}</div>
                   <div className="fw-semibold">
-                    {data.email || "—"}
+                    {data.email || t("contact.fallback")}
                   </div>
                 </div>
 
                 <div className="col-md-6">
-                  <div className="text-muted small">Phone</div>
+                  <div className="text-muted small">{t("contact.labels.phone")}</div>
                   <div className="fw-semibold">
-                    {companyInfo.phone || "—"}
+                    {companyInfo.phone || t("contact.fallback")}
                   </div>
                 </div>
               </div>

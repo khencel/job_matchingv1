@@ -1,0 +1,14 @@
+{
+  "companyProfile": {
+    "title": "会社プロフィール",
+    "empty": "会社プロフィールがありません。"
+  },
+  "contact": {
+    "title": "連絡先",
+    "labels": {
+      "email": "メール",
+      "phone": "電話"
+    },
+    "fallback": "—"
+  }
+}

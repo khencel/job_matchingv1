@@ -32,6 +32,7 @@ import qAndA from "./qAndA.json";
 import contactUsModal from "./contactUsModal.json";
 import employerPostJobHeader from "./employerPostJobHeader.json";
 import employerProfileHeader from "./employerProfileHeader.json";
+import employerProfileBody from "./employerProfileBody.json";
 import addSkill from "./addSkill.json";
 import adminSidebar from "./adminSidebar.json";
 import jobSeekerDashboard from "./jobSeekerDashboard.json";
@@ -60,6 +61,7 @@ import employerJobListingEditModal from "./employerJobListingEditModal.json";
 import employerApplicants from "./employerApplicants.json";
 import changePasswordModal from "./changePasswordModal.json";
 import jobListFilter from "./jobListFilter.json";
+import registrationEmployerPage from "./registrationEmployerPage.json";
 
 export default {
   // Spread common/auth translations into root
@@ -92,6 +94,7 @@ export default {
   contactUsModal,
   employerPostJobHeader,
   employerProfileHeader,
+  employerProfileBody,
   addSkill,
   adminSidebar,
   jobSeekerDashboard,
@@ -120,4 +123,5 @@ export default {
   employerApplicants,
   changePasswordModal,
   jobListFilter,
+  registrationEmployerPage,
 };

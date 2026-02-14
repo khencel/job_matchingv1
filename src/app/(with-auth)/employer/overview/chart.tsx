@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { useTranslations } from "next-intl";
 
 ChartJS.register(
   LineElement,
@@ -21,11 +22,17 @@ ChartJS.register(
 );
 
 export default function ApplicantsChart() {
+  const t = useTranslations("employerOverview");
+
   const data = {
-    labels: ["October", "November", "December"],
+    labels: [
+      t("chart.months.october"),
+      t("chart.months.november"),
+      t("chart.months.december"),
+    ],
     datasets: [
       {
-        label: "Applicants A",
+        label: t("chart.series.applicantsA"),
         data: [1.2, 1.3, 1.9],
         borderColor: "#0d6efd",
         backgroundColor: "transparent",
@@ -33,7 +40,7 @@ export default function ApplicantsChart() {
         pointRadius: 0,
       },
       {
-        label: "Applicants B",
+        label: t("chart.series.applicantsB"),
         data: [0.7, 1.2, 1.4],
         borderColor: "#fd7e14",
         backgroundColor: "transparent",
@@ -80,9 +87,9 @@ export default function ApplicantsChart() {
     >
       {/* Header */}
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <h6 className="mb-0 fw-bold">Applicants</h6>
+        <h6 className="mb-0 fw-bold">{t("chart.title")}</h6>
         <small className="text-muted">
-          Last 2 months ⌄
+          {t("chart.period")} ⌄
         </small>
       </div>
 
