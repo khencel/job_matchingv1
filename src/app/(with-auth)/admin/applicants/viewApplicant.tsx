@@ -1,3 +1,5 @@
+"use client";
+
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { AddButton } from '@/components/Button';
@@ -9,6 +11,7 @@ import { GiGraduateCap } from "react-icons/gi";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { useState } from 'react';
 import ViewFile from './viewFile';
+import { useTranslations } from "next-intl";
 
 interface ViewApplicantProps {
     handleShow: boolean;
@@ -17,6 +20,7 @@ interface ViewApplicantProps {
 }
 
 export default function ViewApplicant({handleShow, handleClose, data}: ViewApplicantProps){
+    const t = useTranslations("adminApplicants");
     
     const userdata = data?.user?.userDetails;
     const [viewFile, setViewFile] = useState(false)
@@ -26,7 +30,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
         const baseUrl = process.env.NEXT_PUBLIC_API_CONTENT_URL;
         const filePath = data?.user?.resume?.resume;
 
-        if (!filePath) return alert("Walang resume na ma-download.");
+        if (!filePath) return alert(t("applicantDetails.fallbacks.noResume"));
 
         const fileUrl = `${baseUrl}${filePath}`;
 
@@ -52,7 +56,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                 size="xl"
             >
                 <Modal.Header closeButton>
-                <Modal.Title>Applicant Details</Modal.Title>
+                <Modal.Title>{t("applicantDetails.title")}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="row">
@@ -63,7 +67,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                         </div>
                         <div className="col-10 p-3">
                             <h5><strong className='text-capitalize'>{userdata?.firstName} {userdata?.lastName}</strong></h5>
-                            <small>Software Engineer</small>
+                            <small>{t("applicantDetails.roleFallback")}</small>
                         </div>
                     </div>
                     <div className="row">
@@ -71,22 +75,22 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                             
                             <div className="row mt-5">
                                 <div className="col">
-                                    <strong>BIOGRAPHY</strong>
+                                    <strong>{t("applicantDetails.sections.biography")}</strong>
                                     <br />
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore cum velit excepturi modi impedit nam distinctio voluptates totam at quidem, nulla temporibus aperiam, exercitationem obcaecati labore molestiae corporis tempora? Nam!
+                                    {t("applicantDetails.placeholders.biography")}
                                 </div>
                             </div>
 
                             <div className="row mt-5">
                                 <div className="col">
-                                    <strong>Cover Letter</strong>
+                                    <strong>{t("applicantDetails.sections.coverLetter")}</strong>
                                     <br />
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore cum velit excepturi modi impedit nam distinctio voluptates totam at quidem, nulla temporibus aperiam, exercitationem obcaecati labore molestiae corporis tempora? Nam!
+                                    {t("applicantDetails.placeholders.coverLetter")}
                                 </div>
                             </div>
 
                             <hr />
-                            <strong><h4>Documents</h4></strong>
+                            <strong><h4>{t("applicantDetails.sections.documents")}</h4></strong>
                             {
                                 data?.user?.documents?.map((item:any, index:number) => {
                                     let name = item.documents.split('/')
@@ -98,14 +102,16 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                                         <FaFileAlt style={{fontSize:"50px"}} />
                                                     </div>
                                                     <div className="col-3">
-                                                        <button onClick={() => handleViewFile(item.documents,'document')} className='btn btn-primary-custom'>View</button>
+                                                        <button onClick={() => handleViewFile(item.documents,'document')} className='btn btn-primary-custom'>
+                                                            {t("applicantDetails.labels.view")}
+                                                        </button>
                                                     </div>
                                                     <div className="col-6">
                                                         <small>
                                                             {name[2]}
                                                             <br />
                                                             <strong>
-                                                                PDF
+                                                                {t("applicantDetails.labels.pdf")}
                                                             </strong>
                                                         </small>
                                                     </div>
@@ -118,7 +124,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                             }
                             <hr />
                             <strong>
-                                <h4>Resume</h4>
+                                <h4>{t("applicantDetails.sections.resume")}</h4>
                             </strong>
                             <div className="row mt-4">
                                 <div className="col p-3 border rounded-3">
@@ -127,14 +133,16 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                             <FaFileAlt style={{fontSize:"50px"}} />
                                         </div>
                                         <div className="col-3">
-                                            <button onClick={() => handleViewFile(data?.user?.resume?.resume,'resume')} className='btn btn-primary-custom'>View</button>
+                                            <button onClick={() => handleViewFile(data?.user?.resume?.resume,'resume')} className='btn btn-primary-custom'>
+                                                {t("applicantDetails.labels.view")}
+                                            </button>
                                         </div>
                                         <div className="col-3">
                                             <small>
-                                                Custom Resume
+                                                {t("applicantDetails.labels.customResume")}
                                                 <br />
                                                 <strong>
-                                                    PDF
+                                                    {t("applicantDetails.labels.pdf")}
                                                 </strong>
                                             </small>
                                         </div>
@@ -154,7 +162,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                         <FaBirthdayCake className='text-primary' />
                                         <small>
                                             <br />
-                                            DATE OF BIRTH
+                                            {t("applicantDetails.labels.dateOfBirth")}
                                             <br />
                                             <strong><FormattedDate date={userdata?.birthdate} /></strong>
                                         </small>
@@ -164,7 +172,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                         <FaFileAlt  className='text-primary' />
                                         <small>
                                             <br />
-                                            VISA STATUS
+                                            {t("applicantDetails.labels.visaStatus")}
                                             <br />
                                             <strong>{userdata?.visaStatus}</strong>
                                         </small>
@@ -174,7 +182,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                         <FiLayers  className='text-primary' />
                                         <small>
                                             <br />
-                                            JAPANESE LANGUAGE LEVEL
+                                            {t("applicantDetails.labels.japaneseLevel")}
                                             <br />
                                             <strong>{userdata?.japaneseLevel}</strong>
                                         </small>
@@ -185,7 +193,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                         <FaMapMarkedAlt   className='text-primary' />
                                         <small>
                                             <br />
-                                            NATIONALITY
+                                            {t("applicantDetails.labels.nationality")}
                                             <br />
                                             <strong>{userdata?.nationality}</strong>
                                         </small>
@@ -195,7 +203,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                         <BsGenderAmbiguous  className='text-primary' />
                                         <small>
                                             <br />
-                                            GENDER
+                                            {t("applicantDetails.labels.gender")}
                                             <br />
                                             <strong>{userdata?.gender}</strong>
                                         </small>
@@ -205,7 +213,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                         <GiGraduateCap  className='text-primary' />
                                         <small>
                                             <br />
-                                            VOCATIONAL MAJOR
+                                            {t("applicantDetails.labels.vocationalMajor")}
                                             <br />
                                             <strong>{userdata?.highestEducation}</strong>
                                         </small>
@@ -216,7 +224,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
 
                             <div className="row mt-4">
                                 <div className="col p-3 border download-border-applicant rounded-3">
-                                    Contact Information
+                                    {t("applicantDetails.sections.contactInformation")}
                                     <br />
                                     <div className='row mt-3'>
                                         <div className="col-2 text-center">
@@ -224,7 +232,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                         </div>
                                         <div className="col-9">
                                             <small>
-                                                Location
+                                                {t("applicantDetails.labels.location")}
                                                 <br />
                                                 <strong>
                                                     {userdata?.currentPlaceResidence}
@@ -238,7 +246,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                         </div>
                                         <div className="col-9">
                                             <small>
-                                                TELEPHONE
+                                                {t("applicantDetails.labels.telephone")}
                                                 <br />
                                                 <strong>
                                                     {userdata?.contactNo}
@@ -252,10 +260,10 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                         </div>
                                         <div className="col-9">
                                             <small>
-                                                EMAIL ADDRESS
+                                                {t("applicantDetails.labels.emailAddress")}
                                                 <br />
                                                 <strong>
-                                                    {data?.user?.email || "No email"}
+                                                    {data?.user?.email || t("applicantDetails.fallbacks.noEmail")}
                                                 </strong>
                                             </small>
                                         </div>
@@ -266,10 +274,10 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                                         </div>
                                         <div className="col-9">
                                             <small>
-                                                FACEBOOK
+                                                {t("applicantDetails.labels.facebook")}
                                                 <br />
                                                 <strong>
-                                                    {userdata?.facebook || "No facebook"}
+                                                    {userdata?.facebook || t("applicantDetails.fallbacks.noFacebook")}
                                                 </strong>
                                             </small>
                                         </div>
@@ -282,7 +290,7 @@ export default function ViewApplicant({handleShow, handleClose, data}: ViewAppli
                 </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    {t("buttons.close")}
                 </Button>
                 
                 </Modal.Footer>

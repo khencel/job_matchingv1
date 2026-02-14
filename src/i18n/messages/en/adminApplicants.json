@@ -20,7 +20,76 @@
   },
   "buttons": {
     "viewEmployer": "View Employer",
-    "viewApplicant": "View Applicant"
+    "viewApplicant": "View Applicant",
+    "close": "Close"
+  },
+  "modal": {
+    "title": "Change Status",
+    "message": "Are you sure you want to change the status of this data?"
+  },
+  "toast": {
+    "title": "Change status",
+    "message": "Status of this record has been changed!"
+  },
+  "excel": {
+    "fileName": "Filtered_Applicants.xlsx",
+    "sheetName": "Applicants",
+    "headers": {
+      "firstName": "FIRST NAME",
+      "lastName": "LAST NAME",
+      "employer": "EMPLOYER",
+      "jobRole": "JOB ROLE"
+    }
+  },
+  "employerDetails": {
+    "titleFallback": "Employer Details",
+    "sections": {
+      "aboutCompany": "About Company",
+      "companyProfile": "Company Profile",
+      "jobPosts": "Job Posts by this Employer",
+      "position": "Position",
+      "salary": "Salary",
+      "employmentType": "Type of Employment",
+      "jobDescription": "Job Description",
+      "responsibility": "Responsibility",
+      "niceToHave": "Nice to Have",
+      "whoYouAre": "Who you are"
+    }
+  },
+  "applicantDetails": {
+    "title": "Applicant Details",
+    "roleFallback": "Software Engineer",
+    "sections": {
+      "biography": "BIOGRAPHY",
+      "coverLetter": "Cover Letter",
+      "documents": "Documents",
+      "resume": "Resume",
+      "contactInformation": "Contact Information"
+    },
+    "labels": {
+      "view": "View",
+      "pdf": "PDF",
+      "customResume": "Custom Resume",
+      "dateOfBirth": "DATE OF BIRTH",
+      "visaStatus": "VISA STATUS",
+      "japaneseLevel": "JAPANESE LANGUAGE LEVEL",
+      "nationality": "NATIONALITY",
+      "gender": "GENDER",
+      "vocationalMajor": "VOCATIONAL MAJOR",
+      "location": "Location",
+      "telephone": "TELEPHONE",
+      "emailAddress": "EMAIL ADDRESS",
+      "facebook": "FACEBOOK"
+    },
+    "placeholders": {
+      "biography": "Add a short biography for this applicant.",
+      "coverLetter": "Add a cover letter summary for this applicant."
+    },
+    "fallbacks": {
+      "noEmail": "No email",
+      "noFacebook": "No facebook",
+      "noResume": "No resume available to download."
+    }
   },
   "pagination": {
     "itemsPerPage": "Items per page:",

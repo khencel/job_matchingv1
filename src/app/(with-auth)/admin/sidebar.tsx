@@ -16,17 +16,19 @@ import{ PropsWithChildren} from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaFileMedical } from "react-icons/fa6";
+import { useTranslations } from "next-intl";
 
 
 const Sidebar = ({ children }: PropsWithChildren) => {
+  const t = useTranslations("adminSidebar");
   const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
   const menuItems = [
-    {label: "Overviews", icon:FiLayers, href: "/admin/overview"},
-    { label: "User Management", icon: FaUser, href: "/admin/users" },
+    {label: t("menuItems.overviews"), icon:FiLayers, href: "/admin/overview"},
+    { label: t("menuItems.userManagement"), icon: FaUser, href: "/admin/users" },
     // { label: "Employer List", icon: FaClipboardList, href: "/admin/applicants" },
-    { label: "Applicants", icon: FaPlus, href: "/admin/applicants" },
-    { label: "Settings", icon: FaBuilding, href: "/admin/job_listing" },
+    { label: t("menuItems.applicants"), icon: FaPlus, href: "/admin/applicants" },
+    { label: t("menuItems.settings"), icon: FaBuilding, href: "/admin/job_listing" },
   ];
 
   return (
@@ -35,7 +37,7 @@ const Sidebar = ({ children }: PropsWithChildren) => {
       <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
         <div className="sidebar-header">
           <h3 className="sidebar-title">
-            {!collapsed && "ADMIN DASHBOARD"}
+            {!collapsed && t("title")}
           </h3>
 
           <button

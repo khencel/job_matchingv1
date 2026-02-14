@@ -29,6 +29,10 @@
       "activate": "Activate",
       "deactivate": "Deactivate"
     },
+    "toast": {
+      "title": "Update Status",
+      "message": "User status updated successfully"
+    },
     "modal": {
       "title": "Change Status",
       "message": "Are you sure, Your want to change the status?"

@@ -19,8 +19,10 @@ import { fetchCurrentUser } from "@/redux/features/auth/auth_thunk";
 import { updateProfileThunk } from "@/redux/slices/updateProfile/updataProfileThunk";
 import { RegisterSuperVisoryData } from "@/types/super-visory";
 import { setSupervisoryField } from "@/redux/slices/updateProfile/updateProfileSlice";
+import { useTranslations } from "next-intl";
 
 export default function SuperVisoryProfilePage() {
+  const t = useTranslations("supervisoryProfile");
   const dispatch = useAppDispatch();
 
   const authUser = useAppSelector((s) => s.authState.user);
@@ -97,7 +99,7 @@ export default function SuperVisoryProfilePage() {
       return updateUser.companyInfo[field] || "";
     }
     // Fallback logic for authUser display...
-    return "N/A"; // Simplified for brevity
+    return t("fallback.notAvailable"); // Simplified for brevity
   };
 
   return (
@@ -120,14 +122,14 @@ export default function SuperVisoryProfilePage() {
                   {photoPreview ? (
                     <Image
                       src={photoPreview}
-                      alt="Preview"
+                      alt={t("previewAlt")}
                       fill
                       style={{ objectFit: "cover" }}
                     />
                   ) : authUser?.avatar ? (
                     <Image
                       src={authUser.avatar}
-                      alt="User"
+                      alt={t("avatarAlt")}
                       fill
                       style={{ objectFit: "cover" }}
                     />
@@ -164,11 +166,11 @@ export default function SuperVisoryProfilePage() {
                 <div>
                   <h2 className="fw-bold mb-1">
                     {authUser?.userDetails_supervisory?.contactPersonInfo
-                      ?.name || "N/A"}
+                      ?.name || t("fallback.notAvailable")}
                   </h2>
                   <p className="text-muted mb-2 fw-medium">
                     {authUser?.userDetails_supervisory?.companyInfo
-                      ?.companyName || "N/A"}
+                      ?.companyName || t("fallback.notAvailable")}
                   </p>
                 </div>
                 <div className="d-flex gap-2">
@@ -179,13 +181,13 @@ export default function SuperVisoryProfilePage() {
                         className="d-flex align-items-center gap-2"
                         onClick={handleEditToggle}
                       >
-                        <X size={16} /> Cancel
+                        <X size={16} /> {t("buttons.cancel")}
                       </Button>
                       <Button
                         className="btn-primary-custom d-flex align-items-center gap-2"
                         onClick={handleSaveProfile}
                       >
-                        <Save size={16} /> Save Changes
+                        <Save size={16} /> {t("buttons.saveChanges")}
                       </Button>
                     </>
                   ) : (
@@ -194,7 +196,7 @@ export default function SuperVisoryProfilePage() {
                       className="d-flex align-items-center gap-2"
                       onClick={handleEditToggle}
                     >
-                      <Edit2 size={16} /> Edit Profile
+                      <Edit2 size={16} /> {t("buttons.editProfile")}
                     </Button>
                   )}
                 </div>
@@ -210,7 +212,7 @@ export default function SuperVisoryProfilePage() {
           <Card className="border-0 shadow-sm h-100">
             <Card.Header className="bg-white border-0 pt-4 px-4 pb-0">
               <h5 className="fw-bold mb-0 d-flex align-items-center gap-2">
-                <Building2 size={20} /> Company Information
+                <Building2 size={20} /> {t("sections.companyInformation.title")}
               </h5>
             </Card.Header>
             <Card.Body className="p-4">
@@ -218,7 +220,7 @@ export default function SuperVisoryProfilePage() {
                 <Col md={6}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Company Name
+                      {t("sections.companyInformation.fields.companyName")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -242,7 +244,7 @@ export default function SuperVisoryProfilePage() {
                 <Col md={6}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Phonetic Name
+                      {t("sections.companyInformation.fields.phoneticName")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -269,7 +271,7 @@ export default function SuperVisoryProfilePage() {
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Industry
+                      {t("sections.companyInformation.fields.industry")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -293,7 +295,7 @@ export default function SuperVisoryProfilePage() {
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Capital
+                      {t("sections.companyInformation.fields.capital")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -318,7 +320,7 @@ export default function SuperVisoryProfilePage() {
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Year Founded
+                      {t("sections.companyInformation.fields.yearFounded")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -344,7 +346,7 @@ export default function SuperVisoryProfilePage() {
                 <Col md={6}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Representative Name
+                      {t("sections.companyInformation.fields.representativeName")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -368,7 +370,7 @@ export default function SuperVisoryProfilePage() {
                 <Col md={6}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Employees
+                      {t("sections.companyInformation.fields.employees")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -393,13 +395,13 @@ export default function SuperVisoryProfilePage() {
 
                 <Col md={12} className="mt-4">
                   <h6 className="fw-bold small text-primary mb-3">
-                    HEADQUARTERS ADDRESS
+                    {t("sections.headquartersAddress.title")}
                   </h6>
                 </Col>
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Prefecture
+                      {t("sections.headquartersAddress.fields.prefecture")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -426,7 +428,7 @@ export default function SuperVisoryProfilePage() {
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      City
+                      {t("sections.headquartersAddress.fields.city")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -451,7 +453,7 @@ export default function SuperVisoryProfilePage() {
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Street
+                      {t("sections.headquartersAddress.fields.street")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -477,7 +479,7 @@ export default function SuperVisoryProfilePage() {
                 <Col md={12}>
                   <Form.Group>
                     <Form.Label className="text-muted small fw-semibold">
-                      Business Description
+                      {t("sections.businessDescription.title")}
                     </Form.Label>
                     {isEditMode ? (
                       <Form.Control
@@ -513,13 +515,13 @@ export default function SuperVisoryProfilePage() {
             <Card className="border-0 shadow-sm">
               <Card.Header className="bg-white border-0 pt-4 px-4 pb-0">
                 <h6 className="fw-bold mb-0 d-flex align-items-center gap-2">
-                  <User size={18} /> Contact Person
+                  <User size={18} /> {t("sections.contactPerson.title")}
                 </h6>
               </Card.Header>
               <Card.Body className="p-4">
                 <div className="mb-3">
                   <Form.Label className="text-muted small fw-semibold">
-                    Full Name
+                    {t("sections.contactPerson.fields.fullName")}
                   </Form.Label>
                   {isEditMode ? (
                     <Form.Control
@@ -543,7 +545,7 @@ export default function SuperVisoryProfilePage() {
 
                 <div className="mb-3">
                   <Form.Label className="text-muted small fw-semibold">
-                    Department
+                    {t("sections.contactPerson.fields.department")}
                   </Form.Label>
                   {isEditMode ? (
                     <Form.Control
@@ -567,7 +569,7 @@ export default function SuperVisoryProfilePage() {
 
                 <div className="mb-3">
                   <Form.Label className="text-muted small fw-semibold">
-                    Phone Number
+                    {t("sections.contactPerson.fields.phoneNumber")}
                   </Form.Label>
                   {isEditMode ? (
                     <Form.Control
@@ -592,7 +594,7 @@ export default function SuperVisoryProfilePage() {
 
                 <div>
                   <Form.Label className="text-muted small fw-semibold">
-                    Email
+                    {t("sections.contactPerson.fields.email")}
                   </Form.Label>
                   {isEditMode ? (
                     <Form.Control

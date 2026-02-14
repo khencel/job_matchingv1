@@ -1,6 +1,9 @@
+"use client";
+
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { AddButton } from '@/components/Button';
+import { useTranslations } from "next-intl";
 
 
 interface ViewFileProps {
@@ -11,6 +14,7 @@ interface ViewFileProps {
 
 
 export default function ViewFile({ handleClose, handleShow, file }: ViewFileProps) {
+    const t = useTranslations("adminApplicants");
     return (
         <Modal size='xl' show={handleShow} onHide={handleClose}>
             <Modal.Body>
@@ -18,7 +22,7 @@ export default function ViewFile({ handleClose, handleShow, file }: ViewFileProp
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    {t("buttons.close")}
                 </Button>
                 
             </Modal.Footer>

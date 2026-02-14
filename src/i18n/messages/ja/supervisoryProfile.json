@@ -4,6 +4,11 @@
     "saveChanges": "変更を保存",
     "editProfile": "プロフィールを編集"
   },
+  "fallback": {
+    "notAvailable": "該当なし"
+  },
+  "previewAlt": "プレビュー",
+  "avatarAlt": "ユーザー",
   "sections": {
     "companyInformation": {
       "title": "会社情報",

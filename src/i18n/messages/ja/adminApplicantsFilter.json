@@ -1,5 +1,5 @@
 {
-  "title": "福利厚生を追加",
+  "title": "応募者をフィルター",
   "fields": {
     "company": {
       "label": "会社：",
@@ -38,5 +38,8 @@
   "buttons": {
     "close": "閉じる",
     "applyFilter": "フィルターを適用"
+  },
+  "options": {
+    "none": "なし"
   }
 }

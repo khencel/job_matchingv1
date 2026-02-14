@@ -20,7 +20,76 @@
   },
   "buttons": {
     "viewEmployer": "雇用主を見る",
-    "viewApplicant": "応募者を見る"
+    "viewApplicant": "応募者を見る",
+    "close": "閉じる"
+  },
+  "modal": {
+    "title": "ステータスを変更",
+    "message": "このデータのステータスを変更してもよろしいですか？"
+  },
+  "toast": {
+    "title": "ステータスを変更",
+    "message": "この記録のステータスが変更されました！"
+  },
+  "excel": {
+    "fileName": "Filtered_Applicants.xlsx",
+    "sheetName": "応募者",
+    "headers": {
+      "firstName": "名",
+      "lastName": "姓",
+      "employer": "雇用主",
+      "jobRole": "職種"
+    }
+  },
+  "employerDetails": {
+    "titleFallback": "雇用主の詳細",
+    "sections": {
+      "aboutCompany": "会社について",
+      "companyProfile": "会社プロフィール",
+      "jobPosts": "この雇用主の求人",
+      "position": "職種",
+      "salary": "給与",
+      "employmentType": "雇用形態",
+      "jobDescription": "仕事内容",
+      "responsibility": "責任",
+      "niceToHave": "望ましいスキル",
+      "whoYouAre": "求める人物像"
+    }
+  },
+  "applicantDetails": {
+    "title": "応募者の詳細",
+    "roleFallback": "ソフトウェアエンジニア",
+    "sections": {
+      "biography": "経歴",
+      "coverLetter": "カバーレター",
+      "documents": "書類",
+      "resume": "履歴書",
+      "contactInformation": "連絡先情報"
+    },
+    "labels": {
+      "view": "表示",
+      "pdf": "PDF",
+      "customResume": "カスタム履歴書",
+      "dateOfBirth": "生年月日",
+      "visaStatus": "ビザステータス",
+      "japaneseLevel": "日本語レベル",
+      "nationality": "国籍",
+      "gender": "性別",
+      "vocationalMajor": "最終学歴",
+      "location": "所在地",
+      "telephone": "電話番号",
+      "emailAddress": "メールアドレス",
+      "facebook": "Facebook"
+    },
+    "placeholders": {
+      "biography": "応募者の経歴を入力してください。",
+      "coverLetter": "応募者の志望動機を入力してください。"
+    },
+    "fallbacks": {
+      "noEmail": "メールアドレスなし",
+      "noFacebook": "Facebookなし",
+      "noResume": "ダウンロードできる履歴書はありません。"
+    }
   },
   "pagination": {
     "itemsPerPage": "ページあたりの項目数：",

@@ -1,5 +1,5 @@
 {
-  "title": "Add Perks & Benefits",
+  "title": "Filter Applicants",
   "fields": {
     "company": {
       "label": "Company:",
@@ -38,5 +38,8 @@
   "buttons": {
     "close": "Close",
     "applyFilter": "Apply Filter"
+  },
+  "options": {
+    "none": "None"
   }
 }

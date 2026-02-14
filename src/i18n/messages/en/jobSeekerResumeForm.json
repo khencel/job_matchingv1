@@ -36,6 +36,7 @@
   "placeholders": {
     "fullName": "e.g. Jane Doe",
     "namePhonetic": "e.g. ジェーンドウ",
+    "select": "Select",
     "postalCode": "123-4567",
     "preference": "Add preference",
     "reasons": "Share your motivation or key points"

@@ -48,9 +48,11 @@ import companyProfilePage from "./companyProfilePage.json";
 import adminUsers from "./adminUsers.json";
 import adminApplicants from "./adminApplicants.json";
 import adminApplicantsFilter from "./adminApplicantsFilter.json";
+import adminSettings from "./adminSettings.json";
 import supervisoryOverview from "./supervisoryOverview.json";
 import supervisoryApplicants from "./supervisoryApplicants.json";
 import supervisoryProfile from "./supervisoryProfile.json";
+import supervisoryLayout from "./supervisoryLayout.json";
 import jobSeekerAppliedJobs from "./jobSeekerAppliedJobs.json";
 import jobSeekerDocuments from "./jobSeekerDocuments.json";
 import jobSeekerProfileExtended from "./jobSeekerProfileExtended.json";
@@ -115,9 +117,11 @@ export default {
   adminUsers,
   adminApplicants,
   adminApplicantsFilter,
+  adminSettings,
   supervisoryOverview,
   supervisoryApplicants,
   supervisoryProfile,
+  supervisoryLayout,
   jobSeekerAppliedJobs,
   jobSeekerDocuments,
   jobSeekerProfileExtended,

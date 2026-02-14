@@ -36,6 +36,7 @@
   "placeholders": {
     "fullName": "例：山田 太郎",
     "namePhonetic": "例：ヤマダ タロウ",
+    "select": "選択してください",
     "postalCode": "123-4567",
     "preference": "希望条件を追加",
     "reasons": "志望動機やポイントを記入"

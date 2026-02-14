@@ -18,6 +18,7 @@ import ViewApplicant from "./viewApplicant";
 import { popup } from "@/helper/pop_up";
 import { showSuccessToast } from "@/app/(util)/toaster";
 import FilterModal from "./filterModal";
+import { useTranslations } from "next-intl";
 
 import * as XLSX from "xlsx-js-style";
 import { saveAs } from 'file-saver';
@@ -25,6 +26,7 @@ import { saveAs } from 'file-saver';
 
 
 export default function AdminApplicants() {
+    const t = useTranslations("adminApplicants");
     const dispatch = useAppDispatch();
     const {items, status, error, next, previous, currentPage, pageSize, count, company, itemToPrint}= useSelector((state: RootState) => state.applicants);
     const [showEmployer, setShowEmployer] = useState(false);
@@ -89,10 +91,10 @@ export default function AdminApplicants() {
         if(itemToPrint.length === 0) return;
 
         const dataForExcel = itemToPrint.map((item:any) => ({
-            "FIRST NAME": `${item.user.userDetails.firstName}`,
-            "LAST NAME": `${item.user.userDetails.lastName}`,
-            "EMPLOYER": `${item.job_post.employerDetails.userDetails_emp.company_information.name}`,
-            "JOB ROLE": `${item.job_post.jobPostDetails.title}`,
+            [t("excel.headers.firstName")]: `${item.user.userDetails.firstName}`,
+            [t("excel.headers.lastName")]: `${item.user.userDetails.lastName}`,
+            [t("excel.headers.employer")]: `${item.job_post.employerDetails.userDetails_emp.company_information.name}`,
+            [t("excel.headers.jobRole")]: `${item.job_post.jobPostDetails.title}`,
         }));
 
         const worksheet = XLSX.utils.json_to_sheet(dataForExcel);
@@ -118,17 +120,17 @@ export default function AdminApplicants() {
         });
         
         const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Applicants");
+        XLSX.utils.book_append_sheet(workbook, worksheet, t("excel.sheetName"));
 
         const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
         const blob = new Blob([excelBuffer], { type: "application/octet-stream" });
-        saveAs(blob, "Filtered_Applicants.xlsx");
+        saveAs(blob, t("excel.fileName"));
     };
 
     const handleUpdateStatus = (id: number, status: string) => {
         popup({
-            title: "Change Status",
-            text: `Are you sure you want to change the status of this data?`,
+            title: t("modal.title"),
+            text: t("modal.message"),
             icon: "warning",
             onConfirm() {
             const payloadstatus = {
@@ -139,7 +141,7 @@ export default function AdminApplicants() {
             dispatch(updateStatus(payloadstatus))
                 .unwrap() 
                 .then(() => {
-                showSuccessToast("Change status", "Status of this record has been changed!");
+                showSuccessToast(t("toast.title"), t("toast.message"));
                
                 dispatch(fetchApplicants({ page: currentPage, pageSize, ...currentFilter }));
                 dispatch(fetchApplicantsNoPagination(currentFilter));
@@ -162,18 +164,18 @@ export default function AdminApplicants() {
         <>
             <div className="row standar-div">
                 <div className="col">
-                    <h5><strong><BiArrowBack /> Applicants Listing</strong></h5>
+                    <h5><strong><BiArrowBack /> {t("title")}</strong></h5>
                 </div>
                 <div className="col-2 border text-end me-2">
                     <button className="btn btn-success btn-sm" onClick={handleDownloadExcel}>
-                        Download Excel
+                        {t("downloadButton")}
                     </button>
                 </div>
             </div>
 
             <div className="row standar-div mt-2">
                 <div className="col">
-                    <strong>Users List ({count} total)</strong>
+                    <strong>{t("listTitle", { count })}</strong>
                 </div>
                 {/* <div className="col-2 text-end">
                     <FaSearch className="text-primary" /> Search Users
@@ -181,7 +183,7 @@ export default function AdminApplicants() {
                 
                 <div className="col-1 text-end">
                     <span style={{cursor:"pointer"}} onClick={handleFilter}>
-                        <FaSliders className="text-primary"  /> Filter
+                        <FaSliders className="text-primary"  /> {t("filterButton")}
                     </span>
                     
                 </div>
@@ -192,13 +194,13 @@ export default function AdminApplicants() {
                         <table className="table table-hover">
                             <thead>
                                 <tr>
-                                    <th className="text-start p-2">Full Name</th>
-                                    <th className="text-start p-2">Hiring Stage</th>
-                                    <th className="text-start p-2">Joined</th>
-                                    <th className="text-start p-2">Age</th>
-                                    <th className="text-start p-2">Job Role</th>
-                                    <th className="text-start p-2">Employer</th>
-                                    <th className="text-start p-2">Action</th>
+                                    <th className="text-start p-2">{t("table.fullName")}</th>
+                                    <th className="text-start p-2">{t("table.hiringStage")}</th>
+                                    <th className="text-start p-2">{t("table.joined")}</th>
+                                    <th className="text-start p-2">{t("table.age")}</th>
+                                    <th className="text-start p-2">{t("table.jobRole")}</th>
+                                    <th className="text-start p-2">{t("table.employer")}</th>
+                                    <th className="text-start p-2">{t("table.action")}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -229,10 +231,18 @@ export default function AdminApplicants() {
                                                         value={item.status || "Pending"} // default to "Pending" if null
                                                         onChange={(e) => handleUpdateStatus(item.id, e.target.value)}
                                                     >
-                                                        <option className="text-dark"  value="Pending">Pending</option>
-                                                        <option className="text-dark"  value="Processing">Processing</option>
-                                                        <option className="text-dark"  value="Completed">Completed</option>
-                                                        <option className="text-dark"  value="Rejected">Rejected</option>
+                                                        <option className="text-dark" value="Pending">
+                                                            {t("stages.pending")}
+                                                        </option>
+                                                        <option className="text-dark" value="Processing">
+                                                            {t("stages.processing")}
+                                                        </option>
+                                                        <option className="text-dark" value="Completed">
+                                                            {t("stages.completed")}
+                                                        </option>
+                                                        <option className="text-dark" value="Rejected">
+                                                            {t("stages.rejected")}
+                                                        </option>
                                                     </select>
                                                 </td>
                                                 <td className="text-start p-2"><FormattedDate date={item.created_at} /></td>
@@ -252,10 +262,14 @@ export default function AdminApplicants() {
 
                                                         <ul className="dropdown-menu dropdown-menu-end">
                                                             <li>
-                                                                <button className="dropdown-item" onClick={() => handleViewEmployer(item)}>View Employer</button>
+                                                                <button className="dropdown-item" onClick={() => handleViewEmployer(item)}>
+                                                                    {t("buttons.viewEmployer")}
+                                                                </button>
                                                             </li>
                                                             <li>
-                                                                <button className="dropdown-item" onClick={() => handleViewApplicant(item)}>View Applicant</button>
+                                                                <button className="dropdown-item" onClick={() => handleViewApplicant(item)}>
+                                                                    {t("buttons.viewApplicant")}
+                                                                </button>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -273,7 +287,7 @@ export default function AdminApplicants() {
             {/* Pagination Controls */}
             <div className="d-flex justify-content-between align-items-center mt-3">
                 <div className="d-flex align-items-center">
-                    <label className="me-2">Items per page:</label>
+                    <label className="me-2">{t("pagination.itemsPerPage")}</label>
                     <select 
                         className="form-select form-select-sm" 
                         style={{ width: 'auto' }}
@@ -287,7 +301,11 @@ export default function AdminApplicants() {
                         <option value={50}>50</option>
                     </select>
                     <span className="ms-3 text-muted">
-                        Showing {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, count)} of {count}
+                        {t("pagination.showing", {
+                            start: ((currentPage - 1) * pageSize) + 1,
+                            end: Math.min(currentPage * pageSize, count),
+                            total: count,
+                        })}
                     </span>
                 </div>
 
@@ -299,7 +317,7 @@ export default function AdminApplicants() {
                                 onClick={() => handlePageChange(currentPage - 1)}
                                 disabled={!previous}
                             >
-                                Previous
+                                {t("pagination.previous")}
                             </button>
                         </li>
                         
@@ -323,7 +341,7 @@ export default function AdminApplicants() {
                                 onClick={() => handlePageChange(currentPage + 1)}
                                 disabled={!next}
                             >
-                                Next
+                                {t("pagination.next")}
                             </button>
                         </li>
                     </ul>

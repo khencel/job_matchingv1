@@ -1,8 +1,11 @@
 
+"use client";
+
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { AddButton } from '@/components/Button';
 import { useState } from 'react';
+import { useTranslations } from "next-intl";
 
 interface FilterModalProps {
     handleShow: boolean;
@@ -21,6 +24,7 @@ interface FilterModalProps {
 }
 
 export default function FilterModal({handleShow, handleClose, companyList, onApplyFilter}: FilterModalProps){
+    const t = useTranslations("adminApplicantsFilter");
     const [selectedCompany, setSelectedCompany] = useState('');
     const [selectedGender, setSelectedGender] = useState('');
     const [selectedVisa, setSelectedVisa] = useState('');
@@ -44,19 +48,19 @@ export default function FilterModal({handleShow, handleClose, companyList, onApp
         <>
             <Modal show={handleShow} onHide={handleClose}>
                 <Modal.Header closeButton>
-                <Modal.Title>Add Perks & Benefits</Modal.Title>
+                <Modal.Title>{t("title")}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="row">
                         <div className="col">
-                            <strong>Company:</strong>
+                            <strong>{t("fields.company.label")}</strong>
                             <br />
                             <select name="" id="" className='form-control' 
                                 value={selectedCompany}
                                 onChange={(e) => setSelectedCompany(e.target.value)}
                             >
-                                <option value="" disabled  hidden>Select Company</option>
-                                <option value="">None</option>
+                                <option value="" disabled  hidden>{t("fields.company.placeholder")}</option>
+                                <option value="">{t("options.none")}</option>
                                 {
                                     companyList.map((item:any,index:number) => {
                                         return (
@@ -70,7 +74,7 @@ export default function FilterModal({handleShow, handleClose, companyList, onApp
                     </div>
                     <div className="row mt-3">
                             <div className="col">
-                                <strong>First Name:</strong>
+                                <strong>{t("fields.firstName.label")}</strong>
                                 <br />
                                 <input type="text"
                                     className="form-control"
@@ -80,7 +84,7 @@ export default function FilterModal({handleShow, handleClose, companyList, onApp
                             </div>
 
                             <div className="col">
-                                <strong>Last Name:</strong>
+                                <strong>{t("fields.lastName.label")}</strong>
                                 <br />
                                 <input type="text"
                                     className="form-control"
@@ -91,44 +95,50 @@ export default function FilterModal({handleShow, handleClose, companyList, onApp
                     </div>
                     <div className="row mt-3">
                         <div className="col">
-                            <strong>Gender:</strong>
+                            <strong>{t("fields.gender.label")}</strong>
                             <br />
                             <select name="" id=""
                                 className='form-control'
                                 value={selectedGender}
                                 onChange={(e) => setSelectedGender(e.target.value)}
                             >
-                                <option value="" disabled hidden>Select Gender</option>
-                                <option value="">None</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option value="" disabled hidden>{t("fields.gender.placeholder")}</option>
+                                <option value="">{t("options.none")}</option>
+                                <option value="male">{t("fields.gender.options.male")}</option>
+                                <option value="female">{t("fields.gender.options.female")}</option>
                             </select>
                         </div>
 
                         <div className="col">
-                            <strong>Visa Status:</strong>
+                            <strong>{t("fields.visaStatus.label")}</strong>
                             <br />
                             <select name="" id=""
                                 className='form-control'
                                 value={selectedVisa}
                                 onChange={(e) => setSelectedVisa(e.target.value)}
                             >
-                                <option value="" disabled hidden>Select Status</option>
-                                <option value="">None</option>
-                                <option value="APPLIED">Applied</option>
-                                <option value="PENDING">Pending</option>
-                                <option value="REVIEWING">Under Review</option>
-                                <option value="ISSUED">Issued</option>
-                                <option value="DENIED">Denied</option>
+                                <option value="" disabled hidden>{t("fields.visaStatus.placeholder")}</option>
+                                <option value="">{t("options.none")}</option>
+                                <option value="APPLIED">{t("fields.visaStatus.options.applied")}</option>
+                                <option value="PENDING">{t("fields.visaStatus.options.pending")}</option>
+                                <option value="REVIEWING">{t("fields.visaStatus.options.underReview")}</option>
+                                <option value="ISSUED">{t("fields.visaStatus.options.issued")}</option>
+                                <option value="DENIED">{t("fields.visaStatus.options.denied")}</option>
                             </select>
                         </div>
                     </div>
 
                     <div className="row mt-3">
                         <div className="col">
-                            <strong>Start age above:</strong>
+                            <strong>{t("fields.startAge.label")}</strong>
                             <br />
-                            <input type="number" value={startAge} onChange={(e) => setStartAge(Number(e.target.value))} className='form-control' placeholder='Ex. 18/20/30' />
+                            <input
+                                type="number"
+                                value={startAge}
+                                onChange={(e) => setStartAge(Number(e.target.value))}
+                                className='form-control'
+                                placeholder={t("fields.startAge.placeholder")}
+                            />
                             
                         </div>
 
@@ -153,9 +163,9 @@ export default function FilterModal({handleShow, handleClose, companyList, onApp
                 </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    {t("buttons.close")}
                 </Button>
-                    <AddButton label="Apply Filter" onClick={handleApply} className='btn btn-primary-custom rounded-3' icon={null} /> 
+                    <AddButton label={t("buttons.applyFilter")} onClick={handleApply} className='btn btn-primary-custom rounded-3' icon={null} /> 
                 </Modal.Footer>
             </Modal>
         </>

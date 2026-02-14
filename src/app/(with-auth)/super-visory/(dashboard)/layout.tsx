@@ -9,12 +9,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { Button, Nav, Tab } from "react-bootstrap";
+import { useTranslations } from "next-intl";
 
 export default function JobSeekerLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const t = useTranslations("supervisoryLayout");
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
   const pathname = usePathname();
 
@@ -29,6 +31,27 @@ export default function JobSeekerLayout({
     setIsCollapsed(!isCollapsed);
   };
 
+  const sideBarNavItems: SideBarNavItem[] = [
+    // {
+    //   eventKey: "overview",
+    //   href: "/super-visory/overview",
+    //   icon: <LayersIcon />,
+    //   label: t("items.overview"),
+    // },
+    {
+      eventKey: "profile",
+      href: "/super-visory/profile",
+      icon: <UserCircle2Icon />,
+      label: t("items.profile"),
+    },
+    // {
+    //   eventKey: "applicants",
+    //   href: "/super-visory/applicants",
+    //   icon: <FileUserIcon />,
+    //   label: t("items.applicants"),
+    // },
+  ];
+
   return (
     <div className="d-flex flex-grow-1" style={{ overflow: "hidden" }}>
       <Tab.Container
@@ -38,13 +61,15 @@ export default function JobSeekerLayout({
         {/* Sidebar */}
         <div className={`sidebar ${isCollapsed ? "collapsed" : ""} border-end`}>
           <div className="sidebar-header">
-            <h3 className="sidebar-title">{!isCollapsed && "SUPER VISORY"}</h3>
+            <h3 className="sidebar-title">
+              {!isCollapsed && t("title")}
+            </h3>
             <Button onClick={handleCollapse} className="toggle-btn">
               <MenuIcon className="icon" />
             </Button>
           </div>
           <Nav className="flex-column">
-            {SideBarNavItems.map((item, idx) => (
+            {sideBarNavItems.map((item, idx) => (
               <Nav.Item key={idx}>
                 <Nav.Link
                   as={Link}
@@ -74,24 +99,4 @@ interface SideBarNavItem {
   label: string;
 }
 
-const SideBarNavItems: SideBarNavItem[] = [
-  // {
-  //   eventKey: "overview",
-  //   href: "/super-visory/overview",
-  //   icon: <LayersIcon />,
-  //   label: "Overview",
-  // },
-  {
-    eventKey: "profile",
-    href: "/super-visory/profile",
-    icon: <UserCircle2Icon />,
-    label: "Profile",
-  },
-  // {
-  //   eventKey: "applicants",
-  //   href: "/super-visory/applicants",
-  //   icon: <FileUserIcon />,
-  //   label: "Applicants",
-  // },
-  
-];
+ 

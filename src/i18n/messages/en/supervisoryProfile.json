@@ -4,6 +4,11 @@
     "saveChanges": "Save Changes",
     "editProfile": "Edit Profile"
   },
+  "fallback": {
+    "notAvailable": "N/A"
+  },
+  "previewAlt": "Preview",
+  "avatarAlt": "User",
   "sections": {
     "companyInformation": {
       "title": "Company Information",
