@@ -48,6 +48,7 @@ export default function RegisterEmployerStep2() {
   const dispatch = useAppDispatch();
   // i18n for labels/placeholders in Step 2
   const t = useTranslations("registerEmployerStep2");
+  const tExtended = useTranslations("registerEmployerStep2Extended");
   const employerInfo = useAppSelector(
     (s) => s.registerEmployer.registerEmployerData.company_information,
   );
@@ -575,12 +576,12 @@ export default function RegisterEmployerStep2() {
 
         {/* Founded Date */}
         <Form.Group className="mb-3" controlId="founded">
-          <Form.Label>Company Founded Year</Form.Label>
+          <Form.Label>{tExtended("additionalFields.foundedYear.label")}</Form.Label>
           <Form.Control
             required
             type="number"
             name="founded"
-            placeholder={"Enter Company Founded Year (Greater than 1000)"}
+            placeholder={tExtended("additionalFields.foundedYear.placeholder")}
             value={data.founded}
             onChange={handleChange}
             onFocus={(e) => e.target.select()}
@@ -589,19 +590,19 @@ export default function RegisterEmployerStep2() {
             }
           />
           <Form.Control.Feedback type="invalid">
-            {"Please enter founded date"}
+            {tExtended("additionalFields.foundedYear.error")}
           </Form.Control.Feedback>
         </Form.Group>
 
         {/* Company Profile */}
         <Form.Group className="mb-3" controlId="profile">
-          <Form.Label>Company Profile</Form.Label>
+          <Form.Label>{tExtended("additionalFields.companyProfile.label")}</Form.Label>
           <Form.Control
             required
             type="text"
             as="textarea"
             name="profile"
-            placeholder={"Enter Company Biography"}
+            placeholder={tExtended("additionalFields.companyProfile.placeholder")}
             value={data.profile}
             onChange={handleChange}
             onFocus={(e) => e.target.select()}
@@ -611,7 +612,7 @@ export default function RegisterEmployerStep2() {
             }
           />
           <Form.Control.Feedback type="invalid">
-            {"Please enter company biography"}
+            {tExtended("additionalFields.companyProfile.error")}
           </Form.Control.Feedback>
         </Form.Group>
       </div>

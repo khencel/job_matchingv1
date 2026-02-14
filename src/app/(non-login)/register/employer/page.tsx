@@ -1,7 +1,12 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 export default function EmployerRegistration (){
+    const t = useTranslations("registrationEmployerPage");
     return (
         <>
-            <h1>test</h1>
+            <h1>{t("title")}</h1>
         </>
     )
 }

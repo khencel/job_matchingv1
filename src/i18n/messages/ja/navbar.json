@@ -23,6 +23,7 @@
   "applicants": "応募者",
   "japanese": "日本語",
   "language": {
+    "label": "言語",
     "selectorAria": "言語を選択",
     "english": "🇺🇸 英語",
     "japanese": "🇯🇵 日本語"

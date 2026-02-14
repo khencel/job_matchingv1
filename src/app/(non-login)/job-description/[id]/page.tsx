@@ -26,6 +26,7 @@ import Swal from "sweetalert2";
 
 const JobDescriptionPage = () => {
   const t = useTranslations("jobDescriptionPage");
+  const tExtended = useTranslations("jobDescriptionPageExtended");
   const router = useRouter();
 
   const params = useParams();
@@ -58,15 +59,15 @@ const JobDescriptionPage = () => {
   }
 
   if (!jobDetails) {
-    return <Container className="py-5 text-center">Job not found.</Container>;
+    return <Container className="py-5 text-center">{tExtended("errors.notFound")}</Container>;
   }
 
   const handleClickApply = () => {
     if (!user) {
       Swal.fire({
         icon: "error",
-        title: "Not Logged In",
-        text: "Please log in to apply for jobs.",
+        title: tExtended("alerts.notLoggedIn.title"),
+        text: tExtended("alerts.notLoggedIn.message"),
       });
       router.push("/login");
       return;
@@ -75,8 +76,8 @@ const JobDescriptionPage = () => {
     if (!user.resume) {
       Swal.fire({
         icon: "warning",
-        title: "Resume Required",
-        text: "Please upload your resume before applying for jobs.",
+        title: tExtended("alerts.resumeRequired.title"),
+        text: tExtended("alerts.resumeRequired.message"),
       });
       return;
     }
@@ -91,8 +92,8 @@ const JobDescriptionPage = () => {
       );
       Swal.fire({
         icon: "success",
-        title: "Application Sent",
-        text: "Your application has been sent successfully!",
+        title: tExtended("alerts.applicationSent.title"),
+        text: tExtended("alerts.applicationSent.message"),
       });
     } catch (error) {
       console.log("Error applying", error);
@@ -147,7 +148,7 @@ const JobDescriptionPage = () => {
                       width={84}
                       height={84}
                       src={avatarUrl}
-                      alt="Company Logo"
+                      alt={tExtended("companyLogo")}
                       style={{ width: "100%", height: "100%", objectFit: "cover" }}
                     />
                   </div>
@@ -181,7 +182,7 @@ const JobDescriptionPage = () => {
                     variant="outline-secondary"
                     className="rounded-pill px-3"
                   >
-                    Visit Profile
+                    {tExtended("buttons.visitProfile")}
                   </Button>
 
                   <Button
@@ -198,7 +199,7 @@ const JobDescriptionPage = () => {
                         aria-hidden="true"
                       />
                     ) : isApplied ? (
-                      "Applied"
+                      tExtended("buttons.applied")
                     ) : (
                       t("buttons.apply")
                     )}
@@ -302,9 +303,9 @@ const JobDescriptionPage = () => {
               <Card className="border-0 shadow-sm rounded-4">
                 <CardBody className="p-4">
                   <div className="d-flex flex-column gap-2">
-                    <div className="fw-semibold text-dark">Ready to apply?</div>
+                    <div className="fw-semibold text-dark">{tExtended("applySection.heading")}</div>
                     <div className="text-muted small">
-                      Make sure your profile and resume are updated before submitting.
+                      {tExtended("applySection.subtitle")}
                     </div>
 
                     <Button
@@ -315,7 +316,7 @@ const JobDescriptionPage = () => {
                       {applyStatus === "loading" ? (
                         <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
                       ) : isApplied ? (
-                        "Applied"
+                        tExtended("buttons.applied")
                       ) : (
                         t("buttons.apply")
                       )}
@@ -326,7 +327,7 @@ const JobDescriptionPage = () => {
                       className="rounded-pill"
                       onClick={() => router.push(`/company_profile/${jobDetails.user_id}`)}
                     >
-                      Visit Company Profile
+                      {tExtended("buttons.visitCompanyProfile")}
                     </Button>
                   </div>
                 </CardBody>
@@ -350,7 +351,7 @@ const JobDescriptionPage = () => {
                         <div className="fw-semibold text-dark mb-1">{item}</div>
                         <div className="text-muted small">
                           {/* placeholder description UI only; replace if you store descriptions */}
-                          Company-provided benefit to support your work and well-being.
+                          {tExtended("perksDescription")}
                         </div>
                       </div>
                     </Col>
@@ -365,7 +366,7 @@ const JobDescriptionPage = () => {
 
         {/* More Jobs */}
         <div className="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
-          <h3 className="fw-semibold text-dark mb-0">More Jobs</h3>
+          <h3 className="fw-semibold text-dark mb-0">{tExtended("moreJobs")}</h3>
         </div>
         <JobPost />
       </Container>

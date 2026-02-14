@@ -59,7 +59,7 @@ export default function Navbar() {
       <div className="container py-2">
         {/* LOGO */}
         <Link className="navbar-brand d-flex align-items-center gap-2" href="/">
-          <img src="/img/logo.png" style={{ maxWidth: "180px", height: "auto" }} alt="Logo" />
+          <img src="/img/logo.png" style={{ maxWidth: "180px", height: "auto" }} alt={t("logoAlt")} />
         </Link>
 
         {/* TOGGLER */}
@@ -149,16 +149,17 @@ export default function Navbar() {
           <div className="d-flex align-items-center justify-content-center justify-content-lg-end gap-2 ms-lg-3 pb-2 pb-lg-0">
             <div className="d-flex align-items-center gap-2 px-2 py-1 border rounded-pill bg-light">
               <span className="small text-muted" style={{ lineHeight: 1 }}>
-                Lang
+                {t("language.label")}
               </span>
               <select
                 className="form-select form-select-sm border-0 bg-transparent shadow-none"
                 value={locale}
                 onChange={handleLanguageChange}
                 style={{ minWidth: 130, cursor: "pointer" }}
+                aria-label={t("language.selectorAria")}
               >
-                <option value="en">🇺🇸 English</option>
-                <option value="ja">🇯🇵 日本語</option>
+                <option value="en">{t("language.english")}</option>
+                <option value="ja">{t("language.japanese")}</option>
               </select>
             </div>
           </div>

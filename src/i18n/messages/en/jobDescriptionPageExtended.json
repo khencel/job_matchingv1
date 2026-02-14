@@ -24,5 +24,8 @@
     "subtitle": "Make sure your profile and resume are updated before submitting."
   },
   "perksDescription": "Company-provided benefit to support your work and well-being.",
-  "moreJobs": "More Jobs"
+  "moreJobs": "More Jobs",
+  "errors": {
+    "notFound": "Job not found."
+  }
 }

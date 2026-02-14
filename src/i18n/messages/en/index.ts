@@ -80,6 +80,7 @@ import changePasswordModal from "./changePasswordModal.json";
 import jobListFilter from "./jobListFilter.json";
 import registrationEmployerPage from "./registrationEmployerPage.json";
 import registrationJobSeekerPage from "./registrationJobSeekerPage.json";
+import registerPage from "./registerPage.json";
 
 export default {
   // Spread common/auth translations into root
@@ -160,4 +161,5 @@ export default {
   jobListFilter,
   registrationEmployerPage,
   registrationJobSeekerPage,
+  registerPage,
 };
