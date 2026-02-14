@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { updateResumeData } from "@/redux/slices/resumeSlice";
 import { ResumeData } from "@/types/resume-builder";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 type EducationKey = "year" | "month" | "description";
 type WorkKey = "year" | "month" | "description";
@@ -18,6 +19,7 @@ const emptyWork = { year: "", month: "", description: "" };
 const emptyLicense = { year: "", month: "", qualification: "" };
 
 const ResumeForm = () => {
+  const t = useTranslations("jobSeekerResumeForm");
   const dispatch = useAppDispatch();
   const user = useAppSelector(
     (s) => s.authState.user?.userDetails_job_seeker.jobSeekerData,
@@ -68,20 +70,20 @@ const ResumeForm = () => {
     Record<string, (value: string) => string | null>
   >(
     () => ({
-      fullName: (value) => (value.trim() ? null : "Full name is required."),
-      gender: (value) => (value.trim() ? null : "Gender is required."),
+      fullName: (value) => (value.trim() ? null : t("validation.fullNameRequired")),
+      gender: (value) => (value.trim() ? null : t("validation.genderRequired")),
       email: (value) =>
-        /\S+@\S+\.\S+/.test(value) ? null : "Please provide a valid email.",
+        /\S+@\S+\.\S+/.test(value) ? null : t("validation.emailInvalid"),
       phone: (value) =>
-        value.trim().length >= 7 ? null : "Phone number is too short.",
-      address: (value) => (value.trim() ? null : "Address is required."),
-      birthdate: (value) => (value ? null : "Birthdate is required."),
-      age: (value) => (Number(value) > 0 ? null : "Age is required."),
-      postalCode: (value) => (value.trim() ? null : "Postal code is required."),
-      reasons: (value) => (value.trim() ? null : "Motivation is required."),
-      photoUrl: (value) => (value.trim() ? null : "Photo is required."),
+        value.trim().length >= 7 ? null : t("validation.phoneTooShort"),
+      address: (value) => (value.trim() ? null : t("validation.addressRequired")),
+      birthdate: (value) => (value ? null : t("validation.birthdateRequired")),
+      age: (value) => (Number(value) > 0 ? null : t("validation.ageRequired")),
+      postalCode: (value) => (value.trim() ? null : t("validation.postalCodeRequired")),
+      reasons: (value) => (value.trim() ? null : t("validation.reasonsRequired")),
+      photoUrl: (value) => (value.trim() ? null : t("validation.photoRequired")),
     }),
-    [],
+    [t],
   );
 
   useEffect(() => {
@@ -242,13 +244,13 @@ const ResumeForm = () => {
     const file = e.target.files?.[0];
     if (!file) return;
     if (!file.type.startsWith("image/")) {
-      setUploadError("Please upload a valid image file.");
+      setUploadError(t("upload.invalidImage"));
       e.target.value = "";
       return;
     }
     const maxSizeMb = 2;
     if (file.size > maxSizeMb * 1024 * 1024) {
-      setUploadError(`Image must be under ${maxSizeMb}MB.`);
+      setUploadError(t("upload.maxSize", { size: maxSizeMb }));
       e.target.value = "";
       return;
     }
@@ -268,7 +270,7 @@ const ResumeForm = () => {
 
   const clearPhoto = () => {
     dispatchUpdate({ photoUrl: "" });
-    setErrors((prev) => ({ ...prev, photoUrl: "Photo is required." }));
+    setErrors((prev) => ({ ...prev, photoUrl: t("validation.photoRequired") }));
     if (photoInputRef.current) photoInputRef.current.value = "";
   };
 
@@ -277,9 +279,9 @@ const ResumeForm = () => {
       <Card.Header className="bg-white">
         <div className="d-flex align-items-center justify-content-between">
           <div>
-            <Card.Title>Resume Details</Card.Title>
+            <Card.Title>{t("header.title")}</Card.Title>
             <Card.Subtitle className="text-muted">
-              Update fields to see the preview refresh instantly.
+              {t("header.subtitle")}
             </Card.Subtitle>
           </div>
         </div>
@@ -290,33 +292,33 @@ const ResumeForm = () => {
       >
         <Form noValidate>
           <section className="mb-4">
-            <h5 className="mb-3">Basic Information</h5>
+            <h5 className="mb-3">{t("sections.basicInfo")}</h5>
             <Form.Group className="mb-3" controlId="resume-fullName">
-              <Form.Label>Full Name *</Form.Label>
+              <Form.Label>{t("fields.fullName")}</Form.Label>
               <Form.Control
                 name="fullName"
                 value={resumeData.fullName}
                 onChange={handleInputChange}
                 isInvalid={Boolean(errors.fullName)}
-                placeholder="e.g. Jane Doe"
+                placeholder={t("placeholders.fullName")}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.fullName}
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3" controlId="resume-namePhonetic">
-              <Form.Label>Name Phonetic</Form.Label>
+              <Form.Label>{t("fields.namePhonetic")}</Form.Label>
               <Form.Control
                 name="namePhonetic"
                 value={resumeData.namePhonetic || ""}
                 onChange={handleInputChange}
-                placeholder="e.g. ジェーンドウ"
+                placeholder={t("placeholders.namePhonetic")}
               />
             </Form.Group>
             <Row className="g-3">
               <Col md={6}>
                 <Form.Group controlId="resume-birthdate">
-                  <Form.Label>Birthdate *</Form.Label>
+                  <Form.Label>{t("fields.birthdate")}</Form.Label>
                   <Form.Control
                     type="date"
                     name="birthdate"
@@ -331,7 +333,7 @@ const ResumeForm = () => {
               </Col>
               <Col md={6}>
                 <Form.Group controlId="resume-age">
-                  <Form.Label>Age</Form.Label>
+                  <Form.Label>{t("fields.age")}</Form.Label>
                   <Form.Control
                     type="number"
                     name="age"
@@ -349,18 +351,18 @@ const ResumeForm = () => {
             <Row className="g-3 mt-1">
               <Col md={6}>
                 <Form.Group controlId="resume-gender">
-                  <Form.Label>Gender</Form.Label>
+                  <Form.Label>{t("fields.gender")}</Form.Label>
                   <Form.Select
                     name="gender"
                     value={resumeData.gender || ""}
                     onChange={handleInputChange}
                     isInvalid={Boolean(errors.gender)}
                   >
-                    <option value="">Select...</option>
-                    <option value="female">Female</option>
-                    <option value="male">Male</option>
-                    <option value="non-binary">Non-binary</option>
-                    <option value="prefer-not">Prefer not to say</option>
+                    <option value="">{t("placeholders.select")}</option>
+                    <option value="female">{t("options.gender.female")}</option>
+                    <option value="male">{t("options.gender.male")}</option>
+                    <option value="non-binary">{t("options.gender.nonBinary")}</option>
+                    <option value="prefer-not">{t("options.gender.preferNot")}</option>
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">
                     {errors.gender}
@@ -369,7 +371,7 @@ const ResumeForm = () => {
               </Col>
               <Col md={6}>
                 <Form.Group controlId="resume-photo">
-                  <Form.Label>Profile Photo</Form.Label>
+                  <Form.Label>{t("fields.photo")}</Form.Label>
                   <div className="d-flex flex-column gap-2">
                     <div className="border rounded p-2 d-flex align-items-center gap-3">
                       <div
@@ -386,7 +388,7 @@ const ResumeForm = () => {
                           />
                         ) : (
                           <div className="h-100 w-100 d-flex align-items-center justify-content-center text-muted">
-                            No photo
+                            {t("photo.noPhoto")}
                           </div>
                         )}
                       </div>
@@ -397,8 +399,8 @@ const ResumeForm = () => {
                           onClick={triggerPhotoUpload}
                         >
                           {resumeData.photoUrl
-                            ? "Change Image"
-                            : "Upload Image"}
+                            ? t("photo.change")
+                            : t("photo.upload")}
                         </Button>
                         <Button
                           variant="outline-danger"
@@ -406,11 +408,11 @@ const ResumeForm = () => {
                           onClick={clearPhoto}
                           disabled={!resumeData.photoUrl}
                         >
-                          Remove
+                          {t("photo.remove")}
                         </Button>
                       </div>
                     </div>
-                    <Form.Text muted>PNG or JPG, up to 2MB.</Form.Text>
+                    <Form.Text muted>{t("photo.hint")}</Form.Text>
                     {uploadError && (
                       <div className="text-danger small">{uploadError}</div>
                     )}
@@ -431,9 +433,9 @@ const ResumeForm = () => {
           </section>
 
           <section className="mb-4">
-            <h5 className="mb-3">Contact & Address</h5>
+            <h5 className="mb-3">{t("sections.contact")}</h5>
             <Form.Group className="mb-3" controlId="resume-email">
-              <Form.Label>Email *</Form.Label>
+              <Form.Label>{t("fields.email")}</Form.Label>
               <Form.Control
                 type="email"
                 name="email"
@@ -446,7 +448,7 @@ const ResumeForm = () => {
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3" controlId="resume-phone">
-              <Form.Label>Phone *</Form.Label>
+              <Form.Label>{t("fields.phone")}</Form.Label>
               <Form.Control
                 name="phone"
                 value={resumeData.phone}
@@ -458,7 +460,7 @@ const ResumeForm = () => {
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3" controlId="resume-address">
-              <Form.Label>Address *</Form.Label>
+              <Form.Label>{t("fields.address")}</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={2}
@@ -472,7 +474,7 @@ const ResumeForm = () => {
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3" controlId="resume-addressPhonetic">
-              <Form.Label>Address Phonetic</Form.Label>
+              <Form.Label>{t("fields.addressPhonetic")}</Form.Label>
               <Form.Control
                 name="addressPhonetic"
                 value={resumeData.addressPhonetic || ""}
@@ -482,12 +484,12 @@ const ResumeForm = () => {
             <Row className="g-3">
               <Col md={6}>
                 <Form.Group controlId="resume-postalCode">
-                  <Form.Label>Postal Code</Form.Label>
+                  <Form.Label>{t("fields.postalCode")}</Form.Label>
                   <Form.Control
                     name="postalCode"
                     value={resumeData.postalCode || ""}
                     onChange={handleInputChange}
-                    placeholder="123-4567"
+                    placeholder={t("placeholders.postalCode")}
                     isInvalid={Boolean(errors.postalCode)}
                   />
                   <Form.Control.Feedback type="invalid">
@@ -497,7 +499,7 @@ const ResumeForm = () => {
               </Col>
               <Col md={6}>
                 <Form.Group controlId="resume-other-phone">
-                  <Form.Label>Alt. Phone</Form.Label>
+                  <Form.Label>{t("fields.otherPhone")}</Form.Label>
                   <Form.Control
                     value={otherContact.phone || ""}
                     onChange={(e) =>
@@ -510,7 +512,7 @@ const ResumeForm = () => {
             <Row className="g-3 mt-1">
               <Col md={6}>
                 <Form.Group controlId="resume-other-email">
-                  <Form.Label>Alt. Email</Form.Label>
+                  <Form.Label>{t("fields.otherEmail")}</Form.Label>
                   <Form.Control
                     value={otherContact.email || ""}
                     onChange={(e) =>
@@ -521,7 +523,7 @@ const ResumeForm = () => {
               </Col>
               <Col md={6}>
                 <Form.Group controlId="resume-other-phonetic">
-                  <Form.Label>Alt. Phonetic</Form.Label>
+                  <Form.Label>{t("fields.otherPhonetic")}</Form.Label>
                   <Form.Control
                     value={otherContact.phonetic || ""}
                     onChange={(e) =>
@@ -532,7 +534,7 @@ const ResumeForm = () => {
               </Col>
             </Row>
             <Form.Group className="mt-3" controlId="resume-other-address">
-              <Form.Label>Alt. Address</Form.Label>
+              <Form.Label>{t("fields.otherAddress")}</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={2}
@@ -546,13 +548,13 @@ const ResumeForm = () => {
 
           <section className="mb-4">
             <div className="d-flex align-items-center justify-content-between mb-3">
-              <h5 className="mb-0">Education</h5>
+              <h5 className="mb-0">{t("sections.education")}</h5>
               <Button
                 variant="outline-primary"
                 size="sm"
                 onClick={addEducationRow}
               >
-                <Plus size={14} className="me-1" /> Add
+                <Plus size={14} className="me-1" /> {t("buttons.add")}
               </Button>
             </div>
             {educationEntries.map((entry, index) => (
@@ -564,7 +566,7 @@ const ResumeForm = () => {
                   <Row className="g-2">
                     <Col xs={4}>
                       <Form.Group controlId={`edu-year-${index}`}>
-                        <Form.Label>Year</Form.Label>
+                        <Form.Label>{t("fields.year")}</Form.Label>
                         <Form.Control
                           value={entry.year}
                           onChange={(e) =>
@@ -575,7 +577,7 @@ const ResumeForm = () => {
                     </Col>
                     <Col xs={4}>
                       <Form.Group controlId={`edu-month-${index}`}>
-                        <Form.Label>Month</Form.Label>
+                        <Form.Label>{t("fields.month")}</Form.Label>
                         <Form.Control
                           value={entry.month}
                           onChange={(e) =>
@@ -597,7 +599,7 @@ const ResumeForm = () => {
                           variant="link"
                           className="text-danger p-0"
                           onClick={() => removeEducationRow(index)}
-                          title="Remove entry"
+                          title={t("buttons.removeEntry")}
                         >
                           <Trash2 size={16} />
                         </Button>
@@ -605,7 +607,7 @@ const ResumeForm = () => {
                     </Col>
                   </Row>
                   <Form.Group className="mt-2" controlId={`edu-desc-${index}`}>
-                    <Form.Label>Details</Form.Label>
+                    <Form.Label>{t("fields.details")}</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={2}
@@ -626,9 +628,9 @@ const ResumeForm = () => {
 
           <section className="mb-4">
             <div className="d-flex align-items-center justify-content-between mb-3">
-              <h5 className="mb-0">Work History</h5>
+              <h5 className="mb-0">{t("sections.work")}</h5>
               <Button variant="outline-primary" size="sm" onClick={addWorkRow}>
-                <Plus size={14} className="me-1" /> Add
+                <Plus size={14} className="me-1" /> {t("buttons.add")}
               </Button>
             </div>
             {workEntries.map((entry, index) => (
@@ -637,7 +639,7 @@ const ResumeForm = () => {
                   <Row className="g-2">
                     <Col xs={4}>
                       <Form.Group controlId={`work-year-${index}`}>
-                        <Form.Label>Year</Form.Label>
+                        <Form.Label>{t("fields.year")}</Form.Label>
                         <Form.Control
                           value={entry.year}
                           onChange={(e) =>
@@ -648,7 +650,7 @@ const ResumeForm = () => {
                     </Col>
                     <Col xs={4}>
                       <Form.Group controlId={`work-month-${index}`}>
-                        <Form.Label>Month</Form.Label>
+                        <Form.Label>{t("fields.month")}</Form.Label>
                         <Form.Control
                           value={entry.month}
                           onChange={(e) =>
@@ -666,7 +668,7 @@ const ResumeForm = () => {
                           variant="link"
                           className="text-danger p-0"
                           onClick={() => removeWorkRow(index)}
-                          title="Remove entry"
+                          title={t("buttons.removeEntry")}
                         >
                           <Trash2 size={16} />
                         </Button>
@@ -674,7 +676,7 @@ const ResumeForm = () => {
                     </Col>
                   </Row>
                   <Form.Group className="mt-2" controlId={`work-desc-${index}`}>
-                    <Form.Label>Details</Form.Label>
+                    <Form.Label>{t("fields.details")}</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={2}
@@ -691,13 +693,13 @@ const ResumeForm = () => {
 
           <section className="mb-4">
             <div className="d-flex align-items-center justify-content-between mb-3">
-              <h5 className="mb-0">Licenses / Qualifications</h5>
+              <h5 className="mb-0">{t("sections.licenses")}</h5>
               <Button
                 variant="outline-primary"
                 size="sm"
                 onClick={addLicenseRow}
               >
-                <Plus size={14} className="me-1" /> Add
+                <Plus size={14} className="me-1" /> {t("buttons.add")}
               </Button>
             </div>
             {licenseEntries.map((entry, index) => (
@@ -706,7 +708,7 @@ const ResumeForm = () => {
                   <Row className="g-2">
                     <Col xs={4}>
                       <Form.Group controlId={`license-year-${index}`}>
-                        <Form.Label>Year</Form.Label>
+                        <Form.Label>{t("fields.year")}</Form.Label>
                         <Form.Control
                           value={entry.year}
                           onChange={(e) =>
@@ -717,7 +719,7 @@ const ResumeForm = () => {
                     </Col>
                     <Col xs={4}>
                       <Form.Group controlId={`license-month-${index}`}>
-                        <Form.Label>Month</Form.Label>
+                        <Form.Label>{t("fields.month")}</Form.Label>
                         <Form.Control
                           value={entry.month}
                           onChange={(e) =>
@@ -735,7 +737,7 @@ const ResumeForm = () => {
                           variant="link"
                           className="text-danger p-0"
                           onClick={() => removeLicenseRow(index)}
-                          title="Remove entry"
+                          title={t("buttons.removeEntry")}
                         >
                           <Trash2 size={16} />
                         </Button>
@@ -746,7 +748,7 @@ const ResumeForm = () => {
                     className="mt-2"
                     controlId={`license-qualification-${index}`}
                   >
-                    <Form.Label>Qualification</Form.Label>
+                    <Form.Label>{t("fields.qualification")}</Form.Label>
                     <Form.Control
                       value={entry.qualification}
                       onChange={(e) =>
@@ -764,15 +766,15 @@ const ResumeForm = () => {
           </section>
 
           <section className="mb-4">
-            <h5 className="mb-3">Preferences</h5>
+            <h5 className="mb-3">{t("sections.preferences")}</h5>
             <InputGroup className="mb-2">
               <Form.Control
-                placeholder="Add preference"
+                placeholder={t("placeholders.preference")}
                 value={preferenceInput}
                 onChange={(e) => setPreferenceInput(e.target.value)}
               />
               <Button variant="outline-secondary" onClick={handleAddPreference}>
-                Add
+                {t("buttons.add")}
               </Button>
             </InputGroup>
             <div className="d-flex flex-wrap gap-2">
@@ -795,7 +797,7 @@ const ResumeForm = () => {
           </section>
 
           <section>
-            <h5 className="mb-3">Motivation / Reasons</h5>
+            <h5 className="mb-3">{t("sections.reasons")}</h5>
             <Form.Group controlId="resume-reasons">
               <Form.Control
                 as="textarea"
@@ -803,7 +805,7 @@ const ResumeForm = () => {
                 name="reasons"
                 value={resumeData.reasons || ""}
                 onChange={handleInputChange}
-                placeholder="Share your motivation or key points"
+                placeholder={t("placeholders.reasons")}
                 isInvalid={Boolean(errors.reasons)}
               />
               <Form.Control.Feedback type="invalid">

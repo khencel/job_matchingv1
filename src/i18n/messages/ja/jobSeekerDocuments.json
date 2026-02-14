@@ -3,6 +3,7 @@
   "subtitle": "ドキュメントをアップロードして管理",
   "documentsCount": "{count}件のドキュメント",
   "previewFiles": "ファイルをプレビュー",
+  "fileNameFallback": "ドキュメント",
   "upload": {
     "title": "ドキュメントをアップロード",
     "subtitle": "一度に複数のファイルを選択してアップロードします。対応形式：PDF、DOC、DOCX、JPG、PNG",

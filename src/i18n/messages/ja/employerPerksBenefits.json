@@ -1,0 +1,52 @@
+{
+  "title": "福利厚生",
+  "dateRange": "2025年11月 - 12月",
+  "listTitle": "福利厚生（合計{count}件）",
+  "table": {
+    "name": "名称",
+    "description": "説明",
+    "createdAt": "作成日"
+  },
+  "states": {
+    "loading": "読み込み中...",
+    "empty": "データが見つかりません"
+  },
+  "buttons": {
+    "add": "福利厚生",
+    "edit": "編集",
+    "delete": "削除"
+  },
+  "modals": {
+    "add": {
+      "title": "福利厚生を追加しますか？",
+      "message": "この福利厚生を追加してもよろしいですか？",
+      "confirmText": "はい、作成します",
+      "header": "福利厚生を追加"
+    },
+    "edit": {
+      "title": "福利厚生を更新しますか？",
+      "message": "よろしいですか？",
+      "confirmText": "はい",
+      "header": "福利厚生を編集"
+    },
+    "delete": {
+      "title": "福利厚生を削除しますか？",
+      "message": "この福利厚生を削除してもよろしいですか？",
+      "confirmText": "はい、削除します"
+    },
+    "fields": {
+      "name": "名称",
+      "description": "説明"
+    },
+    "actions": {
+      "close": "閉じる",
+      "save": "保存"
+    }
+  },
+  "toasts": {
+    "deleteTitle": "削除",
+    "deleteMessage": "福利厚生を削除しました",
+    "updateTitle": "更新",
+    "updateMessage": "福利厚生を更新しました"
+  }
+}

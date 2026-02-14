@@ -4,5 +4,9 @@
     "saving": "保存中...",
     "saveResume": "履歴書を保存",
     "printResume": "履歴書を印刷"
+  },
+  "toasts": {
+    "successTitle": "成功",
+    "successMessage": "履歴書を保存しました。"
   }
 }

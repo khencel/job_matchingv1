@@ -1,8 +1,5 @@
 {
   "greeting": "こんにちは",
-  "subtitle": "ここにあなたの日々の活動と応募があります"
-{
-  "greeting": "こんにちは",
   "subtitle": "日々の活動と応募状況を確認できます",
   "statusActivity": {
     "totalUsers": "総ユーザー数",

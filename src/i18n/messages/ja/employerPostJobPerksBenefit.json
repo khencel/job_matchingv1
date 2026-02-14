@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "basicInfo": {
+      "title": "基本情報",
+      "subtitle": "あなたの求人投稿です。"
+    },
+    "details": {
+      "title": "情報の詳細"
+    }
+  },
+  "fields": {
+    "title": "職種:",
+    "salary": "給与:",
+    "jobType": "雇用形態:",
+    "jobDescription": "仕事内容:",
+    "responsibilities": "責任範囲:",
+    "requirements": "応募条件:",
+    "niceToHave": "歓迎条件:"
+  },
+  "buttons": {
+    "confirm": "確認"
+  },
+  "confirm": {
+    "title": "求人を作成しますか？",
+    "message": "求人が作成されました",
+    "confirmText": "はい、作成します"
+  },
+  "addBenefitModal": {
+    "title": "福利厚生を追加",
+    "placeholders": {
+      "title": "タイトルを入力...",
+      "description": "説明を入力..."
+    },
+    "actions": {
+      "save": "保存"
+    }
+  }
+}

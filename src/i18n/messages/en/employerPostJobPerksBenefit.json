@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "basicInfo": {
+      "title": "Basic Information",
+      "subtitle": "Your job post."
+    },
+    "details": {
+      "title": "Information details"
+    }
+  },
+  "fields": {
+    "title": "Title:",
+    "salary": "Salary:",
+    "jobType": "Job Type:",
+    "jobDescription": "Job description:",
+    "responsibilities": "Responsibilities:",
+    "requirements": "Requirements:",
+    "niceToHave": "Nice to Have:"
+  },
+  "buttons": {
+    "confirm": "Confirm"
+  },
+  "confirm": {
+    "title": "Create job post?",
+    "message": "Job post successfully created",
+    "confirmText": "Yes, create"
+  },
+  "addBenefitModal": {
+    "title": "Add Benefit",
+    "placeholders": {
+      "title": "Title here...",
+      "description": "Description here..."
+    },
+    "actions": {
+      "save": "Save"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "title": "Resume",
+  "dateLabel": "Date:",
+  "header": {
+    "phonetic": "Phonetic:",
+    "fullName": "Full name:",
+    "birthdate": "Birthdate:",
+    "age": "Age:",
+    "gender": "Gender:"
+  },
+  "photo": {
+    "title": "PHOTO",
+    "instructions": {
+      "size": "Height: 36-40mm x Width: 24-30mm",
+      "pose": "Upper body, front-facing",
+      "glue": "Glue on the back"
+    }
+  },
+  "contact": {
+    "addressPhonetic": "Phonetic of address:",
+    "phone": "Phone:",
+    "currentAddress": "Current address:",
+    "postalCode": "Postal Code:",
+    "email": "Email:"
+  },
+  "otherContact": {
+    "phonetic": "Phonetic:",
+    "phone": "Phone:",
+    "address": "Other contact address:",
+    "email": "Email:",
+    "note": "Please fill in only if you wish to be contacted at a location other than your current address."
+  },
+  "tables": {
+    "year": "Year",
+    "month": "Month",
+    "educationWork": "Education & Work History",
+    "licenses": "Licenses & Qualifications",
+    "noEducation": "No educational background provided",
+    "noWork": "No work history provided",
+    "noLicenses": "No licenses or qualifications provided"
+  },
+  "motivation": {
+    "title": "Motivation, Self-PR, etc.",
+    "placeholder": "(Write your motivation, self-PR, etc.)"
+  },
+  "preferences": {
+    "title": "Personal Preferences",
+    "placeholder": "(Enter preferences such as salary, job type, working hours, work location, etc.)"
+  }
+}

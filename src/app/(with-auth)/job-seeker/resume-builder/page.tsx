@@ -14,8 +14,10 @@ import { saveResume } from "@/redux/slices/resumeSlice";
 import { DownloadIcon, SaveIcon } from "lucide-react";
 import { Button, Spinner, Row, Col } from "react-bootstrap";
 import { showSuccessToast } from "@/app/(util)/toaster";
+import { useTranslations } from "next-intl";
 
 const ResumeBuilderPage = () => {
+  const t = useTranslations("jobSeekerResumeBuilder");
   const dispatch = useAppDispatch();
 
   // SELECTORS
@@ -88,7 +90,7 @@ const ResumeBuilderPage = () => {
         }),
       ).unwrap();
 
-      showSuccessToast("Success", "Resume saved.");
+      showSuccessToast(t("toasts.successTitle"), t("toasts.successMessage"));
     } catch (err) {
       console.error("Failed to generate or save PDF:", err);
     }
@@ -119,26 +121,25 @@ const ResumeBuilderPage = () => {
           >
             {isResumeValid ? null : (
               <small className="text-danger">
-                Complete details before saving the resume. <br />
-                (Name, Photo, Contact Info, Address, Reasons)
+                {t("validationMessage")}
               </small>
             )}
             <Button
               variant="success"
               onClick={handleSaveResume}
               className="d-flex gap-2 align-items-center shadow-sm"
-              title="Save Resume"
+              title={t("buttons.saveResume")}
               disabled={!isResumeValid || isLoading}
             >
               {isLoading ? (
                 <>
                   <Spinner as="span" animation="border" size="sm" />
-                  Saving...
+                  {t("buttons.saving")}
                 </>
               ) : (
                 <>
                   <SaveIcon size={18} />
-                  Save Resume
+                  {t("buttons.saveResume")}
                 </>
               )}
             </Button>
@@ -146,10 +147,10 @@ const ResumeBuilderPage = () => {
               variant="primary"
               onClick={() => handlePrint()}
               className="d-flex gap-2 align-items-center shadow-sm"
-              title="Print Resume"
+              title={t("buttons.printResume")}
             >
               <DownloadIcon size={18} />
-              Print Resume
+              {t("buttons.printResume")}
             </Button>
           </div>
           {/* The Actual Resume Template */}

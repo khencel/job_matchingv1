@@ -4,5 +4,9 @@
     "saving": "Saving...",
     "saveResume": "Save Resume",
     "printResume": "Print Resume"
+  },
+  "toasts": {
+    "successTitle": "Success",
+    "successMessage": "Resume saved."
   }
 }

@@ -1,12 +1,16 @@
+"use client";
+
 import { ResumeData } from "@/types/resume-builder";
 import React, { forwardRef } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
+import { useTranslations } from "next-intl";
 interface ResumeTemplateProps {
   data: ResumeData;
 }
 
 export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
   ({ data }, ref) => {
+    const t = useTranslations("jobSeekerResumeTemplate");
     const borderDark = "border-dark";
     const cellStyle =
       "p-2 border-end border-dark d-flex align-items-center justify-content-center";
@@ -32,10 +36,10 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
             style={{ minHeight: "60px" }}
           >
             <Col xs={8} className="p-2">
-              <div className="text-center fw-bold fs-4">Resume</div>
+              <div className="text-center fw-bold fs-4">{t("title")}</div>
             </Col>
             <Col xs={4} className="p-2 border-start border-dark text-end">
-              <span className="small text-muted me-2">Date:</span>
+              <span className="small text-muted me-2">{t("dateLabel")}</span>
               <strong>{data.createdAt || ""}</strong>
             </Col>
           </Row>
@@ -52,7 +56,7 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
                   xs={12}
                   className="d-flex align-items-center px-3 border-bottom border-dark"
                 >
-                  <span className="small text-muted me-2">Phonetic:</span>
+                  <span className="small text-muted me-2">{t("header.phonetic")}</span>
                   <strong>{data.namePhonetic}</strong>
                 </Col>
               </Row>
@@ -63,7 +67,7 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
                   xs={12}
                   className="d-flex align-items-center px-3 border-bottom border-dark"
                 >
-                  <span className="small text-muted me-2">Full name:</span>
+                  <span className="small text-muted me-2">{t("header.fullName")}</span>
                   <h5 className="fs-5 fw-bold mb-0">{data.fullName}</h5>
                 </Col>
               </Row>
@@ -71,13 +75,13 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
               {/* Birthdate with age + Gender */}
               <Row className="g-0" style={{ minHeight: "60px" }}>
                 <Col xs={12} className="d-flex align-items-center px-3">
-                  <span className="small text-muted me-2">Birthdate:</span>
+                  <span className="small text-muted me-2">{t("header.birthdate")}</span>
                   <strong className="me-3">{data.birthdate}</strong>
-                  <span className="small text-muted me-2">Age:</span>
+                  <span className="small text-muted me-2">{t("header.age")}</span>
                   <strong className="me-3">
                     {typeof data.age === "number" ? data.age : ""}
                   </strong>
-                  <span className="small text-muted me-2">Gender:</span>
+                  <span className="small text-muted me-2">{t("header.gender")}</span>
                   <strong>{data.gender || ""}</strong>
                 </Col>
               </Row>
@@ -100,11 +104,11 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
                 />
               ) : (
                 <div className="text-muted small">
-                  <div className="fw-bold text-center mb-1">PHOTO</div>
+                  <div className="fw-bold text-center mb-1">{t("photo.title")}</div>
                   <ol className="m-0 ps-3">
-                    <li>Height: 36–40mm × Width: 24–30mm</li>
-                    <li>Upper body, front-facing</li>
-                    <li>Glue on the back</li>
+                    <li>{t("photo.instructions.size")}</li>
+                    <li>{t("photo.instructions.pose")}</li>
+                    <li>{t("photo.instructions.glue")}</li>
                   </ol>
                 </div>
               )}
@@ -115,23 +119,23 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
           <Row className="g-0 border-start border-end border-bottom border-dark">
             <Col xs={6} className="p-2 border-end border-dark">
               <div className="d-flex align-items-center gap-3">
-                <span className="small text-muted">Phonetic of address:</span>
+                <span className="small text-muted">{t("contact.addressPhonetic")}</span>
                 <strong>{data.addressPhonetic}</strong>
               </div>
               <div className="mt-1">
-                <span className="small text-muted me-2">Phone:</span>
+                <span className="small text-muted me-2">{t("contact.phone")}</span>
                 <strong>{data.phone}</strong>
               </div>
             </Col>
             <Col xs={6} className="p-2">
               <div className="text-break">
-                <span className="small text-muted me-2">Current address:</span>
+                <span className="small text-muted me-2">{t("contact.currentAddress")}</span>
                 <strong>{data.address}</strong>
               </div>
               <div className="mt-1 d-flex align-items-center flex-wrap">
-                <span className="small text-muted me-2">Postal Code:</span>
+                <span className="small text-muted me-2">{t("contact.postalCode")}</span>
                 <strong className="me-3">{data.postalCode || ""}</strong>
-                <span className="small text-muted me-2">Email:</span>
+                <span className="small text-muted me-2">{t("contact.email")}</span>
                 <strong className="text-break">{data.email}</strong>
               </div>
             </Col>
@@ -141,30 +145,29 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
           <Row className="g-0 border-start border-end border-bottom border-dark">
             <Col xs={6} className="p-2 border-end border-dark">
               <div className="d-flex align-items-center gap-3">
-                <span className="small text-muted">Phonetic:</span>
+                <span className="small text-muted">{t("otherContact.phonetic")}</span>
                 <strong>{data.otherContact?.phonetic || ""}</strong>
               </div>
               <div className="mt-1">
-                <span className="small text-muted me-2">Phone:</span>
+                <span className="small text-muted me-2">{t("otherContact.phone")}</span>
                 <strong>{data.otherContact?.phone || ""}</strong>
               </div>
             </Col>
             <Col xs={6} className="p-2">
               <div className="text-break">
                 <span className="small text-muted me-2">
-                  Other contact address:
+                  {t("otherContact.address")}
                 </span>
                 <strong>{data.otherContact?.address || ""}</strong>
               </div>
               <div className="mt-1 d-flex align-items-center flex-wrap">
-                <span className="small text-muted me-2">Email:</span>
+                <span className="small text-muted me-2">{t("otherContact.email")}</span>
                 <strong className="text-break">
                   {data.otherContact?.email || ""}
                 </strong>
               </div>
               <div className="small text-muted mt-1">
-                Please fill in only if you wish to be contacted at a location
-                other than your current address.
+                {t("otherContact.note")}
               </div>
             </Col>
           </Row>
@@ -172,13 +175,13 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
           {/* Education & Work History (Year | Month | Item) */}
           <Row className="g-0 border border-dark bg-light fw-bold text-center">
             <Col xs={2} className={`p-1 border-end ${borderDark}`}>
-              Year
+              {t("tables.year")}
             </Col>
             <Col xs={2} className={`p-1 border-end ${borderDark}`}>
-              Month
+              {t("tables.month")}
             </Col>
             <Col xs={8} className="p-1">
-              Education & Work History
+              {t("tables.educationWork")}
             </Col>
           </Row>
 
@@ -205,7 +208,7 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
               <Col xs={2} className={cellStyle}></Col>
               <Col xs={2} className={cellStyle}></Col>
               <Col xs={8} className="p-3 text-center text-muted">
-                No educational background provided
+                {t("tables.noEducation")}
               </Col>
             </Row>
           )}
@@ -233,7 +236,7 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
               <Col xs={2} className={cellStyle}></Col>
               <Col xs={2} className={cellStyle}></Col>
               <Col xs={8} className="p-3 text-center text-muted">
-                No work history provided
+                {t("tables.noWork")}
               </Col>
             </Row>
           )}
@@ -241,13 +244,13 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
           {/* Licenses & Qualifications */}
           <Row className="g-0 border border-dark bg-light fw-bold text-center mt-2">
             <Col xs={2} className={`p-1 border-end ${borderDark}`}>
-              Year
+              {t("tables.year")}
             </Col>
             <Col xs={2} className={`p-1 border-end ${borderDark}`}>
-              Month
+              {t("tables.month")}
             </Col>
             <Col xs={8} className="p-1">
-              Licenses & Qualifications
+              {t("tables.licenses")}
             </Col>
           </Row>
           {data.licenses && data.licenses.length > 0 ? (
@@ -272,7 +275,7 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
               <Col xs={2} className={cellStyle}></Col>
               <Col xs={2} className={cellStyle}></Col>
               <Col xs={8} className="p-3 text-center text-muted">
-                No licenses or qualifications provided
+                {t("tables.noLicenses")}
               </Col>
             </Row>
           )}
@@ -280,7 +283,7 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
           {/* Motivation, Self-PR, etc. */}
           <Row className="g-0 border border-dark bg-light fw-bold text-center mt-2">
             <Col xs={12} className="p-1">
-              Motivation, Self-PR, etc.
+              {t("motivation.title")}
             </Col>
           </Row>
           <Row
@@ -292,7 +295,7 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
                 <div>{data.reasons}</div>
               ) : (
                 <div className="text-muted">
-                  (Write your motivation, self-PR, etc.)
+                  {t("motivation.placeholder")}
                 </div>
               )}
             </Col>
@@ -301,7 +304,7 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
           {/* Personal Preferences */}
           <Row className="g-0 border border-dark bg-light fw-bold text-center mt-2">
             <Col xs={12} className="p-1">
-              Personal Preferences
+              {t("preferences.title")}
             </Col>
           </Row>
           {data.preferences && data.preferences.length > 0 ? (
@@ -318,8 +321,7 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
           ) : (
             <Row className="g-0 border-start border-end border-bottom border-dark">
               <Col xs={12} className="p-3 text-muted">
-                (Enter preferences such as salary, job type, working hours, work
-                location, etc.)
+                {t("preferences.placeholder")}
               </Col>
             </Row>
           )}

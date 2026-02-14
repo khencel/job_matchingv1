@@ -11,10 +11,11 @@ import { useEffect, useState } from "react";
 import { removeBenefit, setInitialData, resetForm } from "@/redux/slices/employer/post_a_job/basicInfoSlice";
 import { popup } from "@/helper/pop_up";
 import { useRouter } from "next/navigation";
-import { title } from "process";
+import { useTranslations } from "next-intl";
 
 
 export default function PerksBenefitPage() {
+  const t = useTranslations("employerPostJobPerksBenefit");
   const basicInfo = useSelector((state: RootState) => state.basicInfo);
   const benefits = useSelector((state:RootState) => state.basicInfo.benefits)
   const dispatch = useDispatch<AppDispatch>();
@@ -31,9 +32,9 @@ export default function PerksBenefitPage() {
   const handleConfirm = () => {
       dispatch(setInitialData(basicInfo))
       popup({
-        title: "Create job post?",
-        text: "Job post successfully created",
-        confirmText: 'yes, create',
+        title: t("confirm.title"),
+        text: t("confirm.message"),
+        confirmText: t("confirm.confirmText"),
         icon:"warning",
         onConfirm: () => {
           handleSubmit()
@@ -66,33 +67,33 @@ export default function PerksBenefitPage() {
       <Header />
 
       <div className="emp-component-style mt-2">  
-          <strong>Basic Information</strong>
+          <strong>{t("sections.basicInfo.title")}</strong>
           <br />
-          <small>Your job post.</small>
+          <small>{t("sections.basicInfo.subtitle")}</small>
           <hr />
           <div className="row mt-5">
               <div className="col-md-3">
-                  <strong>Information details</strong>
+                  <strong>{t("sections.details.title")}</strong>
 
               </div>
               <div className="col">
                   <div className="row">
                     <div className="col-3">
-                      <strong>Title:</strong>
+                      <strong>{t("fields.title")}</strong>
                     </div>
                     <div className="col-9">
                       {data?.title}
                     </div>
 
                     <div className="col-3">
-                      <strong>Salary:</strong>
+                      <strong>{t("fields.salary")}</strong>
                     </div>
                     <div className="col-9">
                       {data?.salary}
                     </div>
 
                     <div className="col-3">
-                      <strong>Job Type:</strong>
+                      <strong>{t("fields.jobType")}</strong>
                     </div>
                     <div className="col-9">
                       {
@@ -107,7 +108,7 @@ export default function PerksBenefitPage() {
                     </div>
 
                     <div className="col-3 mt-5">
-                      <strong>Job description:</strong>
+                      <strong>{t("fields.jobDescription")}</strong>
                     </div>
                     <div className="col-9 mt-5">
                       <p dangerouslySetInnerHTML={{
@@ -117,7 +118,7 @@ export default function PerksBenefitPage() {
                     </div>
                     <hr />
                     <div className="col-3">
-                      <strong>Responsibilities:</strong>
+                      <strong>{t("fields.responsibilities")}</strong>
                     </div>
                     <div className="col-9">
                       <p dangerouslySetInnerHTML={{
@@ -127,7 +128,7 @@ export default function PerksBenefitPage() {
                     </div>
                     <hr />
                     <div className="col-3">
-                      <strong>Requirements:</strong>
+                      <strong>{t("fields.requirements")}</strong>
                     </div>
                     <div className="col-9">
                       <p dangerouslySetInnerHTML={{
@@ -139,7 +140,7 @@ export default function PerksBenefitPage() {
 
                     <hr />
                     <div className="col-3">
-                      <strong>Nice to Have:</strong>
+                      <strong>{t("fields.niceToHave")}</strong>
                     </div>
                     <div className="col-9">
                       <p dangerouslySetInnerHTML={{
@@ -159,7 +160,7 @@ export default function PerksBenefitPage() {
                             className="btn btn-primary-custom rounded-3"
                             onClick={handleConfirm}
                         >
-                            Confirm
+                          {t("buttons.confirm")}
                         </button>
                 </div>
             </div>

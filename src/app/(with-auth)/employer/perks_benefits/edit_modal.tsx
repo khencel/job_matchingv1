@@ -1,3 +1,5 @@
+"use client";
+
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { AddButton } from '@/components/Button';
@@ -11,6 +13,7 @@ import { FaSave } from "react-icons/fa";
 import { useEffect, useState } from 'react';
 import { updatePerksBenefits } from '@/redux/slices/perks_benefits/perksBenefitsThunk';
 import { showSuccessToast } from '@/app/(util)/toaster';
+import { useTranslations } from 'next-intl';
 
 
 interface EditModalProps {
@@ -27,6 +30,7 @@ interface UpdatePerksPayload {
 
 
 export default function EditModal({showModalEdit, closeModalEdit, data}: EditModalProps){
+    const t = useTranslations("employerPerksBenefits");
     const dispatch = useAppDispatch();
 
     const [form, setForm] = useState<UpdatePerksPayload>({
@@ -57,12 +61,12 @@ export default function EditModal({showModalEdit, closeModalEdit, data}: EditMod
 
     const handleUpdate = () => {
         popup({
-            title: "Update Perks & Benefits?",
-            text: "Are you sure?",
-            confirmText: "Yes",
+            title: t("modals.edit.title"),
+            text: t("modals.edit.message"),
+            confirmText: t("modals.edit.confirmText"),
             icon: "warning",
             onConfirm: () => {
-                showSuccessToast('Update Item','Perks & Benefits updated successfully')
+                showSuccessToast(t("toasts.updateTitle"), t("toasts.updateMessage"))
                 dispatch(updatePerksBenefits(form));
                 closeModalEdit();
             },
@@ -75,14 +79,14 @@ export default function EditModal({showModalEdit, closeModalEdit, data}: EditMod
         <>
             <Modal show={showModalEdit} onHide={closeModalEdit}>
                 <Modal.Header closeButton>
-                <Modal.Title>Edit Perks & Benefits</Modal.Title>
+                <Modal.Title>{t("modals.edit.header")}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="row">
                         <div className="col">
                             <input 
                                 className="form-control" 
-                                placeholder="Name" 
+                                placeholder={t("modals.fields.name")}
                                 type="text"
                                 name="name"
                                 value={form.name}
@@ -94,7 +98,7 @@ export default function EditModal({showModalEdit, closeModalEdit, data}: EditMod
                         <div className="col">
                             <textarea 
                                 className="form-control" 
-                                placeholder="Description" 
+                                placeholder={t("modals.fields.description")}
                                 rows={5}
                                 name="description"
                                 value={form.description}
@@ -105,9 +109,9 @@ export default function EditModal({showModalEdit, closeModalEdit, data}: EditMod
                 </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={closeModalEdit}>
-                    Close
+                    {t("modals.actions.close")}
                 </Button>
-                    <AddButton label="Save" className='btn btn-primary-custom rounded-3' onClick={handleUpdate} icon={<FaSave />} /> 
+                    <AddButton label={t("modals.actions.save")} className='btn btn-primary-custom rounded-3' onClick={handleUpdate} icon={<FaSave />} /> 
                 </Modal.Footer>
             </Modal>
         </>

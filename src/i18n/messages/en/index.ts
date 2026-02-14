@@ -55,13 +55,18 @@ import jobSeekerAppliedJobs from "./jobSeekerAppliedJobs.json";
 import jobSeekerDocuments from "./jobSeekerDocuments.json";
 import jobSeekerProfileExtended from "./jobSeekerProfileExtended.json";
 import jobSeekerResumeBuilder from "./jobSeekerResumeBuilder.json";
+import jobSeekerResumeForm from "./jobSeekerResumeForm.json";
+import jobSeekerResumeTemplate from "./jobSeekerResumeTemplate.json";
 import employerOverview from "./employerOverview.json";
 import employerJobListing from "./employerJobListing.json";
 import employerJobListingEditModal from "./employerJobListingEditModal.json";
 import employerApplicants from "./employerApplicants.json";
+import employerPerksBenefits from "./employerPerksBenefits.json";
+import employerPostJobPerksBenefit from "./employerPostJobPerksBenefit.json";
 import changePasswordModal from "./changePasswordModal.json";
 import jobListFilter from "./jobListFilter.json";
 import registrationEmployerPage from "./registrationEmployerPage.json";
+import registrationJobSeekerPage from "./registrationJobSeekerPage.json";
 
 export default {
   // Spread common/auth translations into root
@@ -117,11 +122,16 @@ export default {
   jobSeekerDocuments,
   jobSeekerProfileExtended,
   jobSeekerResumeBuilder,
+  jobSeekerResumeForm,
+  jobSeekerResumeTemplate,
   employerOverview,
   employerJobListing,
   employerJobListingEditModal,
   employerApplicants,
+  employerPerksBenefits,
+  employerPostJobPerksBenefit,
   changePasswordModal,
   jobListFilter,
   registrationEmployerPage,
+  registrationJobSeekerPage,
 };

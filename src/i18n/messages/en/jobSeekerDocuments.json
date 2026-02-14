@@ -3,6 +3,7 @@
   "subtitle": "Upload and manage your documents",
   "documentsCount": "{count} Documents",
   "previewFiles": "Preview Files",
+  "fileNameFallback": "Document",
   "upload": {
     "title": "Upload Your Documents",
     "subtitle": "Select multiple files to upload at once. Supported formats: PDF, DOC, DOCX, JPG, PNG",

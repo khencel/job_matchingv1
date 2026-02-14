@@ -1,0 +1,78 @@
+{
+  "header": {
+    "title": "Resume Details",
+    "subtitle": "Update fields to see the preview refresh instantly."
+  },
+  "sections": {
+    "basicInfo": "Basic Information",
+    "contact": "Contact & Address",
+    "education": "Education",
+    "work": "Work History",
+    "licenses": "Licenses / Qualifications",
+    "preferences": "Preferences",
+    "reasons": "Motivation / Reasons"
+  },
+  "fields": {
+    "fullName": "Full Name *",
+    "namePhonetic": "Name Phonetic",
+    "birthdate": "Birthdate *",
+    "age": "Age",
+    "gender": "Gender",
+    "photo": "Profile Photo",
+    "email": "Email *",
+    "phone": "Phone *",
+    "address": "Address *",
+    "addressPhonetic": "Address Phonetic",
+    "postalCode": "Postal Code",
+    "otherPhone": "Alt. Phone",
+    "otherEmail": "Alt. Email",
+    "otherPhonetic": "Alt. Phonetic",
+    "otherAddress": "Alt. Address",
+    "year": "Year",
+    "month": "Month",
+    "details": "Details",
+    "qualification": "Qualification"
+  },
+  "placeholders": {
+    "fullName": "e.g. Jane Doe",
+    "namePhonetic": "e.g. ジェーンドウ",
+    "postalCode": "123-4567",
+    "preference": "Add preference",
+    "reasons": "Share your motivation or key points"
+  },
+  "options": {
+    "gender": {
+      "female": "Female",
+      "male": "Male",
+      "nonBinary": "Non-binary",
+      "preferNot": "Prefer not to say"
+    }
+  },
+  "buttons": {
+    "add": "Add",
+    "removeEntry": "Remove entry"
+  },
+  "photo": {
+    "noPhoto": "No photo",
+    "change": "Change Image",
+    "upload": "Upload Image",
+    "remove": "Remove",
+    "hint": "PNG or JPG, up to 2MB."
+  },
+  "upload": {
+    "invalidImage": "Please upload a valid image file.",
+    "maxSize": "Image must be under {size}MB."
+  },
+  "validation": {
+    "fullNameRequired": "Full name is required.",
+    "genderRequired": "Gender is required.",
+    "emailInvalid": "Please provide a valid email.",
+    "phoneTooShort": "Phone number is too short.",
+    "addressRequired": "Address is required.",
+    "birthdateRequired": "Birthdate is required.",
+    "ageRequired": "Age is required.",
+    "postalCodeRequired": "Postal code is required.",
+    "reasonsRequired": "Motivation is required.",
+    "photoRequired": "Photo is required."
+  }
+}

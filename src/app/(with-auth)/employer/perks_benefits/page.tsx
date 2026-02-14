@@ -17,10 +17,12 @@ import { popup } from "@/helper/pop_up";
 import { showSuccessToast } from "@/app/(util)/toaster";
 import EditModal from "./edit_modal";
 import Cookies from "js-cookie";
+import { useTranslations } from "next-intl";
 
 
 
 export default function PerksBenefitsPage(){
+    const t = useTranslations("employerPerksBenefits");
     const [showModal, setShowModal] = useState(false);
     const [showModalEdit, setShowModalEdit] = useState(false);
     const dispatch = useAppDispatch();
@@ -39,13 +41,13 @@ export default function PerksBenefitsPage(){
 
     const handleDelete = (id: number) => {
         popup({
-            title: "Delete Perks & Benefits?",
-            text: "Are you sure you want to delete this Perks & Benefits?",
-            confirmText: 'yes, Create it!',
+            title: t("modals.delete.title"),
+            text: t("modals.delete.message"),
+            confirmText: t("modals.delete.confirmText"),
             icon:"warning",
             onConfirm: () => {
                     dispatch(deletePerksBenefits(id));
-                    showSuccessToast('Delete Item','Perks & Benefits deleted successfully')
+                    showSuccessToast(t("toasts.deleteTitle"), t("toasts.deleteMessage"))
                     handleClose();
                 }
         })        
@@ -76,20 +78,20 @@ export default function PerksBenefitsPage(){
         <>
             <div className="row standar-div">
                 <div className="col">
-                    <h5><strong><BiArrowBack /> Perks & Benefits</strong></h5>
+                    <h5><strong><BiArrowBack /> {t("title")}</strong></h5>
                 </div>
                 <div className="col text-end">
-                    <span>November - December 2025 <FaCalendarCheck className="text-primary" /></span>
+                    <span>{t("dateRange")} <FaCalendarCheck className="text-primary" /></span>
                 </div>
             </div>
 
             <div className="row standar-div mt-2">
                 <div className="col">
-                    <strong>Perks & Benefits ({items.length}) total</strong>
+                    <strong>{t("listTitle", { count: items.length })}</strong>
                 </div>
                 <div className="col-2 text-end">
                     {/* <button className="btn btn-primary-custom"> Add Perks & Benefits</button> */}
-                    <AddButton onClick={handleAdd} label="Perks & Benefits" className="btn btn-primary-custom" icon={<FaPlus />} />               
+                    <AddButton onClick={handleAdd} label={t("buttons.add")} className="btn btn-primary-custom" icon={<FaPlus />} />               
                 </div>
             </div>
 
@@ -100,9 +102,9 @@ export default function PerksBenefitsPage(){
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Created At</th>
+                                        <th>{t("table.name")}</th>
+                                        <th>{t("table.description")}</th>
+                                        <th>{t("table.createdAt")}</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -110,7 +112,7 @@ export default function PerksBenefitsPage(){
                                     {
                                         status === "loading" && (
                                             <tr>
-                                                <td colSpan={5}>Loading...</td>
+                                                <td colSpan={5}>{t("states.loading")}</td>
                                             </tr>
                                         )
                                     }
@@ -118,7 +120,7 @@ export default function PerksBenefitsPage(){
                                     {
                                         status === "succeeded" && items.length === 0 && (
                                             <tr>
-                                                <td colSpan={5}>No data found</td>
+                                                <td colSpan={5}>{t("states.empty")}</td>
                                             </tr>
                                         )
                                     }
@@ -140,13 +142,13 @@ export default function PerksBenefitsPage(){
 
                                                     <Dropdown.Menu>
                                                         <Dropdown.Item onClick={() => handleEdit(perk)}>
-                                                            Edit
+                                                            {t("buttons.edit")}
                                                         </Dropdown.Item>
                                                         <Dropdown.Item
                                                             className="text-danger"
                                                             onClick={() => handleDelete(perk.id)}
                                                         >
-                                                            Delete
+                                                            {t("buttons.delete")}
                                                         </Dropdown.Item>
                                                     </Dropdown.Menu>
                                                 </Dropdown>
