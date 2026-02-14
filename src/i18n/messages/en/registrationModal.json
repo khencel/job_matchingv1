@@ -1,0 +1,17 @@
+{
+  "title": {
+    "employer": "Employer Registration",
+    "jobSeeker": "Job Seeker Registration",
+    "supervisory": "Supervisory Registration"
+  },
+  "steps": {
+    "account": "Account",
+    "company": "Company",
+    "contact": "Contact",
+    "confirm": "Confirm"
+  },
+  "buttons": {
+    "close": "Close",
+    "back": "Back"
+  }
+}

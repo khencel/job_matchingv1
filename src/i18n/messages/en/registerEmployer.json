@@ -1,0 +1,124 @@
+{
+  "registerEmployerStep1": {
+    "title": "Account Details",
+    "labels": {
+      "email": "Email Address",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "rememberMe": "Remember me"
+    },
+    "placeholders": {
+      "enterEmail": "Enter your email",
+      "enterPassword": "Enter your password",
+      "confirmYourPassword": "Confirm your password"
+    },
+    "helpers": {
+      "passwordMinLength": "Must be at least 8 characters long.",
+      "accountConfirmNote": "A confirmation link will be sent to your email address to verify your account"
+    },
+    "errors": {
+      "fillRequired": "Please fill in all required fields.",
+      "invalidEmail": "Please enter a valid email address.",
+      "passwordTooShort": "Password must be at least 8 characters long.",
+      "passwordMismatch": "Passwords do not match."
+    },
+    "buttons": {
+      "next": "Next"
+    }
+  },
+  "registerEmployerStep2": {
+    "title": "Management Organization Information",
+    "labels": {
+      "basicInfo": "Basic Information",
+      "companyName": "Company Name",
+      "companyAddress": "Company Address",
+      "phoneNumber": "Phone Number",
+      "companyIndustry": "Company Industry",
+      "industry": "Industry",
+      "regions": "Regions",
+      "region": "Region",
+      "orgInfo": "Organizational Information",
+      "numEmployees": "Number of Employees",
+      "branchOffices": "Branch Offices",
+      "branchOfficePlaceholder": "Enter branch office location",
+      "branchOfficesList": "Branch Offices:",
+      "selectedIndustries": "Selected Industries:",
+      "prInfo": "PR Information",
+      "appealPoints": "Appeal Points",
+      "fee": "Fee"
+    },
+    "placeholders": {
+      "enterCompanyName": "Enter company name",
+      "enterCompanyAddress": "Enter company address",
+      "enterPhoneNumber": "Enter phone number",
+      "selectIndustry": "Select Industry",
+      "selectRegion": "Select Region",
+      "enterNumEmployees": "Enter number of employees",
+      "enterAppealPoints": "Enter appeal points",
+      "enterFee": "Enter fee amount"
+    },
+    "errors": {
+      "invalidCompanyName": "Enter a valid Company Name",
+      "invalidCompanyAddress": "Enter a valid Company Address",
+      "invalidPhoneNumber": "Enter a valid Phone Number",
+      "invalidIndustry": "Select Industry",
+      "invalidNumOfEmployees": "Need at least 1 employee.",
+      "invalidRegion": "Select Region",
+      "invalidCurrentBranch": "At least minimum of 2 characters",
+      "invalidBranchName": "Branch name must be at least 2 characters long.",
+      "fillRequired": "Please fill in all required fields.",
+      "addAtLeastOneBranch": "Please add at least one branch office."
+    },
+    "buttons": {
+      "next": "Next",
+      "add": "Add",
+      "remove": "Remove"
+    }
+  },
+  "registerEmployerStep3": {
+    "title": "Contact Person",
+    "labels": {
+      "name": "Name",
+      "departmentName": "Department Name",
+      "phoneNumber": "Phone Number",
+      "emailAddress": "Email Address"
+    },
+    "placeholders": {
+      "enterFullName": "Enter full name",
+      "enterDeptName": "Enter department name",
+      "enterPhoneNumber": "Enter phone number",
+      "enterEmailAddress": "Enter email address"
+    },
+    "helpers": {
+      "contactInfoNote": "This information will be used by the platform administrators to contact your company if needed. It will not be displayed on job listings."
+    },
+    "errors": {
+      "invalidName": "Minimum of 3 characters",
+      "invalidDepartmentName": "Enter a valid Department Name",
+      "invalidPhoneNumber": "Enter a valid Phone Number",
+      "invalidEmail": "Please enter a valid email address.",
+      "fillRequired": "Please fill in all required fields."
+    },
+    "buttons": {
+      "next": "Next"
+    }
+  },
+  "registerEmployerStep4": {
+    "title": "Terms and Conditions",
+    "labels": {
+      "acceptTerms": "Accept the terms of use.",
+      "acceptPrivacyPolicy": "Accept privacy policy.",
+      "acceptReceiveEmails": "Receive notification via email."
+    },
+    "helpers": {
+      "submitting": "Submitting..."
+    },
+    "errors": {
+      "acceptTerms": "You must accept Terms of Use to proceed.",
+      "acceptPrivacy": "You must accept Privacy Policy to proceed."
+    },
+    "buttons": {
+      "submit": "Submit Registration"
+    }
+  }
+}

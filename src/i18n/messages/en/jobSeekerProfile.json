@@ -1,0 +1,30 @@
+{
+  "loading": "Loading...",
+  "noDataAvailable": "No data available",
+  "avatarAlt": "Job Seeker Avatar",
+  "sections": {
+    "overview": "Overview",
+    "personalInformation": "Personal Information"
+  },
+  "infoLabels": {
+    "fullName": "Full Name",
+    "gender": "Gender",
+    "birthdate": "Birthdate",
+    "nationality": "Nationality",
+    "phone": "Phone Number",
+    "facebook": "Facebook",
+    "contactInformation": "Contact Information",
+    "currentResidence": "Current Residence",
+    "professionalInformation": "Professional Information",
+    "education": "Highest Education",
+    "japaneseLevel": "Japanese Level",
+    "visaStatus": "Visa Status"
+  },
+  "education": {
+    "highSchool": "High School",
+    "associateDegree": "Associate Degree",
+    "bachelorDegree": "Bachelor's Degree",
+    "masterDegree": "Master's Degree",
+    "doctorate": "Doctorate"
+  }
+}

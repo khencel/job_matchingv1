@@ -1,0 +1,88 @@
+{
+  "registerJobSeekerStep2": {
+    "title": "Personal Information",
+    "labels": {
+      "firstName": "First Name",
+      "midName": "Middle Name",
+      "lastName": "Last Name",
+      "nationality": "Nationality",
+      "gender": "Gender",
+      "currentPlaceResidence": "Current Place of Residence",
+      "birthdate": "Date of Birth",
+      "visaStatus": "Visa Status",
+      "highestEducation": "Highest Education",
+      "japaneseLevel": "Japanese Language Level (JLPT)",
+      "email": "Email Address",
+      "contactNo": "Contact Number",
+      "facebook": "Facebook Profile",
+      "optional": "Optional"
+    },
+    "placeholders": {
+      "firstName": "Enter your first name",
+      "midName": "Enter your middle name",
+      "lastName": "Enter your last name",
+      "selectNationality": "Select your nationality",
+      "nationality": "Enter your nationality",
+      "currentPlaceResidence": "Enter your current address",
+      "selectVisaStatus": "Select visa status",
+      "selectEducation": "Select your highest education",
+      "selectJapaneseLevel": "Select your Japanese level",
+      "email": "Enter your email address",
+      "contactNo": "Enter your contact number",
+      "facebook": "Enter your Facebook profile URL"
+    },
+    "options": {
+      "male": "Male",
+      "female": "Female",
+      "visaApplied": "Applied",
+      "visaPending": "Pending",
+      "visaReviewing": "Under Review",
+      "visaIssued": "Issued",
+      "visaDenied": "Denied",
+      "elementary": "Elementary School",
+      "jrHighschool": "Junior High School",
+      "srHighschool": "Senior High School",
+      "vocational": "Vocational School",
+      "bachelorDegree": "Bachelor's Degree",
+      "masterDegree": "Master's Degree",
+      "doctoralDegree": "Doctoral Degree"
+    },
+    "errors": {
+      "nameTooShort": "Name must be at least 2 characters.",
+      "visaStatusRequired": "Please select your visa status.",
+      "nationalityRequired": "Please select your nationality.",
+      "genderRequired": "Please select your gender.",
+      "residenceTooShort": "Current residence must be at least 2 characters.",
+      "birthdateRequired": "Please enter your date of birth.",
+      "age18Error": "You must be at least 18 years old.",
+      "age100Error": "You must be at most 100 years old.",
+      "invalidEmail": "Please enter a valid email address.",
+      "contactNoTooShort": "Contact number must be at least 7 digits.",
+      "highestEducationRequired": "Please select your highest education.",
+      "japaneseLevelRequired": "Please select your Japanese level.",
+      "invalidFacebookUrl": "Please enter a valid Facebook profile URL.",
+      "fillRequired": "Please fill in all required fields."
+    },
+    "buttons": {
+      "next": "Next"
+    }
+  },
+  "registerJobSeekerStep3": {
+    "title": "Terms and Conditions",
+    "labels": {
+      "acceptTerms": "I accept the Terms and Conditions",
+      "acceptPrivacyPolicy": "I accept the Privacy Policy",
+      "acceptReceiveEmails": "I agree to receive promotional emails (optional)"
+    },
+    "helpers": {
+      "submitting": "Submitting..."
+    },
+    "errors": {
+      "acceptT&C": "You must accept the Terms and Conditions to proceed.",
+      "acceptPrivacyPolicy": "You must accept the Privacy Policy to proceed."
+    },
+    "buttons": {
+      "submit": "Submit Registration"
+    }
+  }
+}

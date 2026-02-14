@@ -1,0 +1,17 @@
+{
+  "placeholders": {
+    "jobType": "Job Type"
+  },
+  "labels": {
+    "region": "Region"
+  },
+  "regions": {
+    "test1": "Test1",
+    "test2": "Test2",
+    "test3": "Test3",
+    "test4": "Test4"
+  },
+  "buttons": {
+    "explore": "Explore"
+  }
+}
