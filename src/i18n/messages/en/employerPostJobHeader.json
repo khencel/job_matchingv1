@@ -1,0 +1,17 @@
+{
+  "heading": "Post a Job",
+  "steps": {
+    "step1": {
+      "indicator": "Step 1 of 3",
+      "title": "Job Information"
+    },
+    "step2": {
+      "indicator": "Step 2 of 3",
+      "title": "Job Description"
+    },
+    "step3": {
+      "indicator": "Step 3 of 3",
+      "title": "Information"
+    }
+  }
+}

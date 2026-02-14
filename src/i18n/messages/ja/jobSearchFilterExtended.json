@@ -1,0 +1,13 @@
+{
+  "ariaLabels": {
+    "specificSkillField": "特定技能 分野",
+    "prefecture": "都道府県"
+  },
+  "placeholders": {
+    "selectCategory": "カテゴリーを選択",
+    "selectPrefecture": "都道府県を選択"
+  },
+  "buttons": {
+    "search": "検索"
+  }
+}

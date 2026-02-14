@@ -1,0 +1,19 @@
+{
+  "validation": {
+    "companyNameRequired": "会社名フィールドは必須です",
+    "nameRequired": "名前フィールドは必須です",
+    "emailRequired": "メールフィールドは必須です",
+    "invalidEmail": "無効なメールアドレス",
+    "phoneRequired": "電話番号フィールドは必須です",
+    "messageRequired": "メッセージフィールドは必須です"
+  },
+  "processing": "処理中... お待ちください",
+  "placeholders": {
+    "companyName": "例：ABC株式会社",
+    "name": "例：山田太郎",
+    "email": "example@company.com",
+    "phone": "例：090-xxxx-xxxx",
+    "subject": "例：求人掲載について",
+    "message": "例：サービスと料金について教えてください。"
+  }
+}

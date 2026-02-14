@@ -1,0 +1,16 @@
+{
+  "heading": "Employer Profile",
+  "fallback": {
+    "noLocation": "No location",
+    "notSpecified": "—"
+  },
+  "buttons": {
+    "editProfile": "Edit Profile"
+  },
+  "stats": {
+    "founded": "Founded",
+    "employees": "Employees",
+    "location": "Location",
+    "industry": "Industry"
+  }
+}

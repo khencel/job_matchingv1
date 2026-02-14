@@ -1,0 +1,43 @@
+{
+  "hero": {
+    "heading": "Welcome to Our Platform",
+    "tagline": "Connect. Apply. Grow."
+  },
+  "form": {
+    "heading": "Sign In",
+    "description": "Welcome back! Please login to your account",
+    "fields": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Password"
+      }
+    },
+    "buttons": {
+      "signIn": "Sign In",
+      "signingIn": "Signing In..."
+    },
+    "links": {
+      "forgotPassword": "Forgot Password?"
+    }
+  },
+  "toasts": {
+    "fillAllFields": {
+      "title": "Sign in failed",
+      "message": "Please fill in all fields"
+    },
+    "verifyEmail": {
+      "message": "Please verify your email"
+    },
+    "success": {
+      "title": "Sign in successful",
+      "message": "Welcome back!"
+    },
+    "invalidCredentials": {
+      "message": "Invalid email or password"
+    }
+  }
+}

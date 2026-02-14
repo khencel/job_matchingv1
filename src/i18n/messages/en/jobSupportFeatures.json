@@ -1,0 +1,31 @@
+{
+  "badge": "Job Support Features",
+  "heading": "Everything You Need to Succeed",
+  "description": "Powerful tools designed to help employers and job seekers connect, collaborate, and grow.",
+  "features": {
+    "smartMatching": {
+      "title": "Smart Job Matching",
+      "description": "Automatically match job seekers with the right opportunities based on skills, experience, and preferences."
+    },
+    "profiles": {
+      "title": "Employer & Seeker Profiles",
+      "description": "Create detailed profiles to showcase skills, experience, and company culture."
+    },
+    "tracking": {
+      "title": "Application Tracking",
+      "description": "Track job applications in real time with clear status updates from submission to hiring."
+    },
+    "insights": {
+      "title": "Career Insights",
+      "description": "Get insights on job trends, salary ranges, and career growth opportunities."
+    },
+    "security": {
+      "title": "Secure & Reliable",
+      "description": "Your data is protected with industry-standard security and privacy measures."
+    },
+    "hiring": {
+      "title": "Fast & Easy Hiring",
+      "description": "Streamline the hiring process with intuitive tools that save time and effort."
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "heading": "求人を掲載",
+  "steps": {
+    "step1": {
+      "indicator": "ステップ 1/3",
+      "title": "求人情報"
+    },
+    "step2": {
+      "indicator": "ステップ 2/3",
+      "title": "求人説明"
+    },
+    "step3": {
+      "indicator": "ステップ 3/3",
+      "title": "情報"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "success": {
+    "title": "Company Information Submitted"
+  },
+  "additionalFields": {
+    "foundedYear": {
+      "label": "Company Founded Year",
+      "placeholder": "Enter Company Founded Year (Greater than 1000)",
+      "error": "Please enter founded date"
+    },
+    "companyProfile": {
+      "label": "Company Profile",
+      "placeholder": "Enter Company Biography",
+      "error": "Please enter company biography"
+    }
+  },
+  "industries": {
+    "techIT": "Tech & IT",
+    "creativeDesign": "Creative & Design",
+    "businessOffice": "Business & Office",
+    "salesMarketing": "Sales & Marketing",
+    "financeAccounting": "Finance & Accounting",
+    "ecommerceRetail": "E-commerce & Retail",
+    "educationTraining": "Education & Training",
+    "healthcare": "Healthcare",
+    "skilledTrades": "Skilled Trades",
+    "logisticsTransportation": "Logistics & Transportation",
+    "hospitalityTourism": "Hospitality & Tourism",
+    "customerServiceBPO": "Customer Service & BPO",
+    "constructionEngineering": "Construction & Engineering",
+    "legalCompliance": "Legal & Compliance",
+    "othersGeneral": "Others / General"
+  },
+  "regions": {
+    "hokkaido": "Hokkaido",
+    "tohoku": "Tohoku",
+    "kanto": "Kanto",
+    "chubu": "Chubu",
+    "kansai": "Kansai",
+    "chugoku": "Chugoku",
+    "shikoku": "Shikoku",
+    "kyushu": "Kyushu",
+    "okinawa": "Okinawa"
+  }
+}

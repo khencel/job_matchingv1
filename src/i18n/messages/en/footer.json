@@ -1,0 +1,21 @@
+{
+  "heading": {
+    "line1": "Explore Your",
+    "line2": "Next Career",
+    "line3": "Move"
+  },
+  "description": "Are you ready to take the next step in your career? JobLink helps you discover exciting opportunities tailored to your skills and aspirations",
+  "brand": {
+    "name": "JOB Search",
+    "tagline": "Join thousands of successful job seekers who have found their dream careers through our platform. Your future begins here!"
+  },
+  "links": {
+    "home": "Home",
+    "features": "Job Support Features",
+    "aboutUs": "About Us",
+    "qa": "Q&A",
+    "contacts": "Contacts",
+    "legal": "Company & Legal Notice"
+  },
+  "copyright": "Copyright Jobsearch 2025. All rights reserved"
+}

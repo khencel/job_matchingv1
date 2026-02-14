@@ -1,0 +1,19 @@
+{
+  "validation": {
+    "companyNameRequired": "Company name field is required",
+    "nameRequired": "Name field is required",
+    "emailRequired": "Email field is required",
+    "invalidEmail": "Invalid Email",
+    "phoneRequired": "Phone field is required",
+    "messageRequired": "Message field is required"
+  },
+  "processing": "Processing... Please wait",
+  "placeholders": {
+    "companyName": "e.g., ABC Co., Ltd.",
+    "name": "e.g., Taro Yamada",
+    "email": "example@company.com",
+    "phone": "e.g., +81-90-xxxx-xxxx",
+    "subject": "e.g., About job posting",
+    "message": "e.g., Please tell me about your services and pricing."
+  }
+}

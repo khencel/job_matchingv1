@@ -1,0 +1,15 @@
+{
+  "heading": "無料登録",
+  "subtitle": "外国人と企業をつなぐ新しいキャリアプラットフォーム",
+  "cards": {
+    "jobSeeker": {
+      "description": "夢の仕事を探していますか？"
+    },
+    "employer": {
+      "description": "最高の人材を採用しましょう！"
+    },
+    "supervisory": {
+      "description": "効果的に管理・監督"
+    }
+  }
+}

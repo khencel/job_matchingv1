@@ -1,0 +1,16 @@
+{
+  "passwordToggle": {
+    "hide": "パスワードを隠す",
+    "show": "パスワードを表示"
+  },
+  "confirmPasswordToggle": {
+    "hide": "確認パスワードを隠す",
+    "show": "確認パスワードを表示"
+  },
+  "success": {
+    "title": "アカウント情報が送信されました"
+  },
+  "errors": {
+    "registrationError": "登録エラー:"
+  }
+}

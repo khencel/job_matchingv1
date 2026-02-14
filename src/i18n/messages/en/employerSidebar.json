@@ -1,0 +1,10 @@
+{
+  "title": "EMPLOYERS DASHBOARD",
+  "menuItems": {
+    "profile": "Employers Profile",
+    "applicants": "Applicants",
+    "postJob": "Post Job",
+    "jobListings": "Job Listings",
+    "perksBenefits": "Perks & Benefits"
+  }
+}

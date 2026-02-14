@@ -1,0 +1,15 @@
+{
+  "heading": "Free Registration",
+  "subtitle": "A new career platform connecting foreigners and companies.",
+  "cards": {
+    "jobSeeker": {
+      "description": "Looking for your dream job?"
+    },
+    "employer": {
+      "description": "Hire the best talent!"
+    },
+    "supervisory": {
+      "description": "Manage and supervise effectively"
+    }
+  }
+}

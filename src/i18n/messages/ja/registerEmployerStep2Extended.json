@@ -1,0 +1,45 @@
+{
+  "success": {
+    "title": "会社情報が送信されました"
+  },
+  "additionalFields": {
+    "foundedYear": {
+      "label": "会社設立年",
+      "placeholder": "会社設立年を入力してください（1000年以上）",
+      "error": "設立年を入力してください"
+    },
+    "companyProfile": {
+      "label": "会社プロフィール",
+      "placeholder": "会社の経歴を入力してください",
+      "error": "会社の経歴を入力してください"
+    }
+  },
+  "industries": {
+    "techIT": "テクノロジー・IT",
+    "creativeDesign": "クリエイティブ・デザイン",
+    "businessOffice": "ビジネス・オフィス",
+    "salesMarketing": "営業・マーケティング",
+    "financeAccounting": "財務・会計",
+    "ecommerceRetail": "Eコマース・小売",
+    "educationTraining": "教育・研修",
+    "healthcare": "医療・ヘルスケア",
+    "skilledTrades": "技能職",
+    "logisticsTransportation": "物流・運輸",
+    "hospitalityTourism": "ホスピタリティ・観光",
+    "customerServiceBPO": "カスタマーサービス・BPO",
+    "constructionEngineering": "建設・エンジニアリング",
+    "legalCompliance": "法務・コンプライアンス",
+    "othersGeneral": "その他・一般"
+  },
+  "regions": {
+    "hokkaido": "北海道",
+    "tohoku": "東北",
+    "kanto": "関東",
+    "chubu": "中部",
+    "kansai": "関西",
+    "chugoku": "中国",
+    "shikoku": "四国",
+    "kyushu": "九州",
+    "okinawa": "沖縄"
+  }
+}

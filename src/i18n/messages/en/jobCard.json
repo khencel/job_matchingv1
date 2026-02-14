@@ -1,0 +1,12 @@
+{
+  "labels": {
+    "postedOn": "Posted on",
+    "employmentType": "Employment Type:",
+    "salary": "Salary:"
+  },
+  "fallback": {
+    "dateUnavailable": "Posted date unavailable",
+    "notSpecified": "Not specified",
+    "noDescription": "No description provided."
+  }
+}

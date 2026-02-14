@@ -1,0 +1,13 @@
+{
+  "ariaLabels": {
+    "specificSkillField": "Specific Skill Field",
+    "prefecture": "Prefecture"
+  },
+  "placeholders": {
+    "selectCategory": "Select Category",
+    "selectPrefecture": "Select Prefecture"
+  },
+  "buttons": {
+    "search": "Search"
+  }
+}

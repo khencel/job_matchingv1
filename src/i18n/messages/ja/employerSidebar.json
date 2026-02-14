@@ -1,0 +1,10 @@
+{
+  "title": "雇用主ダッシュボード",
+  "menuItems": {
+    "profile": "雇用主プロフィール",
+    "applicants": "応募者",
+    "postJob": "求人掲載",
+    "jobListings": "求人一覧",
+    "perksBenefits": "福利厚生"
+  }
+}

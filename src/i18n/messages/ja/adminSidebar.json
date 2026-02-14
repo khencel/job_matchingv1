@@ -1,0 +1,9 @@
+{
+  "title": "管理ダッシュボード",
+  "menuItems": {
+    "overviews": "概要",
+    "userManagement": "ユーザー管理",
+    "applicants": "応募者",
+    "settings": "設定"
+  }
+}

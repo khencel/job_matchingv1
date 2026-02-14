@@ -1,0 +1,16 @@
+{
+  "heading": "雇用主プロフィール",
+  "fallback": {
+    "noLocation": "場所なし",
+    "notSpecified": "—"
+  },
+  "buttons": {
+    "editProfile": "プロフィールを編集"
+  },
+  "stats": {
+    "founded": "設立",
+    "employees": "従業員数",
+    "location": "所在地",
+    "industry": "業種"
+  }
+}

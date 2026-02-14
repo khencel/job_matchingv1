@@ -1,0 +1,12 @@
+{
+  "labels": {
+    "postedOn": "掲載日",
+    "employmentType": "雇用形態：",
+    "salary": "給与："
+  },
+  "fallback": {
+    "dateUnavailable": "掲載日は利用できません",
+    "notSpecified": "指定なし",
+    "noDescription": "説明がありません。"
+  }
+}

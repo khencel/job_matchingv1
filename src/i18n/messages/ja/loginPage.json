@@ -1,0 +1,43 @@
+{
+  "hero": {
+    "heading": "プラットフォームへようこそ",
+    "tagline": "つながる。応募する。成長する。"
+  },
+  "form": {
+    "heading": "サインイン",
+    "description": "お帰りなさい！アカウントにログインしてください",
+    "fields": {
+      "email": {
+        "label": "メールアドレス",
+        "placeholder": "メールアドレス"
+      },
+      "password": {
+        "label": "パスワード",
+        "placeholder": "パスワード"
+      }
+    },
+    "buttons": {
+      "signIn": "サインイン",
+      "signingIn": "サインイン中..."
+    },
+    "links": {
+      "forgotPassword": "パスワードをお忘れですか？"
+    }
+  },
+  "toasts": {
+    "fillAllFields": {
+      "title": "サインイン失敗",
+      "message": "すべてのフィールドを入力してください"
+    },
+    "verifyEmail": {
+      "message": "メールアドレスを確認してください"
+    },
+    "success": {
+      "title": "サインイン成功",
+      "message": "お帰りなさい！"
+    },
+    "invalidCredentials": {
+      "message": "無効なメールアドレスまたはパスワード"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "badge": "Q&A",
+  "heading": "Frequently Asked Questions",
+  "description": "Find quick answers to common questions about Job Support.",
+  "questions": {
+    "whatIsJobSupport": {
+      "question": "What is Job Support?",
+      "answer": "Job Support is a comprehensive platform that connects job seekers with employers. It provides tools for profile creation, job matching, application tracking, and career insights to help you find the perfect job or hire the right talent."
+    },
+    "isItFree": {
+      "question": "Is Job Support free to use?",
+      "answer": "Yes! Job Support offers a free plan for job seekers to create profiles, search for jobs, and apply to opportunities. Employers can also post jobs and access basic features for free. Premium plans with advanced features are available for both job seekers and employers."
+    },
+    "howToApply": {
+      "question": "How do I apply for a job?",
+      "answer": "Simply create a profile, search for jobs that match your skills and preferences, and click the 'Apply' button on any job listing. You can track your applications and receive updates directly through the platform."
+    },
+    "howToPostJobs": {
+      "question": "How can employers post jobs?",
+      "answer": "Employers can sign up, create a company profile, and start posting job listings in just a few clicks. Our intuitive tools make it easy to attract and manage candidates."
+    }
+  }
+}

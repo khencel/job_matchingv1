@@ -1,0 +1,9 @@
+{
+  "ariaLabels": {
+    "latestJobs": "Latest job listings",
+    "companyImage": "Company image"
+  },
+  "badges": {
+    "new": "NEW"
+  }
+}

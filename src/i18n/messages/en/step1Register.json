@@ -1,0 +1,16 @@
+{
+  "passwordToggle": {
+    "hide": "Hide password",
+    "show": "Show password"
+  },
+  "confirmPasswordToggle": {
+    "hide": "Hide confirm password",
+    "show": "Show confirm password"
+  },
+  "success": {
+    "title": "Account Information Submitted"
+  },
+  "errors": {
+    "registrationError": "Error on Registration:"
+  }
+}
