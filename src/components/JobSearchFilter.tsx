@@ -6,10 +6,12 @@ import { setFilterField } from "@/redux/slices/filterJobPost/filterJobPostSlice"
 import { useAppDispatch } from "@/redux/hooks";
 import { filterJobPostV1 } from "@/redux/slices/filterJobPost/filterJobPostThunk";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function JobSearchFiler() {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const t = useTranslations("jobSearchFilter");
 
   const { category, region } = useSelector(
     (state: RootState) => state.jobSearchFilterSlice,
@@ -54,16 +56,14 @@ export default function JobSearchFiler() {
 
                 <select
                   name="ssw_field"
-                  aria-label="特定技能 分野"
+                  aria-label={t("aria.category")}
                   id="sswField"
                   value={category}
                   onChange={(e) =>
                     dispatch(setFilterField({ category: e.target.value }))
                   }
                 >
-                  <option value="" data-i18n="ssw_placeholder">
-                    Select Category
-                  </option>
+                  <option value="">{t("placeholders.category")}</option>
                   {listCategory.map((item: any, index: number) => {
                     return (
                       <option key={index} value={item.value}>
@@ -97,12 +97,10 @@ export default function JobSearchFiler() {
                   onChange={(e) =>
                     dispatch(setFilterField({ region: e.target.value }))
                   }
-                  aria-label="都道府県"
+                  aria-label={t("aria.prefecture")}
                   id="prefecture"
                 >
-                  <option value="" data-i18n="pref_placeholder">
-                    Select Prefecture
-                  </option>
+                  <option value="">{t("placeholders.prefecture")}</option>
                   {regionList.map((item: any, index: number) => {
                     return (
                       <option key={index} value={item.value}>
@@ -119,7 +117,7 @@ export default function JobSearchFiler() {
                 onClick={handleApplyFilter}
                 className="btn btn-primary-custom w-100 h-100 border rounded-4"
               >
-                Search
+                {t("buttons.search")}
               </button>
             </div>
           </div>

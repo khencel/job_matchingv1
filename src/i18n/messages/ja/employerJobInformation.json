@@ -1,0 +1,61 @@
+{
+  "header": {
+    "title": "基本情報",
+    "subtitle": "この情報は公開表示されます。",
+    "stepBadge": "ステップ 1"
+  },
+  "fields": {
+    "jobTitle": {
+      "label": "求人タイトル",
+      "help": "職種名は1つのポジションを表す必要があります。",
+      "placeholder": "例：ソフトウェアエンジニア",
+      "minChars": "80文字以上"
+    },
+    "salary": {
+      "label": "給与",
+      "help": "想定される給与範囲を入力してください。",
+      "placeholder": "想定給与",
+      "tip": "ヒント：交渉可能な場合は空欄でも構いません。"
+    },
+    "employmentType": {
+      "label": "雇用形態",
+      "help": "1つ以上選択してください。",
+      "selectedLabel": "選択中：",
+      "options": {
+        "fullTime": "フルタイム",
+        "partTime": "パートタイム",
+        "remote": "リモート",
+        "internship": "インターンシップ"
+      }
+    },
+    "prefecture": {
+      "label": "都道府県",
+      "help": "勤務地の都道府県を選択してください。",
+      "placeholder": "都道府県を選択",
+      "tip": "地域で求人を絞り込むのに役立ちます。"
+    },
+    "categories": {
+      "label": "カテゴリー",
+      "help": "複数の職種カテゴリを選択できます。"
+    }
+  },
+  "buttons": {
+    "next": "次へ"
+  },
+  "footer": {
+    "requiredNote": {
+      "prefix": "「",
+      "suffix": "」は必須項目です。"
+    }
+  },
+  "errors": {
+    "jobTitleRequired": {
+      "title": "求人タイトルは必須です。",
+      "description": "続行するには求人タイトルを入力してください。"
+    },
+    "employmentTypeRequired": {
+      "title": "雇用形態は必須です。",
+      "description": "続行するには雇用形態を1つ以上選択してください。"
+    }
+  }
+}

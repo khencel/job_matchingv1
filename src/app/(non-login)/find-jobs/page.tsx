@@ -285,7 +285,6 @@ const FindJobPage = () => {
                               className="btn btn-primary-custom w-100 rounded-3"
                               onClick={() => router.push(`job-description/${job.id}`)}
                               type="button"
-                              data-i18n="btn_detail"
                             >
                               {t('results.jobCard.viewDetails')}
                             </button>

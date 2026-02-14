@@ -1,6 +1,8 @@
 {
   "placeholders": {
-    "jobType": "職種"
+    "jobType": "職種",
+    "category": "カテゴリーを選択",
+    "prefecture": "都道府県を選択"
   },
   "labels": {
     "region": "地域"
@@ -12,6 +14,11 @@
     "test4": "テスト4"
   },
   "buttons": {
-    "explore": "検索"
+    "explore": "検索",
+    "search": "検索"
+  },
+  "aria": {
+    "category": "特定技能 分野",
+    "prefecture": "都道府県"
   }
 }

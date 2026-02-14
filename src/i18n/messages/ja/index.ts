@@ -11,6 +11,7 @@ import about from "./about.json";
 import contactUs from "./contactUs.json";
 import jobSearchFilter from "./jobSearchFilter.json";
 import jobSearchFilterExtended from "./jobSearchFilterExtended.json";
+import serviceContent from "./serviceContent.json";
 import registerButton from "./registerButton.json";
 import registrationModal from "./registrationModal.json";
 import registerEmployer from "./registerEmployer.json";
@@ -40,6 +41,7 @@ import employerPostJobHeader from "./employerPostJobHeader.json";
 import employerProfileHeader from "./employerProfileHeader.json";
 import employerProfileBody from "./employerProfileBody.json";
 import addSkill from "./addSkill.json";
+import jobListCard from "./jobListCard.json";
 import adminSidebar from "./adminSidebar.json";
 import jobSeekerDashboard from "./jobSeekerDashboard.json";
 import jobSeekerLayout from "./jobSeekerLayout.json";
@@ -73,6 +75,7 @@ import employerJobListingEditModal from "./employerJobListingEditModal.json";
 import employerApplicants from "./employerApplicants.json";
 import employerPerksBenefits from "./employerPerksBenefits.json";
 import employerPostJobPerksBenefit from "./employerPostJobPerksBenefit.json";
+import employerJobInformation from "./employerJobInformation.json";
 import changePasswordModal from "./changePasswordModal.json";
 import jobListFilter from "./jobListFilter.json";
 import registrationEmployerPage from "./registrationEmployerPage.json";
@@ -90,6 +93,7 @@ export default {
   contactUs,
   jobSearchFilter,
   jobSearchFilterExtended,
+  serviceContent,
   registerButton,
   registrationModal,
   registerEmployer,
@@ -117,6 +121,7 @@ export default {
   employerProfileHeader,
   employerProfileBody,
   addSkill,
+  jobListCard,
   adminSidebar,
   jobSeekerDashboard,
   jobSeekerLayout,
@@ -150,6 +155,7 @@ export default {
   employerApplicants,
   employerPerksBenefits,
   employerPostJobPerksBenefit,
+  employerJobInformation,
   changePasswordModal,
   jobListFilter,
   registrationEmployerPage,

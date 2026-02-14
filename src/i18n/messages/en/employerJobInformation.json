@@ -1,0 +1,61 @@
+{
+  "header": {
+    "title": "Basic Information",
+    "subtitle": "This information will be displayed publicly.",
+    "stepBadge": "Step 1"
+  },
+  "fields": {
+    "jobTitle": {
+      "label": "Job Title",
+      "help": "Job title must describe one position.",
+      "placeholder": "e.g. Software Engineer",
+      "minChars": "At least 80 characters"
+    },
+    "salary": {
+      "label": "Salary",
+      "help": "Please specify the estimated salary range for the role.",
+      "placeholder": "Estimate salary",
+      "tip": "Tip: You can leave this blank if negotiable."
+    },
+    "employmentType": {
+      "label": "Type of Employment",
+      "help": "Select one or more employment types.",
+      "selectedLabel": "Selected:",
+      "options": {
+        "fullTime": "Full-Time",
+        "partTime": "Part-Time",
+        "remote": "Remote",
+        "internship": "Internship"
+      }
+    },
+    "prefecture": {
+      "label": "Prefecture",
+      "help": "Choose the location/prefecture for this job.",
+      "placeholder": "Select Prefecture",
+      "tip": "This helps job seekers filter positions by area."
+    },
+    "categories": {
+      "label": "Categories",
+      "help": "You can select multiple job categories."
+    }
+  },
+  "buttons": {
+    "next": "Next"
+  },
+  "footer": {
+    "requiredNote": {
+      "prefix": "Fields marked with ",
+      "suffix": " are required."
+    }
+  },
+  "errors": {
+    "jobTitleRequired": {
+      "title": "Job title is required.",
+      "description": "Please provide a job title to proceed."
+    },
+    "employmentTypeRequired": {
+      "title": "Employment type is required.",
+      "description": "Please select at least one employment type to proceed."
+    }
+  }
+}

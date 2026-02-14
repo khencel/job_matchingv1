@@ -9,11 +9,13 @@ import { showErrorToast } from "@/app/(util)/toaster";
 import { useRouter } from "next/navigation"
 import Cookies from "js-cookie";
 import { regionList } from "@/components/listGroupData"
+import { useTranslations } from "next-intl"
 
 export default function PostAJob() {
   const [mounted, setMounted] = useState(false);
   const [input, setInput] = useState<string>("")
   const router = useRouter();
+  const t = useTranslations("employerJobInformation");
 
   const dispatch = useDispatch();
   const basicInfo = useSelector((state: RootState) => state.basicInfo);
@@ -31,11 +33,11 @@ export default function PostAJob() {
     const employmentTypes = basicInfo.type_of_emp;
 
     if (!title) {
-      showErrorToast("Job title is required.", " Please provide a job title to proceed.");
+      showErrorToast(t("errors.jobTitleRequired.title"), t("errors.jobTitleRequired.description"));
       return;
     }
     if (employmentTypes.length === 0) {
-      showErrorToast("Employment type is required.", " Please select at least one employment type to proceed.");
+      showErrorToast(t("errors.employmentTypeRequired.title"), t("errors.employmentTypeRequired.description"));
       return;
     }
 
@@ -70,14 +72,14 @@ export default function PostAJob() {
           <div className="d-flex flex-column gap-1 mb-3">
             <div className="d-flex align-items-center justify-content-between flex-wrap">
               <div>
-                <h5 className="mb-0">Basic Information</h5>
+                <h5 className="mb-0">{t("header.title")}</h5>
                 <small className="text-muted">
-                  This information will be displayed publicly.
+                  {t("header.subtitle")}
                 </small>
               </div>
 
               <span className="badge bg-light text-dark border rounded-pill px-3 py-2">
-                Step 1
+                {t("header.stepBadge")}
               </span>
             </div>
             <hr className="my-3" />
@@ -91,22 +93,22 @@ export default function PostAJob() {
               <div className="row g-3 align-items-start mb-4">
                 <div className="col-12 col-md-4">
                   <label className="form-label fw-semibold mb-1">
-                    Job Title <span className="text-danger">*</span>
+                    {t("fields.jobTitle.label")} <span className="text-danger">*</span>
                   </label>
                   <div className="text-muted small">
-                    Job title must describe one position.
+                    {t("fields.jobTitle.help")}
                   </div>
                 </div>
                 <div className="col-12 col-md-8">
                   <textarea
                     value={basicInfo.title}
                     onChange={(e) => dispatch(setField({ title: e.target.value }))}
-                    placeholder="e.g. Software Engineer"
+                    placeholder={t("fields.jobTitle.placeholder")}
                     className="form-control rounded-3"
                     rows={3}
                   />
                   <div className="d-flex justify-content-between mt-2">
-                    <small className="text-muted">At least 80 characters</small>
+                    <small className="text-muted">{t("fields.jobTitle.minChars")}</small>
                     <small className="text-muted">{basicInfo.title?.length ?? 0}/80</small>
                   </div>
                 </div>
@@ -115,9 +117,9 @@ export default function PostAJob() {
               {/* Salary */}
               <div className="row g-3 align-items-center mb-4">
                 <div className="col-12 col-md-4">
-                  <label className="form-label fw-semibold mb-1">Salary</label>
+                  <label className="form-label fw-semibold mb-1">{t("fields.salary.label")}</label>
                   <div className="text-muted small">
-                    Please specify the estimated salary range for the role.
+                    {t("fields.salary.help")}
                   </div>
                 </div>
                 <div className="col-12 col-md-8">
@@ -128,11 +130,11 @@ export default function PostAJob() {
                       value={basicInfo.salary ?? ""}
                       onChange={(e) => dispatch(setField({ salary: e.target.valueAsNumber }))}
                       className="form-control rounded-end-3"
-                      placeholder="Estimate salary"
+                      placeholder={t("fields.salary.placeholder")}
                     />
                   </div>
                   <small className="text-muted d-block mt-2">
-                    Tip: You can leave this blank if negotiable.
+                    {t("fields.salary.tip")}
                   </small>
                 </div>
               </div>
@@ -141,19 +143,19 @@ export default function PostAJob() {
               <div className="row g-3 align-items-start mb-4">
                 <div className="col-12 col-md-4">
                   <label className="form-label fw-semibold mb-1">
-                    Type of Employment <span className="text-danger">*</span>
+                    {t("fields.employmentType.label")} <span className="text-danger">*</span>
                   </label>
                   <div className="text-muted small">
-                    Select one or more employment types.
+                    {t("fields.employmentType.help")}
                   </div>
                 </div>
                 <div className="col-12 col-md-8">
                   <div className="d-flex flex-wrap gap-2">
                     {[
-                      { label: "Full-Time", value: "Full-Time" },
-                      { label: "Part-Time", value: "Part-Time" },
-                      { label: "Remote", value: "Remote" },
-                      { label: "Internship", value: "Internship" },
+                      { label: t("fields.employmentType.options.fullTime"), value: "Full-Time" },
+                      { label: t("fields.employmentType.options.partTime"), value: "Part-Time" },
+                      { label: t("fields.employmentType.options.remote"), value: "Remote" },
+                      { label: t("fields.employmentType.options.internship"), value: "Internship" },
                     ].map((item) => {
                       const checked = basicInfo.type_of_emp.includes(item.value);
                       return (
@@ -179,7 +181,7 @@ export default function PostAJob() {
 
                   {basicInfo.type_of_emp.length > 0 && (
                     <div className="mt-2 text-muted small">
-                      Selected: <strong>{basicInfo.type_of_emp.join(", ")}</strong>
+                      {t("fields.employmentType.selectedLabel")} <strong>{basicInfo.type_of_emp.join(", ")}</strong>
                     </div>
                   )}
                 </div>
@@ -189,10 +191,10 @@ export default function PostAJob() {
               <div className="row g-3 align-items-center mb-4">
                 <div className="col-12 col-md-4">
                   <label className="form-label fw-semibold mb-1">
-                    Prefecture <span className="text-danger">*</span>
+                    {t("fields.prefecture.label")} <span className="text-danger">*</span>
                   </label>
                   <div className="text-muted small">
-                    Choose the location/prefecture for this job.
+                    {t("fields.prefecture.help")}
                   </div>
                 </div>
                 <div className="col-12 col-md-8">
@@ -201,13 +203,13 @@ export default function PostAJob() {
                     onChange={(e) => dispatch(setField({ region: e.target.value }))}
                     className="form-select rounded-3"
                   >
-                    <option disabled hidden value="">Select Prefecture</option>
+                    <option disabled hidden value="">{t("fields.prefecture.placeholder")}</option>
                     {regionList.map((item: any, index: number) => (
                       <option key={item.value} value={item.value}>{item.label}</option>
                     ))}
                   </select>
                   <small className="text-muted d-block mt-2">
-                    This helps job seekers filter positions by area.
+                    {t("fields.prefecture.tip")}
                   </small>
                 </div>
               </div>
@@ -215,9 +217,9 @@ export default function PostAJob() {
               {/* Categories */}
               <div className="row g-3 align-items-start mb-2">
                 <div className="col-12 col-md-4">
-                  <label className="form-label fw-semibold mb-1">Categories</label>
+                  <label className="form-label fw-semibold mb-1">{t("fields.categories.label")}</label>
                   <div className="text-muted small">
-                    You can select multiple job categories.
+                    {t("fields.categories.help")}
                   </div>
                 </div>
                 <div className="col-12 col-md-8">
@@ -238,7 +240,7 @@ export default function PostAJob() {
                   className="btn btn-primary-custom rounded-3 px-4 py-2"
                   onClick={handleNext}
                 >
-                  Next
+                  {t("buttons.next")}
                 </button>
               </div>
 
@@ -247,7 +249,7 @@ export default function PostAJob() {
 
           {/* Helper note */}
           <div className="text-muted small mt-3">
-            Fields marked with <span className="text-danger">*</span> are required.
+            {t("footer.requiredNote.prefix")}<span className="text-danger">*</span>{t("footer.requiredNote.suffix")}
           </div>
         </div>
       </div>

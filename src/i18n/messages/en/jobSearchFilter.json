@@ -1,6 +1,8 @@
 {
   "placeholders": {
-    "jobType": "Job Type"
+    "jobType": "Job Type",
+    "category": "Select Category",
+    "prefecture": "Select Prefecture"
   },
   "labels": {
     "region": "Region"
@@ -12,6 +14,11 @@
     "test4": "Test4"
   },
   "buttons": {
-    "explore": "Explore"
+    "explore": "Explore",
+    "search": "Search"
+  },
+  "aria": {
+    "category": "Specific Skill Field",
+    "prefecture": "Prefecture"
   }
 }

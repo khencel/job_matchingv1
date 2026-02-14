@@ -40,7 +40,25 @@
       "daysAgo": "{count} days ago",
       "date": "{date}"
     },
-    "applicationsCount": "{count} Applications"
+    "applicationsCount": "{count} Applications",
+    "sampleJobs": [
+      {
+        "title": "UI/UX Designer"
+      },
+      {
+        "title": "Senior UX Designer"
+      },
+      {
+        "title": "Technical Support Specialist"
+      },
+      {
+        "title": "Junior Graphic Designer"
+      },
+      {
+        "title": "Front End Developer",
+        "date": "Dec 7, 2025"
+      }
+    ]
   },
   "chart": {
     "title": "Applicants",

@@ -40,7 +40,25 @@
       "daysAgo": "{count}日前",
       "date": "{date}"
     },
-    "applicationsCount": "応募 {count}件"
+    "applicationsCount": "応募 {count}件",
+    "sampleJobs": [
+      {
+        "title": "UI/UXデザイナー"
+      },
+      {
+        "title": "シニアUXデザイナー"
+      },
+      {
+        "title": "テクニカルサポートスペシャリスト"
+      },
+      {
+        "title": "ジュニアグラフィックデザイナー"
+      },
+      {
+        "title": "フロントエンドエンジニア",
+        "date": "2025年12月7日"
+      }
+    ]
   },
   "chart": {
     "title": "応募者",

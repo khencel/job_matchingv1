@@ -31,7 +31,7 @@ export default function RecentPostJob(){
                             <tr>
                                 <td>
                                     <div className="text_rencent_jobs">
-                                        <strong>UI/UX Designer</strong>
+                                        <strong>{t("recentPostJobs.sampleJobs.0.title")}</strong>
                                         <br />
                                         <small>{t("recentPostJobs.jobTypes.fullTime")} <GoDotFill /> {t("recentPostJobs.time.daysAgo", { count: 27 })}</small>
                                     </div>
@@ -50,7 +50,7 @@ export default function RecentPostJob(){
                             <tr>
                                 <td>
                                     <div className="text_rencent_jobs">
-                                        <strong>Senior UX Designer</strong>
+                                        <strong>{t("recentPostJobs.sampleJobs.1.title")}</strong>
                                         <br />
                                         <small>{t("recentPostJobs.jobTypes.internship")} <GoDotFill /> {t("recentPostJobs.time.daysAgo", { count: 8 })}</small>
                                     </div>
@@ -69,7 +69,7 @@ export default function RecentPostJob(){
                             <tr>
                                 <td>
                                     <div className="text_rencent_jobs">
-                                        <strong>Technical Support Specialist</strong>
+                                        <strong>{t("recentPostJobs.sampleJobs.2.title")}</strong>
                                         <br />
                                         <small>{t("recentPostJobs.jobTypes.partTime")} <GoDotFill /> {t("recentPostJobs.time.daysAgo", { count: 4 })}</small>
                                     </div>
@@ -88,7 +88,7 @@ export default function RecentPostJob(){
                             <tr>
                                 <td>
                                     <div className="text_rencent_jobs">
-                                        <strong>Junior Graphic Designer</strong>
+                                        <strong>{t("recentPostJobs.sampleJobs.3.title")}</strong>
                                         <br />
                                         <small>{t("recentPostJobs.jobTypes.fullTime")} <GoDotFill /> {t("recentPostJobs.time.daysAgo", { count: 24 })}</small>
                                     </div>
@@ -107,9 +107,9 @@ export default function RecentPostJob(){
                             <tr>
                                 <td>
                                     <div className="text_rencent_jobs">
-                                        <strong>Fron End Developer</strong>
+                                        <strong>{t("recentPostJobs.sampleJobs.4.title")}</strong>
                                         <br />
-                                        <small>{t("recentPostJobs.jobTypes.fullTime")} <GoDotFill /> {t("recentPostJobs.time.date", { date: "Dec 7, 2025" })}</small>
+                                        <small>{t("recentPostJobs.jobTypes.fullTime")} <GoDotFill /> {t("recentPostJobs.time.date", { date: t("recentPostJobs.sampleJobs.4.date") })}</small>
                                     </div>
                                 </td>
                                 <td>

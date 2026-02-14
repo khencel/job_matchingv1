@@ -1,50 +1,35 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function ServiceContent() {
   const router = useRouter();
+  const t = useTranslations("serviceContent");
   return (
     <div className="">
       <section className="approach-wrap" id="direct-approach">
         <div className="approach-inner">
           <div className="container">
             <div className="approach-head">
-              <div className="approach-kicker" data-i18n="approach_kicker">
-                New intake: Direct approach
-              </div>
-              <h3 className="approach-main" data-i18n="approach_title">
-                Approach job seekers and employers directly
-              </h3>
-              <p className="approach-sub" data-i18n="approach_sub">
-                *For companies considering interviewing overseas candidates
-              </p>
+              <div className="approach-kicker">{t("kicker")}</div>
+              <h3 className="approach-main">{t("title")}</h3>
+              <p className="approach-sub">{t("subtitle")}</p>
             </div>
 
             <div className="approach-grid">
               <div className="approach-card">
-                <div
-                  className="approach-chip"
-                  data-i18n="approach_company_chip"
-                >
-                  For companies
-                </div>
+                <div className="approach-chip">{t("company.chip")}</div>
 
                 <ul className="approach-list">
-                  <li data-i18n="approach_company_li1">
-                    Companies considering hiring foreign talent for the first
-                    time
-                  </li>
-                  <li data-i18n="approach_company_li2">
-                    Companies urgently looking for candidates
-                  </li>
+                  <li>{t("company.list.0")}</li>
+                  <li>{t("company.list.1")}</li>
                 </ul>
 
-                <p className="approach-note" data-i18n="approach_company_note">
-                  *If you need fast introductions, we will propose suitable
-                  candidates.
+                <p className="approach-note">
+                  {t("company.note.line1")}
                   <br />
-                  *We also support the overall process for first-time hiring.
+                  {t("company.note.line2")}
                 </p>
 
                 <button
@@ -53,46 +38,31 @@ export default function ServiceContent() {
                     router.push("/registration/employer");
                   }}
                   type="button"
-                  data-i18n="approach_company_btn"
                 >
-                  For companies
+                  {t("company.button")}
                 </button>
               </div>
 
               <div className="approach-card">
-                <div
-                  className="approach-chip"
-                  data-i18n="approach_jobseeker_chip"
-                >
-                  For job seekers
-                </div>
+                <div className="approach-chip">{t("jobSeeker.chip")}</div>
 
                 <ul className="approach-list">
-                  <li data-i18n="approach_jobseeker_li1">
-                    If you need to change jobs urgently
-                  </li>
-                  <li data-i18n="approach_jobseeker_li2">
-                    If you want career consultation
-                  </li>
+                  <li>{t("jobSeeker.list.0")}</li>
+                  <li>{t("jobSeeker.list.1")}</li>
                 </ul>
 
-                <p
-                  className="approach-note"
-                  data-i18n="approach_jobseeker_note"
-                >
-                  *If urgent, we will search and introduce opportunities on your
-                  behalf.
+                <p className="approach-note">
+                  {t("jobSeeker.note.line1")}
                   <br />
-                  *For consultation as well, start here.
+                  {t("jobSeeker.note.line2")}
                 </p>
 
                 <button
                   className="approach-btn"
                   type="button"
-                  data-i18n="approach_jobseeker_btn"
                   onClick={() => router.push("/registration/job-seeker")}
                 >
-                  For job seeker
+                  {t("jobSeeker.button")}
                 </button>
               </div>
             </div>
