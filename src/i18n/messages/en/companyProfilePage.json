@@ -3,6 +3,10 @@
     "loading": "Loading...",
     "noData": "No company profile data available."
   },
+  "assets": {
+    "bannerAlt": "Company Banner",
+    "avatarAlt": "Company Avatar"
+  },
   "stats": {
     "industries": "{count} industries",
     "jobs": "{count} jobs",
@@ -26,9 +30,12 @@
       "department": "Department",
       "email": "Email",
       "companyIndustry": "Company industry",
+      "industryFallback": "Industry",
       "branchOffices": "Branch offices",
+      "branchFallback": "Branch",
       "perksAndBenefits": "Perks & benefits",
-      "noPerks": "No perks added yet."
+      "noPerks": "No perks added yet.",
+      "perkFallback": "Perk"
     },
     "jobs": {
       "title": "Posted jobs",

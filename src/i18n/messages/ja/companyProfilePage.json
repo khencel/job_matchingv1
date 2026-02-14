@@ -3,6 +3,10 @@
     "loading": "読み込み中...",
     "noData": "会社プロフィールデータがありません。"
   },
+  "assets": {
+    "bannerAlt": "会社バナー",
+    "avatarAlt": "会社アバター"
+  },
   "stats": {
     "industries": "{count}業界",
     "jobs": "{count}件の求人",
@@ -26,9 +30,12 @@
       "department": "部署",
       "email": "メール",
       "companyIndustry": "会社業種",
+      "industryFallback": "業種",
       "branchOffices": "支店",
+      "branchFallback": "支店",
       "perksAndBenefits": "福利厚生",
-      "noPerks": "まだ福利厚生が追加されていません。"
+      "noPerks": "まだ福利厚生が追加されていません。",
+      "perkFallback": "福利厚生"
     },
     "jobs": {
       "title": "掲載求人",

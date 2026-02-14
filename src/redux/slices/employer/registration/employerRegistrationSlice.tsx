@@ -123,11 +123,11 @@ const employerRegistrationSlice = createSlice({
 
             if (field === "needs") {
                 if (!value || (Array.isArray(value) && value.length === 0)) {
-                    errors[field] = "This field is required";
+                    errors[field] = "errors.required";
                 }
             } else {
                 if (!value) {
-                    errors[field] = "This field is required";
+                    errors[field] = "errors.required";
                 }
             }
         });

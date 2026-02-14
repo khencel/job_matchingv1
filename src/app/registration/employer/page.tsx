@@ -162,6 +162,11 @@ export default function RegistrationEmployer() {
     }
   }, [errors]);
 
+  const resolveError = (message?: string) => {
+    if (!message) return "";
+    return message.startsWith("errors.") ? t(message) : message;
+  };
+
   return (
     <>
       <Navbar />
@@ -199,7 +204,7 @@ export default function RegistrationEmployer() {
                   onChange={handleChange}
                 />
                 {errors.company_name && (
-                  <small className="text-danger">{errors.company_name}</small>
+                  <small className="text-danger">{resolveError(errors.company_name)}</small>
                 )}
               </div>
 
@@ -220,7 +225,7 @@ export default function RegistrationEmployer() {
                   ))}
                 </select>
                 {errors.company_pref && (
-                  <small className="text-danger">{errors.company_pref}</small>
+                  <small className="text-danger">{resolveError(errors.company_pref)}</small>
                 )}
               </div>
 
@@ -235,7 +240,7 @@ export default function RegistrationEmployer() {
                   onChange={handleChange}
                 />
                 {errors.contact_name && (
-                  <small className="text-danger">{errors.contact_name}</small>
+                  <small className="text-danger">{resolveError(errors.contact_name)}</small>
                 )}
               </div>
 
@@ -260,7 +265,7 @@ export default function RegistrationEmployer() {
                   onChange={handleChange}
                 />
                 {errors.phone && (
-                  <small className="text-danger">{errors.phone}</small>
+                  <small className="text-danger">{resolveError(errors.phone)}</small>
                 )}
               </div>
 
@@ -276,7 +281,7 @@ export default function RegistrationEmployer() {
                   onChange={handleChange}
                 />
                 {errors.email && (
-                  <small className="text-danger">{errors.email}</small>
+                  <small className="text-danger">{resolveError(errors.email)}</small>
                 )}
               </div>
 
@@ -349,7 +354,7 @@ export default function RegistrationEmployer() {
                   <span>{t("needsOptions.consult")}</span>
                 </label>
                 {errors.needs && (
-                  <small className="text-danger">{errors.needs}</small>
+                  <small className="text-danger">{resolveError(errors.needs)}</small>
                 )}
               </div>
 
@@ -368,7 +373,7 @@ export default function RegistrationEmployer() {
                   onChange={handleChange}
                 />
                 {errors.role && (
-                  <small className="text-danger">{errors.role}</small>
+                  <small className="text-danger">{resolveError(errors.role)}</small>
                 )}
               </div>
 
@@ -406,7 +411,7 @@ export default function RegistrationEmployer() {
                   <option>{t("headcountOptions.tenPlus")}</option>
                 </select>
                 {errors.head_count && (
-                  <small className="text-danger">{errors.head_count}</small>
+                  <small className="text-danger">{resolveError(errors.head_count)}</small>
                 )}
               </div>
 

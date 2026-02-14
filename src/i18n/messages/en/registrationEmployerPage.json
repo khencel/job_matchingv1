@@ -1,6 +1,9 @@
 {
   "loading": "Processing... Please wait",
   "title": "For Companies | Direct Approach (Overseas & Domestic Hiring)",
+  "errors": {
+    "required": "This field is required"
+  },
   "lead": {
     "line1": "This form is for companies considering hiring foreign talent.",
     "line2": "You can consult about both overseas new hiring and hiring candidates already in Japan."

@@ -9,10 +9,12 @@ import { getPublicProfile } from "@/redux/slices/publicProfileSlice";
 import Image from "next/image";
 import { fetchJobPostById } from "@/redux/slices/jobs/jobsThunk";
 import JobCard from "@/components/JobCard";
+import { useTranslations } from "next-intl";
 
 const CompanyProfilePage = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const t = useTranslations("companyProfilePage");
 
   const jobs = useAppSelector((s) => s.jobPostById.data.results);
 
@@ -54,7 +56,7 @@ const CompanyProfilePage = () => {
   if (loading) {
     return (
       <Container className="py-5 d-flex justify-content-center">
-        <div className="text-muted">Loading...</div>
+        <div className="text-muted">{t("states.loading")}</div>
       </Container>
     );
   }
@@ -62,7 +64,7 @@ const CompanyProfilePage = () => {
   if (!user || !company_information || !contact_person) {
     return (
       <Container className="py-5 text-center">
-        <div className="text-muted">No company profile data available.</div>
+        <div className="text-muted">{t("states.noData")}</div>
       </Container>
     );
   }
@@ -80,7 +82,7 @@ const CompanyProfilePage = () => {
             {user.banner && (
               <Image
                 src={user.banner}
-                alt="Company Banner"
+                alt={t("assets.bannerAlt")}
                 fill
                 objectFit="cover"
                 className="banner-image"
@@ -122,7 +124,7 @@ const CompanyProfilePage = () => {
                   ) : (
                     <Image
                       src={user.avatar}
-                      alt="Company Avatar"
+                      alt={t("assets.avatarAlt")}
                       fill
                       objectFit="cover"
                       className="avatar-image"
@@ -141,13 +143,13 @@ const CompanyProfilePage = () => {
 
                     {company_information.company_industry?.length ? (
                       <Badge bg="light" text="dark" className="border rounded-pill px-3 py-2">
-                        {company_information.company_industry.length} industries
+                        {t("stats.industries", { count: company_information.company_industry.length })}
                       </Badge>
                     ) : null}
 
                     {jobs ? (
                       <Badge bg="light" text="dark" className="border rounded-pill px-3 py-2">
-                        {jobs.length} jobs
+                        {t("stats.jobs", { count: jobs.length })}
                       </Badge>
                     ) : null}
                   </div>
@@ -158,13 +160,13 @@ const CompanyProfilePage = () => {
               <div className="d-flex flex-wrap gap-2">
                 {company_information.founded ? (
                   <Badge bg="primary-subtle" text="dark" className="border rounded-pill px-3 py-2">
-                    Founded: {company_information.founded}
+                    {t("stats.founded", { year: company_information.founded })}
                   </Badge>
                 ) : null}
 
                 {company_information.no_of_emp ? (
                   <Badge bg="primary-subtle" text="dark" className="border rounded-pill px-3 py-2">
-                    Employees: {company_information.no_of_emp}
+                    {t("stats.employees", { count: company_information.no_of_emp })}
                   </Badge>
                 ) : null}
               </div>
@@ -178,8 +180,8 @@ const CompanyProfilePage = () => {
               <Col lg={8} md={12}>
                 <Card className="border-0 shadow-sm rounded-4 mb-4">
                   <Card.Body className="p-4">
-                    <p className="section-label mb-1">Company Overview</p>
-                    <h2 className="section-title mb-3">About this company</h2>
+                    <p className="section-label mb-1">{t("sections.overview.title")}</p>
+                    <h2 className="section-title mb-3">{t("sections.overview.subtitle")}</h2>
 
                     <div
                       className="section-description text-muted"
@@ -195,7 +197,7 @@ const CompanyProfilePage = () => {
                   <Col md={6}>
                     <Card className="info-card border-0 shadow-sm rounded-4 h-100">
                       <Card.Body className="p-4">
-                        <p className="info-card-label text-muted mb-1">Founded</p>
+                        <p className="info-card-label text-muted mb-1">{t("sections.details.founded")}</p>
                         <p className="info-card-value fw-semibold mb-0">
                           {company_information.founded}
                         </p>
@@ -206,7 +208,7 @@ const CompanyProfilePage = () => {
                   <Col md={6}>
                     <Card className="info-card border-0 shadow-sm rounded-4 h-100">
                       <Card.Body className="p-4">
-                        <p className="info-card-label text-muted mb-1">Employees</p>
+                        <p className="info-card-label text-muted mb-1">{t("sections.details.employees")}</p>
                         <p className="info-card-value fw-semibold mb-0">
                           {company_information.no_of_emp}
                         </p>
@@ -219,7 +221,7 @@ const CompanyProfilePage = () => {
                   <Col md={6}>
                     <Card className="info-card border-0 shadow-sm rounded-4 h-100">
                       <Card.Body className="p-4">
-                        <p className="info-card-label text-muted mb-1">Phone</p>
+                        <p className="info-card-label text-muted mb-1">{t("sections.details.phone")}</p>
                         <p className="info-card-value fw-semibold mb-0">
                           {company_information.phone}
                         </p>
@@ -230,7 +232,7 @@ const CompanyProfilePage = () => {
                   <Col md={6}>
                     <Card className="info-card border-0 shadow-sm rounded-4 h-100">
                       <Card.Body className="p-4">
-                        <p className="info-card-label text-muted mb-1">Fee</p>
+                        <p className="info-card-label text-muted mb-1">{t("sections.details.fee")}</p>
                         <p className="info-card-value fw-semibold mb-0">
                           {company_information.fee}
                         </p>
@@ -241,7 +243,7 @@ const CompanyProfilePage = () => {
 
                 <Card className="detail-card border-0 shadow-sm rounded-4 mb-3">
                   <Card.Body className="p-4">
-                    <h3 className="subsection-title mb-2">Appeal point</h3>
+                    <h3 className="subsection-title mb-2">{t("sections.details.appealPoint")}</h3>
                     <p className="text-muted mb-0" style={{ fontSize: 14, lineHeight: 1.8 }}>
                       {company_information.appeal_point}
                     </p>
@@ -250,7 +252,7 @@ const CompanyProfilePage = () => {
 
                 <Card className="detail-card border-0 shadow-sm rounded-4">
                   <Card.Body className="p-4">
-                    <h3 className="subsection-title mb-2">Company Address</h3>
+                    <h3 className="subsection-title mb-2">{t("sections.details.companyAddress")}</h3>
                     <p className="text-muted mb-0" style={{ fontSize: 14, lineHeight: 1.8 }}>
                       {company_information.address}
                     </p>
@@ -263,25 +265,25 @@ const CompanyProfilePage = () => {
                 <div className="position-sticky" style={{ top: 90 }}>
                   <Card className="detail-card border-0 shadow-sm rounded-4 mb-3">
                     <Card.Body className="p-4">
-                      <h3 className="detail-card-title mb-3">Contact person</h3>
+                      <h3 className="detail-card-title mb-3">{t("sections.details.contactPerson")}</h3>
 
                       <div className="detail-row d-flex justify-content-between gap-3 py-2 border-bottom">
-                        <p className="detail-label text-muted mb-0">Name</p>
+                        <p className="detail-label text-muted mb-0">{t("sections.details.name")}</p>
                         <p className="detail-value fw-semibold mb-0">{contact_person.name}</p>
                       </div>
 
                       <div className="detail-row d-flex justify-content-between gap-3 py-2 border-bottom">
-                        <p className="detail-label text-muted mb-0">Department</p>
+                        <p className="detail-label text-muted mb-0">{t("sections.details.department")}</p>
                         <p className="detail-value mb-0">{contact_person.department_name}</p>
                       </div>
 
                       <div className="detail-row d-flex justify-content-between gap-3 py-2 border-bottom">
-                        <p className="detail-label text-muted mb-0">Email</p>
+                        <p className="detail-label text-muted mb-0">{t("sections.details.email")}</p>
                         <p className="detail-value mb-0">{contact_person.email}</p>
                       </div>
 
                       <div className="detail-row d-flex justify-content-between gap-3 py-2">
-                        <p className="detail-label text-muted mb-0">Phone</p>
+                        <p className="detail-label text-muted mb-0">{t("sections.details.phone")}</p>
                         <p className="detail-value mb-0">{contact_person.phone}</p>
                       </div>
                     </Card.Body>
@@ -289,7 +291,7 @@ const CompanyProfilePage = () => {
 
                   <Card className="detail-card border-0 shadow-sm rounded-4 mb-3">
                     <Card.Body className="p-4">
-                      <h3 className="detail-card-title mb-3">Company industry</h3>
+                      <h3 className="detail-card-title mb-3">{t("sections.details.companyIndustry")}</h3>
                       <div className="industry-container d-flex flex-wrap gap-2">
                         {company_information.company_industry.map((industry: any, idx: number) => (
                           <Badge
@@ -301,7 +303,7 @@ const CompanyProfilePage = () => {
                           >
                             {typeof industry === "string"
                               ? industry
-                              : industry?.label ?? industry?.name ?? "Industry"}
+                              : industry?.label ?? industry?.name ?? t("sections.details.industryFallback")}
                           </Badge>
                         ))}
                       </div>
@@ -310,7 +312,7 @@ const CompanyProfilePage = () => {
 
                   <Card className="detail-card border-0 shadow-sm rounded-4 mb-3">
                     <Card.Body className="p-4">
-                      <h3 className="detail-card-title mb-3">Branch offices</h3>
+                      <h3 className="detail-card-title mb-3">{t("sections.details.branchOffices")}</h3>
                       <ul className="branch-list mb-0 ps-3">
                         {company_information.branch_office.map((branch: any, idx: number) => (
                           <li
@@ -320,7 +322,7 @@ const CompanyProfilePage = () => {
                           >
                             {typeof branch === "string"
                               ? branch
-                              : branch?.name ?? branch?.label ?? "Branch"}
+                              : branch?.name ?? branch?.label ?? t("sections.details.branchFallback")}
                           </li>
                         ))}
                       </ul>
@@ -329,10 +331,10 @@ const CompanyProfilePage = () => {
 
                   <Card className="perks-card border-0 shadow-sm rounded-4">
                     <Card.Body className="p-4">
-                      <h3 className="detail-card-title mb-3">Perks & benefits</h3>
+                      <h3 className="detail-card-title mb-3">{t("sections.details.perksAndBenefits")}</h3>
                       {!user.perks_benefits ? (
                         <p className="perks-empty-message text-muted mb-0">
-                          No perks added yet.
+                          {t("sections.details.noPerks")}
                         </p>
                       ) : (
                         <ul className="branch-list mb-0 ps-3">
@@ -344,7 +346,7 @@ const CompanyProfilePage = () => {
                             >
                               {typeof perk === "string"
                                 ? perk
-                                : perk?.title ?? perk?.name ?? "Perk"}
+                                : perk?.title ?? perk?.name ?? t("sections.details.perkFallback")}
                             </li>
                           ))}
                         </ul>
@@ -362,12 +364,12 @@ const CompanyProfilePage = () => {
           <Card.Body className="p-4 p-md-5">
             <Row className="align-items-center g-2 mb-3">
               <Col md={8}>
-                <p className="section-label mb-1">Posted jobs</p>
-                <h2 className="section-title mb-0">Job listings</h2>
+                <p className="section-label mb-1">{t("sections.jobs.title")}</p>
+                <h2 className="section-title mb-0">{t("sections.jobs.subtitle")}</h2>
               </Col>
               <Col md={4} className="text-md-end">
                 <Badge pill bg="light" text="dark" className="border px-3 py-2">
-                  Total jobs: {jobs.length}
+                  {t("sections.jobs.totalJobs", { count: jobs.length })}
                 </Badge>
               </Col>
             </Row>
@@ -392,10 +394,10 @@ const CompanyProfilePage = () => {
             ) : (
               <div className="jobs-placeholder text-center py-5">
                 <p className="jobs-placeholder-title fw-semibold mb-1">
-                  No jobs listed yet.
+                  {t("sections.jobs.noJobs")}
                 </p>
                 <p className="jobs-placeholder-subtitle text-muted mb-0">
-                  Your posted jobs will appear here once created.
+                  {t("sections.jobs.noJobsSubtitle")}
                 </p>
               </div>
             )}
