@@ -32,7 +32,7 @@ export default function Step1Register({
   goNextStepAction,
   checkEmail,
 }: Step1RegisterProps) {
-  const t = useTranslations("Step1Register");
+  const t = useTranslations("step1Register");
   const dispatch = useAppDispatch();
   const accountInfo = useAppSelector(selector);
 
@@ -133,7 +133,7 @@ export default function Step1Register({
         await dispatch(checkEmail({ email: data.email })).unwrap();
         Swal.fire({
           icon: "success",
-          title: "Account Information Submitted",
+          title: t("alerts.accountSubmitted"),
           toast: true,
           position: "top",
           showConfirmButton: false,
@@ -158,7 +158,7 @@ export default function Step1Register({
       // No email check function provided, proceed to next step
       Swal.fire({
         icon: "success",
-        title: "Account Information Submitted",
+        title: t("alerts.accountSubmitted"),
         toast: true,
         position: "top",
         showConfirmButton: false,
@@ -214,7 +214,7 @@ export default function Step1Register({
             size="sm"
             type="button"
             onClick={() => setShowPassword((prev) => !prev)}
-            aria-label={showPassword ? "Hide password" : "Show password"}
+            aria-label={showPassword ? t("ariaLabels.hidePassword") : t("ariaLabels.showPassword")}
           >
             {showPassword ? <EyeIcon size="16" /> : <EyeOffIcon size="16" />}
           </Button>
@@ -251,8 +251,8 @@ export default function Step1Register({
             onClick={() => setShowConfirmPassword((prev) => !prev)}
             aria-label={
               showConfirmPassword
-                ? "Hide confirm password"
-                : "Show confirm password"
+                ? t("ariaLabels.hideConfirmPassword")
+                : t("ariaLabels.showConfirmPassword")
             }
           >
             {showConfirmPassword ? (

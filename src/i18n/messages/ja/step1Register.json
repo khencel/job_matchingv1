@@ -1,16 +1,36 @@
 {
-  "passwordToggle": {
-    "hide": "パスワードを隠す",
-    "show": "パスワードを表示"
+  "title": "アカウントを作成",
+  "labels": {
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "confirmPassword": "パスワードを確認",
+    "rememberMe": "ログイン状態を保持"
   },
-  "confirmPasswordToggle": {
-    "hide": "確認パスワードを隠す",
-    "show": "確認パスワードを表示"
-  },
-  "success": {
-    "title": "アカウント情報が送信されました"
+  "placeholders": {
+    "enterEmail": "メールアドレスを入力",
+    "enterPassword": "パスワードを入力",
+    "confirmYourPassword": "パスワードを確認"
   },
   "errors": {
+    "invalidEmail": "有効なメールアドレスを入力してください",
+    "passwordTooShort": "パスワードは8文字以上である必要があります",
+    "passwordMismatch": "パスワードが一致しません",
     "registrationError": "登録エラー:"
+  },
+  "helpers": {
+    "passwordMinLength": "パスワードは8文字以上である必要があります",
+    "accountConfirmNote": "アカウントを作成することにより、利用規約とプライバシーポリシーに同意したものとみなされます"
+  },
+  "buttons": {
+    "next": "次へ"
+  },
+  "alerts": {
+    "accountSubmitted": "アカウント情報が送信されました"
+  },
+  "ariaLabels": {
+    "showPassword": "パスワードを表示",
+    "hidePassword": "パスワードを隠す",
+    "showConfirmPassword": "確認パスワードを表示",
+    "hideConfirmPassword": "確認パスワードを隠す"
   }
 }

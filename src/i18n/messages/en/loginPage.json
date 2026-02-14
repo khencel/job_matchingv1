@@ -5,7 +5,7 @@
   },
   "form": {
     "heading": "Sign In",
-    "description": "Welcome back! Please login to your account",
+    "subtitle": "Welcome back! Please login to your account",
     "fields": {
       "email": {
         "label": "Email",
@@ -20,16 +20,15 @@
       "signIn": "Sign In",
       "signingIn": "Signing In..."
     },
-    "links": {
-      "forgotPassword": "Forgot Password?"
-    }
+    "forgotPassword": "Forgot Password?"
   },
-  "toasts": {
+  "alerts": {
     "fillAllFields": {
       "title": "Sign in failed",
       "message": "Please fill in all fields"
     },
     "verifyEmail": {
+      "title": "Sign in failed",
       "message": "Please verify your email"
     },
     "success": {
@@ -37,6 +36,7 @@
       "message": "Welcome back!"
     },
     "invalidCredentials": {
+      "title": "Sign in failed",
       "message": "Invalid email or password"
     }
   }

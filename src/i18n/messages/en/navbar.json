@@ -13,5 +13,9 @@
   "logout": "Log Out",
   "profile": "My Profile",
   "changePassword": "Change Password",
+  "application": "Application",
+  "documents": "Documents",
+  "overview": "Overview",
+  "applicants": "Applicants",
   "japanese": "日本語"
 }

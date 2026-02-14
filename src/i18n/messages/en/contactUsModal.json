@@ -1,4 +1,19 @@
 {
+  "title": "Contact Us",
+  "description": "Please fill in the form below and submit.",
+  "descriptionSubtext": "Our team will contact you after reviewing your inquiry.",
+  "labels": {
+    "companyName": "Company Name (Required)",
+    "name": "Name / Contact Person (Required)",
+    "email": "Email Address (Required)",
+    "phone": "Phone Number (Required)",
+    "subject": "Subject",
+    "message": "Inquiry Details (Required)"
+  },
+  "buttons": {
+    "clear": "Clear",
+    "send": "Send Message"
+  },
   "validation": {
     "companyNameRequired": "Company name field is required",
     "nameRequired": "Name field is required",

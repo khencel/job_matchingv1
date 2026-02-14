@@ -1,18 +1,20 @@
+"use client";
 
-import { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import MultiSelectDropdown from '@/components/MultipleSelect';
-import TextEditor from '../post_a_job/job-description/TextEditor';
-import AddSkill from '../add_skill';
-import { useAppDispatch } from '@/redux/hooks';
-import { setField } from '@/redux/slices/employer/post_a_job/basicInfoSlice';
-import { updateJobPost } from '@/redux/features/job_post/job_post_thunk';
-import { listJobPost } from '@/redux/features/job_post/job_post_thunk';
+import { useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import MultiSelectDropdown from "@/components/MultipleSelect";
+import TextEditor from "../post_a_job/job-description/TextEditor";
+import AddSkill from "../add_skill";
+import { useAppDispatch } from "@/redux/hooks";
+import { setField } from "@/redux/slices/employer/post_a_job/basicInfoSlice";
+import { updateJobPost } from "@/redux/features/job_post/job_post_thunk";
+import { listJobPost } from "@/redux/features/job_post/job_post_thunk";
 import type { RootState } from "@/redux/store";
-import { useSelector } from 'react-redux';
-import { popup } from '@/helper/pop_up';
-import { showSuccessToast } from '@/app/(util)/toaster';
+import { useSelector } from "react-redux";
+import { popup } from "@/helper/pop_up";
+import { showSuccessToast } from "@/app/(util)/toaster";
+import { useTranslations } from "next-intl";
 
 interface EditModalProps {
     handleShow: boolean;
@@ -21,11 +23,9 @@ interface EditModalProps {
     data: any;
 }
 
-
-export default function Editmodal({handleShow, handleClose, data, currentPage}: EditModalProps){
-
+export default function Editmodal({ handleShow, handleClose, data, currentPage }: EditModalProps) {
+    const t = useTranslations("employerJobListingEditModal");
     const basicInfo = useSelector((state: RootState) => state.basicInfo);
-
 
     const dispatch = useAppDispatch();
     const [formData, setFormData] = useState({
@@ -38,41 +38,52 @@ export default function Editmodal({handleShow, handleClose, data, currentPage}: 
         responsibilities: "",
         who_you_are: "",
         nice_to_have: "",
-        skill: [] as string[]
-    })
+        skill: [] as string[],
+    });
+
+    const employmentTypeOptions = [
+        { value: "Full-Time", label: t("fields.employmentType.options.fullTime") },
+        { value: "Part-Time", label: t("fields.employmentType.options.partTime") },
+        { value: "Remote", label: t("fields.employmentType.options.remote") },
+        { value: "Internship", label: t("fields.employmentType.options.internship") },
+    ];
 
     const handleUpdate = async () => {
         popup({
-            title: 'Are you sure?',
-            text: 'Do you want to update this job post?',
-            icon: 'warning',
+            title: t("modals.confirmUpdate.title"),
+            text: t("modals.confirmUpdate.message"),
+            icon: "warning",
             onConfirm: () => {
-                updatePostJob()
-            }
-        })
+                updatePostJob();
+            },
+        });
     };
 
     const updatePostJob = async () => {
         if (!formData.id) return;
         const skillFromRedux = basicInfo.skill;
-        await dispatch(updateJobPost({
-            id: formData.id,
-            title: formData.title,
-            salary: Number(formData.salary),
-            type_of_emp: formData.type_of_emp,
-            category: formData.category,
-            job_desc: formData.job_desc,
-            responsibility: formData.responsibilities,
-            who_you_are: formData.who_you_are,
-            nice_to_have: formData.nice_to_have,
-            skill: formData.skill
-        })).unwrap();
+        await dispatch(
+            updateJobPost({
+                id: formData.id,
+                title: formData.title,
+                salary: Number(formData.salary),
+                type_of_emp: formData.type_of_emp,
+                category: formData.category,
+                job_desc: formData.job_desc,
+                responsibility: formData.responsibilities,
+                who_you_are: formData.who_you_are,
+                nice_to_have: formData.nice_to_have,
+                skill: formData.skill,
+            }),
+        ).unwrap();
 
-        const updatedList: any = await dispatch(listJobPost({
-            userId: Number(data.user_id),
-            page: currentPage,
-            pageSize: 10
-        })).unwrap();
+        const updatedList: any = await dispatch(
+            listJobPost({
+                userId: Number(data.user_id),
+                page: currentPage,
+                pageSize: 10,
+            }),
+        ).unwrap();
 
         const updatedJob = updatedList.results.find((job: any) => job.id === formData.id);
 
@@ -87,17 +98,15 @@ export default function Editmodal({handleShow, handleClose, data, currentPage}: 
                 responsibilities: updatedJob.responsibility || "",
                 who_you_are: updatedJob.who_you_are || "",
                 nice_to_have: updatedJob.nice_to_have || "",
-                skill: skillFromRedux || []
+                skill: skillFromRedux || [],
             });
         }
-        showSuccessToast('Success', 'Job post updated successfully')
+        showSuccessToast(t("modals.success.title"), t("modals.success.message"));
         handleClose();
     };
 
-
-
     useEffect(() => {
-        if(data){
+        if (data) {
             setFormData({
                 id: data.id,
                 title: data.title || "",
@@ -108,84 +117,107 @@ export default function Editmodal({handleShow, handleClose, data, currentPage}: 
                 responsibilities: data.responsibility || "",
                 who_you_are: data.who_you_are || "",
                 nice_to_have: data.nice_to_have || "",
-                skill: data.skill || []
-            })
-
-            dispatch(setField({
-                type_of_emp: data.type_of_emp || [],
                 skill: data.skill || [],
-            }))
+            });
+
+            dispatch(
+                setField({
+                    type_of_emp: data.type_of_emp || [],
+                    skill: data.skill || [],
+                }),
+            );
         }
-    }, [data])
-    
+    }, [data, dispatch]);
+
     return (
-        <Modal size="xl"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered show={handleShow} onHide={handleClose}>
+        <Modal
+            size="xl"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={handleShow}
+            onHide={handleClose}
+        >
             <Modal.Header closeButton>
-                <Modal.Title>Edit Job Post</Modal.Title>
+                <Modal.Title>{t("title")}</Modal.Title>
             </Modal.Header>
-            <Modal.Body className='p-0'>
+            <Modal.Body className="p-0">
                 <div className="emp-component-style mt-2">
-                    <strong>Basic Information</strong>
+                    <strong>{t("sections.basicInfo.title")}</strong>
                     <br />
-                    <small>This Information will be displayed publicly.</small>
+                    <small>{t("sections.basicInfo.subtitle")}</small>
                     <hr />
                     <div className="row mt-5">
                         <div className="col">
-                            <strong>Job Title <span className="text-danger">*</span></strong>
+                            <strong>
+                                {t("fields.jobTitle.label")} <span className="text-danger">*</span>
+                            </strong>
                             <br />
-                            <small>Job title must be describe one position.</small>
+                            <small>{t("fields.jobTitle.hint")}</small>
                         </div>
                         <div className="col">
-                            <textarea name="" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value})} placeholder="e.g Software Engineer" className="form-control" id=""></textarea>
-                            <small>At least 80 characters</small>
+                            <textarea
+                                name=""
+                                value={formData.title}
+                                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                                placeholder={t("fields.jobTitle.placeholder")}
+                                className="form-control"
+                                id=""
+                            ></textarea>
+                            <small>{t("fields.jobTitle.minChars")}</small>
                         </div>
                     </div>
 
                     <div className="row mt-2">
                         <div className="col">
-                            <strong>Salary</strong>
+                            <strong>{t("fields.salary.label")}</strong>
                             <br />
-                            <small>Please specify the estimated salary range for the role.</small>
+                            <small>{t("fields.salary.hint")}</small>
                         </div>
                         <div className="col">
-                            <input type="number" value={formData.salary} onChange={(e) => setFormData({ ...formData, salary: e.target.value})} className="form-control" placeholder="Estimate salary" />
+                            <input
+                                type="number"
+                                value={formData.salary}
+                                onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
+                                className="form-control"
+                                placeholder={t("fields.salary.placeholder")}
+                            />
                         </div>
                     </div>
 
                     <div className="row mt-2">
                         <div className="col">
-                            <strong>Type of Employment <span className="text-danger">*</span></strong>
+                            <strong>
+                                {t("fields.employmentType.label")} <span className="text-danger">*</span>
+                            </strong>
                         </div>
                         <div className="col">
-                            {["Full-Time", "Part-Time", "Remote", "Internship"].map(type => (
-                                <div key={type}>
+                            {employmentTypeOptions.map((type) => (
+                                <div key={type.value}>
                                     <input
                                         type="checkbox"
-                                        checked={formData.type_of_emp.includes(type)}
+                                        checked={formData.type_of_emp.includes(type.value)}
                                         onChange={(e) => {
                                             const updated = e.target.checked
-                                            ? [...formData.type_of_emp, type]
-                                            : formData.type_of_emp.filter(t => t !== type);
+                                                ? [...formData.type_of_emp, type.value]
+                                                : formData.type_of_emp.filter((t) => t !== type.value);
 
                                             setFormData({ ...formData, type_of_emp: updated });
                                             dispatch(setField({ type_of_emp: updated }));
                                         }}
-                                        />
+                                    />
 
-                                    {" "}{type}
+                                    {" "}
+                                    {type.label}
                                 </div>
                             ))}
-                           
                         </div>
                     </div>
 
                     <div className="row mt-2">
                         <div className="col">
-                            <strong>Categories</strong>
+                            <strong>{t("fields.categories.label")}</strong>
                             <br />
-                            <small>You can select multiple job categories</small>
+                            <small>{t("fields.categories.hint")}</small>
                         </div>
                         <div className="col">
                             <MultiSelectDropdown
@@ -197,82 +229,87 @@ export default function Editmodal({handleShow, handleClose, data, currentPage}: 
                         </div>
                     </div>
 
-                    {/* <div className="row mt-2">
-                        <div className="col">
-                            <strong>Required Skills</strong>
-                            <br />
-                            <small>Add required skills for the job</small>
-                        </div>
-                        <div className="col">
-                            
-                            <AddSkill
-                                skills={formData.skill}
-                                onAddSkill={(newSkill) => setFormData({...formData, skill: [...formData.skill, newSkill]})}
-                                onRemoveSkill={(skillToRemove) => setFormData({...formData, skill: formData.skill.filter(s => s !== skillToRemove)})}
-                            />
-
-                        </div>
-                    </div> */}
                     <hr />
-                    <strong>Details</strong>
-                        <br />
-                        <small>Add the description of the job, responsibilities. who you are and nice-to-have</small>
-                        <hr />
-        
-                        <div className="row mt-5">
-                            <div className="col">
-                                <strong>Job Description <span className="text-danger">*</span></strong>
-                                <br />
-                                <small>Job description must be describe one position.</small>
-                            </div>
-                            <div className="col">
-                                <TextEditor value={formData.job_desc} onChange={(value) => setFormData({ ...formData, job_desc: value})} />
-                            </div>
+                    <strong>{t("sections.details.title")}</strong>
+                    <br />
+                    <small>{t("sections.details.subtitle")}</small>
+                    <hr />
+
+                    <div className="row mt-5">
+                        <div className="col">
+                            <strong>
+                                {t("fields.jobDescription.label")} <span className="text-danger">*</span>
+                            </strong>
+                            <br />
+                            <small>{t("fields.jobDescription.hint")}</small>
                         </div>
-        
-                        <div className="row mt-2">
-                            <div className="col">
-                                <strong>Responsibility <span className="text-danger">*</span></strong>
-                                <br />
-                                <small>Outline the core responsibilities of the position.</small>
-                            </div>
-                            <div className="col">
-                                <TextEditor value={formData.responsibilities} onChange={(value) => setFormData({ ...formData, responsibilities: value})}  />
-                            </div>
+                        <div className="col">
+                            <TextEditor
+                                value={formData.job_desc}
+                                onChange={(value) => setFormData({ ...formData, job_desc: value })}
+                            />
                         </div>
-        
-                        <div className="row mt-2">
-                            <div className="col">
-                                <strong>Who You Are <span className="text-danger">*</span></strong>
-                                <br />
-                                <small>Add your preferred candidates qualifications.</small>
-                            </div>
-                            <div className="col">
-                                <TextEditor value={formData.who_you_are} onChange={(value) => setFormData({ ...formData, who_you_are: value})}  />
-                            </div>
+                    </div>
+
+                    <div className="row mt-2">
+                        <div className="col">
+                            <strong>
+                                {t("fields.responsibility.label")} <span className="text-danger">*</span>
+                            </strong>
+                            <br />
+                            <small>{t("fields.responsibility.hint")}</small>
                         </div>
-        
-                        <div className="row mt-2">
-                            <div className="col">
-                                <strong>Nice-To-Have <span className="text-danger">*</span></strong>
-                                <br />
-                                <small>Add nice-to-have skills and qualifications for the role to encourage a more diverse set of candidates to apply.</small>
-                            </div>
-                            <div className="col">
-                                <TextEditor value={formData.nice_to_have} onChange={(value) => setFormData({ ...formData, nice_to_have: value})} />
-                            </div>
+                        <div className="col">
+                            <TextEditor
+                                value={formData.responsibilities}
+                                onChange={(value) =>
+                                    setFormData({ ...formData, responsibilities: value })
+                                }
+                            />
                         </div>
+                    </div>
+
+                    <div className="row mt-2">
+                        <div className="col">
+                            <strong>
+                                {t("fields.whoYouAre.label")} <span className="text-danger">*</span>
+                            </strong>
+                            <br />
+                            <small>{t("fields.whoYouAre.hint")}</small>
+                        </div>
+                        <div className="col">
+                            <TextEditor
+                                value={formData.who_you_are}
+                                onChange={(value) => setFormData({ ...formData, who_you_are: value })}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="row mt-2">
+                        <div className="col">
+                            <strong>
+                                {t("fields.niceToHave.label")} <span className="text-danger">*</span>
+                            </strong>
+                            <br />
+                            <small>{t("fields.niceToHave.hint")}</small>
+                        </div>
+                        <div className="col">
+                            <TextEditor
+                                value={formData.nice_to_have}
+                                onChange={(value) => setFormData({ ...formData, nice_to_have: value })}
+                            />
+                        </div>
+                    </div>
                 </div>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    {t("actions.close")}
                 </Button>
                 <Button variant="primary" onClick={handleUpdate}>
-                    Save Changes
+                    {t("actions.saveChanges")}
                 </Button>
             </Modal.Footer>
         </Modal>
     );
-
 }

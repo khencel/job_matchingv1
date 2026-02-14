@@ -5,7 +5,7 @@
   },
   "form": {
     "heading": "サインイン",
-    "description": "お帰りなさい！アカウントにログインしてください",
+    "subtitle": "お帰りなさい！アカウントにログインしてください",
     "fields": {
       "email": {
         "label": "メールアドレス",
@@ -20,16 +20,15 @@
       "signIn": "サインイン",
       "signingIn": "サインイン中..."
     },
-    "links": {
-      "forgotPassword": "パスワードをお忘れですか？"
-    }
+    "forgotPassword": "パスワードをお忘れですか？"
   },
-  "toasts": {
+  "alerts": {
     "fillAllFields": {
       "title": "サインイン失敗",
       "message": "すべてのフィールドを入力してください"
     },
     "verifyEmail": {
+      "title": "サインイン失敗",
       "message": "メールアドレスを確認してください"
     },
     "success": {
@@ -37,6 +36,7 @@
       "message": "お帰りなさい！"
     },
     "invalidCredentials": {
+      "title": "サインイン失敗",
       "message": "無効なメールアドレスまたはパスワード"
     }
   }

@@ -24,8 +24,8 @@ export default function NextIntlProvider({
   locale?: SupportedLocale;
 }) {
   return (
-    <NextIntlClientProvider 
-      locale={locale} 
+    <NextIntlClientProvider
+      locale={locale}
       messages={MESSAGES[locale]}
       timeZone="Asia/Tokyo"
     >

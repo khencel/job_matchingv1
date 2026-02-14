@@ -1,3 +1,4 @@
+"use client";
 import { logoutUser } from "@/redux/features/auth/auth_thunk";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
@@ -10,8 +11,10 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button, DropdownItem } from "react-bootstrap";
+import { useTranslations } from "next-intl";
 
 const DropdownNav = () => {
+  const t = useTranslations("navbar");
   const router = useRouter();
   const dispatch = useAppDispatch();
   const role = useAppSelector((s) => s.authState.user?.role);
@@ -31,7 +34,7 @@ const DropdownNav = () => {
       <div className="d-flex flex-column">
         {role === "job_seeker" ? (
           <>
-            {dropdownItems.jobSeeker.map((item, idx) => (
+            {getDropdownItems(t).jobSeeker.map((item, idx) => (
               <div key={idx}>
                 <DropdownItem className="py-2" as={Link} href={item.href}>
                   {item.icon}
@@ -43,7 +46,7 @@ const DropdownNav = () => {
           </>
         ) : (
           <>
-            {dropdownItems.superVisory.map((item, idx) => (
+            {getDropdownItems(t).superVisory.map((item, idx) => (
               <div key={idx}>
                 <DropdownItem className="py-2" as={Link} href={item.href}>
                   {item.icon}
@@ -56,7 +59,7 @@ const DropdownNav = () => {
         )}
         <DropdownItem as={Button} onClick={handleLogout} className="py-2">
           <LogOutIcon className="text-danger" />
-          <span className="ms-2 text-danger">Logout</span>
+          <span className="ms-2 text-danger">{t('logout')}</span>
         </DropdownItem>
       </div>
     </div>
@@ -65,39 +68,39 @@ const DropdownNav = () => {
 
 export default DropdownNav;
 
-const dropdownItems = {
+const getDropdownItems = (t: any) => ({
   jobSeeker: [
     {
-      label: "Profile",
+      label: t('profile'),
       icon: <UserCircle2Icon />,
       href: "/job-seeker/profile",
     },
     {
-      label: "Application",
+      label: t('application'),
       icon: <FoldersIcon />,
       href: "/job-seeker/applied-jobs",
     },
     {
-      label: "Documents",
+      label: t('documents'),
       icon: <FileUserIcon />,
       href: "/job-seeker/documents",
     },
   ],
   superVisory: [
     {
-      label: "Overview",
+      label: t('overview'),
       icon: <LayersIcon />,
       href: "/super-visory/overview",
     },
     {
-      label: "Applicants",
+      label: t('applicants'),
       icon: <FileUserIcon />,
       href: "/super-visory/applicants",
     },
     {
-      label: "Profile",
+      label: t('profile'),
       icon: <UserCircle2Icon />,
       href: "/super-visory/profile",
     },
   ],
-};
+});

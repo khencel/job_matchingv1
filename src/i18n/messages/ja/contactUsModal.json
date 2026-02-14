@@ -1,4 +1,19 @@
 {
+  "title": "お問い合わせ",
+  "description": "以下のフォームにご記入の上、送信してください。",
+  "descriptionSubtext": "お問い合わせ内容を確認後、担当者よりご連絡いたします。",
+  "labels": {
+    "companyName": "会社名（必須）",
+    "name": "お名前 / ご担当者名（必須）",
+    "email": "メールアドレス（必須）",
+    "phone": "電話番号（必須）",
+    "subject": "件名",
+    "message": "お問い合わせ内容（必須）"
+  },
+  "buttons": {
+    "clear": "クリア",
+    "send": "送信する"
+  },
   "validation": {
     "companyNameRequired": "会社名フィールドは必須です",
     "nameRequired": "名前フィールドは必須です",

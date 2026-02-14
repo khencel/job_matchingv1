@@ -1,16 +1,36 @@
 {
-  "passwordToggle": {
-    "hide": "Hide password",
-    "show": "Show password"
+  "title": "Create Account",
+  "labels": {
+    "email": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "rememberMe": "Remember Me"
   },
-  "confirmPasswordToggle": {
-    "hide": "Hide confirm password",
-    "show": "Show confirm password"
-  },
-  "success": {
-    "title": "Account Information Submitted"
+  "placeholders": {
+    "enterEmail": "Enter your email",
+    "enterPassword": "Enter your password",
+    "confirmYourPassword": "Confirm your password"
   },
   "errors": {
+    "invalidEmail": "Please enter a valid email address",
+    "passwordTooShort": "Password must be at least 8 characters",
+    "passwordMismatch": "Passwords do not match",
     "registrationError": "Error on Registration:"
+  },
+  "helpers": {
+    "passwordMinLength": "Password must be at least 8 characters long",
+    "accountConfirmNote": "By creating an account, you agree to our Terms of Service and Privacy Policy"
+  },
+  "buttons": {
+    "next": "Next"
+  },
+  "alerts": {
+    "accountSubmitted": "Account Information Submitted"
+  },
+  "ariaLabels": {
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "showConfirmPassword": "Show confirm password",
+    "hideConfirmPassword": "Hide confirm password"
   }
 }

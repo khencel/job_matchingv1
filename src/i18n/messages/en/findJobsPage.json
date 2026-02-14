@@ -1,7 +1,7 @@
 {
   "pageTitle": "Job Filter",
-  "pageSubtitle": "Refine results quickly",
   "filters": {
+    "subtitle": "Refine results quickly",
     "clearButton": "Clear",
     "prefecture": {
       "label": "Prefecture",
@@ -10,7 +10,8 @@
     },
     "category": {
       "label": "Category",
-      "placeholder": "Select Category"
+      "placeholder": "Select Category",
+      "none": "None"
     },
     "jobType": {
       "label": "Job Type",
@@ -20,32 +21,34 @@
         "remote": "Remote",
         "internship": "Internship"
       },
-      "selected": "Selected: {types}"
+      "selected": "Selected:"
     },
     "salary": {
       "label": "Salary",
       "min": "Min",
       "max": "Max",
-      "helper": "Leave blank to show all ranges."
+      "hint": "Leave blank to show all ranges."
     },
-    "results": "Results:"
+    "results": "Results:",
+    "states": {
+      "loading": "Loading",
+      "error": "Error",
+      "updated": "Updated"
+    }
   },
-  "resultsSection": {
-    "heading": "Job Results",
-    "subheading": "Browse jobs that match your filters.",
-    "jobsCount": "{count} jobs"
-  },
-  "states": {
-    "loading": "Loading jobs...",
-    "loadingShort": "Loading",
-    "error": "Error",
-    "updated": "Updated",
-    "noJobs": "No jobs found",
-    "noJobsSubtitle": "Try adjusting your filters."
-  },
-  "jobCard": {
-    "newBadge": "NEW",
-    "updated": "Updated: 2/2",
-    "viewDetails": "View details"
+  "results": {
+    "title": "Job Results",
+    "subtitle": "Browse jobs that match your filters.",
+    "jobCount": "{count} jobs",
+    "states": {
+      "loading": "Loading jobs...",
+      "noJobsTitle": "No jobs found",
+      "noJobsMessage": "Try adjusting your filters."
+    },
+    "jobCard": {
+      "newBadge": "NEW",
+      "updated": "Updated:",
+      "viewDetails": "View details"
+    }
   }
 }

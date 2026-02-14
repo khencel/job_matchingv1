@@ -16,10 +16,12 @@ import Editmodal from "./edit_modal";
 import Cookies from "js-cookie";
 import { showSuccessToast } from "@/app/(util)/toaster";
 import { jobPostChangeStatus } from "@/redux/slices/employer/post_a_job/jobListingThunk";
+import { useTranslations } from "next-intl";
 
 
 
 export default function JobListing() {
+    const t = useTranslations("employerJobListing");
     const dispatch = useAppDispatch();
     const { items, status, error, loading, count, next, previous, currentPage, pageSize } = 
         useSelector((state: RootState) => state.jobListing);
@@ -51,9 +53,9 @@ export default function JobListing() {
 
     const handleDelete = (id: number) => {
         popup({
-        title: "Delete job post?",
-        text: "Job post will be deleted",
-        confirmText: 'yes, Delete it!',
+        title: t("modals.deleteJob.title"),
+        text: t("modals.deleteJob.message"),
+        confirmText: t("modals.deleteJob.confirmButton"),
         icon:"warning",
         onConfirm: () => {
                 btnDelete(id)
@@ -66,7 +68,7 @@ export default function JobListing() {
         if (!userId) return;
         await dispatch(deleteJobPost(id));
         dispatch(listJobPost({ userId, page: currentPage, pageSize }));
-        showSuccessToast("Success", "Job post deleted successfully");
+        showSuccessToast(t("modals.deleteJob.successTitle"), t("modals.deleteJob.successMessage"));
     }
 
 
@@ -77,15 +79,15 @@ export default function JobListing() {
 
     const handleChangeStatus = async (id:number) =>{
         popup({
-        title: "Change Status",
-        text: "Update the status of this Job Post?",
+        title: t("modals.changeStatus.title"),
+        text: t("modals.changeStatus.message"),
         icon:"warning",
         onConfirm:async () => {
                 const userId = Number(Cookies.get("user_id"));
                 if (!userId) return;
                 await dispatch(jobPostChangeStatus(id)); 
                 dispatch(listJobPost({ userId, page: currentPage, pageSize }));
-                showSuccessToast("Update Status","Status has been updated")
+                showSuccessToast(t("modals.changeStatus.successTitle"), t("modals.changeStatus.successMessage"))
             }
         })
         
@@ -102,7 +104,7 @@ export default function JobListing() {
         <>
             <div className="row standar-div">
                 <div className="col">
-                    <h5><strong><BiArrowBack /> Job Listing</strong></h5>
+                    <h5><strong><BiArrowBack /> {t("title")}</strong></h5>
                 </div>
                 {/* <div className="col text-end">
                     <span>November - December 2025 <FaCalendarCheck className="text-primary" /></span>
@@ -111,7 +113,7 @@ export default function JobListing() {
 
             <div className="row standar-div mt-2">
                 <div className="col">
-                    <strong>Job List ({count} total)</strong>
+                    <strong>{t("listTitle", { count })}</strong>
                 </div>
                 {/* <div className="col-2 text-end">
                     <FaSearch className="text-primary" /> Search Jobs
@@ -126,7 +128,7 @@ export default function JobListing() {
                     {loading ? (
                         <div className="text-center py-5">
                             <div className="spinner-border text-primary" role="status">
-                                <span className="visually-hidden">Loading...</span>
+                                <span className="visually-hidden">{t("states.loading")}</span>
                             </div>
                         </div>
                     ) : error ? (
@@ -136,12 +138,12 @@ export default function JobListing() {
                             <table className="table">
                                 <thead>
                                     <tr>
-                                        <th>Status</th>
-                                        <th>Role</th>
-                                        <th>Date Posted</th>
-                                        <th>Salary</th>
-                                        <th>Job type</th>
-                                        <th>Applicants</th>
+                                        <th>{t("table.status")}</th>
+                                        <th>{t("table.role")}</th>
+                                        <th>{t("table.datePosted")}</th>
+                                        <th>{t("table.salary")}</th>
+                                        <th>{t("table.jobType")}</th>
+                                        <th>{t("table.applicants")}</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -149,7 +151,7 @@ export default function JobListing() {
                                     {items.map((item: any) => (
                                         <tr key={item.id}>
                                             <td className={item.is_active?"text-success":"text-danger"}>
-                                                {item.is_active?"Enable":"Disable"}
+                                                {item.is_active ? t("statusToggle.enable") : t("statusToggle.disable")}
                         
                                             </td>
                                             <td>{item.title}</td>
@@ -176,17 +178,17 @@ export default function JobListing() {
 
                                                     <ul className="dropdown-menu dropdown-menu-end">
                                                         <li>
-                                                            <button className="dropdown-item" onClick={() => handleEdit(item)}>Edit</button>
+                                                            <button className="dropdown-item" onClick={() => handleEdit(item)}>{t("buttons.edit")}</button>
                                                         </li>
                                                         <li>
-                                                            <button className="dropdown-item text-danger" onClick={() => handleDelete(item.id)}>Delete</button>
+                                                            <button className="dropdown-item text-danger" onClick={() => handleDelete(item.id)}>{t("buttons.delete")}</button>
                                                         </li>
                                                         <li>
                                                             <button 
                                                                 className={`dropdown-item ${item.is_active?'text-danger':'text-success'}`}
                                                                 onClick={() => handleChangeStatus(item.id)}
                                                             >
-                                                                {item.is_active?"Disable":"Enable"}
+                                                                {item.is_active ? t("statusToggle.disable") : t("statusToggle.enable")}
                                                                 
                                                             </button>
                                                         </li>
@@ -201,7 +203,7 @@ export default function JobListing() {
                             {/* Pagination Controls */}
                             <div className="d-flex justify-content-between align-items-center mt-3">
                                 <div className="d-flex align-items-center">
-                                    <label className="me-2">Items per page:</label>
+                                    <label className="me-2">{t("pagination.itemsPerPage")}</label>
                                     <select 
                                         className="form-select form-select-sm" 
                                         style={{ width: 'auto' }}
@@ -214,7 +216,11 @@ export default function JobListing() {
                                         <option value={50}>50</option>
                                     </select>
                                     <span className="ms-3 text-muted">
-                                        Showing {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, count)} of {count}
+                                        {t("pagination.showing", {
+                                            start: ((currentPage - 1) * pageSize) + 1,
+                                            end: Math.min(currentPage * pageSize, count),
+                                            total: count,
+                                        })}
                                     </span>
                                 </div>
 
@@ -226,7 +232,7 @@ export default function JobListing() {
                                                 onClick={() => handlePageChange(currentPage - 1)}
                                                 disabled={!previous}
                                             >
-                                                Previous
+                                                {t("pagination.previous")}
                                             </button>
                                         </li>
                                         
@@ -250,7 +256,7 @@ export default function JobListing() {
                                                 onClick={() => handlePageChange(currentPage + 1)}
                                                 disabled={!next}
                                             >
-                                                Next
+                                                {t("pagination.next")}
                                             </button>
                                         </li>
                                     </ul>

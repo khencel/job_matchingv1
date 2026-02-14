@@ -13,5 +13,9 @@
   "logout": "ログアウト",
   "profile": "マイプロフィール",
   "changePassword": "パスワード変更",
+  "application": "応募",
+  "documents": "書類",
+  "overview": "概要",
+  "applicants": "応募者",
   "japanese": "日本語"
 }

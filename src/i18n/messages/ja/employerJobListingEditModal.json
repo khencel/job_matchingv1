@@ -1,0 +1,69 @@
+{
+  "title": "求人を編集",
+  "sections": {
+    "basicInfo": {
+      "title": "基本情報",
+      "subtitle": "この情報は公開されます。"
+    },
+    "details": {
+      "title": "詳細",
+      "subtitle": "仕事内容、責任、人物像、歓迎条件を追加してください。"
+    }
+  },
+  "fields": {
+    "jobTitle": {
+      "label": "職種名",
+      "hint": "職種は1つのポジションを説明するように記載してください。",
+      "placeholder": "例：ソフトウェアエンジニア",
+      "minChars": "80文字以上"
+    },
+    "salary": {
+      "label": "給与",
+      "hint": "役割の想定給与レンジを記載してください。",
+      "placeholder": "想定給与"
+    },
+    "employmentType": {
+      "label": "雇用形態",
+      "options": {
+        "fullTime": "フルタイム",
+        "partTime": "パートタイム",
+        "remote": "リモート",
+        "internship": "インターン"
+      }
+    },
+    "categories": {
+      "label": "カテゴリ",
+      "hint": "複数のカテゴリを選択できます"
+    },
+    "jobDescription": {
+      "label": "仕事内容",
+      "hint": "仕事内容は1つのポジションを説明するように記載してください。"
+    },
+    "responsibility": {
+      "label": "責任",
+      "hint": "主な責任範囲を記載してください。"
+    },
+    "whoYouAre": {
+      "label": "求める人物像",
+      "hint": "希望する候補者の資格や経験を記載してください。"
+    },
+    "niceToHave": {
+      "label": "歓迎条件",
+      "hint": "幅広い候補者が応募できるよう、歓迎スキルや資格を記載してください。"
+    }
+  },
+  "actions": {
+    "close": "閉じる",
+    "saveChanges": "変更を保存"
+  },
+  "modals": {
+    "confirmUpdate": {
+      "title": "よろしいですか？",
+      "message": "この求人を更新しますか？"
+    },
+    "success": {
+      "title": "成功",
+      "message": "求人が更新されました"
+    }
+  }
+}

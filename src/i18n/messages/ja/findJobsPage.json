@@ -1,7 +1,7 @@
 {
   "pageTitle": "求人フィルター",
-  "pageSubtitle": "結果を素早く絞り込む",
   "filters": {
+    "subtitle": "結果を素早く絞り込む",
     "clearButton": "クリア",
     "prefecture": {
       "label": "都道府県",
@@ -10,7 +10,8 @@
     },
     "category": {
       "label": "カテゴリー",
-      "placeholder": "カテゴリーを選択"
+      "placeholder": "カテゴリーを選択",
+      "none": "なし"
     },
     "jobType": {
       "label": "雇用形態",
@@ -20,32 +21,34 @@
         "remote": "リモート",
         "internship": "インターンシップ"
       },
-      "selected": "選択済み：{types}"
+      "selected": "選択済み："
     },
     "salary": {
       "label": "給与",
       "min": "最低",
       "max": "最高",
-      "helper": "すべての範囲を表示するには空白のままにしてください。"
+      "hint": "すべての範囲を表示するには空白のままにしてください。"
     },
-    "results": "結果："
+    "results": "結果：",
+    "states": {
+      "loading": "読み込み中",
+      "error": "エラー",
+      "updated": "更新済み"
+    }
   },
-  "resultsSection": {
-    "heading": "求人結果",
-    "subheading": "フィルターに一致する求人を閲覧します。",
-    "jobsCount": "{count}件の求人"
-  },
-  "states": {
-    "loading": "求人を読み込み中...",
-    "loadingShort": "読み込み中",
-    "error": "エラー",
-    "updated": "更新済み",
-    "noJobs": "求人が見つかりません",
-    "noJobsSubtitle": "フィルターを調整してみてください。"
-  },
-  "jobCard": {
-    "newBadge": "NEW",
-    "updated": "更新：2/2",
-    "viewDetails": "詳細を見る"
+  "results": {
+    "title": "求人結果",
+    "subtitle": "フィルターに一致する求人を閲覧します。",
+    "jobCount": "{count}件の求人",
+    "states": {
+      "loading": "求人を読み込み中...",
+      "noJobsTitle": "求人が見つかりません",
+      "noJobsMessage": "フィルターを調整してみてください。"
+    },
+    "jobCard": {
+      "newBadge": "NEW",
+      "updated": "更新：",
+      "viewDetails": "詳細を見る"
+    }
   }
 }

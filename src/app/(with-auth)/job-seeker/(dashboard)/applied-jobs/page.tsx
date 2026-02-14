@@ -5,8 +5,10 @@ import { fetchAppliedJobs } from "@/redux/slices/jobs/jobsThunk";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Col, Pagination, Row, Badge, Container } from "react-bootstrap";
+import { useTranslations } from "next-intl";
 
 const AppliedJobsPage = () => {
+  const t = useTranslations("jobSeekerAppliedJobs");
   const dispatch = useAppDispatch();
   const { loading, error, appliedJob } = useAppSelector((s) => s.appliedJob);
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,7 +26,7 @@ const AppliedJobsPage = () => {
     // You can expand this logic based on your real status values
     return (
       <Badge bg="primary" pill className="px-3 py-2">
-        {status || "Applied"}
+        {status || t("status.applied")}
       </Badge>
     );
   };
@@ -33,9 +35,9 @@ const AppliedJobsPage = () => {
     <Container className="py-5">
       {/* Header Section */}
       <div className="mb-4">
-        <h2 className="fw-bold text-dark">My Applications</h2>
+        <h2 className="fw-bold text-dark">{t("title")}</h2>
         <p className="text-muted h-100 gap-2 d-flex align-items-center">
-          Total Applications:
+          {t("totalApplications")}
           <Badge bg="dark" pill>
             {appliedJob?.count}
           </Badge>
@@ -44,7 +46,7 @@ const AppliedJobsPage = () => {
 
       {loading && (
         <div className="text-center py-5 text-muted">
-          Loading applications...
+          {t("states.loading")}
         </div>
       )}
       {error && <div className="text-center py-5 text-danger">{error}</div>}
@@ -53,10 +55,10 @@ const AppliedJobsPage = () => {
       {!loading && appliedJob?.results?.length === 0 && (
         <div className="text-center py-5 bg-light rounded-3">
           <h5 className="text-muted">
-            You haven{"'"}t applied to any jobs yet.
+            {t("states.empty")}
           </h5>
           <Link href="/find-jobs" className="btn btn-primary mt-3">
-            Find Jobs
+            {t("states.findJobs")}
           </Link>
         </div>
       )}
@@ -64,12 +66,12 @@ const AppliedJobsPage = () => {
       {/* Table Header - Hidden on small screens for cleaner mobile look */}
       {appliedJob?.results?.length > 0 && (
         <Row className="d-none d-md-flex mb-3 px-3 text-uppercase fs-7 text-muted fw-bold">
-          <Col md={6}>Role & Company</Col>
+          <Col md={6}>{t("table.roleAndCompany")}</Col>
           <Col md={3} className="text-center">
-            Date Applied
+            {t("table.dateApplied")}
           </Col>
           <Col md={3} className="text-center">
-            Status
+            {t("table.status")}
           </Col>
         </Row>
       )}
@@ -124,7 +126,7 @@ const AppliedJobsPage = () => {
                 {/* 2. Date */}
                 <Col md={3} className="text-md-center mt-3 mt-md-0">
                   <small className="text-muted d-block d-md-none fw-bold mb-1">
-                    Applied On:
+                    {t("appliedOn")}
                   </small>
                   <span className="fw-medium text-secondary">
                     {formatDate(job.created_at)}
@@ -136,7 +138,7 @@ const AppliedJobsPage = () => {
                   md={3}
                   className="text-md-center mt-3 mt-md-0 d-flex justify-content-md-center align-items-center"
                 >
-                  {getStatusBadge("Applied")}
+                  {getStatusBadge(t("status.applied"))}
                 </Col>
               </Row>
             </Link>

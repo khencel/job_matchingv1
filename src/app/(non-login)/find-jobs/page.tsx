@@ -10,8 +10,10 @@ import { useSelector } from "react-redux";
 import { setFilterField, setFieldClear } from "@/redux/slices/filterJobPost/filterJobPostSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { filterJobPostV1 } from "@/redux/slices/filterJobPost/filterJobPostThunk";
+import { useTranslations } from "next-intl";
 
 const FindJobPage = () => {
+  const t = useTranslations("findJobsPage");
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -48,8 +50,8 @@ const FindJobPage = () => {
                 <Card.Header className="bg-white border-0 p-3">
                   <div className="d-flex align-items-center justify-content-between gap-2">
                     <div>
-                      <div className="fw-bold" style={{ fontSize: 16 }}>Job Filter</div>
-                      <div className="text-muted small">Refine results quickly</div>
+                      <div className="fw-bold" style={{ fontSize: 16 }}>{t('pageTitle')}</div>
+                      <div className="text-muted small">{t('filters.subtitle')}</div>
                     </div>
 
                     <Button
@@ -57,7 +59,7 @@ const FindJobPage = () => {
                       onClick={() => dispatch(setFieldClear())}
                       className="p-0 text-danger text-decoration-none fw-semibold"
                     >
-                      Clear
+                      {t('filters.clearButton')}
                     </Button>
                   </div>
                 </Card.Header>
@@ -65,16 +67,16 @@ const FindJobPage = () => {
                 <Card.Body className="p-3 p-md-4">
                   {/* Prefecture */}
                   <Form.Group className="mb-3">
-                    <Form.Label className="fw-semibold mb-2">Prefecture</Form.Label>
+                    <Form.Label className="fw-semibold mb-2">{t('filters.prefecture.label')}</Form.Label>
                     <Form.Select
                       value={region ?? ""}
                       onChange={(e) => dispatch(setFilterField({ region: e.target.value }))}
                       className="rounded-3"
                     >
                       <option value="" disabled hidden>
-                        Select prefecture
+                        {t('filters.prefecture.placeholder')}
                       </option>
-                      <option value="">None</option>
+                      <option value="">{t('filters.prefecture.none')}</option>
                       {regionList.map((item: any, index: number) => (
                         <option key={index} value={item.value}>
                           {item.label}
@@ -85,16 +87,16 @@ const FindJobPage = () => {
 
                   {/* Category */}
                   <Form.Group className="mb-3">
-                    <Form.Label className="fw-semibold mb-2">Category</Form.Label>
+                    <Form.Label className="fw-semibold mb-2">{t('filters.category.label')}</Form.Label>
                     <Form.Select
                       value={category ?? ""}
                       onChange={(e) => dispatch(setFilterField({ category: e.target.value }))}
                       className="rounded-3"
                     >
                       <option value="" disabled hidden>
-                        Select Category
+                        {t('filters.category.placeholder')}
                       </option>
-                      <option value="">None</option>
+                      <option value="">{t('filters.category.none')}</option>
                       {listCategory.map((item: any, index: number) => (
                         <option key={index} value={item.value}>
                           {item.label}
@@ -105,7 +107,7 @@ const FindJobPage = () => {
 
                   {/* Job Type */}
                   <Form.Group className="mb-3">
-                    <Form.Label className="fw-semibold mb-2">Job Type</Form.Label>
+                    <Form.Label className="fw-semibold mb-2">{t('filters.jobType.label')}</Form.Label>
 
                     <div className="d-flex flex-wrap gap-2">
                       {jobTypes.map((type) => {
@@ -141,7 +143,7 @@ const FindJobPage = () => {
 
                     {type_of_emp.length > 0 && (
                       <div className="text-muted small mt-2">
-                        Selected: <strong>{type_of_emp.join(", ")}</strong>
+                        {t('filters.jobType.selected')} <strong>{type_of_emp.join(", ")}</strong>
                       </div>
                     )}
                   </Form.Group>
@@ -150,13 +152,13 @@ const FindJobPage = () => {
 
                   {/* Salary */}
                   <Form.Group>
-                    <Form.Label className="fw-semibold mb-2">Salary</Form.Label>
+                    <Form.Label className="fw-semibold mb-2">{t('filters.salary.label')}</Form.Label>
                     <div className="d-flex gap-2 align-items-center">
                       <Form.Control
                         type="number"
                         value={salary_start ?? ""}
                         onChange={(e) => dispatch(setFilterField({ salary_start: Number(e.target.value) }))}
-                        placeholder="Min"
+                        placeholder={t('filters.salary.min')}
                         className="rounded-3"
                       />
                       <span className="text-muted fw-bold">—</span>
@@ -164,11 +166,11 @@ const FindJobPage = () => {
                         type="number"
                         value={salary_end ?? ""}
                         onChange={(e) => dispatch(setFilterField({ salary_end: Number(e.target.value) }))}
-                        placeholder="Max"
+                        placeholder={t('filters.salary.max')}
                         className="rounded-3"
                       />
                     </div>
-                    <div className="text-muted small mt-2">Leave blank to show all ranges.</div>
+                    <div className="text-muted small mt-2">{t('filters.salary.hint')}</div>
                   </Form.Group>
 
                   {/* Keep your button commented as-is */}
@@ -182,17 +184,17 @@ const FindJobPage = () => {
                   <Card.Body className="py-3 px-3">
                     <div className="d-flex align-items-center justify-content-between">
                       <div className="text-muted small">
-                        Results: <strong className="text-dark">{items.length}</strong>
+                        {t('filters.results')} <strong className="text-dark">{items.length}</strong>
                       </div>
                       {status === "loading" ? (
                         <div className="d-flex align-items-center gap-2 text-muted small">
                           <Spinner animation="border" size="sm" />
-                          Loading
+                          {t('filters.states.loading')}
                         </div>
                       ) : error ? (
-                        <span className="text-danger small">Error</span>
+                        <span className="text-danger small">{t('filters.states.error')}</span>
                       ) : (
-                        <span className="text-success small">Updated</span>
+                        <span className="text-success small">{t('filters.states.updated')}</span>
                       )}
                     </div>
                   </Card.Body>
@@ -207,11 +209,11 @@ const FindJobPage = () => {
               {/* Header */}
               <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 mb-3">
                 <div>
-                  <h4 className="mb-1 fw-bold text-dark">Job Results</h4>
-                  <div className="text-muted small">Browse jobs that match your filters.</div>
+                  <h4 className="mb-1 fw-bold text-dark">{t('results.title')}</h4>
+                  <div className="text-muted small">{t('results.subtitle')}</div>
                 </div>
                 <Badge bg="light" text="dark" className="border rounded-pill px-3 py-2">
-                  {items.length} jobs
+                  {t('results.jobCount', { count: items.length })}
                 </Badge>
               </div>
 
@@ -220,7 +222,7 @@ const FindJobPage = () => {
                 <Card className="border-0 bg-light rounded-4">
                   <Card.Body className="py-5 d-flex justify-content-center align-items-center gap-2 text-muted">
                     <Spinner animation="border" />
-                    Loading jobs...
+                    {t('results.states.loading')}
                   </Card.Body>
                 </Card>
               ) : error ? (
@@ -232,8 +234,8 @@ const FindJobPage = () => {
               ) : items.length === 0 ? (
                 <Card className="border-0 bg-light rounded-4">
                   <Card.Body className="py-5 text-center">
-                    <div className="fw-bold mb-1">No jobs found</div>
-                    <div className="text-muted small">Try adjusting your filters.</div>
+                    <div className="fw-bold mb-1">{t('results.states.noJobsTitle')}</div>
+                    <div className="text-muted small">{t('results.states.noJobsMessage')}</div>
                   </Card.Body>
                 </Card>
               ) : (
@@ -251,7 +253,7 @@ const FindJobPage = () => {
                             className="img-fluid"
                             alt="Company Avatar"
                           />
-                          <span className="job-badge-modern">NEW</span>
+                          <span className="job-badge-modern">{t('results.jobCard.newBadge')}</span>
                         </div>
 
                         <div className="p-3 d-flex flex-column gap-2">
@@ -259,7 +261,7 @@ const FindJobPage = () => {
                             <div className="text-muted small text-truncate" title={job?.employer?.[0]?.userDetails_emp?.company_information?.name}>
                               {job?.employer?.[0]?.userDetails_emp?.company_information?.name}
                             </div>
-                            <div className="text-muted small">Updated: 2/2</div>
+                            <div className="text-muted small">{t('results.jobCard.updated')} 2/2</div>
                           </div>
 
                           <div className="fw-bold text-dark" style={{ lineHeight: 1.25 }}>
@@ -285,7 +287,7 @@ const FindJobPage = () => {
                               type="button"
                               data-i18n="btn_detail"
                             >
-                              View details
+                              {t('results.jobCard.viewDetails')}
                             </button>
                           </div>
                         </div>

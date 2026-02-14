@@ -1,19 +1,21 @@
+"use client";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 
 
 export default function Footer() {
+  const t = useTranslations("footer");
   return (
     <footer className="bg-light custom-footer text-dark pt-5">
       <div className="container">
         {/* Top Section */}
         <div className="text-center mb-4">
           <h3 className="fw-bold">
-            Explore Your <span className="text-primary">Next Career</span> Move
+            {t('heading.line1')} <span className="text-primary">{t('heading.line2')}</span> {t('heading.line3')}
           </h3>
           <p className="small">
-            Are you ready to take the next step in your career? JobLink helps you discover
-            exciting opportunities tailored to your skills and aspirations
+            {t('tagline')}
           </p>
           <hr />
         </div>
@@ -25,8 +27,7 @@ export default function Footer() {
             <div className="d-flex flex-column">
               <h5 className="fw-bold text-primary">JOB<span className="text-dark">Search</span></h5>
               <p className="small">
-                Join thousands of successful job seekers who have found their dream careers
-                through our platform. Your future begins here!
+                {t('description')}
               </p>
             </div>
           </div>
@@ -35,22 +36,22 @@ export default function Footer() {
           <div className="col-md-6 d-flex justify-content-md-end">
             <ul className="nav">
               <li className="nav-item">
-                <a className="nav-link text-dark" href="#">Home</a>
+                <a className="nav-link text-dark" href="#">{t('links.home')}</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-dark" href="#">Job Support Features</a>
+                <a className="nav-link text-dark" href="#">{t('links.features')}</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-dark" href="#">About Us</a>
+                <a className="nav-link text-dark" href="#">{t('links.aboutUs')}</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-dark" href="#">Q&A</a>
+                <a className="nav-link text-dark" href="#">{t('links.qa')}</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-dark" href="#">Contacts</a>
+                <a className="nav-link text-dark" href="#">{t('links.contacts')}</a>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-dark" href="/legal-notice">Company & Legal Notice</Link>
+                <Link className="nav-link text-dark" href="/legal-notice">{t('links.legalNotice')}</Link>
               </li>
             </ul>
           </div>
@@ -59,7 +60,7 @@ export default function Footer() {
 
       {/* Bottom Copyright */}
       <div className="bg-secondary text-light text-center py-3">
-        &copy; Copyright Jobsearch 2025. All rights reserved
+        {t('copyright')}
       </div>
     </footer>
   );

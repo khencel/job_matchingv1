@@ -86,22 +86,22 @@ export default function Navbar() {
             </li>
             <li className="nav-item">
               <Link className="nav-link nav-link-modern px-3 py-2 rounded-pill" href="/#job_support_features">
-                Features
+                {t('features')}
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link nav-link-modern px-3 py-2 rounded-pill" href="/#about_us">
-                About Us
+                {t('aboutUs')}
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link nav-link-modern px-3 py-2 rounded-pill" href="/#q_and_a">
-                Q&amp;A
+                {t('qa')}
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link nav-link-modern px-3 py-2 rounded-pill" href="/#contact_us">
-                Contacts
+                {t('contact')}
               </Link>
             </li>
 

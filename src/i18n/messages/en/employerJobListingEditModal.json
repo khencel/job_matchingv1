@@ -1,0 +1,69 @@
+{
+  "title": "Edit Job Post",
+  "sections": {
+    "basicInfo": {
+      "title": "Basic Information",
+      "subtitle": "This information will be displayed publicly."
+    },
+    "details": {
+      "title": "Details",
+      "subtitle": "Add the description of the job, responsibilities, who you are and nice-to-have."
+    }
+  },
+  "fields": {
+    "jobTitle": {
+      "label": "Job Title",
+      "hint": "Job title must describe one position.",
+      "placeholder": "e.g. Software Engineer",
+      "minChars": "At least 80 characters"
+    },
+    "salary": {
+      "label": "Salary",
+      "hint": "Please specify the estimated salary range for the role.",
+      "placeholder": "Estimate salary"
+    },
+    "employmentType": {
+      "label": "Type of Employment",
+      "options": {
+        "fullTime": "Full-Time",
+        "partTime": "Part-Time",
+        "remote": "Remote",
+        "internship": "Internship"
+      }
+    },
+    "categories": {
+      "label": "Categories",
+      "hint": "You can select multiple job categories"
+    },
+    "jobDescription": {
+      "label": "Job Description",
+      "hint": "Job description must describe one position."
+    },
+    "responsibility": {
+      "label": "Responsibility",
+      "hint": "Outline the core responsibilities of the position."
+    },
+    "whoYouAre": {
+      "label": "Who You Are",
+      "hint": "Add your preferred candidates qualifications."
+    },
+    "niceToHave": {
+      "label": "Nice-To-Have",
+      "hint": "Add nice-to-have skills and qualifications for the role to encourage a more diverse set of candidates to apply."
+    }
+  },
+  "actions": {
+    "close": "Close",
+    "saveChanges": "Save Changes"
+  },
+  "modals": {
+    "confirmUpdate": {
+      "title": "Are you sure?",
+      "message": "Do you want to update this job post?"
+    },
+    "success": {
+      "title": "Success",
+      "message": "Job post updated successfully"
+    }
+  }
+}

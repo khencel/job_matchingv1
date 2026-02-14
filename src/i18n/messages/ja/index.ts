@@ -56,6 +56,7 @@ import jobSeekerProfileExtended from "./jobSeekerProfileExtended.json";
 import jobSeekerResumeBuilder from "./jobSeekerResumeBuilder.json";
 import employerOverview from "./employerOverview.json";
 import employerJobListing from "./employerJobListing.json";
+import employerJobListingEditModal from "./employerJobListingEditModal.json";
 import employerApplicants from "./employerApplicants.json";
 import changePasswordModal from "./changePasswordModal.json";
 import jobListFilter from "./jobListFilter.json";
@@ -115,6 +116,7 @@ export default {
   jobSeekerResumeBuilder,
   employerOverview,
   employerJobListing,
+  employerJobListingEditModal,
   employerApplicants,
   changePasswordModal,
   jobListFilter,
