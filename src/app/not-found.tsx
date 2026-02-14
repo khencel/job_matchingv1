@@ -1,7 +1,9 @@
-import { getTranslations } from "next-intl/server";
+"use client";
 
-export default async function NotFound() {
-  const t = await getTranslations("notFound");
+import { useTranslations } from "next-intl";
+
+export default function NotFound() {
+  const t = useTranslations("notFound");
   return (
     <main>
       <h1>{t("heading")}</h1>
