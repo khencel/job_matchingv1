@@ -1,0 +1,51 @@
+{
+  "title": "Company information",
+  "labels": {
+    "basicInfo": "Basic information",
+    "companyName": "Company name",
+    "companyAddress": "Company address",
+    "phoneNumber": "Phone number",
+    "companyIndustry": "Company industry",
+    "industry": "Industry",
+    "selectedIndustries": "Selected industries",
+    "regions": "Regions",
+    "region": "Region",
+    "orgInfo": "Organizational information",
+    "numEmployees": "Number of employees",
+    "branchOffices": "Branch offices",
+    "branchOfficePlaceholder": "Enter branch office",
+    "branchOfficesList": "Branch offices list",
+    "prInfo": "PR information",
+    "appealPoints": "Appeal points",
+    "fee": "Fee"
+  },
+  "placeholders": {
+    "enterCompanyName": "Enter company name",
+    "enterCompanyAddress": "Enter company address",
+    "enterPhoneNumber": "Enter phone number",
+    "selectIndustry": "Select industry",
+    "selectRegion": "Select region",
+    "enterNumEmployees": "Enter number of employees",
+    "enterAppealPoints": "Enter appeal points",
+    "enterFee": "Enter fee"
+  },
+  "errors": {
+    "invalidCompanyName": "Company name must be at least 2 characters",
+    "invalidCompanyAddress": "Company address must be at least 2 characters",
+    "invalidPhoneNumber": "Please enter a valid phone number",
+    "invalidIndustry": "Please select at least one industry",
+    "invalidRegion": "Please select a region",
+    "invalidNumOfEmployees": "Please enter a valid number of employees",
+    "invalidBranchName": "Branch name must be at least 2 characters",
+    "addAtLeastOneBranch": "Please add at least one branch office",
+    "fillRequired": "This field is required"
+  },
+  "buttons": {
+    "add": "Add",
+    "remove": "Remove",
+    "next": "Next"
+  },
+  "alerts": {
+    "submitted": "Company information submitted"
+  }
+}

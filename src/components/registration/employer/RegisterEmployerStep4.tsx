@@ -96,30 +96,35 @@ export default function RegisterEmployerStep4({
 
     const { accountInfo, ...finalSubmissionDetails } = employerData;
 
+    const fullName = `${finalSubmissionDetails.contact_person.name}}`;
+
     const fullFormData: RegisterUserArgs = {
       email: accountInfo.email,
       password: accountInfo.password,
       user_type: "employer",
       details: JSON.stringify(finalSubmissionDetails),
+      context: {
+        header: t("context.header", { fullName }),
+        description: t("context.description"),
+        button: t("context.button"),
+        subText: t("context.subText"),
+      },
     };
 
     try {
       const res = await dispatch(registerThunk(fullFormData)).unwrap();
       Swal.fire({
-        title: "Verify Your Email",
-        text: `We've sent a verification email to your registered email
-                  address. Click the verification link to activate
-                  your account.`,
+        title: t("alerts.verifyEmailTitle"),
+        text: t("alerts.verifyEmailText"),
         icon: "success",
-        footer: `If you don't see the email, please check your spam or junk
-                  folder.`,
+        footer: t("alerts.verifyEmailFooter"),
       });
       closeModal();
       console.log("Employer Registered:", res.userDetails_emp);
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Employer Registration Failed",
+        title: t("alerts.registrationFailed"),
         toast: true,
         position: "top",
         showConfirmButton: false,

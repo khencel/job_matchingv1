@@ -15,10 +15,13 @@ import serviceContent from "./serviceContent.json";
 import registerButton from "./registerButton.json";
 import registrationModal from "./registrationModal.json";
 import registerEmployer from "./registerEmployer.json";
+import registerEmployerStep2 from "./registerEmployerStep2.json";
 import registerEmployerStep2Extended from "./registerEmployerStep2Extended.json";
+import registerEmployerStep3 from "./registerEmployerStep3.json";
 import registerJobSeeker from "./registerJobSeeker.json";
 import registerJobSeekerStep2 from "./registerJobSeekerStep2.json";
 import registerJobSeekerStep3 from "./registerJobSeekerStep3.json";
+import registerEmployerStep4 from "./registerEmployerStep4.json";
 import registerSupervisory from "./registerSupervisory.json";
 import jobDescriptionPage from "./jobDescriptionPage.json";
 import jobSeekerProfile from "./jobSeekerProfile.json";
@@ -100,10 +103,13 @@ export default {
   registerButton,
   registrationModal,
   registerEmployer,
+  registerEmployerStep2,
   registerEmployerStep2Extended,
+  registerEmployerStep3,
   registerJobSeeker,
   registerJobSeekerStep2,
   registerJobSeekerStep3,
+  registerEmployerStep4,
   registerSupervisory,
   jobDescriptionPage,
   jobSeekerProfile,

@@ -1,0 +1,30 @@
+{
+  "title": "Contact information",
+  "labels": {
+    "name": "Full name",
+    "departmentName": "Department name",
+    "phoneNumber": "Phone number",
+    "emailAddress": "Email address"
+  },
+  "placeholders": {
+    "enterFullName": "Enter full name",
+    "enterDeptName": "Enter department name",
+    "enterPhoneNumber": "Enter phone number",
+    "enterEmailAddress": "Enter email address"
+  },
+  "errors": {
+    "invalidName": "Name must be 3 to 100 characters",
+    "invalidDepartmentName": "Department name must be 3 to 100 characters",
+    "invalidPhoneNumber": "Please enter a valid phone number",
+    "invalidEmail": "Please enter a valid email address"
+  },
+  "helpers": {
+    "contactInfoNote": "Make sure this contact information is accurate."
+  },
+  "buttons": {
+    "next": "Next"
+  },
+  "alerts": {
+    "submitted": "Company information submitted"
+  }
+}

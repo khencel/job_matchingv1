@@ -1,0 +1,30 @@
+{
+  "title": "連絡先情報",
+  "labels": {
+    "name": "氏名",
+    "departmentName": "部署名",
+    "phoneNumber": "電話番号",
+    "emailAddress": "メールアドレス"
+  },
+  "placeholders": {
+    "enterFullName": "氏名を入力",
+    "enterDeptName": "部署名を入力",
+    "enterPhoneNumber": "電話番号を入力",
+    "enterEmailAddress": "メールアドレスを入力"
+  },
+  "errors": {
+    "invalidName": "氏名は3〜100文字で入力してください",
+    "invalidDepartmentName": "部署名は3〜100文字で入力してください",
+    "invalidPhoneNumber": "有効な電話番号を入力してください",
+    "invalidEmail": "有効なメールアドレスを入力してください"
+  },
+  "helpers": {
+    "contactInfoNote": "連絡先情報が正しいことをご確認ください。"
+  },
+  "buttons": {
+    "next": "次へ"
+  },
+  "alerts": {
+    "submitted": "会社情報を送信しました"
+  }
+}

@@ -111,7 +111,7 @@ export default function RegisterEmployerStep3() {
     setError({});
     Swal.fire({
       icon: "success",
-      title: "Company Information Submitted",
+      title: t("alerts.submitted"),
       toast: true,
       position: "top",
       showConfirmButton: false,

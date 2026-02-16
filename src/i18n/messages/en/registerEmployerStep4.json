@@ -1,0 +1,30 @@
+{
+  "title": "Terms and conditions",
+  "labels": {
+    "acceptTerms": "I agree to the Terms and Conditions",
+    "acceptPrivacyPolicy": "I agree to the Privacy Policy",
+    "acceptReceiveEmails": "I want to receive emails and updates"
+  },
+  "errors": {
+    "acceptTerms": "You must accept the Terms and Conditions",
+    "acceptPrivacy": "You must accept the Privacy Policy"
+  },
+  "helpers": {
+    "submitting": "Submitting"
+  },
+  "buttons": {
+    "submit": "Submit"
+  },
+  "context": {
+    "header": "Complete Your Registration {fullName}",
+    "description": "Thank you for signing up. Please verify your email address by clicking the button below.",
+    "button": "Verify Email",
+    "subText": "If you did not create this account, you can safely ignore this email."
+  },
+  "alerts": {
+    "verifyEmailTitle": "Verify Your Email",
+    "verifyEmailText": "We've sent a verification email to your registered email address. Click the verification link to activate your account.",
+    "verifyEmailFooter": "If you don't see the email, please check your spam or junk folder.",
+    "registrationFailed": "Employer registration failed"
+  }
+}
