@@ -1,0 +1,66 @@
+{
+  "title": "個人情報",
+  "labels": {
+    "firstName": "名",
+    "midName": "ミドルネーム",
+    "lastName": "姓",
+    "optional": "任意",
+    "nationality": "国籍",
+    "gender": "性別",
+    "currentPlaceResidence": "現在の居住地",
+    "birthdate": "生年月日",
+    "visaStatus": "ビザ状況",
+    "highestEducation": "最終学歴",
+    "japaneseLevel": "日本語レベル",
+    "contactNo": "連絡先番号",
+    "facebook": "Facebookプロフィール"
+  },
+  "placeholders": {
+    "firstName": "名を入力",
+    "midName": "ミドルネームを入力",
+    "lastName": "姓を入力",
+    "selectNationality": "国籍を選択",
+    "currentPlaceResidence": "現在の居住地を入力",
+    "selectVisaStatus": "ビザ状況を選択",
+    "selectEducation": "最終学歴を選択",
+    "selectJapaneseLevel": "日本語レベルを選択",
+    "contactNo": "連絡先番号を入力",
+    "facebook": "https://facebook.com/yourname"
+  },
+  "options": {
+    "male": "男性",
+    "female": "女性",
+    "visaApplied": "申請済み",
+    "visaPending": "保留中",
+    "visaReviewing": "審査中",
+    "visaIssued": "発給済み",
+    "visaDenied": "却下",
+    "elementary": "小学校",
+    "jrHighschool": "中学校",
+    "srHighschool": "高等学校",
+    "vocational": "専門学校",
+    "bachelorDegree": "学士",
+    "masterDegree": "修士",
+    "doctoralDegree": "博士"
+  },
+  "errors": {
+    "nameTooShort": "2文字以上で入力してください",
+    "nationalityRequired": "国籍を選択してください",
+    "genderRequired": "性別を選択してください",
+    "residenceTooShort": "2文字以上で入力してください",
+    "birthdateRequired": "生年月日を選択してください",
+    "age18Error": "18歳以上である必要があります",
+    "age100Error": "年齢は100歳未満である必要があります",
+    "visaStatusRequired": "ビザ状況を選択してください",
+    "highestEducationRequired": "最終学歴を選択してください",
+    "japaneseLevelRequired": "日本語レベルを選択してください",
+    "contactNoTooShort": "有効な連絡先番号を入力してください",
+    "invalidFacebookUrl": "有効なFacebook URLを入力してください"
+  },
+  "buttons": {
+    "next": "次へ"
+  },
+  "alerts": {
+    "submitted": "個人情報を送信しました"
+  }
+}

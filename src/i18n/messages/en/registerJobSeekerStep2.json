@@ -1,0 +1,66 @@
+{
+  "title": "Personal information",
+  "labels": {
+    "firstName": "First name",
+    "midName": "Middle name",
+    "lastName": "Last name",
+    "optional": "optional",
+    "nationality": "Nationality",
+    "gender": "Gender",
+    "currentPlaceResidence": "Current place of residence",
+    "birthdate": "Birthdate",
+    "visaStatus": "Visa status",
+    "highestEducation": "Highest education",
+    "japaneseLevel": "Japanese level",
+    "contactNo": "Contact number",
+    "facebook": "Facebook profile"
+  },
+  "placeholders": {
+    "firstName": "Enter your first name",
+    "midName": "Enter your middle name",
+    "lastName": "Enter your last name",
+    "selectNationality": "Select nationality",
+    "currentPlaceResidence": "Enter your current place of residence",
+    "selectVisaStatus": "Select visa status",
+    "selectEducation": "Select highest education",
+    "selectJapaneseLevel": "Select Japanese level",
+    "contactNo": "Enter contact number",
+    "facebook": "https://facebook.com/yourname"
+  },
+  "options": {
+    "male": "Male",
+    "female": "Female",
+    "visaApplied": "Applied",
+    "visaPending": "Pending",
+    "visaReviewing": "Reviewing",
+    "visaIssued": "Issued",
+    "visaDenied": "Denied",
+    "elementary": "Elementary",
+    "jrHighschool": "Junior high school",
+    "srHighschool": "Senior high school",
+    "vocational": "Vocational",
+    "bachelorDegree": "Bachelor's degree",
+    "masterDegree": "Master's degree",
+    "doctoralDegree": "Doctoral degree"
+  },
+  "errors": {
+    "nameTooShort": "Must be at least 2 characters",
+    "nationalityRequired": "Please select your nationality",
+    "genderRequired": "Please select your gender",
+    "residenceTooShort": "Must be at least 2 characters",
+    "birthdateRequired": "Please select your birthdate",
+    "age18Error": "You must be at least 18 years old",
+    "age100Error": "Age must be under 100 years old",
+    "visaStatusRequired": "Please select your visa status",
+    "highestEducationRequired": "Please select your highest education",
+    "japaneseLevelRequired": "Please select your Japanese level",
+    "contactNoTooShort": "Please enter a valid contact number",
+    "invalidFacebookUrl": "Please enter a valid Facebook URL"
+  },
+  "buttons": {
+    "next": "Next"
+  },
+  "alerts": {
+    "submitted": "Personal information submitted"
+  }
+}
