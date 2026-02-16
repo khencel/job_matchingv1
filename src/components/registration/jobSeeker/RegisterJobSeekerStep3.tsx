@@ -85,25 +85,30 @@ export default function RegisterJobSeekerStep3({
     setError({});
     dispatch(saveRegJobSeekerStep3(data));
 
+    const fullName = `${jobSeekerData.jobSeekerData.firstName} ${jobSeekerData.jobSeekerData.lastName}`;
+
     const fullFormData: RegisterUserArgs = {
       email: jobSeekerData.accountInfo.email,
       password: jobSeekerData.accountInfo.password,
       user_type: "job_seeker",
       details: JSON.stringify(jobSeekerData),
+      context: {
+        header: t("context.header", { fullName }),
+        description: t("context.description"),
+        button: t("context.button"),
+        subText: t("context.subText"),
+      },
     };
     try {
       // Final submit thunk (simulated API)
       const res = await dispatch(registerThunk(fullFormData)).unwrap();
       Swal.fire({
-        title: "Verify Your Email",
-        text: `We've sent a verification email to your registered email
-            address. Click the verification link to activate
-            your account.`,
+        title: t("alerts.verifyEmailTitle"),
+        text: t("alerts.verifyEmailText"),
         icon: "success",
-        footer: `If you don't see the email, please check your spam or junk
-            folder.`,
+        footer: t("alerts.verifyEmailFooter"),
       });
-      console.log("Job Seeker Registered:", res.userDetails_job_seeker);
+      console.log("Job Seeker Registered:", res.userDetails_job_seeker, fullFormData.context);
       closeModal();
     } catch (error) {
       const displayError =

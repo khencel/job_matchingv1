@@ -9,6 +9,12 @@ export interface RegisterUserArgs {
   password: string;
   user_type: "employer" | "job_seeker" | "supervisory";
   details: string;
+  context: {
+    header: string;
+    description: string;
+    button: string;
+    subText: string;
+  };
 }
 
 // User type returned from backend

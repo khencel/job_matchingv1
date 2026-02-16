@@ -18,6 +18,7 @@ import registerEmployer from "./registerEmployer.json";
 import registerEmployerStep2Extended from "./registerEmployerStep2Extended.json";
 import registerJobSeeker from "./registerJobSeeker.json";
 import registerJobSeekerStep2 from "./registerJobSeekerStep2.json";
+import registerJobSeekerStep3 from "./registerJobSeekerStep3.json";
 import registerSupervisory from "./registerSupervisory.json";
 import jobDescriptionPage from "./jobDescriptionPage.json";
 import jobSeekerProfile from "./jobSeekerProfile.json";
@@ -102,6 +103,7 @@ export default {
   registerEmployerStep2Extended,
   registerJobSeeker,
   registerJobSeekerStep2,
+  registerJobSeekerStep3,
   registerSupervisory,
   jobDescriptionPage,
   jobSeekerProfile,
