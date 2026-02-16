@@ -1,0 +1,47 @@
+{
+  "title": "Company information",
+  "labels": {
+    "basicInfo": "Basic information",
+    "companyName": "Company name",
+    "companyNamePhonetic": "Company name (phonetic)",
+    "representativeName": "Representative name",
+    "headquartersAddress": "Headquarters address",
+    "prefecture": "Prefecture",
+    "city": "City",
+    "street": "Street",
+    "companyDetails": "Company details",
+    "numberOfEmployees": "Number of employees",
+    "industry": "Industry",
+    "yearFounded": "Year founded",
+    "capital": "Capital",
+    "businessDescription": "Business description"
+  },
+  "placeholders": {
+    "enterCompanyName": "Enter company name",
+    "enterCompanyNamePhonetic": "Enter company name (phonetic)",
+    "enterRepresentativeName": "Enter representative name",
+    "selectPrefecture": "Select prefecture",
+    "enterCity": "Enter city",
+    "enterStreet": "Enter street",
+    "enterNumberOfEmployees": "Enter number of employees",
+    "selectIndustry": "Select industry",
+    "enterYearFounded": "Enter year founded",
+    "enterCapital": "Enter capital",
+    "enterBusinessDescription": "Enter business description"
+  },
+  "errors": {
+    "tooShortCompanyName": "Company name must be at least 2 characters",
+    "tooShortRepName": "Representative name must be at least 2 characters",
+    "fillRequired": "This field is required",
+    "invalidCity": "City must be at least 2 characters",
+    "invalidStreet": "Street must be at least 2 characters",
+    "invalidNumOfEmployees": "Please enter a valid number of employees",
+    "invalidYearFounded": "Please enter a valid year founded"
+  },
+  "buttons": {
+    "next": "Next"
+  },
+  "alerts": {
+    "submitted": "Company information submitted"
+  }
+}
