@@ -120,7 +120,11 @@ export default function RegisterEmployerStep4({
         footer: t("alerts.verifyEmailFooter"),
       });
       closeModal();
-      console.log("Employer Registered:", res.userDetails_emp);
+      console.log(
+        "Employer Registered:",
+        res.userDetails_emp,
+        fullFormData.context,
+      );
     } catch (error) {
       Swal.fire({
         icon: "error",

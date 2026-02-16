@@ -107,7 +107,7 @@ export default function RegisterSuperVisoryStep4({
         icon: "success",
         footer: t("messages.verifyEmailFooter"),
       });
-      console.log("Super Visory Registered:", res.userDetails_supervisory);
+      console.log("Super Visory Registered:", res.userDetails_supervisory, fullFormData.context);
       closeModal();
     } catch (error) {
       console.log("Error Submitting the Register Supervisory:", error);
