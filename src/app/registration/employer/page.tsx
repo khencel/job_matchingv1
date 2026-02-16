@@ -524,7 +524,6 @@ export default function RegistrationEmployer() {
                   <option value="">{t("selectPlaceholder")}</option>
                   <option>{t("housingOptions.dorm")}</option>
                   <option>{t("housingOptions.company")}</option>
-                  <option>{t("housingOptions.allowance")}</option>
                   <option>{t("housingOptions.none")}</option>
                 </select>
               </div>
@@ -565,7 +564,6 @@ export default function RegistrationEmployer() {
                   onChange={handleChange}
                 >
                   <option value="">{t("selectPlaceholder")}</option>
-                  <option>{t("acceptOptions.yes")}</option>
                   <option>{t("acceptOptions.maybe")}</option>
                   <option>{t("acceptOptions.consult")}</option>
                 </select>
