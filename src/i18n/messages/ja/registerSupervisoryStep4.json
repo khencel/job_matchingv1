@@ -1,0 +1,31 @@
+{
+  "title": "利用規約と同意",
+  "labels": {
+    "acceptTerms": "利用規約に同意します",
+    "acceptPrivacyPolicy": "プライバシーポリシーに同意します",
+    "acceptReceiveEmails": "メールや更新情報の受信を希望します"
+  },
+  "errors": {
+    "acceptTerms": "利用規約に同意する必要があります",
+    "acceptPrivacy": "プライバシーポリシーに同意する必要があります"
+  },
+  "helpers": {
+    "submitting": "送信中"
+  },
+  "buttons": {
+    "submit": "送信"
+  },
+  "context": {
+    "header": "登録を完了してください",
+    "description": "ご登録ありがとうございます。下のボタンをクリックしてメールアドレスを確認してください。",
+    "button": "メールを確認",
+    "subText": "このアカウントを作成していない場合は、このメールを無視して問題ありません。"
+  },
+  "messages": {
+    "error": "エラー",
+    "registrationFailed": "監督者の登録に失敗しました",
+    "verifyEmailTitle": "メールをご確認ください",
+    "verifyEmailText": "登録されたメールアドレスに確認メールを送信しました。リンクをクリックしてアカウントを有効化してください。",
+    "verifyEmailFooter": "メールが見当たらない場合は、迷惑メールフォルダもご確認ください。"
+  }
+}

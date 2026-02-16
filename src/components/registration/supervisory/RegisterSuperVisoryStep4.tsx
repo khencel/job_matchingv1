@@ -90,19 +90,22 @@ export default function RegisterSuperVisoryStep4({
       password: superVisoryData.accountInfo.password,
       user_type: "supervisory",
       details: JSON.stringify(superVisoryData),
+      context: {
+        header: t("context.header"),
+        description: t("context.description"),
+        button: t("context.button"),
+        subText: t("context.subText"),
+      }
     };
 
     try {
       // Final submit thunk (simulated API)
       const res = await dispatch(registerThunk(fullFormData)).unwrap();
       Swal.fire({
-        title: "Verify Your Email",
-        text: `We've sent a verification email to your registered email
-        address. Click the verification link to activate
-        your account.`,
+        title: t("messages.verifyEmailTitle"),
+        text: t("messages.verifyEmailText"),
         icon: "success",
-        footer: `If you don't see the email, please check your spam or junk
-                 folder.`,
+        footer: t("messages.verifyEmailFooter"),
       });
       console.log("Super Visory Registered:", res.userDetails_supervisory);
       closeModal();

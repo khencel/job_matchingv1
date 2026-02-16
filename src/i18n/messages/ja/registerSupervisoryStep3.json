@@ -1,4 +1,29 @@
 {
+  "title": "担当者情報",
+  "labels": {
+    "name": "氏名",
+    "department": "部署",
+    "phoneNumber": "電話番号",
+    "email": "メール"
+  },
+  "placeholders": {
+    "enterName": "氏名を入力",
+    "enterDepartment": "部署を入力",
+    "enterPhoneNumber": "電話番号を入力",
+    "enterEmail": "メールアドレスを入力"
+  },
+  "errors": {
+    "invalidName": "氏名は2〜100文字で入力してください",
+    "invalidDepartmentName": "部署名は2〜100文字で入力してください",
+    "invalidPhoneNumber": "有効な電話番号を入力してください",
+    "invalidEmail": "有効なメールアドレスを入力してください"
+  },
+  "helpers": {
+    "contactInfoNote": "連絡先情報が正しいことをご確認ください。"
+  },
+  "buttons": {
+    "next": "次へ"
+  },
   "messages": {
     "success": "成功",
     "contactPersonSaved": "担当者情報を保存しました"
