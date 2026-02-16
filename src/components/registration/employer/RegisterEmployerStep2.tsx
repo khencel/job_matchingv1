@@ -209,19 +209,6 @@ export default function RegisterEmployerStep2() {
       hasError = true;
     }
 
-    // Validate fee
-    const feeNum = Number(data.fee);
-    if (feeNum <= 0) {
-      validationErrors.fee = true;
-      hasError = true;
-    }
-
-    // Validate branch offices
-    if (!data.branch_office || data.branch_office.length === 0) {
-      validationErrors.branch_office = true;
-      hasError = true;
-    }
-
     if (data.founded <= 1000 || data.founded > new Date().getFullYear()) {
       validationErrors.founded = true;
       hasError = true;
@@ -235,9 +222,7 @@ export default function RegisterEmployerStep2() {
     if (hasError) {
       setError(validationErrors);
 
-      if (validationErrors.branch_office) {
-        setTimeout(() => branchInputRef.current?.focus(), 0);
-      } else if (validationErrors.company_industry) {
+      if (validationErrors.company_industry) {
         setTimeout(() => industrySelectRef.current?.focus(), 0);
       } else {
         const firstErrorField = Object.keys(validationErrors)[0];
@@ -474,9 +459,6 @@ export default function RegisterEmployerStep2() {
                     branch_office: false,
                   }));
                 }}
-                isInvalid={
-                  error.branch_office || data.branch_office.length === 0
-                }
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
@@ -484,13 +466,6 @@ export default function RegisterEmployerStep2() {
                   }
                 }}
               />
-
-              <Form.Control.Feedback type="invalid">
-                {currentBranch.trim().length > 0 &&
-                currentBranch.trim().length < 2
-                  ? t("errors.invalidBranchName")
-                  : t("errors.addAtLeastOneBranch")}
-              </Form.Control.Feedback>
             </Col>
             <Col xs={3}>
               <Button
@@ -556,27 +531,11 @@ export default function RegisterEmployerStep2() {
           </Form.Control.Feedback>
         </Form.Group>
 
-        {/* Fee Field */}
-        <Form.Group className="mb-3" controlId="fee">
-          <Form.Label>{t("labels.fee")}</Form.Label>
-          <Form.Control
-            required
-            type="number"
-            name="fee"
-            placeholder={t("placeholders.enterFee")}
-            value={data.fee}
-            onChange={handleChange}
-            onFocus={(e) => e.target.select()}
-            isInvalid={error.fee || data.fee < 0}
-          />
-          <Form.Control.Feedback type="invalid">
-            {t("errors.fillRequired")}
-          </Form.Control.Feedback>
-        </Form.Group>
-
         {/* Founded Date */}
         <Form.Group className="mb-3" controlId="founded">
-          <Form.Label>{tExtended("additionalFields.foundedYear.label")}</Form.Label>
+          <Form.Label>
+            {tExtended("additionalFields.foundedYear.label")}
+          </Form.Label>
           <Form.Control
             required
             type="number"
@@ -596,13 +555,17 @@ export default function RegisterEmployerStep2() {
 
         {/* Company Profile */}
         <Form.Group className="mb-3" controlId="profile">
-          <Form.Label>{tExtended("additionalFields.companyProfile.label")}</Form.Label>
+          <Form.Label>
+            {tExtended("additionalFields.companyProfile.label")}
+          </Form.Label>
           <Form.Control
             required
             type="text"
             as="textarea"
             name="profile"
-            placeholder={tExtended("additionalFields.companyProfile.placeholder")}
+            placeholder={tExtended(
+              "additionalFields.companyProfile.placeholder",
+            )}
             value={data.profile}
             onChange={handleChange}
             onFocus={(e) => e.target.select()}

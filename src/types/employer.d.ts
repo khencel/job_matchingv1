@@ -1,7 +1,6 @@
 import { RegistrationStep1 } from "./user-register";
 
 export interface RegisterEmployerStep2Data {
-  fee: number;
   name: string;
   phone: string;
   region: string;
