@@ -24,7 +24,6 @@ const initialState: RegisterEmployer = {
       no_of_emp: 0,
       branch_office: [],
       appeal_point: 0,
-      fee: 0,
       founded: 0,
       profile: "",
     },
