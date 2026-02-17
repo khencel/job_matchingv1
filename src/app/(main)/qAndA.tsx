@@ -30,7 +30,7 @@ export default function QASection() {
                     data-bs-toggle="collapse"
                     data-bs-target="#qaOne"
                   >
-                    {t("questions.whatIsJobSupport.question")}
+                    {t("questions.jobSeeker.forJobSeeker")}
                   </button>
                 </h2>
                 <div
@@ -39,7 +39,57 @@ export default function QASection() {
                   data-bs-parent="#qaAccordion"
                 >
                   <div className="accordion-body text-muted">
-                    {t("questions.whatIsJobSupport.answer")}
+                    <ol>
+                      <li>{t("questions.jobSeeker.question1")}</li>
+                      <ul>
+                        <li>{t("questions.jobSeeker.answer1")}</li>
+                      </ul>
+
+                      <li>{t("questions.jobSeeker.question2")}</li>
+                      <ul>
+                        <li>{t("questions.jobSeeker.answer2")}</li>
+                      </ul>
+
+                      <li>{t("questions.jobSeeker.question3")}</li>
+                      <ul>
+                        <li>{t("questions.jobSeeker.answer3")}</li>
+                      </ul>
+
+                      <li>{t("questions.jobSeeker.question4")}</li>
+                      <ul>
+                        <li>{t("questions.jobSeeker.answer4")}</li>
+                      </ul>
+
+                      <li>{t("questions.jobSeeker.question5")}</li>
+                      <ul>
+                        <li>{t("questions.jobSeeker.answer5")}</li>
+                      </ul>
+
+                      <li>{t("questions.jobSeeker.question6")}</li>
+                      <ul>
+                        <li>{t("questions.jobSeeker.answer6")}</li>
+                      </ul>
+
+                      <li>{t("questions.jobSeeker.question7")}</li>
+                      <ul>
+                        <li>{t("questions.jobSeeker.answer7")}</li>
+                      </ul>
+
+                      <li>{t("questions.jobSeeker.question8")}</li>
+                      <ul>
+                        <li>{t("questions.jobSeeker.answer8")}</li>
+                      </ul>
+
+                      <li>{t("questions.jobSeeker.question9")}</li>
+                      <ul>
+                        <li>{t("questions.jobSeeker.answer9")}</li>
+                      </ul>
+
+                      <li>{t("questions.jobSeeker.question10")}</li>
+                      <ul>
+                        <li>{t("questions.jobSeeker.answer10")}</li>
+                      </ul>
+                    </ol>
                   </div>
                 </div>
               </div>
@@ -53,7 +103,7 @@ export default function QASection() {
                     data-bs-toggle="collapse"
                     data-bs-target="#qaTwo"
                   >
-                    {t("questions.isItFree.question")}
+                    {t("questions.employer.forEmployer")}
                   </button>
                 </h2>
                 <div
@@ -62,7 +112,52 @@ export default function QASection() {
                   data-bs-parent="#qaAccordion"
                 >
                   <div className="accordion-body text-muted">
-                    {t("questions.isItFree.answer")}
+                    <ol>
+                      <li>{t("questions.employer.question1")}</li>
+                      <ul>
+                        <li>{t("questions.employer.answer1")}</li>
+                      </ul>
+
+                      <li>{t("questions.employer.question2")}</li>
+                      <ul>
+                        <li>{t("questions.employer.answer2")}</li>
+                      </ul>
+
+                      <li>{t("questions.employer.question3")}</li>
+                      <ul>
+                        <li>{t("questions.employer.answer3")}</li>
+                      </ul>
+
+                      <li>{t("questions.employer.question4")}</li>
+                      <ul>
+                        <li>{t("questions.employer.answer4")}</li>
+                      </ul>
+
+                      <li>{t("questions.employer.question5")}</li>
+                      <ul>
+                        <li>{t("questions.employer.answer5")}</li>
+                      </ul>
+
+                      <li>{t("questions.employer.question6")}</li>
+                      <ul>
+                        <li>{t("questions.employer.answer6")}</li>
+                      </ul>
+
+                      <li>{t("questions.employer.question7")}</li>
+                      <ul>
+                        <li>{t("questions.employer.answer7")}</li>
+                      </ul>
+
+                      <li>{t("questions.employer.question8")}</li>
+                      <ul>
+                        <li>{t("questions.employer.answer8")}</li>
+                      </ul>
+
+                      <li>{t("questions.employer.question9")}</li>
+                      <ul>
+                        <li>{t("questions.employer.answer9")}</li>
+                      </ul>
+                    </ol>
                   </div>
                 </div>
               </div>
@@ -76,7 +171,7 @@ export default function QASection() {
                     data-bs-toggle="collapse"
                     data-bs-target="#qaThree"
                   >
-                    {t("questions.howToApply.question")}
+                    {t("questions.supervisory.forSupervisory")}
                   </button>
                 </h2>
                 <div
@@ -85,34 +180,35 @@ export default function QASection() {
                   data-bs-parent="#qaAccordion"
                 >
                   <div className="accordion-body text-muted">
-                    {t("questions.howToApply.answer")}
+                    <ol>
+                      <li>{t("questions.supervisory.question1")}</li>
+                      <ul>
+                        <li>{t("questions.supervisory.answer1")}</li>
+                      </ul>
+
+                      <li>{t("questions.supervisory.question2")}</li>
+                      <ul>
+                        <li>{t("questions.supervisory.answer2")}</li>
+                      </ul>
+
+                      <li>{t("questions.supervisory.question3")}</li>
+                      <ul>
+                        <li>{t("questions.supervisory.answer3")}</li>
+                      </ul>
+
+                      <li>{t("questions.supervisory.question4")}</li>
+                      <ul>
+                        <li>{t("questions.supervisory.answer4")}</li>
+                      </ul>
+
+                      <li>{t("questions.supervisory.question5")}</li>
+                      <ul>
+                        <li>{t("questions.supervisory.answer5")}</li>
+                      </ul>
+                    </ol>
                   </div>
                 </div>
               </div>
-
-              {/* Question 4 */}
-              <div className="accordion-item border-0 shadow-sm rounded-3">
-                <h2 className="accordion-header">
-                  <button
-                    className="accordion-button collapsed rounded-3"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#qaFour"
-                  >
-                    {t("questions.howToPostJobs.question")}
-                  </button>
-                </h2>
-                <div
-                  id="qaFour"
-                  className="accordion-collapse collapse"
-                  data-bs-parent="#qaAccordion"
-                >
-                  <div className="accordion-body text-muted">
-                    {t("questions.howToPostJobs.answer")}
-                  </div>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>

@@ -3,21 +3,64 @@
   "heading": "Frequently Asked Questions",
   "description": "Find quick answers to common questions about Job Support.",
   "questions": {
-    "whatIsJobSupport": {
-      "question": "What is Job Support?",
-      "answer": "Job Support is a comprehensive platform that connects job seekers with employers. It provides tools for profile creation, job matching, application tracking, and career insights to help you find the perfect job or hire the right talent."
+    "jobSeeker": {
+      "forJobSeeker": "For job seekers",  
+      "question1": "Is the service free?",
+      "answer1": "Yes, registration and use of the service are completely free of charge.",
+      "question2":" Can I register even if I don’t speak much Japanese?",
+      "answer2":"Yes. We introduce job opportunities based on your Japanese language level.",
+      "question3":"Can I register without a resume?",
+      "answer3":"Yes. We can create a resume based on the information you provide during registration.",
+      "question4":"What kinds of jobs are available?",
+      "answer4":"We offer a variety of jobs, including positions in food service, agriculture, construction, nursing care, and more.",
+      "question5":"Can I change jobs with my current visa?",
+      "answer5":"Yes, as long as it is within the scope of your current residence status.",
+      "question6":"Can you support me with a visa change?",
+      "answer6":"Yes. We will provide guidance in cooperation with supervisory organizations and registered support organizations.",
+      "question7":"Are the companies reliable?",
+      "answer7":"Yes. All registered companies are verified and reviewed before their job listings are published.",
+      "question8":"What happens after I apply?",
+      "answer8":"Our management team will contact you after your application.",
+
+      "question9":"Are interviews conducted online?",
+      "answer9":"It depends on the company.",
+
+      "question10":"Is my personal information safe?",
+      "answer10":"Yes. Your personal information is properly managed and will not be provided to third parties without your consent."
     },
-    "isItFree": {
-      "question": "Is Job Support free to use?",
-      "answer": "Yes! Job Support offers a free plan for job seekers to create profiles, search for jobs, and apply to opportunities. Employers can also post jobs and access basic features for free. Premium plans with advanced features are available for both job seekers and employers."
+    "employer": {
+      "forEmployer": "For Companies",
+      "question1": "Can we use the service even if it is our first time hiring foreign workers?",
+      "answer1":"Yes, you can use our service even if you are hiring foreign workers for the first time. ",
+      "question2":"What types of residence statuses are eligible?",
+      "answer2":"We mainly support Specified Skilled Worker (SSW) visa holders, as well as foreign workers who are eligible to work within the scope of their residence status.",
+      "question3":"Can we collaborate with supervisory organizations or registered support organizations?",
+      "answer3":"Yes. We can assist with building a support system and consulting on partnerships with relevant organizations.",
+      "question4":"What is the process for posting a job listing?",
+      "answer4":"After company registration, you enter the job details → our team reviews the content → the job posting goes live.",
+      "question5":"Are there any fees?",
+      "answer5":"Job posting is completely free of charge.",
+      "question6":"How are interviews conducted?",
+      "answer6":"Interviews can be arranged according to your preference, including in-person or online formats.",
+      "question7":"Is personal information managed securely?",
+      "answer7":"Yes. We handle all information securely under an appropriate management system.",
+      "question8":"What industries are supported?",
+      "answer8":"We mainly support industries under the Specified Skilled Worker categories, such as food service, agriculture, construction, nursing care, and more.",
+      "question9":"How can we check applicant information?",
+      "answer9":"Our management team will share application status and resume information with your company."
     },
-    "howToApply": {
-      "question": "How do I apply for a job?",
-      "answer": "Simply create a profile, search for jobs that match your skills and preferences, and click the 'Apply' button on any job listing. You can track your applications and receive updates directly through the platform."
-    },
-    "howToPostJobs": {
-      "question": "How can employers post jobs?",
-      "answer": "Employers can sign up, create a company profile, and start posting job listings in just a few clicks. Our intuitive tools make it easy to attract and manage candidates."
+    "supervisory": {
+      "forSupervisory": "For Supervisory Organizations / Registered Support Organizations",
+      "question1":"Can supervisory organizations and registered support organizations register on the platform?",
+      "answer1":"Yes. You can register your organization’s information and set the job categories, nationalities, and regions you are able to support.",
+      "question2":"Can we register the job categories, nationalities, and regions we can support?",
+      "answer2":"Yes. You can select multiple job categories, nationalities, and regions that your organization can handle.",
+      "question3":"How are communications with job seekers and host companies handled?",
+      "answer3":"After an application is submitted, our management team will generally act as an intermediary to support communication and schedule coordination.",
+      "question4":"Can we register if we have multiple branches?",
+      "answer4":"Yes, registration is possible even if your organization has multiple branches.",
+      "question5":"Can we update our registration information?",
+      "answer5":"Yes. You can edit your information at any time from your My Page."
     }
   }
 }
