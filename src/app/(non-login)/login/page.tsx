@@ -9,6 +9,7 @@ import {
   showWarningToast,
 } from "@/app/(util)/toaster";
 import { useTranslations } from "next-intl";
+import ForgotPassword from "./forgotPassword";
 
 export default function Login() {
   const t = useTranslations("loginPage");
@@ -19,6 +20,16 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fadeIn, setFadeIn] = useState(false);
+  const [forgotPasswordModal, setForgotPasswordModal] = useState(false);
+
+
+  const forgotPassword = () => {
+    setForgotPasswordModal(true);
+  }
+
+  const closeForgotPassword = () => {
+    setForgotPasswordModal(false);
+  }
 
   useEffect(() => {
     setFadeIn(true);
@@ -128,10 +139,13 @@ export default function Login() {
           </button>
 
           <div className="text-center">
-            <span className="text-primary cursor-pointer">{t('form.forgotPassword')}</span>
+            <span onClick={forgotPassword} className="text-primary cursor-pointer">{t('form.forgotPassword')}</span>
           </div>
         </div>
       </div>
+
+
+      <ForgotPassword handleShow={forgotPasswordModal} handleClose={closeForgotPassword} />
     </div>
   );
 }

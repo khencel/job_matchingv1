@@ -89,6 +89,8 @@ import jobListFilter from "./jobListFilter.json";
 import registrationEmployerPage from "./registrationEmployerPage.json";
 import registrationJobSeekerPage from "./registrationJobSeekerPage.json";
 import registerPage from "./registerPage.json";
+import forgotPassword from "./forgotPassword.json";
+
 
 export default {
   // Spread common/auth translations into root
@@ -178,4 +180,5 @@ export default {
   registrationEmployerPage,
   registrationJobSeekerPage,
   registerPage,
+  forgotPassword,
 };

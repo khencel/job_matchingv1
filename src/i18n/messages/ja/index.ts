@@ -89,6 +89,9 @@ import jobListFilter from "./jobListFilter.json";
 import registrationEmployerPage from "./registrationEmployerPage.json";
 import registrationJobSeekerPage from "./registrationJobSeekerPage.json";
 import registerPage from "./registerPage.json";
+import forgotPassword from "./forgotPassword.json";
+
+
 
 export default {
   // 共通/認証翻訳をルートに展開
@@ -178,4 +181,5 @@ export default {
   registrationEmployerPage,
   registrationJobSeekerPage,
   registerPage,
+  forgotPassword
 };
