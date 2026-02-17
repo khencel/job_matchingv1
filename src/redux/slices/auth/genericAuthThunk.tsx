@@ -12,3 +12,15 @@ export const forgotPassword = createAsyncThunk(
         }
     }
 );
+
+export const resetPassword = createAsyncThunk(
+    "auth/resetPassword",
+    async (data:any, { rejectWithValue }) => {
+        try {
+            const res = await standard_post_api('/api/auth/reset-password/',data);
+            return res.data;
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    }
+)
