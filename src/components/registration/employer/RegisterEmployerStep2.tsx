@@ -518,13 +518,13 @@ export default function RegisterEmployerStep2() {
           <Form.Label>{t("labels.appealPoints")}</Form.Label>
           <Form.Control
             required
-            type="number"
+            type="text"
             name="appeal_point"
             placeholder={t("placeholders.enterAppealPoints")}
             value={data.appeal_point}
             onChange={handleChange}
             onFocus={(e) => e.target.select()}
-            isInvalid={error.appeal_point || data.appeal_point < 0}
+            isInvalid={error.appeal_point}
           />
           <Form.Control.Feedback type="invalid">
             {t("errors.fillRequired")}

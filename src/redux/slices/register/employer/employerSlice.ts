@@ -9,7 +9,7 @@ import { RegistrationStep1 } from "@/types/user-register";
 import { registerThunk } from "../registerThunk";
 
 const initialState: RegisterEmployer = {
-  currentStep: 1,
+  currentStep: 2,
   registerEmployerData: {
     accountInfo: {
       email: "",
@@ -23,7 +23,7 @@ const initialState: RegisterEmployer = {
       region: "",
       no_of_emp: 0,
       branch_office: [],
-      appeal_point: 0,
+      appeal_point: "",
       founded: 0,
       profile: "",
     },

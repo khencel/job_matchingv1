@@ -8,7 +8,7 @@ export interface RegisterEmployerStep2Data {
   founded: number;
   profile: string;
   no_of_emp: number;
-  appeal_point: number;
+  appeal_point: string;
   branch_office: string[];
   company_industry: string[];
 }
