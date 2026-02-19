@@ -195,7 +195,8 @@ export default function RegistrationEmployer() {
             <div className="grid-reg">
               <div className="field-reg">
                 <label>
-                  {t("labels.companyName")} <span className="text-danger">*</span>
+                  {t("labels.companyName")}{" "}
+                  <span className="text-danger">*</span>
                 </label>
                 <input
                   name="company_name"
@@ -204,13 +205,16 @@ export default function RegistrationEmployer() {
                   onChange={handleChange}
                 />
                 {errors.company_name && (
-                  <small className="text-danger">{resolveError(errors.company_name)}</small>
+                  <small className="text-danger">
+                    {resolveError(errors.company_name)}
+                  </small>
                 )}
               </div>
 
               <div className="field-reg">
                 <label>
-                  {t("labels.prefecture")} <span className="text-danger">*</span>
+                  {t("labels.prefecture")}{" "}
+                  <span className="text-danger">*</span>
                 </label>
                 <select
                   name="company_pref"
@@ -225,13 +229,16 @@ export default function RegistrationEmployer() {
                   ))}
                 </select>
                 {errors.company_pref && (
-                  <small className="text-danger">{resolveError(errors.company_pref)}</small>
+                  <small className="text-danger">
+                    {resolveError(errors.company_pref)}
+                  </small>
                 )}
               </div>
 
               <div className="field-reg">
                 <label>
-                  {t("labels.contactName")} <span className="text-danger">*</span>
+                  {t("labels.contactName")}{" "}
+                  <span className="text-danger">*</span>
                 </label>
                 <input
                   name="contact_name"
@@ -240,7 +247,9 @@ export default function RegistrationEmployer() {
                   onChange={handleChange}
                 />
                 {errors.contact_name && (
-                  <small className="text-danger">{resolveError(errors.contact_name)}</small>
+                  <small className="text-danger">
+                    {resolveError(errors.contact_name)}
+                  </small>
                 )}
               </div>
 
@@ -265,7 +274,9 @@ export default function RegistrationEmployer() {
                   onChange={handleChange}
                 />
                 {errors.phone && (
-                  <small className="text-danger">{resolveError(errors.phone)}</small>
+                  <small className="text-danger">
+                    {resolveError(errors.phone)}
+                  </small>
                 )}
               </div>
 
@@ -281,7 +292,9 @@ export default function RegistrationEmployer() {
                   onChange={handleChange}
                 />
                 {errors.email && (
-                  <small className="text-danger">{resolveError(errors.email)}</small>
+                  <small className="text-danger">
+                    {resolveError(errors.email)}
+                  </small>
                 )}
               </div>
 
@@ -354,7 +367,9 @@ export default function RegistrationEmployer() {
                   <span>{t("needsOptions.consult")}</span>
                 </label>
                 {errors.needs && (
-                  <small className="text-danger">{resolveError(errors.needs)}</small>
+                  <small className="text-danger">
+                    {resolveError(errors.needs)}
+                  </small>
                 )}
               </div>
 
@@ -373,7 +388,9 @@ export default function RegistrationEmployer() {
                   onChange={handleChange}
                 />
                 {errors.role && (
-                  <small className="text-danger">{resolveError(errors.role)}</small>
+                  <small className="text-danger">
+                    {resolveError(errors.role)}
+                  </small>
                 )}
               </div>
 
@@ -411,7 +428,9 @@ export default function RegistrationEmployer() {
                   <option>{t("headcountOptions.tenPlus")}</option>
                 </select>
                 {errors.head_count && (
-                  <small className="text-danger">{resolveError(errors.head_count)}</small>
+                  <small className="text-danger">
+                    {resolveError(errors.head_count)}
+                  </small>
                 )}
               </div>
 
@@ -555,20 +574,6 @@ export default function RegistrationEmployer() {
                   <option>{t("interviewOptions.either")}</option>
                 </select>
               </div>
-
-              <div className="field-reg">
-                <label>{t("labels.acceptConfirm")}</label>
-                <select
-                  name="accept_confirm"
-                  value={form.accept_confirm}
-                  onChange={handleChange}
-                >
-                  <option value="">{t("selectPlaceholder")}</option>
-                  <option>{t("acceptOptions.maybe")}</option>
-                  <option>{t("acceptOptions.consult")}</option>
-                </select>
-                <div className="hint">{t("acceptHint")}</div>
-              </div>
             </div>
 
             <div className="field-reg" style={{ marginTop: "12px" }}>
@@ -621,10 +626,7 @@ export default function RegistrationEmployer() {
             </div>
 
             <div className="actions text-end mt-5" id="pdfButtons">
-              <button
-                className="btn btn-default-custom me-1"
-                type="button"
-              >
+              <button className="btn btn-default-custom me-1" type="button">
                 {t("buttons.clear")}
               </button>
               <button className="btn btn-primary-custom" onClick={handleSubmit}>
