@@ -91,7 +91,7 @@ export default function NavbarAuth() {
           {/* Logo on the left */}
           <a className="navbar-brand d-flex align-items-center" href="#">
             <img
-              src="/img/logo.png"
+              src="/img/logo-latest.png"
               alt={t("logoAlt")}
               style={{ height: "70px", width: "auto", objectFit: "contain"}}
             />

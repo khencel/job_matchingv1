@@ -78,7 +78,7 @@ export default function Login() {
       <div className="left-side d-flex flex-column align-items-center justify-content-center position-relative text-center">
         <img
           onClick={() => router.push("/")}
-          src="/img/logo.png"
+          src="/img/logo-latest.png"
           alt="Logo"
           style={{width:"40%"}}
           className={`logo ${fadeIn ? "animate-logo" : ""}`}

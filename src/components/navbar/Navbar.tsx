@@ -61,7 +61,7 @@ export default function Navbar() {
         {/* LOGO */}
         <Link className="navbar-brand d-flex align-items-center gap-2" href="/">
           <img
-            src="/img/logo.png"
+            src="/img/logo-latest.png"
             style={{ maxWidth: "180px", height: "auto" }}
             alt={t("logoAlt")}
           />
