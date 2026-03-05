@@ -139,6 +139,7 @@ export default function JobListing() {
                                 <thead>
                                     <tr>
                                         <th>{t("table.status")}</th>
+                                        <th>Company</th>
                                         <th>{t("table.role")}</th>
                                         <th>{t("table.datePosted")}</th>
                                         <th>{t("table.salary")}</th>
@@ -154,6 +155,7 @@ export default function JobListing() {
                                                 {item.is_active ? t("statusToggle.enable") : t("statusToggle.disable")}
                         
                                             </td>
+                                            <td>{item.company_details?.information.company_information?.name}</td>
                                             <td>{item.title}</td>
                                             <td>{formatDate(item.created_at)}</td>
                                             <td>${item.salary.toLocaleString()}</td>

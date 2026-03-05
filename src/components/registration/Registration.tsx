@@ -18,8 +18,8 @@ export default function Registration() {
       </h2>
       <div className="row g-4 justify-content-center">
         <div className="col-12 col-sm-6 col-lg-4">
-          <div className="card shadow p-4 text-center h-100 ">
-            <p className="mb-3">{t("cards.jobSeeker.description")}</p>
+          <div className=" p-4 text-center h-100 ">
+            {/* <p className="mb-3">{t("cards.jobSeeker.description")}</p> */}
             <RegistrationButton
               id="jobSeeker"
               buttonTextKey="buttons.registerJobSeeker"
@@ -28,8 +28,8 @@ export default function Registration() {
         </div>
 
         <div className="col-12 col-sm-6 col-lg-4">
-          <div className="card shadow p-4 text-center h-100">
-            <p className="mb-3">{t("cards.employer.description")}</p>
+          <div className=" p-4 text-center h-100">
+            {/* <p className="mb-3">{t("cards.employer.description")}</p> */}
   
             <RegistrationButton
               id="employer"
@@ -39,8 +39,8 @@ export default function Registration() {
         </div>
 
         <div className="col-12 col-sm-6 col-lg-4">
-          <div className="card shadow p-4 text-center h-100">
-            <p className="mb-3">{t("cards.supervisory.description")}</p>
+          <div className=" p-4 text-center h-100">
+            {/* <p className="mb-3">{t("cards.supervisory.description")}</p> */}
             <RegistrationButton
               id="superVisory"
               buttonTextKey="buttons.registerSupervisory"

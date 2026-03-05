@@ -2,7 +2,7 @@
 import Header from "../headerPostAJob"
 import MultiSelectDropdown from "@/components/MultipleSelect"
 import { useState, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import type { RootState } from '@/redux/store'
 import { setField, addSkill, removeSkill, setInitialData } from "@/redux/slices/employer/post_a_job/basicInfoSlice"
 import { showErrorToast } from "@/app/(util)/toaster";
@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation"
 import Cookies from "js-cookie";
 import { regionList } from "@/components/listGroupData"
 import { useTranslations } from "next-intl"
+import { useAppSelector, useAppDispatch } from "@/redux/hooks"
+import { indexCompany } from "@/redux/slices/employer/company/companyThunk";
 
 export default function PostAJob() {
   const [mounted, setMounted] = useState(false);
@@ -17,9 +19,11 @@ export default function PostAJob() {
   const router = useRouter();
   const t = useTranslations("employerJobInformation");
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const basicInfo = useSelector((state: RootState) => state.basicInfo);
 
+  const { companies } = useAppSelector((state) => state.companySlice);
+  
   const handleAddSkill = () => {
     const value = input.trim();
     if (value) {
@@ -56,8 +60,15 @@ export default function PostAJob() {
     dispatch(setField({ type_of_emp: updatedTypes }));
   }
 
+  const selectedCompany = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedCompanyId = e.target.value;
+    dispatch(setField({ company: Number(selectedCompanyId) }));
+    dispatch(setField({ company_name: (companies || []).find(c => c.id === Number(selectedCompanyId))?.information?.company_information?.name || "" }));
+  }
+
   useEffect(() => {
     setMounted(true);
+    dispatch(indexCompany({ page: 1, pageSize: 100 }));
   }, []);
 
   if (!mounted) return null;
@@ -88,6 +99,28 @@ export default function PostAJob() {
           {/* Card wrapper */}
           <div className="card border-0 shadow-sm rounded-4">
             <div className="card-body p-4 p-md-5">
+
+              <div className="row g-3 align-items-start mb-4">
+                <div className="col-12 col-md-4">
+                  <label className="form-label fw-semibold mb-1">
+                    Company <span className="text-danger">*</span>
+                  </label>
+                  <div className="text-muted small">
+                    The company associated with this job posting. You can manage your company information in the Company Profile section.
+                  </div>
+                </div>
+                <div className="col-12 col-md-8">
+                  <select name="" id="" className="form-select rounded-3" value={basicInfo.company || ""} onChange={(e) => selectedCompany(e)}>
+                    <option value="" disabled>Select a company</option>
+                    {(companies || []).map((company) => (
+                      <option key={company.id} value={company.id}>
+                        {company?.information?.company_information?.name}
+                      </option>
+                    ))}
+                  </select>
+                  
+                </div>
+              </div>
 
               {/* Job title */}
               <div className="row g-3 align-items-start mb-4">

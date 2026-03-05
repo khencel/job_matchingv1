@@ -51,7 +51,7 @@ const JobCard = ({ job, onClick, className }: JobCardProps) => {
       tabIndex={onClick ? 0 : undefined}
     >
       <img
-        src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}media/${job?.employer[0].avatar || 'placeholder.jpg'}`}
+        src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}${(job?.company_details as any)?.avatar || 'placeholder.jpg'}`}
         className="card-img-top"
         alt="Person working on laptop"
         style={{ height: "250px", objectFit: "cover" }}

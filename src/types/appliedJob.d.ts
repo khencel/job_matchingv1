@@ -52,6 +52,7 @@ export interface JobPostDetails {
     avatar: string;
     userDetails_emp: RegisterEmployerData;
   }>;
+  company_details:{}
 }
 
 export interface JobPost {

@@ -1,7 +1,7 @@
 "use client";
 
 import FormattedDate from "@/components/date_format";
-import EditModalProfile from "../company/profile/editModal";
+import EditModalProfile from "./editModal";
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 
@@ -11,25 +11,28 @@ export default function Header({ data }: { data: any }) {
 
   const handleEditModal = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
-
-  const companyInfo = data.userDetails_emp?.company_information || {};
-
-  console.log(companyInfo.company_industry);
-
-  // ✅ design-safe display only (no functional removal)
+  
   const industryText = useMemo(() => {
-    const v = companyInfo?.company_industry;
+    const v = data?.industry;
     if (!v) return t("fallback.notSpecified");
     if (Array.isArray(v)) return v.join(", ");
     return String(v);
-  }, [companyInfo?.company_industry, t]);
+  }, [data?.industry, t]);
+
+  if (!data) {
+    return (
+      <div className="rounded-4 p-4 bg-white border">
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <>
       <div
         className="position-relative overflow-hidden rounded-4 shadow-sm"
         style={{
-          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.55), rgba(255, 255, 255, 0.92)), url(${data.banner})`,
+          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.55), rgba(255, 255, 255, 0.92)), url(${data?.banner})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
@@ -60,7 +63,7 @@ export default function Header({ data }: { data: any }) {
               >
                 <img
                   src={
-                    data.avatar ||
+                    data?.avatar ||
                     `${process.env.NEXT_PUBLIC_API_CONTENT_URL}media/placeholder.jpg`
                   }
                   alt=""
@@ -85,13 +88,13 @@ export default function Header({ data }: { data: any }) {
                       backdropFilter: "blur(6px)",
                     }}
                   >
-                    {companyInfo?.region || t("fallback.noLocation")}
+                    {/* {data?.region || t("fallback.noLocation")} */}
                   </span>
                 </div>
 
                 <div className="mt-2">
                   <div className="fw-semibold" style={{ color: "#0b5ed7" }}>
-                    {companyInfo?.name || t("fallback.notSpecified")}
+                    {data?.name || t("fallback.notSpecified")}
                   </div>
                   <div className="small text-muted">{data.email || t("fallback.notSpecified")}</div>
                 </div>
@@ -122,21 +125,21 @@ export default function Header({ data }: { data: any }) {
               <div className="col-6 col-lg-3">
                 <div className="small text-muted">{t("stats.founded")}</div>
                 <div className="fw-semibold text-dark">
-                  <FormattedDate date={companyInfo.founded} />
+                  {data.founded}
                 </div>
               </div>
 
               <div className="col-6 col-lg-3">
                 <div className="small text-muted">{t("stats.employees")}</div>
                 <div className="fw-semibold text-dark">
-                  {companyInfo.no_of_emp || t("fallback.notSpecified")}
+                  {data.no_of_emp || t("fallback.notSpecified")}
                 </div>
               </div>
 
               <div className="col-6 col-lg-3">
                 <div className="small text-muted">{t("stats.location")}</div>
                 <div className="fw-semibold text-dark">
-                  {companyInfo.region || t("fallback.notSpecified")}
+                  {data?.region || t("fallback.notSpecified")}
                 </div>
               </div>
 

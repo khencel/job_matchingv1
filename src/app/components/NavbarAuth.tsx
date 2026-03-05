@@ -170,11 +170,11 @@ export default function NavbarAuth() {
                       {t("changePassword")}
                     </button>
                   </li>
-                  <li>
+                  {/* <li>
                     <a className="dropdown-item" href="#">
                       {t("profile")}
                     </a>
-                  </li>
+                  </li> */}
                   <li>
                     <hr className="dropdown-divider" />
                   </li>

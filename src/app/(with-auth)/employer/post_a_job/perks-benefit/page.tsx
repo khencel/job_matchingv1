@@ -52,14 +52,12 @@ export default function PerksBenefitPage() {
   }
 
   const data = jobData ? JSON.parse(jobData) : null;
-  console.log(data);
   
 
   useEffect(() => {
       const initialData = localStorage.getItem('initialData');
       setJobData(initialData)
-      console.log('LocalStorage initialData:', initialData);
-      
+
   },[])
 
   return (
@@ -78,6 +76,14 @@ export default function PerksBenefitPage() {
               </div>
               <div className="col">
                   <div className="row">
+
+                    <div className="col-3">
+                      <strong>Company</strong>
+                    </div>
+                    <div className="col-9">
+                      {data?.company_name}
+                    </div>
+
                     <div className="col-3">
                       <strong>{t("fields.title")}</strong>
                     </div>

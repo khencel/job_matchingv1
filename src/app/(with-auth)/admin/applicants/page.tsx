@@ -32,6 +32,9 @@ export default function AdminApplicants() {
     const [showEmployer, setShowEmployer] = useState(false);
     const [showApplicant, setShowApplicant] = useState(false);
 
+    console.log(items);
+    
+
     const [selectedEmployer, setSelectedEmployer] = useState<any>(null);
     const [selectedApplicant, setSelectedApplicant] = useState<any>(null);
 
@@ -248,7 +251,7 @@ export default function AdminApplicants() {
                                                 <td className="text-start p-2"><FormattedDate date={item.created_at} /></td>
                                                 <td className="text-start p-2">{item.user.userDetails.age}</td>
                                                 <td className="text-start p-2">{item.job_post.jobPostDetails?.title}</td>
-                                                <td className="text-start p-2">{item.job_post.employerDetails.userDetails_emp.company_information.name}</td>
+                                                <td className="text-start p-2">{item.job_post.jobPostDetails.company_details.information.company_information.name}</td>
                                                 <td className="text-start p-2">
                                                     <div className="dropdown">
                                                         <button

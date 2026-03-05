@@ -842,6 +842,16 @@
 }
 
 
+.edit_profile_modal .modal-content {
+  border-radius: 18px;
+}
+.edit_profile_modal .btn-link {
+  text-decoration: none;
+}
+.edit_profile_modal .btn-link:hover {
+  text-decoration: underline;
+}
+
 
 
 

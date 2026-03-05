@@ -77,7 +77,10 @@ export default function AdminUsers() {
                 <h5><strong><BiArrowBack /> {t("users.title")}</strong></h5>
             </div>
             <div className="col text-end">
-                <span>{t("users.period")} <FaCalendarCheck className="text-primary" /></span>
+                {/* <span>{t("users.period")} <FaCalendarCheck className="text-primary" /></span> */}
+                <button className="btn btn-primary" onClick={() => {}}>
+                    Add User
+                </button>
             </div>
         </div>
 
@@ -86,9 +89,10 @@ export default function AdminUsers() {
                 <strong>{t("users.listTitle", { count })}</strong>
             </div>
             <div className="col-2 text-end">
-                <FaSearch className="text-primary" /> {t("users.searchPlaceholder")}
+                {/* <FaSearch className="text-primary" /> {t("users.searchPlaceholder")} */}
+                
             </div>
-            <div className="col-2 text-end">
+            <div className="col-1 text-end">
                 <button
                 className="btn btn-link dropdown-toggle text-primary"
                 type="button"
@@ -144,7 +148,7 @@ export default function AdminUsers() {
                                         name = item?.userDetails_job_seeker?.jobSeekerData?.firstName + " " + item?.userDetails_job_seeker?.jobSeekerData?.lastName
                                     }
                                     if(item.role === "employer"){
-                                        name = item?.userDetails_emp?.company_information?.name
+                                        name = item?.userDetails_emp?.contact_person?.name
                                     }
                                     if(item.role === "supervisory"){
                                         name = item?.userDetails_supervisory?.companyInfo?.companyName

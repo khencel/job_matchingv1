@@ -28,7 +28,7 @@ const Sidebar = ({ children }: PropsWithChildren) => {
     { label: t("menuItems.userManagement"), icon: FaUser, href: "/admin/users" },
     // { label: "Employer List", icon: FaClipboardList, href: "/admin/applicants" },
     { label: t("menuItems.applicants"), icon: FaPlus, href: "/admin/applicants" },
-    { label: t("menuItems.settings"), icon: FaBuilding, href: "/admin/job_listing" },
+    // { label: t("menuItems.settings"), icon: FaBuilding, href: "/admin/job_listing" },
   ];
 
   return (

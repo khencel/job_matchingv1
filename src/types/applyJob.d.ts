@@ -25,6 +25,7 @@ export interface JobPosting {
   nice_to_have: string;
   benefits: string[];
   created_at: string;
+  company_details: {}
 }
 
 export interface JobPostById {

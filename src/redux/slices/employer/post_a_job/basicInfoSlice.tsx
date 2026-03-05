@@ -21,6 +21,8 @@ export interface PostBasicInfoState {
     status?: "idle" | "loading" | "succeeded" | "failed";
     benefits: Benefit[];
     region?: string;
+    company?: number;
+    company_name?: string;
 }
 
 const initialState: PostBasicInfoState = {
@@ -35,7 +37,9 @@ const initialState: PostBasicInfoState = {
     nice_to_have: "",
     status: "idle",
     benefits:[],
-    region: ""
+    region: "",
+    company: undefined,
+    company_name: ""
 };
 
 export interface UpdateJobPostPayload {

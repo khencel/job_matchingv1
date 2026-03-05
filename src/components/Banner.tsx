@@ -10,12 +10,13 @@ export default function Banner() {
   const t = useTranslations("banner");
   const tExtended = useTranslations("bannerExtended");
   const router = useRouter();
+
+  console.log(jobPostings);
+  
   useEffect(() => {
     async function fetchJobDetails() {
       const res = await getJobPostings();
       setJobPostings(res.data);
-      console.log(res.data);
-      
     }
     fetchJobDetails();
   }, []);
@@ -74,8 +75,8 @@ export default function Banner() {
                 <div className="job-img">
                   <img 
                         src={
-                          job?.employer?.[0]?.avatar
-                            ? `${process.env.NEXT_PUBLIC_API_CONTENT_URL}media/${job.employer[0].avatar}`
+                          (job?.company_details as any)?.avatar
+                            ? `${process.env.NEXT_PUBLIC_API_CONTENT_URL}${(job?.company_details as any)?.avatar}`
                             : `${process.env.NEXT_PUBLIC_API_CONTENT_URL}media/placeholder.jpg`
                         }
                         alt={tExtended("ariaLabels.companyImage")}
@@ -84,7 +85,7 @@ export default function Banner() {
                 </div>
                 <div className="job-body">
                   <div className="job-top">
-                    <div className="job-company">{job?.employer?.[0]?.userDetails_emp?.company_information?.name}</div>
+                    <div className="job-company">{(job?.company_details as any)?.information.company_information.name}</div>
                     <div className="job-date">
                       {t("job.updated", { date: t("job.updatedFallback") })}
                     </div>

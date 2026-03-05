@@ -102,12 +102,12 @@ const JobDescriptionPage = () => {
 
   const isApplied = false; // Placeholder: Replace with actual logic to check if the user has applied
 
-  const bannerUrl = jobDetails?.employer?.[0]?.banner
-    ? `${process.env.NEXT_PUBLIC_API_CONTENT_URL}media/${jobDetails.employer[0].banner}`
+  const bannerUrl = (jobDetails?.company_details as any)?.banner
+    ? `${process.env.NEXT_PUBLIC_API_CONTENT_URL}${(jobDetails?.company_details as any)?.banner}`
     : "";
 
-  const avatarUrl = jobDetails?.employer?.[0]?.avatar
-    ? `${process.env.NEXT_PUBLIC_API_CONTENT_URL}media/${jobDetails.employer[0].avatar}`
+  const avatarUrl = (jobDetails?.company_details as any)?.avatar
+    ? `${process.env.NEXT_PUBLIC_API_CONTENT_URL}${(jobDetails?.company_details as any)?.avatar}`
     : "";
 
   return (
@@ -337,7 +337,7 @@ const JobDescriptionPage = () => {
         </Row>
 
         {/* Perks & Benefits */}
-        {jobDetails.benefits.length < 1 ? null : (
+        {(jobDetails?.company_details as any)?.benefits.length < 1 ? null : (
           <>
             <hr className="my-5" />
             <Card className="border-0 shadow-sm rounded-4">
@@ -345,13 +345,13 @@ const JobDescriptionPage = () => {
                 <h4 className="mb-4">{t("headings.perksAndBenefits")}</h4>
 
                 <Row className="g-3">
-                  {jobDetails.benefits.map((item, idx) => (
+                  {(jobDetails?.company_details as any)?.benefits.map((item: any, idx: number) => (
                     <Col key={idx} md={6} lg={4}>
                       <div className="p-3 border rounded-4 h-100 bg-white">
-                        <div className="fw-semibold text-dark mb-1">{item}</div>
+                        <div className="fw-semibold text-dark mb-1">{item['name']}</div>
                         <div className="text-muted small">
                           {/* placeholder description UI only; replace if you store descriptions */}
-                          {tExtended("perksDescription")}
+                          {item['description']}
                         </div>
                       </div>
                     </Col>

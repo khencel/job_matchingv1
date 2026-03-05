@@ -246,9 +246,9 @@ const FindJobPage = () => {
                         <div className="job-img-modern">
                           <img
                             src={
-                              job?.employer?.[0]?.avatar
-                                ? `${process.env.NEXT_PUBLIC_API_CONTENT_URL}/media/${job.employer[0].avatar}`
-                                : `${process.env.NEXT_PUBLIC_API_CONTENT_URL}/media/placeholder.jpg`
+                              (job?.company_details as any)?.avatar
+                                ? `${process.env.NEXT_PUBLIC_API_CONTENT_URL}${(job?.company_details as any)?.avatar}`
+                                : `${process.env.NEXT_PUBLIC_API_CONTENT_URL}media/placeholder.jpg`
                             }
                             className="img-fluid"
                             alt="Company Avatar"
@@ -258,10 +258,10 @@ const FindJobPage = () => {
 
                         <div className="p-3 d-flex flex-column gap-2">
                           <div className="d-flex justify-content-between align-items-start gap-2">
-                            <div className="text-muted small text-truncate" title={job?.employer?.[0]?.userDetails_emp?.company_information?.name}>
-                              {job?.employer?.[0]?.userDetails_emp?.company_information?.name}
+                            <div className="text-muted small text-truncate" title={ (job?.company_details as any)?.information.company_information.name }>
+                              { (job?.company_details as any)?.information.company_information.name }
                             </div>
-                            <div className="text-muted small">{t('results.jobCard.updated')} 2/2</div>
+                            {/* <div className="text-muted small">{t('results.jobCard.updated')} 2/2</div> */}
                           </div>
 
                           <div className="fw-bold text-dark" style={{ lineHeight: 1.25 }}>

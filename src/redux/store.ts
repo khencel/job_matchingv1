@@ -20,6 +20,7 @@ import jobPostByIdSlice from "./slices/jobs/jobPostByIdSlice";
 import employerRegistrationSlice from "./slices/employer/registration/employerRegistrationSlice";
 import approachJobSeekerSlice from "./slices/approachJobSeekerSlice";
 import jobSearchFilterSlice from "./slices/filterJobPost/filterJobPostSlice";
+import companySlice from "./slices/employer/company/companySlice";
 
 
 export const makeStore = () => {
@@ -46,6 +47,7 @@ export const makeStore = () => {
       employerRegistration: employerRegistrationSlice,
       approachJobSeeker: approachJobSeekerSlice,
       jobSearchFilterSlice: jobSearchFilterSlice,
+      companySlice: companySlice,
     },
   });
 };
