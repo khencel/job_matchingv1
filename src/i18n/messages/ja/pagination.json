@@ -1,0 +1,8 @@
+{
+  "pagination": {
+    "itemsPerPage": "1ページあたりの表示件数:",
+    "showing": "{total} 件中 {start} - {end} を表示",
+    "previous": "前へ",
+    "next": "次へ"
+  }
+}

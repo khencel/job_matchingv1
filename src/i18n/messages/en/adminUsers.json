@@ -42,6 +42,35 @@
       "showing": "Showing {start} to {end} of {total}",
       "previous": "Previous",
       "next": "Next"
+    },
+    "manageCompany":"Manage Companies",
+    "managePerksBenefits":"Manage Perks & Benefits",
+    "addUser":"Add User",
+    "noCompanyFound":"No Company Found.",
+    "comapany-user":{
+      "listModal":{
+        "header":"Company List",
+        "addButton":"Add Company",
+        "cancel":"Cancel",
+        "create":"Create"
+      },
+      "listTable":{
+        "companyName":"Company Name",
+        "jobPosting":"Job Posting",
+        "region":"Region",
+        "contact":"Contact #",
+        "address":"Address",
+        "action":"Action",
+        "edit":"Edit",
+        "delete":"Delete"
+      }
+    },
+
+    "handleDelete":{
+        "title":"Delete Perks & Benefits",
+        "text":"Are you sure you want to delete this Perks & Benefits",
+        "toastTitle":"Delete Perks & Benefits",
+        "toastDesc":"Perks & Benefits deleted successfully"
     }
   }
 }

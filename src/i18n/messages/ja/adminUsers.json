@@ -1,19 +1,19 @@
 {
   "overview": {
-    "title": "管理者概要",
-    "description": "管理者概要ページへようこそ。"
+    "title": "管理者ダッシュボード",
+    "description": "管理者ダッシュボードへようこそ。"
   },
   "users": {
     "title": "ユーザー一覧",
     "period": "2025年11月 - 12月",
-    "listTitle": "ユーザーリスト（合計{count}名）",
+    "listTitle": "ユーザー一覧（合計 {count} 人）",
     "searchPlaceholder": "ユーザーを検索",
     "filterButton": "フィルター",
     "filters": {
       "all": "すべて",
       "jobSeeker": "求職者",
-      "employer": "雇用主",
-      "supervisory": "監督者"
+      "employer": "企業",
+      "supervisory": "管理者"
     },
     "table": {
       "name": "名前",
@@ -30,18 +30,40 @@
       "deactivate": "無効化"
     },
     "toast": {
-      "title": "ステータスを更新",
-      "message": "ユーザーステータスが更新されました"
+      "title": "ステータス更新",
+      "message": "ユーザーのステータスが正常に更新されました。"
     },
     "modal": {
-      "title": "ステータスを変更",
+      "title": "ステータス変更",
       "message": "ステータスを変更してもよろしいですか？"
     },
     "pagination": {
-      "itemsPerPage": "ページあたりの項目数：",
-      "showing": "{start}から{end}を表示（合計{total}件）",
+      "itemsPerPage": "1ページあたりの表示件数:",
+      "showing": "{total} 件中 {start} - {end} を表示",
       "previous": "前へ",
       "next": "次へ"
+    },
+    "manageCompany": "会社管理",
+    "managePerksBenefits": "福利厚生管理",
+    "addUser": "ユーザー追加",
+    "noCompanyFound": "会社が見つかりません。",
+    "comapany-user": {
+      "listModal": {
+        "header": "会社一覧",
+        "addButton": "会社を追加",
+        "cancel": "キャンセル",
+        "create": "作成"
+      },
+      "listTable": {
+        "companyName": "会社名",
+        "jobPosting": "求人投稿",
+        "region": "地域",
+        "contact": "連絡先番号",
+        "address": "住所",
+        "action": "操作",
+        "edit": "編集",
+        "delete": "削除"
+      }
     }
   }
 }

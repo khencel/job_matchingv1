@@ -11,6 +11,7 @@ import { setPage, setPageSize } from '@/redux/slices/employer/company/companySli
 import { popup } from '@/helper/pop_up';
 import { showSuccessToast } from '@/app/(util)/toaster';
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface CompanyListProps {
     handleShow: boolean;
@@ -19,6 +20,7 @@ interface CompanyListProps {
 }
 
 export default function CompanyList({ handleShow, handleClose, userID }: CompanyListProps) {
+    const t = useTranslations("adminUsers");
     const { companies, count, pageSize, currentPage} = useAppSelector((state) => state.companySlice);
     const router = useRouter(); 
     const dispatch = useAppDispatch();
@@ -73,24 +75,24 @@ export default function CompanyList({ handleShow, handleClose, userID }: Company
         <>
             <Modal size='xl' show={handleShow} onHide={handleClose}>
                 <Modal.Header closeButton>
-                <Modal.Title>Company List</Modal.Title>
+                <Modal.Title>{t("users.comapany-user.listModal.header")}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="row">
                         <div className="col-12 justify-content-end d-flex mb-3">
-                            <button className="btn btn-primary-custom rounded-3 " onClick={handleAddCompanyModal}>Add Company</button>
+                            <button className="btn btn-primary-custom rounded-3 " onClick={handleAddCompanyModal}>{t("users.comapany-user.listModal.addButton")}</button>
                         </div>
                         <div className="col-12 mt-2">
                             <table className='table table-hover'>
                                 <thead>
                                     <tr>   
                                         <th>#</th>
-                                        <th>Company Name</th>
-                                        <th>Job Posting</th>
-                                        <th>Contact #</th>
-                                        <th>Region</th>
-                                        <th>Address</th>
-                                        <th>Action</th>
+                                        <th>{t("users.comapany-user.listTable.companyName")}</th>
+                                        <th>{t("users.comapany-user.listTable.jobPosting")}</th>
+                                        <th>{t("users.comapany-user.listTable.contact")}</th>
+                                        <th>{t("users.comapany-user.listTable.region")}</th>
+                                        <th>{t("users.comapany-user.listTable.address")}</th>
+                                        <th>{t("users.comapany-user.listTable.action")}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -105,14 +107,14 @@ export default function CompanyList({ handleShow, handleClose, userID }: Company
                                                     <td>{company.information.company_information.region}</td>
                                                     <td>{company.information.company_information.address}</td>
                                                     <td>
-                                                        <button className="btn btn-sm btn-primary me-1" onClick={() => handleShowProfile(company.id)}>Edit</button>
-                                                        <button className="btn btn-sm btn-danger" onClick={() => handleDeleteCompany(company.id)}>Delete</button>
+                                                        <button className="btn btn-sm btn-primary me-1" onClick={() => handleShowProfile(company.id)}>{t("users.comapany-user.listTable.edit")}</button>
+                                                        <button className="btn btn-sm btn-danger" onClick={() => handleDeleteCompany(company.id)}>{t("users.comapany-user.listTable.delete")}</button>
                                                     </td>
                                                 </tr>
                                             ))
                                         ) : (
                                             <tr>
-                                                <td className='text-center' colSpan={7}>No companies found.</td>
+                                                <td className='text-center' colSpan={7}>{t("users.noCompanyFound")}</td>
                                             </tr>
                                         )
                                     }
@@ -135,9 +137,9 @@ export default function CompanyList({ handleShow, handleClose, userID }: Company
                 </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Cancel
+                    {t("users.comapany-user.listModal.cancel")}
                 </Button>
-                    <AddButton  label="Create" className='btn btn-primary-custom rounded-3' icon={null} /> 
+                    <AddButton  label={t("users.comapany-user.listModal.create")} className='btn btn-primary-custom rounded-3' icon={null} /> 
                 </Modal.Footer>
             </Modal>
 

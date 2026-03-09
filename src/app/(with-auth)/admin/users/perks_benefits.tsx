@@ -13,6 +13,8 @@ import { useState } from 'react';
 import { showSuccessToast } from '@/app/(util)/toaster';
 import { deletePerksBenefits } from '@/redux/slices/perks_benefits/perksBenefitsThunk';
 import EditModalPerks from './edit_modal_perks';
+import { useTranslations } from 'next-intl';
+
 
 
 
@@ -25,6 +27,7 @@ interface PerksBenefitsProps {
 
 
 export default function PerksBenefits({handleShow, handleClose, userID}: PerksBenefitsProps){
+    const t = useTranslations("employerPerksBenefits");
     const {items, status, error} = useAppSelector((state) => state.perksAndBenefitsSlice);
     const dispatch = useAppDispatch();
 
@@ -39,14 +42,15 @@ export default function PerksBenefits({handleShow, handleClose, userID}: PerksBe
 
     const handleDelete = (id: number) => {
         popup({
-            title: "Delete Perks & Benefits",
-            text: "Are you sure you want to delete this Perks & Benefits?",
+            title: t("modals.delete.title"),
+            text: t("modals.delete.message"),
             icon: "warning",
+            confirmText: t("modals.delete.confirmText"),
             onConfirm: async () => {
                 try {
                     await dispatch(deletePerksBenefits(id)).unwrap();
                     await dispatch(indexPerksBenefitsByUserID(Number(userID)));
-                    showSuccessToast("Delete Perks & Benefits","Perks & Benefits deleted successfully");
+                    showSuccessToast(t("toasts.deleteTitle"),t("toasts.deleteMessage"));
                 } catch (error) {
                     console.error(error);
                 }
@@ -71,21 +75,21 @@ export default function PerksBenefits({handleShow, handleClose, userID}: PerksBe
         <>
             <Modal size='xl' show={handleShow} onHide={handleClose}>
                 <Modal.Header closeButton>
-                <Modal.Title>Perks & Benefits</Modal.Title>
+                <Modal.Title>{t("title")}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="row">
                         <div className="col-12 justify-content-end d-flex mb-3">
-                            <button className="btn btn-primary-custom rounded-3 " onClick={handleAddPerks}>Add Perks & Benefits</button>
+                            <button className="btn btn-primary-custom rounded-3 " onClick={handleAddPerks}>{t("addButton")}</button>
                         </div>
                         <div className="col-12 mt-2">
                             <table className='table table-hover'>
                                 <thead>
                                     <tr>   
                                         <th>#</th>
-                                        <th>Title</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
+                                        <th>{t("table.name")}</th>
+                                        <th>{t("table.description")}</th>
+                                        <th>{t("table.createdAt")}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -97,14 +101,14 @@ export default function PerksBenefits({handleShow, handleClose, userID}: PerksBe
                                                     <td>{item.name}</td>
                                                     <td>{item.description}</td>
                                                     <td style={{width:"12%"}} >
-                                                        <button className="btn btn-sm btn-primary me-1" onClick={() => handleEdit(item)}>Edit</button>
-                                                        <button className="btn btn-sm btn-danger" onClick={() => (handleDelete(item.id))}>Delete</button>
+                                                        <button className="btn btn-sm btn-primary me-1" onClick={() => handleEdit(item)}>{t("buttons.edit")}</button>
+                                                        <button className="btn btn-sm btn-danger" onClick={() => (handleDelete(item.id))}>{t("buttons.delete")}</button>
                                                     </td>
                                                 </tr>
                                             ))
                                         ) : (
                                             <tr>
-                                                <td className='text-center' colSpan={7}>No perks & benefits found.</td>
+                                                <td className='text-center' colSpan={7}>{t("states.empty")}</td>
                                             </tr>
                                         )
                                     }
@@ -116,9 +120,9 @@ export default function PerksBenefits({handleShow, handleClose, userID}: PerksBe
                 </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Cancel
+                    {t("cancel")}
                 </Button>
-                    <AddButton label="Create" className='btn btn-primary-custom rounded-3' icon={null} /> 
+                    <AddButton label={t("create")} className='btn btn-primary-custom rounded-3' icon={null} /> 
                 </Modal.Footer>
             </Modal>
             <AddModal handleShow={addPerksModal} handleClose={() =>setAddPerksModal(false)} userID={userID} />

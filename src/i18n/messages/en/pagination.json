@@ -1,0 +1,8 @@
+{
+    "pagination": {
+      "itemsPerPage": "Items per page:",
+      "showing": "Showing {start} to {end} of {total}",
+      "previous": "Previous",
+      "next": "Next"
+    }
+}

@@ -102,7 +102,7 @@ export default function AdminUsers() {
             <div className="col text-end">
                 {/* <span>{t("users.period")} <FaCalendarCheck className="text-primary" /></span> */}
                 <button className="btn btn-primary-custom rounded-3 me-2" onClick={handleAddModal}>
-                    Add User
+                    {t("users.addUser")}
                 </button>
             </div>
         </div>
@@ -228,12 +228,12 @@ export default function AdminUsers() {
                                                                             <>
                                                                                 <li >
                                                                                     <button onClick={() => handleShowCompanyList(item)} className="dropdown-item">
-                                                                                        Manage Company
+                                                                                        {t("users.manageCompany")}
                                                                                     </button>
                                                                                 </li>
                                                                                 <li >
                                                                                     <button onClick={() => handleShowPerksBenefits(item.id)} className="dropdown-item">
-                                                                                        Manage Perks & Benefits
+                                                                                        {t("users.managePerksBenefits")}
                                                                                     </button>
                                                                                 </li>
                                                                             </>

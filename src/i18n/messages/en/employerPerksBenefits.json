@@ -48,5 +48,8 @@
     "deleteMessage": "Perks & Benefits deleted successfully",
     "updateTitle": "Update Item",
     "updateMessage": "Perks & Benefits updated successfully"
-  }
+  },
+  "addButton":"Add Perks & Benefits",
+  "cancel":"Cancel",
+  "create":"Create"
 }

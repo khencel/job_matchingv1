@@ -1,3 +1,6 @@
+import { useTranslations } from "next-intl";
+
+
 
 interface PaginationProps {
     totalPages: number;
@@ -13,11 +16,12 @@ interface PaginationProps {
 
 
 export default function Pagination({totalPages, currentPage, handlePageChange, next, previous, pageSize, count, handlePageSizeChange}: PaginationProps){
+    const t = useTranslations("pagination");
     return (
         <>
             <div className="d-flex justify-content-between align-items-center mt-3">
                 <div className="d-flex align-items-center">
-                    <label className="me-2">Items per page:</label>
+                    <label className="me-2">{t("pagination.itemsPerPage")}</label>
                     <select 
                         className="form-select form-select-sm" 
                         style={{ width: 'auto' }}
@@ -30,12 +34,12 @@ export default function Pagination({totalPages, currentPage, handlePageChange, n
                         <option value={50}>50</option>
                     </select>
                     <span className="ms-3 text-muted">
-                        {/* {t("users.pagination.showing", {
+                        {t("pagination.showing", {
                             start: ((currentPage - 1) * pageSize) + 1,
                             end: Math.min(currentPage * pageSize, count),
                             total: count,
-                        })} */}
-                        Showing {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, count)} of {count}
+                        })}
+                        {/* {t("pagination.showing")} {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, count)} of {count} */}
                     </span>
                 </div>
                 <nav>
@@ -46,8 +50,8 @@ export default function Pagination({totalPages, currentPage, handlePageChange, n
                                 onClick={() => handlePageChange(currentPage - 1)}
                                 disabled={!previous}
                             >
-                                {/* {t("users.pagination.previous")} */}
-                                previous
+                                {t("pagination.previous")}
+                                
                             </button>
                         </li>
                         
@@ -71,8 +75,8 @@ export default function Pagination({totalPages, currentPage, handlePageChange, n
                                 onClick={() => handlePageChange(currentPage + 1)}
                                 disabled={!next}
                             >
-                                {/* {t("users.pagination.next")} */}
-                                next
+                                {t("pagination.next")}
+                               
                             </button>
                         </li>
                     </ul>

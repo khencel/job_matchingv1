@@ -90,6 +90,9 @@ import registrationEmployerPage from "./registrationEmployerPage.json";
 import registrationJobSeekerPage from "./registrationJobSeekerPage.json";
 import registerPage from "./registerPage.json";
 import forgotPassword from "./forgotPassword.json";
+import pagination from "./pagination.json";
+
+
 
 
 
@@ -181,5 +184,6 @@ export default {
   registrationEmployerPage,
   registrationJobSeekerPage,
   registerPage,
-  forgotPassword
+  forgotPassword,
+  pagination
 };
