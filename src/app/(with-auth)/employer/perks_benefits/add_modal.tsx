@@ -17,21 +17,33 @@ import { useTranslations } from 'next-intl';
 interface AddModalProps {
     handleShow: boolean;
     handleClose: () => void;
+    userID?: string;
 }
 
-export default function AddModal({handleShow, handleClose}: AddModalProps){
+export default function AddModal({handleShow, handleClose, userID}: AddModalProps){
     const t = useTranslations("employerPerksBenefits");
     const dispatch = useAppDispatch();
     const stateInfo = useSelector((state: RootState) => state.perksAndBenefitsSlice)
 
     const handleSave = () => {
+
         popup({
             title: t("modals.add.title"),
             text: t("modals.add.message"),
             confirmText: t("modals.add.confirmText"),
             icon:"warning",
-            onConfirm: () => {
-                    dispatch(addPerksBenefits(stateInfo))
+            onConfirm: async ()  => {
+                    if(userID){
+                        const payload = {
+                            ...stateInfo,
+                            user: userID
+                        }
+
+                        await dispatch(addPerksBenefits(payload))
+                    }else{
+                        await dispatch(addPerksBenefits(stateInfo))
+                    }
+
                     dispatch(resetForm())
                     handleClose();
                 }

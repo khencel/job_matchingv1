@@ -56,3 +56,29 @@ export const updatePerksBenefits = createAsyncThunk<
         }
     }
 );
+
+
+export const indexPerksBenefitsByUserID = createAsyncThunk(
+    "perks/indexPerksBenefitsByUserID",
+    async (user_id: number, {rejectWithValue}) => {
+        try {
+            const response = await standard_get_api(`/api/perks/?userID=${user_id}`);
+            return response.data;
+        } catch (error:any){
+            return rejectWithValue(error.response.data);
+        }
+
+    }
+)
+
+export const updatePerksBenefitsByUserID = createAsyncThunk(
+    "perks/updatePerksBenefitsByUserID",
+    async (data: any, {rejectWithValue}) => {
+        try {
+            const res = await standard_update_api(`/api/perks/${data.id}/`, data);
+            return res.data;
+        } catch (error:any){
+            return rejectWithValue(error.response.data);
+        }
+    }
+)

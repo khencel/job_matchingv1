@@ -1,5 +1,5 @@
 import { createSlice} from "@reduxjs/toolkit";
-import { indexCompany, getCompanyDetails} from "./companyThunk";
+import { indexCompany, getCompanyDetails, getCompanyAdmin } from "./companyThunk";
 
 export interface CompanyState {
     // list Data 
@@ -82,6 +82,23 @@ const companySlice = createSlice({
             .addCase(getCompanyDetails.pending, (state) => {
                 state.selectedCompanyStatus = "loading";
             })
+        builder
+            .addCase(getCompanyAdmin.fulfilled, (state, action) => {
+                state.companies = action.payload.results;
+                state.status = "succeeded";
+                state.next = action.payload.next;
+                state.previous = action.payload.previous;
+                state.count = action.payload.count;
+            })
+            .addCase(getCompanyAdmin.rejected, (state, action) => {
+                state.error = action.payload as string;
+                state.status = "failed";
+            })
+            .addCase(getCompanyAdmin.pending, (state) => {
+                state.status = "loading";
+            })
+                
+                
     }
 });
 

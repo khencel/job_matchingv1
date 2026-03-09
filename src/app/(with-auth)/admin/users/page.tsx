@@ -1,8 +1,7 @@
 "use client"
 
 import { BiArrowBack } from "react-icons/bi";
-import { FaCalendarCheck, FaSliders } from "react-icons/fa6";
-import { FaSearch } from "react-icons/fa";
+import { FaSliders } from "react-icons/fa6";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import type { RootState } from "@/redux/store";
@@ -13,12 +12,23 @@ import { fetchUsers, updateStatus, updateIsActive } from "@/redux/slices/applica
 import { popup } from "@/helper/pop_up";
 import { showSuccessToast } from "@/app/(util)/toaster";
 import { useTranslations } from "next-intl";
+import AddUserModal from "./add_modal";
+import FormattedDate from "@/components/date_format";
+import CompanyList from "./company_list";
+import PerksBenefits from "./perks_benefits";
 
 export default function AdminUsers() {
     const t = useTranslations("adminUsers");
     const {items, status, error, next, previous, currentPage, pageSize, count}= useSelector((state: RootState) => state.getAllUserByFilter);
     const dispatch = useAppDispatch();
     const [filter, setFilter] = useState<{ role: string }>({ role: "all" });
+
+    const [addModal, setAddModal] = useState(false);
+    const [companyListModal, setCompanyListModal] = useState(false);
+    const [userID, setUserID] = useState<string>("");
+
+    const [perksBenefitsModal, setPerksBenefitsModal] = useState(false);
+
 
     const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
             dispatch(setPageSize(Number(e.target.value)));
@@ -61,6 +71,19 @@ export default function AdminUsers() {
         }
     }
 
+    const handleAddModal = () => {
+        setAddModal(true);
+    }
+
+    const handleShowCompanyList = (data: any) => {
+        setUserID(data.id)
+        setCompanyListModal(true);
+    }
+    
+    const handleShowPerksBenefits = (id: number) => {
+        setPerksBenefitsModal(true);
+        setUserID(String(id))
+    }
 
     useEffect(() => {
         dispatch(fetchUsers({
@@ -78,7 +101,7 @@ export default function AdminUsers() {
             </div>
             <div className="col text-end">
                 {/* <span>{t("users.period")} <FaCalendarCheck className="text-primary" /></span> */}
-                <button className="btn btn-primary" onClick={() => {}}>
+                <button className="btn btn-primary-custom rounded-3 me-2" onClick={handleAddModal}>
                     Add User
                 </button>
             </div>
@@ -168,7 +191,7 @@ export default function AdminUsers() {
                                                 </span>
                                                 
                                             </td>
-                                            <td className="text-start p-2">{item.created_at}</td>
+                                            <td className="text-start p-2"><FormattedDate date={item.created_at} /></td>
 
                                             <td className="text-start p-2">
                                                     {
@@ -197,7 +220,24 @@ export default function AdminUsers() {
                                                                                 <button className="dropdown-item" onClick={() => verifyChangeStatus(item.id)}>
                                                                                     {t("users.status.activate")}
                                                                                 </button>
-                                                                            </li>
+                                                                            </li>     
+                                                                    }
+
+                                                                    {
+                                                                        item.role === "employer" && (
+                                                                            <>
+                                                                                <li >
+                                                                                    <button onClick={() => handleShowCompanyList(item)} className="dropdown-item">
+                                                                                        Manage Company
+                                                                                    </button>
+                                                                                </li>
+                                                                                <li >
+                                                                                    <button onClick={() => handleShowPerksBenefits(item.id)} className="dropdown-item">
+                                                                                        Manage Perks & Benefits
+                                                                                    </button>
+                                                                                </li>
+                                                                            </>
+                                                                        )
                                                                     }
                                                                 </ul>
                                                             </div>
@@ -275,6 +315,9 @@ export default function AdminUsers() {
             </ul>
         </nav>
     </div>
+                <AddUserModal handleShow={addModal} handleClose={() => setAddModal(false)} />
+                <CompanyList handleShow={companyListModal} handleClose={() => setCompanyListModal(false)} userID={userID} />
+                <PerksBenefits handleShow={perksBenefitsModal} handleClose={() => setPerksBenefitsModal(false)} userID={userID} />
     </>
     );
 }

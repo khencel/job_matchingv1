@@ -4,6 +4,7 @@ import { standard_delete_api, standard_get_api, standard_post_api, standard_upda
 interface ListCompanyParams {
   page?: number;
   pageSize?: number;
+  userID?: number;
 }
 
 export const indexCompany = createAsyncThunk(
@@ -65,3 +66,28 @@ export const updateCompany = createAsyncThunk(
         }
     }
 )
+
+export const getCompanyAdmin = createAsyncThunk(
+    "company/getCompanyAdmin",
+    async ( {page = 1, pageSize = 10, userID}: ListCompanyParams , {rejectWithValue} ) => {
+        try {
+            const res = await standard_get_api("/api/company/?page="+page+"&page_size="+pageSize+"&userID="+userID);
+            return res.data;
+        } catch (error: any) {
+            return rejectWithValue(error.message);
+        }
+    }
+)
+
+export const delteCompanyAdmin = createAsyncThunk(
+    "company/delteCompanyAdmin",
+    async (companyID:number, {rejectWithValue}) => {
+        try {
+            const res = await standard_delete_api("/api/company/"+companyID+"/");
+            return res.data;
+        } catch (error: any) {
+            return rejectWithValue(error.message);
+        }
+    }
+)
+

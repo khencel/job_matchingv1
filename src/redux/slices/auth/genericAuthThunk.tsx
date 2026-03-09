@@ -24,3 +24,17 @@ export const resetPassword = createAsyncThunk(
         }
     }
 )
+
+export const createUser = createAsyncThunk(
+    "auth/createUser",
+    async (data:any, { rejectWithValue }) => {
+        try {
+            const res = await standard_post_api('/api/auth/store',data);
+            return res.data;
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    }
+)       
+      
+    

@@ -22,6 +22,8 @@ import approachJobSeekerSlice from "./slices/approachJobSeekerSlice";
 import jobSearchFilterSlice from "./slices/filterJobPost/filterJobPostSlice";
 import companySlice from "./slices/employer/company/companySlice";
 
+import JobPosting from "./slices/jobPost/jobPostSlice"
+
 
 export const makeStore = () => {
   return configureStore({
@@ -48,6 +50,7 @@ export const makeStore = () => {
       approachJobSeeker: approachJobSeekerSlice,
       jobSearchFilterSlice: jobSearchFilterSlice,
       companySlice: companySlice,
+      jobPostingSlice: JobPosting,
     },
   });
 };

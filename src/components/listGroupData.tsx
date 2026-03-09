@@ -16,6 +16,7 @@ export const listCategory = [
   { value: "automobile_transport", label: "Automobile transport" },
   { value: "forestry", label: "Forestry" },
   { value: "wood_industry", label: "Wood industry" },
+  { value: "others", label: "Others" },
 ];
 
 export const regionList = [

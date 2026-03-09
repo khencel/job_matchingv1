@@ -17,6 +17,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaFileMedical } from "react-icons/fa6";
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 
 
 const Sidebar = ({ children }: PropsWithChildren) => {
@@ -30,6 +31,8 @@ const Sidebar = ({ children }: PropsWithChildren) => {
     { label: t("menuItems.applicants"), icon: FaPlus, href: "/admin/applicants" },
     // { label: t("menuItems.settings"), icon: FaBuilding, href: "/admin/job_listing" },
   ];
+
+
 
   return (
     <div className="layout">

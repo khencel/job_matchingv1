@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { addPerksBenefits, indexPerksBenefits, deletePerksBenefits, updatePerksBenefits } from "@/redux/slices/perks_benefits/perksBenefitsThunk";
+import { addPerksBenefits, indexPerksBenefits, deletePerksBenefits, updatePerksBenefits, indexPerksBenefitsByUserID } from "@/redux/slices/perks_benefits/perksBenefitsThunk";
 
 
 export interface PerksBenefitsItem {
@@ -58,7 +58,7 @@ const perksAndBenefitsSlice = createSlice({
                     state.error = action.payload as string || "Something went wrong";
             })   
 
-
+        builder
             // Index Perks 
             .addCase(indexPerksBenefits.pending, (state) => {
                 state.status = "loading";   
@@ -68,6 +68,21 @@ const perksAndBenefitsSlice = createSlice({
                 state.items = action.payload.results;
             })
             .addCase(indexPerksBenefits.rejected, (state, action) => {
+                state.status = "failed"
+                state.error = action.payload as string || "Something went wrong";
+            })
+
+        builder
+            // index base on userID 
+            .addCase(indexPerksBenefitsByUserID.pending, (state) => {
+                state.status = "loading";   
+            })
+            .addCase(indexPerksBenefitsByUserID.fulfilled, (state, action) => {
+                state.status = "succeeded";
+                state.items = action.payload.results;
+                
+            })
+            .addCase(indexPerksBenefitsByUserID.rejected, (state, action) => {
                 state.status = "failed"
                 state.error = action.payload as string || "Something went wrong";
             })

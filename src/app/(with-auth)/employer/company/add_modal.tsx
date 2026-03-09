@@ -7,18 +7,21 @@ import MultipleSelect from "@/components/MultipleSelectStandard";
 import TextEditor from "../post_a_job/job-description/TextEditor";
 import { regionList } from "@/components/listGroupData";
 import { popup } from "@/helper/pop_up";
-import { createCompany, indexCompany } from "@/redux/slices/employer/company/companyThunk";
+import { createCompany, indexCompany, getCompanyAdmin } from "@/redux/slices/employer/company/companyThunk";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { showSuccessToast } from "@/app/(util)/toaster";
 import ImageDropzone from "@/components/dropzone";
 import { indexPerksBenefits } from "@/redux/slices/perks_benefits/perksBenefitsThunk";
 import Cookie from "js-cookie";
+import { listCategory } from "@/components/listGroupData";
 
 
 
 interface AddModalProps {
   handleShow: boolean;
   handleClose: () => void;
+  userID_opt?: string;
+  onSuccess?: () => any;
 }
 
 export const industries = [
@@ -64,7 +67,7 @@ const CardBox = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-export default function AddCompanyModal({ handleShow, handleClose }: AddModalProps) {
+export default function AddCompanyModal({ handleShow, handleClose, userID_opt, onSuccess }: AddModalProps) {
     const dispatch = useAppDispatch();
     const [logoPreview, setLogoPreview] = useState<string | null>(null);
     const [logoFile, setLogoFile] = useState<File | null>(null);
@@ -86,9 +89,6 @@ export default function AddCompanyModal({ handleShow, handleClose }: AddModalPro
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string>("");
-
-    const industryOptions = industries.map((item) => ({ label: item, value: item }));
-
     const { items } = useAppSelector((state) => state.perksAndBenefitsSlice);
     const userID = Cookie.get("userID") || "";
 
@@ -101,8 +101,9 @@ export default function AddCompanyModal({ handleShow, handleClose }: AddModalPro
         onConfirm: async () => {
           await handleCreateCompany();
           showSuccessToast("Create company","Company created successfully.");
-          await dispatch(indexCompany({page: 1, pageSize: 10})).unwrap();
-          handleClose();
+          if(!userID_opt){
+            await dispatch(indexCompany({page: 1, pageSize: 10})).unwrap();
+          }
         }
       });
     }
@@ -153,10 +154,17 @@ export default function AddCompanyModal({ handleShow, handleClose }: AddModalPro
         if (bannerFile) {
           formData.append("banner", bannerFile);
         }
+
+        if (userID_opt) {
+          formData.append("user_id", userID_opt);
+        }
+
         
         await dispatch(createCompany(formData)).unwrap();
-        
-        
+        if (onSuccess) {
+          await onSuccess();
+        }
+
         handleClose();
 
         setCompanyName("");
@@ -323,7 +331,7 @@ export default function AddCompanyModal({ handleShow, handleClose }: AddModalPro
                 <FieldLabel>Industry</FieldLabel>
                 <div className="rounded-4" style={{ minHeight: 44 }}>
                   <MultipleSelect
-                    data={industryOptions}
+                    data={listCategory}
                     value={industry}
                     onChange={setIndustry}
                     placeholder="Select industry"
@@ -434,3 +442,5 @@ export default function AddCompanyModal({ handleShow, handleClose }: AddModalPro
     </Modal>
   );
 }
+
+
