@@ -72,5 +72,64 @@
         "toastTitle":"Delete Perks & Benefits",
         "toastDesc":"Perks & Benefits deleted successfully"
     }
+  },
+  "addUser":{
+    "header":"Add User",
+    "cancel":"Cancel",
+    "createUser":"Create User",
+    "label":{
+      "fullname":"Full Name",
+      "email":"Email",
+      "companyInfo":"Company Information",
+      "companyName":"Company Name",
+      "companyAddress":"Company Address",
+      "phone":"Phone Number",
+      "noEmp":"Number of Employees",
+      "founded":"Company Founded Year",
+      "industry":"Industry",
+      "region":"Region",
+      "appeal":"Appeal Points"
+    },
+    "placeholder":{
+      "fullname":"Enter full name",
+      "email":"Enter email",
+      "companyInfo":"Company Information",
+      "companyName":"Enter company name",
+      "companyAddress":"Enter company address",
+      "phone":"Enter phone number",
+      "noEmp":"e.g. 50",
+      "founded":"e.g. 2021",
+      "industry":"Select Industry",
+      "region":"Select Region",
+      "appeal":"Appeal Points"
+    },
+    "validation":{
+      "fullname":"Full name is required.",
+      "email":"Email is required.",
+      "companyName":"Company name is required.",
+      "companyAddress":"Company address is required.",
+      "phone":"Phone number is required.",
+      "noEmp":"Number of employees is required.",
+      "founded":"Founded year is required.",
+      "region":"Region is required.",
+      "industry":"Please select at least one industry."
+    },
+    "validationAccept":{
+      "validFname":"Enter a valid name.",
+      "validEmail":"Enter a valid email address.",
+      "validCompName":"Enter a valid company name.",
+      "validAddress":"Enter a valid address.",
+      "validPhone":"Enter a valid phone number.",
+      "validNoEmpWhole":"Must be a whole number.",
+      "validNoEmpGreater":"Must be greater than 0.",
+      "validFounded":"Enter a valid year.",
+      "validFoundedBetween":"Year must be between 1800 and"
+    },
+    "popcreate":{
+      "title":"Create User",
+      "text":"Are you sure you want to create this user?",
+      "toastText":"Create user",
+      "toastDesc":"User created successfully."
+    }
   }
 }

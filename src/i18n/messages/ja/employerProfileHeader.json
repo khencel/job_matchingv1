@@ -12,5 +12,8 @@
     "employees": "従業員数",
     "location": "所在地",
     "industry": "業種"
-  }
+  },
+  "showJobPost": "求人情報を表示",
+  "perkBenefits": "福利厚生",
+  "perkText": "この求人にはさまざまな福利厚生があります。"
 }

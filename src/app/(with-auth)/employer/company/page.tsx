@@ -39,14 +39,14 @@ export default function CompanyPage() {
     
     const handleDelete = (companyID: number) => {
         popup({
-            title: "Delete Company",
-            text: "Are you sure you want to delete this company?",
+            title: t("deleteCompany"),
+            text: t("deleteCompanyText"),
             icon: "warning",    
             onConfirm: async () => {
                 dispatch(deleteCompany(companyID))
                 .unwrap()
                 .then((res) => {
-                    showSuccessToast("Deleted", "Company deleted successfully");
+                    showSuccessToast(t("deleted"), t("deletedText"));
                     dispatch(indexCompany({page: currentPage, pageSize: pageSize}));
                 })
                 .catch((err) => {
@@ -73,7 +73,7 @@ export default function CompanyPage() {
             <>
                 <div className="row standar-div">
                     <div className="col">
-                        <h5><strong><BiArrowBack /> Company List</strong></h5>
+                        <h5><strong><BiArrowBack /> {t("companyList")}</strong></h5>
                     </div>
                     <div className="col text-end">
                         {/* <span>{t("dateRange")} <FaCalendarCheck className="text-primary" /></span> */}
@@ -82,11 +82,11 @@ export default function CompanyPage() {
     
                 <div className="row standar-div mt-2">
                     <div className="col">
-                        <strong>Company ({count} total)</strong>
+                        <strong>{t("company")} ({count} {t("total")})</strong>
                     </div>
                     <div className="col-2 text-end">
                         {/* <button className="btn btn-primary-custom"> Add Perks & Benefits</button> */}
-                        <AddButton  label="Add Company" className="btn btn-primary-custom" icon={<FaPlus />} onClick={handleShowAddModal} />               
+                        <AddButton  label={t("addCompany")} className="btn btn-primary-custom" icon={<FaPlus />} onClick={handleShowAddModal} />               
                     </div>
                 </div>
     
@@ -97,12 +97,12 @@ export default function CompanyPage() {
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Company Name</th>
-                                            <th>Job Posting</th>
-                                            <th>Contact #</th>
-                                            <th>Region</th>
-                                            <th>Address</th>
-                                            <th>Action</th>
+                                            <th>{t("companyTable.name")}</th>
+                                            <th>{t("companyTable.jobPosting")}</th>
+                                            <th>{t("companyTable.contact")}</th>
+                                            <th>{t("companyTable.region")}</th>
+                                            <th>{t("companyTable.address")}</th>
+                                            <th>{t("companyTable.action")}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -131,10 +131,10 @@ export default function CompanyPage() {
 
                                                                 <ul className="dropdown-menu dropdown-menu-end">
                                                                     <li>
-                                                                        <button className="dropdown-item" onClick={() => handleDelete(company?.id)}>Delete</button>
+                                                                        <button className="dropdown-item" onClick={() => handleDelete(company?.id)}>{t("delete")}</button>
                                                                     </li>
                                                                     <li>
-                                                                        <button className="dropdown-item" onClick={() => handleManage(company?.id)}>Manage</button>
+                                                                        <button className="dropdown-item" onClick={() => handleManage(company?.id)}>{t("manage")}</button>
                                                                     </li>
                                                                 </ul>
                                                             </div>

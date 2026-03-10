@@ -9,7 +9,7 @@ import { listCategory, regionList } from "@/components/listGroupData";
 import { popup } from "@/helper/pop_up";
 import { showSuccessToast } from "@/app/(util)/toaster";
 import { fetchUsers } from "@/redux/slices/applicants/userThunk";
-
+import { useTranslations } from "next-intl";
 
 
 interface AddModalProps {
@@ -68,7 +68,7 @@ export default function AddUserModal({
   const dispatch = useAppDispatch();
   const [form, setForm] = useState<FormState>(initialForm);
   const [touched, setTouched] = useState<TouchedState>(initialTouched);
-
+  const t = useTranslations("adminUsers");
   useEffect(() => {
     if (!handleShow) {
       setForm(initialForm);
@@ -81,37 +81,37 @@ export default function AddUserModal({
   const errors = useMemo(() => {
     const e: Partial<Record<keyof FormState, string>> = {};
 
-    if (!form.fullName.trim()) e.fullName = "Full name is required.";
-    else if (form.fullName.trim().length < 2) e.fullName = "Enter a valid name.";
+    if (!form.fullName.trim()) e.fullName = t("addUser.validation.fullname");
+    else if (form.fullName.trim().length < 2) e.fullName = t("addUser.validationAccept.validFname");
 
-    if (!form.email.trim()) e.email = "Email is required.";
+    if (!form.email.trim()) e.email = t("addUser.validation.email");
     else if (!emailRegex.test(form.email.trim())) {
-      e.email = "Enter a valid email address.";
+      e.email = t("addUser.validationAccept.validEmail");
     }
 
-    if (!form.companyName.trim()) e.companyName = "Company name is required.";
+    if (!form.companyName.trim()) e.companyName = t("addUser.validation.companyName");
     else if (form.companyName.trim().length < 2) {
-      e.companyName = "Enter a valid company name.";
+      e.companyName = t("addUser.validationAccept.validCompName");
     }
 
-    if (!form.companyAddress.trim()) e.companyAddress = "Company address is required.";
+    if (!form.companyAddress.trim()) e.companyAddress = t("addUser.validation.companyAddress");
     else if (form.companyAddress.trim().length < 5) {
-      e.companyAddress = "Enter a valid address.";
+      e.companyAddress = t("addUser.validationAccept.validAddress");
     }
 
-    if (!form.phoneNumber.trim()) e.phoneNumber = "Phone number is required.";
+    if (!form.phoneNumber.trim()) e.phoneNumber = t("addUser.validation.phone");
     else if (!phoneRegex.test(form.phoneNumber.trim())) {
-      e.phoneNumber = "Enter a valid phone number.";
+      e.phoneNumber = t("addUser.validationAccept.validPhone");
     }
 
     if (!form.numberOfEmployees.trim()) {
-      e.numberOfEmployees = "Number of employees is required.";
+      e.numberOfEmployees = t("addUser.validation.noEmp");
     } else {
       const n = Number(form.numberOfEmployees);
       if (!Number.isFinite(n) || !Number.isInteger(n)) {
-        e.numberOfEmployees = "Must be a whole number.";
+        e.numberOfEmployees = t("addUser.validationAccept.validNoEmpWhole");
       } else if (n <= 0) {
-        e.numberOfEmployees = "Must be greater than 0.";
+        e.numberOfEmployees = t("addUser.validationAccept.validNoEmpGreater");
       }
     }
 
@@ -122,22 +122,22 @@ export default function AddUserModal({
     }
 
     if (!form.foundedYear.trim()) {
-      e.foundedYear = "Founded year is required.";
+      e.foundedYear = t("addUser.validation.founded");
     } else {
       const y = Number(form.foundedYear);
       if (!Number.isFinite(y) || !Number.isInteger(y)) {
-        e.foundedYear = "Enter a valid year.";
+        e.foundedYear =  t("addUser.validationAccept.validFounded");
       } else if (y < 1800 || y > currentYear) {
-        e.foundedYear = `Year must be between 1800 and ${currentYear}.`;
+        e.foundedYear = `${t("addUser.validationAccept.validFoundedBetween")} ${currentYear}.`;
       }
     }
 
     if (!form.region.trim()) {
-      e.region = "Region is required.";
+      e.region = t("addUser.validation.region");
     }
 
     if (!form.industry.length) {
-      e.industry = "Please select at least one industry.";
+      e.industry = t("addUser.validation.industry");
     }
 
     return e;
@@ -198,13 +198,13 @@ export default function AddUserModal({
     };
 
     popup({
-      title: "Create User?",
-      text: "Are you sure you want to create this user?",
+      title: t("addUser.popcreate.title"),
+      text: t("addUser.popcreate.text"),
       icon: "warning",
       onConfirm: async () => {
         await dispatch(createUser(payload));
         handleClose();
-        showSuccessToast("Create user","User created successfully.");
+        showSuccessToast(t("addUser.popcreate.toastText"),t("addUser.popcreate.toastDesc"));
 
         await dispatch(fetchUsers({page:1, filter: { role: "all" }}));
       }
@@ -215,17 +215,17 @@ export default function AddUserModal({
     <Modal size="lg" show={handleShow} onHide={handleClose} centered>
       <Form onSubmit={onSubmit} noValidate>
         <Modal.Header closeButton>
-          <Modal.Title>Add User</Modal.Title>
+          <Modal.Title>{t("addUser.header")}</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <div className="row">
             <div className="col-6 mb-3">
               <Form.Group controlId="fullName">
-                <Form.Label>Full Name</Form.Label>
+                <Form.Label>{t("addUser.label.fullname")}</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter full name"
+                  placeholder={t("addUser.placeholder.fullname")}
                   value={form.fullName}
                   onChange={(e) => setField("fullName", e.target.value)}
                   onBlur={() => markTouched("fullName")}
@@ -240,10 +240,10 @@ export default function AddUserModal({
 
             <div className="col-6 mb-3">
               <Form.Group controlId="email">
-                <Form.Label>Email</Form.Label>
+                <Form.Label>{t("addUser.label.email")}</Form.Label>
                 <Form.Control
                   type="email"
-                  placeholder="Enter email"
+                  placeholder={t("addUser.placeholder.email")}
                   value={form.email}
                   onChange={(e) => setField("email", e.target.value)}
                   onBlur={() => markTouched("email")}
@@ -260,15 +260,15 @@ export default function AddUserModal({
 
             <div className="col-12 mb-3">
               <hr />
-              <strong>Company Information</strong>
+              <strong>{t("addUser.label.companyInfo")}</strong>
             </div>
 
             <div className="col-12 mb-3">
               <Form.Group controlId="companyName">
-                <Form.Label>Company Name</Form.Label>
+                <Form.Label>{t("addUser.label.companyName")}</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter company name"
+                  placeholder={t("addUser.placeholder.companyName")}
                   value={form.companyName}
                   onChange={(e) => setField("companyName", e.target.value)}
                   onBlur={() => markTouched("companyName")}
@@ -283,11 +283,11 @@ export default function AddUserModal({
 
             <div className="col-12 mb-3">
               <Form.Group controlId="companyAddress">
-                <Form.Label>Company Address</Form.Label>
+                <Form.Label>{t("addUser.label.companyAddress")}</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={3}
-                  placeholder="Enter company address"
+                  placeholder={t("addUser.placeholder.companyAddress")}
                   value={form.companyAddress}
                   onChange={(e) => setField("companyAddress", e.target.value)}
                   onBlur={() => markTouched("companyAddress")}
@@ -302,10 +302,10 @@ export default function AddUserModal({
 
             <div className="col-6 mb-3">
               <Form.Group controlId="phoneNumber">
-                <Form.Label>Phone Number</Form.Label>
+                <Form.Label>{t("addUser.label.phone")}</Form.Label>
                 <Form.Control
                   type="tel"
-                  placeholder="e.g. +63 912 345 6789"
+                  placeholder={t("addUser.placeholder.phone")}
                   value={form.phoneNumber}
                   onChange={(e) => setField("phoneNumber", e.target.value)}
                   onBlur={() => markTouched("phoneNumber")}
@@ -322,12 +322,12 @@ export default function AddUserModal({
 
             <div className="col-3 mb-3">
               <Form.Group controlId="numberOfEmployees">
-                <Form.Label>Number of Employees</Form.Label>
+                <Form.Label>{t("addUser.label.noEmp")}</Form.Label>
                 <Form.Control
                   type="number"
                   min={1}
                   step={1}
-                  placeholder="e.g. 50"
+                  placeholder={t("addUser.placeholder.noEmp")}
                   value={form.numberOfEmployees}
                   onChange={(e) => setField("numberOfEmployees", e.target.value)}
                   onBlur={() => markTouched("numberOfEmployees")}
@@ -343,13 +343,13 @@ export default function AddUserModal({
 
             <div className="col-3 mb-3">
               <Form.Group controlId="foundedYear">
-                <Form.Label>Company Founded Year</Form.Label>
+                <Form.Label>{t("addUser.label.founded")}</Form.Label>
                 <Form.Control
                   type="number"
                   min={1800}
                   max={currentYear}
                   step={1}
-                  placeholder={`e.g. ${currentYear - 5}`}
+                  placeholder={t("addUser.placeholder.founded")}
                   value={form.foundedYear}
                   onChange={(e) => setField("foundedYear", e.target.value)}
                   onBlur={() => markTouched("foundedYear")}
@@ -365,7 +365,7 @@ export default function AddUserModal({
 
             <div className="col-12 mb-3">
               <Form.Group controlId="industry">
-                <Form.Label>Industry</Form.Label>
+                <Form.Label>{t("addUser.label.industry")}</Form.Label>
                 <MultipleSelect
                   data={listCategory}
                   value={form.industry}
@@ -373,7 +373,7 @@ export default function AddUserModal({
                     setField("industry", selected);
                     markTouched("industry");
                   }}
-                  placeholder="Select industry"
+                  placeholder={t("addUser.placeholder.industry")}
                 />
                 {showInvalid("industry") && (
                   <Form.Control.Feedback type="invalid" style={{ display: "block" }}>
@@ -385,7 +385,7 @@ export default function AddUserModal({
 
             <div className="col-6 mb-3">
               <Form.Group controlId="region">
-                <Form.Label>Region</Form.Label>
+                <Form.Label>{t("addUser.label.region")}</Form.Label>
                 <Form.Select
                   value={form.region}
                   onChange={(e) => setField("region", e.target.value)}
@@ -393,7 +393,7 @@ export default function AddUserModal({
                   isInvalid={showInvalid("region")}
                   isValid={showValid("region")}
                 >
-                  <option value="" disabled>Select Region</option>
+                  <option value="" disabled>{t("addUser.placeholder.region")}</option>
                   {
                     regionList.map((region) => (
                       <option key={region.value} value={region.value}>{region.label}</option>
@@ -408,7 +408,7 @@ export default function AddUserModal({
 
             <div className="col-6 mb-3">
               <Form.Group controlId="appealPoints">
-                <Form.Label>Appeal Points</Form.Label>
+                <Form.Label>{t("addUser.label.appeal")}</Form.Label>
                 <Form.Control
                   type="number"
                   placeholder="0"
@@ -428,14 +428,14 @@ export default function AddUserModal({
 
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose} type="button">
-            Cancel
+            {t("addUser.cancel")}
           </Button>
 
           <Button
             type="submit"
             className="btn btn-primary-custom rounded-3"
           >
-            Create User
+            {t("addUser.createUser")}
           </Button>
         </Modal.Footer>
       </Form>

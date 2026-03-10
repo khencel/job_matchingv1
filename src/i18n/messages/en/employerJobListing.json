@@ -40,5 +40,8 @@
     "showing": "Showing {start} to {end} of {total}",
     "previous": "Previous",
     "next": "Next"
-  }
+  },
+  "addJobPosting":"Add Job Posting",
+  "cancel":"Cancel",
+  "create":"Create"
 }

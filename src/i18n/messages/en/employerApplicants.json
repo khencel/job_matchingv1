@@ -15,5 +15,23 @@
     "showing": "Showing {start} to {end} of {total}",
     "previous": "Previous",
     "next": "Next"
-  }
+  },
+  "addCompany":"Add Company",
+  "companyList":"Company List",
+  "company":"Company",
+  "total":"total",
+  "delete":"Delete",
+  "manage":"Manage",
+  "companyTable":{
+    "name":"Company Name",
+    "jobPosting":"Job Posting",
+    "contact":"Contact #",
+    "region":"Region",
+    "address":"Address",
+    "action":"Action"
+  },
+  "deleteCompany":"Delete Company",
+  "deleteCompanyText":"Are you sure you want to delete this company?",
+  "deleted":"Deleted",
+  "deletedText":"Company deleted successfully"
 }

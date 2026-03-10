@@ -65,5 +65,65 @@
         "delete": "削除"
       }
     }
-  }
+  },
+  "addUser": {
+    "header": "ユーザー追加",
+    "cancel": "キャンセル",
+    "createUser": "ユーザー作成",
+    "label": {
+      "fullname": "氏名",
+      "email": "メールアドレス",
+      "companyInfo": "会社情報",
+      "companyName": "会社名",
+      "companyAddress": "会社住所",
+      "phone": "電話番号",
+      "noEmp": "従業員数",
+      "founded": "設立年",
+      "industry": "業界",
+      "region": "地域",
+      "appeal": "アピールポイント"
+    },
+    "placeholder": {
+      "fullname": "氏名を入力してください",
+      "email": "メールアドレスを入力してください",
+      "companyInfo": "会社情報",
+      "companyName": "会社名を入力してください",
+      "companyAddress": "会社住所を入力してください",
+      "phone": "電話番号を入力してください",
+      "noEmp": "例：50",
+      "founded": "例：2021",
+      "industry": "業界を選択してください",
+      "region": "地域を選択してください",
+      "appeal": "アピールポイント"
+    },
+    "validation": {
+      "fullname": "氏名は必須です。",
+      "email": "メールアドレスは必須です。",
+      "companyName": "会社名は必須です。",
+      "companyAddress": "会社住所は必須です。",
+      "phone": "電話番号は必須です。",
+      "noEmp": "従業員数は必須です。",
+      "founded": "設立年は必須です。",
+      "region": "地域は必須です。",
+      "industry": "少なくとも1つの業界を選択してください。"
+    },
+    "validationAccept": {
+      "validFname": "有効な名前を入力してください。",
+      "validEmail": "有効なメールアドレスを入力してください。",
+      "validCompName": "有効な会社名を入力してください。",
+      "validAddress": "有効な住所を入力してください。",
+      "validPhone": "有効な電話番号を入力してください。",
+      "validNoEmpWhole": "整数を入力してください。",
+      "validNoEmpGreater": "0より大きい値を入力してください。",
+      "validFounded": "有効な年を入力してください。",
+      "validFoundedBetween": "年は1800年からの範囲で入力してください。"
+    },
+    "popcreate": {
+      "title": "ユーザー作成",
+      "text": "このユーザーを作成してもよろしいですか？",
+      "toastText": "ユーザー作成",
+      "toastDesc": "ユーザーが正常に作成されました。"
+    }
+}
+
 }

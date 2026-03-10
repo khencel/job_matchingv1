@@ -15,5 +15,23 @@
     "showing": "{start}から{end}を表示（合計{total}件）",
     "previous": "前へ",
     "next": "次へ"
-  }
+  },
+  "addCompany": "会社を追加",
+  "companyList": "会社一覧",
+  "company": "会社",
+  "total": "合計",
+  "delete": "削除",
+  "manage": "管理",
+  "companyTable": {
+    "name": "会社名",
+    "jobPosting": "求人投稿",
+    "contact": "連絡先",
+    "region": "地域",
+    "address": "住所",
+    "action": "操作"
+  },
+  "deleteCompany": "会社を削除",
+  "deleteCompanyText": "この会社を削除してもよろしいですか？",
+  "deleted": "削除完了",
+  "deletedText": "会社が正常に削除されました。"
 }

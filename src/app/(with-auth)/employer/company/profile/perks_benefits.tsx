@@ -1,4 +1,7 @@
+import { useTranslations } from "next-intl";
+
 export default function PerksBenefits({ data }: { data: any }) {
+  const t = useTranslations("employerProfileHeader");
   return (
     <>
       <div className="py-5">
@@ -16,10 +19,10 @@ export default function PerksBenefits({ data }: { data: any }) {
                   marginRight: 10,
                 }}
               />
-              <h3 className="mb-0 fw-bold">Perks & Benefits</h3>
+              <h3 className="mb-0 fw-bold">{t("perkBenefits")}</h3>
             </div>
             <small className="text-muted">
-              This job comes with several perks and benefits.
+              {t("perkText")}
             </small>
           </div>
 

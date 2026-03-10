@@ -116,7 +116,7 @@ export default function Header({ data }: { data: any }) {
                 className="btn btn-primary-custom rounded-3 px-4 shadow-sm"
                 onClick={handleShowJobPostModal}
               >
-                Show Job Post
+                {t("showJobPost")}
               </button>
 
               <button

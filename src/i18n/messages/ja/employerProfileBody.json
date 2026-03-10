@@ -10,5 +10,32 @@
       "phone": "電話"
     },
     "fallback": "—"
+  },
+  "editProfile": {
+    "editHeader": "プロフィールを編集",
+    "logoBanner": "ロゴ・バナー画像",
+    "uploadLogo": "ロゴをアップロード",
+    "noLogo": "ロゴがアップロードされていません",
+    "replace": "変更",
+    "bannerImage": "バナー画像",
+    "noBanner": "バナーがアップロードされていません",
+    "companyName": "会社名",
+    "phone": "電話番号",
+    "email": "メールアドレス",
+    "address": "住所",
+    "branchMuted": "支店の住所はこの住所がデフォルトとして使用されます。",
+    "region": "地域",
+    "selectRegion": "地域を選択してください",
+    "industry": "業界",
+    "founded": "設立年",
+    "noOfEmp": "従業員数",
+    "points": "アピールポイント",
+    "perks": "福利厚生",
+    "profile": "会社概要",
+    "basic": "基本情報",
+    "close": "閉じる",
+    "save": "変更を保存",
+    "nofile": "ファイルがありません"
   }
+  
 }

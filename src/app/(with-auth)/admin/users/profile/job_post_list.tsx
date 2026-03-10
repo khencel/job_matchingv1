@@ -104,7 +104,7 @@ export default function JobPostList({handleShow, handleClose}:PostJobProps){
                 <Modal.Body>
                     <div className="row">
                         <div className="col-12 justify-content-end d-flex mb-3">
-                            <button className="btn btn-primary-custom rounded-3" onClick={handleAddJobPost}>Add Job Posting</button>
+                            <button className="btn btn-primary-custom rounded-3" onClick={handleAddJobPost}>{t("addJobPosting")}</button>
                         </div>
                         <div className="col-12 mt-2">
                             <table className='table table-hover'>
@@ -191,9 +191,9 @@ export default function JobPostList({handleShow, handleClose}:PostJobProps){
                 </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Cancel
+                    {t("cancel")}
                 </Button>
-                    <AddButton label="Create" className='btn btn-primary-custom rounded-3' icon={null} /> 
+                    <AddButton label={t("create")} className='btn btn-primary-custom rounded-3' icon={null} /> 
                 </Modal.Footer>
             </Modal>
             <AddJobPost handleShow={addJobPost} handleClose={() => setAddJobPost(false)} currentPage={currentPage} />

@@ -14,6 +14,7 @@ import { regionList } from "@/components/listGroupData";
 import { useSearchParams } from "next/navigation";
 import { getCompanyDetails, updateCompany } from "@/redux/slices/employer/company/companyThunk";
 import { indexPerksBenefits } from "@/redux/slices/perks_benefits/perksBenefitsThunk";
+import { useTranslations } from "next-intl";
 
 
 interface EditModalProps {
@@ -66,6 +67,7 @@ const CardBox = ({ children }: { children: React.ReactNode }) => (
 );
 
 export default function EditModalProfile({ handleShow, handleClose, companyProfile }: EditModalProps) {
+    const t = useTranslations("employerProfileBody");
     const dispatch = useAppDispatch();
     const searchParams = useSearchParams();
     const companyID = searchParams.get("companyID");
@@ -240,7 +242,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                 onHide={handleClose}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit Profile</Modal.Title>
+                    <Modal.Title>{t("editProfile.editHeader")}</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>

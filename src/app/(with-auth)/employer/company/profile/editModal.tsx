@@ -14,7 +14,7 @@ import { regionList } from "@/components/listGroupData";
 import { useSearchParams } from "next/navigation";
 import { getCompanyDetails, updateCompany } from "@/redux/slices/employer/company/companyThunk";
 import { indexPerksBenefits } from "@/redux/slices/perks_benefits/perksBenefitsThunk";
-
+import { useTranslations } from "next-intl";
 
 interface EditModalProps {
     handleShow: boolean;
@@ -66,6 +66,7 @@ const CardBox = ({ children }: { children: React.ReactNode }) => (
 );
 
 export default function EditModalProfile({ handleShow, handleClose, companyProfile }: EditModalProps) {
+    const t = useTranslations("employerProfileBody");
     const dispatch = useAppDispatch();
     const searchParams = useSearchParams();
     const companyID = searchParams.get("companyID");
@@ -240,16 +241,16 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                 onHide={handleClose}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit Profile</Modal.Title>
+                    <Modal.Title>{t("editProfile.editHeader")}</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-                    <strong className="standar-text">Logo & Banner Image</strong>
+                    <strong className="standar-text">{t("editProfile.logoBanner")}</strong>
 
                     <div className="row mt-3">
                         {/* LOGO */}
                         <div className="col-md-3 border p-2">
-                            <small>Upload Logo</small>
+                            <small>{t("editProfile.uploadLogo")}</small>
                             <div className="edit-logo-profile my-2">
                                 {logoPreview ? (
                                     <img
@@ -259,18 +260,18 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                     />
                                 ) : (
                                     <div className="text-muted small text-center">
-                                        No logo uploaded
+                                        {t("editProfile.noLogo")}
                                     </div>
                                 )}
                             </div>
                             <small>
-                                {logoFile ? formatFileSize(logoFile.size) : "No file"}{" "}
+                                {logoFile ? formatFileSize(logoFile.size) : t("editProfile.nofile")}{" "}
                                 <span
                                     className="text-primary"
                                     style={{ cursor: "pointer" }}
                                     onClick={handleReplaceLogo}
                                 >
-                                    Replace
+                                    {t("editProfile.replace")}
                                 </span>
                             </small>
                             <input
@@ -284,7 +285,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
 
                         {/* BANNER */}
                         <div className="col-md-9 border p-2">
-                            <small>Banner Image</small>
+                            <small>{t("editProfile.bannerImage")}</small>
                             <div className="edit-banner-profile my-2">
                                 {bannerPreview ? (
                                     <img
@@ -294,18 +295,18 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                     />
                                 ) : (
                                     <div className="text-muted small text-center">
-                                        No banner uploaded
+                                        {t("editProfile.noBanner")}
                                     </div>
                                 )}
                             </div>
                             <small>
-                                {bannerFile ? formatFileSize(bannerFile.size) : "No file"}{" "}
+                                {bannerFile ? formatFileSize(bannerFile.size) : t("editProfile.nofile")}{" "}
                                 <span
                                     className="text-primary"
                                     style={{ cursor: "pointer" }}
                                     onClick={handleReplaceBanner}
                                 >
-                                    Replace
+                                    {t("editProfile.replace")}
                                 </span>
                             </small>
                             <input
@@ -319,11 +320,11 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                     </div>
                     <hr />
                     <div className="mt-4">
-                              <SectionTitle title="Basic Information" />
+                              <SectionTitle title={t("editProfile.basic")} />
                               <CardBox>
                                 <div className="row g-3">
                                     <div className="col-md-4">
-                                      <FieldLabel>Company Name</FieldLabel>
+                                      <FieldLabel>{t("editProfile.companyName")}</FieldLabel>
                                       <input
                                         className="form-control rounded-4"
                                         style={{ height: 44 }}
@@ -335,7 +336,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                     </div>
                     
                                   <div className="col-md-4">
-                                    <FieldLabel>Phone Number</FieldLabel>
+                                    <FieldLabel>{t("editProfile.phone")}</FieldLabel>
                                     <input
                                       className="form-control rounded-4"
                                       style={{ height: 44 }}
@@ -347,7 +348,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                     </div>
                                   
                                     <div className="col-md-4">
-                                      <FieldLabel>Email</FieldLabel>
+                                      <FieldLabel>{t("editProfile.email")}</FieldLabel>
                                       <input
                                         className="form-control rounded-4"
                                         style={{ height: 44 }}
@@ -359,7 +360,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                   </div>
                                   
                                   <div className="col-12">
-                                    <FieldLabel>Address</FieldLabel>
+                                    <FieldLabel>{t("editProfile.address")}</FieldLabel>
                                     <input
                                       className="form-control rounded-4"
                                       style={{ height: 44 }}
@@ -368,13 +369,13 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                       onChange={(e) => setAddress(e.target.value)}
                                       placeholder="e.g., 220 Silver Lake Drive, Reno, NV 89501"
                                     />
-                                    <div className="text-muted small mt-1">Branch office will default to this address.</div>
+                                    <div className="text-muted small mt-1">{t("editProfile.branchMuted")}</div>
                                   </div>
                     
                                   <div className="col-md-6">
-                                    <FieldLabel>Region</FieldLabel>
+                                    <FieldLabel>{t("editProfile.region")}</FieldLabel>
                                     <select name="" id="" className="form-control" value={region} onChange={(e) => setRegion(e.target.value)}>
-                                      <option value="" disabled>Select Region</option>
+                                      <option value="" disabled>{t("editProfile.selectRegion")}</option>
                                       {
                                         regionList.map((region) => (
                                           <option key={region.value} value={region.value}>{region.label}</option>
@@ -384,7 +385,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                   </div>
                     
                                   <div className="col-md-6">
-                                    <FieldLabel>Industry</FieldLabel>
+                                    <FieldLabel>{t("editProfile.industry")}</FieldLabel>
                                     <div className="rounded-4" style={{ minHeight: 44 }}>
                                       <MultipleSelect
                                         data={industryOptions}
@@ -403,7 +404,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                 <CardBox>
                                 <div className="row g-3">
                                     <div className="col-md-4">
-                                    <FieldLabel>Founded</FieldLabel>
+                                    <FieldLabel>{t("editProfile.founded")}</FieldLabel>
                                     <input
                                         className="form-control rounded-4"
                                         style={{ height: 44 }}
@@ -415,7 +416,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                     </div>
                     
                                     <div className="col-md-4">
-                                    <FieldLabel>No. of Employees</FieldLabel>
+                                    <FieldLabel>{t("editProfile.noOfEmp")}</FieldLabel>
                                     <input
                                         className="form-control rounded-4"
                                         style={{ height: 44 }}
@@ -439,7 +440,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                     </div> */}
                     
                                     <div className="col-md-4">
-                                    <FieldLabel>Appeal Point</FieldLabel>
+                                    <FieldLabel>{t("editProfile.points")}</FieldLabel>
                                     <input
                                         className="form-control rounded-4"
                                         style={{ height: 44 }}
@@ -451,7 +452,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                     </div>
 
                                     <div className="col-12">
-                                        <FieldLabel>Perks & Benefits</FieldLabel>
+                                        <FieldLabel>{t("editProfile.perks")}</FieldLabel>
                                         <div className="rounded-4" style={{ minHeight: 44 }}>
                                             <MultipleSelect
                                             data={items.map((item) => ({ label: item.name, value: String(item.id) }))}
@@ -463,7 +464,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                     </div>
                     
                                     <div className="col-12">
-                                        <FieldLabel>Company Profile</FieldLabel>
+                                        <FieldLabel>{t("editProfile.profile")}</FieldLabel>
                                         <div className="border rounded-4 p-2" style={{ background: "#fff" }}>
                                             <TextEditor value={companyProfileText} onChange={(value) => setCompanyProfileText(value)} />
                                         </div>
@@ -477,10 +478,10 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
 
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Close
+                        {t("editProfile.close")}
                     </Button>
                     <Button className="btn-primary-custom rounded-3" onClick={saveChanges}>
-                        Save Changes
+                        {t("editProfile.save")}
                     </Button>
                 </Modal.Footer>
             </Modal>

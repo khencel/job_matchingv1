@@ -12,5 +12,8 @@
     "employees": "Employees",
     "location": "Location",
     "industry": "Industry"
-  }
+  },
+  "showJobPost":"Show Job Post",
+  "perkBenefits":"Perks & Benefits",
+  "perkText":"This job comes with several perks and benefits."
 }

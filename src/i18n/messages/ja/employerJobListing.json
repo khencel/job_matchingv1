@@ -40,5 +40,8 @@
     "showing": "{start}から{end}を表示（合計{total}件）",
     "previous": "前へ",
     "next": "次へ"
-  }
+  },
+  "addJobPosting": "求人投稿を追加",
+  "cancel": "キャンセル",
+  "create": "作成"
 }

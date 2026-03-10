@@ -10,5 +10,31 @@
       "phone": "Phone"
     },
     "fallback": "—"
+  },
+  "editProfile":{
+    "editHeader":"Edit Profile",
+    "logoBanner":"Logo & Banner Image",
+    "uploadLogo":"Upload Logo",
+    "noLogo":"No logo uploaded",
+    "replace":"Replace",
+    "bannerImage":"Banner Image",
+    "noBanner":"No banner uploaded",
+    "companyName":"Company Name",
+    "phone":"Phone Number",
+    "email":"Email",
+    "address":"Address",
+    "branchMuted":"Branch office will default to this address.",
+    "region":"Region",
+    "selectRegion":"Select Region",
+    "industry":"Industry",
+    "founded":"Founded",
+    "noOfEmp":"No. of Employees",
+    "points":"Appeal Point",
+    "perks":"Perks & Benefits",
+    "profile":"Company Profile",
+    "basic":"Basic Information",
+    "close":"Close",
+    "save":"Save Changes",
+    "nofile":"No File"
   }
 }
