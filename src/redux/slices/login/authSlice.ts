@@ -2,6 +2,8 @@ import {
   fetchCurrentUser,
   GetUserResponse,
   loginUser,
+  refreshToken,
+  RefreshTokenResponse,
 } from "@/redux/features/auth/auth_thunk";
 import { User } from "@/types/user-register";
 import { createSlice, PayloadAction, SerializedError } from "@reduxjs/toolkit";
@@ -50,6 +52,7 @@ const authSlice = createSlice({
         loginUser.fulfilled,
         (state, action: PayloadAction<LoginResponse>) => {
           state.loading = false;
+          state.access = action.payload.access;
           state.user = action.payload.user;
         },
       )
@@ -79,6 +82,27 @@ const authSlice = createSlice({
           ? { message: action.payload }
           : { message: "Failed to fetch user" };
         state.isInitialized = true;
+      })
+
+      // Refresh token cases
+      .addCase(refreshToken.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        refreshToken.fulfilled,
+        (state, action: PayloadAction<RefreshTokenResponse>) => {
+          state.loading = false;
+          state.access = action.payload.access;
+        },
+      )
+      .addCase(refreshToken.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload
+          ? { message: action.payload }
+          : { message: "Failed to refresh token" };
+        state.user = null;
+        state.access = null;
       });
   },
 });

@@ -2,7 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchCurrentUser } from "@/redux/features/auth/auth_thunk";
+import {
+  fetchCurrentUser,
+  refreshToken,
+} from "@/redux/features/auth/auth_thunk";
 import Cookies from "js-cookie";
 import { Spinner } from "react-bootstrap";
 
@@ -22,8 +25,8 @@ export default function AuthLoader({
 
       if (hasToken) {
         try {
-          // This will call your API and populate Redux
           await dispatch(fetchCurrentUser()).unwrap();
+          await dispatch(refreshToken());
         } catch (error) {
           console.log("Session expired or invalid.", error);
         }

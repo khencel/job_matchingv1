@@ -8,8 +8,6 @@ import NextIntlProvider from "@/i18n/NextIntlProvider";
 import { cookies } from "next/headers";
 import StoreProvider from "./StoreProvider";
 import AuthLoader from "@/components/auth/AuthLoader";
-import Navbar from "@/components/navbar/Navbar";
-import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
 
 export const metadata = {
@@ -41,10 +39,7 @@ export default async function RootLayout({
             <AuthLoader>
               {/* <Navbar/> */}
               {children}
-              <ToastContainer
-                  position="top-right"
-                  autoClose={3000}
-              />
+              <ToastContainer position="top-right" autoClose={3000} />
               {/* <Footer /> */}
             </AuthLoader>
           </NextIntlProvider>

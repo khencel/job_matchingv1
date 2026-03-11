@@ -9,7 +9,7 @@ import { RegistrationStep1 } from "@/types/user-register";
 import { registerThunk } from "../registerThunk";
 
 const initialState: RegisterEmployer = {
-  currentStep: 2,
+  currentStep: 1,
   registerEmployerData: {
     accountInfo: {
       email: "",

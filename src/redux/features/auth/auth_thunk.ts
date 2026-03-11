@@ -6,6 +6,7 @@ import {
   loginApi,
   LoginPayload,
   logoutApi,
+  refreshTokenApi,
   verifyToken,
 } from "./authService";
 import { RootState } from "@/redux/store";
@@ -24,13 +25,11 @@ export const fetchCurrentUser = createAsyncThunk<
   { rejectValue: string }
 >("auth/fetchCurrentUser", async (_, { rejectWithValue }) => {
   try {
-    // AUTOMATIC: Your Axios Interceptor attaches the Bearer token here.
     const res = await getCurrentUserApi();
     console.log("Fetch current user:", res.data);
     return res.data;
   } catch (error) {
     if (error instanceof AxiosError) {
-      // 1. Handle Server Errors (400, 401, 404, 500)
       if (error.response?.data) {
         const data = error.response.data;
 
@@ -41,12 +40,12 @@ export const fetchCurrentUser = createAsyncThunk<
         // Fallback for complex objects
         return rejectWithValue("Failed to load user profile");
       }
-      // 2. Handle Network Errors (Server offline / WiFi dead)
+      // Handle Network Errors (Server offline / WiFi dead)
       if (error.request) {
         return rejectWithValue("Network error. Unable to reach server.");
       }
     }
-    // 3. Fallback
+    // Fallback
     return rejectWithValue("An unexpected error occurred.");
   }
 });
@@ -131,6 +130,7 @@ export const logoutUser = createAsyncThunk(
       localStorage.clear();
       Cookies.remove("access");
       Cookies.remove("refreshToken");
+      Cookies.remove("user_id");
     }
   },
 );
@@ -173,3 +173,54 @@ export const verifyAccessToken = createAsyncThunk(
     }
   },
 );
+
+export interface RefreshTokenResponse {
+  access: string;
+  refresh: string;
+}
+
+export const refreshToken = createAsyncThunk<
+  RefreshTokenResponse,
+  void,
+  { rejectValue: string }
+>("auth/refreshToken", async (_, { rejectWithValue, dispatch }) => {
+  const refresh = Cookies.get("refreshToken");
+  if (!refresh) {
+    dispatch(forceLogout());
+    Cookies.remove("access");
+    Cookies.remove("refreshToken");
+    return rejectWithValue("No refresh token available");
+  }
+
+  try {
+    const res = await refreshTokenApi(refresh);
+    Cookies.set("access", res.data.access, {
+      expires: 7,
+      secure: true,
+      sameSite: "strict",
+    });
+    Cookies.set("refreshToken", res.data.refresh, {
+      expires: 7,
+      secure: true,
+      sameSite: "strict",
+    });
+    console.log("Token Refreshed!");
+    return res.data;
+  } catch (error) {
+    dispatch(forceLogout());
+    Cookies.remove("access");
+    Cookies.remove("refreshToken");
+    if (error instanceof AxiosError) {
+      if (error.response?.data) {
+        // Fallback for complex objects
+        return rejectWithValue("Failed to refresh token");
+      }
+      // Handle Network Errors (Server offline / WiFi dead)
+      if (error.request) {
+        return rejectWithValue("Network error. Unable to reach server.");
+      }
+    }
+    // Fallback
+    return rejectWithValue("An unexpected error occurred.");
+  }
+});
