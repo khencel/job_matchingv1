@@ -11,7 +11,7 @@ import AuthLoader from "@/components/auth/AuthLoader";
 import { ToastContainer } from "react-toastify";
 
 export const metadata = {
-  title: "Next.js",
+  title: "Job Sapo",
   description: "A job matching application built with Next.js",
 };
 

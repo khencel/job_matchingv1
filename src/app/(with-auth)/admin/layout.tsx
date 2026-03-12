@@ -15,7 +15,7 @@ import "../../../../public/css/employer/style.css"
 
 
 export const metadata = {
-  title: "Next.js",
+  title: "Job Sapo",
   description: "A job matching application built with Next.js",
 };
 

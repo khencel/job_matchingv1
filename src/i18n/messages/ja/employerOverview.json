@@ -4,7 +4,7 @@
   "statusActivity": {
     "totalUsers": "総ユーザー数",
     "activeJobs": "公開中の求人",
-    "interviews": "面接",
+    "interviews": "応募者総数",
     "companies": "企業"
   },
   "recentActivity": {

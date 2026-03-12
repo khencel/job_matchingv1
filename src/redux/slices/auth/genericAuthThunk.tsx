@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { standard_post_api } from "@/redux/features/api/api_request";
+import { standard_get_api, standard_post_api } from "@/redux/features/api/api_request";
 
 export const forgotPassword = createAsyncThunk(
     "auth/forgotPassword",
@@ -36,5 +36,17 @@ export const createUser = createAsyncThunk(
         }
     }
 )       
+
+export const totalNoUser = createAsyncThunk(
+    "auth/totalNoUser",
+    async (year:any, { rejectWithValue }) => {
+        try {
+            const res = await standard_get_api('/api/auth/total-user?year='+year);
+            return res.data;
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    }
+)
       
     
