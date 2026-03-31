@@ -11,6 +11,7 @@ import {
   goNextStep,
   saveRegEmployerStep2,
 } from "@/redux/slices/register/employer/employerSlice";
+import { regionList, listCategory } from "@/components/listGroupData";
 
 // Industry options for dropdown
 export const industries = [
@@ -48,6 +49,9 @@ export default function RegisterEmployerStep2() {
   const dispatch = useAppDispatch();
   // i18n for labels/placeholders in Step 2
   const t = useTranslations("registerEmployerStep2");
+  const i = useTranslations("list");
+  const categoryList = listCategory(i);
+  const prefectureList = regionList(i);
   const tExtended = useTranslations("registerEmployerStep2Extended");
   const employerInfo = useAppSelector(
     (s) => s.registerEmployer.registerEmployerData.company_information,
@@ -343,9 +347,9 @@ export default function RegisterEmployerStep2() {
                 isInvalid={showIndustryError}
               >
                 <option value="">{t("placeholders.selectIndustry")}</option>
-                {industries.map((industry) => (
-                  <option key={industry} value={industry}>
-                    {industry}
+                {categoryList.map((industry) => (
+                  <option key={industry.value} value={industry.value}>
+                    {industry.label}
                   </option>
                 ))}
               </Form.Select>
@@ -409,9 +413,9 @@ export default function RegisterEmployerStep2() {
             isInvalid={error.region || data.region.length < 0}
           >
             <option value="">{t("placeholders.selectRegion")}</option>
-            {japanRegions.map((region) => (
-              <option key={region} value={region}>
-                {region}
+            {prefectureList.map((region) => (
+              <option key={region.value} value={region.value}>
+                {region.label}
               </option>
             ))}
           </Form.Select>

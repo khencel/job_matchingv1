@@ -55,7 +55,7 @@ export default function Login() {
           router.push("/employer/profile");
           break;
         case "job_seeker":
-          router.push("/");
+          router.push("/job-seeker/profile");
           break;
         case "admin":
           router.push("/admin/overview");

@@ -14,6 +14,7 @@ export default function CompanyProfilePage() {
     const dispatch = useAppDispatch();
 
     const { selectedCompany, selectedCompanyError, selectedCompanyStatus } = useAppSelector((state) => state.companySlice);
+    console.log(selectedCompany);
     
     const headerData = selectedCompany? {
         name: selectedCompany?.information?.company_information?.name,
@@ -27,6 +28,7 @@ export default function CompanyProfilePage() {
         profile: selectedCompany?.information?.company_information?.profile,
         phone: selectedCompany?.information?.company_information?.phone,
         address: selectedCompany?.information?.company_information?.address,
+        apeals: selectedCompany?.information?.company_information?.appeal_point,
         benefits: selectedCompany?.benefits,
 
     }: null;

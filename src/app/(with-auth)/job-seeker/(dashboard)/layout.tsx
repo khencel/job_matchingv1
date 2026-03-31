@@ -39,14 +39,22 @@ export default function JobSeekerLayout({
         activeKey={getActiveKey()}
       >
         {/* Sidebar */}
-        <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
+        <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}
+          style={{ height: "100%", display: "flex", flexDirection: "column", borderRight: "1px solid #ddd" }}
+        >
           <div className="sidebar-header">
             <h3 className="sidebar-title">{!isCollapsed && t("title")}</h3>
             <Button onClick={handleCollapse} className="toggle-btn">
               <MenuIcon className="icon" />
             </Button>
           </div>
-          <Nav className="flex-column">
+          <Nav className="flex-column"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              height: "100%",
+            }}
+          >
             <Nav.Item>
               <Nav.Link
                 as={Link}
@@ -86,6 +94,17 @@ export default function JobSeekerLayout({
                 <File /> {!isCollapsed && <span>{t("items.createResume")}</span>}
               </Nav.Link>
             </Nav.Item>
+
+            <Nav.Item style={{ marginTop: "auto" }}>
+              <Nav.Link
+                as={Link}
+                className="sidebar-text"
+                href="/registration/job-seeker"
+              >
+                <File /> {!isCollapsed && <span>{t("items.quickSearch")}</span>}
+              </Nav.Link>
+            </Nav.Item>
+            
           </Nav>
         </div>
         {/* Content */}
@@ -95,4 +114,10 @@ export default function JobSeekerLayout({
       </Tab.Container>
     </div>
   );
+}
+
+const styles = {
+  quickSearch: {
+    marginTop: "auto",
+  },
 }

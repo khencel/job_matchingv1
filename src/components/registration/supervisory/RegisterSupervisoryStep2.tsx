@@ -10,10 +10,14 @@ import { Button, Form, Row, Col } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
 import { RegisterSuperVisoryStep2Data } from "@/types/super-visory";
+import { regionList, listCategory } from "@/components/listGroupData";
 
 export default function RegisterSupervisoryStep2() {
   const dispatch = useAppDispatch();
   const t = useTranslations("registerSupervisoryStep2");
+  const i = useTranslations("list");
+  const categoryList = listCategory(i);
+  const prefectureList = regionList(i);
   const companyInfo = useAppSelector(
     (s) => s.registerSuperVisory.registerSuperVisoryData.companyInfo
   );
@@ -267,9 +271,9 @@ export default function RegisterSupervisoryStep2() {
             isInvalid={!!error.prefecture}
           >
             <option value="">{t("placeholders.selectPrefecture")}</option>
-            {prefectures.map((prefecture) => (
-              <option key={prefecture} value={prefecture}>
-                {prefecture}
+            {prefectureList.map((prefecture) => (
+              <option key={prefecture.value} value={prefecture.value}>
+                {prefecture.label}
               </option>
             ))}
           </Form.Select>
@@ -359,9 +363,9 @@ export default function RegisterSupervisoryStep2() {
             isInvalid={!!error.industry}
           >
             <option value="">{t("placeholders.selectIndustry")}</option>
-            {industries.map((industry) => (
-              <option key={industry} value={industry}>
-                {industry}
+            {categoryList.map((industry) => (
+              <option key={industry.value} value={industry.value}>
+                {industry.label}
               </option>
             ))}
           </Form.Select>
@@ -443,71 +447,3 @@ export default function RegisterSupervisoryStep2() {
     </Form>
   );
 }
-// Industry options
-const industries = [
-  "Technology",
-  "Healthcare",
-  "Finance",
-  "Manufacturing",
-  "Retail",
-  "Education",
-  "Hospitality",
-  "Construction",
-  "Transportation",
-  "Real Estate",
-  "Agriculture",
-  "Entertainment",
-  "Telecommunications",
-  "Energy",
-  "Other",
-];
-//Japan Prefectures
-const prefectures = [
-  "Hokkaido",
-  "Aomori",
-  "Iwate",
-  "Miyagi",
-  "Akita",
-  "Yamagata",
-  "Fukushima",
-  "Ibaraki",
-  "Tochigi",
-  "Gunma",
-  "Saitama",
-  "Chiba",
-  "Tokyo",
-  "Kanagawa",
-  "Niigata",
-  "Toyama",
-  "Ishikawa",
-  "Fukui",
-  "Yamanashi",
-  "Nagano",
-  "Gifu",
-  "Shizuoka",
-  "Aichi",
-  "Mie",
-  "Shiga",
-  "Kyoto",
-  "Osaka",
-  "Hyogo",
-  "Nara",
-  "Wakayama",
-  "Tottori",
-  "Shimane",
-  "Okayama",
-  "Hiroshima",
-  "Yamaguchi",
-  "Tokushima",
-  "Kagawa",
-  "Ehime",
-  "Kochi",
-  "Fukuoka",
-  "Saga",
-  "Nagasaki",
-  "Kumamoto",
-  "Oita",
-  "Miyazaki",
-  "Kagoshima",
-  "Okinawa",
-];

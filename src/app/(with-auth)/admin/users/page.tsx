@@ -115,7 +115,7 @@ export default function AdminUsers() {
                 {/* <FaSearch className="text-primary" /> {t("users.searchPlaceholder")} */}
                 
             </div>
-            <div className="col-1 text-end">
+            <div className="col-2 text-end">
                 <button
                 className="btn btn-link dropdown-toggle text-primary"
                 type="button"

@@ -105,7 +105,7 @@ const JobSeekerProfilePage = () => {
       label: t("sections.professionalStatus.fields.highestEducation.options.doctoralDegree"),
     },
   ];
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_API_CONTENT_URL;
 
   const resumeUrl = useMemo(() => {
     return `${baseUrl}media/${existingResume}?${dateNow}`;

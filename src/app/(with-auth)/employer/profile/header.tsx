@@ -14,8 +14,6 @@ export default function Header({ data }: { data: any }) {
 
   const companyInfo = data.userDetails_emp?.company_information || {};
 
-  console.log(companyInfo.company_industry);
-
   // ✅ design-safe display only (no functional removal)
   const industryText = useMemo(() => {
     const v = companyInfo?.company_industry;
@@ -118,32 +116,49 @@ export default function Header({ data }: { data: any }) {
               backdropFilter: "blur(8px)",
             }}
           >
-            <div className="row g-3">
-              <div className="col-6 col-lg-3">
-                <div className="small text-muted">{t("stats.founded")}</div>
-                <div className="fw-semibold text-dark">
-                  <FormattedDate date={companyInfo.founded} />
+            <div className="row row-cols-2 row-cols-lg-5 g-3">
+              <div className="col">
+                <div className="h-100">
+                  <div className="small text-muted">{t("stats.founded")}</div>
+                  <div className="fw-semibold text-dark">
+                    <FormattedDate date={companyInfo.founded} />
+                  </div>
                 </div>
               </div>
 
-              <div className="col-6 col-lg-3">
-                <div className="small text-muted">{t("stats.employees")}</div>
-                <div className="fw-semibold text-dark">
-                  {companyInfo.no_of_emp || t("fallback.notSpecified")}
+              <div className="col">
+                <div className="h-100">
+                  <div className="small text-muted">{t("stats.employees")}</div>
+                  <div className="fw-semibold text-dark">
+                    {companyInfo.no_of_emp || t("fallback.notSpecified")}
+                  </div>
                 </div>
               </div>
 
-              <div className="col-6 col-lg-3">
-                <div className="small text-muted">{t("stats.location")}</div>
-                <div className="fw-semibold text-dark">
-                  {companyInfo.region || t("fallback.notSpecified")}
+              <div className="col">
+                <div className="h-100">
+                  <div className="small text-muted">{t("stats.apeals")}</div>
+                  <div className="fw-semibold text-dark">
+                    {companyInfo.appeal_point || t("fallback.notSpecified")}
+                  </div>
                 </div>
               </div>
 
-              <div className="col-6 col-lg-3">
-                <div className="small text-muted">{t("stats.industry")}</div>
-                <div className="fw-semibold text-dark text-truncate">
-                  {industryText}
+              <div className="col">
+                <div className="h-100">
+                  <div className="small text-muted">{t("stats.location")}</div>
+                  <div className="fw-semibold text-dark">
+                    {companyInfo.region || t("fallback.notSpecified")}
+                  </div>
+                </div>
+              </div>
+
+              <div className="col">
+                <div className="h-100">
+                  <div className="small text-muted">{t("stats.industry")}</div>
+                  <div className="fw-semibold text-dark text-truncate">
+                    {industryText}
+                  </div>
                 </div>
               </div>
             </div>

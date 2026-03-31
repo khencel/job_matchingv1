@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 export default function Header({ data }: { data: any }) {
   const t = useTranslations("employerProfileHeader");
   const [showModal, setShowModal] = useState(false);
-
+  
   const handleEditModal = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
   
@@ -121,32 +121,50 @@ export default function Header({ data }: { data: any }) {
               backdropFilter: "blur(8px)",
             }}
           >
-            <div className="row g-3">
-              <div className="col-6 col-lg-3">
-                <div className="small text-muted">{t("stats.founded")}</div>
-                <div className="fw-semibold text-dark">
-                  {data.founded}
+            <div className="row row-cols-2 row-cols-lg-5 g-3">
+              <div className="col">
+                <div className="h-100">
+                  <div className="small text-muted">{t("stats.founded")}</div>
+                  <div className="fw-semibold text-dark">
+                    {data.founded}
+                  </div>
                 </div>
               </div>
 
-              <div className="col-6 col-lg-3">
-                <div className="small text-muted">{t("stats.employees")}</div>
-                <div className="fw-semibold text-dark">
-                  {data.no_of_emp || t("fallback.notSpecified")}
+              <div className="col">
+                <div className="h-100">
+                  <div className="small text-muted">{t("stats.employees")}</div>
+                  <div className="fw-semibold text-dark">
+                    {data.no_of_emp || t("fallback.notSpecified")}
+                  </div>
                 </div>
               </div>
 
-              <div className="col-6 col-lg-3">
-                <div className="small text-muted">{t("stats.location")}</div>
-                <div className="fw-semibold text-dark">
-                  {data?.region || t("fallback.notSpecified")}
+              <div className="col">
+                <div className="h-100">
+                  <div className="small text-muted">{t("stats.apeals")}</div>
+                  <div className="fw-semibold text-dark">
+                    {data.apeals || t("fallback.notSpecified")}
+                  </div>
                 </div>
               </div>
 
-              <div className="col-6 col-lg-3">
-                <div className="small text-muted">{t("stats.industry")}</div>
-                <div className="fw-semibold text-dark text-truncate">
-                  {industryText}
+              <div className="col">
+                <div className="h-100">
+                  <div className="small text-muted">{t("stats.location")}</div>
+                  <div className="fw-semibold text-dark">
+                    {data?.region || t("fallback.notSpecified")}
+                  </div>
+                </div>
+                
+              </div>
+
+              <div className="col">
+                <div className="h-100">
+                  <div className="small text-muted">{t("stats.industry")}</div>
+                  <div className="fw-semibold text-dark text-truncate">
+                    {industryText}
+                  </div>
                 </div>
               </div>
             </div>

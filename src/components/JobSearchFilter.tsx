@@ -12,6 +12,10 @@ export default function JobSearchFiler() {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const t = useTranslations("jobSearchFilter");
+  const i = useTranslations("list");
+
+  const categoryList = listCategory(i);
+  const prefectureList = regionList(i);
 
   const { category, region } = useSelector(
     (state: RootState) => state.jobSearchFilterSlice,
@@ -64,7 +68,7 @@ export default function JobSearchFiler() {
                   }
                 >
                   <option value="">{t("placeholders.category")}</option>
-                  {listCategory.map((item: any, index: number) => {
+                  {categoryList.map((item: any, index: number) => {
                     return (
                       <option key={index} value={item.value}>
                         {item.label}
@@ -101,7 +105,7 @@ export default function JobSearchFiler() {
                   id="prefecture"
                 >
                   <option value="">{t("placeholders.prefecture")}</option>
-                  {regionList.map((item: any, index: number) => {
+                  {prefectureList.map((item: any, index: number) => {
                     return (
                       <option key={index} value={item.value}>
                         {item.label}

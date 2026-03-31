@@ -82,7 +82,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
     const [companyProfileText, setCompanyProfileText] = useState("");
     const [founded, setFounded] = useState("");
     const [fee, setFee] = useState("100");
-    const [appealPoint, setAppealPoint] = useState("100");
+    const [appealPoint, setAppealPoint] = useState("");
     const [employees, setEmployees] = useState(0);
     const [region, setRegion] = useState("");
     const [industry, setIndustry] = useState<
@@ -180,7 +180,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
         handleClose();
     };
 
-    // Update state when companyProfile changes
+
     useEffect(() => {
         if (!handleShow) return;
         const companyInfo = companyProfile || {};
@@ -191,6 +191,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
         setAddress(companyInfo?.address || "");
         setFounded(companyInfo?.founded || "");
         setEmployees(companyInfo?.no_of_emp || 0);
+        setAppealPoint(companyInfo?.apeals || "100");
         setRegion(companyInfo?.region || "");
         setCompanyProfileText(companyInfo.profile || "");
         
