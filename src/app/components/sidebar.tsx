@@ -25,7 +25,7 @@ const Sidebar = ({ children }: PropsWithChildren) => {
   const pathname = usePathname();
   const menuItems = [
     // {label: "Overview", icon:FiLayers, href: "/employer/overview"},
-    { label: t("menuItems.profile"), icon: FaUser, href: "/employer/profile" },
+    // { label: t("menuItems.profile"), icon: FaUser, href: "/employer/profile" },
     { label: t("menuItems.applicants"), icon: FaClipboardList, href: "/employer/applicants" },
     { label: t("menuItems.postJob"), icon: FaPlus, href: "/employer/post_a_job/job-information" },
     { label: t("menuItems.jobListings"), icon: FaBuilding, href: "/employer/job_listing" },

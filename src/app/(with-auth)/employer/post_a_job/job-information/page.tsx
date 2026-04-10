@@ -1,6 +1,7 @@
 "use client"
 import Header from "../headerPostAJob"
-import MultiSelectDropdown from "@/components/MultipleSelect"
+// import MultiSelectDropdown from "@/components/MultipleSelect"
+import MultipleSelect from "@/components/MultipleSelectStandard"
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
 import type { RootState } from '@/redux/store'
@@ -8,7 +9,7 @@ import { setField, addSkill, removeSkill, setInitialData } from "@/redux/slices/
 import { showErrorToast } from "@/app/(util)/toaster";
 import { useRouter } from "next/navigation"
 import Cookies from "js-cookie";
-import { regionList } from "@/components/listGroupData"
+import { regionList, listCategory } from "@/components/listGroupData"
 import { useTranslations } from "next-intl"
 import { useAppSelector, useAppDispatch } from "@/redux/hooks"
 import { indexCompany } from "@/redux/slices/employer/company/companyThunk";
@@ -18,11 +19,19 @@ export default function PostAJob() {
   const [input, setInput] = useState<string>("")
   const router = useRouter();
   const t = useTranslations("employerJobInformation");
+  
 
   const dispatch = useAppDispatch();
   const basicInfo = useSelector((state: RootState) => state.basicInfo);
 
   const { companies } = useAppSelector((state) => state.companySlice);
+
+  const i  = useTranslations("list");
+  
+  const regionListData = regionList(i)
+  const industryListData = listCategory(i)
+
+  
   
   const handleAddSkill = () => {
     const value = input.trim();
@@ -237,7 +246,7 @@ export default function PostAJob() {
                     className="form-select rounded-3"
                   >
                     <option disabled hidden value="">{t("fields.prefecture.placeholder")}</option>
-                    {regionList.map((item: any, index: number) => (
+                    {regionListData.map((item: any, index: number) => (
                       <option key={item.value} value={item.value}>{item.label}</option>
                     ))}
                   </select>
@@ -257,12 +266,15 @@ export default function PostAJob() {
                 </div>
                 <div className="col-12 col-md-8">
                   <div className="p-3 border rounded-3 bg-white">
-                    <MultiSelectDropdown
-                      value={basicInfo.category}
-                      onChange={(selectedOptions: any) =>
-                        dispatch(setField({ category: selectedOptions }))
-                      }
-                    />
+
+                    <MultipleSelect
+                        data={industryListData}
+                        value={basicInfo.category || []}
+                        onChange={(selected) => {
+                          dispatch(setField({ category: selected }));
+                        }}
+                        placeholder={"Select categories"}
+                      />
                   </div>
                 </div>
               </div>

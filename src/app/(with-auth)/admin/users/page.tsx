@@ -16,6 +16,8 @@ import AddUserModal from "./add_modal";
 import FormattedDate from "@/components/date_format";
 import CompanyList from "./company_list";
 import PerksBenefits from "./perks_benefits";
+import * as XLSX from "xlsx-js-style";
+import { saveAs } from 'file-saver';
 
 export default function AdminUsers() {
     const t = useTranslations("adminUsers");
@@ -85,6 +87,48 @@ export default function AdminUsers() {
         setUserID(String(id))
     }
 
+    const handleDownload = () => {
+        const itemToPrint = items
+        
+        if(itemToPrint.length === 0) return;
+            const dataForExcel = itemToPrint.map((item:any) => ({
+                ["Full Name"]: item.role === "employer" ? `${item.userDetails_emp?.contact_person?.name}` : item.role === "job_seeker" ? `${item.userDetails_job_seeker?.jobSeekerData?.firstName + " " + item.userDetails_job_seeker?.jobSeekerData?.lastName}` : item.userDetails_supervisory?.companyInfo?.repName,
+                ["Email"]: item.email,
+                ["Role"]: item.role,
+                ["Status"]: item.is_active ? t("users.status.active") : t("users.status.notActive"),
+                ["Joined Date"]: new Date(item.created_at).toLocaleDateString(),
+            }));
+    
+            const worksheet = XLSX.utils.json_to_sheet(dataForExcel);
+    
+            const range = XLSX.utils.decode_range(worksheet["!ref"]!);
+            for (let C = range.s.c; C <= range.e.c; ++C) {
+                const cellAddress = XLSX.utils.encode_cell({ r: 0, c: C });
+                if (worksheet[cellAddress]) {
+                    worksheet[cellAddress].s = {
+                        font: { bold: true }
+                    };
+                }
+            }
+    
+            worksheet['!cols'] = Object.keys(dataForExcel[0]).map((key) => {
+                const maxLength = Math.max(
+                    key.length,
+                    ...dataForExcel.map((row:any) =>
+                        row[key] ? row[key].toString().length : 0
+                    )
+                );
+                return { wch: maxLength + 4 };
+            });
+            
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Users");
+    
+            const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+            const blob = new Blob([excelBuffer], { type: "application/octet-stream" });
+            saveAs(blob, "users.xlsx");
+    }
+
     useEffect(() => {
         dispatch(fetchUsers({
             page: currentPage,
@@ -101,6 +145,9 @@ export default function AdminUsers() {
             </div>
             <div className="col text-end">
                 {/* <span>{t("users.period")} <FaCalendarCheck className="text-primary" /></span> */}
+                <button className="btn btn-success btn-sm me-2" onClick={handleDownload}>
+                        Download Excel
+                </button>
                 <button className="btn btn-primary-custom rounded-3 me-2" onClick={handleAddModal}>
                     {t("users.addUser")}
                 </button>
@@ -111,42 +158,44 @@ export default function AdminUsers() {
             <div className="col">
                 <strong>{t("users.listTitle", { count })}</strong>
             </div>
-            <div className="col-2 text-end">
-                {/* <FaSearch className="text-primary" /> {t("users.searchPlaceholder")} */}
+            <div className="col text-end">
+                
                 
             </div>
-            <div className="col-2 text-end">
+            <div className="col text-end">
                 <button
-                className="btn btn-link dropdown-toggle text-primary"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-            >
-            <FaSliders className="me-1" /> {t("users.filterButton")}
-        </button>
+                        className="btn btn-link dropdown-toggle text-primary"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                    <FaSliders className="me-1" /> {t("users.filterButton")}
+                </button>
 
-        <ul className="dropdown-menu dropdown-menu-end">
-            <li>
-                <button className="dropdown-item" onClick={() => handleFilter("all")}>
-                    {t("users.filters.all")}
-                </button>
-            </li>
-            <li>
-                <button className="dropdown-item" onClick={() => handleFilter("job_seeker")}>
-                    {t("users.filters.jobSeeker")}
-                </button>
-            </li>
-            <li>
-                <button className="dropdown-item" onClick={() => handleFilter("employer")}>
-                    {t("users.filters.employer")}
-                </button>
-            </li>
-            <li>
-                <button className="dropdown-item" onClick={() => handleFilter("supervisory")}>
-                    {t("users.filters.supervisory")}
-                </button>
-            </li>
-        </ul>
+            
+                <ul className="dropdown-menu dropdown-menu-end">
+                    <li>
+                        <button className="dropdown-item" onClick={() => handleFilter("all")}>
+                            {t("users.filters.all")}
+                        </button>
+                    </li>
+                    <li>
+                        <button className="dropdown-item" onClick={() => handleFilter("job_seeker")}>
+                            {t("users.filters.jobSeeker")}
+                        </button>
+                    </li>
+                    <li>
+                        <button className="dropdown-item" onClick={() => handleFilter("employer")}>
+                            {t("users.filters.employer")}
+                        </button>
+                    </li>
+                    <li>
+                        <button className="dropdown-item" onClick={() => handleFilter("supervisory")}>
+                            {t("users.filters.supervisory")}
+                        </button>
+                    </li>
+                </ul>
+                
             </div>
         </div>
 

@@ -78,6 +78,11 @@ export default function AddUserModal({
 
   const currentYear = new Date().getFullYear();
 
+  const i  = useTranslations("list");
+
+  const regionListData = regionList(i)
+  const industryListData = listCategory(i)
+
   const errors = useMemo(() => {
     const e: Partial<Record<keyof FormState, string>> = {};
 
@@ -367,7 +372,7 @@ export default function AddUserModal({
               <Form.Group controlId="industry">
                 <Form.Label>{t("addUser.label.industry")}</Form.Label>
                 <MultipleSelect
-                  data={listCategory}
+                  data={industryListData}
                   value={form.industry}
                   onChange={(selected) => {
                     setField("industry", selected);
@@ -395,7 +400,7 @@ export default function AddUserModal({
                 >
                   <option value="" disabled>{t("addUser.placeholder.region")}</option>
                   {
-                    regionList.map((region) => (
+                    regionListData.map((region) => (
                       <option key={region.value} value={region.value}>{region.label}</option>
                     ))
                   }

@@ -14,6 +14,7 @@ import ImageDropzone from "@/components/dropzone";
 import { indexPerksBenefits } from "@/redux/slices/perks_benefits/perksBenefitsThunk";
 import Cookie from "js-cookie";
 import { listCategory } from "@/components/listGroupData";
+import { useTranslations } from "next-intl";
 
 
 
@@ -69,6 +70,9 @@ const CardBox = ({ children }: { children: React.ReactNode }) => (
 
 export default function AddCompanyModal({ handleShow, handleClose, userID_opt, onSuccess }: AddModalProps) {
     const dispatch = useAppDispatch();
+    const i = useTranslations("list");
+    const regionListData = regionList(i);
+    const listCategoryData = listCategory(i);
     const [logoPreview, setLogoPreview] = useState<string | null>(null);
     const [logoFile, setLogoFile] = useState<File | null>(null);
     const [bannerPreview, setBannerPreview] = useState<string | null>(null);
@@ -320,7 +324,7 @@ export default function AddCompanyModal({ handleShow, handleClose, userID_opt, o
                 <select name="" id="" className="form-control" value={region} onChange={(e) => setRegion(e.target.value)}>
                   <option value="" disabled>Select Region</option>
                   {
-                    regionList.map((region) => (
+                    regionListData.map((region) => (
                       <option key={region.value} value={region.value}>{region.label}</option>
                     ))
                   }
@@ -331,7 +335,7 @@ export default function AddCompanyModal({ handleShow, handleClose, userID_opt, o
                 <FieldLabel>Industry</FieldLabel>
                 <div className="rounded-4" style={{ minHeight: 44 }}>
                   <MultipleSelect
-                    data={listCategory}
+                    data={listCategoryData}
                     value={industry}
                     onChange={setIndustry}
                     placeholder="Select industry"

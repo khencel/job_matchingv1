@@ -52,7 +52,7 @@ export default function Login() {
 
       switch (role) {
         case "employer":
-          router.push("/employer/profile");
+          router.push("/employer/company");
           break;
         case "job_seeker":
           router.push("/job-seeker/profile");
