@@ -13,8 +13,6 @@ import {
   User,
   Mail,
   Phone,
-  FileText,
-  UploadCloud,
 } from "lucide-react";
 import Image from "next/image";
 import { useState, useRef, useEffect, useMemo } from "react";
@@ -33,14 +31,13 @@ import { setJobSeekerField } from "@/redux/slices/updateProfile/updateProfileSli
 import { FaFacebook } from "react-icons/fa";
 import { isPhoneNumberValid } from "@/helper/validations";
 import { RegisterJobSeekerData } from "@/types/job-seeker";
-import { useRouter } from "next/navigation";
 import DisplayResume from "@/components/DisplayResume";
 import { useTranslations } from "next-intl";
+import { NATIONALITIES } from "@/constants/nationalities";
 
 const JobSeekerProfilePage = () => {
   const t = useTranslations("jobSeekerProfileExtended");
   const dispatch = useAppDispatch();
-  const router = useRouter();
   // Read-only source
   const email = useAppSelector((s) => s.authState.user?.email);
   const AuthUser = useAppSelector(
@@ -514,13 +511,24 @@ const JobSeekerProfilePage = () => {
                       {t("sections.personalInformation.fields.nationality")}
                     </Form.Label>
                     {isEditMode ? (
-                      <Form.Control
+                      <Form.Select
                         value={getValue("nationality")}
                         onChange={(e) =>
                           handleInputChange("nationality", e.target.value)
                         }
                         isInvalid={!!errors.nationality}
-                      />
+                      >
+                        <option value="">
+                          {t(
+                            "sections.personalInformation.fields.nationality",
+                          )}
+                        </option>
+                        {NATIONALITIES.map((nationality) => (
+                          <option key={nationality} value={nationality}>
+                            {nationality}
+                          </option>
+                        ))}
+                      </Form.Select>
                     ) : (
                       <p className="fw-medium text-capitalize">
                         {getValue("nationality")}

@@ -10,13 +10,14 @@ import {
 } from "@/redux/slices/register/job-seeker/jobseekerSlice";
 import { isPhoneNumberValid } from "@/helper/validations";
 import { RegisterJobSeekerStep2Data } from "@/types/job-seeker";
+import { NATIONALITIES } from "@/constants/nationalities";
 
 const RegisterJobSeekerStep2 = () => {
   const t = useTranslations("registerJobSeekerStep2");
   const dispatch = useAppDispatch();
 
   const jobSeekerData = useAppSelector(
-    (state) => state.registerJobSeeker?.registerJobSeekerData?.jobSeekerData
+    (state) => state.registerJobSeeker?.registerJobSeekerData?.jobSeekerData,
   );
 
   const [error, setError] = useState<{ [name: string]: boolean }>({});
@@ -25,7 +26,7 @@ const RegisterJobSeekerStep2 = () => {
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => {
     const { name, value } = e.target;
     // Clear error for the field on change
@@ -42,7 +43,7 @@ const RegisterJobSeekerStep2 = () => {
     const minDate = new Date(
       today.getFullYear() - 100,
       today.getMonth(),
-      today.getDate()
+      today.getDate(),
     );
     return minDate.toISOString().split("T")[0];
   };
@@ -52,7 +53,7 @@ const RegisterJobSeekerStep2 = () => {
     const maxDate = new Date(
       today.getFullYear() - 18,
       today.getMonth(),
-      today.getDate()
+      today.getDate(),
     );
     return maxDate.toISOString().split("T")[0];
   };
@@ -180,7 +181,7 @@ const RegisterJobSeekerStep2 = () => {
       setError(validationErrors);
       const firstErrorField = Object.keys(validationErrors)[0];
       const errorElement = form.querySelector(
-        `[name="${firstErrorField}"]`
+        `[name="${firstErrorField}"]`,
       ) as HTMLElement;
       if (errorElement) errorElement.focus();
       return;
@@ -370,8 +371,8 @@ const RegisterJobSeekerStep2 = () => {
           {data.birthdate === ""
             ? t("errors.birthdateRequired")
             : data.birthdate > getMaxBirthdateFor18YearsOld()
-            ? t("errors.age18Error")
-            : t("errors.age100Error")}
+              ? t("errors.age18Error")
+              : t("errors.age100Error")}
         </Form.Control.Feedback>
       </Form.Group>
 
@@ -488,174 +489,5 @@ const RegisterJobSeekerStep2 = () => {
     </Form>
   );
 };
-
-const NATIONALITIES: string[] = [
-  "Afghan",
-  "Albanian",
-  "Algerian",
-  "American",
-  "Andorran",
-  "Angolan",
-  "Argentine",
-  "Armenian",
-  "Australian",
-  "Austrian",
-  "Azerbaijani",
-  "Bahamian",
-  "Bahraini",
-  "Bangladeshi",
-  "Barbadian",
-  "Belarusian",
-  "Belgian",
-  "Belizean",
-  "Beninese",
-  "Bhutanese",
-  "Bolivian",
-  "Bosnian",
-  "Brazilian",
-  "British",
-  "Bruneian",
-  "Bulgarian",
-  "Burkinabe",
-  "Burmese",
-  "Burundian",
-  "Cambodian",
-  "Cameroonian",
-  "Canadian",
-  "Cape Verdean",
-  "Central African",
-  "Chadian",
-  "Chilean",
-  "Chinese",
-  "Colombian",
-  "Comoran",
-  "Congolese",
-  "Costa Rican",
-  "Croatian",
-  "Cuban",
-  "Cypriot",
-  "Czech",
-  "Danish",
-  "Djiboutian",
-  "Dominican",
-  "Dutch",
-  "Ecuadorian",
-  "Egyptian",
-  "Emirati",
-  "English",
-  "Eritrean",
-  "Estonian",
-  "Ethiopian",
-  "Fijian",
-  "Filipino",
-  "Finnish",
-  "French",
-  "Gabonese",
-  "Gambian",
-  "Georgian",
-  "German",
-  "Ghanaian",
-  "Greek",
-  "Grenadian",
-  "Guatemalan",
-  "Guinean",
-  "Guyanese",
-  "Haitian",
-  "Honduran",
-  "Hungarian",
-  "Icelandic",
-  "Indian",
-  "Indonesian",
-  "Iranian",
-  "Iraqi",
-  "Irish",
-  "Israeli",
-  "Italian",
-  "Ivorian",
-  "Jamaican",
-  "Japanese",
-  "Jordanian",
-  "Kazakh",
-  "Kenyan",
-  "Korean",
-  "Kuwaiti",
-  "Kyrgyz",
-  "Laotian",
-  "Latvian",
-  "Lebanese",
-  "Liberian",
-  "Libyan",
-  "Lithuanian",
-  "Luxembourgish",
-  "Macedonian",
-  "Malagasy",
-  "Malawian",
-  "Malaysian",
-  "Maldivian",
-  "Malian",
-  "Maltese",
-  "Mauritanian",
-  "Mauritian",
-  "Mexican",
-  "Moldovan",
-  "Mongolian",
-  "Montenegrin",
-  "Moroccan",
-  "Mozambican",
-  "Namibian",
-  "Nepalese",
-  "New Zealander",
-  "Nicaraguan",
-  "Nigerian",
-  "Nigerien",
-  "Norwegian",
-  "Omani",
-  "Pakistani",
-  "Panamanian",
-  "Papua New Guinean",
-  "Paraguayan",
-  "Peruvian",
-  "Polish",
-  "Portuguese",
-  "Qatari",
-  "Romanian",
-  "Russian",
-  "Rwandan",
-  "Saudi",
-  "Scottish",
-  "Senegalese",
-  "Serbian",
-  "Singaporean",
-  "Slovak",
-  "Slovenian",
-  "Somali",
-  "South African",
-  "Spanish",
-  "Sri Lankan",
-  "Sudanese",
-  "Surinamese",
-  "Swedish",
-  "Swiss",
-  "Syrian",
-  "Taiwanese",
-  "Tajik",
-  "Tanzanian",
-  "Thai",
-  "Togolese",
-  "Trinidadian",
-  "Tunisian",
-  "Turkish",
-  "Turkmen",
-  "Ugandan",
-  "Ukrainian",
-  "Uruguayan",
-  "Uzbek",
-  "Venezuelan",
-  "Vietnamese",
-  "Welsh",
-  "Yemeni",
-  "Zambian",
-  "Zimbabwean",
-];
 
 export default RegisterJobSeekerStep2;
