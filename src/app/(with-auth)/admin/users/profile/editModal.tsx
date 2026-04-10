@@ -378,7 +378,7 @@ export default function EditModalProfile({ handleShow, handleClose, companyProfi
                                     <select name="" id="" className="form-control" value={region} onChange={(e) => setRegion(e.target.value)}>
                                       <option value="" disabled>Select Region</option>
                                       {
-                                        regionList.map((region) => (
+                                        regionList(t).map((region) => (
                                           <option key={region.value} value={region.value}>{region.label}</option>
                                         ))
                                       }
