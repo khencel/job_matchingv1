@@ -25,7 +25,7 @@ const FilterJobs = () => {
               {t("fields.category.placeholder")}
             </option>
             {
-              listCategory.map((item:any, index:number)=>{
+              listCategory(t).map((item:any, index:number)=>{
                 return (
                   <option key={index} value={item.value}>{item.label}</option>
                 )
