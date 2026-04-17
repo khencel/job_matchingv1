@@ -76,7 +76,7 @@ export default function RegisterEmployerStep2() {
 
     // Normalize numeric fields: drop leading zeroes like "01" -> "1" for fee/appealPoints
     const normalizedValue =
-      name === "appeal_point" || name === "fee" || name === "no_of_emp"
+      name === "fee" || name === "no_of_emp"
         ? value.replace(/^0+(?=\d)/, "")
         : value;
 
@@ -206,12 +206,7 @@ export default function RegisterEmployerStep2() {
       hasError = true;
     }
 
-    // Validate appeal points
-    const appealPointsNum = Number(data.appeal_point);
-    if (appealPointsNum <= 0) {
-      validationErrors.appeal_point = true;
-      hasError = true;
-    }
+    // appeal_point is optional (can be blank)
 
     if (data.founded <= 1000 || data.founded > new Date().getFullYear()) {
       validationErrors.founded = true;
@@ -521,14 +516,12 @@ export default function RegisterEmployerStep2() {
         <Form.Group className="mb-3" controlId="appealPoints">
           <Form.Label>{t("labels.appealPoints")}</Form.Label>
           <Form.Control
-            required
             type="text"
             name="appeal_point"
             placeholder={t("placeholders.enterAppealPoints")}
             value={data.appeal_point}
             onChange={handleChange}
             onFocus={(e) => e.target.select()}
-            isInvalid={error.appeal_point}
           />
           <Form.Control.Feedback type="invalid">
             {t("errors.fillRequired")}
