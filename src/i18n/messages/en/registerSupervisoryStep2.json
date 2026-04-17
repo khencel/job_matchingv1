@@ -39,7 +39,9 @@
     "invalidYearFounded": "Please enter a valid year founded"
   },
   "buttons": {
-    "next": "Next"
+    "next": "Next",
+    "add": "Add",
+    "remove": "Remove"
   },
   "alerts": {
     "submitted": "Company information submitted"

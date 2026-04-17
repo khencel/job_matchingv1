@@ -10,7 +10,7 @@ export interface RegisterSuperVisoryStep2Data {
     street: string;
   };
   numOfEmployees: number | null;
-  industry: string;
+  industry: string[];
   yearFounded: number | null;
   capital: number | null;
   businessDescription: string;

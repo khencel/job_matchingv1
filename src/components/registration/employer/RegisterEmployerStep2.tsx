@@ -251,6 +251,9 @@ export default function RegisterEmployerStep2() {
     error.company_industry ||
     (isSubmitted && data.company_industry.length === 0);
 
+  const getIndustryLabel = (value: string) =>
+    categoryList.find((item) => item.value === value)?.label ?? value;
+
   return (
     <Form noValidate onSubmit={handleSubmit}>
       <h4 className="mb-5 text-center">{t("title")}</h4>
@@ -379,7 +382,7 @@ export default function RegisterEmployerStep2() {
                   key={index}
                   className="d-flex justify-content-between align-items-center mb-2 p-2 bg-light rounded"
                 >
-                  <span>{industry}</span>
+                  <span>{getIndustryLabel(industry)}</span>
                   <Button
                     variant="danger"
                     size="sm"

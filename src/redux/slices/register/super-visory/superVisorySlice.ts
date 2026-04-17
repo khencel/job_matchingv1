@@ -25,7 +25,7 @@ const initialState: RegisterSuperVisory = {
         street: "",
       },
       numOfEmployees: null,
-      industry: "",
+      industry: [],
       yearFounded: null,
       capital: null,
       businessDescription: "",

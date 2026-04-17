@@ -39,7 +39,9 @@
     "invalidYearFounded": "有効な設立年を入力してください"
   },
   "buttons": {
-    "next": "次へ"
+    "next": "次へ",
+    "add": "追加",
+    "remove": "削除"
   },
   "alerts": {
     "submitted": "会社情報を送信しました"

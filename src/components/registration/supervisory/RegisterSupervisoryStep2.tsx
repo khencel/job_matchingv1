@@ -5,7 +5,7 @@ import {
   saveRegSuperVisoryStep2,
   goNextStep,
 } from "@/redux/slices/register/super-visory/superVisorySlice";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import Swal from "sweetalert2";
@@ -24,6 +24,9 @@ export default function RegisterSupervisoryStep2() {
 
   const [data, setData] = useState<RegisterSuperVisoryStep2Data>(companyInfo);
   const [error, setError] = useState<{ [name: string]: boolean }>({});
+  const [currentIndustry, setCurrentIndustry] = useState<string>("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const industrySelectRef = useRef<HTMLSelectElement>(null);
 
   useEffect(() => {
     setData(companyInfo);
@@ -53,8 +56,28 @@ export default function RegisterSupervisoryStep2() {
     }
   };
 
+  const handleAddIndustry = () => {
+    const selected = currentIndustry.trim();
+    if (!selected || data.industry.includes(selected)) return;
+
+    setData((prev) => ({
+      ...prev,
+      industry: [...prev.industry, selected],
+    }));
+    setCurrentIndustry("");
+    setError((prevErrors) => ({ ...prevErrors, industry: false }));
+  };
+
+  const handleRemoveIndustry = (index: number) => {
+    setData((prev) => ({
+      ...prev,
+      industry: prev.industry.filter((_, i) => i !== index),
+    }));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitted(true);
     const form = e.currentTarget as HTMLFormElement;
 
     // First validation: Check HTML5 form validity
@@ -131,7 +154,7 @@ export default function RegisterSupervisoryStep2() {
     }
 
     // Validate industry
-    if (!data.industry) {
+    if (!data.industry || data.industry.length === 0) {
       validationErrors.industry = true;
       hasError = true;
     }
@@ -164,17 +187,23 @@ export default function RegisterSupervisoryStep2() {
 
     if (hasError) {
       setError(validationErrors);
-      // Focus on first error field
-      const firstErrorField = Object.keys(validationErrors)[0];
-      const errorElement = form.querySelector(
-        `[name="${firstErrorField}"]`
-      ) as HTMLElement;
-      if (errorElement) errorElement.focus();
+
+      if (validationErrors.industry) {
+        setTimeout(() => industrySelectRef.current?.focus(), 0);
+      } else {
+        const firstErrorField = Object.keys(validationErrors)[0];
+        const errorElement = form.querySelector(
+          `[name="${firstErrorField}"]`
+        ) as HTMLElement;
+        if (errorElement) errorElement.focus();
+      }
       return;
     }
 
     // All validations passed - save data and show success message
     setError({});
+    setIsSubmitted(false);
+
     Swal.fire({
       icon: "success",
       title: t("alerts.submitted"),
@@ -187,6 +216,12 @@ export default function RegisterSupervisoryStep2() {
     dispatch(saveRegSuperVisoryStep2(data));
     dispatch(goNextStep(3));
   };
+
+  const showIndustryError =
+    error.industry || (isSubmitted && data.industry.length === 0);
+
+  const getIndustryLabel = (value: string) =>
+    categoryList.find((item) => item.value === value)?.label ?? value;
 
   return (
     <Form noValidate onSubmit={handleSubmit}>
@@ -355,23 +390,65 @@ export default function RegisterSupervisoryStep2() {
 
         <Form.Group className="mb-3" controlId="industry">
           <Form.Label>{t("labels.industry")}</Form.Label>
-          <Form.Select
-            name="industry"
-            value={data.industry}
-            onChange={handleChange}
-            required
-            isInvalid={!!error.industry}
-          >
-            <option value="">{t("placeholders.selectIndustry")}</option>
-            {categoryList.map((industry) => (
-              <option key={industry.value} value={industry.value}>
-                {industry.label}
-              </option>
-            ))}
-          </Form.Select>
-          <Form.Control.Feedback type="invalid">
-            {t("errors.fillRequired")}
-          </Form.Control.Feedback>
+          <Row>
+            <Col xs={9}>
+              <Form.Select
+                name="currentIndustry"
+                ref={industrySelectRef}
+                value={currentIndustry}
+                onChange={(e) => {
+                  setCurrentIndustry(e.target.value);
+                  setError((prevErrors) => ({ ...prevErrors, industry: false }));
+                }}
+                isInvalid={showIndustryError}
+              >
+                <option value="">{t("placeholders.selectIndustry")}</option>
+                {categoryList.map((industry) => (
+                  <option key={industry.value} value={industry.value}>
+                    {industry.label}
+                  </option>
+                ))}
+              </Form.Select>
+              <Form.Control.Feedback type="invalid">
+                {t("errors.fillRequired")}
+              </Form.Control.Feedback>
+            </Col>
+            <Col xs={3}>
+              <Button
+                type="button"
+                variant="outline-primary"
+                className="w-100"
+                onClick={handleAddIndustry}
+                disabled={
+                  currentIndustry.trim() === "" ||
+                  data.industry.includes(currentIndustry)
+                }
+              >
+                {t("buttons.add")}
+              </Button>
+            </Col>
+          </Row>
+
+          {data.industry.length > 0 && (
+            <div className="mt-3">
+              {data.industry.map((industry, index) => (
+                <div
+                  key={`${industry}-${index}`}
+                  className="d-flex justify-content-between align-items-center mb-2 p-2 bg-light rounded"
+                >
+                  <span>{getIndustryLabel(industry)}</span>
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    type="button"
+                    onClick={() => handleRemoveIndustry(index)}
+                  >
+                    {t("buttons.remove")}
+                  </Button>
+                </div>
+              ))}
+            </div>
+          )}
         </Form.Group>
 
         <Row>
