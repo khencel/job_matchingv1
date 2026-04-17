@@ -386,11 +386,13 @@ const RegisterJobSeekerStep2 = () => {
           isInvalid={!!error.visaStatus}
         >
           <option value="">{t("placeholders.selectVisaStatus")}</option>
-          <option value="APPLIED">{t("options.visaApplied")}</option>
-          <option value="PENDING">{t("options.visaPending")}</option>
-          <option value="REVIEWING">{t("options.visaReviewing")}</option>
-          <option value="ISSUED">{t("options.visaIssued")}</option>
-          <option value="DENIED">{t("options.visaDenied")}</option>
+          <option value="ssw">{t("options.visaSsw")}</option>
+          <option value="training">{t("options.visaTraining")}</option>
+          <option value="services">{t("options.visaServices")}</option>
+          <option value="student">{t("options.visaStudent")}</option>
+          <option value="dependent">{t("options.visaDependent")}</option>
+          <option value="permanent">{t("options.visaPermanent")}</option>
+          <option value="notSure">{t("options.visaNotSure")}</option>
         </Form.Select>
         <Form.Control.Feedback type="invalid">
           {t("errors.visaStatusRequired")}

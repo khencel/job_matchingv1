@@ -8,7 +8,15 @@ export interface RegisterJobSeekerStep2Data {
   gender: "male" | "female" | null;
   currentPlaceResidence: string;
   birthdate: string;
-  visaStatus: "APPLIED" | "PENDING" | "REVIEWING" | "ISSUED" | "DENIED" | null;
+  visaStatus:
+    | "student"
+    | "services"
+    | "dependent"
+    | "permanent"
+    | "ssw"
+    | "training"
+    | "notSure"
+    | null;
   highestEducation:
     | "elementary"
     | "jr-highschool"
