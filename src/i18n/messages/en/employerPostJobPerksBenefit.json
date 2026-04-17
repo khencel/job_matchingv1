@@ -15,7 +15,8 @@
     "jobDescription": "Job description:",
     "responsibilities": "Responsibilities:",
     "requirements": "Requirements:",
-    "niceToHave": "Nice to Have:"
+    "niceToHave": "Nice to Have:",
+    "company": "Company"
   },
   "buttons": {
     "confirm": "Confirm"

@@ -34,9 +34,15 @@
       "placeholder": "Select Prefecture",
       "tip": "This helps job seekers filter positions by area."
     },
+    "company": {
+      "label": "Company",
+      "help": "The company associated with this job posting. You can manage your company information in the Company Profile section.",
+      "placeholder": "Select a company"
+    },
     "categories": {
       "label": "Categories",
-      "help": "You can select multiple job categories."
+      "help": "You can select multiple job categories.",
+      "placeholder": "Select categories"
     }
   },
   "buttons": {

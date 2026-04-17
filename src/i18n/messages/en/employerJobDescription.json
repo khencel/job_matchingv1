@@ -1,0 +1,27 @@
+{
+  "header": {
+    "title": "Details",
+    "subtitle": "Add the description of the job, responsibilities, who you are, and nice-to-have"
+  },
+  "sections": {
+    "jobDescription": {
+      "title": "Job Description",
+      "help": "Job description must describe one position."
+    },
+    "responsibility": {
+      "title": "Responsibility",
+      "help": "Outline the core responsibilities of the position."
+    },
+    "requirements": {
+      "title": "Requirements",
+      "help": "Add your preferred candidates qualifications."
+    },
+    "niceToHave": {
+      "title": "Nice-To-Have",
+      "help": "Add nice-to-have skills and qualifications for the role to encourage a more diverse set of candidates to apply."
+    }
+  },
+  "buttons": {
+    "next": "Next"
+  }
+}

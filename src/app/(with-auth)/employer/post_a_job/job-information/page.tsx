@@ -112,22 +112,29 @@ export default function PostAJob() {
               <div className="row g-3 align-items-start mb-4">
                 <div className="col-12 col-md-4">
                   <label className="form-label fw-semibold mb-1">
-                    Company <span className="text-danger">*</span>
+                    {t("fields.company.label")} <span className="text-danger">*</span>
                   </label>
                   <div className="text-muted small">
-                    The company associated with this job posting. You can manage your company information in the Company Profile section.
+                    {t("fields.company.help")}
                   </div>
                 </div>
                 <div className="col-12 col-md-8">
-                  <select name="" id="" className="form-select rounded-3" value={basicInfo.company || ""} onChange={(e) => selectedCompany(e)}>
-                    <option value="" disabled>Select a company</option>
+                  <select
+                    name=""
+                    id=""
+                    className="form-select rounded-3"
+                    value={basicInfo.company || ""}
+                    onChange={(e) => selectedCompany(e)}
+                  >
+                    <option value="" disabled>
+                      {t("fields.company.placeholder")}
+                    </option>
                     {(companies || []).map((company) => (
                       <option key={company.id} value={company.id}>
                         {company?.information?.company_information?.name}
                       </option>
                     ))}
                   </select>
-                  
                 </div>
               </div>
 
@@ -266,15 +273,14 @@ export default function PostAJob() {
                 </div>
                 <div className="col-12 col-md-8">
                   <div className="p-3 border rounded-3 bg-white">
-
                     <MultipleSelect
-                        data={industryListData}
-                        value={basicInfo.category || []}
-                        onChange={(selected) => {
-                          dispatch(setField({ category: selected }));
-                        }}
-                        placeholder={"Select categories"}
-                      />
+                      data={industryListData}
+                      value={basicInfo.category || []}
+                      onChange={(selected) => {
+                        dispatch(setField({ category: selected }));
+                      }}
+                      placeholder={t("fields.categories.placeholder")}
+                    />
                   </div>
                 </div>
               </div>
@@ -299,5 +305,5 @@ export default function PostAJob() {
         </div>
       </div>
     </>
-  )
+  );
 }

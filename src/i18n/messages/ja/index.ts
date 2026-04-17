@@ -29,6 +29,7 @@ import registerSupervisoryStep4 from "./registerSupervisoryStep4.json";
 import jobDescriptionPage from "./jobDescriptionPage.json";
 import jobSeekerProfile from "./jobSeekerProfile.json";
 import companyProfile from "./companyProfile.json";
+import employerJobDescription from "./employerJobDescription.json";
 
 // 新しい翻訳
 import footer from "./footer.json";
@@ -187,5 +188,6 @@ export default {
   registerPage,
   forgotPassword,
   pagination,
-  list
+  list,
+  employerJobDescription
 };

@@ -78,7 +78,7 @@ export default function PerksBenefitPage() {
                   <div className="row">
 
                     <div className="col-3">
-                      <strong>Company</strong>
+                      <strong>{t("fields.company")}</strong>
                     </div>
                     <div className="col-9">
                       {data?.company_name}

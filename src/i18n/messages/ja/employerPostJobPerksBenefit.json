@@ -15,7 +15,8 @@
     "jobDescription": "仕事内容:",
     "responsibilities": "責任範囲:",
     "requirements": "応募条件:",
-    "niceToHave": "歓迎条件:"
+    "niceToHave": "歓迎条件:",
+    "company": "会社"
   },
   "buttons": {
     "confirm": "確認"
